@@ -1,4 +1,4 @@
-<div class="panel panel-primary">
+<div class="panel panel-primary" ng-controller="viewReportCtrl">
   <div class="panel-heading">{{ report.title }}</div>
   <div class="panel-body" id="reportBody">
     <div id="author" class="pull-left col-md-10"><em><strong>Submitted by: </strong></em></div>
@@ -6,7 +6,7 @@
     <div id="desc" class="">
       
         <a class="btn btn-sm btn-warning pull-right btn-crud" href="#/reports/{{report.id}}/edit">Edit</a>
-        <form action="#/reports/{{report.id}}?_method=DELETE" method="POST">
+<!--        <form action="#/reports/{{report.id}}?_method=DELETE" method="POST">-->
           <button class="btn btn-sm btn-danger pull-right btn-crud">
             Delete
           </button>          
@@ -26,13 +26,15 @@
           </div>
           <div class="panel-body col-md-6">
             <textarea type="text" name="test[params]" id="editor" class="form-control" readonly></textarea>
+<!--
               <script>
                   $("#editor").wysiwyg();
               </script>
+-->
           </div>
           <div class="col-md-2 list-group">
             <li class="list-group-item">
-              YA95100006 <span class="glyphicon glyphicon-ok pull-right
+              YA95100006 <span ng-click="status()" ng-class="class" class="glyphicon glyphicon-ok pull-right
 "></span>
             </li>
             <li class="list-group-item">

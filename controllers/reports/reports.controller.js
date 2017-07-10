@@ -4,6 +4,6 @@ myApp.controller('reportCtrl', ['$scope', '$location','$http', '$log', function 
 //		console.log(result.data);
 		$scope.reports=result.data;
 	});
-	$log.info($location.path());
+//	$log.info($location.path());
 //	$log.info('test');
 }]);

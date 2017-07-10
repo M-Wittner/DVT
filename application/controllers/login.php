@@ -20,7 +20,7 @@ class Login extends CI_Controller {
 
 		if($this->form_validation->run() == false) {
 			//validation fail
-			$this->load->view('login_view');
+			
 		} else {
 			// check for user credentials(authenticate)
 			$uresult = $this->user_model->get_user($username, $password);

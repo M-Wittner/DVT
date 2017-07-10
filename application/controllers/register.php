@@ -1,4 +1,8 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+//header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header('Content-Type: application/json');
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Register extends CI_Controller
 {
     public function __construct() {
@@ -15,48 +19,13 @@ class Register extends CI_Controller
     }
     function register()
     {
-        //set validation rules
-
-        $this->form_validation->set_rules('fname', 'First Name', 'trim|required|alpha|min_length[3]|max_length[30]');
-        $this->form_validation->set_rules('lname', 'Last Name', 'trim|required|alpha|min_length[3]|max_length[30]');
-        $this->form_validation->set_rules('email', 'Email ID', 'trim|required|valid_email|is_unique[users.email]');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
-        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|matches[password]|md5');
-
-			//GO!
-        //validate form input
-        if ($this->form_validation->run() == FALSE)
-        {
-
-            // fails
-			$data['main_content'] = 'signup_view';
-            $this->load->view("includes/template", $data);
-        }
-        else
-        {
-            //insert the user registration details into database
-            $data = array(
-                'username' => $this->input->post('username'),
-				'password' => $this->input->post('password'),
-                'email' => $this->input->post('email'),
-				'fname' => $this->input->post('fname'),
-				'lname'	=> $this->input->post('lname'),
-            );
-
-            // insert form data into database
-            if (!$this->user_model->insertUser($data))
-            {
-				//success
-                $this->session->set_flashdata('msg','<div class="alert alert-success text-center">You are Successfully Registered!</div>');
-                redirect('register/register');
-            }
-            else
-            {
-                // error
-                $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>');
-                redirect('register/register');
-            }
-        }
+        $request = json_decode(file_get_contents('php://input'), TRUE);
+//		$data = $this->user_model->insertUser($request);
+//		if($data) {
+//			echo "success";
+//		} else {
+//			echo "failure"
+//		}
     }
     
     function verify($hash=NULL)

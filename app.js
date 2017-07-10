@@ -5,11 +5,11 @@ myApp.config(['$routeProvider','$locationProvider', function($routeProvider, $lo
 	$routeProvider
 		.when('/', {
 		templateUrl: 'pages/home.html',
-		controller: 'registerCtrl'
+		controller: 'homeCtrl'
 	})
 		.when('/register', {
 		templateUrl: 'pages/register.html',
-		controller: 'registerCtrl'
+		controller: 'regCtrl'
 	})
 		.when('/reports', {
 			templateUrl: 'pages/reports/index.html',
@@ -17,22 +17,19 @@ myApp.config(['$routeProvider','$locationProvider', function($routeProvider, $lo
 	})
 		.when('/reports/new', {
 			templateUrl: 'pages/reports/new.html',
-			controller: 'reportCtrl'
+//			controller: 'reportCtrl'
 	})
 		.when('/reports/:id', {
 			templateUrl: 'pages/reports/view.html',
-			controller: 'reportCtrl'
+			controller: 'viewReportCtrl'
 	})
 		.when('reports/:id/edit', {
 			templateUrl: 'pages/reports/edit.html',
 			controller: ''
 	})
-//		.otherwise({redirectTo: '/'});
+		.otherwise({redirectTo: '/'});
 	
 	$locationProvider.hashPrefix('');
-//		.html5Mode({
-//			enabled: true,
-//			requireBase: false
-//	});
+
 }]);
 

@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 class User_model extends CI_Model
 {
     function __construct()
