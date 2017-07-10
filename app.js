@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'btorfs.multiselect']);
 
 myApp.config(['$routeProvider','$locationProvider', function($routeProvider, $locationProvider) {
 	
@@ -17,7 +17,7 @@ myApp.config(['$routeProvider','$locationProvider', function($routeProvider, $lo
 	})
 		.when('/reports/new', {
 			templateUrl: 'pages/reports/new.html',
-//			controller: 'reportCtrl'
+			controller: 'newReportCtrl'
 	})
 		.when('/reports/:id', {
 			templateUrl: 'pages/reports/view.html',
