@@ -10,10 +10,8 @@ class Login extends CI_Controller {
 	$this->load->model('user_model');
     }
 	function index() {
-		//get form input
-		$username	= $this->input->post('username');
-		$password	= $this->input->post('password');
-
+		$request = json_decode(file_get_contents('php://input'), TRUE);
+		echo $request;
 		//form validation
 		$this->form_validation->set_rules('username', 'username', 'trim|required');
 		$this->form_validation->set_rules('password', 'password', 'trim|required');

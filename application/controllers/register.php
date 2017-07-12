@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 //header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-header('Content-Type: application/json');
+//header('Content-Type: application/json');
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Register extends CI_Controller
 {
@@ -19,12 +19,24 @@ class Register extends CI_Controller
     }
     function register()
     {
-        $request = json_decode(file_get_contents('php://input'), TRUE);
-//		$data = $this->user_model->insertUser($request);
+//		die(var_dump($_POST));
+//		die(var_dump(json_decode(file_get_contents('php://input'))));
+//		$request = json_decode(file_get_contents('php://input'));
+//		die(var_dump($request->'username');
+//		$user = array(
+//			'username'=>$request->username,
+//			'fname'=>$request->fname,
+//			'lname'=>$request->lname,
+//			'email'=>$request->email,
+//			'password'=>$request->password
+//		);
+        
+//		$data = $this->user_model->insertUser($user);
 //		if($data) {
 //			echo "success";
+//			echo $data;
 //		} else {
-//			echo "failure"
+//			echo "failure";
 //		}
     }
     

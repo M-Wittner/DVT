@@ -9,7 +9,7 @@ class User_model extends CI_Model
     }
     
 	//get the username & password from tbl_usrs
-    function get_user($usr, $pwd) {
+    function get_user($request) {
 		$this->db->select('username, password');
 //		$this->db->from('users');
 		$this->db->where('username', $usr, 'password', md5($pwd));
@@ -18,10 +18,17 @@ class User_model extends CI_Model
     }
 
     //insert into user table
-    function insertUser($data)
+    function insertUser($request)
     {
-       $this->db->insert('users', $data);
-		return;
+		$user = array(
+			'username'=>$request['username'],
+			'fname'=>$request['fname'],
+			'lname'=>$request['lname'],
+			'email'=>$request['email'],
+			'password'=>$request['password']
+		);
+        $insertStatus = $this->db->insert('users', $user);
+		return $insertStatus;
     }
 
 //    //send verification email to user's email id
