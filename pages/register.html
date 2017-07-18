@@ -31,7 +31,7 @@
 							<label for="cpassword" class="control-label">Re-Password</label>
 						</div>
 						<div class="col-lg-8 col-sm-8">
-							<input ng-model="user.cpassword" class="form-control" placeholder="Re-Password" type="password">
+							<input ng-model="user.cpassword" name="cpassword" id="cpassword" class="form-control" placeholder="Re-Password" type="password">
 						</div>
 					</div>
 				</div>
@@ -74,7 +74,7 @@
 					<div class="col-lg-12 col-sm-12 text-center">
 						<input type="button" class="btn btn-default" value="Sign Up" ng-click="register()"/>
 					</div>
-					<pre>{{message}}</pre>
+					<div>{{message}}</div>
 				</div>
 			</form>
 		</div>

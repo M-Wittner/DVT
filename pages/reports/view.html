@@ -13,16 +13,13 @@
         </form>
       <p class="panel panel-heading">
         Report Description:
-        <div id="test" class="cil-md-12">
-          
-
-          <hr>
+        <div id="test" class="row container-fluid">
                   <div class="col-md-2 panel-body">
             <input name="testNum" id="testNum" class="formInput form-control" type="text" value="1" readonly>
           </div>
           <div class="col-md-2 panel-body">
             <input id="station" required class="formInput form-control" type="text" name="test[station]" value="" readonly>
-            <input id="testName" required class="formInput form-control" type="text" name="test[name]" value="" readonly>
+            <input id="testName" required class="formInput form-control" type="text" name="test.name" value="" readonly>
           </div>
           <div class="panel-body col-md-6">
             <textarea type="text" name="test[params]" id="editor" class="form-control" readonly></textarea>
@@ -34,7 +31,7 @@
           </div>
           <div class="col-md-2 list-group">
             <li class="list-group-item">
-              YA95100006 <span ng-click="status()" ng-class="class" class="glyphicon glyphicon-ok pull-right
+              YA95100006 <span ng-click="status()" ng-class="{'glyphicon-plus': !test, 'glyphicon-ok': test}" class="glyphicon pull-right
 "></span>
             </li>
             <li class="list-group-item">

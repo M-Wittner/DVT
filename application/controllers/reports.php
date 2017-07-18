@@ -19,29 +19,9 @@ class Reports extends CI_Controller {
 //		$data['main_content'] = 'Reports/index';
 //		$this->load->view('users', $this->data);
 		$result = $this->reportModel->Reports();
-		$reports = $result;
-		echo json_encode($reports);
-//		$this->load->view('index.html', $result);	
+		echo json_encode($result);	
 	}
-	function fetchdata() {
-		$data['fetchdata']=$this->reportModel->Reports();
-//		$data['main_content'] = 'Reports/index';
-//		$this->load->view('includes/template', $data);
-		$result=$this->db->get('reports')->result();
-		$arr_data=array();
-		$i=0;
-		 foreach($result as $row) {
-			 $arr_data[$i]['id']=$row->id;
-			 $arr_data[$i]['date']=$row->date;
-			 $arr_data[$i]['author']=$row->author;
-			 $arr_data[$i]['title']=$row->title;
-		   $i++;  
-		 }
-    
-     echo json_encode($arr_data);
-		echo '<hr>';
-//     echo json_encode($data['fetchdata']);
-	}
+
 	function All() {
 		$reports = $this->reportModel->Reports();
 		echo json_encode($reports);
@@ -53,8 +33,8 @@ class Reports extends CI_Controller {
 	}
 	
 	function Show() {
-		$data['main_content'] = 'Reports/show';
-		$this->load->view('includes/template', $data);
+		$this->db->where('id', $name);
+		return $q->result();
 	}
 	
 }

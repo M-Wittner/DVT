@@ -7,8 +7,23 @@ class Home extends CI_Controller {
 		$this->load->library('session');
 	}
 	function index() {
-		$this->load->view('home_view');
+		$this->login();
 	}
+	function login() {
+		$postData = json_decode(file_get_contents('php://input'));
+		$userData = $postData->user;
+		$user = array(
+			'username'=>$userData->username,
+			'password'=>$userData->password,
+		);
+		$data = $this->db->insert('users', $user);
+		if($data) {
+			echo "success";
+		} else {
+			echo "failure";
+		}
+	}
+	
 	function logout(){
 		// destroy session
         $data = array('login' => '', 'username' => '', 'userid' => '');

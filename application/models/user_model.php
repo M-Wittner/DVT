@@ -1,5 +1,4 @@
 <?php
-header("Access-Control-Allow-Origin: *");
 class User_model extends CI_Model
 {
     function __construct()
@@ -12,24 +11,28 @@ class User_model extends CI_Model
     function get_user($request) {
 		$this->db->select('username, password');
 //		$this->db->from('users');
-		$this->db->where('username', $usr, 'password', md5($pwd));
+		$this->db->where('username', $user[0], 'password', md5($user[1]));
 		$q = $this->db->get('users');
-		return $q->result();
+		if ($q->num_rows() == 1) {
+			return $q->result();
+		} else {
+			return FALSE;	
+		}
     }
 
     //insert into user table
-    function insertUser($request)
-    {
-		$user = array(
-			'username'=>$request['username'],
-			'fname'=>$request['fname'],
-			'lname'=>$request['lname'],
-			'email'=>$request['email'],
-			'password'=>$request['password']
-		);
-        $insertStatus = $this->db->insert('users', $user);
-		return $insertStatus;
-    }
+//    function insertUser($request)
+//    {
+//		$user = array(
+//			'username'=>$request['username'],
+//			'fname'=>$request['fname'],
+//			'lname'=>$request['lname'],
+//			'email'=>$request['email'],
+//			'password'=>$request['password']
+//		);
+//        $insertStatus = $this->db->insert('users', $user);
+//		return $insertStatus;
+//    }
 
 //    //send verification email to user's email id
 //    function sendEmail($to_email)

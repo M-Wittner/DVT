@@ -1,6 +1,9 @@
 var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'btorfs.multiselect']);
 
-myApp.config(['$routeProvider','$locationProvider', function($routeProvider, $locationProvider) {
+myApp.config(['$routeProvider','$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
+	
+	//$httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+	//$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 	
 	$routeProvider
 		.when('/', {
@@ -32,4 +35,3 @@ myApp.config(['$routeProvider','$locationProvider', function($routeProvider, $lo
 	$locationProvider.hashPrefix('');
 
 }]);
-

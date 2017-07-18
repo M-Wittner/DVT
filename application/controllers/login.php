@@ -1,5 +1,8 @@
 <?php
-
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, Content-Length, X-Requested-With");
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Login extends CI_Controller {
 	public function __construct() {
 
@@ -10,18 +13,27 @@ class Login extends CI_Controller {
 	$this->load->model('user_model');
     }
 	function index() {
-		$request = json_decode(file_get_contents('php://input'), TRUE);
-		echo $request;
-		//form validation
-		$this->form_validation->set_rules('username', 'username', 'trim|required');
-		$this->form_validation->set_rules('password', 'password', 'trim|required');
-
-		if($this->form_validation->run() == false) {
+		$this->login();
+	}
+	
+	function login() {
+		$postData = json_decode(file_get_contents('php://input'));
+		$userData = $postData->user;
+		$user = array(
+			'username'=>$userData->username,
+			'password'=>md5($userData->password),
+		);
+		$this->form_validation->set_data($user);
+		$this->form_validation->set_rules('username', 'Userame', 'trim|required|alpha|min_length[4]|max_length[10]');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
+		
+		if($this->form_validation->run() == FALSE) {
 			//validation fail
+			echo "faild to login";
 			
 		} else {
 			// check for user credentials(authenticate)
-			$uresult = $this->user_model->get_user($username, $password);
+			$uresult = $this->user_model->get_user($user[0], $user[1]);
 			if(count($uresult) > 0) {
 				//set sesison
 				$sessData = array(
@@ -30,12 +42,11 @@ class Login extends CI_Controller {
 					'uid' 	=> $uresult[0]->id
 				);
 				$this->session->set_userdata($sessData);
-				redirect('reports/index');
+				redirect('#/reports');
+				echo "suclog";
 			} else {
-				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Wrong Username or Password!</div>');
-				redirect('login/index');
+				echo 'failure!!';
 			}
 		}
-
 	}
 }
