@@ -35,3 +35,9 @@ myApp.config(['$routeProvider','$locationProvider', '$httpProvider', function($r
 	$locationProvider.hashPrefix('');
 
 }]);
+
+myApp.directive('test', function(){
+	return {
+		templateUrl: 'pages/reports/newTest.html'
+	}
+});

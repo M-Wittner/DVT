@@ -1,84 +1,25 @@
-<div class="panel panel-primary">
-	<div class="panel-heading">New Task</div>
-	<div id="test" class="col-md-12 panel-body">
-		<span class="label label-primary">Task Title</span>
-		<input id="taskTitle" required class="formInput form-control" type="text" name="taskTitle" placeholder="Task Title">
-	</div>
-	<div id="desc">
-		<div class="row">
-			<div class="panel-body">
-				<div class="col-md-12">
-					<span class="label label-primary">Test Lineup</span>
-					<input required class="form-control" type="text" placeholder="Test Lineup">
-				</div>
-			</div>
+<form>
+	<div class="panel panel-primary" ng-controller="newReportCtrl">
+		<div class="panel-heading">New Task</div>
+		<div id="test" class="col-md-12 panel-body">
+			<span class="label label-primary">Task Title</span>
+			<input id="taskTitle" required class="formInput form-control" type="text" name="title" ng-model="plan.title" placeholder="Task Title">
 		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="panel-body">
-				<span class="label label-primary">Station:</span>
-				<multiselect ng-model="station" options="test.name" show-search="true" selection-limit="1">
-					</multiselect>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="panel-body">
-					<span class="label label-primary">Test Name:</span>
-					<multiselect ng-model="name" options="test.name" show-search="true" selection-limit="1">
-					</multiselect>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="panel-body">
-					<span class="label label-primary">Chip S/N:</span>
-					<multiselect ng-model="chipSN" options="test.name" show-select-all="true" show-search="true" show-unselect-all="true">
-					</multiselect>
-				</div>
-			</div>
+		<div id="">
+			<test ng-repeat="test in testCount"></test>
 		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="panel-body">
-					<span class="label label-primary">Pin:</span></br>
-					<span>From</span>
-					<input type="number" class="Pin">
-					<span>To</span>
-					<input type="number" class="Pin">
-					<span>Step</span>
-					<input type="number" class="Pin">
-				</div>
+		<div class="panel-body">
+			<div class="col-md-12">
+			<button class="btn btn-xs btn-primary addButton" ng-click="addTest()">
+				Add Test!
+			</button>
+				<button class="btn btn-xs btn-danger addButton" ng-click="removeTest()">
+				Remove Test!
+			</button>
 			</div>
-			<div class="col-md-2">
-				<div class="panel-body">
-					<span class="label label-primary">Temperature:</span>
-					<multiselect ng-model="temperature" options="test.name" show-select-all="true" show-unselect-all="true">
-					</multiselect>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="panel-body">
-					<span class="label label-primary">Channel:</span>
-					<multiselect ng-model="channel" options="test.name" show-select-all="true" show-unselect-all="true">
-					</multiselect>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="panel-body">
-					<span class="label label-primary">Anthena:</span>
-					<multiselect ng-model="anthena" options="test.name" show-select-all="true" show-unselect-all="true">
-					</multiselect>
-				</div>
+			<div class="col-md-12">
+				<button class="btn btn-lg btn-success col-lg-3" ng-click="addPlan()">Submit!</button>
 			</div>
 		</div>
 	</div>
-	<div class="panel-body">
-		<div class="col-md-12">
-		<button class="btn btn-xs btn-primary addButton">
-			Add Test!
-		</button>
-		</div>
-		<div class="col-md-12">
-			<button class="btn btn-lg btn-success col-lg-3">Submit!</button>
-		</div>
-	</div>
-</div>
+</form>
