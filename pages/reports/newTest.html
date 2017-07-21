@@ -1,17 +1,19 @@
 	<div id="desc" ng-controller="newReportCtrl">
-		<div class="row">
+		<form>
+			<div class="row">
 			<div class="panel-body">
 				<div class="col-md-12">
 					<span class="label label-primary">Test Lineup</span>
 					<input required class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.lineup">
 				</div>
+				<pre>{{test.lineup}}</pre>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-4">
 				<div class="panel-body">
 					<span class="label label-primary">Station:</span>
-					<multiselect ng-model="test.station" options="test.stationList" show-search="true" selection-limit="1">
+					<multiselect ng-model="test.station" options="params.stationList" show-search="true" selection-limit="1">
 					</multiselect>
 					<pre>{{test.station}}</pre>
 				</div>
@@ -19,14 +21,14 @@
 			<div class="col-md-4">
 				<div class="panel-body">
 					<span class="label label-primary">Test Name:</span>
-					<multiselect ng-model="test.name" options="test.nameList" show-search="true" selection-limit="1">
+					<multiselect ng-model="plan.test.name" options="params.nameList" show-search="true" selection-limit="1">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="panel-body">
 					<span class="label label-primary">Chip S/N:</span>
-					<multiselect ng-model="test.chipSN" options="test.chipList" show-select-all="true" show-search="true" show-unselect-all="true">
+					<multiselect ng-model="plan.test.chipSN" options="params.chipList" show-select-all="true" show-search="true" show-unselect-all="true">
 					</multiselect>
 				</div>
 			</div>
@@ -36,36 +38,41 @@
 				<div class="panel-body">
 					<span class="label label-primary">Pin:</span></br>
 					<span>From</span>
-					<input ng-model="test.pinFrom" type="number" class="Pin">
+					<input ng-model="plan.test.pinFrom" type="number" class="Pin">
 					<span>To</span>
-					<input ng-model="test.pinTo" type="number" class="Pin">
+					<input ng-model="plan.test.pinTo" type="number" class="Pin">
 					<span>Step</span>
-					<input ng-model="test.pinStep" type="number" class="Pin"></br></br>
+					<input ng-model="plan.test.pinStep" type="number" class="Pin"></br></br>
 					<span>Additional</span>
-					<input ng-model="test.pinAdd" name="pinAdd" type="text" class="Pin">
+					<input ng-model="plan.test.pinAdd" name="pinAdd" type="text" class="Pin">
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="panel-body">
 					<span class="label label-primary">Temperature:</span>
-					<multiselect ng-model="test.temp" options="test.tempList" show-select-all="true" show-unselect-all="true">
+					<multiselect ng-model="plan.test.temp" options="params.tempList" show-select-all="true" show-unselect-all="true">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="panel-body">
 					<span class="label label-primary">Channel:</span>
-					<multiselect ng-model="test.channel" options="test.chList" show-select-all="true" show-unselect-all="true">
+					<multiselect ng-model="plan.test.channel" options="params.chList" show-select-all="true" show-unselect-all="true">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="panel-body">
 					<span class="label label-primary">Anthena:</span>
-					<multiselect ng-model="test.anthena" options="test.antList" show-select-all="true" show-unselect-all="true">
+					<multiselect ng-model="plan.test.anthena" options="params.antList" show-select-all="true" show-unselect-all="true">
 					</multiselect>
 				</div>
 			</div>
 		</div>
+		
+		</form>
+<button class="btn btn-xs btn-primary addButton" ng-click="updateTest(test)">
+				add!
+			</button>
 	</div>
 <hr/>

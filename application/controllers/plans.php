@@ -36,10 +36,11 @@ class Plans extends CI_Controller {
 			'title'=>$planData->title,
 		);
 		
-		$testData = $postData->test;
+		$testData = $postData->plan;
+		die(var_dump($postData));
 		$test = array(
 			'lineup'=>$testData->lineup,
-			'station'=>$testData->station,
+			'station'=>$testData->station[0],
 			'name'=>$testData->name,
 			'chips'=>$testData->chips->chipSN,
 			'pin_from'=>$testData->pinFrom,
@@ -50,7 +51,13 @@ class Plans extends CI_Controller {
 			'channel'=>$testData->channel,
 			'anthena'=>$testData->anthena,
 		);
-		$data = $this->db->insert('plans', $plan);
+		die(var_dump($postData));
+		if($test && $plan){
+			$data = $this->db->insert('plans', $plan);
+		} else {
+			die(var_dump($test));
+		};
+		
 	}
 	
 	function Show() {

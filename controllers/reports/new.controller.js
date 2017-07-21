@@ -1,8 +1,9 @@
 myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, $http, $log) {
-	$scope.test = {};
 	$scope.plan = {};
+	$scope.test = {};
+	$scope.params = {};
 	
-	$scope.test.stationList = [
+	$scope.params.stationList = [
 		'R-CB1',
 		'R-CB2',
 		'M-CB1',
@@ -12,7 +13,7 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 		'PTAT/ABS/Vgb+TEMP',
 	];
 	
-	$scope.test.nameList = [
+	$scope.params.nameList = [
 		'TX - EVM',
 		'RX - EVM',
 		'Phase Shifter',
@@ -20,7 +21,7 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 		'Rx Noise Gain',
 	];
 	
-	$scope.test.chipList = [
+	$scope.params.chipList = [
     'YA95100006',
     'YA95100007',
     'YA95100008',
@@ -30,14 +31,14 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
     'YA95100012'
   ];
 	
-	$scope.test.tempList = [
+	$scope.params.tempList = [
 		'-30 C',
 		'0 C',
 		'25 C',
 		'105 C',
 	];
 	
-	$scope.test.chList = [
+	$scope.params.chList = [
 		'1',
 		'2',
 		'3',
@@ -47,7 +48,7 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 		'7',
 	];
 	
-	$scope.test.antList = [
+	$scope.params.antList = [
 		'0',
 		'1',
 		'2',
@@ -107,11 +108,24 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 		$scope.testCount.splice($scope.testCount.length-1,1);
 	}
 	
-	$scope.addPlan = function() {
-		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan, test: $scope.test})
-		.then(function(data){
-			console.log(data.data);
-		})
+	$scope.updateTest = function(newTest){
+		$scope.test = newTest;
+		console.log("directive");
+		console.log($scope.plan);
+		console.log($scope.test);
+	}
+	
+	$scope.addPlan = function(newTest) {
+		$scope.test = newTest;
+		console.log("controller");
+		console.log($scope.plan);
+		console.log($scope.test);
+//		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan})
+//		.then(function(data){
+//			console.log(data.data);
+//			console.log('test:'+ JSON.stringify($scope.test));
+//			console.log($scope);
+//		})
 	};
 
 }]);

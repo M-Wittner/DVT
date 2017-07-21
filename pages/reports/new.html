@@ -1,12 +1,12 @@
 <form>
 	<div class="panel panel-primary" ng-controller="newReportCtrl">
-		<div class="panel-heading">New Task</div>
+		<div class="panel-heading">New Test Plan</div>
 		<div id="test" class="col-md-12 panel-body">
-			<span class="label label-primary">Task Title</span>
-			<input id="taskTitle" required class="formInput form-control" type="text" name="title" ng-model="plan.title" placeholder="Task Title">
+			<span class="label label-primary">Test Plan Title</span>
+			<input id="taskTitle" required class="formInput form-control" type="text" name="title" ng-model="plan.title" placeholder="Test Plan Title" autofocus>
 		</div>
 		<div id="">
-			<test ng-repeat="test in testCount"></test>
+			<test-form ng-repeat="test in testCount" update-test="addTest(newTest)" test="test"></test-form>
 		</div>
 		<div class="panel-body">
 			<div class="col-md-12">
