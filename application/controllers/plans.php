@@ -36,13 +36,13 @@ class Plans extends CI_Controller {
 			'title'=>$planData->title,
 		);
 		
-		$testData = $postData->plan;
-		die(var_dump($postData));
+		$testData = $postData->test;
+//		die(var_dump($postData));
 		$test = array(
 			'lineup'=>$testData->lineup,
-			'station'=>$testData->station[0],
+			'station'=>$testData->station,
 			'name'=>$testData->name,
-			'chips'=>$testData->chips->chipSN,
+			'chips'=>$testData->chipSN,
 			'pin_from'=>$testData->pinFrom,
 			'pin_to'=>$testData->pinTo,
 			'pin_step'=>$testData->pinStep,
@@ -51,12 +51,19 @@ class Plans extends CI_Controller {
 			'channel'=>$testData->channel,
 			'anthena'=>$testData->anthena,
 		);
-		die(var_dump($postData));
-		if($test && $plan){
-			$data = $this->db->insert('plans', $plan);
-		} else {
-			die(var_dump($test));
-		};
+		$chipList = $testData->chipSN;
+		$chips = new stdClass();
+		foreach($chipList as $key=>$value){
+			$chips->$key = $value;
+		}
+		die(var_dump($chips));
+//		die(var_dump($test, $plan));
+//		if(is_object($test) && is_object($plan)){
+////			$pData = $this->db->insert('plans', $plan);
+//			$tData = $this->db->insert('tests', $test);
+//		} else {
+//			die(var_dump($test));
+//		};
 		
 	}
 	

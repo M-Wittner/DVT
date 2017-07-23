@@ -20,16 +20,19 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 		'TX Noise Gain',
 		'Rx Noise Gain',
 	];
-	
-	$scope.params.chipList = [
-    'YA95100006',
-    'YA95100007',
-    'YA95100008',
-    'YA95100009',
-    'YA95100010',
-    'YA95100011',
-    'YA95100012'
-  ];
+	$scope.params.chipList = [];
+    $http.get('http://localhost:3000/chips')
+	.then(function(response){
+		var result = [];
+		var count = 0;
+		for (var k in response.data){
+			if(response.data.hasOwnProperty(k)){
+			   $scope.params.chipList.push(response.data[k].serial_num);
+			   ++count;
+			   }
+		}
+//		console.log($scope.params.chipList);
+	});
 	
 	$scope.params.tempList = [
 		'-30 C',
@@ -111,21 +114,19 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 	$scope.updateTest = function(newTest){
 		$scope.test = newTest;
 		console.log("directive");
-		console.log($scope.plan);
+//		console.log($scope.plan);
+		console.log($scope.$$childTail.test);
 		console.log($scope.test);
+		console.log($scope);
 	}
 	
 	$scope.addPlan = function(newTest) {
-		$scope.test = newTest;
-		console.log("controller");
-		console.log($scope.plan);
-		console.log($scope.test);
-//		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan})
-//		.then(function(data){
-//			console.log(data.data);
-//			console.log('test:'+ JSON.stringify($scope.test));
-//			console.log($scope);
-//		})
+		$scope.test = $scope.$$childTail.$$childTail.test;
+		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan, test: $scope.test})
+		.then(function(data){
+			console.log(data.data);
+			console.log($scope);
+		})
 	};
 
 }]);

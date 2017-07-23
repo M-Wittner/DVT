@@ -39,14 +39,9 @@ myApp.config(['$routeProvider','$locationProvider', '$httpProvider', function($r
 myApp.directive('testForm', function(){
 	return {
 		templateUrl: 'pages/reports/newTest.html',
-		scope: {
-			test: '=',
-			updateTest: '&'
-		},
-		link: function(scope, element, attrs){setTimeout(function() {
-			console.log(scope);
-			console.log(scope.test);
-			console.log(scope.plan);
-		}, 5000)}
+		scope: false,
+		link: function(scope, element, attrs){
+			
+		}
 	}
 });
