@@ -21,18 +21,18 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 		'Rx Noise Gain',
 	];
 	$scope.params.chipList = [];
-//    $http.get('http://localhost:3000/chips/all')
-//	.then(function(response){
-//		var result = [];
-//		var count = 0;
-//		for (var k in response.data){
-//			if(response.data.hasOwnProperty(k)){
-//			   $scope.params.chipList.push(response.data[k].serial_num);
-//			   ++count;
-//			   }
-//		}
-////		console.log($scope.params.chipList);
-//	});
+    $http.get('http://localhost:3000/chips/all')
+	.then(function(response){
+		var result = [];
+		var count = 0;
+		for (var k in response.data){
+			if(response.data.hasOwnProperty(k)){
+			   $scope.params.chipList.push(response.data[k].serial_num);
+			   ++count;
+			   }
+		}
+//		console.log($scope.params.chipList);
+	});
 	
 	$scope.params.tempList = [
 		'-30 C',
@@ -111,7 +111,7 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 		$scope.testCount.splice($scope.testCount.length-1,1);
 	}
 	
-	$scope.updateTest = function(newTest){
+	$scope.updateTest = function(){
 		$scope.test = newTest;
 		console.log("directive");
 //		console.log($scope.plan);
@@ -120,20 +120,21 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 		console.log($scope);
 	}
 	
-	$scope.addPlan = function(newTest) {
+	$scope.addPlan = function() {
 		$scope.test = $scope.$$childTail.$$childTail.test;
+		$scope.chips = $scope.$$childTail.$$childTail.chips;
 		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan, test: $scope.test})
-		.then(function(data){
-			console.log(data.data);
-			console.log($scope);
+		.then(function(response){
+			console.log(response.data);
 		})
 	};
 	
-	$scope.addChip = function(chip){
-		console.log($scope.chips);
+	$scope.addChip = function(){
+//		console.log($scope);
 		$http.post('http://localhost:3000/chips/create', {chip: $scope.chips})
 		.then(function(response){
 			console.log(response.data);
+//			console.log($scope);
 		})
 	}
 

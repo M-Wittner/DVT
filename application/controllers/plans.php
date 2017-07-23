@@ -51,6 +51,7 @@ class Plans extends CI_Controller {
 			'channel'=>$testData->channel,
 			'anthena'=>$testData->anthena,
 		);
+		die(var_dump($test));
 		$chipList = $testData->chipSN;
 		$chips = new stdClass();
 		foreach($chipList as $key=>$value){

@@ -25,12 +25,14 @@ class Chips extends CI_Controller {
 		$chip = array(
 			'serial_num'=>$chipData->SN
 		);
+//		die(var_dump($chip));
 		$data = $this->db->insert('chips', $chip);
-		if ($data) {
-			echo 'success';
-		} else {
-			die(var_dump($chip));
-		}
+//		if ($data) {
+//			die(var_dump($chip));
+//			echo 'success';
+//		} else {
+//			die(var_dump($chip));
+//		}
 	}
 }
 ?>
