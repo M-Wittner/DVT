@@ -41,7 +41,9 @@ myApp.directive('testForm', function(){
 		templateUrl: 'pages/reports/newTest.html',
 		scope: false,
 		link: function(scope, element, attrs){
-			
+//			setTimeout(function(){
+//				console.log(scope);
+//			}, 5000);
 		}
 	}
 });

@@ -30,6 +30,10 @@
 					<span class="label label-primary">Chip S/N:</span>
 					<multiselect ng-model="test.chipSN" options="params.chipList" show-select-all="true" show-search="true" show-unselect-all="true">
 					</multiselect>
+					<input class="form-control" type="text" ng-model="chips.SN" name="newChip">
+					<button class="btn btn-xs btn-primary addButton" ng-click="addChip()">
+						add!
+					</button>
 				</div>
 			</div>
 		</div>

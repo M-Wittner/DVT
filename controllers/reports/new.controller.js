@@ -2,7 +2,7 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 	$scope.plan = {};
 	$scope.test = {};
 	$scope.params = {};
-	
+	$scope.chips = {};	
 	$scope.params.stationList = [
 		'R-CB1',
 		'R-CB2',
@@ -21,18 +21,18 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 		'Rx Noise Gain',
 	];
 	$scope.params.chipList = [];
-    $http.get('http://localhost:3000/chips')
-	.then(function(response){
-		var result = [];
-		var count = 0;
-		for (var k in response.data){
-			if(response.data.hasOwnProperty(k)){
-			   $scope.params.chipList.push(response.data[k].serial_num);
-			   ++count;
-			   }
-		}
-//		console.log($scope.params.chipList);
-	});
+//    $http.get('http://localhost:3000/chips/all')
+//	.then(function(response){
+//		var result = [];
+//		var count = 0;
+//		for (var k in response.data){
+//			if(response.data.hasOwnProperty(k)){
+//			   $scope.params.chipList.push(response.data[k].serial_num);
+//			   ++count;
+//			   }
+//		}
+////		console.log($scope.params.chipList);
+//	});
 	
 	$scope.params.tempList = [
 		'-30 C',
@@ -128,5 +128,13 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 			console.log($scope);
 		})
 	};
+	
+	$scope.addChip = function(chip){
+		console.log($scope.chips);
+		$http.post('http://localhost:3000/chips/create', {chip: $scope.chips})
+		.then(function(response){
+			console.log(response.data);
+		})
+	}
 
 }]);

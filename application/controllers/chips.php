@@ -5,16 +5,32 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization, Content-Lengt
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Chips extends CI_Controller {
-	public function index() {
+	
+	public function __construct() {
+        parent::__construct();
+        $this->load->helper(array('form','url'));
+        $this->load->library(array('session', 'form_validation', 'email'));
+        $this->load->database('');
+    }
+	
+	public function all() {
 		$data = $this->db->get('chips');
 		$result = $data->result();
 		echo json_encode($result);
-//			foreach ($result as $value) {
-//				echo $value->serial_num;
-//				echo '<br/>';
-//				array_push($array, $value->serial_num);
-//			}
-//		var_dump($array);
+	}
+	
+	public function create(){
+		$postData = json_decode(file_get_contents('php://input'));
+		$chipData = $postData->chip;
+		$chip = array(
+			'serial_num'=>$chipData->SN
+		);
+		$data = $this->db->insert('chips', $chip);
+		if ($data) {
+			echo 'success';
+		} else {
+			die(var_dump($chip));
+		}
 	}
 }
 ?>
