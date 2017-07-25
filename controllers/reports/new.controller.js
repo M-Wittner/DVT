@@ -1,8 +1,6 @@
 myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, $http, $log) {
-	$scope.obj = {};
 	$scope.array = [];
 	$scope.test = {};
-	
 	$scope.params = {};
 	
 	
@@ -125,14 +123,16 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 	
 	$scope.addPlan = function() {
 		console.log($scope.array);
+		console.log($scope.plan);
+		console.log($scope.chips);
 //		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan, test: $scope.test})
 //		.then(function(response){
 //			console.log(response.data);
 //		})
 	};
 	
-	$scope.addChip = function(chip){
-		console.log(JSON.stringify(chip));
+	$scope.addChip = function(){
+		console.log($scope);
 //		console.log($scope.chips);
 //		$http.post('http://localhost:3000/chips/create', {chip: $scope.chips})
 //		.then(function(response){

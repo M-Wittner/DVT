@@ -40,12 +40,11 @@ myApp.directive('testForm', function(){
 	return {
 		templateUrl: 'pages/reports/newTest.html',
 		scope: {
-			planObj: '=',
-			arrayTry: '='
+			planParams: '=',
+//			newChip: '='
 		},
-		link: function(scope, element, attrs){setTimeout(function() {
-//			scope.obj = {};
-//			console.log(scope);
-		}, 0000)}
+		link: function(scope, element, attrs){
+			
+		}
 	}
 });
