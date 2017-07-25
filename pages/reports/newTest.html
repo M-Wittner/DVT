@@ -1,12 +1,12 @@
-	<div id="desc" ng-controller="newReportCtrl">
-		<form>
-			<div class="row">
+<div id="desc" ng-controller="newReportCtrl">
+	<form>
+		<div class="row">
 			<div class="panel-body">
 				<div class="col-md-12">
 					<span class="label label-primary">Test Lineup</span>
 					<input required class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.lineup">
+					<input required class="form-control" type="text" placeholder="Test Lineup" name="array" ng-model="arrayTry.line">
 				</div>
-				<pre>{{test.lineup}}</pre>
 			</div>
 		</div>
 		<div class="row">
@@ -15,7 +15,6 @@
 					<span class="label label-primary">Station:</span>
 					<multiselect ng-model="test.station" options="params.stationList" show-search="true" selection-limit="1">
 					</multiselect>
-					<pre>{{test.station}}</pre>
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -30,7 +29,7 @@
 					<span class="label label-primary">Chip S/N:</span>
 					<multiselect ng-model="test.chipSN" options="params.chipList" show-select-all="true" show-search="true" show-unselect-all="true">
 					</multiselect>
-					<input class="form-control" type="text" ng-model="chips.SN" name="chipSN">
+					<input class="form-control" type="text" ng-model="chips.chipSN" name="chipSN">
 					<button class="btn btn-xs btn-primary addButton" ng-click="addChip()">
 						add!
 					</button>
@@ -46,7 +45,8 @@
 					<span>To</span>
 					<input ng-model="test.pinTo" type="number" class="Pin">
 					<span>Step</span>
-					<input ng-model="test.pinStep" type="number" class="Pin"></br></br>
+					<input ng-model="test.pinStep" type="number" class="Pin"></br>
+					</br>
 					<span>Additional</span>
 					<input ng-model="test.pinAdd" name="pinAdd" type="text" class="Pin">
 				</div>
@@ -73,10 +73,9 @@
 				</div>
 			</div>
 		</div>
-		
-		</form>
-<button class="btn btn-xs btn-primary addButton" ng-click="updateTest(test)">
-				add!
-			</button>
-	</div>
+	</form>
+	<button class="btn btn-xs btn-primary addButton" ng-click="updateTest(test)">
+		add!
+	</button>
+</div>
 <hr/>

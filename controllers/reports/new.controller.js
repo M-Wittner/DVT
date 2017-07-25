@@ -1,8 +1,11 @@
 myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, $http, $log) {
-	$scope.plan = {};
+	$scope.obj = {};
+	$scope.array = [];
 	$scope.test = {};
+	
 	$scope.params = {};
-	$scope.chips = {};	
+	
+	
 	$scope.params.stationList = [
 		'R-CB1',
 		'R-CB2',
@@ -111,7 +114,7 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 		$scope.testCount.splice($scope.testCount.length-1,1);
 	}
 	
-	$scope.updateTest = function(){
+	$scope.updateTest = function(newTest){
 		$scope.test = newTest;
 		console.log("directive");
 //		console.log($scope.plan);
@@ -121,21 +124,21 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 	}
 	
 	$scope.addPlan = function() {
-		$scope.test = $scope.$$childTail.$$childTail.test;
-		$scope.chips = $scope.$$childTail.$$childTail.chips;
-		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan, test: $scope.test})
-		.then(function(response){
-			console.log(response.data);
-		})
+		console.log($scope.array);
+//		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan, test: $scope.test})
+//		.then(function(response){
+//			console.log(response.data);
+//		})
 	};
 	
-	$scope.addChip = function(){
-//		console.log($scope);
-		$http.post('http://localhost:3000/chips/create', {chip: $scope.chips})
-		.then(function(response){
-			console.log(response.data);
-//			console.log($scope);
-		})
+	$scope.addChip = function(chip){
+		console.log(JSON.stringify(chip));
+//		console.log($scope.chips);
+//		$http.post('http://localhost:3000/chips/create', {chip: $scope.chips})
+//		.then(function(response){
+//			console.log(response.data);
+////			console.log($scope);
+//		})
 	}
 
 }]);

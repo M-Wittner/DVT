@@ -23,9 +23,9 @@ class Chips extends CI_Controller {
 		$postData = json_decode(file_get_contents('php://input'));
 		$chipData = $postData->chip;
 		$chip = array(
-			'serial_num'=>$chipData->SN
+			'serial_num'=>$chipData->chipSN
 		);
-//		die(var_dump($chip));
+		die(print_r($chip));
 		$data = $this->db->insert('chips', $chip);
 //		if ($data) {
 //			die(var_dump($chip));

@@ -6,7 +6,7 @@
 			<input id="taskTitle" required class="formInput form-control" type="text" name="title" ng-model="plan.title" placeholder="Test Plan Title" autofocus>
 		</div>
 		<div id="">
-			<test-form ng-repeat="test in testCount" update-test="addTest(newTest)" add-chip="addChip(chip)"></test-form>
+			<test-form ng-repeat="test in testCount" plan-obj="obj" array-try="array"></test-form>
 		</div>
 		<div class="panel-body">
 			<div class="col-md-12">

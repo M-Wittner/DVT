@@ -29,6 +29,7 @@ class Register extends CI_Controller
 			'fname'=>$userData->fname,
 			'lname'=>$userData->lname,
 		);
+		die(print_r($user));
 //		$cpassword =md5($userData->cpassword);
 		$this->form_validation->set_data($user);
 		$this->form_validation->set_rules('username', 'Userame', 'trim|required|alpha|min_length[4]|max_length[10]');

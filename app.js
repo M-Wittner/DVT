@@ -1,6 +1,6 @@
 var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'btorfs.multiselect']);
 
-myApp.config(['$routeProvider','$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
+myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	
 	//$httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
 	//$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
@@ -39,11 +39,13 @@ myApp.config(['$routeProvider','$locationProvider', '$httpProvider', function($r
 myApp.directive('testForm', function(){
 	return {
 		templateUrl: 'pages/reports/newTest.html',
-		scope: false,
-		link: function(scope, element, attrs){
-//			setTimeout(function(){
-//				console.log(scope);
-//			}, 5000);
-		}
+		scope: {
+			planObj: '=',
+			arrayTry: '='
+		},
+		link: function(scope, element, attrs){setTimeout(function() {
+//			scope.obj = {};
+//			console.log(scope);
+		}, 0000)}
 	}
 });
