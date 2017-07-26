@@ -4,7 +4,7 @@
 			<div class="panel-body">
 				<div class="col-md-12">
 					<span class="label label-primary">Test Lineup</span>
-					<input required class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="planParams.test.lineup">
+					<input required class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.lineup" ng-disabled="lock">
 				</div>
 			</div>
 		</div>
@@ -12,26 +12,28 @@
 			<div class="col-md-4">
 				<div class="panel-body">
 					<span class="label label-primary">Station:</span>
-					<multiselect ng-model="planParams.test.station" options="params.stationList" show-search="true" selection-limit="1">
+					<multiselect required ng-model="test.station" options="params.stationList" show-search="true" selection-limit="1" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="panel-body">
 					<span class="label label-primary">Test Name:</span>
-					<multiselect ng-model="planParams.test.name" options="params.nameList" show-search="true" selection-limit="1">
+					<multiselect ng-model="test.name" options="params.nameList" show-search="true" selection-limit="1" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="panel-body">
 					<span class="label label-primary">Chip S/N:</span>
-					<multiselect ng-model="planParams.chips.chipSN" options="params.chipList" show-select-all="true" show-search="true" show-unselect-all="true">
+					<multiselect ng-model="chips.chipSN" options="params.chipList" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
-					<input class="form-control" type="text" ng-model="planParams.chips.newChip" name="newChip">
+<!--
+					<input class="form-control" type="text" ng-model="chips.newChip" name="newChip">
 					<button class="btn btn-xs btn-primary addButton" ng-click="addChip()">
 						add!
 					</button>
+-->
 				</div>
 			</div>
 		</div>
@@ -40,41 +42,46 @@
 				<div class="panel-body">
 					<span class="label label-primary">Pin:</span></br>
 					<span>From</span>
-					<input ng-model="planParams.test.pinFrom" type="number" class="Pin">
+					<input ng-model="test.pinFrom" type="number" class="Pin" ng-disabled="lock">
 					<span>To</span>
-					<input ng-model="planParams.test.pinTo" type="number" class="Pin">
+					<input ng-model="test.pinTo" type="number" class="Pin" ng-disabled="lock">
 					<span>Step</span>
-					<input ng-model="planParams.test.pinStep" type="number" class="Pin"></br>
+					<input ng-model="test.pinStep" type="number" class="Pin" ng-disabled="lock"></br>
 					</br>
 					<span>Additional</span>
-					<input ng-model="planParams.test.pinAdd" name="pinAdd" type="text" class="Pin">
+					<input ng-model="test.pinAdd" name="pinAdd" type="text" class="Pin" ng-disabled="lock">
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="panel-body">
 					<span class="label label-primary">Temperature:</span>
-					<multiselect ng-model="planParams.test.temp" options="params.tempList" show-select-all="true" show-unselect-all="true">
+					<multiselect ng-model="test.temp" options="params.tempList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="panel-body">
 					<span class="label label-primary">Channel:</span>
-					<multiselect ng-model="planParams.test.channel" options="params.chList" show-select-all="true" show-unselect-all="true">
+					<multiselect ng-model="test.channel" options="params.chList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="panel-body">
 					<span class="label label-primary">Anthena:</span>
-					<multiselect ng-model="planParams.test.anthena" options="params.antList" show-select-all="true" show-unselect-all="true">
+					<multiselect ng-model="test.anthena" options="params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 		</div>
 	</form>
-	<button class="btn btn-xs btn-primary addButton" ng-click="updateTest(test)">
-		add!
+<div class="col-md-12">
+	<button class="btn btn-xs btn-info addButton" ng-click="addTest1()" ng-disabled="lock">
+		Insert!
 	</button>
+	<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">
+		Edit!
+	</button>
+</div>
 </div>
 <hr/>

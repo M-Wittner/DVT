@@ -39,9 +39,12 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 myApp.directive('testForm', function(){
 	return {
 		templateUrl: 'pages/reports/newTest.html',
+		controller: 'testCtrl',
 		scope: {
 			planParams: '=',
-//			newChip: '='
+			params: '=',
+			index: '&',
+			locked: '='
 		},
 		link: function(scope, element, attrs){
 			

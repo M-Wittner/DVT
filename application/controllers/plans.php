@@ -11,7 +11,7 @@ class Plans extends CI_Controller {
 	$this->load->helper(array('form','url'));
 	$this->load->library(array('session'));
 	$this->load->database('');
-	$this->load->model('planModel');
+	$this->load->model('plan_model');
     }
 
 	function index() {
@@ -35,6 +35,13 @@ class Plans extends CI_Controller {
 		$plan = array(
 			'title'=>$planData->title,
 		);
+		die(var_dump($postData));
+		$data = $this->plan_model->insert_plan($plan);
+		if($data){
+			echo "success";
+		} else {
+			echo 'failure';
+		};
 		
 		$testData = $postData->test;
 //		die(var_dump($postData));

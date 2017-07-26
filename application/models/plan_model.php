@@ -1,10 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class planModel extends CI_Model {
+class plan_model extends CI_Model {
 	function Plans() {
 		$q = $this->db->get('plans');
 		return $q->result();
 	}
+	
+	 function insert_plan($plan)
+    {
+        $insertStatus = $this->db->insert('plans', $plan);
+		return $insertStatus;
+    }
 
     public function Update($plan)
     {

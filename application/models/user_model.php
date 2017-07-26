@@ -21,18 +21,11 @@ class User_model extends CI_Model
     }
 
     //insert into user table
-//    function insertUser($request)
-//    {
-//		$user = array(
-//			'username'=>$request['username'],
-//			'fname'=>$request['fname'],
-//			'lname'=>$request['lname'],
-//			'email'=>$request['email'],
-//			'password'=>$request['password']
-//		);
-//        $insertStatus = $this->db->insert('users', $user);
-//		return $insertStatus;
-//    }
+    function insert_user($user)
+    {
+        $insertStatus = $this->db->insert('users', $user);
+		return $insertStatus;
+    }
 
 //    //send verification email to user's email id
 //    function sendEmail($to_email)
