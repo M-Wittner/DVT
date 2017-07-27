@@ -19,12 +19,12 @@ class Plans extends CI_Controller {
 //		$this->fetchdata();
 //		$data['main_content'] = 'Plans/index';
 //		$this->load->view('users', $this->data);
-		$result = $this->planModel->Plans();
+		$result = $this->plan_model->Plans();
 		echo json_encode($result);	
 	}
 
 	function All() {
-		$plans = $this->planModel->Plans();
+		$plans = $this->plan_model->Plans();
 		echo json_encode($plans);
 	}
 	
@@ -35,36 +35,51 @@ class Plans extends CI_Controller {
 		$plan = array(
 			'title'=>$planData->title,
 		);
-		die(var_dump($postData));
-		$data = $this->plan_model->insert_plan($plan);
-		if($data){
+		die(print_r($planData));
+//		$testData = $postData->test;
+//		foreach ($testData as $i => $test){
+//			$stationsData = $testData[$i]->station;
+//			$stations = $this->plan_model->get_station($stationsData);
+//			$nameData = $testData[$i]->name;
+//			$name = $this->plan_model->get_name($nameData);
+//			$chipsData = $testData[$i]->chips;
+//			$chips = $this->plan_model->get_chips($chipsData);
+//			$tempsData = $testData[$i]->temp;
+//			$temps = $this->plan_model->get_temps($tempsData);
+//			$channelsData = $testData[$i]->channel;
+//			$channels = $this->plan_model->get_channels($channelsData);
+//			$anthenasData = $testData[$i]->anthena;
+//			$anthenas = $this->plan_model->get_anthenas($anthenasData);
+////			die(var_dump($data));
+//			$test = array(
+//			'lineup'=>$testData[$i]->lineup,
+//			'station'=>$stations, // <- array of stations!
+//			'name'=>$name,
+////			'chips'=>$chips,
+//			'pin_from'=>$testData[$i]->pinFrom,
+//			'pin_to'=>$testData[$i]->pinTo,
+//			'pin_step'=>$testData[$i]->pinStep,
+//			'pin_additional'=>$testData[$i]->pinAdd,
+////			'temp'=>$temps,
+////			'channel'=>$channels,
+////			'anthena'=>$anthenas,
+//		);
+//			print_r($plan);
+//			print_r($test);
+//			print_r($chips);
+//			print_r($anthenas);
+//			print_r($channels);
+//		};
+//		die(print_r($plan));
+		$insertPlan = $this->plan_model->insert_plan($plan);
+//		$insertId = $this->plan_model->get_id($insertPlan);
+		if($insertPlan){
 			echo "success";
+			print_r('id: '.$insertPlan);
+//			print_r($insertId);
 		} else {
 			echo 'failure';
 		};
-		
-		$testData = $postData->test;
-//		die(var_dump($postData));
-		$test = array(
-			'lineup'=>$testData->lineup,
-			'station'=>$testData->station,
-			'name'=>$testData->name,
-			'chips'=>$testData->chipSN,
-			'pin_from'=>$testData->pinFrom,
-			'pin_to'=>$testData->pinTo,
-			'pin_step'=>$testData->pinStep,
-			'pin_additional'=>$testData->pinAdd,
-			'temp'=>$testData->temp,
-			'channel'=>$testData->channel,
-			'anthena'=>$testData->anthena,
-		);
-		die(var_dump($test));
-		$chipList = $testData->chipSN;
-		$chips = new stdClass();
-		foreach($chipList as $key=>$value){
-			$chips->$key = $value;
-		}
-		die(var_dump($chips));
 //		die(var_dump($test, $plan));
 //		if(is_object($test) && is_object($plan)){
 ////			$pData = $this->db->insert('plans', $plan);

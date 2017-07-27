@@ -29,7 +29,7 @@ class Register extends CI_Controller
 			'fname'=>$userData->fname,
 			'lname'=>$userData->lname,
 		);
-//		die(print_r($user));
+//		die(print_r($userData));
 //		$cpassword =md5($userData->cpassword);
 		$this->form_validation->set_data($user);
 		$this->form_validation->set_rules('username', 'Userame', 'trim|required|alpha');
@@ -38,7 +38,7 @@ class Register extends CI_Controller
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
 //		$this->form_validation->set_rules($cpassword, 'Confirm Password', 'trim|required|matches[password]|md5');
-		
+		die(print_r($user));
 		if($this->form_validation->run() == FALSE) {
 			// Failed
 			echo "form Invalid";
@@ -46,8 +46,11 @@ class Register extends CI_Controller
 		} else {
 			// Succeed
 			$data = $this->user_model->insert_user($user);
+//			$insertId = $this->user_model->get_id($data);
 			if($data) {
-				echo "success";
+				echo "success    ";
+//				print_r("</br>".$data);
+//				print_r($insertId);
 			} else {
 				echo "failure";
 			}

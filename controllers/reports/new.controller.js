@@ -12,7 +12,7 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 	}
 		
 	$scope.addPlan = function() {
-//		console.log($scope.array);
+//		console.log($scope.array[0]);
 //		console.log($scope.plan);
 //		console.log($scope.chips);
 		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan, test: $scope.array})

@@ -26,6 +26,11 @@ class User_model extends CI_Model
         $insertStatus = $this->db->insert('users', $user);
 		return $insertStatus;
     }
+	
+	function get_id($insertStatus){
+		$insertId = $this->db->insert_id($insertStatus);
+		return $insertId;
+	}
 
 //    //send verification email to user's email id
 //    function sendEmail($to_email)
