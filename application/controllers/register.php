@@ -32,10 +32,10 @@ class Register extends CI_Controller
 //		die(print_r($user));
 //		$cpassword =md5($userData->cpassword);
 		$this->form_validation->set_data($user);
-		$this->form_validation->set_rules('username', 'Userame', 'trim|required|alpha|min_length[4]|max_length[10]');
+		$this->form_validation->set_rules('username', 'Userame', 'trim|required|alpha');
 		$this->form_validation->set_rules('fname', 'First Name', 'trim|required|alpha|min_length[3]|max_length[30]');
-		$this->form_validation->set_rules('lname', 'Last Name', 'trim|required|alpha|min_length[3]|max_length[30]');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
+		$this->form_validation->set_rules('lname', 'Last Name', 'trim|required|alpha');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
 //		$this->form_validation->set_rules($cpassword, 'Confirm Password', 'trim|required|matches[password]|md5');
 		
