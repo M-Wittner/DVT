@@ -35,7 +35,7 @@ class Plans extends CI_Controller {
 		$plan = array(
 			'title'=>$planData->title,
 		);
-		die(print_r($planData));
+//		die(print_r($plan));
 //		$testData = $postData->test;
 //		foreach ($testData as $i => $test){
 //			$stationsData = $testData[$i]->station;
