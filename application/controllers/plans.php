@@ -30,10 +30,9 @@ class Plans extends CI_Controller {
 	
 	function Create() {
 		$postData = json_decode(file_get_contents('php://input'));
-		
 		$planData = $postData->plan;
 		$plan = array(
-			'title'=>$planData->title,
+			'title'=>$planData->title
 		);
 		$testData = $postData->test;
 		foreach ($testData as $i => $test){
@@ -49,7 +48,6 @@ class Plans extends CI_Controller {
 			$channels = $this->plan_model->get_channels($channelsData);
 			$anthenasData = $testData[$i]->anthena;
 			$anthenas = $this->plan_model->get_anthenas($anthenasData);
-//			die(var_dump($data));
 			$test = array(
 			'lineup'=>$testData[$i]->lineup,
 			'station'=>$stations, // <- array of stations!
@@ -60,20 +58,18 @@ class Plans extends CI_Controller {
 			'pin_step'=>$testData[$i]->pinStep,
 			'pin_additional'=>$testData[$i]->pinAdd,
 			'mcs'=>$testData[$i]->mcs,
-//			'temp'=>$temps,
-//			'channel'=>$channels,
-//			'anthena'=>$anthenas,
+			'voltage'=>$testData[$i]->voltage,
+			'notes'=>$testData[$i]->notes,
 		);
-			print_r($plan);
-			print_r($test);
-			print_r($chips);
-			print_r($anthenas);
-			print_r($channels);
+//			print_r($plan);
+//			print_r($test);
+//			print_r($chips);
+//			print_r($anthenas);
+//			print_r($channels);
 		};
-		die();
-		$insertPlan = $this->plan_model->insert_plan($plan);
-//		$insertId = $this->plan_model->get_id($insertPlan);
-		if($insertPlan){
+		die(print_r($plan));
+		$data = $this->plan_model->insert_plan($plan);
+		if($data){
 			echo "success";
 			print_r('id: '.$insertPlan);
 //			print_r($insertId);

@@ -28,7 +28,7 @@
 					<span class="label label-primary">Chip S/N:</span>
 					<multiselect ng-model="test.chips" options="params.chipList" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
-<!--
+					<!--
 					<input class="form-control" type="text" ng-model="chips.newChip" name="newChip">
 					<button class="btn btn-xs btn-primary addButton" ng-click="addChip()">
 						add!
@@ -80,14 +80,29 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<div class="panel-body">
+					<span class="label label-primary">Voltage:</span>
+					<input ng-model="test.voltage" type="number" class="Pin" ng-disabled="lock">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel-body">
+					<span class="label label-primary">Notes:</span>
+<!--					<input  type="text" ng-model="test.notes" ng-disabled="lock">-->
+					<textarea ng-model="test.notes" ng-disabled="lock"></textarea>
+				</div>
+			</div>
+		</div>
 	</form>
-<div class="col-md-12">
-	<button class="btn btn-xs btn-info addButton" ng-click="addTest1()" ng-disabled="lock">
+	<div class="col-md-12">
+		<button class="btn btn-xs btn-info addButton" ng-click="addTest1()" ng-disabled="lock">
 		Insert!
 	</button>
-	<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">
+		<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">
 		Edit!
 	</button>
-</div>
+	</div>
 </div>
 <hr/>
