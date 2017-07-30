@@ -38,7 +38,7 @@ class Register extends CI_Controller
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
 //		$this->form_validation->set_rules($cpassword, 'Confirm Password', 'trim|required|matches[password]|md5');
-		die(print_r($user));
+//		die(print_r($user));
 		if($this->form_validation->run() == FALSE) {
 			// Failed
 			echo "form Invalid";
