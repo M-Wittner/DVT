@@ -9,7 +9,7 @@ class Plans extends CI_Controller {
 
 	parent::__construct();
 	$this->load->helper(array('form','url'));
-	$this->load->library(array('session'));
+//	$this->load->library(array('session'));
 	$this->load->database('');
 	$this->load->model('plan_model');
     }
@@ -67,22 +67,15 @@ class Plans extends CI_Controller {
 //			print_r($anthenas);
 //			print_r($channels);
 		};
-		die(print_r($plan));
-		$data = $this->plan_model->insert_plan($plan);
-		if($data){
+		
+//		die(print_r($plan));
+		$insertPlan = $this->plan_model->insert_plan($plan);
+		if($insertPlan){
 			echo "success";
-			print_r('id: '.$insertPlan);
 //			print_r($insertId);
 		} else {
 			echo 'failure';
 		};
-//		die(var_dump($test, $plan));
-//		if(is_object($test) && is_object($plan)){
-////			$pData = $this->db->insert('plans', $plan);
-//			$tData = $this->db->insert('tests', $test);
-//		} else {
-//			die(var_dump($test));
-//		};
 		
 	}
 	
