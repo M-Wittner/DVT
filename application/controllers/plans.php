@@ -59,6 +59,7 @@ class Plans extends CI_Controller {
 			'pin_to'=>$testData[$i]->pinTo,
 			'pin_step'=>$testData[$i]->pinStep,
 			'pin_additional'=>$testData[$i]->pinAdd,
+			'mcs'=>$testData[$i]->mcs,
 //			'temp'=>$temps,
 //			'channel'=>$channels,
 //			'anthena'=>$anthenas,
