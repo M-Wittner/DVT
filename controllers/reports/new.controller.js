@@ -1,6 +1,6 @@
 myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, $http, $log) {
 	$scope.array = [];
-//	$scope.plan = {};
+	$scope.plan = {};
 	
 	$scope.testCount = [{}];
 	$scope.addTest = function(){
@@ -12,9 +12,6 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 	}
 		
 	$scope.addPlan = function() {
-//		console.log($scope.array[0]);
-//		console.log($scope.plan);
-//		console.log($scope.chips);
 		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
 			if(response.data){
@@ -23,5 +20,6 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 				console.log(response);
 			}
 		})
+//		console.log($scope.array);
 	};
 }]);

@@ -12,9 +12,34 @@ class plan_model extends CI_Model {
 		return $q->result();
 	}
 	
-	 function insert_plan($plan)
+	 function add_plan($plan)
     {
         $insertStatus = $this->db->insert('plans', $plan);
+		return $insertStatus;
+    }
+	 function add_test($test)
+    {
+        $insertStatus = $this->db->insert('tests', $test);
+		return $insertStatus;
+    }
+	function add_temps($temps)
+    {
+        $insertStatus = $this->db->insert('test_temps', $temps);
+		return $insertStatus;
+    }
+	function add_channels($channels)
+    {
+        $insertStatus = $this->db->insert('test_channels', $channels);
+		return $insertStatus;
+    }
+	function add_anthenas($temps)
+    {
+        $insertStatus = $this->db->insert('test_anthenas', $anthenas);
+		return $insertStatus;
+    }
+	function add_chips($chips)
+    {
+        $insertStatus = $this->db->insert('test_chips', $chips);
 		return $insertStatus;
     }
 	
@@ -68,29 +93,4 @@ class plan_model extends CI_Model {
 		}
 		return $anthena;
 	}
-
-    public function Update($plan)
-    {
-        if(is_object($plan)){
-            $this->db->where('id', $plan->id);
-            return $this->db->update('plans', $plan);
-        }
-    }
-
-    public function Delete($plan)
-    {
-        if(isset($plan->id) && !is_null($plan->id))
-        {
-            $this->db->where('id', $plan->id);
-            return $this->db->delete('plans');
-        }
-    }
-
-    public function Create($plan)
-    {
-        if(is_object($plan))
-        {
-            $this->db->insert('plans', $plan);
-        }
-    }
 }
