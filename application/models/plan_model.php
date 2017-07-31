@@ -32,7 +32,7 @@ class plan_model extends CI_Model {
         $insertStatus = $this->db->insert('test_channels', $channels);
 		return $insertStatus;
     }
-	function add_anthenas($temps)
+	function add_anthenas($anthenas)
     {
         $insertStatus = $this->db->insert('test_anthenas', $anthenas);
 		return $insertStatus;
