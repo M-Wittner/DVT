@@ -1,4 +1,4 @@
-myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, $http, $log) {
+myApp.controller('newReportCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 	$scope.array = [];
 	$scope.plan = {};
 	
@@ -15,7 +15,7 @@ myApp.controller('newReportCtrl', ['$scope', '$http', '$log', function ($scope, 
 		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
 			if(response.data){
-				console.log(response.data);
+				$location.path('/reports');
 			} else {
 				console.log(response);
 			}
