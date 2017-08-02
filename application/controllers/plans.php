@@ -31,6 +31,7 @@ class Plans extends CI_Controller {
 	function Create() {
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
+//		die();
 		// plan data
 		$planData = $postData->plan;
 		$plan = array(
@@ -94,7 +95,7 @@ class Plans extends CI_Controller {
 					$this->plan_model->add_anthenas($anthena);
 					print_r($anthena);
 				};
-				break;
+//				break;
 		};
 		echo 'success';
 		} else {
