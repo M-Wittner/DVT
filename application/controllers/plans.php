@@ -31,106 +31,75 @@ class Plans extends CI_Controller {
 	function Create() {
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
-		die(print_r($postData));
 		// plan data
 		$planData = $postData->plan;
 		$plan = array(
 			'title'=>$planData->title
 		);
-		$testData = $postData->test;
-		foreach ($testData as $i => $test){
-			$stationsData = $testData[$i]->station;
-			$nameData = $testData[$i]->name;
-			$chipsData = $testData[$i]->chips;
-			$tempsData = $testData[$i]->temp;
-			$channelsData = $testData[$i]->channel;
-			$anthenasData = $testData[$i]->anthena;
-		};
-		$tempsArr = $this->plan_model->get_temps($tempsData);
-		$chipsArr = $this->plan_model->get_chips($chipsData);
-		$channelsArr= $this->plan_model->get_channels($channelsData);
-		$anthenasArr = $this->plan_model->get_anthenas($anthenasData);
-		$stationsArr = $this->plan_model->get_station($stationsData);
-		$nameArr = $this->plan_model->get_name($nameData);
+		$testsObj = $postData->test;
 		
-		// inserting plan
 		$insertPlan = $this->plan_model->add_plan($plan);
 		if($insertPlan){
-			//getting inserted plan id
 			$planId = $this->plan_model->get_id($insertPlan);
-			if($planId) {
+			foreach($testsObj as $i => $testArr){
+				$chipsArr = $testArr->chips;
+				$tempsArr = $testArr->temp;
+				$channelsArr = $testArr->channel;
+				$anthenasArr = $testArr->anthena;
 				$test = array(
-					'lineup'=>$testData[$i]->lineup,
-					'station'=>$stationsArr,
-					'name'=>$nameArr,
-					'pin_from'=>$testData[$i]->pinFrom,
-					'pin_to'=>$testData[$i]->pinTo,
-					'pin_step'=>$testData[$i]->pinStep,
-					'pin_additional'=>$testData[$i]->pinAdd,
-					'mcs'=>$testData[$i]->mcs,
-					'voltage'=>$testData[$i]->voltage,
-					'notes'=>$testData[$i]->notes,
+					'lineup'=>$testArr->lineup,
+					'station'=>$testArr->station[0],
+					'name'=>$testArr->name[0],
+					'pin_from'=>$testArr->pinFrom,
+					'pin_to'=>$testArr->pinTo,
+					'pin_step'=>$testArr->pinStep,
+					'pin_additional'=>$testArr->pinAdd,
+					'mcs'=>$testArr->mcs,
+					'voltage'=>$testArr->voltage,
+					'notes'=>$testArr->notes,
 					'plan_id'=>$planId
 				);
 				$insertTest = $this->plan_model->add_test($test);
-				if($insertTest){
-					$testId = $this->plan_model->get_id($insertTest);
-					if($testId) {
-						foreach ($tempsArr as $tempRes){
-							$temps = array(
-								'temp' => $tempRes,
-								'test_id'=> $testId
-							);
-							$insertTemps = $this->plan_model->add_temps($temps);
-						};
-						if($insertTemps){
-							foreach($channelsArr as $channelRes){
-								$channels = array(
-									'channel' => $channelRes,
-									'test_id' => $testId
-								);
-								$insertChannels = $this->plan_model->add_channels($channels);
-							};
-							if($insertChannels){
-								foreach($anthenasArr as $anthenaRes){
-									$anthenas = array(
-										'anthena' => $anthenaRes,
-										'test_id' => $testId
-									);
-									$insertAnthenas = $this->plan_model->add_anthenas($anthenas);
-								};
-								if($insertAnthenas){
-									foreach($chipsArr as $chipRes){
-										$chips = array(
-											'chip' => $chipRes,
-											'test_id' => $testId
-										);
-//										print_r($chips);
-										$insertChips = $this->plan_model->add_chips($chips);
-										echo 'success!';
-									};
-								} else {
-									echo 'no anthenas inserted';
-								}
-							} else {
-								echo 'no channels inserted';
-							}
-							
-						} else {
-							echo 'no temps inserted';
-						}
-					} else{
-						echo 'no test id obtained';
-					}
-				} else {
-					echo 'inset test failure';
-				}
-			} else {
-				echo "no plan ID obtained";
-			}
-		} else {
-			echo 'failure';
+				$testId = $this->plan_model->tests_id($insertTest);
+				print_r($test);
+				foreach($chipsArr as $result){
+					$chip = array(
+						'chip'=> $result,
+						'test_id'=>$testId
+					);
+					$this->plan_model->add_chips($chip);
+					print_r($chip);
+				};
+				foreach($tempsArr as $result){
+					$temp = array(
+						'temp'=>$result,
+						'test_id'=>$testId
+					);
+					$this->plan_model->add_temps($temp);
+					print_r($temp);
+				};
+				foreach($channelsArr as $result){
+					$channel = array(
+						'channel'=>$result,
+						'test_id'=>$testId
+					);
+					$this->plan_model->add_channels($channel);
+					print_r($channel);
+				};
+				foreach($anthenasArr as $result){
+					$anthena = array(
+						'anthena'=>$result,
+						'test_id'=>$testId
+					);
+					$this->plan_model->add_anthenas($anthena);
+					print_r($anthena);
+				};
+				break;
 		};
+		echo 'success';
+		} else {
+			echo 'No plan inserted!';
+		}
 		
 	}
 	
@@ -140,3 +109,46 @@ class Plans extends CI_Controller {
 	}
 	
 }
+//
+//				$insertTest = $this->plan_model->add_test($test);
+//				$testId = $this->plan_model->tests_id($insertTest);
+//				if($testId){
+//					print_r($testId);
+//					die();
+//					
+////					foreach($chipsArr as $result){
+////						$chip = array(
+////							'chip'=> $result,
+////							'test_id'=>$testId
+////						);
+////						$this->plan_model->add_chips($chip);
+////						print_r($chip);
+////					};
+////					foreach($tempsArr as $result){
+////						$temp = array(
+////							'temp'=>$result,
+////							'test_id'=>$testId
+////						);
+////						$this->plan_model->add_temps($temp);
+////						print_r($temp);
+////					};
+////					foreach($channelsArr as $result){
+////						$channel = array(
+////							'channel'=>$result,
+////							'test_id'=>$testId
+////						);
+////						$this->plan_model->add_channels($channel);
+////						print_r($channel);
+////					};
+////					foreach($anthenasArr as $result){
+////						$anthena = array(
+////							'anthena'=>$result,
+////							'test_id'=>$testId
+////						);
+////						$this->plan_model->add_anthenas($anthena);
+////						print_r($anthena);
+////						break;
+////					};
+//				}else{
+//					echo 'No test Inserted';
+//				}

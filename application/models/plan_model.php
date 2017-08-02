@@ -47,6 +47,10 @@ class plan_model extends CI_Model {
 		$insertId = $this->db->insert_id($insertStatus);
 		return $insertId;
 	}
+	function tests_id($insertStatus){
+		$insertId = $this->db->insert_id($insertStatus);
+		return $insertId;
+	}
 	
 	function get_station($stations) {
 		foreach($stations as $i=> $station) {
