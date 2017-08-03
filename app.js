@@ -14,20 +14,20 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 		templateUrl: 'pages/register.html',
 		controller: 'regCtrl'
 	})
-		.when('/reports', {
-			templateUrl: 'pages/reports/index.html',
-			controller: 'reportCtrl'
+		.when('/plans', {
+			templateUrl: 'pages/plans/index.html',
+			controller: 'plansCtrl'
 	})
-		.when('/reports/new', {
-			templateUrl: 'pages/reports/new.html',
-			controller: 'newReportCtrl'
+		.when('/plans/new', {
+			templateUrl: 'pages/plans/new.html',
+			controller: 'newPlanCtrl'
 	})
-		.when('/reports/:id', {
-			templateUrl: 'pages/reports/view.html',
-			controller: 'viewReportCtrl'
+		.when('/plans/:id', {
+			templateUrl: 'pages/plans/view.html',
+			controller: 'viewPlanCtrl'
 	})
-		.when('reports/:id/edit', {
-			templateUrl: 'pages/reports/edit.html',
+		.when('plans/:id/edit', {
+			templateUrl: 'pages/plans/edit.html',
 			controller: ''
 	})
 		.otherwise({redirectTo: '/'});
@@ -38,7 +38,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 
 myApp.directive('testForm', function(){
 	return {
-		templateUrl: 'pages/reports/newTest.html',
+		templateUrl: 'pages/plans/newTest.html',
 		controller: 'testCtrl',
 		scope: {
 			planParams: '=',

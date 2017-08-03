@@ -1,18 +1,18 @@
-<div class="panel panel-primary" ng-controller="viewReportCtrl">
-  <div class="panel-heading">{{ report.title }}</div>
-  <div class="panel-body" id="reportBody">
+<div class="panel panel-primary">
+  <div class="panel-heading">{{ plan.title }}</div>
+  <div class="panel-body" id="planBody">
     <div id="author" class="pull-left col-md-10"><em><strong>Submitted by: </strong></em></div>
-    <div id="date" class="pull-right col-md-2">{{ report.date }}</div>
+    <div id="date" class="pull-right col-md-2">{{ plan.date }}</div>
     <div id="desc" class="">
       
-        <a class="btn btn-sm btn-warning pull-right btn-crud" href="#/reports/{{report.id}}/edit">Edit</a>
+        <a class="btn btn-sm btn-warning pull-right btn-crud" href="#/plans/{{plan.id}}/edit">Edit</a>
 <!--        <form action="#/reports/{{report.id}}?_method=DELETE" method="POST">-->
           <button class="btn btn-sm btn-danger pull-right btn-crud">
             Delete
           </button>          
         </form>
       <p class="panel panel-heading">
-        Report Description:
+        Plan Description:
         <div id="test" class="row container-fluid">
                   <div class="col-md-2 panel-body">
             <input name="testNum" id="testNum" class="formInput form-control" type="text" value="1" readonly>
@@ -55,4 +55,4 @@
     </div>
   </div>
 </div>
-<a  class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/reports/{{report.id}}/comments/new">Add New Comment</a>
+<a  class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/comments/new">Add New Comment</a>

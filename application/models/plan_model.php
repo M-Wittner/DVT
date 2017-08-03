@@ -12,6 +12,11 @@ class plan_model extends CI_Model {
 		return $q->result();
 	}
 	
+	function get_plan($id) {
+		$q = $this->db->get_where('plans', array('id'=> $id));
+		return $q->result();
+	}
+	
 	 function add_plan($plan)
     {
         $insertStatus = $this->db->insert('plans', $plan);

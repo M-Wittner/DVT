@@ -1,15 +1,15 @@
 <div class="panel panel-primary">
-  <div class="panel-heading">Edit report.name</div>
-  <form action="/reports/<%= report._id %>/?_method=PUT" method="POST" class="IssueForm">
-  <div class="panel-body" id="reportBody">
+  <div class="panel-heading">Edit plan.name</div>
+  <form action="/plans/<%= plan._id %>/?_method=PUT" method="POST" class="IssueForm">
+  <div class="panel-body" id="planBody">
     <div id="desc" class="">
       <p class="panel panel-heading">
         Report Description:
         <div id="test" class="cil-md-12 panel-heading">
             <span class="label label-primary">Task Title</span>
-            <input id="taskTitle" required class="formInput form-control" type="text" name="taskTitle" value="<%= report.taskTitle %>">
+            <input id="taskTitle" required class="formInput form-control" type="text" name="taskTitle" value="<%= plan.taskTitle %>">
         </div>
-        <% report.tests.forEach(function(test){ %>
+        <% plan.tests.forEach(function(test){ %>
                   <div class="col-md-2 panel-body">
             <input name="testNum" id="testNum" class="formInput form-control" type="text" value="1" readonly>
           </div>
