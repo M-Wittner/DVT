@@ -1,12 +1,13 @@
-myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', function ($scope, $location, $http) {
-	$scope.planId = {};
-	$http.get('http://localhost:3000/plans/show', )
+myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams', function ($scope, $location, $http, $routeParams) {
+	$http.post('http://localhost:3000/plans/show', $routeParams.id)
 	.then(function(response){
-		$scope.planId.id = response.data;
-		$http.post('http://localhost:3000/plans/show', {id: $scope.planId})
-		.then(function(response){
-			console.log(response.data);
-		});
+		console.log(response.data);
+		$scope.plan = response.data.plan[0];
+		$scope.tests = response.data.tests;
+//		$scope.tests.channels = response.tests.channels;
+//		console.log($scope.plan);
+		console.log(response.data.tests[0].channels);
+//		console.log($scope.channels[1]);
 	});
 	$scope.class = "glyphicon glyphicon-ok";
 	$scope.test = false;

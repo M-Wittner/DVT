@@ -1,58 +1,113 @@
 <div class="panel panel-primary">
-  <div class="panel-heading">{{ plan.title }}</div>
-  <div class="panel-body" id="planBody">
-    <div id="author" class="pull-left col-md-10"><em><strong>Submitted by: </strong></em></div>
-    <div id="date" class="pull-right col-md-2">{{ plan.date }}</div>
-    <div id="desc" class="">
-      
-        <a class="btn btn-sm btn-warning pull-right btn-crud" href="#/plans/{{plan.id}}/edit">Edit</a>
-<!--        <form action="#/reports/{{report.id}}?_method=DELETE" method="POST">-->
-          <button class="btn btn-sm btn-danger pull-right btn-crud">
+	<div class="panel-heading">{{ plan.title }}</div>
+	<div class="panel-body" id="planBody">
+		<div id="author" class="pull-left col-md-10"><em><strong>Submitted by: </strong></em></div>
+		<div id="date" class="pull-right col-md-2">{{ plan.date }}</div>
+		<div id="desc" ng-repeat="test in tests">
+			<div>
+			</div>
+			<a class="btn btn-sm btn-warning pull-right btn-crud" href="#/plans/{{plan.id}}/{{test.id}}/edit">Edit</a>
+			<!--        <form action="#/reports/{{report.id}}?_method=DELETE" method="POST">-->
+			<button class="btn btn-sm btn-danger pull-right btn-crud">
             Delete
-          </button>          
-        </form>
-      <p class="panel panel-heading">
-        Plan Description:
-        <div id="test" class="row container-fluid">
-                  <div class="col-md-2 panel-body">
-            <input name="testNum" id="testNum" class="formInput form-control" type="text" value="1" readonly>
-          </div>
-          <div class="col-md-2 panel-body">
-            <input id="station" required class="formInput form-control" type="text" name="test[station]" value="" readonly>
-            <input id="testName" required class="formInput form-control" type="text" name="test.name" value="" readonly>
-          </div>
-          <div class="panel-body col-md-6">
-            <textarea type="text" name="test[params]" id="editor" class="form-control" readonly></textarea>
-<!--
-              <script>
-                  $("#editor").wysiwyg();
-              </script>
--->
-          </div>
-          <div class="col-md-2 list-group">
-            <li class="list-group-item">
-              YA95100006 <span ng-click="status()" ng-class="{'glyphicon-plus': !test, 'glyphicon-ok': test}" class="glyphicon pull-right
-"></span>
-            </li>
-            <li class="list-group-item">
-              YA95100007
-            </li>
-            <li class="list-group-item">
-              YA95100008
-            </li>
-          </div>
-
-        </div>
-        
-        <div class="panel-footer col-md-12">
-<!--        ng-repeat -->
-          <p id="commentP">
-            <strong><!-- comments --></strong>: 
-          </p>
-        
-        <div>
-      </p>
-    </div>
-  </div>
+          </button>
+			<div class="row">
+				<div class="panel-body">
+					<div class="col-md-4">
+						<span class="label label-primary">Test Lineup</span>
+						<label class="form-control">{{test.lineup}}</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Station:</span>
+						<label class="form-control">{{test.station}}</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Test Name:</span>
+						<label class="form-control">{{test.name}}</label>
+					</div>
+				</div>
+				<div class="panel-body col-md-3">
+					<span class="label label-primary">Pin:</span></br>
+					<div class="col-md-4">
+						<span>From</span>
+						<label class="form-control">{{test.pin_from}}</label>
+					</div>
+					<div class="col-md-4">
+						<span>To</span>
+						<label class="form-control">{{test.pin_to}}</label>
+					</div>
+					<div class="col-md-4">
+						<span>Step</span>
+						<label class="form-control">{{test.pin_step}}</label>
+					</div>
+					<div class="col-md-5">
+						<span>More</span>
+						<label class="form-control">{{test.pin_additional}}</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">MCS:</span></br>
+						<label class="form-control">{{test.mcs}}</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Chip S/N:</span>
+						<ul class="list-group" >
+						  <li ng-repeat="chip in test.chips" class="list-group-item">{{chip}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Temperatures:</span>
+						<ul class="list-group" >
+						  <li ng-repeat="temp in test.temps" class="list-group-item">{{temp}}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Channels:</span>
+						<ul class="list-group" >
+						  <li ng-repeat="channel in test.channels" class="list-group-item">{{channel}}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Anthenas:</span>
+						<ul class="list-group" >
+						  <li ng-repeat="anthena in test.anthenas" class="list-group-item">{{anthena}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Voltage:</span>
+						<label class="form-control">{{test.voltage}}</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="panel-body">
+						<span class="label label-primary">Notes:</span>
+						<!--					<input  type="text" ng-model="test.notes" ng-disabled="lock">-->
+						<label class="form-control">{{test.notes}}</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<a  class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/comments/new">Add New Comment</a>
+<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/comments/new">Add New Comment</a>

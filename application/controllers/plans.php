@@ -96,12 +96,9 @@ class Plans extends CI_Controller {
 	}
 	
 	function Show() {
-		$postData = json_decode(file_get_contents('php://input'));
-		die(var_dump($postData));
-		$id = $postData;
-		
-		die(var_dump($postData));
-		$result = $this->plan_model->get_plan($id[0]);
+		$id = json_decode(file_get_contents('php://input'));
+		$result = $this->plan_model->get_plan($id);
+//		die(var_dump($result));
 		echo json_encode($result);
 		
 	}
