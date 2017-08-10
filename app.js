@@ -66,20 +66,6 @@ myApp.constant('USER_ROLES', {
 });
 
 
-myApp.service('Session', function(){
-	this.create = function(sessionId, userId, userRole){
-		this.id = sessionId;
-		this.userId = userId;
-		this.userRols = userRole;
-	};
-	
-	this.destory = function(){
-		this.id = null;
-		this.userId = null;
-		this.userRole = null;
-	};
-});
-
 myApp.factory('AuthService', function($http, Session){
 	var authService = {};
 	
@@ -87,7 +73,7 @@ myApp.factory('AuthService', function($http, Session){
 		return $http.post('http://wigig-584:3000/login', {user: credentials})
 		.then(function(res){
 			console.log(res.data);
-			Session.create(res.data.id, res.data.user.id, res.data.user.role);
+			Session.create(res.data.id, res.data.user.id);
 			return res.data.user;
 		});
 	};
@@ -104,4 +90,18 @@ myApp.factory('AuthService', function($http, Session){
 		};
 		
 		return authService;
+});
+
+myApp.service('Session', function(){
+	this.create = function(sessionId, userId, userRole){
+		this.id = sessionId;
+		this.userId = userId;
+		this.userRols = userRole;
+	};
+	
+	this.destory = function(){
+		this.id = null;
+		this.userId = null;
+		this.userRole = null;
+	};
 });

@@ -12,7 +12,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', functi
 	}
 		
 	$scope.addPlan = function() {
-		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan, test: $scope.array})
+		$http.post('http://wigig-584:3000/plans/create', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
 			if(response.data){
 				var message = 'Plan Created Succesfully!';
