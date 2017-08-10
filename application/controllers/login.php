@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, Content-Length, X-Requested-With");
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Login extends CI_Controller {
 	public function __construct() {
@@ -23,20 +23,30 @@ class Login extends CI_Controller {
 			'username'=>$userData->username,
 			'password'=>md5($userData->password),
 		);
-		var_dump($postData);
-		$uresult = $this->user_model->get_user($user);
+		$this->form_validation->set_data($user);
+		$this->form_validation->set_rules('username', 'Userame', 'trim|required|alpha|min_length[4]|max_length[10]');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
+		
+		if($this->form_validation->run() == FALSE) {
+			//validation fail
+			echo "faild to login";
+			
+		} else {
+			// check for user credentials(authenticate)
+			$uresult = $this->user_model->get_user($user[0], $user[1]);
 			if(count($uresult) > 0) {
 				//set sesison
 				$sessData = array(
 					'login' => TRUE,
-					'userName' => $uresult[0]->username,
-					'userId' 	=> $uresult[0]->id
+					'uname' => $uresult[0]->username,
+					'uid' 	=> $uresult[0]->id
 				);
-				echo 'blaaa';
-				die(var_dump($uresult));
-				echo json_encode($sessData);
+				$this->session->set_userdata($sessData);
+				redirect('#/reports');
+				echo "suclog";
 			} else {
 				echo 'failure!!';
 			}
+		}
 	}
 }

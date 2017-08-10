@@ -1,25 +1,18 @@
 <div class="panel panel-primary">
-	<div class="panel-heading">
-		{{ plan.title }}
-		<button class="btn btn-sm btn-warning pull-right btn-crud" ng-click="edit(plan.id)" ng-disabled="">Edit btn</button>
-		<a class="btn btn-sm btn-warning pull-right btn-crud" href="#/plans/{{plan.id}}/edit" ng-disabled="">Edit</a>
-		<button class="btn btn-sm btn-danger pull-right btn-crud" ng-click="remove(plan.id)">
-            Delete
-        </button>
-	</div>
+	<div class="panel-heading">{{ plan.title }}</div>
 	<div class="panel-body" id="planBody">
 		<div id="author" class="pull-left col-md-10"><em><strong>Submitted by: </strong></em></div>
 		<div id="date" class="pull-right col-md-2">{{ plan.date }}</div>
 		<div id="desc" ng-repeat="test in tests">
 			<div>
 			</div>
-			
+			<a class="btn btn-sm btn-warning pull-right btn-crud" href="#/plans/{{plan.id}}/{{test.id}}/edit">Edit</a>
+			<!--        <form action="#/reports/{{report.id}}?_method=DELETE" method="POST">-->
+			<button class="btn btn-sm btn-danger pull-right btn-crud">
+            Delete
+          </button>
 			<div class="row">
 				<div class="panel-body">
-					<div class="col-md-1">
-						<span class="label label-primary">Test ID</span>
-						<label class="form-control">{{test.id}}</label>
-					</div>
 					<div class="col-md-4">
 						<span class="label label-primary">Test Lineup</span>
 						<label class="form-control">{{test.lineup}}</label>
@@ -64,14 +57,11 @@
 						<label class="form-control">{{test.mcs}}</label>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<div class="panel-body">
 						<span class="label label-primary">Chip S/N:</span>
 						<ul class="list-group" >
-						  <li ng-repeat="chip in test.chips" class="list-group-item">
-							  {{chip}}
-							  <span ng-click="test = !test" ng-class="{'glyphicon-remove': !test, 'glyphicon-ok': test}" class="glyphicon pull-right"></span>
-						</li>
+						  <li ng-repeat="chip in test.chips" class="list-group-item">{{chip}}</li>
 						</ul>
 					</div>
 				</div>

@@ -103,9 +103,4 @@ class Plans extends CI_Controller {
 		
 	}
 	
-	function remove(){
-		$id = json_decode(file_get_contents('php://input'));
-		$result = $this->plan_model->delete_plan($id);
-	}
-	
 }

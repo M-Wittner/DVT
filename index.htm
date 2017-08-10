@@ -9,15 +9,12 @@
 
 	<!-- Angular -->
 	<script type="text/javascript" src="https://code.angularjs.org/1.6.4/angular.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
 	<script src="https://code.angularjs.org/1.6.4/angular-animate.min.js"></script>
 	<script src="https://code.angularjs.org/1.6.4/angular-touch.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
-	<!-- Angukar Flash -->
-	<script src="assets/lib/angular-flash/dist/angular-flash.min.js"></script>
-	<link rel="stylesheet" href="assets/lib/angular-flash/dist/angular-flash.min.css" type="text/css">
 	<!-- Multiselect -->
 	<script type="text/javascript" src="assets/lib/angular-bootstrap-multiselect/dist/angular-bootstrap-multiselect.min.js"></script>
 
@@ -43,14 +40,13 @@
 	<!--	test	-->
 	<script type="text/javascript" src="controllers/test.controller.js"></script>
 	<!--  Reports	-->
-	<script type="text/javascript" src="controllers/app.controller.js"></script>
 	<script type="text/javascript" src="controllers/plans/plans.controller.js"></script>
 	<script type="text/javascript" src="controllers/plans/view.controller.js"></script>
 	<script type="text/javascript" src="controllers/plans/new.controller.js"></script>
-	<script type="text/javascript" src="controllers/plans/edit.controller.js"></script>
+	<script type="text/javascript" src="controllers/plans/new.controller.js"></script>
 </head>
 
-<body ng-app="myApp" ng-controller="appCtrl">
+<body ng-app="myApp">
 	<div class="container">
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
@@ -76,7 +72,7 @@
 								<li><a href="#/plans/new">New Plan</a></li>
 							</ul>
 						</li>
-<!--						<li class="pull-right"><a href="#">Logged in as M</a></li>-->
+						<li class="pull-right"><a href="#">Logged in as M</a></li>
 						<li><a href="#/logout">Log Out</a></li>
 
 						<li><a href="#/register">Sign up</a></li>
@@ -95,7 +91,7 @@
 		</nav>
 	</div>
 	<div class="container">
-		<div ng-view></div>
+		<div class="container" ng-view></div>
 	</div>
 </body>
 

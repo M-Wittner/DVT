@@ -1,6 +1,4 @@
-<?php
-header("Access-Control-Allow-Origin: *");
-header('Content-Type: application/x-www-form-urlencoded');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class User_model extends CI_Model
 {
     function __construct()
@@ -10,20 +8,29 @@ class User_model extends CI_Model
     }
     
 	//get the username & password from tbl_usrs
-    function get_user($usr, $pwd) {
+    function get_user($request) {
 		$this->db->select('username, password');
 //		$this->db->from('users');
-		$this->db->where('username', $usr, 'password', md5($pwd));
+		$this->db->where('username', $user[0], 'password', md5($user[1]));
 		$q = $this->db->get('users');
-		return $q->result();
+		if ($q->num_rows() == 1) {
+			return $q->result();
+		} else {
+			return FALSE;	
+		}
     }
 
     //insert into user table
-    function insertUser($data)
+    function insert_user($user)
     {
-       $this->db->insert('users', $data);
-		return;
+        $insertStatus = $this->db->insert('users', $user);
+		return $insertStatus;
     }
+	
+	function get_id($insertStatus){
+		$insertId = $this->db->insert_id($insertStatus);
+		return $insertId;
+	}
 
 //    //send verification email to user's email id
 //    function sendEmail($to_email)

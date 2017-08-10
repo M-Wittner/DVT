@@ -12,11 +12,6 @@ class plan_model extends CI_Model {
 		return $q->result();
 	}
 	
-	function delete_plan($id){
-		$q = $this->db->query("DELETE FROM `plans` WHERE id = ?", $id);
-		return;
-	}
-	
 	function get_plan($id) {
 		$q = $this->db->get_where('plans', array('id'=> $id))->result();
 		$tests =$this->db->get_where('tests', array('plan_id'=>$id))->result();

@@ -34,7 +34,7 @@ myApp.controller('testCtrl', ['$scope', '$http', '$log', function ($scope, $http
 		'Rx Noise Gain',
 	];
 	$scope.params.chipList = [];
-    $http.get('http://wigig-584:3000/chips/all')
+    $http.get('http://localhost:3000/chips/all')
 	.then(function(response){
 		var result = [];
 		var count = 0;
