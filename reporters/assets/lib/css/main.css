@@ -1,0 +1,74 @@
+#formCont {
+    width: 100%;
+}
+
+.btn-crud{
+    margin-right: 0.4%;
+    margin-top: 0.4%;
+}
+ #editor {
+     overflow: scroll;
+     height: 250px;
+     width: 100%;
+     /*max-height: 300px;*/
+ }
+
+#desc {
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 100%;
+    margin-top: 5%;
+    display: inline-block;
+    border: 4px solid #337ab7;
+    border-radius: 6px;
+}
+
+#details {
+    height: 250px;
+}
+
+#reportBody{
+    padding-bottom: 0.75%;
+}
+
+#commentP{
+    border-bottom: 1px solid gray;
+    margin-bottom: 3%;
+}
+
+.addButton {
+    margin-top: 1%;
+    margin-left: 0.4%;
+    margin-bottom: 1%;
+    width: 120px;
+}
+
+.IssueForm {
+    border: 1.5px solid gray;
+    padding: 1% 0% 1% 2%;
+    border-radius: 10px;
+}
+
+textarea {
+    height: 50px;
+    width: 100%;
+}
+
+.line {
+    padding-bottom: 5px;
+}
+
+.formInput {
+    margin-bottom: 5% !important;
+}
+#taskTitle{
+    margin-right: 80%;
+}
+
+#issueDesc {
+    padding-top: 0px !important;
+}
+
+#subBTN {
+    margin-bottom: 1%;
+}

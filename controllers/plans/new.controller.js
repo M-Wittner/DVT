@@ -1,4 +1,4 @@
-myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', function ($scope, $http, $location, Flash) {
 	$scope.array = [];
 	$scope.plan = {};
 	
@@ -12,10 +12,12 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', function ($scop
 	}
 		
 	$scope.addPlan = function() {
-		$http.post('http://localhost:3000/plans/create', {plan: $scope.plan, test: $scope.array})
+		$http.post('http://wigig-584:3000/plans/create', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
 			if(response.data){
-//				$location.path('/plans');
+				var message = 'Plan Created Succesfully!';
+				var id = Flash.create('success', message, 3500);
+				$location.path('/plans');
 				console.log(response.data)
 			} else {
 				console.log(response);

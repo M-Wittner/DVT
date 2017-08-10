@@ -1,59 +1,122 @@
 <div class="panel panel-primary">
-  <div class="panel-heading">Edit plan.name</div>
-  <form action="/plans/<%= plan._id %>/?_method=PUT" method="POST" class="IssueForm">
-  <div class="panel-body" id="planBody">
-    <div id="desc" class="">
-      <p class="panel panel-heading">
-        Report Description:
-        <div id="test" class="cil-md-12 panel-heading">
-            <span class="label label-primary">Task Title</span>
-            <input id="taskTitle" required class="formInput form-control" type="text" name="taskTitle" value="<%= plan.taskTitle %>">
-        </div>
-        <% plan.tests.forEach(function(test){ %>
-                  <div class="col-md-2 panel-body">
-            <input name="testNum" id="testNum" class="formInput form-control" type="text" value="1" readonly>
-          </div>
-          <div class="col-md-2 panel-body">
-            <input id="station" required class="formInput form-control" type="text" name="test[station]" value="<%= test.station %>">
-            <input id="testName" required class="formInput form-control" type="text" name="test[name]" value="<%= test.name %>">
-          </div>
-          <div class="panel-body col-md-6">
-            <textarea type="text" name="test[params]" id="editor" class="form-control"><%= test.params %></textarea>
-              <script>
-                  $("#editor").wysiwyg();
-              </script>
-          </div>
-            <div class="line col-md-2">
-                <span class=" label label-primary">Chip S\N:</span>
-                <div class="button-group">
-                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" name="test[chipSN]">
-                        <span class="glyphicon glyphicon-cog">Chip</span> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a href="#" class="small" data-value="YA95100006" tabIndex="-1"><input name="chipSN" type="checkbox"/>&nbsp;YA95100006</a></li>
-                      <li><a href="#" class="small" data-value="YA95100007" tabIndex="-1"><input name="chipSN" type="checkbox"/>&nbsp;YA95100007</a></li>
-                      <li><a href="#" class="small" data-value="YA95100008" tabIndex="-1"><input name="chipSN" type="checkbox"/>&nbsp;YA95100008</a></li>
-                      <li><a href="#" class="small" data-value="YA95100009" tabIndex="-1"><input name="chipSN" type="checkbox"/>&nbsp;YA95100009</a></li>
-                      <li><a href="#" class="small" data-value="YA95100010" tabIndex="-1"><input name="chipSN" type="checkbox"/>&nbsp;YA95100010</a></li>
-                      <li><a href="#" class="small" data-value="YA95100011" tabIndex="-1"><input name="chipSN" type="checkbox"/>&nbsp;YA95100011</a></li>
-                    </ul>
-               </div>  
-            </div>
-        <% }); %>
-        </div>
-        
-        <div class="col-md-12">
-            <button class="pull-right btn btn-xs btn-primary col-lg-5 addButton" onclick="test.forEach(addTest)">
-              Add Test!
-            </button>
-        <div>
-      </p>
-    </div>
-
-  </div>
-        <div class="col-md-12" id="subBTN">
-            <hr>
-            <button class="btn btn-lg btn-success">Submit!</button>
-        </div>
-      </form>
+	<div class="panel-heading">
+		{{ plan.title }}
+		<a class="btn btn-sm btn-warning pull-right btn-crud" ng-click="edit(plan.id)">Edit</a>
+		<button class="btn btn-sm btn-danger pull-right btn-crud">
+            Delete
+        </button>
+	</div>
+	<div class="panel-body" id="planBody">
+		<div id="author" class="pull-left col-md-10"><em><strong>Submitted by: </strong></em></div>
+		<div id="date" class="pull-right col-md-2">{{ plan.date }}</div>
+		<div id="desc" ng-repeat="test in tests">
+			<div>
+			</div>
+			
+			<div class="row">
+				<div class="panel-body">
+					<div class="col-md-1">
+						<span class="label label-primary">Test ID</span>
+						<label class="form-control">{{test.id}}</label>
+					</div>
+					<div class="col-md-4">
+						<span class="label label-primary">Test Lineup</span>
+						<label class="form-control">{{test.lineup}}</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Station:</span>
+						<label class="form-control">{{test.station}}</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Test Name:</span>
+						<label class="form-control">{{test.name}}</label>
+					</div>
+				</div>
+				<div class="panel-body col-md-3">
+					<span class="label label-primary">Pin:</span></br>
+					<div class="col-md-4">
+						<span>From</span>
+						<label class="form-control">{{test.pin_from}}</label>
+					</div>
+					<div class="col-md-4">
+						<span>To</span>
+						<label class="form-control">{{test.pin_to}}</label>
+					</div>
+					<div class="col-md-4">
+						<span>Step</span>
+						<label class="form-control">{{test.pin_step}}</label>
+					</div>
+					<div class="col-md-5">
+						<span>More</span>
+						<label class="form-control">{{test.pin_additional}}</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">MCS:</span></br>
+						<label class="form-control">{{test.mcs}}</label>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="panel-body">
+						<span class="label label-primary">Chip S/N:</span>
+						<ul class="list-group" >
+						  <li ng-repeat="chip in test.chips" class="list-group-item">
+							  {{chip}}
+							  <span ng-click="test = !test" ng-class="{'glyphicon-remove': !test, 'glyphicon-ok': test}" class="glyphicon pull-right"></span>
+						</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Temperatures:</span>
+						<ul class="list-group" >
+						  <li ng-repeat="temp in test.temps" class="list-group-item">{{temp}}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Channels:</span>
+						<ul class="list-group" >
+						  <li ng-repeat="channel in test.channels" class="list-group-item">{{channel}}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Anthenas:</span>
+						<ul class="list-group" >
+						  <li ng-repeat="anthena in test.anthenas" class="list-group-item">{{anthena}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<div class="panel-body">
+						<span class="label label-primary">Voltage:</span>
+						<label class="form-control">{{test.voltage}}</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="panel-body">
+						<span class="label label-primary">Notes:</span>
+						<!--					<input  type="text" ng-model="test.notes" ng-disabled="lock">-->
+						<label class="form-control">{{test.notes}}</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/comments/new">Add New Comment</a>
