@@ -1,9 +1,6 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'btorfs.multiselect']);
+var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
-	
-	//$httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
-	//$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 	
 	$routeProvider
 		.when('/', {
@@ -28,7 +25,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 	})
 		.when('plans/:id/edit', {
 			templateUrl: 'pages/plans/edit.html',
-			controller: ''
+			controller: 'editPlanCtrl'
 	})
 		.otherwise({redirectTo: '/'});
 	
@@ -50,4 +47,61 @@ myApp.directive('testForm', function(){
 			
 		}
 	}
+});
+
+myApp.constant('AUTH_EVENTS', {
+  loginSuccess: 'auth-login-success',
+  loginFailed: 'auth-login-failed',
+  logoutSuccess: 'auth-logout-success',
+  sessionTimeout: 'auth-session-timeout',
+  notAuthenticated: 'auth-not-authenticated',
+  notAuthorized: 'auth-not-authorized'
+});
+
+myApp.constant('USER_ROLES', {
+  all: '*',
+  admin: 'admin',
+  editor: 'editor',
+  guest: 'guest'
+});
+
+
+myApp.service('Session', function(){
+	this.create = function(sessionId, userId, userRole){
+		this.id = sessionId;
+		this.userId = userId;
+		this.userRols = userRole;
+	};
+	
+	this.destory = function(){
+		this.id = null;
+		this.userId = null;
+		this.userRole = null;
+	};
+});
+
+myApp.factory('AuthService', function($http, Session){
+	var authService = {};
+	
+	authService.login = function (credentials){
+		return $http.post('http://wigig-584:3000/login', {user: credentials})
+		.then(function(res){
+			console.log(res.data);
+			Session.create(res.data.id, res.data.user.id, res.data.user.role);
+			return res.data.user;
+		});
+	};
+	
+	authService.isAuthenticated = function(){
+			return !!Session.userId;
+		};
+		
+		authService.isAuthorized = function(authorizedRoles){
+			if(!angular.isArray(authorizedRoles)){
+				authorizedRoles = [authorizedRoles];
+			}
+			return(authService.isAuthenticated() && authorizedRoles.indexOf(Session.userRole) !== -1);
+		};
+		
+		return authService;
 });
