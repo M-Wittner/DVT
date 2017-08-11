@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash']);
+var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	
@@ -66,20 +66,28 @@ myApp.constant('USER_ROLES', {
 });
 
 
-myApp.factory('AuthService', function($http, Session){
+myApp.factory('AuthService', function($http, Session, $cookies){
 	var authService = {};
 	
 	authService.login = function (credentials){
-		return $http.post('http://wigig-584:3000/login', {user: credentials})
+		return $http.post('http://wigig-584:3000/auth/login', {user: credentials})
 		.then(function(res){
-			console.log(res.data);
-			Session.create(res.data.id, res.data.user.id);
-			return res.data.user;
+			if(res.data.login = true){
+				Session.create(res.data.__ci_last_regenerate, res.data.userId, res.data.username);
+				return res.data;	
+			} else {
+				console.log('Error! Not logged in');
+			}
 		});
 	};
 	
 	authService.isAuthenticated = function(){
-			return !!Session.userId;
+		if($cookies.getObject('loggedUser')){
+			return true;
+		} else {
+			return false;
+		}
+			
 		};
 		
 		authService.isAuthorized = function(authorizedRoles){
@@ -93,13 +101,14 @@ myApp.factory('AuthService', function($http, Session){
 });
 
 myApp.service('Session', function(){
-	this.create = function(sessionId, userId, userRole){
+	this.create = function(sessionId, userId, username){
 		this.id = sessionId;
 		this.userId = userId;
-		this.userRols = userRole;
+		this.username = username;
+//		this.userRole = userRole;
 	};
 	
-	this.destory = function(){
+	this.destroy = function(){
 		this.id = null;
 		this.userId = null;
 		this.userRole = null;

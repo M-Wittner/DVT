@@ -23,11 +23,12 @@ class Plans extends CI_Controller {
 	function Create() {
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
-//		die(print_r($postData));
 		// plan data
 		$planData = $postData->plan;
 		$plan = array(
-			'title'=>$planData->title
+			'title'=>$planData->title,
+			'user_id'=>$planData->userId,
+			'user_username'=>$planData->username
 		);
 		$testsObj = $postData->test;
 		

@@ -1,21 +1,52 @@
-myApp.controller('homeCtrl', ['$scope', '$rootScope', '$http', 'AuthService', 'AUTH_EVENTS', 'USER_ROLES', function ($scope, $rootScope, $http, AuthService, AUTH_EVENTS, USER_ROLES) {
+myApp.controller('homeCtrl', ['$scope', '$rootScope', '$http', 'AuthService', 'AUTH_EVENTS', 'USER_ROLES', '$location', 'Flash','Session','$cookies', '$window', function ($scope, $rootScope, $http, AuthService, AUTH_EVENTS, USER_ROLES, $location,
+Flash, Session, $cookies, $window) {
+	$scope.isAuthenticated = AuthService.isAuthenticated();
+	
+	if($cookies.getObject('loggedUser')){
+		$scope.currentUser = $cookies.getObject('loggedUser');
+	} else{
+		$scope.currentUser = {};
+		$scope.userRoles = USER_ROLES;
+		$scope.isAuthorized = AuthService.isAuthorized;
+		$scope.setCurrentUser = function (user) {
+			$scope.currentUser.username = user.username;
+		};
+	}
 	$scope.user = {};
 	$scope.login = function (user) {
-		console.log(user);
 		AuthService.login($scope.user).then(function (user) {
 			$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 			$scope.setCurrentUser(user);
-			console.log('fata');
+			$scope.currentUser = user;
+			if(user.username){
+				var date = new Date();
+ 				var minutes = 30;
+ 				date.setTime(date.getTime() + (minutes * 60 * 1000));
+				$cookies.putObject('loggedUser', user, {'expires': date});
+				$window.location.reload();
+				$location.path('/plans');
+				var message = 'Welcome, '+ user.username + '!';
+				var id = Flash.create('success', message, 5000);
+			} else {
+				var message = 'Failed to log in';
+				var id = Flash.create('danger', message, 5000);
+//				console.log('Failed to log in');
+			}
+			
 		}, function () {
 			$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 		});
 	};
+	
 
-	$scope.currentUser = null;
-	$scope.userRoles = USER_ROLES;
-	$scope.isAuthorized = AuthService.isAuthorized;
-
-	$scope.setCurrentUser = function (user) {
-		$scope.currentUser = user;
+	
+	$scope.logout = function(){
+		$cookies.remove('loggedUser');
+		$window.location.reload();
+		$location.path('/');
+		var message = 'Logged out successfully';
+		var id = Flash.create('success', message, 5000);
 	};
+
+
 }]);

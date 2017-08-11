@@ -3,7 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type");
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Login extends CI_Controller {
+class Auth extends CI_Controller {
 	public function __construct() {
 
 	parent::__construct();
@@ -28,12 +28,28 @@ class Login extends CI_Controller {
 				//set sesison
 				$sessData = array(
 					'login' => TRUE,
-					'userName' => $uresult[0]->username,
+					'username' => $uresult[0]->username,
 					'userId' 	=> $uresult[0]->id
 				);
-				echo json_encode($sessData);
+				$this->session->set_userdata($sessData);
+				$session = $this->session->userdata();
+				echo json_encode($session);
+//				echo 'success';
 			} else {
-				echo 'failure!!';
+				return;
 			}
+	}
+	
+	function logout(){
+		$postData = json_decode(file_get_contents('php://input'));
+//		$userData = $postData->user;
+		die(var_dump($postData));
+		$sessDestroy = $this->session->sess_destroy();
+		return $sessDestroy;
+	}
+	
+	function currentUser(){
+		$session = $this->session->userdata('username');
+		echo json_encode($session);
 	}
 }

@@ -399,3 +399,4 @@ ERROR - 201720172017-0808-1010 0606:0808:5050 --> Severity: Notice --> Trying to
 ERROR - 201720172017-0808-1010 0606:0808:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 30
 ERROR - 201720172017-0808-1010 0606:0808:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 32
 ERROR - 201720172017-0808-1010 0606:0808:5050 --> Query error: Column 'title' cannot be null - Invalid query: INSERT INTO `plans` (`title`) VALUES (NULL)
+ERROR - 201720172017-0808-1010 2323:0808:4646 --> Severity: Warning --> Illegal offset type in isset or empty C:\xampp\htdocs\system\libraries\Session\Session.php 751

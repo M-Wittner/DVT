@@ -19,8 +19,15 @@ class Register extends CI_Controller
     }
     function register()
     {
-        $request = json_decode(file_get_contents('php://input'), TRUE);
-		$data = $this->user_model->insertUser($request);
+        $request = json_decode(file_get_contents('php://input'));
+		$user = array(
+			'username'=>$request->username,
+			'password'=>md5($request->password),
+			'email'=>$request->email,
+			'fname'=>$request->fname,
+			'lname'=>$request->lname
+		);
+		$data = $this->user_model->insertUser($user);
 		if($data) {
 			echo "success";
 		} else {

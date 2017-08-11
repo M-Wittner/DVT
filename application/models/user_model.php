@@ -1,4 +1,5 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/x-www-form-urlencoded');
 class User_model extends CI_Model
@@ -11,9 +12,6 @@ class User_model extends CI_Model
     
 	//get the username & password from tbl_usrs
     function get_user($user) {
-//		$this->db->select('username, password');
-////		$this->db->from('users');
-//		$this->db->where('username', $usr, 'password', md5($pwd));
 		$q = $this->db->get_where('users', $user);
 		return $q->result();
     }
@@ -21,8 +19,9 @@ class User_model extends CI_Model
     //insert into user table
     function insertUser($data)
     {
-       $this->db->insert('users', $data);
-		return;
+       $insertStatuts = $this->db->insert('users', $data);
+//		die(var_dump($data));
+		return $insertStatuts;
     }
 
 //    //send verification email to user's email id
