@@ -109,4 +109,15 @@ class Plans extends CI_Controller {
 		$result = $this->plan_model->delete_plan($id);
 	}
 	
+	function edit(){
+		$postData = json_decode(file_get_contents('php://input'));
+		$result = $this->plan_model->get_plan($postData);
+		print_r($result);
+	}
+	
+	function newcomment(){
+		$issueData =  json_decode(file_get_contents('php://input'));
+		print_r($issueData);
+	}
+	
 }

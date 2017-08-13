@@ -153,4 +153,9 @@ class plan_model extends CI_Model {
 		}
 		return $anthena;
 	}
+	
+	function get_test($planId, $testId){
+		$test = $this->db->get_where('tests', $testId)->result();
+		return $test;
+	}
 }

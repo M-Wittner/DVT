@@ -23,11 +23,15 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/plans/view.html',
 			controller: 'viewPlanCtrl'
 	})
-		.when('plans/:id/edit', {
+		.when('/plans/:id/edit', {
 			templateUrl: 'pages/plans/edit.html',
 			controller: 'editPlanCtrl'
 	})
-//		.otherwise({redirectTo: '/'});
+		.when('/plans/:planId/test/:testId/comments/new', {
+			templateUrl: 'pages/comments/new.html',
+			controller: 'newCommentCtrl'
+	})
+		.otherwise({redirectTo: '/'});
 	;
 	
 	$locationProvider.hashPrefix('');

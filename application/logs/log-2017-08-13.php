@@ -11,3 +11,18 @@ ERROR - 201720172017-0808-1313 0909:0808:2323 --> 404 Page Not Found: Plans/edit
 ERROR - 201720172017-0808-1313 0909:0808:3434 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-0808-1313 0909:0808:3434 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-0808-1313 0909:0808:3737 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0808-1313 1313:0808:5353 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0808-1313 1313:0808:5353 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0808-1313 1313:0808:0101 --> Severity: 4096 --> Object of class stdClass could not be converted to string C:\xampp\htdocs\system\database\DB_query_builder.php 683
+ERROR - 201720172017-0808-1313 1313:0808:0202 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 3 - Invalid query: SELECT *
+FROM `plans`
+WHERE `id` =
+ERROR - 201720172017-0808-1313 1414:0808:0808 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0808-1313 1515:0808:2222 --> Severity: 4096 --> Object of class stdClass could not be converted to string C:\xampp\htdocs\system\database\DB_query_builder.php 683
+ERROR - 201720172017-0808-1313 1515:0808:2222 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 3 - Invalid query: SELECT *
+FROM `plans`
+WHERE `id` =
+ERROR - 201720172017-0808-1313 1515:0808:3737 --> Severity: 4096 --> Object of class stdClass could not be converted to string C:\xampp\htdocs\system\database\DB_query_builder.php 683
+ERROR - 201720172017-0808-1313 1515:0808:3737 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 3 - Invalid query: SELECT *
+FROM `plans`
+WHERE `id` =

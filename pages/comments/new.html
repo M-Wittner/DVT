@@ -1,0 +1,43 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">New Comment</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-3 col-sm-3 col-xs-3">
+				<span class="label label-primary">Severity</span>
+				<select ng-model="issue.severity" class="form-control">
+				  <option>Major</option>
+				  <option>Minor</option>
+				</select>
+			</div>
+			<div class="col-md-3 col-sm-3 col-xs-3">
+				<span class="label label-primary">Test Station</span>
+				<select ng-model="issue.station" class="form-control" >
+				  <option>{{station}}</option>
+				</select>
+			</div>
+			<div ng-if=" issue.severity == 'Minor'">
+				<div class="col-md-3 col-sm-3 col-xs-3">
+					<span class="label label-primary">Test Name</span>
+					<select ng-model="issue.name" class="form-control" ng-repeat="test in tests">
+					  <option>{{test.name}}</option>
+					</select>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-3">
+					<span class="label label-primary">Chip</span>
+					<select ng-model="issue.chip" class="form-control" ng-repeat="test in tests">
+					  <option ng-repeat="chip in test.chips">{{chip}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<span class="label label-primary">Details:</span>
+				<textarea required class="form-control" type="text" placeholder="Test Station" name="lineup" ng-model="issue.details" ng-disabled="lock"></textarea>
+			</div>
+		</div>
+		<button class="btn btn-success" ng-click="newCmt()">Submit!</button>
+	</div>
+</div>

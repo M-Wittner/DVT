@@ -9,6 +9,7 @@
 .btn-crud{
     margin-right: 0.4%;
     margin-top: 0.4%;
+    margin-bottom: 0.4%;
 }
  #editor {
      overflow: scroll;
@@ -40,7 +41,7 @@
 }
 
 .addButton {
-    margin-bottom: 0.5%;
+    margin-right: 0.5%;
     width: 120px;
 }
 

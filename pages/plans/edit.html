@@ -1,61 +1,104 @@
-<h1>BLAaaaaaaaaaaaaaaaaa</h1>
-<!--
 <div class="panel panel-primary">
-  <div class="panel-heading">Edit plan.name</div>
-  <form action="/plans/<%= plan._id %>/?_method=PUT" method="POST" class="IssueForm">
-  <div class="panel-body" id="planBody">
-    <div id="desc" class="">
-      <p class="panel panel-heading">
-        Report Description:
-        <div id="test" class="cil-md-12 panel-heading">
-            <span class="label label-primary">Task Title</span>
-            <input id="taskTitle" required class="formInput form-control" type="text" name="taskTitle" value="<%= plan.taskTitle %>">
-        </div>
-        <% plan.tests.forEach(function(test){ %>
-                  <div class="col-md-2 panel-body">
-            <input name="testNum" id="testNum" class="formInput form-control" type="text" value="1" readonly>
-          </div>
-          <div class="col-md-2 panel-body">
-            <input id="station" required class="formInput form-control" type="text" name="test[station]" value="<%= test.station %>">
-            <input id="testName" required class="formInput form-control" type="text" name="test[name]" value="<%= test.name %>">
-          </div>
-          <div class="panel-body col-md-6">
-            <textarea type="text" name="test[params]" id="editor" class="form-control"><%= test.params %></textarea>
-              <script>
-                  $("#editor").wysiwyg();
-              </script>
-          </div>
-            <div class="line col-md-2">
-                <span class=" label label-primary">Chip S\N:</span>
-                <div class="button-group">
-                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" name="test[chipSN]">
-                        <span class="glyphicon glyphicon-cog">Chip</span> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a href="#" class="small" data-value="YA95100006" tabIndex="-1"><input name="chipSN" type="checkbox"/>&nbsp;YA95100006</a></li>
-                      <li><a href="#" class="small" data-value="YA95100007" tabIndex="-1"><input name="chipSN" type="checkbox"/>&nbsp;YA95100007</a></li>
-                      <li><a href="#" class="small" data-value="YA95100008" tabIndex="-1"><input name="chipSN" type="checkbox"/>&nbsp;YA95100008</a></li>
-                      <li><a href="#" class="small" data-value="YA95100009" tabIndex="-1"><input name="chipSN" type="checkbox"/>&nbsp;YA95100009</a></li>
-                      <li><a href="#" class="small" data-value="YA95100010" tabIndex="-1"><input name="chipSN" type="checkbox"/>&nbsp;YA95100010</a></li>
-                      <li><a href="#" class="small" data-value="YA95100011" tabIndex="-1"><input name="chipSN" type="checkbox"/>&nbsp;YA95100011</a></li>
-                    </ul>
-               </div>  
-            </div>
-        <% }); %>
-        </div>
-        
-        <div class="col-md-12">
-            <button class="pull-right btn btn-xs btn-primary col-lg-5 addButton" onclick="test.forEach(addTest)">
-              Add Test!
-            </button>
-        <div>
-      </p>
-    </div>
-
-  </div>
-        <div class="col-md-12" id="subBTN">
-            <hr>
-            <button class="btn btn-lg btn-success">Submit!</button>
-        </div>
-      </form>
-</div>-->
+	<div class="panel-heading">Edit: {{ plan.title }}</div>
+	<div class="panel-body" id="planBody">
+		<div id="author" class="pull-left col-md-10"><em><strong>Submitted by: {{plan.user_username}}</strong></em></div>
+		<div id="desc" ng-repeat="test in tests">
+				<div>
+		<div class="row">
+			<div class="panel-body">
+				<div class="col-md-12">
+					<span class="label label-primary">Test Lineup</span>
+					<input required class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.lineup" ng-disabled="lock">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel-body">
+					<span class="label label-primary">Station:</span>
+					<multiselect required ng-model="test.station" options="params.stationList" show-search="true" selection-limit="1" ng-disabled="lock">
+					</multiselect>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel-body">
+					<span class="label label-primary">Test Name:</span>
+					<multiselect ng-model="test.name" options="params.nameList" show-search="true" selection-limit="1" ng-disabled="lock">
+					</multiselect>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel-body">
+					<span class="label label-primary">Chip S/N:</span>
+					<multiselect ng-model="test.chips" options="params.chipList" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
+					</multiselect>
+					<!--
+					<input class="form-control" type="text" ng-model="chips.newChip" name="newChip">
+					<button class="btn btn-xs btn-primary addButton" ng-click="addChip()">
+						add!
+					</button>
+-->
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel-body">
+					<span class="label label-primary">Pin:</span></br>
+					<span>From</span>
+					<input ng-model="test.pinFrom" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_from}}">
+					<span>To</span>
+					<input ng-model="test.pinTo" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_to}}">
+					<span>Step</span>
+					<input ng-model="test.pinStep" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_step}}"></br>
+					</br>
+					<span>Additional</span>
+					<input ng-model="test.pinAdd" name="pinAdd" type="text" class="Pin" ng-disabled="lock" value="{{test.pin_additional}}">
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="panel-body">
+					<span class="label label-primary">Temperature:</span>
+					<multiselect ng-model="test.temp" options="params.tempList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+					</multiselect>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="panel-body">
+					<span class="label label-primary">Channel:</span>
+					<multiselect ng-model="test.channel" options="params.chList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+					</multiselect>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="panel-body">
+					<span class="label label-primary">Anthena:</span>
+					<multiselect ng-model="test.anthena" options="test.anthenas" show-select-all="true" show-unselect-all="true" ng-disabled="lock" value="{{test.anthena}}">
+					</multiselect>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="panel-body">
+					<span class="label label-primary">MCS:</span></br>
+					<input ng-model="test.mcs" type="number" class="Pin" ng-disabled="lock" value="{{test.mcs}}">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<div class="panel-body">
+					<span class="label label-primary">Voltage:</span>
+					<input ng-model="test.voltage" type="number" class="Pin" ng-disabled="lock" value="{{test.voltage}}">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel-body">
+					<span class="label label-primary">Notes:</span>
+					<textarea ng-model="test.notes" ng-disabled="lock"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+		</div>
+	</div>
+</div>
