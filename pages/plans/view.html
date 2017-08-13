@@ -6,9 +6,9 @@
 		<div id="desc" ng-repeat="test in tests">
 			<div>
 			</div>
-			<a class="btn btn-sm btn-warning pull-right btn-crud" href="#/plans/{{plan.id}}/{{test.id}}/edit">Edit</a>
+			<a class="btn btn-sm btn-warning pull-right btn-crud" href="#/plans/{{plan.id}}/edit" ng-click="edit()">Edit</a>
 			<!--        <form action="#/reports/{{report.id}}?_method=DELETE" method="POST">-->
-			<button class="btn btn-sm btn-danger pull-right btn-crud">
+			<button class="btn btn-sm btn-danger pull-right btn-crud" ng-click="remove()">
             Delete
           </button>
 			<div class="row">
@@ -16,6 +16,10 @@
 					<div class="col-md-4">
 						<span class="label label-primary">Test Lineup</span>
 						<label class="form-control">{{test.lineup}}</label>
+					</div>	
+					<div class="col-md-1">
+						<span class="label label-primary">Test ID</span>
+						<label class="form-control">{{test.id}}</label>
 					</div>
 				</div>
 			</div>

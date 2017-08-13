@@ -27,7 +27,8 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/plans/edit.html',
 			controller: 'editPlanCtrl'
 	})
-		.otherwise({redirectTo: '/'});
+//		.otherwise({redirectTo: '/'});
+	;
 	
 	$locationProvider.hashPrefix('');
 
