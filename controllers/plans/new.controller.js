@@ -33,7 +33,6 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 			} else {
 				var message = 'Error! Plan was not created!';
 				var id = Flash.create('danger', message, 3500);
-				$location.path('/plans');
 				console.log(response.data);
 			}
 		})

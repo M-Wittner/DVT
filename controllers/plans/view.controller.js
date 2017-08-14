@@ -1,4 +1,4 @@
-myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams', function ($scope, $location, $http, $routeParams) {
+myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', function ($scope, $location, $http, $routeParams, Flash) {
 	$http.post('http://wigig-584:3000/plans/show', $routeParams.id)
 	.then(function(response){
 //		console.log(response.data);

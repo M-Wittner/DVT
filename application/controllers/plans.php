@@ -24,6 +24,7 @@ class Plans extends CI_Controller {
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
 		// plan data
+		
 		$planData = $postData->plan;
 		$plan = array(
 			'title'=>$planData->title,
@@ -31,7 +32,6 @@ class Plans extends CI_Controller {
 			'user_username'=>$planData->username
 		);
 		$testsObj = $postData->test;
-		
 		$insertPlan = $this->plan_model->add_plan($plan);
 		if($insertPlan){
 			$planId = $this->plan_model->get_id($insertPlan);
@@ -53,41 +53,45 @@ class Plans extends CI_Controller {
 					'notes'=>$testArr->notes,
 					'plan_id'=>$planId
 				);
-				$insertTest = $this->plan_model->add_test($test);
-				$testId = $this->plan_model->tests_id($insertTest);
-//				print_r($test);
-				foreach($chipsArr as $result){
-					$chip = array(
-						'chip'=> $result,
-						'test_id'=>$testId
-					);
-					$this->plan_model->add_chips($chip);
-//					print_r($chip);
-				};
-				foreach($tempsArr as $result){
-					$temp = array(
-						'temp'=>$result,
-						'test_id'=>$testId
-					);
-					$this->plan_model->add_temps($temp);
-//					print_r($temp);
-				};
-				foreach($channelsArr as $result){
-					$channel = array(
-						'channel'=>$result,
-						'test_id'=>$testId
-					);
-					$this->plan_model->add_channels($channel);
-//					print_r($channel);
-				};
-				foreach($anthenasArr as $result){
-					$anthena = array(
-						'anthena'=>$result,
-						'test_id'=>$testId
-					);
-					$this->plan_model->add_anthenas($anthena);
-//					print_r($anthena);
-				};
+				if($testArr->lineup){
+					$insertTest = $this->plan_model->add_test($test);
+					$testId = $this->plan_model->tests_id($insertTest);
+	//				print_r($test);
+					foreach($chipsArr as $result){
+						$chip = array(
+							'chip'=> $result,
+							'test_id'=>$testId
+						);
+						$this->plan_model->add_chips($chip);
+	//					print_r($chip);
+					};
+					foreach($tempsArr as $result){
+						$temp = array(
+							'temp'=>$result,
+							'test_id'=>$testId
+						);
+						$this->plan_model->add_temps($temp);
+	//					print_r($temp);
+					};
+					foreach($channelsArr as $result){
+						$channel = array(
+							'channel'=>$result,
+							'test_id'=>$testId
+						);
+						$this->plan_model->add_channels($channel);
+	//					print_r($channel);
+					};
+					foreach($anthenasArr as $result){
+						$anthena = array(
+							'anthena'=>$result,
+							'test_id'=>$testId
+						);
+						$this->plan_model->add_anthenas($anthena);
+	//					print_r($anthena);
+					};
+				} else {
+					echo 'No Test Detected!';
+				}
 		};
 		echo 'success';
 		} else {
