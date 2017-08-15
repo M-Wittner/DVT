@@ -12,21 +12,21 @@
 			<div class="col-md-4">
 				<div class="panel-body">
 					<span class="label label-primary">Station:</span>
-					<multiselect required ng-model="test.station" options="params.stationList" show-search="true" selection-limit="1" ng-disabled="lock">
+					<multiselect required ng-model="test.station" options="testParams.params.stationList" show-search="true" selection-limit="1" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="panel-body">
 					<span class="label label-primary">Test Name:</span>
-					<multiselect ng-model="test.name" options="params.nameList" show-search="true" selection-limit="1" ng-disabled="lock">
+					<multiselect ng-model="test.name" options="testParams.params.nameList" show-search="true" selection-limit="1" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="panel-body">
 					<span class="label label-primary">Chip S/N:</span>
-					<multiselect ng-model="test.chips" options="params.chipList" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
+					<multiselect ng-model="test.chips" options="testParams.params.chipList" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 					<!--
 					<input class="form-control" type="text" ng-model="chips.newChip" name="newChip">
@@ -55,21 +55,21 @@
 			<div class="col-md-2">
 				<div class="panel-body">
 					<span class="label label-primary">Temperature:</span>
-					<multiselect ng-model="test.temp" options="params.tempList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+					<multiselect ng-model="test.temp" options="testParams.params.tempList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="panel-body">
 					<span class="label label-primary">Channel:</span>
-					<multiselect ng-model="test.channel" options="params.chList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+					<multiselect ng-model="test.channel" options="testParams.params.chList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="panel-body">
-					<span class="label label-primary">Anthena:</span>
-					<multiselect ng-model="test.anthena" options="params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+					<span class="label label-primary">Antenna:</span>
+					<multiselect ng-model="test.anthena" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>

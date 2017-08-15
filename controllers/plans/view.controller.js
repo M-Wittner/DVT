@@ -1,14 +1,26 @@
-myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', function ($scope, $location, $http, $routeParams, Flash) {
+myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', function ($scope, $location, $http, $routeParams, Flash, AuthService) {
+	
+	$scope.isAuthenticated = AuthService.isAuthenticated();
+	
+	if($scope.isAuthenticated == true) {
+		
 	$http.post('http://wigig-584:3000/plans/show', $routeParams.id)
 	.then(function(response){
-//		console.log(response.data);
 		$scope.plan = response.data.plan[0];
 		$scope.tests = response.data.tests;
-//		$scope.tests.channels = response.tests.channels;
-//		console.log($scope.plan);
-//		console.log(response.data.tests[0].channels);
-//		console.log($scope.channels[1]);
 	});
+	
+	$http.post('http://wigig-584:3000/plans/showcomments', $routeParams.id)
+	.then(function(response){
+		$scope.comments = response.data;
+	});
+		
+	} else {
+		var message = 'Please Login first!';
+		var id = Flash.create('danger', message, 3500);
+		$location.path('/');
+	};
+								 
 	$scope.class = "glyphicon glyphicon-ok";
 	$scope.test = false;
 	$scope.status = function(){

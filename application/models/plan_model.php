@@ -154,8 +154,33 @@ class plan_model extends CI_Model {
 		return $anthena;
 	}
 	
-	function get_test($planId, $testId){
-		$test = $this->db->get_where('tests', $testId)->result();
-		return $test;
+	function get_test($data){
+		$test = $this->db->get_where('tests', array('plan_id'=>$data->planId, 'id'=>$data->testId))->result();
+		$chips = $this->db->get_where('test_chips', array('test_id'=>$data->testId))->result();
+		
+		$result = array(
+			'test'=>$test,
+			'chips'=>$chips
+		);
+		return $result;
+	}
+	
+	function add_comment($data){
+		$comment = array(
+			'plan_id'=>$data->id->planId,
+			'test_id'=>$data->id->testId,
+			'severity'=>$data->comment->severity,
+			'station'=>$data->comment->station,
+			'test_name'=>$data->comment->name,
+			'chip'=>$data->comment->chip,
+			'details'=>$data->comment->details
+		);
+		$insertStatus = $this->db->insert('test_comments', $comment);
+		return $insertStatus;
+	}
+	
+	function get_comments($id){
+		$comments = $this->db->get_where('test_comments', array('plan_id'=>$id))->result();
+		return $comments;
 	}
 }

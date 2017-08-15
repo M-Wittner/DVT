@@ -32,28 +32,28 @@ class Plans extends CI_Controller {
 			'user_username'=>$planData->username
 		);
 		$testsObj = $postData->test;
-		$insertPlan = $this->plan_model->add_plan($plan);
-		if($insertPlan){
-			$planId = $this->plan_model->get_id($insertPlan);
-			foreach($testsObj as $i => $testArr){
-				$chipsArr = $testArr->chips;
-				$tempsArr = $testArr->temp;
-				$channelsArr = $testArr->channel;
-				$anthenasArr = $testArr->anthena;
-				$test = array(
-					'lineup'=>$testArr->lineup,
-					'station'=>$testArr->station[0],
-					'name'=>$testArr->name[0],
-					'pin_from'=>$testArr->pinFrom,
-					'pin_to'=>$testArr->pinTo,
-					'pin_step'=>$testArr->pinStep,
-					'pin_additional'=>$testArr->pinAdd,
-					'mcs'=>$testArr->mcs,
-					'voltage'=>$testArr->voltage,
-					'notes'=>$testArr->notes,
-					'plan_id'=>$planId
-				);
-				if($testArr->lineup){
+		if(sizeof($postData->test) > 0){
+			$insertPlan = $this->plan_model->add_plan($plan);
+			if($insertPlan){
+				$planId = $this->plan_model->get_id($insertPlan);
+				foreach($testsObj as $i => $testArr){
+					$chipsArr = $testArr->chips;
+					$tempsArr = $testArr->temp;
+					$channelsArr = $testArr->channel;
+					$anthenasArr = $testArr->anthena;
+					$test = array(
+						'lineup'=>$testArr->lineup,
+						'station'=>$testArr->station[0],
+						'name'=>$testArr->name[0],
+						'pin_from'=>$testArr->pinFrom,
+						'pin_to'=>$testArr->pinTo,
+						'pin_step'=>$testArr->pinStep,
+						'pin_additional'=>$testArr->pinAdd,
+						'mcs'=>$testArr->mcs,
+						'voltage'=>$testArr->voltage,
+						'notes'=>$testArr->notes,
+						'plan_id'=>$planId
+					);
 					$insertTest = $this->plan_model->add_test($test);
 					$testId = $this->plan_model->tests_id($insertTest);
 	//				print_r($test);
@@ -89,13 +89,14 @@ class Plans extends CI_Controller {
 						$this->plan_model->add_anthenas($anthena);
 	//					print_r($anthena);
 					};
-				} else {
-					echo 'No Test Detected!';
-				}
-		};
-		echo 'success';
+					
+			};
+			echo 'success';
+			} else {
+				echo 'No plan inserted!';
+			}	
 		} else {
-			echo 'No plan inserted!';
+			echo 'No Test Detected!';
 		}
 		
 	}
@@ -111,17 +112,24 @@ class Plans extends CI_Controller {
 	function remove(){
 		$id = json_decode(file_get_contents('php://input'));
 		$result = $this->plan_model->delete_plan($id);
+		return $result;
 	}
 	
 	function edit(){
 		$postData = json_decode(file_get_contents('php://input'));
-		$result = $this->plan_model->get_plan($postData);
-		print_r($result);
+		$result = $this->plan_model->get_test($postData);
+		echo json_encode($result);
 	}
 	
 	function newcomment(){
-		$issueData =  json_decode(file_get_contents('php://input'));
-		print_r($issueData);
+		$postData = json_decode(file_get_contents('php://input'));
+		$comment = $this->plan_model->add_comment($postData);
+		echo json_encode($comment);
 	}
 	
+	function showcomments(){
+		$id = json_decode(file_get_contents('php://input'));
+		$comments = $this->plan_model->get_comments($id);
+		echo json_encode($comments);
+	}
 }

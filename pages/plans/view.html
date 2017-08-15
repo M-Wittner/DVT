@@ -115,3 +115,39 @@
 		</div>
 	</div>
 </div>
+
+<div ng-repeat="comment in comments">
+	<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
+	  <div class="panel-heading">
+		<h3 class="panel-title">test: {{comment.test_name}}</h3>
+	  </div>
+	  <div class="panel-body">
+		<div class="row">
+			<div class="col-sm-3 col-sm-3 col-xs-3">
+				<span class="label label-primary">Severity</span>
+				<label class="form-control">{{comment.severity}}</label>
+			</div>
+			<div class="col-md-3 col-sm-3 col-xs-3">
+				<span class="label label-primary">Test Station</span>
+				<label class="form-control">{{comment.station}}</label>
+			</div>
+			<div ng-if="comment.severity == 'Minor'">
+				<div class="col-md-3 col-sm-3 col-xs-3">
+					<span class="label label-primary">Test Name</span>
+					<label class="form-control">{{comment.test_name}}</label>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-3">
+					<span class="label label-primary">Chip</span>
+					<label class="form-control">{{comment.chip}}</label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<span class="label label-primary">Details:</span>
+				<label class="form-control">{{comment.details}}</label>
+			</div>
+		</div>
+	  </div>
+	</div>
+</div>

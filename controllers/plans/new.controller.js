@@ -1,5 +1,8 @@
-myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window) {
+myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
+	
+	$scope.testParams = testParams;
+//	console.log($scope.testParams);
 	
 	if($scope.isAuthenticated == false){
 		var message = 'Please Login first!';
@@ -31,7 +34,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 				$location.path('/plans');
 				console.log(response.data)
 			} else {
-				var message = 'Error! Plan was not created!';
+				var message = response.data;
 				var id = Flash.create('danger', message, 3500);
 				console.log(response.data);
 			}

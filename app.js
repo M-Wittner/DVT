@@ -105,6 +105,111 @@ myApp.factory('AuthService', function($http, Session, $cookies){
 		return authService;
 });
 
+myApp.factory('testParams', function($http, $log){
+	var testParams = {};
+	testParams.params = {};
+	
+	testParams.params.stationList = [
+		'R-CB1',
+		'R-CB2',
+		'M-CB1',
+		'M-CB2',
+		'FS',
+		'RFC/CAL',
+		'PTAT/ABS/Vgb+TEMP',
+	];
+	
+	testParams.params.nameList = [
+		'TX - EVM',
+		'RX - EVM',
+		'Phase Shifter',
+		'TX Noise Gain',
+		'Rx Noise Gain',
+	];
+	testParams.params.chipList = [];
+    $http.get('http://wigig-584:3000/chips/all')
+	.then(function(response){
+		var result = [];
+		var count = 0;
+		for (var k in response.data){
+			if(response.data.hasOwnProperty(k)){
+			   testParams.params.chipList.push(response.data[k].serial_num);
+			   ++count;
+			   }
+		}
+	});
+	
+	testParams.params.tempList = [
+		'-30 C',
+		'0 C',
+		'25 C',
+		'105 C',
+	];
+	
+	testParams.params.chList = [
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+		'6',
+		'7',
+	];
+	
+	testParams.params.antList = [
+		'0',
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+		'6',
+		'7',
+		'8',
+		'9',
+		'10',
+		'11',
+		'12',
+		'13',
+		'14',
+		'15',
+		'16',
+		'17',
+		'18',
+		'19',
+		'20',
+		'21',
+		'22',
+		'23',
+		'24',
+		'25',
+		'26',
+		'27',
+		'28',
+		'29',
+		'30',
+		'31',
+	];
+
+	testParams.status = {
+		isopen: false
+	};
+
+	testParams.toggled = function (open) {
+		$log.log('Dropdown is now: ', open);
+	};
+
+	testParams.toggleDropdown = function ($event) {
+		$event.preventDefault();
+		$event.stopPropagation();
+		testParams.status.isopen = !testParams.status.isopen;
+	};
+
+	testParams.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+	
+	return testParams;
+});
+
 myApp.service('Session', function(){
 	this.create = function(sessionId, userId, username){
 		this.id = sessionId;
