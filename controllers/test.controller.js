@@ -8,6 +8,7 @@ myApp.controller('testCtrl', ['$scope', '$http', '$log', 'testParams', function 
 	$scope.addTest1 = function(){
 		$scope.planParams.push($scope.test);
 		$scope.lock = true;
+		console.log($scope.planParams);
 	};
 	
 	$scope.editToggle = function(){

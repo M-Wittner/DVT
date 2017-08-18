@@ -1,153 +1,184 @@
+<div class="row">
+	<div class="col-md-2">
+		<span class="label label-primary">Test Priority:</span>
+		<select id="select" class="form-control" ng-model="sort">
+			<option ng-repeat="priority in tests">{{priority.priority}}</option>
+			<option value="all">all</option>
+		</select>
+	</div>
+	<div class="col-md-2">
+		<span class="label label-primary">Test ID:</span>
+		<select id="select" class="form-control" ng-model="testId">
+			<option ng-repeat="id in tests">{{id.id}}</option>
+			<option value="all">all</option>
+		</select>
+	</div>
+</div>
 <div class="panel panel-primary">
 	<div class="panel-heading">{{ plan.title }}</div>
 	<div class="panel-body" id="planBody">
 		<div id="author" class="pull-left col-md-10"><em><strong>Submitted by: {{plan.user_username}}</strong></em></div>
 		<div id="date" class="pull-right col-md-2">{{ plan.date }}</div>
 		<div>
-			<a class="btn btn-sm btn-warning pull-right btn-crud" href="#/plans/{{plan.id}}/edit" ng-click="edit()">Edit</a>
 			<!--        <form action="#/reports/{{report.id}}?_method=DELETE" method="POST">-->
 			<button class="btn btn-sm btn-danger pull-right btn-crud" ng-click="remove()">
             	Delete
         	</button>
 		</div>
-		<div id="desc" ng-repeat="test in tests">
-			<div class="row">
-				<div class="panel-body">
-					<div class="col-md-4">
-						<span class="label label-primary">Test Lineup</span>
-						<label class="form-control">{{test.lineup}}</label>
-					</div>	
-					<div class="col-md-1">
-						<span class="label label-primary">Test ID</span>
-						<label class="form-control">{{test.id}}</label>
+		<div id="desc" ng-repeat="test in tests | orderBy:['id']">
+			<div ng-if="sort == 'all' || (sort == test.priority && testId == test.id)">
+				<div class="col-md-2 col-sm-2 pull-right">
+					<a class="btn btn-sm btn-warning pull-right btn-crud"  ng-click="edit()" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
+				</div>
+				<div class="row">
+					<div class="panel-body">
+						<div class="col-md-2 col-sm-2">
+							<span class="label label-primary">Test Priority:</span>
+							<label class="form-control">{{test.priority}}</label>
+						</div>
+						<div class="col-md-4 col-sm-8">
+							<span class="label label-primary">Test Lineup:</span>
+							<label class="form-control">{{test.lineup}}</label>
+						</div>	
+						<div class="col-md-1 col-sm-2">
+							<span class="label label-primary">Test ID:</span>
+							<label class="form-control">{{test.id}}</label>
+						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">Station:</span>
+							<label class="form-control">{{test.station}}</label>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">Test Name:</span>
+							<label class="form-control">{{test.name}}</label>
+						</div>
+					</div>
+					<div class="panel-body col-md-3">
+						<span class="label label-primary">Pin:</span></br>
+						<div class="col-md-4">
+							<span>From</span>
+							<label class="form-control">{{test.pin_from}}</label>
+						</div>
+						<div class="col-md-4">
+							<span>To</span>
+							<label class="form-control">{{test.pin_to}}</label>
+						</div>
+						<div class="col-md-4">
+							<span>Step</span>
+							<label class="form-control">{{test.pin_step}}</label>
+						</div>
+						<div class="col-md-5">
+							<span>More</span>
+							<label class="form-control">{{test.pin_additional}}</label>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">MCS:</span></br>
+							<label class="form-control">{{test.mcs}}</label>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">Chip S/N:</span>
+							<ul class="list-group" >
+							  <li ng-repeat="chip in test.chips track by $index" class="list-group-item">{{chip}}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">Temperatures:</span>
+							<ul class="list-group" >
+							  <li ng-repeat="temp in test.temps" class="list-group-item">{{temp}}</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">Channels:</span>
+							<ul class="list-group" >
+							  <li ng-repeat="channel in test.channels" class="list-group-item">{{channel}}</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">Anthenas:</span>
+							<ul class="list-group" >
+							  <li ng-repeat="antenna in test.antennas" class="list-group-item">{{antenna}}</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="panel-body">
+							<span class="label label-primary">time:</span>
+							<label class="form-control">{{test.seconds/120}} Hours per chip</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">Voltage:</span>
+							<label class="form-control">{{test.voltage}}</label>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="panel-body">
+							<span class="label label-primary">Notes:</span>
+							<!--					<input  type="text" ng-model="test.notes" ng-disabled="lock">-->
+							<label class="form-control">{{test.notes}}</label>
+						</div>
+					</div>
+				</div>
+				<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/test/{{test.id}}/comments/new">Add New Comment</a>
 			</div>
-			<div class="row">
-				<div class="col-md-2">
-					<div class="panel-body">
-						<span class="label label-primary">Station:</span>
-						<label class="form-control">{{test.station}}</label>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="panel-body">
-						<span class="label label-primary">Test Name:</span>
-						<label class="form-control">{{test.name}}</label>
-					</div>
-				</div>
-				<div class="panel-body col-md-3">
-					<span class="label label-primary">Pin:</span></br>
-					<div class="col-md-4">
-						<span>From</span>
-						<label class="form-control">{{test.pin_from}}</label>
-					</div>
-					<div class="col-md-4">
-						<span>To</span>
-						<label class="form-control">{{test.pin_to}}</label>
-					</div>
-					<div class="col-md-4">
-						<span>Step</span>
-						<label class="form-control">{{test.pin_step}}</label>
-					</div>
-					<div class="col-md-5">
-						<span>More</span>
-						<label class="form-control">{{test.pin_additional}}</label>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="panel-body">
-						<span class="label label-primary">MCS:</span></br>
-						<label class="form-control">{{test.mcs}}</label>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="panel-body">
-						<span class="label label-primary">Chip S/N:</span>
-						<ul class="list-group" >
-						  <li ng-repeat="chip in test.chips" class="list-group-item">{{chip}}</li>
-						</ul>
-					</div>
-				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-2">
-					<div class="panel-body">
-						<span class="label label-primary">Temperatures:</span>
-						<ul class="list-group" >
-						  <li ng-repeat="temp in test.temps" class="list-group-item">{{temp}}</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="panel-body">
-						<span class="label label-primary">Channels:</span>
-						<ul class="list-group" >
-						  <li ng-repeat="channel in test.channels" class="list-group-item">{{channel}}</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="panel-body">
-						<span class="label label-primary">Anthenas:</span>
-						<ul class="list-group" >
-						  <li ng-repeat="anthena in test.anthenas" class="list-group-item">{{anthena}}</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-2">
-					<div class="panel-body">
-						<span class="label label-primary">Voltage:</span>
-						<label class="form-control">{{test.voltage}}</label>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="panel-body">
-						<span class="label label-primary">Notes:</span>
-						<!--					<input  type="text" ng-model="test.notes" ng-disabled="lock">-->
-						<label class="form-control">{{test.notes}}</label>
-					</div>
-				</div>
-			</div>
-			<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/test/{{test.id}}/comments/new">Add New Comment</a>
 		</div>
 	</div>
-</div>
 
-<div ng-repeat="comment in comments">
-	<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
-	  <div class="panel-heading">
-		<h3 class="panel-title">test: {{comment.test_name}}</h3>
-	  </div>
-	  <div class="panel-body">
-		<div class="row">
-			<div class="col-sm-3 col-sm-3 col-xs-3">
-				<span class="label label-primary">Severity</span>
-				<label class="form-control">{{comment.severity}}</label>
+	<div ng-repeat="comment in comments">
+		<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
+			<div class="panel-heading">
+				<h3 class="panel-title">test: {{comment.test_name}}</h3>
 			</div>
-			<div class="col-md-3 col-sm-3 col-xs-3">
-				<span class="label label-primary">Test Station</span>
-				<label class="form-control">{{comment.station}}</label>
-			</div>
-			<div ng-if="comment.severity == 'Minor'">
-				<div class="col-md-3 col-sm-3 col-xs-3">
-					<span class="label label-primary">Test Name</span>
-					<label class="form-control">{{comment.test_name}}</label>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-3 col-sm-3 col-xs-3">
+						<span class="label label-primary">Severity</span>
+						<label class="form-control">{{comment.severity}}</label>
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-3">
+						<span class="label label-primary">Test Station</span>
+						<label class="form-control">{{comment.station}}</label>
+					</div>
+					<div ng-if="comment.severity == 'Minor'">
+						<div class="col-md-3 col-sm-3 col-xs-3">
+							<span class="label label-primary">Test Name</span>
+							<label class="form-control">{{comment.test_name}}</label>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-3">
+							<span class="label label-primary">Chip</span>
+							<label class="form-control">{{comment.chip}}</label>
+						</div>
+					</div>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-3">
-					<span class="label label-primary">Chip</span>
-					<label class="form-control">{{comment.chip}}</label>
+				<div class="row">
+					<div class="col-md-8">
+						<span class="label label-primary">Details:</span>
+						<label class="form-control">{{comment.details}}</label>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-8">
-				<span class="label label-primary">Details:</span>
-				<label class="form-control">{{comment.details}}</label>
-			</div>
-		</div>
-	  </div>
 	</div>
 </div>

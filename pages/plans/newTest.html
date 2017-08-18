@@ -2,7 +2,12 @@
 	<div>
 		<div class="row">
 			<div class="panel-body">
-				<div class="col-md-12">
+				<div class="col-md-2">
+					<span class="label label-primary">Test Priority</span>
+					<multiselect ng-model="test.priority" options="testParams.params.priorityList" selection-limit="1" ng-disabled="lock">
+					</multiselect>
+				</div>
+				<div class="col-md-10">
 					<span class="label label-primary">Test Lineup</span>
 					<input required class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.lineup" value="{{test.lineup}}" ng-disabled="lock">
 				</div>
@@ -69,7 +74,7 @@
 			<div class="col-md-2">
 				<div class="panel-body">
 					<span class="label label-primary">Antenna:</span>
-					<multiselect ng-model="test.anthena" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+					<multiselect ng-model="test.antenna" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
@@ -92,6 +97,21 @@
 					<span class="label label-primary">Notes:</span>
 <!--					<input  type="text" ng-model="test.notes" ng-disabled="lock">-->
 					<textarea ng-model="test.notes" ng-disabled="lock"></textarea>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="col-md-12">
+				<div class="panel-body">
+					<span class="label label-primary">Time Calculator:</span>
+					<span>lineups</span>
+					<input ng-model="test.lineups" type="number" class="Pin" ng-disabled="lock">
+					<span>Secondes per iteration</span>
+					<input ng-model="test.seconds" type="number" class="Pin" ng-disabled="lock">
+					<span>Number of Pins</span>
+					<input ng-model="test.pins" type="number" class="Pin" ng-disabled="lock">
+					<span>Number of antennas</span>
+					<input ng-model="test.ants" type="number" class="Pin" ng-disabled="lock">
 				</div>
 			</div>
 		</div>

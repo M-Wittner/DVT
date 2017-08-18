@@ -20,7 +20,7 @@ Flash, Session, $cookies, $window) {
 			$scope.currentUser = user;
 			if(user.username){
 				var date = new Date();
- 				var minutes = 30;
+ 				var minutes = 60;
  				date.setTime(date.getTime() + (minutes * 60 * 1000));
 				$cookies.putObject('loggedUser', user, {'expires': date});
 				$window.location.reload();

@@ -41,11 +41,11 @@ class plan_model extends CI_Model {
 			}
 			$tests[$key]->channels = $channel;
 			
-			$ant = $this->db->get_where('test_anthenas', array('test_id'=>$id))->result();
+			$ant = $this->db->get_where('test_antennas', array('test_id'=>$id))->result();
 			foreach($ant as $i => $value){
-				$anthena[$i] = $value->anthena;
+				$antenna[$i] = $value->antenna;
 			}
-			$tests[$key]->anthenas = $anthena;
+			$tests[$key]->antennas = $antenna;
 			
 			$chip = $this->db->get_where('test_chips', array('test_id'=>$id))->result();
 			foreach($chip as $i => $value){
@@ -88,9 +88,9 @@ class plan_model extends CI_Model {
         $insertStatus = $this->db->insert('test_channels', $channels);
 		return $insertStatus;
     }
-	function add_anthenas($anthenas)
+	function add_antennas($antennas)
     {
-        $insertStatus = $this->db->insert('test_anthenas', $anthenas);
+        $insertStatus = $this->db->insert('test_antennas', $antennas);
 		return $insertStatus;
     }
 	function add_chips($chips)
@@ -146,23 +146,42 @@ class plan_model extends CI_Model {
 		return $channel;
 	}
 	
-	function get_anthenas($anthenas){
-		$anthena = array();
-		foreach($anthenas as $i=> $a){
-			array_push($anthena, $anthenas[$i]);
+	function get_antennas($antennas){
+		$antenna = array();
+		foreach($antennas as $i=> $a){
+			array_push($antenna, $antennas[$i]);
 		}
-		return $anthena;
+		return $antenna;
+	}
+	
+	function update_chips($chips){
+		var_dump($chips);
+//		$this->db->where('id', $chips->id);
+//		$insertStatus = $this->db->update('test_chips', $chips);
+//		return $insertStatus;
 	}
 	
 	function get_test($data){
-		$test = $this->db->get_where('tests', array('plan_id'=>$data->planId, 'id'=>$data->testId))->result();
+		$q = $this->db->get_where('plans', array('id'=> $data->planId))->result();
+		$test =$this->db->get_where('tests', array('plan_id'=>$data->planId, 'id'=>$data->testId))->result();
+		$sql = "SELECT id FROM `tests` WHERE plan_id = ?";
+		$query = $this->db->query($sql, $data->planId);
+		$testsIdArr = $query->result();
+		$channels = $this->db->get_where('test_channels', array('test_id'=>$data->testId))->result();
 		$chips = $this->db->get_where('test_chips', array('test_id'=>$data->testId))->result();
-		
-		$result = array(
+		$temps = $this->db->get_where('test_temps', array('test_id'=>$data->testId))->result();
+		$antennas = $this->db->get_where('test_antennas', array('test_id'=>$data->testId))->result();
+
+		$test[0]->channels = $channels;
+		$test[0]->chips = $chips;
+		$test[0]->antennas = $antennas;
+		$test[0]->temps = $temps;
+
+		$plan = array(
+			'plan'=>$q,
 			'test'=>$test,
-			'chips'=>$chips
 		);
-		return $result;
+		return $plan;
 	}
 	
 	function add_comment($data){
@@ -182,5 +201,66 @@ class plan_model extends CI_Model {
 	function get_comments($id){
 		$comments = $this->db->get_where('test_comments', array('plan_id'=>$id))->result();
 		return $comments;
+	}
+	
+	function update_plan($data){
+		foreach ($data as $testRes){
+			$id = $testRes->id;
+			$chipsArr = $testRes->chips;
+			$tempsArr = $testRes->temps;
+			$channelsArr = $testRes->channel;
+			$antennasArr = $testRes->antenna;
+			$planId = $testRes->plan_id;
+			$test = array(
+				'lineup'=>$testRes->lineup,
+				'station'=>$testRes->station[0],
+				'name'=>$testRes->name[0],
+				'pin_from'=>$testRes->pin_from,
+				'pin_to'=>$testRes->pin_to,
+				'pin_step'=>$testRes->pin_step,
+				'pin_additional'=>$testRes->pin_additional,
+				'mcs'=>$testRes->mcs,
+				'voltage'=>$testRes->voltage,
+				'notes'=>$testRes->notes,
+//				'plan_id'=>$testRes->plan_id
+			);
+			$this->db->where('id', $id);
+			$testStatus = $this->db->update('tests', $test);
+			foreach($chipsArr as $result){
+				$chipRes = $this->db->get_where('test_chips', array('chip'=>$result))->result();
+				var_dump($chipRes);
+//				$chip = array(
+//					'chip'=> $chipRes->chip,
+//					'test_id'=>$chipRes->test_id,
+//					'id'=>$chipRes->id
+//				);
+//			$this->db->where('test_id', $id);
+//			$testStatus = $this->db->update('test_chips', $chip);
+			}
+			die();
+			foreach($tempsArr as $result){
+				$temp = array(
+					'chip'=> $result,
+//					'test_id'=>$id
+				);
+//				$this->plan_model->add_chips($chip);
+			}
+			foreach($channelsArr as $result){
+				$channel = array(
+					'chip'=> $result,
+//					'test_id'=>$id
+				);
+//				$this->plan_model->add_chips($chip);
+			}
+			foreach($antennasArr as $result){
+				$antenna = array(
+					'chip'=> $result,
+//					'test_id'=>$id
+				);
+//				$this->plan_model->add_chips($chip);
+			}
+			echo 'wow';
+			
+		}
 	}
 }

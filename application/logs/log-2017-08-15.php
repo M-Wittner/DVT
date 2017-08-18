@@ -84,3 +84,5 @@ ERROR - 201720172017-0808-1515 1313:0808:3333 --> 404 Page Not Found: Faviconico
 ERROR - 201720172017-0808-1515 1313:0808:5151 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-0808-1515 1313:0808:5858 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-0808-1515 1313:0808:0202 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0808-1515 1515:0808:4242 --> Severity: Notice --> Undefined property: stdClass::$name C:\xampp\htdocs\application\models\plan_model.php 174
+ERROR - 201720172017-0808-1515 1515:0808:4242 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\models\plan_model.php 175

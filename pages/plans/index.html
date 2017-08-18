@@ -14,7 +14,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="plan in plans">
+			<tr ng-repeat="plan in plans | orderBy:'-date'">
 				<th>{{ plan.date }}</th>
 				<td>{{ plan.user_username }}</td>
 				<td>{{ plan.title }}</td>

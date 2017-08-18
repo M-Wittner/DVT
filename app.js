@@ -23,7 +23,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/plans/view.html',
 			controller: 'viewPlanCtrl'
 	})
-		.when('/plans/:id/edit', {
+		.when('/plans/:planId/test/:testId/edit', {
 			templateUrl: 'pages/plans/edit.html',
 			controller: 'editPlanCtrl'
 	})
@@ -144,6 +144,12 @@ myApp.factory('testParams', function($http, $log){
 		'0 C',
 		'25 C',
 		'105 C',
+	];
+	
+	testParams.params.priorityList = [
+		'High',
+		'Medium',
+		'Low'
 	];
 	
 	testParams.params.chList = [

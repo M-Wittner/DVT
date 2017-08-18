@@ -1,109 +1,111 @@
 <div class="panel panel-primary">
-	<div class="panel-heading">Edit: {{ plan.title }}</div>
+	<div class="panel-heading">Edit: {{ plan.title }} Station: {{ test.station }}</div>
 	<div class="panel-body" id="planBody">
 		<div id="author" class="pull-left col-md-10"><em><strong>Submitted by: {{plan.user_username}}</strong></em></div>
-		<div id="desc" ng-repeat="test in tests">
-				<div>
-		<div class="row">
-			<div class="panel-body">
-				<div class="col-md-12">
-					<span class="label label-primary">Test Lineup</span>
-					<input required class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.lineup" ng-disabled="lock">
+		<div id="desc">
+			<div>
+				<div class="row">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<span class="label label-primary">Test Lineup</span>
+							<input required class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.lineup" ng-disabled="lock">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="panel-body">
+							<span class="label label-primary">Station:</span>
+<!--
+							<multiselect required ng-model="station" options="testParams.params.stationList" show-search="true" selection-limit="1" ng-disabled="lock">
+							</multiselect>
+-->
+							<select class="form-control" ng-model="test.station">
+								<option ng-repeat=" station in testParams.params.stationList">{{station}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel-body">
+							<span class="label label-primary">Test Name:</span>
+							<select class="form-control" ng-model="test.name">
+								<option ng-repeat=" name in testParams.params.nameList">{{name}}</option>
+							</select>
+<!--
+							<multiselect ng-model="test.name" options="testParams.params.nameList" show-search="true" selection-limit="1" ng-disabled="lock">
+							</multiselect>
+-->
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel-body">
+							<span class="label label-primary">Chip S/N:</span>
+							<multiselect ng-model="chips" id-prop="chip" display-prop="chip" options="testParams.params.chipList" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
+							</multiselect>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="panel-body">
+							<span class="label label-primary">Pin:</span></br>
+							<span>From</span>
+							<input ng-model="test.pinFrom" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_from}}">
+							<span>To</span>
+							<input ng-model="test.pinTo" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_to}}">
+							<span>Step</span>
+							<input ng-model="test.pinStep" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_step}}"></br>
+							</br>
+							<span>Additional</span>
+							<input ng-model="test.pinAdd" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_additional}}">
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">Temperature:</span>
+							<multiselect ng-model="temps" id-prop="temp" options="testParams.params.tempList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+							</multiselect>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">Channel:</span>
+							<multiselect ng-model="channels" id-prop="id" options="testParams.params.chList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+							</multiselect>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">Antenna:</span>
+							<multiselect ng-model="antennas" id-prop="id" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock" value="test.antenna">
+							</multiselect>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">MCS:</span></br>
+							<input ng-model="test.mcs" type="number" class="Pin" ng-disabled="lock" value="{{test.mcs}}">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<div class="panel-body">
+							<span class="label label-primary">Voltage:</span>
+							<input ng-model="test.voltage" type="number" class="Pin" ng-disabled="lock" value="{{test.voltage}}">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="panel-body">
+							<span class="label label-primary">Notes:</span>
+							<textarea ng-model="test.notes" ng-disabled="lock"></textarea>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="panel-body">
-					<span class="label label-primary">Station:</span>
-					<multiselect required ng-model="test.station" options="testParams.params.stationList" show-search="true" selection-limit="1" ng-disabled="lock">
-					</multiselect>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="panel-body">
-					<span class="label label-primary">Test Name:</span>
-					<multiselect ng-model="test.name" options="testParams.params.nameList" show-search="true" selection-limit="1" ng-disabled="lock">
-					</multiselect>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="panel-body">
-					<span class="label label-primary">Chip S/N:</span>
-					<multiselect ng-model="test.chips" options="testParams.params.chipList" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
-					</multiselect>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="panel-body">
-					<span class="label label-primary">Pin:</span></br>
-					<span>From</span>
-					<input ng-model="test.pinFrom" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_from}}">
-					<span>To</span>
-					<input ng-model="test.pinTo" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_to}}">
-					<span>Step</span>
-					<input ng-model="test.pinStep" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_step}}"></br>
-					</br>
-					<span>Additional</span>
-					<input ng-model="test.pinAdd" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_additional}}">
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="panel-body">
-					<span class="label label-primary">Temperature:</span>
-					<multiselect ng-model="test.temp" options="testParams.params.tempList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
-					</multiselect>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="panel-body">
-					<span class="label label-primary">Channel:</span>
-					<multiselect ng-model="test.channel" options="testParams.params.chList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
-					</multiselect>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="panel-body">
-					<span class="label label-primary">Antenna:</span>
-					<multiselect ng-model="test.anthena" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock" value="{{test.anthena}}">
-					</multiselect>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="panel-body">
-					<span class="label label-primary">MCS:</span></br>
-					<input ng-model="test.mcs" type="number" class="Pin" ng-disabled="lock" value="{{test.mcs}}">
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2">
-				<div class="panel-body">
-					<span class="label label-primary">Voltage:</span>
-					<input ng-model="test.voltage" type="number" class="Pin" ng-disabled="lock" value="{{test.voltage}}">
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="panel-body">
-					<span class="label label-primary">Notes:</span>
-					<textarea ng-model="test.notes" ng-disabled="lock"></textarea>
-				</div>
-			</div>
-		</div>
-	</div>
 		<div class="col-md-12">
-			<button class="btn btn-xs btn-info addButton" ng-click="addTest1()" ng-disabled="lock">
-				Insert!
-			</button>
-			<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">
-				Edit!
-			</button>
-		</div>
-		</div>
-		<div class="col-md-12">
-			<button class="btn btn-lg btn-success col-lg-3" ng-click="addPlan()">Submit!</button>
+			<button class="btn btn-lg btn-warning col-lg-3" ng-click="editPlan()">Edit!</button>
 		</div>
 	</div>
 

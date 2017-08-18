@@ -40,8 +40,10 @@ class Plans extends CI_Controller {
 					$chipsArr = $testArr->chips;
 					$tempsArr = $testArr->temp;
 					$channelsArr = $testArr->channel;
-					$anthenasArr = $testArr->anthena;
+					$antennasArr = $testArr->antenna;
+					$time = $testArr->ants*$testArr->lineups*$testArr->seconds*$testArr->pins;
 					$test = array(
+						'priority'=>$testArr->priority[0],
 						'lineup'=>$testArr->lineup,
 						'station'=>$testArr->station[0],
 						'name'=>$testArr->name[0],
@@ -52,6 +54,7 @@ class Plans extends CI_Controller {
 						'mcs'=>$testArr->mcs,
 						'voltage'=>$testArr->voltage,
 						'notes'=>$testArr->notes,
+						'seconds'=>$time,
 						'plan_id'=>$planId
 					);
 					$insertTest = $this->plan_model->add_test($test);
@@ -81,13 +84,13 @@ class Plans extends CI_Controller {
 						$this->plan_model->add_channels($channel);
 	//					print_r($channel);
 					};
-					foreach($anthenasArr as $result){
-						$anthena = array(
-							'anthena'=>$result,
+					foreach($antennasArr as $result){
+						$antenna = array(
+							'antenna'=>$result,
 							'test_id'=>$testId
 						);
-						$this->plan_model->add_anthenas($anthena);
-	//					print_r($anthena);
+						$this->plan_model->add_antennas($antenna);
+	//					print_r($antenna);
 					};
 					
 			};
@@ -104,7 +107,6 @@ class Plans extends CI_Controller {
 	function Show() {
 		$id = json_decode(file_get_contents('php://input'));
 		$result = $this->plan_model->get_plan($id);
-//		die(var_dump($result));
 		echo json_encode($result);
 		
 	}
@@ -117,7 +119,20 @@ class Plans extends CI_Controller {
 	
 	function edit(){
 		$postData = json_decode(file_get_contents('php://input'));
-		$result = $this->plan_model->get_test($postData);
+		$plan = $this->db->get_where('plans', array('id'=> $postData->planId))->result();
+		$test = $this->db->get_where('tests', array('id'=>$postData->testId))->result();
+		$chips = $this->db->get_where('test_chips', array('test_id'=>$postData->testId))->result();
+		$temps = $this->db->get_where('test_temps', array('test_id'=>$postData->testId))->result();
+		$channels = $this->db->get_where('test_channels', array('test_id'=>$postData->testId))->result();
+		$antennas = $this->db->get_where('test_antennas', array('test_id'=>$postData->testId))->result();
+		$result = array(
+			'plan'=>$plan,
+			'test'=>$test,
+			'chips'=>$chips,
+			'temps'=>$temps,
+			'channels'=>$channels,
+			'antennas'=>$antennas
+		);
 		echo json_encode($result);
 	}
 	
@@ -131,5 +146,15 @@ class Plans extends CI_Controller {
 		$id = json_decode(file_get_contents('php://input'));
 		$comments = $this->plan_model->get_comments($id);
 		echo json_encode($comments);
+	}
+	
+	function update(){
+		$postData = json_decode(file_get_contents('php://input'));
+		$plan = $this->plan_model->update_plan($postData);
+		if($plan){
+			echo 'success';
+		} else {
+			echo 'Plan Was not updated';
+		}
 	}
 }
