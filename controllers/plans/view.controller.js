@@ -7,7 +7,6 @@ myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	.then(function(response){
 		$scope.plan = response.data.plan[0];
 		$scope.tests = response.data.tests;
-		console.log($scope.tests);
 	});
 	
 	$http.post('http://wigig-584:3000/plans/showcomments', $routeParams.id)
@@ -22,8 +21,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	};
 	
 	$scope.params = testParams.params;
-	console.log($scope.params);
-	$scope.sort = 'all';
+//	console.log($scope.params);
 	$scope.class = "glyphicon glyphicon-ok";
 	$scope.test = false;
 	$scope.status = function(){

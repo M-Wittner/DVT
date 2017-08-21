@@ -1,32 +1,51 @@
-<div class="row">
-	<div class="col-md-2">
-		<span class="label label-primary">Test Priority:</span>
-		<select id="select" class="form-control" ng-model="sort">
-			<option ng-repeat="priority in tests">{{priority.priority}}</option>
-			<option value="all">all</option>
-		</select>
-	</div>
-	<div class="col-md-2">
-		<span class="label label-primary">Test ID:</span>
-		<select id="select" class="form-control" ng-model="testId">
-			<option ng-repeat="id in tests">{{id.id}}</option>
-			<option value="all">all</option>
-		</select>
+<div class="containter">
+	<div class="row">
+		<div class="col-md-2 col-sm-2 col-xs-3">
+			<span class="label label-primary">Test Priority:</span>
+			<select class="form-control" ng-model="testPriority">
+				<option value="">all</option>
+				<option ng-repeat="test in tests | orderBy:['priority']| unique:'priority'">{{test.priority}}</option>
+			</select>
+		</div>
+		<div class="col-md-2 col-sm-2 col-xs-3">
+			<span class="label label-primary">Test ID:</span>
+			<select class="form-control" ng-model="testId">
+				<option value="">all</option>
+				<option ng-repeat="test in tests">{{test.id}}</option>
+			</select>
+		</div>
+		<div class="col-md-2 col-sm-2 col-xs-3">
+			<span class="label label-primary">Test Station:</span>
+			<select class="form-control" ng-model="testStation">
+				<option value="">all</option>
+				<option ng-repeat="test in tests | unique:'station'">{{test.station}}</option>
+			</select>
+		</div>
+		<div class="col-md-2 col-sm-2 col-xs-3">
+			<span class="label label-primary">Test Name:</span>
+			<select class="form-control" ng-model="testName">
+				<option value="">all</option>
+				<option ng-repeat="test in tests | unique:'name'">{{test.name}}</option>
+			</select>
+		</div>
 	</div>
 </div>
+</br>
 <div class="panel panel-primary">
-	<div class="panel-heading">{{ plan.title }}</div>
+	<div class="panel-heading">{{ plan.title }}
+	<span class="pane pull-right">{{ plan.date }}</span>
+	</div>
+	
+		<div>
 	<div class="panel-body" id="planBody">
 		<div id="author" class="pull-left col-md-10"><em><strong>Submitted by: {{plan.user_username}}</strong></em></div>
-		<div id="date" class="pull-right col-md-2">{{ plan.date }}</div>
-		<div>
 			<!--        <form action="#/reports/{{report.id}}?_method=DELETE" method="POST">-->
 			<button class="btn btn-sm btn-danger pull-right btn-crud" ng-click="remove()">
             	Delete
         	</button>
 		</div>
-		<div id="desc" ng-repeat="test in tests | orderBy:['id']">
-			<div ng-if="sort == 'all' || (sort == test.priority && testId == test.id)">
+		<div id="desc" ng-repeat="test in tests | orderBy:[priority] | filter:{id: testId, priority: testPriority, station: testStation, name: testName}">
+			<div>
 				<div class="col-md-2 col-sm-2 pull-right">
 					<a class="btn btn-sm btn-warning pull-right btn-crud"  ng-click="edit()" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
 				</div>
@@ -53,7 +72,7 @@
 							<label class="form-control">{{test.station}}</label>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<div class="panel-body">
 							<span class="label label-primary">Test Name:</span>
 							<label class="form-control">{{test.name}}</label>

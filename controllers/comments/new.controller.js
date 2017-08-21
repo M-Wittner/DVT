@@ -20,7 +20,7 @@ myApp.controller('newCommentCtrl', ['$scope', '$location','$http', '$routeParams
 	$scope.newCmt = function(){
 		$http.post('http://wigig-584:3000/plans/newcomment', {comment: $scope.issue, id: $routeParams})
 		.then(function(response){
-			if(response.data = true) {
+			if(response.data == 'success') {
 				$location.path('/plans/'+$routeParams.planId);
 				var message = 'Comment Was Added successfully';
 				var id = Flash.create('success', message, 5000);

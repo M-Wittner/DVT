@@ -37,12 +37,16 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	};
 	
 	$scope.editPlan = function(){
-		console.log($scope.test);
-		console.log($scope.chips);
-//		$http.put('http://wigig-584:3000/plans/update', $scope.test)
-//		.then(function(response){
-//			console.log(response.data);
-//		});
+		$http.put('http://wigig-584:3000/plans/update', {plan: $scope.plan, test: $scope.test, chips: $scope.chips, antennas: $scope.antennas, temps: $scope.temps, channels: $scope.channels})
+		.then(function(response){
+			if(response.data == 'success'){
+				$location.path('/plans/'+$routeParams.planId);
+				var message = 'Test was edited successfully';
+				var id = Flash.create('success', message, 5000);
+			}else {
+				console.log(response.data);
+			}
+		});
 	};
 	
 }]);

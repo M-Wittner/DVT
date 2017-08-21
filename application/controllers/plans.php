@@ -63,6 +63,7 @@ class Plans extends CI_Controller {
 					foreach($chipsArr as $result){
 						$chip = array(
 							'chip'=> $result,
+							'plan_id'=>$planId,
 							'test_id'=>$testId
 						);
 						$this->plan_model->add_chips($chip);
@@ -71,6 +72,7 @@ class Plans extends CI_Controller {
 					foreach($tempsArr as $result){
 						$temp = array(
 							'temp'=>$result,
+							'plan_id'=>$planId,
 							'test_id'=>$testId
 						);
 						$this->plan_model->add_temps($temp);
@@ -79,6 +81,7 @@ class Plans extends CI_Controller {
 					foreach($channelsArr as $result){
 						$channel = array(
 							'channel'=>$result,
+							'plan_id'=>$planId,
 							'test_id'=>$testId
 						);
 						$this->plan_model->add_channels($channel);
@@ -87,6 +90,7 @@ class Plans extends CI_Controller {
 					foreach($antennasArr as $result){
 						$antenna = array(
 							'antenna'=>$result,
+							'plan_id'=>$planId,
 							'test_id'=>$testId
 						);
 						$this->plan_model->add_antennas($antenna);

@@ -102,16 +102,22 @@
 		</div>
 		<div>
 			<div class="col-md-12">
-				<div class="panel-body">
-					<span class="label label-primary">Time Calculator:</span>
-					<span>lineups</span>
-					<input ng-model="test.lineups" type="number" class="Pin" ng-disabled="lock">
-					<span>Secondes per iteration</span>
-					<input ng-model="test.seconds" type="number" class="Pin" ng-disabled="lock">
-					<span>Number of Pins</span>
-					<input ng-model="test.pins" type="number" class="Pin" ng-disabled="lock">
-					<span>Number of antennas</span>
-					<input ng-model="test.ants" type="number" class="Pin" ng-disabled="lock">
+				<div class="panel-body row">
+					<div class="col-md-9">
+						<span class="label label-primary">Time Calculator:</span>
+						<span>lineups</span>
+						<input ng-model="test.lineups" type="number" class="Pin" ng-disabled="lock">
+						<span>Secondes per iteration</span>
+						<input ng-model="test.seconds" type="number" class="Pin" ng-disabled="lock">
+						<span>Number of Pins</span>
+						<input ng-model="test.pins" type="number" class="Pin" ng-disabled="lock">
+						<span>Number of antennas</span>
+						<input ng-model="test.ants" type="number" class="Pin" ng-disabled="lock">
+					</div>
+					<div class="col-md-3">
+						<span class="label label-primary">Total:</span>
+						<label class="form-control">{{(test.lineups * test.seconds * test.pins * test.ants)/3600}} Hours Per Chip</label>
+					</div>
 				</div>
 			</div>
 		</div>

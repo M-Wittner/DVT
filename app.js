@@ -110,7 +110,7 @@ myApp.factory('testParams', function($http, $log){
 	testParams.params = {};
 	
 	testParams.params.stationList = [
-		'R-CB1',
+		"R-CB1",
 		'R-CB2',
 		'M-CB1',
 		'M-CB2',
@@ -147,9 +147,9 @@ myApp.factory('testParams', function($http, $log){
 	];
 	
 	testParams.params.priorityList = [
-		'High',
-		'Medium',
-		'Low'
+		'1',
+		'2',
+		'3'
 	];
 	
 	testParams.params.chList = [
@@ -214,6 +214,23 @@ myApp.factory('testParams', function($http, $log){
 	testParams.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 	
 	return testParams;
+});
+
+myApp.filter('unique', function() {
+   return function(collection, keyname) {
+      var output = [], 
+          keys = [];
+
+      angular.forEach(collection, function(item) {
+          var key = item[keyname];
+          if(keys.indexOf(key) === -1) {
+              keys.push(key);
+              output.push(item);
+          }
+      });
+
+      return output;
+   };
 });
 
 myApp.service('Session', function(){
