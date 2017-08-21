@@ -1,4 +1,4 @@
-myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', 'testParams', function ($scope, $location, $http, $routeParams, Flash, AuthService, testParams) {
+myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', 'testParams', 'LS', function ($scope, $location, $http, $routeParams, Flash, AuthService, testParams, LS) {
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
@@ -7,6 +7,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	.then(function(response){
 		$scope.plan = response.data.plan[0];
 		$scope.tests = response.data.tests;
+		console.log($scope.tests);
 	});
 	
 	$http.post('http://wigig-584:3000/plans/showcomments', $routeParams.id)
@@ -35,7 +36,6 @@ myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 		$scope.test = !$scope.test;
 	}
 	
-	
 	$scope.remove = function() {
 		$http.post('http://wigig-584:3000/plans/remove', this.plan.id)
 		.then(function(response){
@@ -44,4 +44,24 @@ myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 			$location.path('/plans');
 		});
 	};
+	
+	$scope.status = LS.getData();
+		
+	$scope.chipStatus = function(chip, testId){
+		if($scope.status == null){
+			$scope.status = 'glyphicon-hourglass';
+		} else if($scope.status == 'glyphicon-hourglass'){
+			$scope.status = 'glyphicon-ok';
+		} else if($scope.status == 'glyphicon-ok'){
+			$scope.status = 'glyphicon-remove';
+		} else{
+			$scope.status = null;
+		}
+		$http.post('http://wigig-584:3000/plans/chipstatus', {status: $scope.status, chip: chip, planId: $routeParams.id, testId: testId})
+		.then(function(response){
+			LS.setData($scope.status);
+//			console.log();
+//			console.log(response.data);
+		});
+	}
 }]);

@@ -264,4 +264,17 @@ class plan_model extends CI_Model {
 		}
 		return $insertStatus;
 	}
+	
+	function update_chip_status($result){
+		if($result->status == 'glyphicon-hourglass'){
+			$insertStatus = $this->db->update('test_chips', array('chip'=>$result->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId, 'running'=>true, 'completed'=>false, 'error'=>false));
+		} else if($result->status == 'glyphicon-ok'){
+			$insertStatus = $this->db->update('test_chips', array('chip'=>$result->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId, 'running'=>false, 'completed'=>true, 'error'=>false));
+		} else if($result->status == 'glyphicon-remove'){
+			$insertStatus = $this->db->update('test_chips', array('chip'=>$result->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId, 'running'=>false, 'completed'=>false ,'error'=>true));
+		} else{
+			$insertStatus = $this->db->update('test_chips', array('chip'=>$result->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId, 'running'=>false, 'completed'=>false, 'error'=>false));
+		}
+		return $result->status;
+	}
 }

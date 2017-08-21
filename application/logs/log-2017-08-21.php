@@ -166,3 +166,69 @@ ERROR - 201720172017-0808-2121 1010:0808:1717 --> Severity: Notice --> Array to 
 ERROR - 201720172017-0808-2121 1010:0808:1717 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\system\database\DB_query_builder.php 1754
 ERROR - 201720172017-0808-2121 1010:0808:1717 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0, 1, 2, 3, 4, 5) VALUES (Array, Array, Array, Array, Array, Array)' at line 1 - Invalid query: REPLACE INTO `test_chips` (0, 1, 2, 3, 4, 5) VALUES (Array, Array, Array, Array, Array, Array)
 ERROR - 201720172017-0808-2121 1010:0808:4848 --> Query error: Cannot delete or update a parent row: a foreign key constraint fails (`reporter`.`test_antennas`, CONSTRAINT `id for antenna plan_id` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`)) - Invalid query: DELETE FROM `plans` WHERE id = 2
+ERROR - 201720172017-0808-2121 1010:0808:4545 --> Severity: Notice --> Undefined property: stdClass::$chips C:\xampp\htdocs\application\models\plan_model.php 207
+ERROR - 201720172017-0808-2121 1010:0808:4545 --> Severity: Notice --> Undefined property: stdClass::$temps C:\xampp\htdocs\application\models\plan_model.php 208
+ERROR - 201720172017-0808-2121 1010:0808:4545 --> Severity: Notice --> Undefined property: stdClass::$channels C:\xampp\htdocs\application\models\plan_model.php 209
+ERROR - 201720172017-0808-2121 1010:0808:4545 --> Severity: Notice --> Undefined property: stdClass::$antennas C:\xampp\htdocs\application\models\plan_model.php 210
+ERROR - 201720172017-0808-2121 1010:0808:4545 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\plan_model.php 229
+ERROR - 201720172017-0808-2121 1313:0808:1515 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 269
+ERROR - 201720172017-0808-2121 1313:0808:5252 --> Severity: Notice --> Use of undefined constant status - assumed 'status' C:\xampp\htdocs\application\models\plan_model.php 269
+ERROR - 201720172017-0808-2121 1313:0808:5252 --> Severity: Notice --> Object of class stdClass could not be converted to int C:\xampp\htdocs\application\models\plan_model.php 269
+ERROR - 201720172017-0808-2121 1313:0808:5252 --> Severity: Notice --> Use of undefined constant status - assumed 'status' C:\xampp\htdocs\application\models\plan_model.php 271
+ERROR - 201720172017-0808-2121 1313:0808:5252 --> Severity: Notice --> Object of class stdClass could not be converted to int C:\xampp\htdocs\application\models\plan_model.php 271
+ERROR - 201720172017-0808-2121 1313:0808:5353 --> Severity: Notice --> Use of undefined constant status - assumed 'status' C:\xampp\htdocs\application\models\plan_model.php 273
+ERROR - 201720172017-0808-2121 1313:0808:5353 --> Severity: Notice --> Object of class stdClass could not be converted to int C:\xampp\htdocs\application\models\plan_model.php 273
+ERROR - 201720172017-0808-2121 1313:0808:3030 --> Severity: Notice --> Use of undefined constant status - assumed 'status' C:\xampp\htdocs\application\models\plan_model.php 271
+ERROR - 201720172017-0808-2121 1313:0808:3030 --> Severity: Notice --> Object of class stdClass could not be converted to int C:\xampp\htdocs\application\models\plan_model.php 271
+ERROR - 201720172017-0808-2121 1313:0808:3030 --> Severity: Notice --> Use of undefined constant status - assumed 'status' C:\xampp\htdocs\application\models\plan_model.php 273
+ERROR - 201720172017-0808-2121 1313:0808:3030 --> Severity: Notice --> Object of class stdClass could not be converted to int C:\xampp\htdocs\application\models\plan_model.php 273
+ERROR - 201720172017-0808-2121 1313:0808:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 269
+ERROR - 201720172017-0808-2121 1313:0808:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 271
+ERROR - 201720172017-0808-2121 1313:0808:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 273
+ERROR - 201720172017-0808-2121 1313:0808:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:5050 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`reporter`.`test_chips`, CONSTRAINT `id for plan_id` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) - Invalid query: UPDATE `test_chips` SET `chip` = NULL, `plan_id` = NULL, `test_id` = NULL, `running` = 0, `completed` = 0, `error` = 0
+ERROR - 201720172017-0808-2121 1313:0808:0808 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 269
+ERROR - 201720172017-0808-2121 1313:0808:0808 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 271
+ERROR - 201720172017-0808-2121 1313:0808:0808 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 273
+ERROR - 201720172017-0808-2121 1313:0808:0808 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:0808 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:0808 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:0808 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`reporter`.`test_chips`, CONSTRAINT `id for plan_id` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) - Invalid query: UPDATE `test_chips` SET `chip` = NULL, `plan_id` = NULL, `test_id` = NULL, `running` = 0, `completed` = 0, `error` = 0
+ERROR - 201720172017-0808-2121 1313:0808:2424 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 269
+ERROR - 201720172017-0808-2121 1313:0808:2424 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 271
+ERROR - 201720172017-0808-2121 1313:0808:2424 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 273
+ERROR - 201720172017-0808-2121 1313:0808:2424 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:2424 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:2424 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:2424 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`reporter`.`test_chips`, CONSTRAINT `id for plan_id` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) - Invalid query: UPDATE `test_chips` SET `chip` = NULL, `plan_id` = NULL, `test_id` = NULL, `running` = 0, `completed` = 0, `error` = 0
+ERROR - 201720172017-0808-2121 1313:0808:0505 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 269
+ERROR - 201720172017-0808-2121 1313:0808:0505 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 271
+ERROR - 201720172017-0808-2121 1313:0808:0505 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 273
+ERROR - 201720172017-0808-2121 1313:0808:0505 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:0505 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:0505 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:0505 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`reporter`.`test_chips`, CONSTRAINT `id for plan_id` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) - Invalid query: UPDATE `test_chips` SET `chip` = NULL, `plan_id` = NULL, `test_id` = NULL, `running` = 0, `completed` = 0, `error` = 0
+ERROR - 201720172017-0808-2121 1313:0808:3636 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 269
+ERROR - 201720172017-0808-2121 1313:0808:3636 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 271
+ERROR - 201720172017-0808-2121 1313:0808:3636 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 273
+ERROR - 201720172017-0808-2121 1313:0808:3636 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:3636 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:3636 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:3636 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`reporter`.`test_chips`, CONSTRAINT `id for plan_id` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) - Invalid query: UPDATE `test_chips` SET `chip` = NULL, `plan_id` = NULL, `test_id` = NULL, `running` = 0, `completed` = 0, `error` = 0
+ERROR - 201720172017-0808-2121 1313:0808:3636 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 269
+ERROR - 201720172017-0808-2121 1313:0808:3636 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 271
+ERROR - 201720172017-0808-2121 1313:0808:3636 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 273
+ERROR - 201720172017-0808-2121 1313:0808:3636 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:3636 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 276
+ERROR - 201720172017-0808-2121 1313:0808:3737 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`reporter`.`test_chips`, CONSTRAINT `id for plan_id` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) - Invalid query: UPDATE `test_chips` SET `chip` = NULL, `plan_id` = NULL, `test_id` = NULL, `running` = 0, `completed` = 0, `error` = 0
+ERROR - 201720172017-0808-2121 1414:0808:5454 --> Query error: Duplicate entry '3' for key 'plan_id' - Invalid query: INSERT INTO `test_chips` (`chip`, `plan_id`, `test_id`) VALUES ('YA95100009', 3, 3)
+ERROR - 201720172017-0808-2121 1414:0808:1616 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 42
+ERROR - 201720172017-0808-2121 1414:0808:1616 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 48
+ERROR - 201720172017-0808-2121 1414:0808:0303 --> Query error: Duplicate entry '4' for key 'plan_id' - Invalid query: INSERT INTO `test_chips` (`chip`, `plan_id`, `test_id`) VALUES ('YA95100009', 4, 4)
+ERROR - 201720172017-0808-2121 1414:0808:2323 --> Query error: Duplicate entry '5' for key 'plan_id' - Invalid query: INSERT INTO `test_chips` (`chip`, `plan_id`, `test_id`) VALUES ('YA95100009', 5, 5)
+ERROR - 201720172017-0808-2121 1414:0808:0202 --> Query error: Duplicate entry '6' for key 'plan_id' - Invalid query: INSERT INTO `test_chips` (`chip`, `plan_id`, `test_id`) VALUES ('YA95100009', 6, 6)
+ERROR - 201720172017-0808-2121 1414:0808:4141 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0808-2121 1414:0808:4141 --> 404 Page Not Found: Faviconico/index

@@ -70,6 +70,17 @@ myApp.constant('USER_ROLES', {
   guest: 'guest'
 });
 
+myApp.factory('LS', function($window, $rootScope){
+		var LS = {};
+		LS.setData = function(val){
+			$window.localStorage && $window.localStorage.setItem('chipStatus', val);
+			return this;
+		};
+		LS.getData = function(){
+			return $window.localStorage && $window.localStorage.getItem('chipStatus');
+		};
+	return LS;
+});
 
 myApp.factory('AuthService', function($http, Session, $cookies){
 	var authService = {};

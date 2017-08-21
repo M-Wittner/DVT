@@ -59,7 +59,8 @@ class Plans extends CI_Controller {
 					);
 					$insertTest = $this->plan_model->add_test($test);
 					$testId = $this->plan_model->tests_id($insertTest);
-	//				print_r($test);
+//					print_r($test);
+//					print_r($testId);
 					foreach($chipsArr as $result){
 						$chip = array(
 							'chip'=> $result,
@@ -160,5 +161,11 @@ class Plans extends CI_Controller {
 		} else {
 			echo 'Plan Was not updated';
 		}
+	}
+	
+	function chipstatus(){
+		$status = json_decode(file_get_contents('php://input'));
+		$updateStatus = $this->plan_model->update_chip_status($status);
+		echo json_encode($updateStatus);
 	}
 }
