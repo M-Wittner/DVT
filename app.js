@@ -71,14 +71,19 @@ myApp.constant('USER_ROLES', {
 });
 
 myApp.factory('LS', function($window, $rootScope){
-		var LS = {};
-		LS.setData = function(val){
-			$window.localStorage && $window.localStorage.setItem('chipStatus', val);
-			return this;
-		};
-		LS.getData = function(){
-			return $window.localStorage && $window.localStorage.getItem('chipStatus');
-		};
+	console.log(this);
+	var LS = {};
+	LS.setData = function(val){
+		$window.localStorage && $window.localStorage.setItem('chipStatusClass', val.lass);
+		$window.localStorage && $window.localStorage.setItem('chipStatusIndex', val.index);
+		return this;
+	};
+	LS.getData = function(){
+		var data = {};
+		data.class = $window.localStorage && $window.localStorage.getItem('chipStatusClass');
+		data.index = $window.localStorage && $window.localStorage.getItem('chipStatusIndex');
+		return data;
+	};
 	return LS;
 });
 

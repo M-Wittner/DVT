@@ -48,9 +48,11 @@ class plan_model extends CI_Model {
 			$tests[$key]->antennas = $antenna;
 			
 			$chip = $this->db->get_where('test_chips', array('test_id'=>$id))->result();
-			foreach($chip as $i => $value){
-				$chip[$i] = $value->chip;
-			}
+//			foreach($chip as $i => $value){
+//				$chip[$i] = $value->chip;
+//				
+//			}
+			
 			$tests[$key]->chips = $chip;
 			
 			$temp = $this->db->get_where('test_temps', array('test_id'=>$id))->result();
@@ -60,7 +62,6 @@ class plan_model extends CI_Model {
 			$tests[$key]->temps = $temp;
 		}
 //		$tests = (object) $tests;
-
 		$plan = array(
 			'plan'=>$q,
 			'tests'=>$tests,
@@ -266,6 +267,7 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_chip_status($result){
+		die(print_r($result));
 		if($result->status == 'glyphicon-hourglass'){
 			$insertStatus = $this->db->update('test_chips', array('chip'=>$result->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId, 'running'=>true, 'completed'=>false, 'error'=>false));
 		} else if($result->status == 'glyphicon-ok'){
