@@ -107,7 +107,7 @@
 						<div class="panel-body col-md-10">
 							<span class="label label-primary">Chip S/N:</span>
 							<ul class="list-group" >
-							  <li ng-repeat="chip in test.chips track by $index" class="list-group-item" ng-click="chipStatus(chip, test.id)">{{chip.chip}} <span class="pull-right glyphicon" ng-class="status.class"></span></li>
+							  <li ng-repeat="chip in test.chips track by $index" class="list-group-item" ng-click="chipStatus(chip, test.id)">{{chip.chip}}<span class="pull-right glyphicon" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span></li>
 							</ul>
 						</div>
 					</div>

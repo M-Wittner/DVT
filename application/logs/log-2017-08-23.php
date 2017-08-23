@@ -50,3 +50,39 @@ ERROR - 201720172017-0808-2323 0101:0808:5353 --> Severity: Notice --> Array to 
 ERROR - 201720172017-0808-2323 0101:0808:5353 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\application\models\plan_model.php 53
 ERROR - 201720172017-0808-2323 0101:0808:3232 --> Severity: Notice --> Undefined variable: test C:\xampp\htdocs\application\models\plan_model.php 65
 ERROR - 201720172017-0808-2323 0202:0808:3636 --> Severity: Parsing Error --> syntax error, unexpected 'echo' (T_ECHO) C:\xampp\htdocs\application\controllers\plans.php 168
+ERROR - 201720172017-0808-2323 1818:0808:1818 --> Severity: Parsing Error --> syntax error, unexpected '==' (T_IS_EQUAL) C:\xampp\htdocs\application\models\plan_model.php 274
+ERROR - 201720172017-0808-2323 1818:0808:1818 --> Severity: Parsing Error --> syntax error, unexpected '==' (T_IS_EQUAL) C:\xampp\htdocs\application\models\plan_model.php 274
+ERROR - 201720172017-0808-2323 1818:0808:0101 --> Severity: Parsing Error --> syntax error, unexpected '=' C:\xampp\htdocs\application\models\plan_model.php 274
+ERROR - 201720172017-0808-2323 1818:0808:0101 --> Severity: Parsing Error --> syntax error, unexpected '=' C:\xampp\htdocs\application\models\plan_model.php 274
+ERROR - 201720172017-0808-2323 1818:0808:4747 --> Severity: Parsing Error --> syntax error, unexpected '==' (T_IS_EQUAL) C:\xampp\htdocs\application\models\plan_model.php 274
+ERROR - 201720172017-0808-2323 1818:0808:4747 --> Severity: Parsing Error --> syntax error, unexpected '==' (T_IS_EQUAL) C:\xampp\htdocs\application\models\plan_model.php 274
+ERROR - 201720172017-0808-2323 1818:0808:2626 --> Severity: Parsing Error --> syntax error, unexpected '==' (T_IS_EQUAL) C:\xampp\htdocs\application\models\plan_model.php 274
+ERROR - 201720172017-0808-2323 1818:0808:2626 --> Severity: Parsing Error --> syntax error, unexpected '==' (T_IS_EQUAL) C:\xampp\htdocs\application\models\plan_model.php 274
+ERROR - 201720172017-0808-2323 1818:0808:4545 --> Severity: Parsing Error --> syntax error, unexpected '==' (T_IS_EQUAL) C:\xampp\htdocs\application\models\plan_model.php 274
+ERROR - 201720172017-0808-2323 1818:0808:4545 --> Severity: Parsing Error --> syntax error, unexpected '==' (T_IS_EQUAL) C:\xampp\htdocs\application\models\plan_model.php 274
+ERROR - 201720172017-0808-2323 1818:0808:2323 --> Severity: 4096 --> Object of class stdClass could not be converted to string C:\xampp\htdocs\system\database\DB_driver.php 1524
+ERROR - 201720172017-0808-2323 1818:0808:2323 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' `plan_id` = '10', `test_id` = '7', `running` = 1, `completed` = 0, `error` = 0' at line 1 - Invalid query: UPDATE `test_chips` SET `chip` = , `plan_id` = '10', `test_id` = '7', `running` = 1, `completed` = 0, `error` = 0
+ERROR - 201720172017-0808-2323 1818:0808:4242 --> Severity: 4096 --> Object of class stdClass could not be converted to string C:\xampp\htdocs\system\database\DB_driver.php 1524
+ERROR - 201720172017-0808-2323 1818:0808:4242 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' `plan_id` = '10', `test_id` = '7', `running` = 1, `completed` = 0, `error` = 0' at line 1 - Invalid query: UPDATE `test_chips` SET `chip` = , `plan_id` = '10', `test_id` = '7', `running` = 1, `completed` = 0, `error` = 0
+ERROR - 201720172017-0808-2323 1818:0808:2828 --> Severity: 4096 --> Object of class stdClass could not be converted to string C:\xampp\htdocs\system\database\DB_driver.php 1524
+ERROR - 201720172017-0808-2323 1818:0808:2828 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' `plan_id` = '10', `test_id` = '7', `running` = 0, `completed` = 1, `error` = 0' at line 1 - Invalid query: UPDATE `test_chips` SET `chip` = , `plan_id` = '10', `test_id` = '7', `running` = 0, `completed` = 1, `error` = 0
+ERROR - 201720172017-0808-2323 1818:0808:3232 --> Severity: 4096 --> Object of class stdClass could not be converted to string C:\xampp\htdocs\system\database\DB_driver.php 1524
+ERROR - 201720172017-0808-2323 1818:0808:3232 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' `plan_id` = '10', `test_id` = '7', `running` = 0, `completed` = 1, `error` = 0' at line 1 - Invalid query: UPDATE `test_chips` SET `chip` = , `plan_id` = '10', `test_id` = '7', `running` = 0, `completed` = 1, `error` = 0
+ERROR - 201720172017-0808-2323 1818:0808:1818 --> Severity: Notice --> Undefined property: stdClass::$antenna C:\xampp\htdocs\application\controllers\plans.php 43
+ERROR - 201720172017-0808-2323 1818:0808:1818 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 91
+ERROR - 201720172017-0808-2323 1818:0808:2828 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 48
+ERROR - 201720172017-0808-2323 1818:0808:3939 --> Severity: Parsing Error --> syntax error, unexpected '=>' (T_DOUBLE_ARROW) C:\xampp\htdocs\application\models\plan_model.php 275
+ERROR - 201720172017-0808-2323 1818:0808:3939 --> Severity: Parsing Error --> syntax error, unexpected '=>' (T_DOUBLE_ARROW) C:\xampp\htdocs\application\models\plan_model.php 275
+ERROR - 201720172017-0808-2323 1818:0808:3737 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\system\database\DB_query_builder.php 683
+ERROR - 201720172017-0808-2323 1818:0808:3737 --> Query error: Unknown column 'test_chips' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 0, `completed` = 1, `error` = 0
+WHERE `test_chips` = `Array`
+ERROR - 201720172017-0808-2323 1818:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 270
+ERROR - 201720172017-0808-2323 1818:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 270
+ERROR - 201720172017-0808-2323 1818:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 271
+ERROR - 201720172017-0808-2323 1818:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 271
+ERROR - 201720172017-0808-2323 1818:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 272
+ERROR - 201720172017-0808-2323 1818:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 272
+ERROR - 201720172017-0808-2323 1818:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 275
+ERROR - 201720172017-0808-2323 1818:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 275
+ERROR - 201720172017-0808-2323 1818:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 275
+ERROR - 201720172017-0808-2323 1818:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 275

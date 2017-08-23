@@ -235,10 +235,10 @@ class plan_model extends CI_Model {
 			);
 			array_push($chips, $chip);
 		}
-		die(var_dump($chips));
+//		die(var_dump($chips));
 //		$insertStatus = $this->db->replace('test_chips', $chips);
 		foreach($tempsArr as $result){
-			var_dump($result);
+//			var_dump($result);
 			$temp = array(
 				'temp'=> $result,
 				'plan_id'=>$planId,
@@ -267,16 +267,25 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_chip_status($result){
-		die(print_r($result));
-		if($result->status == 'glyphicon-hourglass'){
-			$insertStatus = $this->db->update('test_chips', array('chip'=>$result->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId, 'running'=>true, 'completed'=>false, 'error'=>false));
-		} else if($result->status == 'glyphicon-ok'){
-			$insertStatus = $this->db->update('test_chips', array('chip'=>$result->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId, 'running'=>false, 'completed'=>true, 'error'=>false));
-		} else if($result->status == 'glyphicon-remove'){
-			$insertStatus = $this->db->update('test_chips', array('chip'=>$result->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId, 'running'=>false, 'completed'=>false ,'error'=>true));
+		$runs = $result->chip->running;
+		$complete = $result->chip->completed;
+		$error = $result->chip->error;
+//		die(var_dump($result));
+		if($runs == false && $complete == false && $error == false){
+			$this->db->where(array('chip'=>$result->chip->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_chips', array('running'=>true, 'completed'=>false, 'error'=>false));
+		} else if($runs == true && $complete == false && $error == false){
+			$this->db->where(array('chip'=>$result->chip->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>true, 'error'=>false));
+		} else if($runs == false && $complete == true && $error == false){
+			$this->db->where(array('chip'=>$result->chip->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false ,'error'=>true));
+		} else if($runs == false && $complete == false && $error == true){
+			$this->db->where(array('chip'=>$result->chip->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false, 'error'=>false));
 		} else{
-			$insertStatus = $this->db->update('test_chips', array('chip'=>$result->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId, 'running'=>false, 'completed'=>false, 'error'=>false));
+			echo 'nothing';
 		}
-		return $result->status;
+		return $result;
 	}
 }

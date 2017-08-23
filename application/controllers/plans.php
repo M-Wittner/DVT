@@ -165,7 +165,7 @@ class Plans extends CI_Controller {
 	
 	function chipstatus(){
 		$status = json_decode(file_get_contents('php://input'));
-		die(var_dump($status));
+//		die(var_dump($status));
 		$updateStatus = $this->plan_model->update_chip_status($status);
 		echo json_encode($updateStatus);
 	}
