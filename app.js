@@ -120,6 +120,8 @@ myApp.factory('testParams', function($http, $log){
 	var testParams = {};
 	testParams.params = {};
 	
+	testParams.nameSettings = { groupByTextProvider: function(groupValue) { if (groupValue === 'M') { return 'M'; } else { return 'R'; } }, groupBy: 'station', };
+	
 	testParams.params.stationList = [
 		"R-CB1",
 		'R-CB2',
@@ -131,23 +133,25 @@ myApp.factory('testParams', function($http, $log){
 	];
 	
 	testParams.params.nameList = [
-		'TX - EVM',
-		'RX - EVM',
-		'Phase Shifter',
-		'TX Noise Gain',
-		'Rx Noise Gain',
+		$http.get('http://wigig-584:3000/params/tests')
+		.then(function(response){
+			testParams.params.nameList = response.data;
+		})
 	];
-	testParams.params.chipList = [];
-    $http.get('http://wigig-584:3000/chips/all')
+	testParams.params.xifList = [
+		'0',
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+		'6',
+		'7',
+	];
+	testParams.params.chipList = {};
+    $http.get('http://wigig-584:3000/params/chips')
 	.then(function(response){
-		var result = [];
-		var count = 0;
-		for (var k in response.data){
-			if(response.data.hasOwnProperty(k)){
-			   testParams.params.chipList.push(response.data[k].serial_num);
-			   ++count;
-			   }
-		}
+		testParams.params.chipList = response.data;
 	});
 	
 	testParams.params.tempList = [
@@ -171,6 +175,9 @@ myApp.factory('testParams', function($http, $log){
 		'5',
 		'6',
 		'7',
+		'8',
+		'9',
+		'10',
 	];
 	
 	testParams.params.antList = [

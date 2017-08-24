@@ -211,7 +211,9 @@ class plan_model extends CI_Model {
 		$antennasArr = $data->antennas;
 		$planId = $data->test->plan_id;
 		$testId = $data->test->id;
-		$chips = array();
+		$newChips = array();
+		$chips = $this->db->get_where('test_chips', array('test_id'=>$testId))->result();
+//		die(var_dump($chips));
 		$test = array(
 			'lineup'=>$data->test->lineup,
 			'station'=>$data->test->station,
@@ -225,18 +227,20 @@ class plan_model extends CI_Model {
 			'notes'=>$data->test->notes,
 //				'plan_id'=>$data->plan_id
 		);
+		die(var_dump($chipsArr));
 		$this->db->where('id', $testId);
 		$testStatus = $this->db->update('tests', $test);
 		foreach($chipsArr as $result){
 			$chip = array(
 				'chip'=>$result,
-				'plan_id'=>$planId,
-				'test_id'=>$testId
+//				'plan_id'=>$planId,
+//				'test_id'=>$testId
 			);
-			array_push($chips, $chip);
+			array_push($newChips, $chip);
 		}
 //		die(var_dump($chips));
-//		$insertStatus = $this->db->replace('test_chips', $chips);
+		$this->db->where(array('plan_id'=>$planId, 'test_id'=>$testId));
+		$insertStatus = $this->db->replace('test_chips', $newChips);
 		foreach($tempsArr as $result){
 //			var_dump($result);
 			$temp = array(

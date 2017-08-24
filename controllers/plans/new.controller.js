@@ -3,7 +3,8 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	
 	$scope.testParams = testParams;
 //	console.log($scope.testParams);
-	
+	console.log($scope.testParams.params);
+	$scope.testParams.nameSettings = { groupByTextProvider: function(groupValue) { if (groupValue === 'M') { return 'M'; } else { return 'R'; } }, groupBy: 'station', };
 	if($scope.isAuthenticated == false){
 		var message = 'Please Login first!';
 		var id = Flash.create('danger', message, 3500);
@@ -20,7 +21,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	$scope.addTest = function(){
 		$scope.testCount.push({})
 	}
-	
+//	console.log(String.indexOf('gdsgfdgfd'));
 	$scope.removeTest = function() {
 		$scope.testCount.splice($scope.testCount.length-1,1);
 	}

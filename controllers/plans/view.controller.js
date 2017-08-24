@@ -38,7 +38,6 @@ myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 			console.log(response.data.chip.running);
 			console.log(response.data.chip.completed);
 			console.log(response.data.chip.error);
-//			$scope.$digest();
 		});
 	}
 }]);
