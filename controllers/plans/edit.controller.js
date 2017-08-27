@@ -4,7 +4,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	if($scope.isAuthenticated == true) {
 	
 		
-	$http.post('http://wigig-584:3000/plans/edit', $routeParams)
+	$http.post('http://wigig-584/plans/edit', $routeParams)
 	.then(function(response){
 		$scope.plan = response.data.plan[0];
 		$scope.test = response.data.test[0];
@@ -37,7 +37,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	};
 	
 	$scope.editPlan = function(){
-		$http.put('http://wigig-584:3000/plans/update', {plan: $scope.plan, test: $scope.test, chips: $scope.chips, antennas: $scope.antennas, temps: $scope.temps, channels: $scope.channels})
+		$http.put('http://wigig-584/plans/update', {plan: $scope.plan, test: $scope.test, chips: $scope.chips, antennas: $scope.antennas, temps: $scope.temps, channels: $scope.channels})
 		.then(function(response){
 			if(response.data == 'success'){
 				$location.path('/plans/'+$routeParams.planId);

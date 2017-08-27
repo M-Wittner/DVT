@@ -86,7 +86,7 @@ myApp.factory('AuthService', function($http, Session, $cookies){
 	var authService = {};
 	
 	authService.login = function (credentials){
-		return $http.post('http://wigig-584:3000/auth/login', {user: credentials})
+		return $http.post('http://wigig-584/auth/login', {user: credentials})
 		.then(function(res){
 			if(res.data.login = true){
 				Session.create(res.data.__ci_last_regenerate, res.data.userId, res.data.username);
@@ -131,13 +131,13 @@ myApp.factory('testParams', function($http, $log){
 	];
 	
 	testParams.params.nameListM = {};
-	$http.get('http://wigig-584:3000/params/testsM')
+	$http.get('http://wigig-584/params/testsM')
 	.then(function(response){
 		testParams.params.nameListM = response.data;
 	});
 	
 	testParams.params.nameListR = {};
-	$http.get('http://wigig-584:3000/params/testsR')
+	$http.get('http://wigig-584/params/testsR')
 	.then(function(response){
 		testParams.params.nameListR = response.data;
 //			console.log(response.data);
@@ -154,13 +154,13 @@ myApp.factory('testParams', function($http, $log){
 		'7',
 	];
 	testParams.params.chipListM = {};
-    $http.get('http://wigig-584:3000/params/chipsM')
+    $http.get('http://wigig-584/params/chipsM')
 	.then(function(response){
 		testParams.params.chipListM = response.data;
 	});
 	
 	testParams.params.chipListR = {};
-	$http.get('http://wigig-584:3000/params/chipsR')
+	$http.get('http://wigig-584/params/chipsR')
 	.then(function(response){
 		testParams.params.chipListR = response.data;
 //		console.log(response.data);

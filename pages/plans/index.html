@@ -9,7 +9,6 @@
 			<tr>
 				<th>Date</th>
 				<th>Author</th>
-				<th>Plan Title</th>
 				<th>View</th>
 			</tr>
 		</thead>
@@ -17,7 +16,6 @@
 			<tr ng-repeat="plan in plans | orderBy:'-date'">
 				<th>{{ plan.date }}</th>
 				<td>{{ plan.user_username }}</td>
-				<td>{{ plan.title }}</td>
 				<td><a ng-click="view(plan.id)" class="btn btn-success">View</a></td>
 			</tr>
 		</tbody>

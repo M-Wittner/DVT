@@ -3,7 +3,7 @@ myApp.controller('newCommentCtrl', ['$scope', '$location','$http', '$routeParams
 	
 	if($scope.isAuthenticated == true) {
 		
-		$http.post('http://wigig-584:3000/plans/edit', $routeParams)
+		$http.post('http://wigig-584/plans/edit', $routeParams)
 		.then(function(response){
 			$scope.tests = response.data.test;
 			$scope.chips = response.data.chips;
@@ -18,7 +18,7 @@ myApp.controller('newCommentCtrl', ['$scope', '$location','$http', '$routeParams
 	$scope.issue = {};	
 	
 	$scope.newCmt = function(){
-		$http.post('http://wigig-584:3000/plans/newcomment', {comment: $scope.issue, id: $routeParams})
+		$http.post('http://wigig-584/plans/newcomment', {comment: $scope.issue, id: $routeParams})
 		.then(function(response){
 			if(response.data == 'success') {
 				$location.path('/plans/'+$routeParams.planId);

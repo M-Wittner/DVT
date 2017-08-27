@@ -3,14 +3,14 @@ myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
 	if($scope.isAuthenticated == true) {	
-	$http.post('http://wigig-584:3000/plans/show', $routeParams.id)
+	$http.post('http://wigig-584/plans/show', $routeParams.id)
 	.then(function(response){
 		$scope.plan = response.data.plan[0];
 		$scope.tests = response.data.tests;
-		console.log(response.data);
+//		console.log(response.data);
 	});
 	
-	$http.post('http://wigig-584:3000/plans/showcomments', $routeParams.id)
+	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
 	.then(function(response){
 		$scope.comments = response.data;
 	});
@@ -24,7 +24,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	$scope.params = testParams.params;
 	
 	$scope.remove = function() {
-		$http.post('http://wigig-584:3000/plans/remove', this.plan.id)
+		$http.post('http://wigig-584/plans/remove', this.plan.id)
 		.then(function(response){
 			var message = 'Plan Deleted Succesfully!';
 			var id = Flash.create('success', message, 3500);
@@ -33,11 +33,11 @@ myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	};
 	
 	$scope.chipStatus = function(chip, testId, index){
-		$http.post('http://wigig-584:3000/plans/chipstatus', {chip: chip, planId: $routeParams.id, testId: testId})
+		$http.post('http://wigig-584/plans/chipstatus', {chip: chip, planId: $routeParams.id, testId: testId})
 		.then(function(response){
-			console.log(response.data.chip.running);
-			console.log(response.data.chip.completed);
-			console.log(response.data.chip.error);
+//			console.log(response.data.chip.running);
+//			console.log(response.data.chip.completed);
+//			console.log(response.data.chip.error);
 		});
 	}
 }]);
