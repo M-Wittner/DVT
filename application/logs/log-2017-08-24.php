@@ -78,3 +78,4 @@ ERROR - 201720172017-0808-2424 1414:0808:0000 --> Query error: You have an error
 ERROR - 201720172017-0808-2424 1414:0808:4343 --> 404 Page Not Found: Indexhtn/index
 ERROR - 201720172017-0808-2424 1414:0808:4343 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-0808-2424 1414:0808:0707 --> Severity: Notice --> Undefined property: stdClass::$title C:\xampp\htdocs\application\controllers\plans.php 30
+ERROR - 201720172017-0808-2424 1616:0808:1010 --> Severity: Notice --> Undefined property: stdClass::$password C:\xampp\htdocs\application\controllers\auth.php 24

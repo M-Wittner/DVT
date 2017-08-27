@@ -27,7 +27,6 @@ class Plans extends CI_Controller {
 		
 		$planData = $postData->plan;
 		$plan = array(
-			'title'=>$planData->title,
 			'user_id'=>$planData->userId,
 			'user_username'=>$planData->username
 		);

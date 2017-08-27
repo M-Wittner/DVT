@@ -120,8 +120,6 @@ myApp.factory('testParams', function($http, $log){
 	var testParams = {};
 	testParams.params = {};
 	
-	testParams.nameSettings = { groupByTextProvider: function(groupValue) { if (groupValue === 'M') { return 'M'; } else { return 'R'; } }, groupBy: 'station', };
-	
 	testParams.params.stationList = [
 		"R-CB1",
 		'R-CB2',
@@ -132,12 +130,19 @@ myApp.factory('testParams', function($http, $log){
 		'PTAT/ABS/Vgb+TEMP',
 	];
 	
-	testParams.params.nameList = [
-		$http.get('http://wigig-584:3000/params/tests')
-		.then(function(response){
-			testParams.params.nameList = response.data;
-		})
-	];
+	testParams.params.nameListM = {};
+	$http.get('http://wigig-584:3000/params/testsM')
+	.then(function(response){
+		testParams.params.nameListM = response.data;
+	});
+	
+	testParams.params.nameListR = {};
+	$http.get('http://wigig-584:3000/params/testsR')
+	.then(function(response){
+		testParams.params.nameListR = response.data;
+//			console.log(response.data);
+	});
+	
 	testParams.params.xifList = [
 		'0',
 		'1',
@@ -148,10 +153,17 @@ myApp.factory('testParams', function($http, $log){
 		'6',
 		'7',
 	];
-	testParams.params.chipList = {};
-    $http.get('http://wigig-584:3000/params/chips')
+	testParams.params.chipListM = {};
+    $http.get('http://wigig-584:3000/params/chipsM')
 	.then(function(response){
-		testParams.params.chipList = response.data;
+		testParams.params.chipListM = response.data;
+	});
+	
+	testParams.params.chipListR = {};
+	$http.get('http://wigig-584:3000/params/chipsR')
+	.then(function(response){
+		testParams.params.chipListR = response.data;
+//		console.log(response.data);
 	});
 	
 	testParams.params.tempList = [

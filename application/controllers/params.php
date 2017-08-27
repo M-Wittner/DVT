@@ -13,13 +13,27 @@ class Params extends CI_Controller {
         $this->load->database('');
     }
 	
-	public function chips() {
+	public function chipsM() {
+		$this->db->where('chip', 'TalynM');
+		$data = $this->db->get('params_chips');
+		$result = $data->result();
+		echo json_encode($result);
+	}
+	public function chipsR() {
+		$this->db->where('chip', 'TalynA');
 		$data = $this->db->get('params_chips');
 		$result = $data->result();
 		echo json_encode($result);
 	}
 	
-	public function tests(){
+	public function testsM(){
+		$this->db->where('station', 'M');
+		$data = $this->db->get('params_test_names');
+		$result = $data->result();
+		echo json_encode($result);
+	}	
+	public function testsR(){
+		$this->db->where('station', 'R');
 		$data = $this->db->get('params_test_names');
 		$result = $data->result();
 		echo json_encode($result);
