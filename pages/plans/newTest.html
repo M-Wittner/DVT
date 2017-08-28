@@ -25,19 +25,19 @@
 				<div class="panel-body">
 					<span class="label label-primary">Test Name:</span>
 					<!--	M stations	-->
-					<multiselect ng-if="test.station == 'M-CB1' || test.station == 'M-CB2'" ng-model="test.name" options="testParams.params.nameListM" show-search="true" selection-limit="1" id-prop="id" display-prop="test_name">
+					<multiselect ng-if="test.station == 'M-CB1' || test.station == 'M-CB2'" ng-model="test.name" options="testParams.params.nameListM" show-search="true" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
 					</multiselect>
 					<!--	R stations	-->
-					<multiselect ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'" ng-model="test.name" options="testParams.params.nameListR" show-search="true" selection-limit="1" id-prop="id" display-prop="test_name">
+					<multiselect ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'" ng-model="test.name" options="testParams.params.nameListR" show-search="true" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="panel-body">
 					<span class="label label-primary">Chip S/N:</span>
-					<multiselect ng-if="test.station == 'M-CB1' || test.station == 'M-CB2'" ng-model="test.chips" options="testParams.params.chipListM" groupBy="station" id-prop="Serial_Number" display-prop="Serial_Number" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true">
+					<multiselect ng-if="test.station == 'M-CB1' || test.station == 'M-CB2'" ng-model="test.chips" options="testParams.params.chipListM" groupBy="station" id-prop="Serial_Number" display-prop="Serial_Number" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
-					<multiselect ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'" ng-model="test.chips" options="testParams.params.chipListR" groupBy="station" id-prop="Serial_Number" display-prop="Serial_Number" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true">
+					<multiselect ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'" ng-model="test.chips" options="testParams.params.chipListR" groupBy="station" id-prop="Serial_Number" display-prop="Serial_Number" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>

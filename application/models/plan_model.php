@@ -23,29 +23,34 @@ class plan_model extends CI_Model {
 		$sql = "SELECT id FROM `tests` WHERE plan_id = ?";
 		$query = $this->db->query($sql, $id);
 		$testsIdArr = $query->result();
-//		die(print_r($tests));
+		
 
 		
 		$testsId = array();
 		foreach($testsIdArr as $i => $result){
 			$testsId[$i] = $result->id;
 		}
-		
-		$arr = array();
-		$testChannel = new stdClass();
+//		die(var_dump($tests));
 		foreach($testsId as $key => $id){
-			
+			if($tests[$key]->station == 'M-CB1' || $tests[$key]->station == 'M-CB2') {
+				$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$id))->result();
+				foreach($xifRes as $i => $value){
+					$xif[$i] = $value->xif;
+				}
+				$tests[$key]->xifs = $xif;
+
+			} else if($tests[$key]->station == 'R-CB1' || $tests[$key]->station == 'R-CB2'){
+				$ant = $this->db->get_where('test_antennas', array('test_id'=>$id))->result();
+				foreach($ant as $i => $value){
+					$antenna[$i] = $value->antenna;
+				}
+				$tests[$key]->antennas = $antenna;	
+			}
 			$ch = $this->db->get_where('test_channels', array('test_id'=>$id))->result();
-			foreach($ch as $i => $value){
-				$channel[$i] = $value->channel;
-			}
+				foreach($ch as $i => $value){
+					$channel[$i] = $value->channel;
+				}
 			$tests[$key]->channels = $channel;
-			
-			$ant = $this->db->get_where('test_antennas', array('test_id'=>$id))->result();
-			foreach($ant as $i => $value){
-				$antenna[$i] = $value->antenna;
-			}
-			$tests[$key]->antennas = $antenna;
 			
 			$chip = $this->db->get_where('test_chips', array('test_id'=>$id))->result();
 //			foreach($chip as $i => $value){
@@ -97,6 +102,11 @@ class plan_model extends CI_Model {
 	function add_chips($chips)
     {
         $insertStatus = $this->db->insert('test_chips', $chips);
+		return $insertStatus;
+    }
+	function add_xifs($xifs)
+    {
+        $insertStatus = $this->db->insert('test_xifs', $xifs);
 		return $insertStatus;
     }
 	

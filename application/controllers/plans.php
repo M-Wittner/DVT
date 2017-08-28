@@ -24,7 +24,6 @@ class Plans extends CI_Controller {
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
 		// plan data
-		
 		$planData = $postData->plan;
 		$plan = array(
 			'user_id'=>$planData->userId,
@@ -36,67 +35,126 @@ class Plans extends CI_Controller {
 			if($insertPlan){
 				$planId = $this->plan_model->get_id($insertPlan);
 				foreach($testsObj as $i => $testArr){
-					$chipsArr = $testArr->chips;
-					$tempsArr = $testArr->temp;
-					$channelsArr = $testArr->channel;
-					$antennasArr = $testArr->antenna;
-					$time = round($testArr->ants*$testArr->lineups*$testArr->seconds*$testArr->pins);
-					$test = array(
-						'priority'=>$testArr->priority[0],
-						'lineup'=>$testArr->lineup,
-						'station'=>$testArr->station[0],
-						'name'=>$testArr->name[0],
-						'pin_from'=>$testArr->pinFrom,
-						'pin_to'=>$testArr->pinTo,
-						'pin_step'=>$testArr->pinStep,
-						'pin_additional'=>$testArr->pinAdd,
-						'mcs'=>$testArr->mcs,
-						'voltage'=>$testArr->voltage,
-						'notes'=>$testArr->notes,
-						'seconds'=>$time,
-						'plan_id'=>$planId
-					);
-					
-					$insertTest = $this->plan_model->add_test($test);
-					$testId = $this->plan_model->tests_id($insertTest);
-//					print_r($test);
-//					print_r($testId);
-					foreach($chipsArr as $result){
-						$chip = array(
-							'chip'=> $result,
-							'plan_id'=>$planId,
-							'test_id'=>$testId
+//					die(var_dump($testArr->chips));
+					//---R station test---
+					if($testArr->station[0] == 'R-CB1' || $testArr->station[0] == 'R-CB2'){
+						$chipsArr = $testArr->chips;
+						$tempsArr = $testArr->temp;
+						$channelsArr = $testArr->channel;
+						$antennasArr = $testArr->antenna;
+						$time = round($testArr->ants*$testArr->lineups*$testArr->seconds*$testArr->pins);
+						$test = array(
+							'priority'=>$testArr->priority[0],
+							'lineup'=>$testArr->lineup,
+							'station'=>$testArr->station[0],
+							'name'=>$testArr->name[0]->test_name,
+							'pin_from'=>$testArr->pinFrom,
+							'pin_to'=>$testArr->pinTo,
+							'pin_step'=>$testArr->pinStep,
+							'pin_additional'=>$testArr->pinAdd,
+							'mcs'=>$testArr->mcs,
+							'voltage'=>$testArr->voltage,
+							'notes'=>$testArr->notes,
+							'seconds'=>$time,
+							'plan_id'=>$planId
 						);
-						$this->plan_model->add_chips($chip);
-					};
-					foreach($tempsArr as $result){
-						$temp = array(
-							'temp'=>$result,
-							'plan_id'=>$planId,
-							'test_id'=>$testId
+
+						$insertTest = $this->plan_model->add_test($test);
+						$testId = $this->plan_model->tests_id($insertTest);
+	//					print_r($test);
+	//					print_r($testId);
+						foreach($chipsArr as $result){
+							$chip = array(
+								'chip'=> $result->Serial_Number,
+								'plan_id'=>$planId,
+								'test_id'=>$testId
+							);
+							$this->plan_model->add_chips($chip);
+						};
+						foreach($tempsArr as $result){
+							$temp = array(
+								'temp'=>$result,
+								'plan_id'=>$planId,
+								'test_id'=>$testId
+							);
+							$this->plan_model->add_temps($temp);
+		//					print_r($temp);
+						};
+						foreach($channelsArr as $result){
+							$channel = array(
+								'channel'=>$result,
+								'plan_id'=>$planId,
+								'test_id'=>$testId
+							);
+							$this->plan_model->add_channels($channel);
+		//					print_r($channel);
+						};
+						foreach($antennasArr as $result){
+							$antenna = array(
+								'antenna'=>$result,
+								'plan_id'=>$planId,
+								'test_id'=>$testId
+							);
+							$this->plan_model->add_antennas($antenna);
+		//					print_r($antenna);
+						};
+						//---M station test---
+					} else if($testArr->station[0] == 'M-CB1' || $testArr->station[0] == 'M-CB2'){
+						$chipsArr = $testArr->chips;
+						$tempsArr = $testArr->temp;
+						$xifsArr = $testArr->xif;
+						$channelsArr = $testArr->channel;
+						$test = array(
+							'priority'=>$testArr->priority[0],
+							'lineup'=>$testArr->lineup,
+							'station'=>$testArr->station[0],
+							'name'=>$testArr->name[0]->test_name,
+							'voltage'=>$testArr->voltage,
+							'notes'=>$testArr->notes,
+							'plan_id'=>$planId
 						);
-						$this->plan_model->add_temps($temp);
-	//					print_r($temp);
-					};
-					foreach($channelsArr as $result){
-						$channel = array(
-							'channel'=>$result,
-							'plan_id'=>$planId,
-							'test_id'=>$testId
-						);
-						$this->plan_model->add_channels($channel);
-	//					print_r($channel);
-					};
-					foreach($antennasArr as $result){
-						$antenna = array(
-							'antenna'=>$result,
-							'plan_id'=>$planId,
-							'test_id'=>$testId
-						);
-						$this->plan_model->add_antennas($antenna);
-	//					print_r($antenna);
-					};
-					
+						$insertTest = $this->plan_model->add_test($test);
+						$testId = $this->plan_model->tests_id($insertTest);
+	//					print_r($test);
+	//					print_r($testId);
+						foreach($chipsArr as $result){
+							$chip = array(
+								'chip'=> $result->Serial_Number,
+								'plan_id'=>$planId,
+								'test_id'=>$testId
+							);
+							$this->plan_model->add_chips($chip);
+						};
+						foreach($tempsArr as $result){
+							$temp = array(
+								'temp'=>$result,
+								'plan_id'=>$planId,
+								'test_id'=>$testId
+							);
+							$this->plan_model->add_temps($temp);
+		//					print_r($temp);
+						};
+						foreach($channelsArr as $result){
+							$channel = array(
+								'channel'=>$result,
+								'plan_id'=>$planId,
+								'test_id'=>$testId
+							);
+							$this->plan_model->add_channels($channel);
+		//					print_r($channel);
+						};
+						foreach($xifsArr as $result){
+							$xif = array(
+								'xif'=>$result,
+								'plan_id'=>$planId,
+								'test_id'=>$testId
+							);
+							$this->plan_model->add_xifs($xif);
+		//					print_r($xif);
+						};
+					} else {
+						echo 'not R or M station';
+					}
 			};
 			echo 'success';
 			} else {

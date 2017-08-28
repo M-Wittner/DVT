@@ -7,7 +7,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	.then(function(response){
 		$scope.plan = response.data.plan[0];
 		$scope.tests = response.data.tests;
-//		console.log(response.data);
+		console.log(response.data);
 	});
 	
 	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
@@ -39,5 +39,13 @@ myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 //			console.log(response.data.chip.completed);
 //			console.log(response.data.chip.error);
 		});
-	}
+	}	
+//	$scope.XifStatus = function(xif, testId, index){
+//		$http.post('http://wigig-584/plans/xifstatus', {xif: xif, planId: $routeParams.id, testId: testId})
+//		.then(function(response){
+////			console.log(response.data.chip.running);
+////			console.log(response.data.chip.completed);
+////			console.log(response.data.chip.error);
+//		});
+//	}
 }]);
