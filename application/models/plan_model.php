@@ -196,17 +196,31 @@ class plan_model extends CI_Model {
 	}
 	
 	function add_comment($data){
-		$comment = array(
-			'plan_id'=>$data->id->planId,
-			'test_id'=>$data->id->testId,
-			'severity'=>$data->comment->severity,
-			'station'=>$data->comment->station,
-			'test_name'=>$data->comment->name,
-			'chip'=>$data->comment->chip,
-			'details'=>$data->comment->details
-		);
-		$insertStatus = $this->db->insert('test_comments', $comment);
-		return $insertStatus;
+		if($data->comment->severity == 'Minor'){
+			$comment = array(
+				'plan_id'=>$data->id->planId,
+				'test_id'=>$data->id->testId,
+				'severity'=>$data->comment->severity,
+				'station'=>$data->comment->station,
+				'test_name'=>$data->comment->name,
+				'chip'=>$data->comment->chip,
+				'details'=>$data->comment->details
+			);
+			$insertStatus = $this->db->insert('test_comments', $comment);
+			return $insertStatus;
+		} elseif($data->comment->severity == 'Major'){
+			$comment = array(
+				'plan_id'=>$data->id->planId,
+				'test_id'=>$data->id->testId,
+				'severity'=>$data->comment->severity,
+				'station'=>$data->comment->station,
+				'details'=>$data->comment->details
+			);
+			$insertStatus = $this->db->insert('test_comments', $comment);
+			return $insertStatus;
+		}else{
+			echo 'failed';
+		};
 	}
 	
 	function get_comments($id){

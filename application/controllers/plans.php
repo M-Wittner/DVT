@@ -200,6 +200,7 @@ class Plans extends CI_Controller {
 	
 	function newcomment(){
 		$postData = json_decode(file_get_contents('php://input'));
+//		die(var_dump($postData));
 		$comment = $this->plan_model->add_comment($postData);
 		echo json_encode($comment);
 	}

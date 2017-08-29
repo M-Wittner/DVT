@@ -255,3 +255,83 @@ ERROR - 201720172017-0808-2828 0505:0808:4141 --> Severity: Notice --> Trying to
 ERROR - 201720172017-0808-2828 0505:0808:4141 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
 ERROR - 201720172017-0808-2828 0505:0808:4141 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
 ERROR - 201720172017-0808-2828 0505:0808:4141 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 1313:0808:3838 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201720172017-0808-2828 1313:0808:3838 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201720172017-0808-2828 1313:0808:3838 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201720172017-0808-2828 1313:0808:0909 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 53
+ERROR - 201720172017-0808-2828 1313:0808:0909 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0808-2828 1313:0808:3333 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0808-2828 1414:0808:4040 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0808-2828 1414:0808:5454 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0808-2828 2020:0808:4848 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0808-2828 2020:0808:2626 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0808-2828 2121:0808:4141 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 53
+ERROR - 201720172017-0808-2828 2121:0808:5555 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 53
+ERROR - 201720172017-0808-2828 2222:0808:5151 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201720172017-0808-2828 2222:0808:5151 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201720172017-0808-2828 2222:0808:5151 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201720172017-0808-2828 2222:0808:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 284
+ERROR - 201720172017-0808-2828 2222:0808:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 284
+ERROR - 201720172017-0808-2828 2222:0808:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 285
+ERROR - 201720172017-0808-2828 2222:0808:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 285
+ERROR - 201720172017-0808-2828 2222:0808:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 286
+ERROR - 201720172017-0808-2828 2222:0808:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 286
+ERROR - 201720172017-0808-2828 2222:0808:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 2222:0808:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 2222:0808:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 2222:0808:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 2222:0808:2929 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 284
+ERROR - 201720172017-0808-2828 2222:0808:2929 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 284
+ERROR - 201720172017-0808-2828 2222:0808:2929 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 285
+ERROR - 201720172017-0808-2828 2222:0808:2929 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 285
+ERROR - 201720172017-0808-2828 2222:0808:2929 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 286
+ERROR - 201720172017-0808-2828 2222:0808:2929 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 286
+ERROR - 201720172017-0808-2828 2222:0808:2929 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 2222:0808:2929 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 2222:0808:2929 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 2222:0808:3030 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 2222:0808:3535 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 284
+ERROR - 201720172017-0808-2828 2222:0808:3535 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 284
+ERROR - 201720172017-0808-2828 2222:0808:3535 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 285
+ERROR - 201720172017-0808-2828 2222:0808:3535 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 285
+ERROR - 201720172017-0808-2828 2222:0808:3535 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 286
+ERROR - 201720172017-0808-2828 2222:0808:3535 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 286
+ERROR - 201720172017-0808-2828 2222:0808:3535 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 2222:0808:3535 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 2222:0808:3535 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 2222:0808:3535 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 289
+ERROR - 201720172017-0808-2828 2222:0808:4949 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 184
+ERROR - 201720172017-0808-2828 2222:0808:4949 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 185
+ERROR - 201720172017-0808-2828 2222:0808:4949 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 186
+ERROR - 201720172017-0808-2828 2222:0808:4949 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 187
+ERROR - 201720172017-0808-2828 2222:0808:4949 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 188
+ERROR - 201720172017-0808-2828 2222:0808:4949 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 189
+ERROR - 201720172017-0808-2828 2222:0808:5757 --> Severity: Notice --> Undefined variable: xif C:\xampp\htdocs\application\models\plan_model.php 40
+ERROR - 201720172017-0808-2828 2222:0808:0202 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 53
+ERROR - 201720172017-0808-2828 2222:0808:1515 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 184
+ERROR - 201720172017-0808-2828 2222:0808:1515 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 185
+ERROR - 201720172017-0808-2828 2222:0808:1515 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 186
+ERROR - 201720172017-0808-2828 2222:0808:1515 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 187
+ERROR - 201720172017-0808-2828 2222:0808:1515 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 188
+ERROR - 201720172017-0808-2828 2222:0808:1515 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 189
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 200
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 200
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 201
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 201
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 202
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 202
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 203
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 203
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 204
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 204
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201720172017-0808-2828 2222:0808:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201720172017-0808-2828 2222:0808:3838 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201720172017-0808-2828 2222:0808:3838 --> Query error: Column 'plan_id' cannot be null - Invalid query: INSERT INTO `test_comments` (`plan_id`, `test_id`, `severity`, `station`, `test_name`, `chip`, `details`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+ERROR - 201720172017-0808-2828 2222:0808:4646 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 184
+ERROR - 201720172017-0808-2828 2222:0808:4747 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 185
+ERROR - 201720172017-0808-2828 2222:0808:4747 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 186
+ERROR - 201720172017-0808-2828 2222:0808:4747 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 187
+ERROR - 201720172017-0808-2828 2222:0808:4747 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 188
+ERROR - 201720172017-0808-2828 2222:0808:4747 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 189
