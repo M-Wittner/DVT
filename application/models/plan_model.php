@@ -34,10 +34,7 @@ class plan_model extends CI_Model {
 		foreach($testsId as $key => $id){
 			if($tests[$key]->station == 'M-CB1' || $tests[$key]->station == 'M-CB2') {
 				$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$id))->result();
-				foreach($xifRes as $i => $value){
-					$xif[$i] = $value->xif;
-				}
-				$tests[$key]->xifs = $xif;
+				$tests[$key]->xifs = $xifRes;
 
 			} else if($tests[$key]->station == 'R-CB1' || $tests[$key]->station == 'R-CB2'){
 				$ant = $this->db->get_where('test_antennas', array('test_id'=>$id))->result();
@@ -311,6 +308,29 @@ class plan_model extends CI_Model {
 		} else if($runs == false && $complete == false && $error == true){
 			$this->db->where(array('chip'=>$result->chip->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
 			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false, 'error'=>false));
+		} else{
+			echo 'nothing';
+		}
+		return $result;
+	}
+	
+	function update_xif_status($result){
+		$runs = $result->xif->running;
+		$complete = $result->xif->completed;
+		$error = $result->xif->error;
+//		die(var_dump($result));
+		if($runs == false && $complete == false && $error == false){
+			$this->db->where(array('chip'=>$result->xif->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_xifs', array('running'=>true, 'completed'=>false, 'error'=>false));
+		} else if($runs == true && $complete == false && $error == false){
+			$this->db->where(array('chip'=>$result->xif->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_xifs', array('running'=>false, 'completed'=>true, 'error'=>false));
+		} else if($runs == false && $complete == true && $error == false){
+			$this->db->where(array('chip'=>$result->xif->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_xifs', array('running'=>false, 'completed'=>false ,'error'=>true));
+		} else if($runs == false && $complete == false && $error == true){
+			$this->db->where(array('chip'=>$result->xif->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_xifs', array('running'=>false, 'completed'=>false, 'error'=>false));
 		} else{
 			echo 'nothing';
 		}

@@ -119,11 +119,22 @@ class Plans extends CI_Controller {
 	//					print_r($testId);
 						foreach($chipsArr as $result){
 							$chip = array(
-								'chip'=> $result->Serial_Number,
+								'chip'=>$result->Serial_Number,
 								'plan_id'=>$planId,
 								'test_id'=>$testId
 							);
-							$this->plan_model->add_chips($chip);
+							$insertChip = $this->plan_model->add_chips($chip);
+							$chipId = $this->db->insert_id($insertChip);
+							foreach($xifsArr as $xifRes){
+								$xif = array(
+									'chip_id'=>$chipId,
+									'xif'=>$xifRes,
+									'plan_id'=>$planId,
+									'test_id'=>$testId
+								);
+								$this->plan_model->add_xifs($xif);
+			//					print_r($xif);
+							};
 						};
 						foreach($tempsArr as $result){
 							$temp = array(
@@ -142,15 +153,6 @@ class Plans extends CI_Controller {
 							);
 							$this->plan_model->add_channels($channel);
 		//					print_r($channel);
-						};
-						foreach($xifsArr as $result){
-							$xif = array(
-								'xif'=>$result,
-								'plan_id'=>$planId,
-								'test_id'=>$testId
-							);
-							$this->plan_model->add_xifs($xif);
-		//					print_r($xif);
 						};
 					} else {
 						echo 'not R or M station';
@@ -225,6 +227,12 @@ class Plans extends CI_Controller {
 		$status = json_decode(file_get_contents('php://input'));
 //		die(var_dump($status));
 		$updateStatus = $this->plan_model->update_chip_status($status);
+		echo json_encode($updateStatus);
+	}
+	function xifstatus(){
+		$status = json_decode(file_get_contents('php://input'));
+//		die(var_dump($status));
+		$updateStatus = $this->plan_model->update_xif_status($status);
 		echo json_encode($updateStatus);
 	}
 }

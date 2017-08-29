@@ -167,9 +167,14 @@ myApp.factory('testParams', function($http, $log){
 	});
 	
 	testParams.params.tempList = [
+		'-40 C',
 		'-30 C',
+		'-10 C',
 		'0 C',
 		'25 C',
+		'40 C',
+		'60 C',
+		'85 C',
 		'105 C',
 	];
 	

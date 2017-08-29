@@ -37,9 +37,21 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		.then(function(response){
 //			console.log(response.data.chip.running);
 //			console.log(response.data.chip.completed);
-//			console.log(response.data.chip.error);
+			console.log(response.data);
 		});
 	}
+	
+//	$scope.xifStat = "{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}";
+	
+	$scope.xifStatus = function(xif, chip, testId){
+		console.log(xif);
+//		$http.post('http://wigig-584/plans/xifstatus', {xif: xif, chip: chip, planId: $routeParams.id, testId: testId})
+//		.then(function(response){
+////			console.log(response.data.chip.running);
+////			console.log(response.data.chip.completed);
+//			console.log(response.data);
+//		});
+	};
 	
 	$scope.reload= function(){
 		$route.reload();

@@ -115,9 +115,43 @@
 					<div class="col-md-3" ng-if="test.station == 'M-CB1' || test.station == 'M-CB2'">
 						<div class="panel-body col-md-5">
 							<span class="label label-primary">XIF:</span>
+<!--
 							<ul class="list-group">
-								<li ng-repeat="xif in test.xifs track by $index" class="list-group-item" ng-click="xifStatus(xif, test.id)">{{xif}}<span class="pull-right glyphicon" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span></li>
+								<li ng-repeat="xif in test.xifs track by $index" class="list-group-item" ng-click="xifStatus(xif, test.id)">{{xif.xif}}<span class="pull-right glyphicon" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span></li>
 							</ul>
+-->
+<!--
+							<table class="table">
+								<thead>
+								<tr>
+									<th ng-repeat="xif in test.xifs| unique:'chip'">{{xif.chip}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="xif in test.xifs| unique:'xif'">
+									<td ng-repeat="chip in test.chips| unique:'chip'" ng-click="xifStatus(xif, chip.chip, chip.test_id)">
+										{{xif.xif}}
+										<span class="pull-right glyphicon" ng-class="{'glyphicon-hourglass': xif.running == true, 'glyphicon-ok': xif.completed == true, 'glyphicon-remove': xif.error == true}"></span>
+									</td>
+								</tr>
+							</tbody>
+							</table>
+-->
+							<table class="table" >
+								<thead>
+								<tr>
+									<th ng-repeat="chip in test.chips">{{chip.chip}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="xif in test.xifs | unique:'xif'">
+									<td ng-repeat="chip in test.chips" ng-click="xifStatus(xif, chip.chip, chip.test_id)">
+										{{xif.xif}}
+										<span class="pull-right glyphicon" ng-class="{'glyphicon-hourglass': xif.running == true, 'glyphicon-ok': xif.completed == true, 'glyphicon-remove': xif.error == true}"></span>
+									</td>
+								</tr>
+							</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
