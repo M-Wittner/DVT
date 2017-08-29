@@ -1,4 +1,4 @@
-myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', 'testParams', 'LS', function ($scope, $location, $http, $routeParams, Flash, AuthService, testParams, LS) {
+myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$routeParams', 'Flash', 'AuthService', 'testParams', 'LS', function ($scope, $route, $location, $http, $routeParams, Flash, AuthService, testParams, LS) {
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
@@ -39,7 +39,11 @@ myApp.controller('viewPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 //			console.log(response.data.chip.completed);
 //			console.log(response.data.chip.error);
 		});
-	}	
+	}
+	
+	$scope.reload= function(){
+		$route.reload();
+	};
 //	$scope.XifStatus = function(xif, testId, index){
 //		$http.post('http://wigig-584/plans/xifstatus', {xif: xif, planId: $routeParams.id, testId: testId})
 //		.then(function(response){
