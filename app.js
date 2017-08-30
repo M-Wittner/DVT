@@ -189,15 +189,20 @@ myApp.factory('testParams', function($http, $log){
 		'2',
 		'3',
 		'4',
-		'5'
-	];
-	testParams.params.chList2 = [
+		'5',
 		'6',
 		'7',
 		'8',
 		'9',
 		'10'
 	];
+//	testParams.params.chList2 = [
+//		'6',
+//		'7',
+//		'8',
+//		'9',
+//		'10'
+//	];
 	
 	testParams.params.antList = [
 		'0',

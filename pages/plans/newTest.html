@@ -67,10 +67,14 @@
 			<div class="col-md-2">
 				<div class="panel-body">
 					<span class="label label-primary">Channel:</span>
+					<multiselect ng-model="test.channel" options="testParams.params.chList1" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+					</multiselect>
+<!--
 					<multiselect ng-if="test.station == 'R-CB1' || test.station == 'M-CB1'" ng-model="test.channel" options="testParams.params.chList1" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 					<multiselect ng-if="test.station == 'R-CB2' || test.station == 'M-CB2'" ng-model="test.channel" options="testParams.params.chList2" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
+-->
 				</div>
 			</div>
 			<div class="col-md-2" ng-if="test.station != 'M-CB1' && test.station != 'M-CB2'">
