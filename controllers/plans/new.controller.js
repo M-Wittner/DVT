@@ -3,7 +3,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	
 	$scope.testParams = testParams;
 //	console.log($scope.testParams);
-	console.log($scope.testParams.params);
+//	console.log($scope.testParams.params);
 //	$scope.testParams.nameSettings = { groupByTextProvider: function(groupValue) { if (groupValue === 'M') { return 'M'; } else { return 'R'; } }, groupBy: 'station', };
 	if($scope.isAuthenticated == false){
 		var message = 'Please Login first!';
@@ -25,7 +25,10 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	$scope.removeTest = function() {
 		$scope.testCount.splice($scope.testCount.length-1,1);
 	}
-		
+//	$scope.calc = true;
+//	$scope.showCalc = function(){
+//		$scope.calc = !$scope.calc;
+//	};
 	$scope.addPlan = function() {
 		$http.post('http://wigig-584/plans/create', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
@@ -33,7 +36,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 				var message = 'Plan Created Succesfully!';
 				var id = Flash.create('success', message, 3500);
 				$location.path('/plans');
-				console.log(response.data)
+//				console.log(response.data)
 			} else {
 				var message = response.data;
 				var id = Flash.create('danger', message, 3500);

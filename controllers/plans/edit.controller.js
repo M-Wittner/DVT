@@ -12,7 +12,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 //		$scope.channels = response.data.test[0].channels;
 //		$scope.temps = response.data.test[0].temps;
 //		$scope.antennas = response.data.test[0].antennas;
-		console.log(response.data);
+//		console.log(response.data);
 	});
 		
 	} else {
@@ -28,7 +28,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	$scope.addTest1 = function(){
 //		$scope.planParams.push($scope.test);
 		$scope.lock = true;
-		console.log($scope.tests);
+//		console.log($scope.tests);
 	};
 	
 	$scope.editToggle = function(){

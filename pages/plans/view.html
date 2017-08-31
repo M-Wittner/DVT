@@ -91,7 +91,7 @@
 							<span>Step</span>
 							<label class="form-inline form-control">{{test.pin_step}}</label>
 						</div>
-						<div class="col-md-5">
+						<div class="col-md-5" ng-if="test.pin_additional != null">
 							<span>More</span>
 							<label class="form-control">{{test.pin_additional}}</label>
 						</div>
@@ -159,10 +159,11 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-3" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
+					<div class="col-md-3" ng-if="(test.station == 'R-CB1' || test.station == 'R-CB2') && test.seconds !== null">
 						<div class="panel-body">
 							<span class="label label-primary">time:</span>
-							<label class="form-control">{{test.seconds/120}} Hours per chip</label>
+							<label class="form-control">
+								{{test.seconds/120}} Hours per chip</label>
 						</div>
 					</div>
 				</div>

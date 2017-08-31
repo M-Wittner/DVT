@@ -35,14 +35,22 @@ class Plans extends CI_Controller {
 			if($insertPlan){
 				$planId = $this->plan_model->get_id($insertPlan);
 				foreach($testsObj as $i => $testArr){
-//					die(var_dump($testArr->chips));
 					//---R station test---
 					if($testArr->station[0] == 'R-CB1' || $testArr->station[0] == 'R-CB2'){
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
 						$channelsArr = $testArr->channel;
 						$antennasArr = $testArr->antenna;
-						$time = round($testArr->ants*$testArr->lineups*$testArr->seconds*$testArr->pins);
+						if($testArr->calc == true){
+							$time = $testArr->ants*$testArr->lineups*$testArr->seconds*$testArr->pins;
+						} else {
+							$time = null;
+						}
+						if(isset($testArr->pinAdd)){
+							$pinAdd = $testArr->pinAdd;
+						} else{
+							$pinAdd = null;
+						}
 						$test = array(
 							'priority'=>$testArr->priority[0],
 							'lineup'=>$testArr->lineup,
@@ -51,14 +59,14 @@ class Plans extends CI_Controller {
 							'pin_from'=>$testArr->pinFrom,
 							'pin_to'=>$testArr->pinTo,
 							'pin_step'=>$testArr->pinStep,
-							'pin_additional'=>$testArr->pinAdd,
+							'pin_additional'=>$pinAdd,
 							'mcs'=>$testArr->mcs,
 							'voltage'=>$testArr->voltage,
 							'notes'=>$testArr->notes,
 							'seconds'=>$time,
 							'plan_id'=>$planId
 						);
-
+//						die(var_dump($time));
 						$insertTest = $this->plan_model->add_test($test);
 						$testId = $this->plan_model->tests_id($insertTest);
 	//					print_r($test);

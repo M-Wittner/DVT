@@ -174,6 +174,7 @@ myApp.factory('testParams', function($http, $log){
 		'25 C',
 		'40 C',
 		'60 C',
+		'80 C',
 		'85 C',
 		'105 C',
 	];

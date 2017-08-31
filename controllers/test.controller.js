@@ -6,9 +6,15 @@ myApp.controller('testCtrl', ['$scope', '$http', '$log', 'testParams', function 
 	$scope.lock = false;
 	
 	$scope.addTest1 = function(){
-		$scope.planParams.push($scope.test);
-		$scope.lock = true;
-		console.log($scope.planParams);
+		if ($scope.test.hasOwnProperty() ){
+			console.log('wow');
+		}else{
+			console.log('not wow');
+		}
+			
+//		$scope.planParams.push($scope.test);
+//		$scope.lock = true;
+//		console.log($scope.planParams);
 	};
 	
 	$scope.editToggle = function(){
@@ -16,9 +22,13 @@ myApp.controller('testCtrl', ['$scope', '$http', '$log', 'testParams', function 
 		$scope.planParams.splice($scope.planParams.length-1,1);
 	};
 	
+	$scope.test.calc = true;
+	$scope.showCalc = function(){
+		$scope.test.calc = !$scope.test.calc;
+	};
 	
 	$scope.addChip = function(){
-		console.log($scope);
+//		console.log($scope);
 //		console.log($scope.chips);
 //		$http.post('http://localhost:3000/chips/create', {chip: $scope.chips})
 //		.then(function(response){

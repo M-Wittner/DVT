@@ -7,7 +7,7 @@ myApp.controller('regCtrl', ['$scope', '$http', '$location', 'Flash', 'AuthServi
 //		console.log($scope.user);
 		$http.post('http://wigig-584/register', $scope.user)
 		.then(function(response){
-			console.log(response.data);
+//			console.log(response.data);
 			var message = 'Signed-Up Succesfully!';
 			var id = Flash.create('success', message, 3500);
 			$location.path('/plans');
