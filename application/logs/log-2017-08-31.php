@@ -413,3 +413,6 @@ ERROR - 201720172017-0808-3131 1919:0808:5252 --> Severity: Notice --> Trying to
 ERROR - 201720172017-0808-3131 2020:0808:3838 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
 ERROR - 201720172017-0808-3131 2020:0808:3838 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
 ERROR - 201720172017-0808-3131 2020:0808:3838 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201720172017-0808-3131 2121:0808:4343 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201720172017-0808-3131 2121:0808:4343 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201720172017-0808-3131 2121:0808:4343 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24

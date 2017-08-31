@@ -6,15 +6,15 @@ myApp.controller('testCtrl', ['$scope', '$http', '$log', 'testParams', function 
 	$scope.lock = false;
 	
 	$scope.addTest1 = function(){
-		if ($scope.test.hasOwnProperty() ){
-			console.log('wow');
-		}else{
-			console.log('not wow');
-		}
+//		if(($scope.test.hasOwnProperty('priority') && $scope.test.hasOwnProperty('lineup') && $scope.test.hasOwnProperty('station') && $scope.test.hasOwnProperty('chips') && $scope.test.hasOwnProperty('pinFrom') && $scope.test.hasOwnProperty('pinTo') && $scope.test.hasOwnProperty('pinStep') && $scope.test.hasOwnProperty('pinAdd') && $scope.test.hasOwnProperty('temp') && $scope.test.hasOwnProperty('channel') && $scope.test.hasOwnProperty('mcs') && $scope.test.hasOwnProperty('voltage') && $scope.test.hasOwnProperty('notes')) || ($scope.test.hasOwnProperty('priority') && $scope.test.hasOwnProperty('lineup') && $scope.test.hasOwnProperty('station') && $scope.test.hasOwnProperty('chips') && $scope.test.hasOwnProperty('temp') && $scope.test.hasOwnProperty('channel') && $scope.test.hasOwnProperty('xif') && $scope.test.hasOwnProperty('voltage') && $scope.test.hasOwnProperty('notes'))){
+//			console.log('wow');
+//	    } else {
+//			  console.log('choose station');
+//	  	}
 			
-//		$scope.planParams.push($scope.test);
-//		$scope.lock = true;
-//		console.log($scope.planParams);
+		$scope.planParams.push($scope.test);
+		$scope.lock = true;
+		console.log($scope.planParams);
 	};
 	
 	$scope.editToggle = function(){
