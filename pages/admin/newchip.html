@@ -1,0 +1,58 @@
+<div class="alert alert-info col-md-offset-1  col-md-10">Notice! Chip Serial Number has to contain its corner!</br> Example: 'YA95100006_TT'</div>
+<div class="container-fluid col-md-offset-3 col-md-5" ng-if="isAuthenticated == true">
+	<form>
+		<div class="panel panel-primary">
+			<div class="panel-heading">Add New Chip</div>
+			<div class="panel-body">
+				<div class="form-group col-md-10">
+					<label>Chip Type</label>
+					<select class="form-control" ng-model="chip.chip">
+						<option>TalynA</option>
+						<option>TalynM</option>
+					</select>
+
+<!--					<input type="password" class="form-control" placeholder="Password">-->
+				</div>
+				<div class="form-group col-md-10">
+					 <label>Board</label>
+					 <select class="form-control" ng-model="chip.board">
+						<option>YA591-H1</option>
+					 </select>
+				</div>
+				<div class="form-group col-md-10">
+					 <label>Package</label>
+					 <select class="form-control" ng-model="chip.package">
+						<option>Flip Chip</option>
+					 </select>
+				</div>
+				<div class="form-group col-md-10">
+					 <label>Model</label>
+					 <select class="form-control" ng-model="chip.model">
+						<option>QCA6425</option>
+					 </select>
+				</div>
+				<div class="form-group col-md-10">
+					 <label>Revision</label>
+					 <select class="form-control" ng-model="chip.revision">
+						<option>A0</option>
+					 </select>
+				</div>
+				<div class="form-group col-md-10">
+					<label>Chip Serial Number</label>
+					<input type="text" class="form-control" ng-model="chip.sn" placeholder="Chip Serial Number('YA95100006_TT')">
+				</div>
+				<div class="form-group col-md-10">
+					 <label>Corner</label>
+					 <select class="form-control" ng-model="chip.corner">
+						<option>TT</option>
+						<option>FF</option>
+						<option>SS</option>
+						<option>FS</option>
+						<option>SF</option>
+					 </select>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-lg btn-success" ng-click="addChip()">Submit!</button>
+	</form>
+</div>

@@ -31,6 +31,18 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/comments/new.html',
 			controller: 'newCommentCtrl'
 	})
+		.when('/admin', {
+			templateUrl: 'pages/admin/panel.html',
+			controller: 'adminCtrl'
+	})
+		.when('/admin/newchip', {
+			templateUrl: 'pages/admin/newchip.html',
+			controller: 'chipCtrl'
+	})
+		.when('/admin/newtest', {
+			templateUrl: 'pages/admin/newtest.html',
+			controller: 'testCtrl'
+	})
 		.otherwise({redirectTo: '/'});
 	;
 	
@@ -130,6 +142,14 @@ myApp.factory('testParams', function($http, $log){
 		'PTAT/ABS/Vgb+TEMP',
 	];
 	
+	testParams.params.newTest = [
+		'R - Stations',
+		'M - Stations',
+		'Full System',
+		'RFC/CAL',
+		'PTAT/ABS/Vgb+TEMP',
+	];
+	
 	testParams.params.nameListM = {};
 	$http.get('http://wigig-584/params/testsM')
 	.then(function(response){
@@ -191,7 +211,6 @@ myApp.factory('testParams', function($http, $log){
 		'3',
 		'4',
 		'5',
-		'6',
 		'7',
 		'8',
 		'9',

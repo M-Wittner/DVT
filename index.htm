@@ -47,6 +47,9 @@
 	<script type="text/javascript" src="controllers/plans/new.controller.js"></script>
 	<script type="text/javascript" src="controllers/plans/edit.controller.js"></script>
 	<script type="text/javascript" src="controllers/comments/new.controller.js"></script>
+	<script type="text/javascript" src="controllers/admin/panel.controller.js"></script>
+	<script type="text/javascript" src="controllers/admin/chip.controller.js"></script>
+	<script type="text/javascript" src="controllers/admin/test.controller.js"></script>
 </head>
 
 <body ng-app="myApp" ng-controller="homeCtrl">
@@ -69,6 +72,7 @@
 					<ul ng-if=" isAuthenticated == true" class="nav navbar-nav">
 						<li><a href="#/plans">All Plans</a></li>
 						<li><a href="#/plans/new">New Plan</a></li>
+						<li><a href="#/admin">Admin Panel</a></li>
 					</ul>
 					<ul ng-if=" isAuthenticated == true" class="nav navbar-nav navbar-right">
 						<li><a href="#">Logged in as {{ currentUser.username }}</a></li>
