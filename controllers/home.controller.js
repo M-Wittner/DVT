@@ -19,14 +19,15 @@ Flash, Session, $cookies, $window) {
 			$scope.setCurrentUser(user);
 			$scope.currentUser = user;
 			if(user.username){
+				// Set Expire Time To 3 Hours
 				var date = new Date();
- 				var minutes = 60;
- 				date.setTime(date.getTime() + (minutes * 60 * 1000));
+ 				date.setDate(date.getDate() + 0.125);
 				$cookies.putObject('loggedUser', user, {'expires': date});
 				$window.location.reload();
 				$location.path('/plans');
 				var message = 'Welcome, '+ user.username + '!';
 				var id = Flash.create('success', message, 5000);
+				console.log(date);
 			} else {
 				var message = 'Failed to log in';
 				var id = Flash.create('danger', message, 5000);
