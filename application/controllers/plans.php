@@ -23,6 +23,7 @@ class Plans extends CI_Controller {
 	function Create() {
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
+//		die(var_dump($postData));
 		// plan data
 		$planData = $postData->plan;
 		$plan = array(
@@ -41,8 +42,9 @@ class Plans extends CI_Controller {
 						$tempsArr = $testArr->temp;
 						$channelsArr = $testArr->channel;
 						$antennasArr = $testArr->antenna;
-						if($testArr->calc == true){
-							$time = $testArr->ants*$testArr->lineups*$testArr->seconds*$testArr->pins;
+//						die(var_dump($testArr));
+						if(isset($testArr->calc)){
+							$time = $testArr->calc->ants*$testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins;
 						} else {
 							$time = null;
 						}
@@ -73,7 +75,7 @@ class Plans extends CI_Controller {
 	//					print_r($testId);
 						foreach($chipsArr as $result){
 							$chip = array(
-								'chip'=> $result->Serial_Number,
+								'chip'=> $result->serial_number,
 								'plan_id'=>$planId,
 								'test_id'=>$testId
 							);
@@ -127,7 +129,7 @@ class Plans extends CI_Controller {
 	//					print_r($testId);
 						foreach($chipsArr as $result){
 							$chip = array(
-								'chip'=>$result->Serial_Number,
+								'chip'=>$result->serial_number,
 								'plan_id'=>$planId,
 								'test_id'=>$testId
 							);

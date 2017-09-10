@@ -504,3 +504,11 @@ ERROR - 201720172017-0909-0404 0404:0909:4848 --> Severity: Notice --> Trying to
 ERROR - 201720172017-0909-0404 0404:0909:4848 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\admin.php 25
 ERROR - 201720172017-0909-0404 0404:0909:4848 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\admin.php 26
 ERROR - 201720172017-0909-0404 0404:0909:4848 --> Query error: Column 'serial_number' cannot be null - Invalid query: INSERT INTO `params_chips` (`chip`, `board`, `package`, `model`, `revision`, `serial_number`, `corner`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+ERROR - 201720172017-0909-0404 0808:0909:3030 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-0404 1313:0909:3636 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-0404 1313:0909:3636 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-0404 1414:0909:5757 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-0404 1414:0909:0101 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-0404 1414:0909:0101 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-0404 1414:0909:0606 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-0404 1414:0909:1111 --> 404 Page Not Found: Faviconico/index

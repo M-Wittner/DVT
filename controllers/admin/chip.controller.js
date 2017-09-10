@@ -10,6 +10,7 @@ myApp.controller('chipCtrl', ['$scope', '$location','$http', '$routeParams', 'Fl
 		};
 	$scope.chip = {};
 	$scope.addChip = function(){
+//		console.log($scope.chip);
 		$http.post('http://wigig-584/admin/addchip', $scope.chip)
 		.then(function(response){
 			console.log(response.data)

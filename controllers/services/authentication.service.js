@@ -27,9 +27,9 @@ myApp.factory('authenticationService', ['$http', '$cookies', '$rootScope', '$tim
 //		set defualt auth header for http request
 		$http.DEFAULTS.headers.common['Authorization'] = 'Basic' + authdata;
 		
-//		Store user details in globals cookie that keeps user logged in for 1 day or until the logout
+//		Store user details in globals cookie that keeps user logged in for 3 hours or until the logout
 		var cookieExp = new Date();
-		cookieExp.setSdate(cookieExp.getDate() + 1);
+		cookieExp.setSdate(cookieExp.getDate() + 3);
 		$cookies.putObject('globals', $rootScope.globals, {expires: cookieExp});
 		
 		function ClearCredentials(){

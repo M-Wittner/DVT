@@ -25,12 +25,15 @@ class Admin extends CI_Controller {
 			'serial_number'=>$postData->sn,
 			'corner'=>$postData->corner,
 		);
-		print_r($chip);
-//		die();
-//		$this->db->limit('1');
-		$insertStatus = $this->db->insert('params_chips', $chip);
-//		return $insertStatus;
-//		echo json_encode($insertStatus);
+		
+		if(isset($chip)){
+			$insertStatus = $this->db->insert('params_chips', $chip);
+			echo json_encode($insertStatus);
+			print_r($chip);
+		}else {
+			echo 'No Chip Was Inserted!';
+		}
+		
 	}
 	
 		public function addTest() {
