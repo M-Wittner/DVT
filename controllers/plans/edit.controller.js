@@ -3,16 +3,23 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	if($scope.isAuthenticated == true) {
 	
-		
+	$scope.test = {};
 	$http.post('http://wigig-584/plans/edit', $routeParams)
 	.then(function(response){
 		$scope.plan = response.data.plan[0];
 		$scope.test = response.data.test[0];
-//		$scope.chips = response.data.test[0].chips;
-//		$scope.channels = response.data.test[0].channels;
-//		$scope.temps = response.data.test[0].temps;
-//		$scope.antennas = response.data.test[0].antennas;
-//		console.log(response.data);
+		$scope.test.antennas = response.data.antennas;
+		$scope.test.channels = response.data.channels;
+		$scope.test.temps = response.data.temps;
+		$scope.test.chips = response.data.chips;
+		$scope.test.mcs = parseInt(response.data.test[0].mcs);
+		$scope.test.voltage = parseInt(response.data.test[0].voltage);
+		$scope.test.pinFrom = parseInt(response.data.test[0].pin_from);
+		$scope.test.pinTo = parseInt(response.data.test[0].pin_to);
+		$scope.test.pinStep = parseInt(response.data.test[0].pin_step);
+		$scope.test.pinAdd = parseInt(response.data.test[0].pin_additional);
+//		console.log($scope.station);
+		console.log(response.data.xifs);
 	});
 		
 	} else {
@@ -37,7 +44,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	};
 	
 	$scope.editPlan = function(){
-		$http.put('http://wigig-584/plans/update', {plan: $scope.plan, test: $scope.test, chips: $scope.chips, antennas: $scope.antennas, temps: $scope.temps, channels: $scope.channels})
+		$http.put('http://wigig-584/plans/update', {plan: $scope.plan, test: $scope.test})
 		.then(function(response){
 			if(response.data == 'success'){
 				$location.path('/plans/'+$routeParams.planId);

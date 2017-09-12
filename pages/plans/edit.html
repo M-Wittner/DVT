@@ -6,7 +6,12 @@
 			<div>
 				<div class="row">
 					<div class="panel-body">
-						<div class="col-md-12">
+						<div class="col-md-2">
+							<span class="label label-primary">Test Priority</span>
+							<multiselect ng-model="test.priority" options="testParams.params.priorityList" selection-limit="1" ng-disabled="lock" required>
+							</multiselect>
+						</div>
+						<div class="col-md-10">
 							<span class="label label-primary">Test Lineup</span>
 							<input required class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.lineup" ng-disabled="lock">
 						</div>
@@ -16,75 +21,80 @@
 					<div class="col-md-4">
 						<div class="panel-body">
 							<span class="label label-primary">Station:</span>
-							<multiselect required ng-model="station" options="testParams.params.stationList" show-search="true" selection-limit="1" ng-disabled="lock">
+							<multiselect ng-model="test.station" options="testParams.params.stationList" show-search="true" selection-limit="1" ng-disabled="lock" required>
 							</multiselect>
-<!--
-							<select class="form-control" ng-model="test.station">
-								<option ng-repeat=" station in testParams.params.stationList">{{station}}</option>
-							</select>
--->
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="panel-body">
 							<span class="label label-primary">Test Name:</span>
-<!--
-							<select class="form-control" ng-model="test.name">
-								<option ng-repeat=" name in testParams.params.nameList">{{name}}</option>
-							</select>
--->
-							<multiselect ng-model="test.name" options="testParams.params.nameList" show-search="true" selection-limit="1" ng-disabled="lock">
+							<!--	M stations	-->
+							<multiselect ng-if="test.station == 'M-CB1' || test.station == 'M-CB2'" ng-model="test.name" options="testParams.params.nameListM" show-search="true" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
 							</multiselect>
+							<!--	R stations	-->
+							<multiselect ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'" ng-model="test.name" options="testParams.params.nameListR" show-search="true" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
+							</multiselect>
+							
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="panel-body">
 							<span class="label label-primary">Chip S/N:</span>
-							<multiselect ng-model="chips" id-prop="chip" display-prop="chip" options="testParams.params.chipList" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
+							<multiselect ng-if="test.station == 'M-CB1' || test.station == 'M-CB2'" ng-model="test.chips" options="testParams.params.chipListM" id-prop="id" display-prop="chip" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
+							</multiselect>
+
+							<multiselect ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'" ng-model="test.chips" options="testParams.params.chipListR" id-prop="id" display-prop="serial_number" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
 							</multiselect>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-4" ng-if="test.station != 'M-CB1' && test.station != 'M-CB2'">
 						<div class="panel-body">
 							<span class="label label-primary">Pin:</span></br>
 							<span>From</span>
-							<input ng-model="test.pinFrom" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_from}}">
+							<input ng-model="test.pinFrom" type="number" class="Pin" ng-disabled="lock">
 							<span>To</span>
-							<input ng-model="test.pinTo" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_to}}">
+							<input ng-model="test.pinTo" type="number" class="Pin" ng-disabled="lock">
 							<span>Step</span>
-							<input ng-model="test.pinStep" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_step}}"></br>
+							<input ng-model="test.pinStep" type="number" class="Pin" ng-disabled="lock"></br>
 							</br>
 							<span>Additional</span>
-							<input ng-model="test.pinAdd" type="number" class="Pin" ng-disabled="lock" value="{{test.pin_additional}}">
+							<input ng-model="test.pinAdd" name="pinAdd" type="text" class="Pin" ng-disabled="lock">
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="panel-body">
 							<span class="label label-primary">Temperature:</span>
-							<multiselect ng-model="temps" id-prop="temp" options="testParams.params.tempList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+							<multiselect ng-model="test.temps" id-prop="temp" options="testParams.params.tempList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 							</multiselect>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="panel-body">
 							<span class="label label-primary">Channel:</span>
-							<multiselect ng-model="channels" id-prop="id" options="testParams.params.chList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+							<multiselect ng-model="test.channels" id-prop="channel" options="testParams.params.chList1" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 							</multiselect>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2" ng-if="test.station == 'R-CB1' && test.station == 'R-CB2'">
 						<div class="panel-body">
 							<span class="label label-primary">Antenna:</span>
-							<multiselect ng-model="antennas" id-prop="id" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock" value="test.antenna">
+							<multiselect ng-model="test.antennas" id-prop="antenna" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock" value="test.antenna">
 							</multiselect>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2" ng-if="test.station != 'R-CB1' && test.station != 'R-CB2'">
+						<div class="panel-body">
+							<span class="label label-primary">XIF:</span>
+							<multiselect ng-model="test.xifs" id-prop="xif" options="testParams.params.xifList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+							</multiselect>
+						</div>
+					</div>
+					<div class="col-md-2" ng-if="test.station != 'M-CB1' && test.station != 'M-CB2'">
 						<div class="panel-body">
 							<span class="label label-primary">MCS:</span></br>
-							<input ng-model="test.mcs" type="number" class="Pin" ng-disabled="lock" value="{{test.mcs}}">
+							<input ng-model="test.mcs" type="number" class="Pin" ng-disabled="lock">
 						</div>
 					</div>
 				</div>
@@ -92,7 +102,7 @@
 					<div class="col-md-2">
 						<div class="panel-body">
 							<span class="label label-primary">Voltage:</span>
-							<input ng-model="test.voltage" type="number" class="Pin" ng-disabled="lock" value="{{test.voltage}}">
+							<input ng-model="test.voltage" type="number" class="Pin" ng-disabled="lock">
 						</div>
 					</div>
 					<div class="col-md-6">

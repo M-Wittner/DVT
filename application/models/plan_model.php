@@ -225,70 +225,27 @@ class plan_model extends CI_Model {
 		return $comments;
 	}
 	
-	function update_plan($data){
-		$chipsArr = $data->chips;
-		$tempsArr = $data->temps;
-		$channelsArr = $data->channels;
-		$antennasArr = $data->antennas;
-		$planId = $data->test->plan_id;
-		$testId = $data->test->id;
-		$newChips = array();
-		$chips = $this->db->get_where('test_chips', array('test_id'=>$testId))->result();
-//		die(var_dump($chips));
+	function update_test($data){
+		$planObj = $data->plan;
+		$testObj = $data->test;
 		$test = array(
-			'lineup'=>$data->test->lineup,
-			'station'=>$data->test->station,
-			'name'=>$data->test->name,
-			'pin_from'=>$data->test->pin_from,
-			'pin_to'=>$data->test->pin_to,
-			'pin_step'=>$data->test->pin_step,
-			'pin_additional'=>$data->test->pin_additional,
-			'mcs'=>$data->test->mcs,
-			'voltage'=>$data->test->voltage,
-			'notes'=>$data->test->notes,
-//				'plan_id'=>$data->plan_id
+			'priority'=>$testObj->priority[0],
+			'lineup'=>$testObj->lineup,
+			'station'=>$testObj->station[0],
+			'name'=>$testObj->name[0]->test_name,
+			'pin_from'=>$testObj->pinFrom,
+			'pin_to'=>$testObj->pinTo,
+			'pin_step'=>$testObj->pinStep,
+			'pin_additional'=>$pinAdd,
+			'mcs'=>$testObj->mcs,
+			'voltage'=>$testObj->voltage,
+			'notes'=>$testObj->notes,
 		);
-		die(var_dump($chipsArr));
-		$this->db->where('id', $testId);
-		$testStatus = $this->db->update('tests', $test);
-		foreach($chipsArr as $result){
-			$chip = array(
-				'chip'=>$result,
-//				'plan_id'=>$planId,
-//				'test_id'=>$testId
-			);
-			array_push($newChips, $chip);
-		}
-//		die(var_dump($chips));
-		$this->db->where(array('plan_id'=>$planId, 'test_id'=>$testId));
-		$insertStatus = $this->db->replace('test_chips', $newChips);
-		foreach($tempsArr as $result){
-//			var_dump($result);
-			$temp = array(
-				'temp'=> $result,
-				'plan_id'=>$planId,
-				'test_id'=>$testId
-			);
-			$insertStatus = $this->db->replace('test_temps', $temp);
-		}
+		var_dump($test);
 		die();
-		foreach($channelsArr as $result){
-			$channel = array(
-				'channel'=> $result,
-				'plan_id'=>$planId,
-				'test_id'=>$testId
-			);
-			$insertStatus = $this->db->replace('test_channels', $channel);
-		}
-		foreach($antennasArr as $result){
-			$antenna = array(
-				'antenna'=> $result,
-				'test_id'=>$testId,
-				'plan_id'=>$planId
-			);
-			$insertStatus = $this->db->replace('test_antennas', $antenna);
-		}
-		return $insertStatus;
+//		$res = $this->db->update($test);
+//		return $res;
+		
 	}
 	
 	function update_chip_status($result){
@@ -312,6 +269,15 @@ class plan_model extends CI_Model {
 			echo 'nothing';
 		}
 		return $result;
+	}
+	
+	function update_plan_status($result){
+		$id = $result->id;
+		$checked = $result->checked;
+		$this->db->where(array('id'=>$id));
+		$insertStatus = $this->db->update('plans', array('checked'=>!$checked));
+		
+		return !$checked;
 	}
 	
 	function update_xif_status($result){

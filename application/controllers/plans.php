@@ -196,6 +196,7 @@ class Plans extends CI_Controller {
 		$plan = $this->db->get_where('plans', array('id'=> $postData->planId))->result();
 		$test = $this->db->get_where('tests', array('id'=>$postData->testId))->result();
 		$chips = $this->db->get_where('test_chips', array('test_id'=>$postData->testId))->result();
+		$xifs = $this->db->get_where('test_xifs', array('test_id'=>$postData->testId))->result();
 		$temps = $this->db->get_where('test_temps', array('test_id'=>$postData->testId))->result();
 		$channels = $this->db->get_where('test_channels', array('test_id'=>$postData->testId))->result();
 		$antennas = $this->db->get_where('test_antennas', array('test_id'=>$postData->testId))->result();
@@ -205,7 +206,8 @@ class Plans extends CI_Controller {
 			'chips'=>$chips,
 			'temps'=>$temps,
 			'channels'=>$channels,
-			'antennas'=>$antennas
+			'antennas'=>$antennas,
+			'xifs'=>$xifs
 		);
 		echo json_encode($result);
 	}
@@ -225,12 +227,18 @@ class Plans extends CI_Controller {
 	
 	function update(){
 		$postData = json_decode(file_get_contents('php://input'));
-		$plan = $this->plan_model->update_plan($postData);
+		$plan = $this->plan_model->update_test($postData);
 		if($plan){
 			echo 'success';
 		} else {
-			echo 'Plan Was not updated';
+			echo 'Test Was not updated';
 		}
+	}
+	
+	function planCheck(){
+		$status = json_decode(file_get_contents('php://input'));
+		$updateStatus = $this->plan_model->update_plan_status($status);
+		echo json_encode($updateStatus);
 	}
 	
 	function chipstatus(){

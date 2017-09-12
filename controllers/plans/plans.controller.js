@@ -1,4 +1,4 @@
-myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', 'AuthService', function ($scope, $location, $http, Flash, $cookies, AuthService) {
+myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', function ($scope, $location, $http, Flash, $cookies, $window, AuthService) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
 	if($scope.isAuthenticated == true) {
@@ -15,6 +15,21 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 		var id = Flash.create('danger', message, 3500);
 		$location.path('/');
 	};
+	
+	$scope.seen = function(plan){
+		$http.post('http://wigig-584/plans/planCheck', plan)
+		.then(function(response){
+//			console.log(response.data);
+			if(response.data == 'true'){
+				var message = 'Plan Marked As Seen';
+				var id = Flash.create('success', message, 3500);
+			} else{
+				var message = 'Plan Marked As Unseen';
+				var id = Flash.create('danger', message, 3500);
+			}
+			setTimeout(function(){$window.location.reload();}, 2500);
+		});
+	}
 	
 	
 //	console.log($scope);
