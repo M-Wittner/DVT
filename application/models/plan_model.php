@@ -228,23 +228,101 @@ class plan_model extends CI_Model {
 	function update_test($data){
 		$planObj = $data->plan;
 		$testObj = $data->test;
-		$test = array(
-			'priority'=>$testObj->priority[0],
-			'lineup'=>$testObj->lineup,
-			'station'=>$testObj->station[0],
-			'name'=>$testObj->name[0]->test_name,
-			'pin_from'=>$testObj->pinFrom,
-			'pin_to'=>$testObj->pinTo,
-			'pin_step'=>$testObj->pinStep,
-			'pin_additional'=>$pinAdd,
-			'mcs'=>$testObj->mcs,
-			'voltage'=>$testObj->voltage,
-			'notes'=>$testObj->notes,
-		);
-		var_dump($test);
-		die();
-//		$res = $this->db->update($test);
-//		return $res;
+//		var_dump($testObj);
+//		die();
+		if($testObj->station[0] == "R-CB1" || $testObj->station[0] == "R-CB2"){
+			$test = array(
+				'plan_id'=>$testObj->plan_id,
+				'priority'=>$testObj->priority[0],
+				'lineup'=>$testObj->lineup,
+				'station'=>$testObj->station[0],
+				'name'=>$testObj->name[0]->test_name,
+				'pin_from'=>$testObj->pinFrom,
+				'pin_to'=>$testObj->pinTo,
+				'pin_step'=>$testObj->pinStep,
+				'pin_additional'=>$testObj->pinAdd,
+				'mcs'=>$testObj->mcs,
+				'voltage'=>$testObj->voltage,
+				'notes'=>$testObj->notes,
+			);
+			
+			// Update antennas
+			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+			$this->db->delete('test_antennas');
+			foreach($testObj->antennas as $i => $antennaRes){
+				$antenna = array(
+					'test_id'=>$testObj->id,
+					'plan_id'=>$testObj->plan_id,
+					'antenna'=>$antennaRes
+					);
+//				die(var_dump($antennaRes));
+				$this->db->replace('test_antennas', $antenna);
+			}
+		}elseif($testObj->station[0] == "M-CB1" || $testObj->station[0] == "M-CB2"){
+			$test = array(
+				'plan_id'=>$testObj->plan_id,
+				'priority'=>$testObj->priority[0],
+				'lineup'=>$testObj->lineup,
+				'station'=>$testObj->station[0],
+				'name'=>$testObj->name[0]->test_name,
+				'voltage'=>$testObj->voltage,
+				'notes'=>$testObj->notes,
+			);
+			// Update xifs
+			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+			$this->db->delete('test_xifs');
+			foreach($testObj->xifs as $i => $xifRes){
+				$xif = array(
+					'test_id'=>$testObj->id,
+					'plan_id'=>$testObj->plan_id,
+					'xif'=>$xifRes
+					);
+				$this->db->replace('test_xifs', $xif);
+			}
+		} else{
+			echo 'Station not operetional right now';
+			die();
+		}
+		// Update chips
+		$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+		$this->db->delete('test_chips');
+		foreach($testObj->chips as $i => $chipRes){
+			$chip = array(
+				'test_id'=>$testObj->id,
+				'plan_id'=>$testObj->plan_id,
+				'chip'=>$chipRes->serial_number
+				);
+			
+			$this->db->replace('test_chips', $chip);
+		}
+		// Update temps
+		$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+		$this->db->delete('test_temps');
+		foreach($testObj->temps as $i => $tempRes){
+			$temp = array(
+				'test_id'=>$testObj->id,
+				'plan_id'=>$testObj->plan_id,
+				'temp'=>$tempRes
+				);
+			$this->db->replace('test_temps', $temp);
+		}
+		// Update channels
+		$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+		$this->db->delete('test_channels');
+		foreach($testObj->channels as $i => $channelRes){
+			$channel = array(
+				'test_id'=>$testObj->id,
+				'plan_id'=>$testObj->plan_id,
+				'channel'=>$channelRes
+				);
+			$this->db->replace('test_channels', $channel);
+		}
+//		var_dump($test);
+//		die();
+		$this->db->where(array('id'=>$testObj->id,'plan_id'=>$testObj->plan_id));
+//		$res = $this->db->delete('tests');
+		$res = $this->db->update('tests', $test);
+		return $res;
 		
 	}
 	

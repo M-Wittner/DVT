@@ -40,7 +40,7 @@
 					<div class="col-md-4">
 						<div class="panel-body">
 							<span class="label label-primary">Chip S/N:</span>
-							<multiselect ng-if="test.station == 'M-CB1' || test.station == 'M-CB2'" ng-model="test.chips" options="testParams.params.chipListM" id-prop="id" display-prop="chip" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
+							<multiselect ng-if="test.station == 'M-CB1' || test.station == 'M-CB2'" ng-model="test.chips" options="testParams.params.chipListM" id-prop="id" display-prop="serial_number" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
 							</multiselect>
 
 							<multiselect ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'" ng-model="test.chips" options="testParams.params.chipListR" id-prop="id" display-prop="serial_number" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
@@ -66,7 +66,7 @@
 					<div class="col-md-2">
 						<div class="panel-body">
 							<span class="label label-primary">Temperature:</span>
-							<multiselect ng-model="test.temps" id-prop="temp" options="testParams.params.tempList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+							<multiselect ng-model="test.temps" id-prop="test_id" options="testParams.params.tempList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 							</multiselect>
 						</div>
 					</div>
@@ -77,7 +77,7 @@
 							</multiselect>
 						</div>
 					</div>
-					<div class="col-md-2" ng-if="test.station == 'R-CB1' && test.station == 'R-CB2'">
+					<div class="col-md-2" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
 						<div class="panel-body">
 							<span class="label label-primary">Antenna:</span>
 							<multiselect ng-model="test.antennas" id-prop="antenna" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock" value="test.antenna">

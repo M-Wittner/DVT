@@ -826,3 +826,10 @@ ERROR - 201720172017-0909-1212 0505:0909:4444 --> Severity: Notice --> Trying to
 ERROR - 201720172017-0909-1212 0505:0909:4444 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 200
 ERROR - 201720172017-0909-1212 0505:0909:4444 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 201
 ERROR - 201720172017-0909-1212 0505:0909:4444 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 202
+ERROR - 201720172017-0909-1212 0505:0909:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 196
+ERROR - 201720172017-0909-1212 0505:0909:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 197
+ERROR - 201720172017-0909-1212 0505:0909:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 198
+ERROR - 201720172017-0909-1212 0505:0909:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 199
+ERROR - 201720172017-0909-1212 0505:0909:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 200
+ERROR - 201720172017-0909-1212 0505:0909:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 201
+ERROR - 201720172017-0909-1212 0505:0909:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 202

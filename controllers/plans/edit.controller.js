@@ -18,8 +18,9 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 		$scope.test.pinTo = parseInt(response.data.test[0].pin_to);
 		$scope.test.pinStep = parseInt(response.data.test[0].pin_step);
 		$scope.test.pinAdd = parseInt(response.data.test[0].pin_additional);
-//		console.log($scope.station);
-		console.log(response.data.xifs);
+		$scope.test.xifs = response.data.xifs;
+		console.log(response.data.test);
+//		console.log(response.data.temps);
 	});
 		
 	} else {
@@ -51,6 +52,8 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 				var message = 'Test was edited successfully';
 				var id = Flash.create('success', message, 5000);
 			}else {
+				var message = response.data;
+				var id = Flash.create('danger', message, 3500);
 				console.log(response.data);
 			}
 		});
