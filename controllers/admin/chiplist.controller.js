@@ -13,5 +13,4 @@ myApp.controller('chiplistCtrl', ['$scope', '$location','$http', '$routeParams',
 			var id = Flash.create('danger', message, 3500);
 			$location.path('/');
 		};
-	
 }]);

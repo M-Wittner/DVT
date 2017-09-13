@@ -1344,3 +1344,6 @@ ERROR - 201720172017-0909-1313 0303:0909:1818 --> Severity: Notice --> Trying to
 ERROR - 201720172017-0909-1313 0303:0909:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
 ERROR - 201720172017-0909-1313 0303:0909:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
 ERROR - 201720172017-0909-1313 0303:0909:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201720172017-0909-1313 0404:0909:1717 --> Severity: Parsing Error --> syntax error, unexpected ')' C:\xampp\htdocs\application\controllers\admin.php 37
+ERROR - 201720172017-0909-1313 0404:0909:5050 --> Severity: Notice --> Undefined property: Admin::$dbutil C:\xampp\htdocs\application\controllers\admin.php 72
+ERROR - 201720172017-0909-1313 0404:0909:5050 --> Severity: Error --> Call to a member function csv_from_result() on null C:\xampp\htdocs\application\controllers\admin.php 72

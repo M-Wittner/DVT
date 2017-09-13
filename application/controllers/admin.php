@@ -8,8 +8,9 @@ class Admin extends CI_Controller {
 	
 	public function __construct() {
         parent::__construct();
-        $this->load->helper(array('form','url'));
+        $this->load->helper(array('form','url','download', 'file'));
         $this->load->database('');
+		$this->load->dbutil();
     }
 	
 	public function addChip() {
@@ -28,8 +29,13 @@ class Admin extends CI_Controller {
 		
 		if(isset($chip['chip'])){
 			$insertStatus = $this->db->insert('params_chips', $chip);
-			echo json_encode($insertStatus);
-			print_r($chip);
+			if($insertStatus == true){
+				$q = $this->db->get('params_chips');
+				$delimiter = ",";
+				$newline = "\r\n";
+				$data = $this->dbutil->csv_from_result($q,$delimiter, $newline);
+				force_download('CSV_Report.csv', $data);
+			}
 		}else {
 			echo 'No Chip Was Inserted!';
 		}
@@ -60,8 +66,16 @@ class Admin extends CI_Controller {
 	}
 	
 	public function chipList(){
-		$chipList = $this->db->get('params_chips')->result();
-		echo json_encode($chipList);
+		$chipList = $this->db->get('params_chips');
+		echo json_encode($chipList->result());
+	}
+	
+	public function updateChipList(){
+		$chipList = $this->db->get('params_chips');
+		$delimiter = ",";
+		$newline = "\r\n";
+		$data = $this->dbutil->csv_from_result($chipList, $delimiter, $newline);
+		force_download('Web_ChipList.csv', $data, TRUE);
 	}
 }
 ?>
