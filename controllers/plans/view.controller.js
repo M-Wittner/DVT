@@ -7,7 +7,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	.then(function(response){
 		$scope.plan = response.data.plan[0];
 		$scope.tests = response.data.tests;
-//		console.log(response.data);
+		console.log(response.data.tests);
 	});
 	
 	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
@@ -35,9 +35,9 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$scope.chipStatus = function(chip, testId, index){
 		$http.post('http://wigig-584/plans/chipstatus', {chip: chip, planId: $routeParams.id, testId: testId})
 		.then(function(response){
-//			console.log(response.data.chip.running);
-//			console.log(response.data.chip.completed);
-//			console.log(response.data);
+			chip = response.data.chip.chip;
+			var message = 'chip '+chip+' Status Updated!';
+			var id = Flash.create('success', message, 3500);
 		});
 	}
 	

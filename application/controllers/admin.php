@@ -75,7 +75,7 @@ class Admin extends CI_Controller {
 		$delimiter = ",";
 		$newline = "\r\n";
 		$data = $this->dbutil->csv_from_result($chipList, $delimiter, $newline);
-		force_download('Web_ChipList.csv', $data, TRUE);
+		force_download('Web_Chip_List.csv', $data, TRUE);
 	}
 }
 ?>

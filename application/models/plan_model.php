@@ -283,21 +283,24 @@ class plan_model extends CI_Model {
 				);
 			$insertStatus = $this->db->replace('test_chips', $chip);
 			$insertId = $this->db->insert_id($insertStatus);
+//			var_dump($insertId);
 			if($testObj->station[0] == "M-CB1" || $testObj->station[0] == "M-CB2"){
 				// Update xifs
 				$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 				$this->db->delete('test_xifs');
-				foreach($testObj->xifs as $i => $xifRes){
+				foreach($testObj->xifs as $xifRes){
 					$xif = array(
 						'test_id'=>$testObj->id,
 						'plan_id'=>$testObj->plan_id,
 						'chip_id'=>$insertId,
 						'xif'=>$xifRes
 						);
+//					$xif['chip_id'] = $insertId;
 					$this->db->replace('test_xifs', $xif);
 				}
 			}
 		}
+//		die();
 		// Update temps
 		$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 		$this->db->delete('test_temps');
