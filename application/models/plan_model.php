@@ -268,17 +268,6 @@ class plan_model extends CI_Model {
 				'voltage'=>$testObj->voltage,
 				'notes'=>$testObj->notes,
 			);
-			// Update xifs
-			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
-			$this->db->delete('test_xifs');
-			foreach($testObj->xifs as $i => $xifRes){
-				$xif = array(
-					'test_id'=>$testObj->id,
-					'plan_id'=>$testObj->plan_id,
-					'xif'=>$xifRes
-					);
-				$this->db->replace('test_xifs', $xif);
-			}
 		} else{
 			echo 'Station not operetional right now';
 			die();
@@ -292,8 +281,22 @@ class plan_model extends CI_Model {
 				'plan_id'=>$testObj->plan_id,
 				'chip'=>$chipRes->serial_number
 				);
-			
-			$this->db->replace('test_chips', $chip);
+			$insertStatus = $this->db->replace('test_chips', $chip);
+			$insertId = $this->db->insert_id($insertStatus);
+			if($testObj->station[0] == "M-CB1" || $testObj->station[0] == "M-CB2"){
+				// Update xifs
+				$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+				$this->db->delete('test_xifs');
+				foreach($testObj->xifs as $i => $xifRes){
+					$xif = array(
+						'test_id'=>$testObj->id,
+						'plan_id'=>$testObj->plan_id,
+						'chip_id'=>$insertId,
+						'xif'=>$xifRes
+						);
+					$this->db->replace('test_xifs', $xif);
+				}
+			}
 		}
 		// Update temps
 		$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));

@@ -19,7 +19,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 		$scope.test.pinStep = parseInt(response.data.test[0].pin_step);
 		$scope.test.pinAdd = parseInt(response.data.test[0].pin_additional);
 		$scope.test.xifs = response.data.xifs;
-		console.log(response.data.test);
+//		console.log(response.data.test);
 //		console.log(response.data.temps);
 	});
 		
