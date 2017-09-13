@@ -1,0 +1,33 @@
+<!--<p>{{chips}}</p>-->
+
+<div class="panel panel-primary">
+	<!-- Default panel contents -->
+	<div class="panel-heading">All Plans</div>
+	<div class="panel-body">
+	</div>
+	<!-- Table -->
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Chip</th>
+				<th>Board</th>
+				<th>Package</th>
+				<th>Model</th>
+				<th>Revision</th>
+				<th>Serial Number</th>
+				<th>Corner</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="chip in chips | orderBy:'chip'">
+				<th>{{ chip.chip }}</th>
+				<td>{{ chip.board }}</td>
+				<td>{{ chip.package }}</td>
+				<td>{{ chip.model }}</td>
+				<td>{{ chip.revision }}</td>
+				<td>{{ chip.serial_number }}</td>
+				<td>{{ chip.corner }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

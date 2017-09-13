@@ -26,7 +26,7 @@ class Admin extends CI_Controller {
 			'corner'=>$postData->corner,
 		);
 		
-		if(isset($chip)){
+		if(isset($chip['chip'])){
 			$insertStatus = $this->db->insert('params_chips', $chip);
 			echo json_encode($insertStatus);
 			print_r($chip);
@@ -57,6 +57,11 @@ class Admin extends CI_Controller {
 		$insertStatus = $this->db->insert('params_test_names', $test);
 //		return $insertStatus;
 		echo json_encode($insertStatus);
+	}
+	
+	public function chipList(){
+		$chipList = $this->db->get('params_chips')->result();
+		echo json_encode($chipList);
 	}
 }
 ?>
