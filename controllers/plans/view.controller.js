@@ -7,7 +7,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	.then(function(response){
 		$scope.plan = response.data.plan[0];
 		$scope.tests = response.data.tests;
-		console.log(response.data.tests);
+//		console.log($scope.tests);
 	});
 	
 	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
@@ -55,8 +55,10 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		});
 	};
 	
-	$scope.reload= function(){
-		$route.reload();
+	$scope.reload= function(index){
+//		$route.reload();
+		console.log((this.test.antennas).length);
+		console.log(($scope.params.antList).length);
 	};
 //	$scope.XifStatus = function(xif, testId, index){
 //		$http.post('http://wigig-584/plans/xifstatus', {xif: xif, planId: $routeParams.id, testId: testId})

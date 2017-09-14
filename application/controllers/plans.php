@@ -36,6 +36,11 @@ class Plans extends CI_Controller {
 			if($insertPlan){
 				$planId = $this->plan_model->get_id($insertPlan);
 				foreach($testsObj as $i => $testArr){
+					if(isset($testArr->notes)){
+						$notes = $testArr->notes;
+					} else {
+						$notes = null;
+					}
 					//---R station test---
 					if($testArr->station[0] == 'R-CB1' || $testArr->station[0] == 'R-CB2'){
 						$chipsArr = $testArr->chips;
@@ -64,7 +69,7 @@ class Plans extends CI_Controller {
 							'pin_additional'=>$pinAdd,
 							'mcs'=>$testArr->mcs,
 							'voltage'=>$testArr->voltage,
-							'notes'=>$testArr->notes,
+							'notes'=>$notes,
 							'seconds'=>$time,
 							'plan_id'=>$planId
 						);
@@ -120,7 +125,7 @@ class Plans extends CI_Controller {
 							'station'=>$testArr->station[0],
 							'name'=>$testArr->name[0]->test_name,
 							'voltage'=>$testArr->voltage,
-							'notes'=>$testArr->notes,
+							'notes'=>$notes,
 							'plan_id'=>$planId
 						);
 						$insertTest = $this->plan_model->add_test($test);

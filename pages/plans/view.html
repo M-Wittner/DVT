@@ -147,7 +147,10 @@
 						<div class="panel-body">
 							<span class="label label-primary">Channels:</span>
 							<ul class="list-group">
-								<li ng-repeat="channel in test.channels" class="list-group-item">{{channel}}</li>
+								<li ng-if="(test.channels).length < (params.chList1).length" ng-repeat="channel in test.channels track by $index" class="list-group-item"> {{channel}}
+								</li>
+								<li ng-if="(test.channels).length == (params.chList1).length" class="list-group-item"> All Channels
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -155,7 +158,10 @@
 						<div class="panel-body">
 							<span class="label label-primary">Anthenas:</span>
 							<ul class="list-group">
-								<li ng-repeat="antenna in test.antennas" class="list-group-item">{{antenna}}</li>
+								<li ng-if="(test.antennas).length < (params.antList).length" ng-repeat="antenna in test.antennas" class="list-group-item"> {{antenna}}
+								</li>
+								<li ng-if="(test.antennas).length == (params.antList).length" class="list-group-item"> All Antennas
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -174,7 +180,7 @@
 							<label class="form-control">{{test.voltage}}</label>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6" ng-hide="test.notes == ''">
 						<div class="panel-body">
 							<span class="label label-primary">Notes:</span>
 							<!--					<input  type="text" ng-model="test.notes" ng-disabled="lock">-->

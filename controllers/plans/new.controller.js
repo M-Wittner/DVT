@@ -22,13 +22,12 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	$scope.insertTest = function(){
 		$scope.planParams.push($scope.test);
 		$scope.lock = true;
-//		console.log($scope.planParams);
 	}
 	$scope.editToggle = function(){
 		$scope.lock = false;
+		$scope.planParams.splice($scope.test, 1);
 	}
 	
-//	console.log(String.indexOf('gdsgfdgfd'));
 	$scope.removeTest = function() {
 		$scope.testCount.splice($scope.testCount.length-1,1);
 	}

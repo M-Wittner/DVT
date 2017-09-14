@@ -1607,3 +1607,34 @@ ERROR - 201720172017-0909-1313 0505:0909:1717 --> Severity: Notice --> Trying to
 ERROR - 201720172017-0909-1313 0505:0909:1717 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 373
 ERROR - 201720172017-0909-1313 0505:0909:1717 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 373
 ERROR - 201720172017-0909-1313 0505:0909:1717 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 373
+ERROR - 201720172017-0909-1313 0808:0909:4242 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-1313 0808:0909:4242 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-1313 1515:0909:4040 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-1313 1515:0909:4040 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-1313 1616:0909:1010 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-1313 1616:0909:4747 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-1313 1616:0909:4747 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-1313 1717:0909:1313 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 233
+ERROR - 201720172017-0909-1313 1717:0909:1313 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 233
+ERROR - 201720172017-0909-1313 1717:0909:1313 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 261
+ERROR - 201720172017-0909-1313 1717:0909:1313 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 261
+ERROR - 201720172017-0909-1313 1717:0909:1515 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 233
+ERROR - 201720172017-0909-1313 1717:0909:1515 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 233
+ERROR - 201720172017-0909-1313 1717:0909:1515 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 261
+ERROR - 201720172017-0909-1313 1717:0909:1515 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 261
+ERROR - 201720172017-0909-1313 1717:0909:1717 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 233
+ERROR - 201720172017-0909-1313 1717:0909:1717 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 233
+ERROR - 201720172017-0909-1313 1717:0909:1717 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 261
+ERROR - 201720172017-0909-1313 1717:0909:1717 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 261
+ERROR - 201720172017-0909-1313 1717:0909:1818 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 233
+ERROR - 201720172017-0909-1313 1717:0909:1818 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 233
+ERROR - 201720172017-0909-1313 1717:0909:1818 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 261
+ERROR - 201720172017-0909-1313 1717:0909:1818 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 261
+ERROR - 201720172017-0909-1313 1717:0909:1818 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 233
+ERROR - 201720172017-0909-1313 1717:0909:1818 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 233
+ERROR - 201720172017-0909-1313 1717:0909:1818 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 261
+ERROR - 201720172017-0909-1313 1717:0909:1818 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 261
+ERROR - 201720172017-0909-1313 1717:0909:5252 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-1313 1717:0909:5252 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-1313 1818:0909:5656 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 119
+ERROR - 201720172017-0909-1313 1818:0909:5656 --> Query error: Column 'lineup' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`) VALUES ('2', NULL, 'M-CB1', 'TX-Psat', 1, '.', 124)
