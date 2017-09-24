@@ -15,8 +15,6 @@ class Admin extends CI_Controller {
 	
 	public function addChip() {
 		$postData = json_decode(file_get_contents('php://input'));
-//		print_r($postData);
-//		die();
 		$chip = array(
 			'chip'=>$postData->chip,
 			'board'=>$postData->board,
@@ -30,11 +28,12 @@ class Admin extends CI_Controller {
 		if(isset($chip['chip'])){
 			$insertStatus = $this->db->insert('params_chips', $chip);
 			if($insertStatus == true){
-				$q = $this->db->get('params_chips');
-				$delimiter = ",";
-				$newline = "\r\n";
-				$data = $this->dbutil->csv_from_result($q,$delimiter, $newline);
-				force_download('CSV_Report.csv', $data);
+//				$q = $this->db->get('params_chips');
+//				$delimiter = ",";
+//				$newline = "\r\n";
+//				$data = $this->dbutil->csv_from_result($q,$delimiter, $newline);
+//				force_download('CSV_Report.csv', $data);
+				echo 'success';
 			}
 		}else {
 			echo 'No Chip Was Inserted!';
@@ -76,6 +75,16 @@ class Admin extends CI_Controller {
 		$newline = "\r\n";
 		$data = $this->dbutil->csv_from_result($chipList, $delimiter, $newline);
 		force_download('Web_Chip_List.csv', $data, TRUE);
+	}
+		public function removeChip(){
+			$chipId = json_decode(file_get_contents('php://input'));
+			$this->db->where(array('id'=>$chipId));
+			$status = $this->db->delete('params_chips');
+			if($status) {
+				echo 'success';
+			} else{
+				echo 'failure';
+			}
 	}
 }
 ?>

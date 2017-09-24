@@ -14,8 +14,8 @@ myApp.controller('chipCtrl', ['$scope', '$location','$http', '$routeParams', 'Fl
 		$http.post('http://wigig-584/admin/addchip', $scope.chip)
 		.then(function(response){
 			if(response.data == 'success'){
-				$location.path('/plans/');
-				var message = 'New chip was edded successfully';
+//				$location.path('/plans/');
+				var message = 'New chip was added successfully';
 				var id = Flash.create('success', message, 5000);
 			}else {
 				var message = response.data;
@@ -23,6 +23,5 @@ myApp.controller('chipCtrl', ['$scope', '$location','$http', '$routeParams', 'Fl
 				console.log(response.data);
 			}
 		})
-	};
-	
+	};	
 }]);

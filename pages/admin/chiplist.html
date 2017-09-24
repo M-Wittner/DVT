@@ -3,7 +3,7 @@
 <div class="panel panel-primary">
 	<!-- Default panel contents -->
 	<div class="panel-heading">All Plans<a class="pull-right btn btn-sm btn-default" href="http://wigig-584/admin/updatechiplist" download="Web-ChipList.csv">
-            	Download
+            	Download <span class="glyphicon glyphicon-save"></span>
         	</a></div>
 	<div class="panel-body">
 	</div>
@@ -18,6 +18,8 @@
 				<th>Revision</th>
 				<th>Serial Number</th>
 				<th>Corner</th>
+<!--				<th></th>-->
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,6 +31,14 @@
 				<td>{{ chip.revision }}</td>
 				<td>{{ chip.serial_number }}</td>
 				<td>{{ chip.corner }}</td>
+<!--
+				<td>
+					<button class="btn btn-warning btn-sm">Edit</button>
+				</td>
+-->
+				<td>
+					<button class="btn btn-danger btn-sm" ng-click="removeChip(chip.id, chip.serial_number)">Delete</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>

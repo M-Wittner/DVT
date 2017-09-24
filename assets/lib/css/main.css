@@ -10,6 +10,13 @@
 	margin-top: 1%;
 }
 
+.check-unseen {
+	color: #ce0000;
+}
+.check-seen {
+	color: #419641;
+}
+
 .btn-crud{
     margin-right: 0.4%;
     margin-top: 0.4%;
