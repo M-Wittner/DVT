@@ -1,4 +1,4 @@
-myApp.controller('chipCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', function ($scope, $location, $http, $routeParams, Flash, AuthService) {
+myApp.controller('chipCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', '$window', function ($scope, $location, $http, $routeParams, Flash, AuthService, $window) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
 	if($scope.isAuthenticated == true) {
@@ -17,6 +17,7 @@ myApp.controller('chipCtrl', ['$scope', '$location','$http', '$routeParams', 'Fl
 //				$location.path('/plans/');
 				var message = 'New chip was added successfully';
 				var id = Flash.create('success', message, 5000);
+				setTimeout(function(){$window.location.reload();}, 2250);
 			}else {
 				var message = response.data;
 				var id = Flash.create('danger', message, 3500);

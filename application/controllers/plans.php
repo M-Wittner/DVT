@@ -190,7 +190,7 @@ class Plans extends CI_Controller {
 		
 	}
 	
-	function remove(){
+	function removePlan(){
 		$id = json_decode(file_get_contents('php://input'));
 		$result = $this->plan_model->delete_plan($id);
 		return $result;
@@ -257,5 +257,11 @@ class Plans extends CI_Controller {
 //		die(var_dump($status));
 		$updateStatus = $this->plan_model->update_xif_status($status);
 		echo json_encode($updateStatus);
+	}
+	
+	function removeComment(){
+		$id = json_decode(file_get_contents('php://input'));
+		$result = $this->plan_model->delete_comment($id);
+		return $result;
 	}
 }

@@ -34,7 +34,7 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">Submitted by: {{plan.user_username}}
 		<span class="pull-right">{{ plan.date }}
-			<button class="btn btn-sm btn-danger" ng-click="remove()">
+			<button class="btn btn-sm btn-danger" ng-click="removePlan()">
             	Delete
         	</button>
 		</span>
@@ -46,7 +46,7 @@
 		<div id="desc" ng-repeat="test in tests | orderBy:[priority] | filter:{id: testId, priority: testPriority, station: testStation, name: testName}">
 			<div>
 				<div class="col-md-2 col-sm-2 pull-right">
-					<a class="btn btn-sm btn-warning pull-right btn-crud" ng-click="edit()" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
+					<a class="btn btn-sm btn-warning pull-right btn-crud" ng-click="editPlan()" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
 				</div>
 				<div class="row">
 					<div class="panel-body">
@@ -197,7 +197,17 @@
 <div ng-repeat="comment in comments">
 	<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
 		<div class="panel-heading">
-			<h3 class="panel-title">test: {{comment.test_id}}</h3>
+			<h3 class="panel-title">test: {{comment.test_id}} {{comment.test_name}}
+				<div class="pull-right">
+					<button class="btn btn-xs btn-warning" ng-click="editComment()" >
+						Edit
+					</button>
+					<button class="btn btn-xs btn-danger" ng-click="removeComment()">
+						Delete
+					</button>
+				</div>
+			</h3>
+			
 		</div>
 		<div class="panel-body">
 			<div class="row">

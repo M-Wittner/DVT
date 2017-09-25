@@ -1,4 +1,4 @@
-myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$routeParams', 'Flash', 'AuthService', 'testParams', 'LS', function ($scope, $route, $location, $http, $routeParams, Flash, AuthService, testParams, LS) {
+myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', 'LS', function ($scope, $route, $location, $http, $routeParams, $window, Flash, AuthService, testParams, LS) {
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
@@ -13,6 +13,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
 	.then(function(response){
 		$scope.comments = response.data;
+		console.log(response.data);
 	});
 		
 	} else {
@@ -23,12 +24,21 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	
 	$scope.params = testParams.params;
 	
-	$scope.remove = function() {
-		$http.post('http://wigig-584/plans/remove', this.plan.id)
+	$scope.removePlan = function() {
+		$http.post('http://wigig-584/plans/removePlan', this.plan.id)
 		.then(function(response){
 			var message = 'Plan Deleted Succesfully!';
 			var id = Flash.create('success', message, 3500);
 			$location.path('/plans');
+		});
+	};
+	
+	$scope.removeComment = function() {
+		$http.post('http://wigig-584/plans/removeComment', this.comment.id)
+		.then(function(response){
+			var message = 'Plan Deleted Succesfully!';
+			var id = Flash.create('success', message, 3500);
+			setTimeout(function(){$window.location.reload();}, 2250);
 		});
 	};
 	

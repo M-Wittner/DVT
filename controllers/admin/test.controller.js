@@ -16,6 +16,7 @@ myApp.controller('testCtrl', ['$scope', '$location','$http', '$routeParams', 'Fl
 			if(response.data == 'true'){
 				var message = 'Test was created';
 				var id = Flash.create('success', message, 3500);
+				setTimeout(function(){$window.location.reload();}, 2250);
 			} else {
 				var message = 'Error! Test was not created';
 				var id = Flash.create('danger', message, 3500);
