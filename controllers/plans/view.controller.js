@@ -5,15 +5,15 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	if($scope.isAuthenticated == true) {	
 	$http.post('http://wigig-584/plans/show', $routeParams.id)
 	.then(function(response){
-//		$scope.plan = response.data.plan[0];
+		$scope.plan = response.data.plan[0];
 		$scope.tests = response.data.tests;
-		console.log(response.data);
+//		console.log(response.data);
 	});
 	
 	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
 	.then(function(response){
 		$scope.comments = response.data;
-		console.log(response.data);
+//		console.log(response.data);
 	});
 		
 	} else {
@@ -79,9 +79,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	};
 	
 	$scope.reload= function(index){
-//		$route.reload();
-		console.log((this.test.antennas).length);
-		console.log(($scope.params.antList).length);
+		$route.reload();
 	};
 //	$scope.XifStatus = function(xif, testId, index){
 //		$http.post('http://wigig-584/plans/xifstatus', {xif: xif, planId: $routeParams.id, testId: testId})
