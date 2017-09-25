@@ -192,3 +192,7 @@ ERROR - 201720172017-0909-2525 2121:0909:4646 --> Severity: Notice --> Trying to
 ERROR - 201720172017-0909-2525 2121:0909:2323 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\admin.php 47
 ERROR - 201720172017-0909-2525 2121:0909:2323 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\admin.php 52
 ERROR - 201720172017-0909-2525 2121:0909:2626 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\admin.php 95
+ERROR - 201720172017-0909-2525 2121:0909:3333 --> Severity: Notice --> Undefined property: stdClass::$priority C:\xampp\htdocs\application\controllers\plans.php 123
+ERROR - 201720172017-0909-2525 2121:0909:3030 --> 404 Page Not Found: Indexhtm%23/plans
+ERROR - 201720172017-0909-2525 2121:0909:4343 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-2525 2121:0909:5050 --> 404 Page Not Found: Faviconico/index
