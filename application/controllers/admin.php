@@ -67,6 +67,10 @@ class Admin extends CI_Controller {
 	public function chipList(){
 		$chipList = $this->db->get('params_chips');
 		echo json_encode($chipList->result());
+	}	
+	public function testList(){
+		$chipList = $this->db->get('params_test_names');
+		echo json_encode($chipList->result());
 	}
 	
 	public function updateChipList(){
@@ -80,6 +84,16 @@ class Admin extends CI_Controller {
 			$chipId = json_decode(file_get_contents('php://input'));
 			$this->db->where(array('id'=>$chipId));
 			$status = $this->db->delete('params_chips');
+			if($status) {
+				echo 'success';
+			} else{
+				echo 'failure';
+			}
+	}		
+		public function removeTest(){
+			$test = json_decode(file_get_contents('php://input'));
+			$this->db->where(array('id'=>$test->id));
+			$status = $this->db->delete('params_test_names');
 			if($status) {
 				echo 'success';
 			} else{

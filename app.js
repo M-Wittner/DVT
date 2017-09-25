@@ -47,6 +47,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/admin/chiplist.html',
 			controller: 'chiplistCtrl'
 	})
+		.when('/admin/testlist', {
+			templateUrl: 'pages/admin/testlist.html',
+			controller: 'testlistCtrl'
+	})
 		.otherwise({redirectTo: '/'});
 	;
 	

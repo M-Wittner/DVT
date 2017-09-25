@@ -13,6 +13,10 @@
 .check-unseen {
 	color: #ce0000;
 }
+
+.form-control{
+	height: inherit;
+}
 .check-seen {
 	color: #419641;
 }
