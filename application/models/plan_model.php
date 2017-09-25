@@ -387,7 +387,12 @@ class plan_model extends CI_Model {
 		return $result;
 	}
 	
-		function delete_comment($id){
+	function delete_test($id){
+		$q = $this->db->query("DELETE FROM `tests` WHERE id = ?", $id);
+		return;
+	}	
+	
+	function delete_comment($id){
 		$q = $this->db->query("DELETE FROM `test_comments` WHERE id = ?", $id);
 		return;
 	}

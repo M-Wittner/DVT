@@ -45,8 +45,11 @@
 		</div>
 		<div id="desc" ng-repeat="test in tests | orderBy:[priority] | filter:{id: testId, priority: testPriority, station: testStation, name: testName}">
 			<div>
-				<div class="col-md-2 col-sm-2 pull-right">
-					<a class="btn btn-sm btn-warning pull-right btn-crud" ng-click="editPlan()" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
+				<div class="col-md-3 col-sm-2 col-sm-offset-10">
+					<a class="btn btn-xs btn-warning col-sm-offset-4" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
+					<a class="btn btn-xs btn-danger btn-crud" ng-click="removeTest()">
+						Delete
+					</a>
 				</div>
 				<div class="row">
 					<div class="panel-body">
@@ -106,7 +109,7 @@
 						<div class="panel-body col-md-10">
 							<span class="label label-primary">Chip S/N:</span>
 							<ul class="list-group">
-								<li ng-repeat="chip in test.chips track by $index" class="list-group-item" ng-click="chipStatus(chip, test.id)">{{chip.chip}}<span class="pull-right glyphicon" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span></li>
+								<li ng-repeat="chip in test.chips track by $index" class="list-group-item" ng-click="chipStatus(chip, test.id)">{{chip.chip}}<span class="pull-right glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span></li>
 								<span class="pull-right btn btn-info btn-xs btn-crud" ng-click="reload()">update</span>
 							</ul>
 							
@@ -129,7 +132,7 @@
 									<td>
 										{{chip.chip}}
 									</td>
-									<td ng-repeat="xifRes in test.xifs"  ng-click="xifStatus(xifRes, chip.chip, chip.test_id)" ng-if="xifRes.chip_id == chip.id"><span class="glyphicon" ng-class="{'glyphicon-hourglass': xifRes.running == true, 'glyphicon-ok': xifRes.completed == true, 'glyphicon-remove': xifRes.error == true}"></span></td>
+									<td ng-repeat="xifRes in test.xifs"  ng-click="xifStatus(xifRes, chip.chip, chip.test_id)" ng-if="xifRes.chip_id == chip.id"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == true, 'glyphicon-ok': xifRes.completed == true, 'glyphicon-remove': xifRes.error == true}"></span></td>
 								</tr>
 							</tbody>
 							</table>
@@ -158,7 +161,7 @@
 						<div class="panel-body">
 							<span class="label label-primary">Anthenas:</span>
 							<ul class="list-group">
-								<li ng-if="(test.antennas).length < (params.antList).length" ng-repeat="antenna in test.antennas" class="list-group-item"> {{antenna}}
+								<li ng-if="(test.antennas).length < (params.antList).length" ng-repeat="antenna in test.antennas track by $index" class="list-group-item"> {{antenna}}
 								</li>
 								<li ng-if="(test.antennas).length == (params.antList).length" class="list-group-item"> All Antennas
 								</li>

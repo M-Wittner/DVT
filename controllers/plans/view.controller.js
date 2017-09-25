@@ -5,9 +5,9 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	if($scope.isAuthenticated == true) {	
 	$http.post('http://wigig-584/plans/show', $routeParams.id)
 	.then(function(response){
-		$scope.plan = response.data.plan[0];
+//		$scope.plan = response.data.plan[0];
 		$scope.tests = response.data.tests;
-//		console.log($scope.tests);
+		console.log(response.data);
 	});
 	
 	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
@@ -33,6 +33,21 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		});
 	};
 	
+	$scope.removeTest = function() {
+		$http.post('http://wigig-584/plans/removeTest', this.test.id)
+		.then(function(response){
+			if(response.data = 'success'){
+				var message = 'Test Deleted Succesfully!';
+				var id = Flash.create('success', message, 3500);
+				setTimeout(function(){$window.location.reload();}, 2250);
+			} else{
+				var message = 'Test Was Not Deleted!';
+				var id = Flash.create('danger', message, 3500);
+				console.log(response.data);
+			}
+		});
+	};
+	
 	$scope.removeComment = function() {
 		$http.post('http://wigig-584/plans/removeComment', this.comment.id)
 		.then(function(response){
@@ -50,8 +65,6 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 			var id = Flash.create('success', message, 3500);
 		});
 	}
-	
-//	$scope.xifStat = "{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}";
 	
 	$scope.xifStatus = function(xif, chip, testId){
 //		console.log(xif);

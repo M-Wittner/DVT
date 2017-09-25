@@ -259,6 +259,15 @@ class Plans extends CI_Controller {
 		echo json_encode($updateStatus);
 	}
 	
+	function removeTest(){
+		$id = json_decode(file_get_contents('php://input'));
+		$result = $this->plan_model->delete_test($id);
+		if ($result){
+			echo 'success';
+		} else{
+			return $result;
+		}
+	}	
 	function removeComment(){
 		$id = json_decode(file_get_contents('php://input'));
 		$result = $this->plan_model->delete_comment($id);
