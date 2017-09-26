@@ -80,7 +80,7 @@
 							<label class="form-control">{{test.name}}</label>
 						</div>
 					</div>
-					<div class="panel-body col-md-2" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
+					<div class="panel-body col-md-3" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
 						<span class="label label-primary">Pin:</span></br>
 						<div class="col-md-4">
 							<span>From</span>
@@ -97,12 +97,6 @@
 						<div class="col-md-5" ng-if="test.pin_additional != null">
 							<span>More</span>
 							<label class="form-control">{{test.pin_additional}}</label>
-						</div>
-					</div>
-					<div class="col-md-2" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
-						<div class="panel-body col-md-6">
-							<span class="label label-primary">MCS:</span></br>
-							<label class="form-control">{{test.mcs}}</label>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -177,6 +171,12 @@
 					</div>
 				</div>
 				<div class="row">
+					<div class="col-md-2" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
+						<div class="panel-body col-md-6">
+							<span class="label label-primary">MCS:</span></br>
+							<label class="form-control">{{test.mcs}}</label>
+						</div>
+					</div>
 					<div class="col-md-2">
 						<div class="panel-body">
 							<span class="label label-primary">Voltage:</span>
@@ -236,8 +236,7 @@
 			<div class="row">
 				<div class="col-md-8">
 					<span class="label label-primary">Details:</span>
-					<div class="col-md-2 col-sm-2" trumbowyg-ng ng-model="comment.details" ng-disabled="lock" editor-config="{btns:[]}">
-						{{comment.details}}
+					<div class="col-md-2 col-sm-2" trumbowyg-ng ng-model="comment.details" ng-disabled="lock">
 					</div>
 				</div>
 			</div>

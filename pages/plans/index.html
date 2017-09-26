@@ -15,7 +15,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="plan in plans | orderBy:'-date'">
-				<th>{{ plan.date }}</th>
+				<th class="PopupTooltip">{{ plan.date }}</th>
 				<td>{{ plan.user_username }}</td>
 				<td><a ng-click="view(plan.id)" class="btn btn-info">View</a></td>
 				<td ng-click="seen(plan)"><span ng-model="test.checked"  class="btn-lg glyphicon" ng-class="{'glyphicon-ok check-seen': plan.checked == true, 'glyphicon-minus check-unseen': plan.checked == false}"></span></td>

@@ -174,3 +174,14 @@ ERROR - 201720172017-0909-2626 1212:0909:2929 --> 404 Page Not Found: Faviconico
 ERROR - 201720172017-0909-2626 1313:0909:1212 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-0909-2626 1313:0909:2525 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-0909-2626 1313:0909:0909 --> 404 Page Not Found: Testlineup/index
+ERROR - 201720172017-0909-2626 1414:0909:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 201
+ERROR - 201720172017-0909-2626 1414:0909:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 202
+ERROR - 201720172017-0909-2626 1414:0909:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 203
+ERROR - 201720172017-0909-2626 1414:0909:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 204
+ERROR - 201720172017-0909-2626 1414:0909:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 205
+ERROR - 201720172017-0909-2626 1414:0909:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 206
+ERROR - 201720172017-0909-2626 1414:0909:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 207
+ERROR - 201720172017-0909-2626 1414:0909:1818 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 197
+ERROR - 201720172017-0909-2626 1414:0909:1818 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 197
+ERROR - 201720172017-0909-2626 1414:0909:1818 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 209
+ERROR - 201720172017-0909-2626 1414:0909:1818 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 209
