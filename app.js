@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies']);
+var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	

@@ -58,5 +58,4 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 			}
 		});
 	};
-	
 }]);

@@ -193,6 +193,7 @@ class plan_model extends CI_Model {
 	}
 	
 	function add_comment($data){
+//		die(var_dump($data));
 		if($data->comment->severity == 'Minor'){
 			$comment = array(
 				'plan_id'=>$data->id->planId,

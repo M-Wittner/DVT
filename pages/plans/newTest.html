@@ -109,8 +109,10 @@
 			<div class="col-md-8">
 				<div class="panel-body" >
 					<span class="label label-primary" >Notes:</span>
-<!--					<input  type="text" ng-model="test.notes" ng-disabled="lock">-->
-					<textarea id="noteBox" ng-model="test.notes" ng-disabled="lock"></textarea>
+					<div trumbowyg-ng placeholder="Comment Details"
+						 ng-model="comment.details"
+						 editor-config="{btns: ['viewHTML', ['undo', 'redo'],['strong', 'em', 'del'], ['link'], ['formatting'], ['foreColor', 'backColor'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['unorderedList', 'orderedList'], ['removeformat'],]}">
+					</div>
 				</div>
 			</div>
 		</div>

@@ -6,27 +6,27 @@
 		<div class="row">
 			<div class="col-sm-3 col-sm-3 col-xs-3">
 				<span class="label label-primary">Severity</span>
-				<select ng-model="issue.severity" class="form-control">
+				<select ng-model="comment.severity" class="form-control">
 				  <option>Major</option>
 				  <option>Minor</option>
 				</select>
 			</div>
 			<div class="col-md-3 col-sm-3 col-xs-3">
 				<span class="label label-primary">Test Station</span>
-				<select ng-model="issue.station" class="form-control" >
+				<select ng-model="comment.station" class="form-control" >
 				  <option ng-repeat="test in tests">{{test.station}}</option>
 				</select>
 			</div>
-			<div ng-if=" issue.severity == 'Minor'">
+			<div ng-if=" comment.severity == 'Minor'">
 				<div class="col-md-3 col-sm-3 col-xs-3">
 					<span class="label label-primary">Test Name</span>
-					<select ng-model="issue.name" class="form-control" >
+					<select ng-model="comment.name" class="form-control" >
 					  <option ng-repeat="test in tests">{{test.name}}</option>
 					</select>
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-3">
 					<span class="label label-primary">Chip</span>
-					<select ng-model="issue.chip" class="form-control">
+					<select ng-model="comment.chip" class="form-control">
 					  <option ng-repeat="chip in chips">{{chip.chip}}</option>
 					</select>
 				</div>
@@ -35,7 +35,10 @@
 		<div class="row">
 			<div class="col-md-8">
 				<span class="label label-primary">Details:</span>
-				<textarea required class="form-control" type="text" placeholder="Test Station" name="lineup" ng-model="issue.details" ng-disabled="lock"></textarea>
+				<div trumbowyg-ng placeholder="Comment Details"
+					 ng-model="comment.details"
+					 editor-config="{btns: ['viewHTML', ['undo', 'redo'],['strong', 'em', 'del'], ['link'], ['formatting'], ['foreColor', 'backColor'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['unorderedList', 'orderedList'], ['removeformat'],]}">
+				</div>
 			</div>
 		</div>
 		<button class="btn btn-success" ng-click="newCmt()">Submit!</button>

@@ -186,8 +186,8 @@
 					<div class="col-md-6" ng-hide="test.notes == null">
 						<div class="panel-body">
 							<span class="label label-primary">Notes:</span>
-							<!--					<input  type="text" ng-model="test.notes" ng-disabled="lock">-->
-							<label class="form-control">{{test.notes}}</label>
+							<div trumbowyg-ng ng-disabled="lock" ng-model="test.notes" editor-config="{hideButtonTexts: true}">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -214,7 +214,7 @@
 		</div>
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-sm-3 col-sm-3 col-xs-3">
+				<div class="col-md-3 col-sm-3 col-xs-3">
 					<span class="label label-primary">Severity</span>
 					<label class="form-control">{{comment.severity}}</label>
 				</div>
@@ -236,7 +236,9 @@
 			<div class="row">
 				<div class="col-md-8">
 					<span class="label label-primary">Details:</span>
-					<label class="form-control">{{comment.details}}</label>
+					<div class="col-md-2 col-sm-2" trumbowyg-ng ng-model="comment.details" ng-disabled="lock" editor-config="{btns:[]}">
+						{{comment.details}}
+					</div>
 				</div>
 			</div>
 		</div>
