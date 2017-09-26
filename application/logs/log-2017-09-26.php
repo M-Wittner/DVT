@@ -20,3 +20,16 @@ ERROR - 201720172017-0909-2626 0808:0909:5555 --> 404 Page Not Found: Node_modul
 ERROR - 201720172017-0909-2626 0808:0909:5555 --> 404 Page Not Found: Node_modules/trumbowyg
 ERROR - 201720172017-0909-2626 0808:0909:0707 --> 404 Page Not Found: Node_modules/trumbowyg
 ERROR - 201720172017-0909-2626 0808:0909:1111 --> 404 Page Not Found: Node_modules/trumbowyg
+ERROR - 201720172017-0909-2626 0808:0909:3939 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 28
+ERROR - 201720172017-0909-2626 0808:0909:3939 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 30
+ERROR - 201720172017-0909-2626 0808:0909:3939 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 31
+ERROR - 201720172017-0909-2626 0808:0909:3939 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 33
+ERROR - 201720172017-0909-2626 0808:0909:3939 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 34
+ERROR - 201720172017-0909-2626 0808:0909:4848 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 28
+ERROR - 201720172017-0909-2626 0808:0909:4848 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 30
+ERROR - 201720172017-0909-2626 0808:0909:4848 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 31
+ERROR - 201720172017-0909-2626 0808:0909:4848 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 33
+ERROR - 201720172017-0909-2626 0808:0909:4848 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 34
+ERROR - 201720172017-0909-2626 0808:0909:4747 --> 404 Page Not Found: Plans/uploadImage
+ERROR - 201720172017-0909-2626 0808:0909:1919 --> 404 Page Not Found: Plans/uploadimage
+ERROR - 201720172017-0909-2626 0808:0909:2424 --> 404 Page Not Found: Plans/uploadimage

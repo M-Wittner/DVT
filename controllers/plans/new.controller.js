@@ -69,6 +69,15 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 			['foreColor', 'backColor'],
 			['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
         	['unorderedList', 'orderedList'],
-		]
+//			['upload'],
+		],
+//		plugins: {
+//			upload: {
+//				serverpath: 'http://wigig-584/plans/create',
+//				fileFieldName: '.png',
+////				urlPropertyName: {url: 			'https://example.com/myimage.jpg', success: true},
+//				
+//			}
+//		}
 	});
 }]);
