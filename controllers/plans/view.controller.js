@@ -66,6 +66,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 			chip = response.data.chip.chip;
 			var message = 'Chip '+chip+' Status Updated!';
 			var id = Flash.create('success', message, 3500);
+			setTimeout(function(){$window.location.reload();}, 2250);
 		});
 	}
 	
@@ -76,6 +77,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 			xif = response.data.xif.xif;
 			var message = 'XIF '+xif+' Status Updated!';
 			var id = Flash.create('success', message, 3500);
+			setTimeout(function(){$window.location.reload();}, 2250);
 //			$scope.$apply();
 //			$route.reload();
 		});

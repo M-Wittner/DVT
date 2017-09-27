@@ -20,16 +20,9 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	}
 	
 	$scope.insertTest = function(){
-		var input = $scope.test;
-//		console.log(input);
-//		if(input.lineup && input.priority && input.station && input.name && input.chips && input.pinFrom && input.pinTo && input.Step && input.temp && input.channel && input.antenna && input.voltage){
-//			console.log('yes')
-//		} else {
-//			var message = 'Please make sure all input fields are filled';
-//			var id = Flash.create('danger', message, 3500);
-//		}
 		$scope.planParams.push($scope.test);
 		$scope.lock = true;
+		console.log(this);
 	}
 	$scope.editToggle = function(){
 		$scope.lock = false;
