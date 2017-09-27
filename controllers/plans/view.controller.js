@@ -56,7 +56,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		$http.post('http://wigig-584/plans/removeComment', this.comment.id)
 		.then(function(response){
 			$window.scrollTo(0, 0);
-			var message = 'Plan Deleted Succesfully!';
+			var message = 'Comment Deleted Succesfully!';
 			var id = Flash.create('success', message, 3500);
 			setTimeout(function(){$window.location.reload();}, 2250);
 		});
@@ -66,7 +66,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		$http.post('http://wigig-584/plans/chipstatus', {chip: chip, planId: $routeParams.id, testId: testId})
 		.then(function(response){
 			chip = response.data.chip.chip;
-			var message = 'chip '+chip+' Status Updated!';
+			var message = 'Chip '+chip+' Status Updated!';
 			var id = Flash.create('success', message, 3500);
 		});
 	}

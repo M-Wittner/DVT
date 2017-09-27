@@ -1,4 +1,4 @@
-myApp.controller('testCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', 'testParams', function ($scope, $location, $http, $routeParams, Flash, AuthService, testParams, $window) {
+myApp.controller('testCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', 'testParams', '$window', function ($scope, $location, $http, $routeParams, Flash, AuthService, testParams, $window) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.testParams = testParams;
 	

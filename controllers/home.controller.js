@@ -9,7 +9,9 @@ Flash, Session, $cookies, $window) {
 		$scope.userRoles = USER_ROLES;
 		$scope.isAuthorized = AuthService.isAuthorized;
 		$scope.setCurrentUser = function (user) {
-			$scope.currentUser.username = user.username;
+			$scope.currentUser = user;
+//			$scope.currentUser.firstName = user.username;
+			
 		};
 	}
 	$scope.user = {};

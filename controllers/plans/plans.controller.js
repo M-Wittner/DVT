@@ -15,11 +15,11 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 		var id = Flash.create('danger', message, 3500);
 		$location.path('/');
 	};
-	
+//	console.log();
 	$scope.seen = function(plan){
-		$http.post('http://wigig-584/plans/planCheck', plan)
+		$http.post('http://wigig-584/plans/planCheck', {plan: plan, user: $scope.currentUser})
 		.then(function(response){
-//			console.log(response.data);
+			console.log(response.data);
 			if(response.data == 'true'){
 				var message = 'Plan Marked As Seen';
 				var id = Flash.create('success', message, 3500);
@@ -27,7 +27,7 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 				var message = 'Plan Marked As Unseen';
 				var id = Flash.create('danger', message, 3500);
 			}
-			setTimeout(function(){$window.location.reload();}, 2500);
+//			setTimeout(function(){$window.location.reload();}, 2500);
 		});
 	}
 	

@@ -14,11 +14,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="plan in plans | orderBy:'-date'">
+			<tr ng-repeat="plan in plans | orderBy:'-date' track by $index">
 				<th class="PopupTooltip">{{ plan.date }}</th>
 				<td>{{ plan.user_username }}</td>
 				<td><a ng-click="view(plan.id)" class="btn btn-info">View</a></td>
-				<td ng-click="seen(plan)"><span ng-model="test.checked"  class="btn-lg glyphicon" ng-class="{'glyphicon-ok check-seen': plan.checked == true, 'glyphicon-minus check-unseen': plan.checked == false}"></span></td>
+				<td ng-click="seen(plan)">
+					<span ng-model="test.checked"  class="btn-lg glyphicon" ng-class="{'glyphicon-ok check-seen': plan.checked == true, 'glyphicon-minus check-unseen': plan.checked == false}"></span>
+					<span ng-if="plan.checked == true">  By {{plan.checked_by}} </span>
+				</td>
 			</tr>
 		</tbody>
 	</table>

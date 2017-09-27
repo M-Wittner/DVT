@@ -109,7 +109,7 @@ myApp.factory('AuthService', function($http, Session, $cookies){
 		return $http.post('http://wigig-584/auth/login', {user: credentials})
 		.then(function(res){
 			if(res.data.login = true){
-				Session.create(res.data.__ci_last_regenerate, res.data.userId, res.data.username);
+				Session.create(res.data.__ci_last_regenerate, res.data.userId, res.data.username, res.data.firstName, res.data.lastName);
 				return res.data;	
 			} else {
 				console.log('Error! Not logged in');
@@ -199,6 +199,7 @@ myApp.factory('testParams', function($http, $log){
 		'-30 C',
 		'-10 C',
 		'0 C',
+		'10 C',
 		'25 C',
 		'40 C',
 		'60 C',
@@ -304,16 +305,19 @@ myApp.filter('unique', function() {
 });
 
 myApp.service('Session', function(){
-	this.create = function(sessionId, userId, username){
+	this.create = function(sessionId, userId, username, fisrtName, lastName){
 		this.id = sessionId;
 		this.userId = userId;
 		this.username = username;
-//		this.userRole = userRole;
+		this.fisrtName = fisrtName;
+		this.lastName = lastName;
 	};
 	
 	this.destroy = function(){
 		this.id = null;
 		this.userId = null;
 		this.userRole = null;
+		this.fisrtName = null;
+		this.lastName = null;
 	};
 });

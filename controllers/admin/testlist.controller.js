@@ -21,6 +21,7 @@ myApp.controller('testlistCtrl', ['$scope', '$location','$http', '$routeParams',
 				$window.scrollTo(0, 0);
 				var message = 'Test '+testName+' was deleted';
 				var id = Flash.create('success', message, 3500);
+				setTimeout(function(){$window.location.reload();}, 2000);
 			} else{
 				$window.scrollTo(0, 0);
 				var message = 'Error! Test was not deleted';

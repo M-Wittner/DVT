@@ -357,12 +357,18 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_plan_status($result){
-		$id = $result->id;
-		$checked = $result->checked;
+		$id = $result->plan->id;
+		$checked = $result->plan->checked;
+		$user = $result->user;
 		$this->db->where(array('id'=>$id));
-		$insertStatus = $this->db->update('plans', array('checked'=>!$checked));
-		
-		return !$checked;
+//		die(print($checked));
+		if($checked == '0'){
+			$insertStatus = $this->db->update('plans', array('checked'=>true, 'checked_by'=>$user->username));
+			return true;
+		} else {
+			$insertStatus = $this->db->update('plans', array('checked'=>false, 'checked_by'=>null));
+			return false;
+		}
 	}
 	
 	function update_xif_status($result){

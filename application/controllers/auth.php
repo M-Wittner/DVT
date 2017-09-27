@@ -29,12 +29,14 @@ class Auth extends CI_Controller {
 				$sessData = array(
 					'login' => TRUE,
 					'username' => $uresult[0]->username,
-					'userId' 	=> $uresult[0]->id
+					'userId' 	=> $uresult[0]->id,
+					'firstName' => $uresult[0]->fname,
+					'lastName' => $uresult[0]->lname,
 				);
 				$this->session->set_userdata($sessData);
 				$session = $this->session->userdata();
 				echo json_encode($session);
-//				echo 'success';
+				
 			} else {
 				return;
 			}
