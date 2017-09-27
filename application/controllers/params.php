@@ -38,5 +38,11 @@ class Params extends CI_Controller {
 		$result = $data->result();
 		echo json_encode($result);
 	}
+	public function testsCal(){
+		$this->db->where('station', 'Calibration');
+		$data = $this->db->get('params_test_names');
+		$result = $data->result();
+		echo json_encode($result);
+	}
 }
 ?>

@@ -41,7 +41,7 @@ class Plans extends CI_Controller {
 					} else {
 						$notes = null;
 					}
-					//---R station test---
+//			------------- R station test -------------
 					if($testArr->station[0] == 'R-CB1' || $testArr->station[0] == 'R-CB2'){
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
@@ -73,11 +73,8 @@ class Plans extends CI_Controller {
 							'seconds'=>$time,
 							'plan_id'=>$planId
 						);
-//						die(var_dump($time));
 						$insertTest = $this->plan_model->add_test($test);
 						$testId = $this->plan_model->tests_id($insertTest);
-	//					print_r($test);
-	//					print_r($testId);
 						foreach($chipsArr as $result){
 							$chip = array(
 								'chip'=> $result->serial_number,
@@ -93,7 +90,6 @@ class Plans extends CI_Controller {
 								'test_id'=>$testId
 							);
 							$this->plan_model->add_temps($temp);
-		//					print_r($temp);
 						};
 						foreach($channelsArr as $result){
 							$channel = array(
@@ -102,7 +98,6 @@ class Plans extends CI_Controller {
 								'test_id'=>$testId
 							);
 							$this->plan_model->add_channels($channel);
-		//					print_r($channel);
 						};
 						foreach($antennasArr as $result){
 							$antenna = array(
@@ -111,10 +106,9 @@ class Plans extends CI_Controller {
 								'test_id'=>$testId
 							);
 							$this->plan_model->add_antennas($antenna);
-		//					print_r($antenna);
 						};
-						//---M station test---
-					} else if($testArr->station[0] == 'M-CB1' || $testArr->station[0] == 'M-CB2'){
+//			------------- M station test -------------
+					} else if($testArr->station[0] == 'M-CB1' || $testArr->station[0] == 'M-CB2' || $testArr->station[0] == 'Calibration'){
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
 						$xifsArr = $testArr->xif;
@@ -128,10 +122,16 @@ class Plans extends CI_Controller {
 							'notes'=>$notes,
 							'plan_id'=>$planId
 						);
+						if($testArr->station[0] == 'Calibration'){
+							if(isset($testArr->miniC)){
+								$test['mini_circuits'] = $testArr->miniC;
+							}else{ 
+								$test['mini_circuits'] = false;
+							}
+							$test['mcs'] = $testArr->mcs;
+						}
 						$insertTest = $this->plan_model->add_test($test);
 						$testId = $this->plan_model->tests_id($insertTest);
-	//					print_r($test);
-	//					print_r($testId);
 						foreach($chipsArr as $result){
 							$chip = array(
 								'chip'=>$result->serial_number,

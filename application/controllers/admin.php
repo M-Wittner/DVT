@@ -54,6 +54,11 @@ class Admin extends CI_Controller {
 					'station'=>'M',
 					'test_name'=>$postData->testName,
 				);
+			} elseif($postData->station[0] === "Calibration"){
+				$test = array(
+					'station'=>$postData->station[0],
+					'test_name'=>$postData->testName,
+				);
 			} else {
 				echo 'Not Yet';
 				die();

@@ -145,6 +145,7 @@ myApp.factory('testParams', function($http, $log){
 		'R-CB2',
 		'M-CB1',
 		'M-CB2',
+		'Calibration',
 		'FS',
 		'RFC/CAL',
 		'PTAT/ABS/Vgb+TEMP',
@@ -153,6 +154,7 @@ myApp.factory('testParams', function($http, $log){
 	testParams.params.newTest = [
 		'R - Stations',
 		'M - Stations',
+		'Calibration',
 		'Full System',
 		'RFC/CAL',
 		'PTAT/ABS/Vgb+TEMP',
@@ -168,6 +170,13 @@ myApp.factory('testParams', function($http, $log){
 	$http.get('http://wigig-584/params/testsR')
 	.then(function(response){
 		testParams.params.nameListR = response.data;
+//			console.log(response.data);
+	});
+	
+	testParams.params.nameListCal = {};
+	$http.get('http://wigig-584/params/testsCal')
+	.then(function(response){
+		testParams.params.nameListCal = response.data;
 //			console.log(response.data);
 	});
 	

@@ -111,7 +111,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4" ng-if="test.station == 'M-CB1' || test.station == 'M-CB2'">
+					<div class="col-md-4" ng-if="test.station == 'M-CB1' || test.station == 'M-CB2' || test.station == 'Calibration'">
 						<div class="panel-body col-md-5">
 							<span class="label label-primary">XIF:</span>
 							<table class="table col-xs-3 col-sm-3 col-md-3">
@@ -130,6 +130,11 @@
 								</tr>
 							</tbody>
 							</table>
+						</div>
+						<div class="panel-body col-md-offset-1 col-md-3" ng-if="test.station == 'Calibration'">
+							<span class="label label-primary">Mini Circuits:</span></br>
+							<label class="form-control" ng-if="test.mini_circuits == true">On</label>
+							<label class="form-control" ng-if="test.mini_circuits == false">Off</label>
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -171,7 +176,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-2" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
+					<div class="col-md-2" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2' || test.station == 'Calibration'">
 						<div class="panel-body col-md-6">
 							<span class="label label-primary">MCS:</span></br>
 							<label class="form-control">{{test.mcs}}</label>
