@@ -641,3 +641,10 @@ ERROR - 201720172017-0909-2727 1515:0909:1010 --> Severity: Notice --> Trying to
 ERROR - 201720172017-0909-2727 1515:0909:1010 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 342
 ERROR - 201720172017-0909-2727 1515:0909:1010 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 342
 ERROR - 201720172017-0909-2727 1515:0909:1010 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 342
+ERROR - 201720172017-0909-2727 1919:0909:3737 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-2727 1919:0909:2121 --> Severity: Notice --> Undefined property: stdClass::$temp C:\xampp\htdocs\application\controllers\plans.php 47
+ERROR - 201720172017-0909-2727 1919:0909:2121 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 86
+ERROR - 201720172017-0909-2727 1919:0909:2626 --> Severity: Notice --> Undefined property: stdClass::$temp C:\xampp\htdocs\application\controllers\plans.php 47
+ERROR - 201720172017-0909-2727 1919:0909:2626 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 86
+ERROR - 201720172017-0909-2727 2121:0909:4040 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-0909-2727 2121:0909:4040 --> 404 Page Not Found: Faviconico/index

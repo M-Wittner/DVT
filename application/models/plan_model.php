@@ -289,16 +289,21 @@ class plan_model extends CI_Model {
 				// Update xifs
 				$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 				$this->db->delete('test_xifs');
-				foreach($testObj->xifs as $xifRes){
-					$xif = array(
-						'test_id'=>$testObj->id,
-						'plan_id'=>$testObj->plan_id,
-						'chip_id'=>$insertId,
-						'xif'=>$xifRes
-						);
-//					$xif['chip_id'] = $insertId;
-					$this->db->replace('test_xifs', $xif);
+				foreach($testObj->chips as $i => $chipRes){
+//					var_dump($chipRes);
+					foreach($testObj->xifs as $xifRes){
+//						var_dump($xifRes);
+						$xif = array(
+							'test_id'=>$testObj->id,
+							'plan_id'=>$testObj->plan_id,
+							'chip_id'=>$chipRes->id,
+							'chip'=>$chipRes->serial_number,
+							'xif'=>$xifRes
+							);
+						$this->db->replace('test_xifs', $xif);
+						}
 				}
+//				die();
 			}
 		}
 //		die();
