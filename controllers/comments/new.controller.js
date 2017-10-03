@@ -15,10 +15,11 @@ myApp.controller('newCommentCtrl', ['$scope', '$location','$http', '$routeParams
 			$location.path('/');
 		};
 	
-	$scope.comment = {};	
-	
+	$scope.comment = {};
+	$scope.comment.author = $scope.currentUser.username;
+
 	$scope.newCmt = function(){
-		$http.post('http://wigig-584/plans/newcomment', {comment: $scope.comment, id: $routeParams})
+		$http.post('http://wigig-584/plans/newcomment', {comment: this.comment, id: $routeParams})
 		.then(function(response){
 			if(response.data == 'true') {
 //				console.log(response.data);
@@ -31,6 +32,6 @@ myApp.controller('newCommentCtrl', ['$scope', '$location','$http', '$routeParams
 				var id = Flash.create('danger', message, 5000);
 			}
 		})
-//		console.log(this);
+//		console.log(this.comment);
 	}
 }]);

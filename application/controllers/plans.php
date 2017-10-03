@@ -230,6 +230,48 @@ class Plans extends CI_Controller {
 		echo json_encode($comments);
 	}
 	
+	function getcomment(){
+		$data = json_decode(file_get_contents('php://input'));
+			$res = array(
+				'comment' => $this->db->get_where('test_comments', array('id'=>$data->commentId))->result(),
+				'test' => $this->db->get_where('tests', array('id'=>$data->testId))->result(),
+				'chips' => $this->db->get_where('test_chips', array('test_id'=>$data->testId))->result()
+			);
+		echo json_encode($res);
+	}
+	
+	function editcomment(){
+		$comment = json_decode(file_get_contents('php://input'));
+		if($comment->severity == 'Minor'){
+			$this->db->where('id', $comment->id);
+			$comment = array(
+				'plan_id'=>$comment->plan_id,
+				'test_id'=>$comment->test_id,
+				'severity'=>$comment->severity,
+				'station'=>$comment->station,
+				'test_name'=>$comment->test_name,
+				'chip'=>$comment->chip,
+				'details'=>$comment->details
+			);
+			$insertStatus = $this->db->update('test_comments', $comment);
+			print_r($insertStatus);
+		} elseif($comment->severity == 'Major'){
+			$this->db->where('id', $comment->id);
+			$comment = array(
+				'plan_id'=>$comment->plan_id,
+				'test_id'=>$comment->test_id,
+				'severity'=>$comment->severity,
+				'station'=>$comment->station,
+				'details'=>$comment->details
+			);
+			$insertStatus = $this->db->update('test_comments', $comment);
+			print_r($insertStatus);
+		}else{
+			echo 'failed';
+		};
+//		echo json_encode($comment->severity);
+	}
+	
 	function update(){
 		$postData = json_decode(file_get_contents('php://input'));
 		$plan = $this->plan_model->update_test($postData);

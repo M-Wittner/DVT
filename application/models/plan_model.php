@@ -198,6 +198,7 @@ class plan_model extends CI_Model {
 			$comment = array(
 				'plan_id'=>$data->id->planId,
 				'test_id'=>$data->id->testId,
+				'author'=>$data->comment->author,
 				'severity'=>$data->comment->severity,
 				'station'=>$data->comment->station,
 				'test_name'=>$data->comment->name,
@@ -210,6 +211,7 @@ class plan_model extends CI_Model {
 			$comment = array(
 				'plan_id'=>$data->id->planId,
 				'test_id'=>$data->id->testId,
+				'author'=>$data->comment->author,
 				'severity'=>$data->comment->severity,
 				'station'=>$data->comment->station,
 				'details'=>$data->comment->details

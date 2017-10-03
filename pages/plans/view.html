@@ -34,6 +34,11 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">Submitted by: {{plan.user_username}}
 		<span class="pull-right">{{ plan.date }}
+<!--
+			<button class="btn btn-sm btn-info" ng-click="report()">
+            	Issue Report
+        	</button>
+-->
 			<button class="btn btn-sm btn-danger" ng-click="removePlan()">
             	Delete
         	</button>
@@ -205,14 +210,12 @@
 <div ng-repeat="comment in comments">
 	<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
 		<div class="panel-heading">
-			<h3 class="panel-title">test: {{comment.test_id}} {{comment.test_name}}
+			<h3 class="panel-title">test: {{comment.test_id}} {{comment.test_name}} ,From: {{comment.author}}
 				<div class="pull-right">
-					<button class="btn btn-xs btn-warning" ng-click="editComment()" >
-						Edit
-					</button>
-					<button class="btn btn-xs btn-danger" ng-click="removeComment()">
+					<a class="btn btn-xs btn-warning col-sm-offset-4" href="#/plans/{{comment.plan_id}}/test/{{comment.test_id}}/comment/{{comment.id}}/edit" ng-click="editComment()">Edit</a>
+					<a class="btn btn-xs btn-danger" ng-click="removeComment()">
 						Delete
-					</button>
+					</a>
 				</div>
 			</h3>
 			

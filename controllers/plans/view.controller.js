@@ -7,7 +7,8 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	.then(function(response){
 		$scope.plan = response.data.plan[0];
 		$scope.tests = response.data.tests;
-		console.log(response.data);
+//		console.log($scope.plan.user_username);
+		console.log($scope.currentUser);
 	});
 
 	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
@@ -24,6 +25,11 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	
 	$scope.params = testParams.params;
 	$scope.lock = true;
+	
+	$scope.report = function(){
+		$scope.plan.tests = $scope.tests;
+		console.log($scope.plan);
+	}
 	
 	$scope.removePlan = function() {
 		$http.post('http://wigig-584/plans/removePlan', this.plan.id)
@@ -50,7 +56,6 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 			}
 		});
 	};
-	
 	$scope.removeComment = function() {
 		$http.post('http://wigig-584/plans/removeComment', this.comment.id)
 		.then(function(response){

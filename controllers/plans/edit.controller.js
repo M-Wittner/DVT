@@ -22,7 +22,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 		$scope.test.name = response.data.test[0].name;
 		$scope.test.lineup = response.data.test[0].lineup;
 		$scope.test.priority = response.data.test[0].priority;
-		$scope.test.station = response.data.test[0].station[0];
+		$scope.test.station = response.data.test[0].station;
 //		console.log(response.data.test);
 		console.log(response.data);
 	});

@@ -51,6 +51,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/admin/testlist.html',
 			controller: 'testlistCtrl'
 	})
+		.when('/plans/:planId/test/:testId/comment/:commentId/edit', {
+			templateUrl: 'pages/comments/edit.html',
+			controller: 'editCommentCtrl'
+	})
 		.otherwise({redirectTo: '/'});
 	;
 	
