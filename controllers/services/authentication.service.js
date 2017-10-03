@@ -18,7 +18,7 @@ myApp.factory('authenticationService', ['$http', '$cookies', '$rootScope', '$tim
 		var authdata = username + ':' + password;
 		
 		$rootScope.globals = {
-			currentUseer: {
+			currentUser: {
 				username: username,
 				password: password
 			}

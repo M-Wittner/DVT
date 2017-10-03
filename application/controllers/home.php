@@ -24,6 +24,11 @@ class Home extends CI_Controller {
 		}
 	}
 	
+	function currentUser(){
+		$data = json_decode(file_get_contents('php://input'));
+		echo json_encode($data);
+	}
+	
 	function logout(){
 		// destroy session
         $data = array('login' => '', 'username' => '', 'userid' => '');

@@ -50,7 +50,7 @@
 		</div>
 		<div id="desc" ng-repeat="test in tests | orderBy:[priority] | filter:{id: testId, priority: testPriority, station: testStation, name: testName}">
 			<div>
-				<div class="col-md-3 col-sm-2 col-sm-offset-10">
+				<div ng-show="user == plan.user_username" class="col-md-3 col-sm-2 col-sm-offset-10">
 					<a class="btn btn-xs btn-warning col-sm-offset-4" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
 					<a class="btn btn-xs btn-danger btn-crud" ng-click="removeTest()">
 						Delete
