@@ -7,24 +7,24 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	$http.post('http://wigig-584/plans/edit', $routeParams)
 	.then(function(response){
 		$scope.plan = response.data.plan[0];
-		$scope.test = response.data.test[0];
-		$scope.test.antennas = response.data.antennas;
-		$scope.test.channels = response.data.channels;
-		$scope.test.temps = response.data.temps;
-		$scope.test.chips = response.data.chips;
-//		$scope.test.mcs = parseInt(response.data.test[0].mcs);
-//		$scope.test.voltage = parseInt(response.data.test[0].voltage);
+		$scope.test = response.data.tests[0];
+//		$scope.test.antennas = response.data.antennas;
+//		$scope.test.channels = response.data.channels;
+//		$scope.test.temps = response.data.temps;
+//		$scope.test.chips = response.data.chips;
+		$scope.test.mcs = parseInt(response.data.tests[0].mcs);
+		$scope.test.voltage = parseInt(response.data.tests[0].voltage);
 //		$scope.test.pinFrom = parseInt(response.data.test[0].pin_from);
 //		$scope.test.pinTo = parseInt(response.data.test[0].pin_to);
 //		$scope.test.pinStep = parseInt(response.data.test[0].pin_step);
 //		$scope.test.pinAdd = parseInt(response.data.test[0].pin_additional);
-		$scope.test.xifs = response.data.xifs;
-		$scope.test.name = response.data.test[0].name;
-		$scope.test.lineup = response.data.test[0].lineup;
-		$scope.test.priority = response.data.test[0].priority;
-		$scope.test.station = response.data.test[0].station;
+//		$scope.test.xifs = response.data.xifs;
+//		$scope.test.name = response.data.test[0].name;
+//		$scope.test.lineup = response.data.test[0].lineup;
+//		$scope.test.priority = response.data.test[0].priority;
+//		$scope.test.station = response.data.test[0].station;
 //		console.log(response.data.test);
-		console.log(response.data);
+//		console.log(response.data);
 	});
 		
 	} else {
@@ -49,7 +49,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	};
 	
 	$scope.editPlan = function(){
-		$http.put('http://wigig-584/plans/update', {plan: $scope.plan, test: $scope.test})
+		$http.post('http://wigig-584/plans/update', {plan: $scope.plan, test: $scope.test})
 		.then(function(response){
 			if(response.data == 'success'){
 				$location.path('/plans/'+$routeParams.planId);
