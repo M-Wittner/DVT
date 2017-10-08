@@ -212,10 +212,10 @@
 		<div class="panel-heading">
 			<h3 class="panel-title">test: {{comment.test_id}} {{comment.test_name}} ,From: {{comment.author}}
 				<div class="pull-right">
-					<a class="btn btn-xs btn-warning col-sm-offset-4" href="#/plans/{{comment.plan_id}}/test/{{comment.test_id}}/comment/{{comment.id}}/edit" ng-click="editComment()">Edit</a>
-					<a class="btn btn-xs btn-danger" ng-click="removeComment()">
+					<button class="btn btn-xs btn-warning" href="#/plans/{{comment.plan_id}}/test/{{comment.test_id}}/comment/{{comment.id}}/edit" ng-click="editComment()">Edit</button>
+					<button class="btn btn-xs btn-danger" ng-click="removeComment()">
 						Delete
-					</a>
+					</button>
 				</div>
 			</h3>
 			
