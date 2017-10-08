@@ -1,6 +1,9 @@
 myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', function ($scope, $location, $http, Flash, $cookies, $window, AuthService) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
+//	$scope.user = $scope.currentUser.username;
+	console.log($scope.currentUser);
+	
 	if($scope.isAuthenticated == true) {
 		$http.get('http://wigig-584/plans')
 		.then(function(response) {

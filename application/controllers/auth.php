@@ -32,6 +32,7 @@ class Auth extends CI_Controller {
 					'userId' 	=> $uresult[0]->id,
 					'firstName' => $uresult[0]->fname,
 					'lastName' => $uresult[0]->lname,
+					'rank' => $uresult[0]->rank,
 				);
 				$this->session->set_userdata($sessData);
 				$session = $this->session->userdata();

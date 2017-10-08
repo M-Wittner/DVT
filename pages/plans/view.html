@@ -211,7 +211,7 @@
 	<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
 		<div class="panel-heading">
 			<h3 class="panel-title">test: {{comment.test_id}} {{comment.test_name}} ,From: {{comment.author}}
-				<div class="pull-right">
+				<div class="pull-right" ng-show="user == comment.author">
 					<button class="btn btn-xs btn-warning" href="#/plans/{{comment.plan_id}}/test/{{comment.test_id}}/comment/{{comment.id}}/edit" ng-click="editComment()">Edit</button>
 					<button class="btn btn-xs btn-danger" ng-click="removeComment()">
 						Delete

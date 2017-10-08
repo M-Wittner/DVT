@@ -3,6 +3,8 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	if($scope.isAuthenticated == true) {
 	
+	$scope.user = $scope.currentUser.username;
+		
 	$scope.test = {};
 	$http.post('http://wigig-584/plans/edit', $routeParams)
 	.then(function(response){

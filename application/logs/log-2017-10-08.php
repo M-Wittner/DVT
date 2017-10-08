@@ -196,3 +196,24 @@ ERROR - 201720172017-1010-0808 1010:1010:3131 --> Severity: Notice --> Trying to
 ERROR - 201720172017-1010-0808 1010:1010:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 387
 ERROR - 201720172017-1010-0808 1010:1010:3838 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 50
 ERROR - 201720172017-1010-0808 1010:1010:4747 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 50
+ERROR - 201720172017-1010-0808 1010:1010:2626 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201720172017-1010-0808 1010:1010:2626 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201720172017-1010-0808 1010:1010:2626 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201720172017-1010-0808 1010:1010:0606 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201720172017-1010-0808 1010:1010:0606 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201720172017-1010-0808 1010:1010:0606 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201720172017-1010-0808 1010:1010:1717 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201720172017-1010-0808 1010:1010:1717 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201720172017-1010-0808 1010:1010:1717 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201720172017-1010-0808 1010:1010:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201720172017-1010-0808 1010:1010:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201720172017-1010-0808 1010:1010:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201720172017-1010-0808 1010:1010:2727 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201720172017-1010-0808 1010:1010:2727 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201720172017-1010-0808 1010:1010:2727 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201720172017-1010-0808 1010:1010:5454 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201720172017-1010-0808 1010:1010:5454 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201720172017-1010-0808 1010:1010:5454 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201720172017-1010-0808 1010:1010:5757 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201720172017-1010-0808 1010:1010:5757 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201720172017-1010-0808 1010:1010:5757 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24

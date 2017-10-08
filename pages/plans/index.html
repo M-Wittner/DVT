@@ -10,7 +10,7 @@
 				<th>Date</th>
 				<th>Author</th>
 				<th>View</th>
-				<th>Seen</th>
+				<th ng-show="currentUser.rank > 10">Seen</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -18,7 +18,7 @@
 				<th class="PopupTooltip">{{ plan.date }}</th>
 				<td>{{ plan.user_username }}</td>
 				<td><a ng-click="view(plan.id)" class="btn btn-info">View</a></td>
-				<td ng-click="seen(plan)">
+				<td ng-show="currentUser.rank > '10'" ng-click="seen(plan)">
 					<span ng-model="test.checked"  class="btn-lg glyphicon" ng-class="{'glyphicon-ok check-seen': plan.checked == true, 'glyphicon-minus check-unseen': plan.checked == false}"></span>
 					<span ng-if="plan.checked == true">  By {{plan.checked_by}} </span>
 				</td>
