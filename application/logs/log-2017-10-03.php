@@ -709,3 +709,29 @@ ERROR - 201720172017-1010-0303 0303:1010:2525 --> Severity: Notice --> Trying to
 ERROR - 201720172017-1010-0303 0303:1010:4040 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
 ERROR - 201720172017-1010-0303 0303:1010:4040 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
 ERROR - 201720172017-1010-0303 0303:1010:4040 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201720172017-1010-0303 0707:1010:5151 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-0303 0707:1010:3939 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-0303 0808:1010:4242 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-0303 0808:1010:4343 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-0303 0808:1010:3131 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 216
+ERROR - 201720172017-1010-0303 0808:1010:3131 --> Query error: Column 'station' cannot be null - Invalid query: INSERT INTO `test_comments` (`plan_id`, `test_id`, `author`, `severity`, `station`, `details`) VALUES ('218', '212', 'c-greenb', 'Major', NULL, '<h1 style=\"\">Bla BlaBla BlaBla Bla</h1><blockquote style=\"\">Bla BlaBla BlaBla BlaBla BlaBla <a href=\"google.com\" title=\"Google\" target=\"Google.com\">BlaBl</a>a BlaBla Bla</blockquote><h1 style=\"text-align: left;\"><ul><li>Bla Bla<br></li><li>sd</li><li><span style=\"font-family: inherit; color: rgb(149, 179, 215);\">s</span></li></ul></h1><br><h4><ol><li>Bla BlaBla Bl</li><li>ds</li><li>s</li></ol></h4><br>')
+ERROR - 201720172017-1010-0303 0909:1010:3030 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-0303 0909:1010:4646 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 118
+ERROR - 201720172017-1010-0303 0909:1010:4646 --> Query error: Column 'lineup' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`) VALUES ('1', NULL, 'M-CB1', 'TX-EVM', 12, NULL, 227)
+ERROR - 201720172017-1010-0303 0909:1010:1818 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 236
+ERROR - 201720172017-1010-0303 0909:1010:1818 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 236
+ERROR - 201720172017-1010-0303 0909:1010:1818 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 264
+ERROR - 201720172017-1010-0303 0909:1010:1818 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 264
+ERROR - 201720172017-1010-0303 0909:1010:2727 --> Query error: Duplicate entry 'DEMO' for key 'serial_number' - Invalid query: INSERT INTO `params_chips` (`chip`, `board`, `package`, `model`, `revision`, `serial_number`, `corner`) VALUES ('TalynA', 'YA591-H1', 'Flip Chip', 'QCA6425', 'A0', 'DEMO', 'TT')
+ERROR - 201720172017-1010-0303 0909:1010:3030 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\controllers\admin.php 19
+ERROR - 201720172017-1010-0303 0909:1010:3030 --> Severity: Notice --> Undefined property: stdClass::$board C:\xampp\htdocs\application\controllers\admin.php 20
+ERROR - 201720172017-1010-0303 0909:1010:3030 --> Severity: Notice --> Undefined property: stdClass::$package C:\xampp\htdocs\application\controllers\admin.php 21
+ERROR - 201720172017-1010-0303 0909:1010:3030 --> Severity: Notice --> Undefined property: stdClass::$model C:\xampp\htdocs\application\controllers\admin.php 22
+ERROR - 201720172017-1010-0303 0909:1010:3030 --> Severity: Notice --> Undefined property: stdClass::$revision C:\xampp\htdocs\application\controllers\admin.php 23
+ERROR - 201720172017-1010-0303 0909:1010:3030 --> Severity: Notice --> Undefined property: stdClass::$sn C:\xampp\htdocs\application\controllers\admin.php 24
+ERROR - 201720172017-1010-0303 0909:1010:3030 --> Severity: Notice --> Undefined property: stdClass::$corner C:\xampp\htdocs\application\controllers\admin.php 25
+ERROR - 201720172017-1010-0303 0909:1010:1919 --> 404 Page Not Found: Admin/updatetestlist
+ERROR - 201720172017-1010-0303 0909:1010:2727 --> 404 Page Not Found: Admin/updatetestlist
+ERROR - 201720172017-1010-0303 0909:1010:5050 --> 404 Page Not Found: Admin/updatetestlist
+ERROR - 201720172017-1010-0303 0909:1010:4141 --> 404 Page Not Found: Admin/updatetestlist
+ERROR - 201720172017-1010-0303 1414:1010:2929 --> Severity: Notice --> Undefined property: stdClass::$password C:\xampp\htdocs\application\controllers\auth.php 24

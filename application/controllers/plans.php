@@ -143,12 +143,12 @@ class Plans extends CI_Controller {
 							foreach($xifsArr as $xifRes){
 								$xif = array(
 									'chip_id'=>$chipId,
+									'chip'=>$chip['chip'],
 									'xif'=>$xifRes,
 									'plan_id'=>$planId,
 									'test_id'=>$testId
 								);
 								$this->plan_model->add_xifs($xif);
-			//					print_r($xif);
 							};
 						};
 						foreach($tempsArr as $result){
