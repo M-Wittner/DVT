@@ -303,6 +303,11 @@ class Plans extends CI_Controller {
 		echo json_encode($updateStatus);
 	}
 	
+	function addtests(){
+		$data = json_decode(file_get_contents('php://input'));
+		echo json_encode($data);
+	}
+	
 	function removeTest(){
 		$id = json_decode(file_get_contents('php://input'));
 		$result = $this->plan_model->delete_test($id);

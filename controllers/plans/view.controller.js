@@ -29,9 +29,8 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$scope.params = testParams.params;
 	$scope.lock = true;
 	
-	$scope.report = function(){
-		$scope.plan.tests = $scope.tests;
-		console.log($scope.plan);
+	$scope.addTest = function(){
+		console.log(this.plan.id);
 	}
 	
 	$scope.removePlan = function() {

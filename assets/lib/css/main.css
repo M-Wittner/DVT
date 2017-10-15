@@ -1,3 +1,7 @@
+#lineup-box {
+	min-width: 525px;
+}
+
 .Pin {
 	width: 50px;
 }
@@ -17,7 +21,7 @@
 .form-control{
 	height: inherit;
 	width: inherit;
-	min-width: 75%;
+	min-width: 50px;
 }
 .check-seen {
 	color: #419641;

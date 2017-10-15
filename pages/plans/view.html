@@ -34,11 +34,9 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">Submitted by: {{plan.user_username}}
 		<span class="pull-right">{{ plan.date }}
-<!--
-			<button class="btn btn-sm btn-info" ng-click="report()">
-            	Issue Report
-        	</button>
--->
+			<a class="btn btn-sm btn-success" href="#/plans/{{plan.id}}/addtests">
+            	Add Tests
+        	</a>
 			<button class="btn btn-sm btn-danger" ng-click="removePlan()">
             	Delete
         	</button>
@@ -64,7 +62,7 @@
 						</div>
 						<div class="col-md-7 col-sm-8">
 							<span class="label label-primary">Test Lineup:</span>
-							<label class="form-control">{{test.lineup}}</label>
+							<label class="form-control" id="lineup-box">{{test.lineup}}</label>
 						</div>
 						<div class="col-md-1 col-sm-2">
 							<span class="label label-primary">Test ID:</span>
