@@ -21,7 +21,7 @@
 .form-control{
 	height: inherit;
 	width: inherit;
-	min-width: 50px;
+	min-width: 70%;
 }
 .check-seen {
 	color: #419641;

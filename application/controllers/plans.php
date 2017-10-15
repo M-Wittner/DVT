@@ -197,29 +197,23 @@ class Plans extends CI_Controller {
 	}
 	
 	function edit(){
-//		$postData = json_decode(file_get_contents('php://input'));
-//		$plan = $this->db->get_where('plans', array('id'=> $postData->planId))->result();
-//		$test = $this->db->get_where('tests', array('id'=>$postData->testId))->result();
-//		$chips = $this->db->get_where('test_chips', array('test_id'=>$postData->testId))->result();
-//		$xifs = $this->db->get_where('test_xifs', array('test_id'=>$postData->testId))->result();
-//		$temps = $this->db->get_where('test_temps', array('test_id'=>$postData->testId))->result();
-//		$channels = $this->db->get_where('test_channels', array('test_id'=>$postData->testId))->result();
-//		$antennas = $this->db->get_where('test_antennas', array('test_id'=>$postData->testId))->result();
-//		$result = array(
-//			'plan'=>$plan,
-//			'test'=>$test,
-//			'chips'=>$chips,
-//			'temps'=>$temps,
-//			'channels'=>$channels,
-//			'antennas'=>$antennas,
-//			'xifs'=>$xifs
-//		);
 		$id = json_decode(file_get_contents('php://input'));
 		$result = $this->plan_model->get_plan($id->planId);
 		echo json_encode($result);
 	}
 	
 	function newcomment(){
+		$id = json_decode(file_get_contents('php://input'));
+		$test = $this->db->get_where('tests', array('id'=>$id->testId))->result();
+		$chips = $this->db->get_where('test_chips', array('test_id'=>$id->testId))->result();
+		$result = array(
+			'test'=>$test,
+			'chips'=>$chips
+		);
+		echo json_encode($result);
+	}
+	
+	function addcomment(){
 		$postData = json_decode(file_get_contents('php://input'));
 //		die(var_dump($postData));
 		$comment = $this->plan_model->add_comment($postData);

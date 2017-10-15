@@ -3,10 +3,11 @@ myApp.controller('newCommentCtrl', ['$scope', '$location','$http', '$routeParams
 	
 	if($scope.isAuthenticated == true) {
 		
-		$http.post('http://wigig-584/plans/edit', $routeParams)
+		$http.post('http://wigig-584/plans/newComment', $routeParams)
 		.then(function(response){
-			$scope.tests = response.data.test;
+			$scope.test = response.data.test;
 			$scope.chips = response.data.chips;
+//			console.log(response.data);
 		});
 
 		} else {
@@ -19,7 +20,7 @@ myApp.controller('newCommentCtrl', ['$scope', '$location','$http', '$routeParams
 	$scope.comment.author = $scope.currentUser.username;
 
 	$scope.newCmt = function(){
-		$http.post('http://wigig-584/plans/newcomment', {comment: this.comment, id: $routeParams})
+		$http.post('http://wigig-584/plans/addComment', {comment: this.comment, id: $routeParams})
 		.then(function(response){
 			if(response.data == 'true') {
 //				console.log(response.data);
