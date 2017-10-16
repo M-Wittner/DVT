@@ -54,3 +54,4 @@ ERROR - 201720172017-1010-1616 0101:1010:4343 --> Severity: Parsing Error --> sy
 ERROR - 201720172017-1010-1616 0101:1010:4343 --> Severity: Parsing Error --> syntax error, unexpected ';' C:\xampp\htdocs\application\models\plan_model.php 66
 ERROR - 201720172017-1010-1616 0202:1010:0303 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-1616 0202:1010:4242 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 0303:1010:2121 --> 404 Page Not Found: Faviconico/index
