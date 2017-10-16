@@ -52,3 +52,5 @@ ERROR - 201720172017-1010-1616 0101:1010:1212 --> Severity: Parsing Error --> sy
 ERROR - 201720172017-1010-1616 0101:1010:3232 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\application\controllers\plans.php 189
 ERROR - 201720172017-1010-1616 0101:1010:4343 --> Severity: Parsing Error --> syntax error, unexpected ';' C:\xampp\htdocs\application\models\plan_model.php 66
 ERROR - 201720172017-1010-1616 0101:1010:4343 --> Severity: Parsing Error --> syntax error, unexpected ';' C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201720172017-1010-1616 0202:1010:0303 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 0202:1010:4242 --> 404 Page Not Found: Faviconico/index

@@ -13,7 +13,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
 	.then(function(response){
 		$scope.comments = response.data;
-//		console.log(response.data);
+		console.log(response.data);
 	});
 		
 	} else {
