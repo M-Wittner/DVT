@@ -1,6 +1,7 @@
 myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.testParams = testParams;
+	console.log($scope.testParams);
 
 	if($scope.isAuthenticated == false){
 		var message = 'Please Login first!';
@@ -48,7 +49,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 			} else {
 				var message = response.data;
 				var id = Flash.create('danger', message, 3500);
-				console.log(response.data);
+//				console.log(response.data);
 			}
 		})
 //		console.log(this);

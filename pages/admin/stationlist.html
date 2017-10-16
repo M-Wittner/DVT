@@ -1,0 +1,33 @@
+<div class="panel panel-primary">
+	<!-- Default panel contents -->
+<!--
+	<div class="panel-heading">All Plans<a class="pull-right btn btn-sm btn-default" href="http://wigig-584/admin/updatetestlist" download="Web-ChipList.csv">
+            	Download <span class="glyphicon glyphicon-save"></span>
+        	</a></div>
+-->
+	<div class="panel-body">
+	</div>
+	<!-- Table -->
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Station</th>
+				<th>Station Computer</th>
+				<th>WWC Computer</th>
+				<th>Chip Computer</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="station in stations">
+				<th>{{ station.station }}</th>
+				<td>{{ station.pc_name}}</td>
+				<td>{{ station.pc_wwc}}</td>
+				<td>{{ station.pc_chip}}</td>
+				<td>
+					<button class="btn btn-danger btn-sm" ng-click="removeStation()">Delete</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

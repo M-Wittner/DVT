@@ -28,11 +28,6 @@ class Admin extends CI_Controller {
 		if(isset($chip['chip'])){
 			$insertStatus = $this->db->insert('params_chips', $chip);
 			if($insertStatus == true){
-//				$q = $this->db->get('params_chips');
-//				$delimiter = ",";
-//				$newline = "\r\n";
-//				$data = $this->dbutil->csv_from_result($q,$delimiter, $newline);
-//				force_download('CSV_Report.csv', $data);
 				echo 'success';
 			}
 		}else {
@@ -40,7 +35,22 @@ class Admin extends CI_Controller {
 		}
 		
 	}
-	
+	public function addstation() {
+		$postData = json_decode(file_get_contents('php://input'));
+		$station = array(
+			'station'=>$postData->station,
+			'pc_name'=>$postData->pcName,
+			'pc_wwc'=>$postData->pcWwc,
+			'pc_chip'=>$postData->pcChip,
+		);
+		
+		$insertStatus = $this->db->insert('params_stations', $station);
+		if($insertStatus == true){
+			echo 'success';
+		}else {
+			echo 'No Chip Was Inserted!';
+		}
+	}
 		public function addTest() {
 		$postData = json_decode(file_get_contents('php://input'));
 
@@ -75,6 +85,10 @@ class Admin extends CI_Controller {
 	}	
 	public function testList(){
 		$chipList = $this->db->get('params_test_names');
+		echo json_encode($chipList->result());
+	}
+	public function stationList(){
+		$chipList = $this->db->get('params_stations');
 		echo json_encode($chipList->result());
 	}
 	

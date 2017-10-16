@@ -46,7 +46,7 @@
 		<div class="panel-body" id="planBody">
 			
 		</div>
-		<div id="desc" ng-repeat="test in tests | orderBy:[priority] | filter:{id: testId, priority: testPriority, station: testStation, name: testName}">
+		<div id="desc" ng-repeat="test in tests | orderBy:[priority] | filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
 			<div>
 				<div ng-show="user == plan.user_username" class="col-md-3 col-sm-2 col-sm-offset-10">
 					<a class="btn btn-xs btn-warning col-sm-offset-4" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
@@ -75,6 +75,19 @@
 						<div class="panel-body">
 							<span class="label label-primary">Station:</span>
 							<label class="form-control">{{test.station}}</label>
+							<ul class="list-group" >
+							  <li class="list-group-item">
+								<strong>Station Computer: </strong>  {{test.stations[0].pc_name}}
+								</li>
+							  <li class="list-group-item">
+								  <strong>WWC Computer: </strong>
+								  {{test.stations[0].pc_wwc}}
+								</li>
+							  <li class="list-group-item">
+								  <strong>Chip Computer: </strong>
+								  {{test.stations[0].pc_chip}}
+								</li>
+							</ul>
 						</div>
 					</div>
 					<div class="col-md-3">

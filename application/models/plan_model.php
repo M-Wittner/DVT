@@ -62,6 +62,8 @@ class plan_model extends CI_Model {
 				$temp[$i] = $value->temp;
 			}
 			$tests[$key]->temps = $temp;
+			$tests[$key]->stations = $this->db->get_where('params_stations', array('station'=>$tests[$key]->station))->result();
+//			var_dump($tests[$key]->stations);
 		}
 //		$tests = (object) $tests;
 		$plan = array(

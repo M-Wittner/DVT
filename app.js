@@ -43,6 +43,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/admin/newtest.html',
 			controller: 'testCtrl'
 	})
+		.when('/admin/newstation', {
+			templateUrl: 'pages/admin/newstation.html',
+			controller: 'stationCtrl'
+	})
 		.when('/admin/chiplist', {
 			templateUrl: 'pages/admin/chiplist.html',
 			controller: 'chiplistCtrl'
@@ -50,6 +54,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 		.when('/admin/testlist', {
 			templateUrl: 'pages/admin/testlist.html',
 			controller: 'testlistCtrl'
+	})
+		.when('/admin/stationlist', {
+			templateUrl: 'pages/admin/stationlist.html',
+			controller: 'stationlistCtrl'
 	})
 		.when('/plans/:planId/test/:testId/comment/:commentId/edit', {
 			templateUrl: 'pages/comments/edit.html',
@@ -158,6 +166,10 @@ myApp.factory('testParams', function($http, $log){
 		'RFC/CAL',
 		'PTAT/ABS/Vgb+TEMP',
 	];
+//	$http.get('http://wigig-584/params/stations')
+//	.then(function(response){
+//		testParams.params.stationList = response.data;
+//	});
 	
 	testParams.params.newTest = [
 		'R - Stations',
