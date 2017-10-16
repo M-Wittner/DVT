@@ -5,17 +5,10 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	if($scope.isAuthenticated == true) {	
 	$http.post('http://wigig-584/plans/show', $routeParams.id)
 	.then(function(response){
-		$scope.plan = response.data.plan[0];
+//		$scope.plan = response.data.plan[0];
 		$scope.tests = response.data.tests;
-//		$scope.station
-//		console.log($scope.plan.user_username);
-		console.log(response.data);
+//		console.log(response.data);
 	});
-		
-	$scope.user = $scope.currentUser.username;
-//	console.log($scope.user);
-
-//	console.log($scope);
 	
 	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
 	.then(function(response){
