@@ -33,7 +33,7 @@
 </br>
 <div class="panel panel-primary">
 	<div class="panel-heading">Submitted by: {{plan.user_username}}
-		<span class="pull-right">{{ plan.date }}
+		<span ng-show="currentUser.rank > '10' || currentUser.username == plan.user_username" class="pull-right">{{ plan.date }}
 			<a class="btn btn-sm btn-success" href="#/plans/{{plan.id}}/addtests">
             	Add Tests
         	</a>
@@ -48,7 +48,7 @@
 		</div>
 		<div id="desc" ng-repeat="test in tests | orderBy:[priority] | filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
 			<div>
-				<div ng-show="user == plan.user_username" class="col-md-3 col-sm-2 col-sm-offset-10">
+				<div ng-show="currentUser.username == plan.user_username || currentUser.rank > '10'" class="col-md-3 col-sm-2 col-sm-offset-10">
 					<a class="btn btn-xs btn-warning col-sm-offset-4" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
 					<a class="btn btn-xs btn-danger btn-crud" ng-click="removeTest()">
 						Delete

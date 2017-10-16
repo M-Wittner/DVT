@@ -55,3 +55,18 @@ ERROR - 201720172017-1010-1616 0101:1010:4343 --> Severity: Parsing Error --> sy
 ERROR - 201720172017-1010-1616 0202:1010:0303 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-1616 0202:1010:4242 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-1616 0303:1010:2121 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 0606:1010:1111 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 0606:1010:1111 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 0707:1010:3030 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 0707:1010:4646 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 0808:1010:2626 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 1212:1010:0202 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 1313:1010:5151 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 1313:1010:5151 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 1313:1010:4242 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 1515:1010:0909 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 118
+ERROR - 201720172017-1010-1616 1515:1010:0909 --> Query error: Column 'lineup' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`, `mini_circuits`, `mcs`) VALUES ('1', NULL, 'Calibration', 'SAR_DC', 12, NULL, 234, 0, 12)
+ERROR - 201720172017-1010-1616 1515:1010:2525 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 118
+ERROR - 201720172017-1010-1616 1515:1010:2525 --> Query error: Column 'lineup' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`, `mini_circuits`, `mcs`) VALUES ('1', NULL, 'Calibration', 'SAR_DC', 12, NULL, 235, 0, 12)
+ERROR - 201720172017-1010-1616 1515:1010:1919 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 1515:1010:1919 --> 404 Page Not Found: Faviconico/index

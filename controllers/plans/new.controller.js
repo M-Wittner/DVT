@@ -1,7 +1,7 @@
 myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.testParams = testParams;
-	console.log($scope.testParams);
+//	console.log($scope.testParams);
 
 	if($scope.isAuthenticated == false){
 		var message = 'Please Login first!';
