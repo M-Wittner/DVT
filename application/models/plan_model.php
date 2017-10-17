@@ -73,6 +73,46 @@ class plan_model extends CI_Model {
 		return $plan;
 	}
 	
+	function edit_test($id) {
+		$plan = $this->db->get_where('plans', array('id'=> $id->planId))->result();
+		$test =$this->db->get_where('tests', array('plan_id'=>$id->planId, 'id'=>$id->testId))->result();
+		
+		$test = $test[0];
+//		die(var_dump($test->station));
+		if($test->station == 'M-CB1' || $test->station == 'M-CB2') {
+			$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$id->testId))->result();
+			$test->xifs = $xifRes;
+
+		} else if($test->station == 'R-CB1' || $test->station == 'R-CB2'){
+			$ant = $this->db->get_where('test_antennas', array('test_id'=>$id->testId))->result();
+			foreach($ant as $i => $value){
+				$antenna[$i] = $value->antenna;
+			}
+			$test->antennas = $antenna;	
+		}
+		$ch = $this->db->get_where('test_channels', array('test_id'=>$id->testId))->result();
+			foreach($ch as $i => $value){
+				$channel[$i] = $value->channel;
+			}
+		$test->channels = $channel;
+
+		$chip = $this->db->get_where('test_chips', array('test_id'=>$id->testId))->result();
+//			foreach($chip as $i => $value){
+//				$chip[$i] = $value->chip;
+//				
+//			}
+
+		$test->chips = $chip;
+
+		$temp = $this->db->get_where('test_temps', array('test_id'=>$id->testId))->result();
+		foreach($temp as $i => $value){
+			$temp[$i] = $value->temp;
+		}
+		$test->temps = $temp;
+
+		return $test;
+	}
+	
 	 function add_plan($plan)
     {
         $insertStatus = $this->db->insert('plans', $plan);
@@ -231,9 +271,9 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_test($data){
-		$planObj = $data->plan;
+//		$planObj = $data->plan;
 		$testObj = $data->test;
-//		var_dump($testObj);
+//		var_dump($data);
 //		die();
 		if($testObj->station[0] == "R-CB1" || $testObj->station[0] == "R-CB2"){
 			$test = array(
@@ -336,7 +376,6 @@ class plan_model extends CI_Model {
 //		var_dump($test);
 //		die();
 		$this->db->where(array('id'=>$testObj->id,'plan_id'=>$testObj->plan_id));
-//		$res = $this->db->delete('tests');
 		$res = $this->db->update('tests', $test);
 		return $res;
 		

@@ -198,7 +198,7 @@ class Plans extends CI_Controller {
 	
 	function edit(){
 		$id = json_decode(file_get_contents('php://input'));
-		$result = $this->plan_model->get_plan($id->planId);
+		$result = $this->plan_model->edit_test($id);
 		echo json_encode($result);
 	}
 	
