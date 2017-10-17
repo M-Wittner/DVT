@@ -21,10 +21,11 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	}
 	
 	$scope.insertTest = function(){
-		$scope.array.push($scope.test);
+		$scope.planParams.push($scope.test);
 		$scope.lock = true;
 //		console.log(this);
 	}
+	
 	$scope.editToggle = function(){
 		$scope.lock = false;
 		$scope.planParams.splice($scope.test, 1);

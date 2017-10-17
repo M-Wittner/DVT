@@ -5,7 +5,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	if($scope.isAuthenticated == true) {	
 	$http.post('http://wigig-584/plans/show', $routeParams.id)
 	.then(function(response){
-//		$scope.plan = response.data.plan[0];
+		$scope.plan = response.data.plan[0];
 		$scope.tests = response.data.tests;
 //		console.log(response.data);
 	});

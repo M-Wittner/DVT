@@ -70,3 +70,7 @@ ERROR - 201720172017-1010-1616 1515:1010:2525 --> Severity: Notice --> Undefined
 ERROR - 201720172017-1010-1616 1515:1010:2525 --> Query error: Column 'lineup' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`, `mini_circuits`, `mcs`) VALUES ('1', NULL, 'Calibration', 'SAR_DC', 12, NULL, 235, 0, 12)
 ERROR - 201720172017-1010-1616 1515:1010:1919 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-1616 1515:1010:1919 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 2020:1010:0707 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 2020:1010:0707 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 2020:1010:0000 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-1616 2020:1010:0000 --> 404 Page Not Found: Faviconico/index

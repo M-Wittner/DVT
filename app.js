@@ -77,7 +77,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 myApp.directive('testForm', function(){
 	return {
 		templateUrl: 'pages/plans/newTest.html',
-		controller: 'testCtrl',
+//		controller: 'testCtrl',
 		scope: {
 			planParams: '=',
 			params: '=',
