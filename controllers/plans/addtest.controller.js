@@ -1,4 +1,4 @@
-myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
+myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', '$routeParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams, $routeParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.testParams = testParams;
 
@@ -10,10 +10,10 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	};
 	
 	$scope.array = [];
-	$scope.test = {};
 	$scope.plan = {};
 	$scope.plan.userId = $cookies.getObject('loggedUser').userId;
 	$scope.plan.username = $cookies.getObject('loggedUser').username;
+	$scope.plan.id = $routeParams.planId;
 	
 	$scope.testCount = [{}];
 	$scope.addTest = function(){
@@ -25,7 +25,6 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 		$scope.lock = true;
 //		console.log(this);
 	}
-	
 	$scope.editToggle = function(){
 		$scope.lock = false;
 		$scope.planParams.splice($scope.test, 1);
@@ -40,19 +39,18 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	};
 
 	$scope.addTestToPlan = function() {
-//		$http.post('http://wigig-584/plans/addTests', {plan: $scope.plan, test: $scope.array})
-//		.then(function(response){
-//			if(response.data == 'success'){
-////				var message = 'Plan Created Succesfully!';
-////				var id = Flash.create('success', message, 3500);
-////				$location.path('/plans');
-//				console.log(response.data)
-//			} else {
-////				var message = response.data;
-////				var id = Flash.create('danger', message, 3500);
-//				console.log(response.data);
-//			}
-//		})
-		console.log(this);
+		$http.post('http://wigig-584/plans/addTests', {plan: $scope.plan, test: $scope.array})
+		.then(function(response){
+			if(response.data == 'success'){
+				var message = 'Plan Created Succesfully!';
+				var id = Flash.create('success', message, 3500);
+				$location.path('/plans/'+$scope.plan.id);
+				console.log(response.data)
+			} else {
+				var message = response.data;
+				var id = Flash.create('danger', message, 3500);
+				console.log(response.data);
+			}
+		})
 	};
 }]);

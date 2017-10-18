@@ -90,6 +90,22 @@ myApp.directive('testForm', function(){
 	}
 });
 
+myApp.directive('testFormedit', function(){
+	return {
+		templateUrl: 'pages/plans/newTestEdit.html',
+		controller: 'addTestCtrl',
+		scope: {
+			planParams: '=',
+			params: '=',
+			index: '&',
+			locked: '='
+		},
+		link: function(scope, element, attrs){
+			
+		}
+	}
+});
+
 myApp.constant('AUTH_EVENTS', {
   loginSuccess: 'auth-login-success',
   loginFailed: 'auth-login-failed',
