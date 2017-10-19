@@ -34,3 +34,4 @@ ERROR - 201720172017-1010-1919 0101:1010:5252 --> Query error: Column 'voltage' 
 ERROR - 201720172017-1010-1919 0101:1010:5252 --> Severity: Notice --> Undefined variable: voltage C:\xampp\htdocs\application\controllers\plans.php 340
 ERROR - 201720172017-1010-1919 0101:1010:5252 --> Severity: Notice --> Undefined variable: voltage C:\xampp\htdocs\application\controllers\plans.php 354
 ERROR - 201720172017-1010-1919 0101:1010:5252 --> Severity: Error --> Cannot access empty property C:\xampp\htdocs\application\controllers\plans.php 354
+ERROR - 201720172017-1010-1919 0202:1010:1515 --> 404 Page Not Found: Faviconico/index
