@@ -69,6 +69,11 @@ class Admin extends CI_Controller {
 					'station'=>$postData->station[0],
 					'test_name'=>$postData->testName,
 				);
+			}elseif($postData->station[0] === "PTAT/ABS/Vgb+TEMP"){
+				$test = array(
+					'station'=>$postData->station[0],
+					'test_name'=>$postData->testName,
+				);
 			} else {
 				echo 'Not Yet';
 				die();

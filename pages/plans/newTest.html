@@ -32,6 +32,8 @@
 					</multiselect>
 					<multiselect ng-if="test.station == 'Calibration'" ng-model="test.name" options="testParams.params.nameListCal" show-search="true" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
 					</multiselect>
+					<multiselect ng-if="test.station == 'PTAT/ABS/Vgb+TEMP'" ng-model="test.name" options="testParams.params.nameListPTAT" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
+					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -42,6 +44,11 @@
 					
 					<multiselect ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'" ng-model="test.chips" options="testParams.params.chipListR" id-prop="id" display-prop="serial_number" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
+					
+					<div ng-if="test.name == Temperature">
+						<multiselect  ng-model="test.chips" options="testParams.params.chipListR" id-prop="id" display-prop="serial_number" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
+						</multiselect>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -112,8 +119,8 @@
 			<div class="col-md-8">
 				<div class="panel-body" >
 					<span class="label label-primary" >Notes:</span>
-					<div trumbowyg-ng placeholder="Comment Details"
-						 ng-model="comment.details"
+					<div trumbowyg-ng placeholder="Test Notes"
+						 ng-model="test.notes"
 						 editor-config="{btns: ['viewHTML', ['undo', 'redo'],['strong', 'em', 'del'], ['link'], ['formatting'], ['foreColor', 'backColor'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['unorderedList', 'orderedList'], ['removeformat'],]}">
 					</div>
 				</div>
