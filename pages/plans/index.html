@@ -1,6 +1,11 @@
 <div class="panel panel-primary">
 	<!-- Default panel contents -->
-	<div class="panel-heading">All Plans</div>
+	<div class="panel-heading">
+		All Plans
+		<span class="pull-right">
+			<input type="text" id="searchBox" ng-model="searchText" class="form-control" placeholder="Search">
+		</span>
+	</div>
 	<div class="panel-body">
 	</div>
 	<!-- Table -->
@@ -14,7 +19,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="plan in plans | orderBy:'-date' track by $index">
+			<tr ng-repeat="plan in plans | filter:searchText | orderBy:'-date' track by $index">
 				<th class="PopupTooltip">{{ plan.date }}</th>
 				<td>{{ plan.user_username }}</td>
 				<td><a ng-click="view(plan.id)" class="btn btn-info">View</a></td>

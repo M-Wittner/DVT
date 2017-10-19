@@ -6,6 +6,10 @@
 	width: 50px;
 }
 
+#searchBox {
+	padding: 2px 5px;
+}
+
 #formCont {
     width: 100%;
 }
