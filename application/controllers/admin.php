@@ -124,5 +124,17 @@ class Admin extends CI_Controller {
 				echo 'failure';
 			}
 	}
+	
+	public function search(){
+		$plans = $this->db->get('plans')->result();
+		
+		foreach ($plans as $plan){
+			$plan->tests = $this->db->get_where('tests', array('plan_id'=>$plan->id))->result();
+			foreach ($plan->tests as $test) {
+				$test->chips = $this->db->get_where('test_chips', array('test_id'=>$test->id))->result();
+			}
+		}
+		echo json_encode($plans);
+	}
 }
 ?>

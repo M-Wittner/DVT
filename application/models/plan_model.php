@@ -24,8 +24,6 @@ class plan_model extends CI_Model {
 		$query = $this->db->query($sql, $id);
 		$testsIdArr = $query->result();
 		
-
-		
 		$testsId = array();
 		foreach($testsIdArr as $i => $result){
 			$testsId[$i] = $result->id;

@@ -35,6 +35,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/admin/panel.html',
 			controller: 'adminCtrl'
 	})
+		.when('/admin/search', {
+			templateUrl: 'pages/admin/search.html',
+			controller: 'searchCtrl'
+	})
 		.when('/admin/newchip', {
 			templateUrl: 'pages/admin/newchip.html',
 			controller: 'chipCtrl'
