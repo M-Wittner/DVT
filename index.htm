@@ -103,6 +103,20 @@
 						<li><a href="#">Logged in as {{ currentUser.username }}</a></li>
 						<li><a href="" ng-click="logout()">Log Out</a></li>
 					</ul>
+					
+					<!--	Dropdown user panel	-->
+<!--
+						<ul ng-if=" isAuthenticated == true" class="nav navbar-nav navbar-right">
+							<li>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Welcome Back, {{ currentUser.username }} <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+							  </ul>
+							</li>
+							<li><a href="" ng-click="logout()">Log Out</a></li>
+						</ul>
+-->	
 					<ul ng-if=" isAuthenticated == false" class="nav navbar-nav">
 						<li><a href="#/register">Sign up</a></li>
 					</ul>
@@ -161,7 +175,7 @@
 				</div>
 			</div>
 		</div>
-		<div ng-if=" isAuthenticated == true || location == register">
+		<div id="mainDiv" ng-if=" isAuthenticated == true || location == register">
 			<div ng-view></div>
 		</div>
 	</div>
