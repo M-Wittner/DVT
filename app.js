@@ -249,6 +249,13 @@ myApp.factory('testParams', function($http, $log){
 		testParams.params.chipListR = response.data;
 //		console.log(response.data);
 	});
+		
+	testParams.params.chipListMR = {};
+	$http.get('http://wigig-584/params/chipsMR')
+	.then(function(response){
+		testParams.params.chipListMR = response.data;
+//		console.log(response.data);
+	});
 	
 	testParams.params.tempList = [
 		'-40 C',

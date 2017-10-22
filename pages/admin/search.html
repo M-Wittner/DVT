@@ -1,13 +1,19 @@
 <div class="form-inline">
-<!--
 	<div class="form-group">
 		<label>Date</label>
 		<input type="text" ng-model="search.date" class="form-control" placeholder="Search By Date">
 	</div>
--->
 	<div class="form-group">
-		<label>Search: ( by date\ station\ test\ chip) </label>
-		<input type="text" ng-model="search.$" class="form-control" placeholder="Search">
+		<label>Station</label>
+		<input type="text" ng-model="search.tests.station" class="form-control" placeholder="Search Station">
+	</div>
+	<div class="form-group">
+		<label>Test</label>
+		<input type="text" ng-model="search.tests.name" class="form-control" placeholder="Search Test">
+	</div>
+	<div class="form-group">
+		<label>Chip</label>
+		<input type="text" ng-model="search.tests.chips.chip" class="form-control" placeholder="Search Chip">
 	</div>
 </div>
 
@@ -38,8 +44,9 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="plan in plans | filter:search | orderBy:'-date' track by $index">
-				<th class="PopupTooltip">{{ plan.date }}</th>
+				<th>{{ plan.date }}</th>
 				<td>{{ plan.user_username }}</td>
+<!--				<td></td>-->
 				<td>
 					<a ng-click="view(plan.id)" class="btn btn-info">View</a>
 				</td>

@@ -153,7 +153,7 @@
 							<label class="form-control" ng-if="test.mini_circuits == false">Off</label>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2" ng-if="test.station != 'PTAT/ABS/Vgb+TEMP'">
 						<div class="panel-body">
 							<span class="label label-primary">Temperatures:</span>
 							<ul class="list-group">
@@ -161,7 +161,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2" ng-if="test.station != 'PTAT/ABS/Vgb+TEMP'">
 						<div class="panel-body">
 							<span class="label label-primary">Channels:</span>
 							<ul class="list-group">
@@ -198,7 +198,7 @@
 							<label class="form-control">{{test.mcs}}</label>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2" ng-if="test.station != 'PTAT/ABS/Vgb+TEMP'">
 						<div class="panel-body">
 							<span class="label label-primary">Voltage:</span>
 							<label class="form-control">{{test.voltage}}</label>

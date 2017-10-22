@@ -19,3 +19,11 @@ ERROR - 201720172017-1010-2020 0303:1010:2929 --> Severity: Notice --> Undefined
 ERROR - 201720172017-1010-2020 0303:1010:2929 --> Severity: Error --> Call to a member function get_plan() on null C:\xampp\htdocs\application\controllers\admin.php 133
 ERROR - 201720172017-1010-2020 0303:1010:3333 --> Severity: Parsing Error --> syntax error, unexpected '}' C:\xampp\htdocs\application\controllers\admin.php 133
 ERROR - 201720172017-1010-2020 0303:1010:3333 --> Severity: Error --> Cannot use object of type stdClass as array C:\xampp\htdocs\application\controllers\admin.php 132
+ERROR - 201720172017-1010-2020 0404:1010:1515 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2020 0808:1010:2222 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2020 0808:1010:2222 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2020 0808:1010:0707 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2020 0808:1010:0707 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2020 0808:1010:2727 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2020 1111:1010:0303 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2020 1111:1010:0303 --> 404 Page Not Found: Faviconico/index

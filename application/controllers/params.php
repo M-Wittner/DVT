@@ -25,6 +25,11 @@ class Params extends CI_Controller {
 		$result = $data->result();
 		echo json_encode($result);
 	}
+	public function chipsMR() {
+		$data = $this->db->get('params_chips');
+		$result = $data->result();
+		echo json_encode($result);
+	}
 	
 	public function testsM(){
 		$this->db->where('station', 'M');

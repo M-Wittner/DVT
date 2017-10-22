@@ -41,11 +41,13 @@ class plan_model extends CI_Model {
 				}
 				$tests[$key]->antennas = $antenna;	
 			}
-			$ch = $this->db->get_where('test_channels', array('test_id'=>$id))->result();
-				foreach($ch as $i => $value){
-					$channel[$i] = $value->channel;
-				}
-			$tests[$key]->channels = $channel;
+			if($tests[$key]->station != 'PTAT/ABS/Vgb+TEMP'){
+				$ch = $this->db->get_where('test_channels', array('test_id'=>$id))->result();
+					foreach($ch as $i => $value){
+						$channel[$i] = $value->channel;
+					}
+				$tests[$key]->channels = $channel;
+			}
 			
 			$chip = $this->db->get_where('test_chips', array('test_id'=>$id))->result();
 //			foreach($chip as $i => $value){
