@@ -169,8 +169,8 @@ class Plans extends CI_Controller {
 							$this->plan_model->add_channels($channel);
 		//					print_r($channel);
 						};
-//			------------- PTAT/ABS/Vgb+TEMP station test -------------
-					} elseif($testArr->station[0] == 'PTAT/ABS/Vgb+TEMP') {
+//------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
+					} elseif($testArr->station[0] == 'PTAT/ABS/Vgb+TEMP'|| $testArr->station[0] == 'TalynM+A') {
 							$chipsArr = $testArr->chips;
 							$test = array(
 								'priority'=>$testArr->priority[0],

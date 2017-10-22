@@ -182,7 +182,7 @@ myApp.factory('testParams', function($http, $log){
 		'M-CB1',
 		'M-CB2',
 		'Calibration',
-//		'FS',
+		'TalynM+A',
 //		'RFC/CAL',
 		'PTAT/ABS/Vgb+TEMP',
 	];
