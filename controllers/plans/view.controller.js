@@ -87,12 +87,4 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$scope.reload= function(index){
 		$route.reload();
 	};
-//	$scope.XifStatus = function(xif, testId, index){
-//		$http.post('http://wigig-584/plans/xifstatus', {xif: xif, planId: $routeParams.id, testId: testId})
-//		.then(function(response){
-////			console.log(response.data.chip.running);
-////			console.log(response.data.chip.completed);
-////			console.log(response.data.chip.error);
-//		});
-//	}
 }]);

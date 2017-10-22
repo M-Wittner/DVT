@@ -64,7 +64,7 @@
 				</td>
 				<td>
 					<ul ng-repeat="test in plan.tests">
-						<li ng-repeat="chip in test.chips ">{{chip.chip}}</li>
+						<li ng-repeat="chip in test.chips ">{{chip.chip}}<span class="pull-right glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span></li>
 					<ul>
 				</td>
 				<td>
