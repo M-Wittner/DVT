@@ -15,3 +15,5 @@ ERROR - 201720172017-1010-2222 1010:1010:4141 --> Query error: Column 'lineup' c
 ERROR - 201720172017-1010-2222 1010:1010:5959 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 48
 ERROR - 201720172017-1010-2222 1010:1010:0606 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 48
 ERROR - 201720172017-1010-2222 1010:1010:2929 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 48
+ERROR - 201720172017-1010-2222 1212:1010:2424 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2222 1212:1010:2525 --> 404 Page Not Found: Faviconico/index
