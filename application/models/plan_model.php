@@ -317,15 +317,25 @@ class plan_model extends CI_Model {
 			);
 //------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
 		} elseif($testObj->station[0] == 'PTAT/ABS/Vgb+TEMP'|| $testObj->station[0] == 'TalynM+A') {
-				$test = array(
-					'priority'=>$testObj->priority[0],
-					'lineup'=>'/',
-					'station'=>$testObj->station[0],
-					'name'=>$testObj->name[0]->test_name,
-					'notes'=>$notes,
-					'plan_id'=>$testObj->plan_id
-				);
-				$insertTest = $this->plan_model->add_test($test);
+			$test = array(
+				'priority'=>$testObj->priority[0],
+				'lineup'=>'/',
+				'station'=>$testObj->station[0],
+				'name'=>$testObj->name[0]->test_name,
+				'notes'=>$notes,
+				'plan_id'=>$testObj->plan_id
+			);
+//			$chipsArr = $testObj->chips;
+//			$insertTest = $this->plan_model->add_test($test);
+//			foreach($chipsArr as $result){
+//				$chip = array(
+//					'chip'=>$result->serial_number,
+//					'plan_id'=>$planId,
+//					'test_id'=>$testId
+//				);
+//			$insertChip = $this->plan_model->add_chips($chip);
+//			break;
+//			}
 		} else{
 			echo 'Station not operetional right now';
 			die();
@@ -360,31 +370,31 @@ class plan_model extends CI_Model {
 						$this->db->replace('test_xifs', $xif);
 						}
 				}
-//				die();
 			}
 		}
-//		die();
+		if($testObj->station[0] != 'TalynM+A'){
 		// Update temps
-		$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
-		$this->db->delete('test_temps');
-		foreach($testObj->temps as $i => $tempRes){
-			$temp = array(
-				'test_id'=>$testObj->id,
-				'plan_id'=>$testObj->plan_id,
-				'temp'=>$tempRes
-				);
-			$this->db->replace('test_temps', $temp);
-		}
-		// Update channels
-		$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
-		$this->db->delete('test_channels');
-		foreach($testObj->channels as $i => $channelRes){
-			$channel = array(
-				'test_id'=>$testObj->id,
-				'plan_id'=>$testObj->plan_id,
-				'channel'=>$channelRes
-				);
-			$this->db->replace('test_channels', $channel);
+			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+			$this->db->delete('test_temps');
+			foreach($testObj->temps as $i => $tempRes){
+				$temp = array(
+					'test_id'=>$testObj->id,
+					'plan_id'=>$testObj->plan_id,
+					'temp'=>$tempRes
+					);
+				$this->db->replace('test_temps', $temp);
+			}
+			// Update channels
+			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+			$this->db->delete('test_channels');
+			foreach($testObj->channels as $i => $channelRes){
+				$channel = array(
+					'test_id'=>$testObj->id,
+					'plan_id'=>$testObj->plan_id,
+					'channel'=>$channelRes
+					);
+				$this->db->replace('test_channels', $channel);
+			}
 		}
 //		var_dump($test);
 //		die();

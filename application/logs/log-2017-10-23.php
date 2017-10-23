@@ -83,3 +83,8 @@ ERROR - 201720172017-1010-2323 2121:1010:2929 --> Severity: Notice --> Undefined
 ERROR - 201720172017-1010-2323 2121:1010:2929 --> Query error: Column 'plan_id' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `notes`, `plan_id`) VALUES ('1', '/', 'TalynM+A', 'Tx', NULL, NULL)
 ERROR - 201720172017-1010-2323 2121:1010:0404 --> Severity: Notice --> Undefined property: stdClass::$channels C:\xampp\htdocs\application\models\plan_model.php 381
 ERROR - 201720172017-1010-2323 2121:1010:0404 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\plan_model.php 381
+ERROR - 201720172017-1010-2323 2121:1010:5151 --> Severity: Parsing Error --> syntax error, unexpected ')' C:\xampp\htdocs\application\models\plan_model.php 337
+ERROR - 201720172017-1010-2323 2121:1010:5151 --> Severity: Parsing Error --> syntax error, unexpected ')' C:\xampp\htdocs\application\models\plan_model.php 337
+ERROR - 201720172017-1010-2323 2121:1010:5757 --> Severity: Parsing Error --> syntax error, unexpected ')' C:\xampp\htdocs\application\models\plan_model.php 337
+ERROR - 201720172017-1010-2323 2121:1010:2222 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2323 2121:1010:2121 --> Severity: Parsing Error --> syntax error, unexpected 'else' (T_ELSE), expecting function (T_FUNCTION) C:\xampp\htdocs\application\models\plan_model.php 339
