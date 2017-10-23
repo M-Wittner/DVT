@@ -15,7 +15,7 @@
 				<th>Station Computer</th>
 				<th>WWC Computer</th>
 				<th>Chip Computer</th>
-				<th></th>
+				<th style="text-align: center">Modify</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,6 +25,8 @@
 				<td>{{ station.pc_wwc}}</td>
 				<td>{{ station.pc_chip}}</td>
 				<td>
+					<a href="#/admin/editstation/{{station.station}}" class="btn btn-warning btn-sm">Edit</a>
+				
 					<button class="btn btn-danger btn-sm" ng-click="removeStation()">Delete</button>
 				</td>
 			</tr>

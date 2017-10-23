@@ -74,6 +74,11 @@ class Admin extends CI_Controller {
 					'station'=>$postData->station[0],
 					'test_name'=>$postData->testName,
 				);
+			}elseif($postData->station[0] === "TalynM+A"){
+				$test = array(
+					'station'=>$postData->station[0],
+					'test_name'=>$postData->testName,
+				);
 			} else {
 				echo 'Not Yet';
 				die();
@@ -103,28 +108,61 @@ class Admin extends CI_Controller {
 		$newline = "\r\n";
 		$data = $this->dbutil->csv_from_result($chipList, $delimiter, $newline);
 		force_download('Web_Chip_List.csv', $data, TRUE);
-	}
-		public function removeChip(){
-			$chipId = json_decode(file_get_contents('php://input'));
-			$this->db->where(array('id'=>$chipId));
-			$status = $this->db->delete('params_chips');
-			if($status) {
-				echo 'success';
-			} else{
-				echo 'failure';
-			}
+	}	
+	public function removeChip(){
+		$chipId = json_decode(file_get_contents('php://input'));
+		$this->db->where(array('id'=>$chipId));
+		$status = $this->db->delete('params_chips');
+		if($status) {
+			echo 'success';
+		} else{
+			echo 'failure';
+		}
+	}				
+	public function removeTest(){
+		$test = json_decode(file_get_contents('php://input'));
+		$this->db->where(array('id'=>$test->id));
+		$status = $this->db->delete('params_test_names');
+		if($status) {
+			echo 'success';
+		} else{
+			echo 'failure';
+		}
 	}		
-		public function removeTest(){
-			$test = json_decode(file_get_contents('php://input'));
-			$this->db->where(array('id'=>$test->id));
-			$status = $this->db->delete('params_test_names');
-			if($status) {
-				echo 'success';
-			} else{
-				echo 'failure';
-			}
+	public function removeStation(){
+		$station = json_decode(file_get_contents('php://input'));
+		$this->db->where(array('id'=>$station->id));
+		$status = $this->db->delete('params_stations');
+		if($status) {
+			echo 'success';
+		} else{
+			echo 'failure';
+		}
+	}	
+	public function editStation(){
+		$station = json_decode(file_get_contents('php://input'));
+		$this->db->where(array('station'=>$station->station));
+		$stationRes = $this->db->get('params_stations')->result();
+//		die(var_dump($stationRes));
+		if($stationRes) {
+			echo json_encode($stationRes);
+		} else{
+			echo 'failure';
+		}
 	}
 	
+	public function updateStation(){
+		$station = json_decode(file_get_contents('php://input'));
+		$this->db->where(array('station'=>$station->station));
+		$status = $this->db->replace('params_stations', $station);
+//		die(var_dump($station));
+		if($status){
+			echo 'success';
+		} else {
+			echo 'fulire';
+		}
+	}
+		
 	public function search(){
 		$plans = $this->db->get('plans')->result();
 		

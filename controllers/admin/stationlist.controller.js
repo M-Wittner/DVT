@@ -4,7 +4,7 @@ myApp.controller('stationlistCtrl', ['$scope', '$location','$http', '$routeParam
 	if($scope.isAuthenticated == true) {
 		$http.get('http://wigig-584/admin/stationlist')
 		.then(function(response) {
-			console.log(response.data);
+//			console.log(response.data);
 			$scope.stations=response.data;
 		});
 
@@ -19,7 +19,7 @@ myApp.controller('stationlistCtrl', ['$scope', '$location','$http', '$routeParam
 		.then(function(response){
 			if(response.data == 'success'){
 				$window.scrollTo(0, 0);
-				var message = 'Station: '+testName+' was deleted';
+				var message = 'Station: '+stationName+' was deleted';
 				var id = Flash.create('success', message, 3500);
 				setTimeout(function(){$window.location.reload();}, 2000);
 			} else{
@@ -28,6 +28,6 @@ myApp.controller('stationlistCtrl', ['$scope', '$location','$http', '$routeParam
 				var id = Flash.create('danger', message, 3500);
 			}
 		});
-//		console.log(this.test.test_name);
+//		console.log(this.station);
 	}
 }]);

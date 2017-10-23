@@ -69,6 +69,7 @@
 	<script type="text/javascript" src="controllers/admin/chip.controller.js"></script>
 	<script type="text/javascript" src="controllers/admin/test.controller.js"></script>
 	<script type="text/javascript" src="controllers/admin/station.controller.js"></script>
+	<script type="text/javascript" src="controllers/admin/editstation.controller.js"></script>
 	<script type="text/javascript" src="controllers/admin/chiplist.controller.js"></script>
 	<script type="text/javascript" src="controllers/admin/testlist.controller.js"></script>
 	<script type="text/javascript" src="controllers/admin/stationlist.controller.js"></script>
@@ -133,9 +134,10 @@
 			</div>
 			<!-- /.container-fluid -->
 		</nav>
-		<flash-message></flash-message>
+		
 	
-	<div >
+	<div id="mainDiv">
+		<flash-message></flash-message>
 		<div ng-if=" isAuthenticated == false && location == register">
 			<div class="row " ng-controller="homeCtrl">
 				<div class="col-lg-6 col-sm-6 well">
@@ -175,8 +177,8 @@
 				</div>
 			</div>
 		</div>
-		<div id="mainDiv" ng-if=" isAuthenticated == true || location == register">
-			<div ng-view></div>
+		<div ng-if="isAuthenticated == true || location == register">
+			<div ng-view ></div>
 		</div>
 	</div>
 </body>

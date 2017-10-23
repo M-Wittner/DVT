@@ -17,3 +17,13 @@ ERROR - 201720172017-1010-2222 1010:1010:0606 --> Severity: Notice --> Undefined
 ERROR - 201720172017-1010-2222 1010:1010:2929 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 48
 ERROR - 201720172017-1010-2222 1212:1010:2424 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-2222 1212:1010:2525 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2222 1717:1010:5757 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2222 1717:1010:5757 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2222 1717:1010:5454 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2222 1818:1010:4141 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2222 1818:1010:4141 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2222 1818:1010:3636 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2222 1818:1010:3636 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2222 1818:1010:3636 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2222 2323:1010:3232 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2222 2323:1010:3232 --> 404 Page Not Found: Faviconico/index

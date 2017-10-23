@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	
@@ -50,6 +50,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 		.when('/admin/newstation', {
 			templateUrl: 'pages/admin/newstation.html',
 			controller: 'stationCtrl'
+	})
+		.when('/admin/editstation/:station', {
+			templateUrl: 'pages/admin/editstation.html',
+			controller: 'editStationCtrl'
 	})
 		.when('/admin/chiplist', {
 			templateUrl: 'pages/admin/chiplist.html',
@@ -195,8 +199,8 @@ myApp.factory('testParams', function($http, $log){
 		'R - Stations',
 		'M - Stations',
 		'Calibration',
-		'Full System',
-		'RFC/CAL',
+		'TalynM+A',
+//		'RFC/CAL',
 		'PTAT/ABS/Vgb+TEMP',
 	];
 	
@@ -224,6 +228,12 @@ myApp.factory('testParams', function($http, $log){
 	$http.get('http://wigig-584/params/testsPTAT')
 	.then(function(response){
 		testParams.params.nameListPTAT = response.data;
+//			console.log(response.data);
+	});
+	testParams.params.nameListFS = {};
+	$http.get('http://wigig-584/params/testsFS')
+	.then(function(response){
+		testParams.params.nameListFS = response.data;
 //			console.log(response.data);
 	});
 	
