@@ -90,18 +90,15 @@ class plan_model extends CI_Model {
 			}
 			$test->antennas = $antenna;	
 		}
-		$ch = $this->db->get_where('test_channels', array('test_id'=>$id->testId))->result();
+		if($test->station !='TalynM+A'){
+			$ch = $this->db->get_where('test_channels', array('test_id'=>$id->testId))->result();
 			foreach($ch as $i => $value){
-				$channel[$i] = $value->channel;
-			}
-		$test->channels = $channel;
+					$channel[$i] = $value->channel;
+				}
+			$test->channels = $channel;
+		}
 
 		$chip = $this->db->get_where('test_chips', array('test_id'=>$id->testId))->result();
-//			foreach($chip as $i => $value){
-//				$chip[$i] = $value->chip;
-//				
-//			}
-
 		$test->chips = $chip;
 
 		$temp = $this->db->get_where('test_temps', array('test_id'=>$id->testId))->result();
@@ -275,6 +272,11 @@ class plan_model extends CI_Model {
 		$testObj = $data->test;
 //		var_dump($data);
 //		die();
+		if(isset($testObj->notes)){
+			$notes = $testObj->notes;
+		} else {
+			$notes = null;
+		}
 		if($testObj->station[0] == "R-CB1" || $testObj->station[0] == "R-CB2"){
 			$test = array(
 				'plan_id'=>$testObj->plan_id,
@@ -288,7 +290,7 @@ class plan_model extends CI_Model {
 				'pin_additional'=>$testObj->pinAdd,
 				'mcs'=>$testObj->mcs,
 				'voltage'=>$testObj->voltage,
-				'notes'=>$testObj->notes,
+				'notes'=>$notes,
 			);
 			
 			// Update antennas
@@ -311,8 +313,19 @@ class plan_model extends CI_Model {
 				'station'=>$testObj->station[0],
 				'name'=>$testObj->name[0]->test_name,
 				'voltage'=>$testObj->voltage,
-				'notes'=>$testObj->notes,
+				'notes'=>$notes,
 			);
+//------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
+		} elseif($testObj->station[0] == 'PTAT/ABS/Vgb+TEMP'|| $testObj->station[0] == 'TalynM+A') {
+				$test = array(
+					'priority'=>$testObj->priority[0],
+					'lineup'=>'/',
+					'station'=>$testObj->station[0],
+					'name'=>$testObj->name[0]->test_name,
+					'notes'=>$notes,
+					'plan_id'=>$testObj->plan_id
+				);
+				$insertTest = $this->plan_model->add_test($test);
 		} else{
 			echo 'Station not operetional right now';
 			die();

@@ -50,3 +50,36 @@ ERROR - 201720172017-1010-2323 1616:1010:2020 --> 404 Page Not Found: Faviconico
 ERROR - 201720172017-1010-2323 1616:1010:2626 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-2323 1717:1010:3737 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-2323 1717:1010:3939 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2323 1818:1010:5050 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2323 1818:1010:0404 --> Severity: Notice --> Undefined property: stdClass::$priority C:\xampp\htdocs\application\controllers\plans.php 480
+ERROR - 201720172017-1010-2323 2020:1010:4545 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 97
+ERROR - 201720172017-1010-2323 2020:1010:0909 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 97
+ERROR - 201720172017-1010-2323 2020:1010:2323 --> Severity: Notice --> Undefined variable: chip C:\xampp\htdocs\application\models\plan_model.php 107
+ERROR - 201720172017-1010-2323 2020:1010:2626 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 97
+ERROR - 201720172017-1010-2323 2121:1010:0404 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 97
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 77
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 78
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 78
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 80
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 82
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 82
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 86
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 86
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 93
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 94
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 98
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\models\plan_model.php 98
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 101
+ERROR - 201720172017-1010-2323 2121:1010:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 104
+ERROR - 201720172017-1010-2323 2121:1010:5858 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2323 2121:1010:5353 --> Severity: Parsing Error --> syntax error, unexpected 'else' (T_ELSE), expecting function (T_FUNCTION) C:\xampp\htdocs\application\models\plan_model.php 325
+ERROR - 201720172017-1010-2323 2121:1010:5656 --> Severity: Notice --> Undefined variable: notes C:\xampp\htdocs\application\models\plan_model.php 320
+ERROR - 201720172017-1010-2323 2121:1010:5656 --> Severity: Notice --> Undefined variable: planId C:\xampp\htdocs\application\models\plan_model.php 322
+ERROR - 201720172017-1010-2323 2121:1010:5656 --> Query error: Column 'plan_id' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `notes`, `plan_id`) VALUES ('1', '/', 'TalynM+A', 'Tx', NULL, NULL)
+ERROR - 201720172017-1010-2323 2121:1010:3434 --> Severity: Notice --> Undefined variable: notes C:\xampp\htdocs\application\models\plan_model.php 320
+ERROR - 201720172017-1010-2323 2121:1010:3434 --> Severity: Notice --> Undefined variable: planId C:\xampp\htdocs\application\models\plan_model.php 322
+ERROR - 201720172017-1010-2323 2121:1010:3434 --> Query error: Column 'plan_id' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `notes`, `plan_id`) VALUES ('1', '/', 'TalynM+A', 'Tx', NULL, NULL)
+ERROR - 201720172017-1010-2323 2121:1010:2929 --> Severity: Notice --> Undefined variable: planId C:\xampp\htdocs\application\models\plan_model.php 327
+ERROR - 201720172017-1010-2323 2121:1010:2929 --> Query error: Column 'plan_id' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `notes`, `plan_id`) VALUES ('1', '/', 'TalynM+A', 'Tx', NULL, NULL)
+ERROR - 201720172017-1010-2323 2121:1010:0404 --> Severity: Notice --> Undefined property: stdClass::$channels C:\xampp\htdocs\application\models\plan_model.php 381
+ERROR - 201720172017-1010-2323 2121:1010:0404 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\plan_model.php 381

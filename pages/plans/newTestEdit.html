@@ -81,7 +81,7 @@
 					</multiselect>
 				</div>
 			</div>
-			<div class="col-md-2" ng-if="test.station == 'M-CB1'  test.station == 'M-CB2'  test.station == 'Calibration'">
+			<div class="col-md-2" ng-if="test.station == 'M-CB1' || test.station == 'M-CB2' || test.station == 'Calibration'">
 				<div class="panel-body">
 					<span class="label label-primary">Antenna:</span>
 					<multiselect ng-model="test.antenna" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">

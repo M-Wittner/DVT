@@ -473,6 +473,27 @@ class Plans extends CI_Controller {
 							$this->plan_model->add_channels($channel);
 		//					print_r($channel);
 						};
+//------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
+					} elseif($testArr->station[0] == 'PTAT/ABS/Vgb+TEMP'|| $testArr->station[0] == 'TalynM+A') {
+							$chipsArr = $testArr->chips;
+							$test = array(
+								'priority'=>$testArr->priority[0],
+								'lineup'=>'/',
+								'station'=>$testArr->station[0],
+								'name'=>$testArr->name[0]->test_name,
+								'notes'=>$notes,
+								'plan_id'=>$planId
+							);
+							$insertTest = $this->plan_model->add_test($test);
+							$testId = $this->plan_model->tests_id($insertTest);
+							foreach($chipsArr as $result){
+								$chip = array(
+									'chip'=>$result->serial_number,
+									'plan_id'=>$planId,
+									'test_id'=>$testId
+								);
+								$insertChip = $this->plan_model->add_chips($chip);
+							}
 					} else {
 						echo 'not R or M station';
 					}

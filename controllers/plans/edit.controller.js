@@ -10,23 +10,9 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	.then(function(response){
 //		$scope.plan = response.data.plan[0];
 		$scope.test = response.data;
-//		$scope.test.antennas = response.data.antennas;
-//		$scope.test.channels = response.data.channels;
-//		$scope.test.temps = response.data.temps;
-//		$scope.test.chips = response.data.chips;
 		$scope.test.mcs = parseInt(response.data.mcs);
 		$scope.test.voltage = parseInt(response.data.voltage);
-//		$scope.test.pinFrom = parseInt(response.data.test[0].pin_from);
-//		$scope.test.pinTo = parseInt(response.data.test[0].pin_to);
-//		$scope.test.pinStep = parseInt(response.data.test[0].pin_step);
-//		$scope.test.pinAdd = parseInt(response.data.test[0].pin_additional);
-//		$scope.test.xifs = response.data.xifs;
-//		$scope.test.name = response.data.name;
-//		$scope.test.lineup = response.data.test[0].lineup;
-//		$scope.test.priority = response.data.test[0].priority;
-//		$scope.test.station = response.data.test[0].station;
-//		console.log(response.data.test);
-//		console.log(response.data);
+		console.log(response.data);
 	});
 		
 	} else {
