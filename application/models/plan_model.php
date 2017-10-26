@@ -20,51 +20,53 @@ class plan_model extends CI_Model {
 	function get_plan($id) {
 		$q = $this->db->get_where('plans', array('id'=> $id))->result();
 		$tests =$this->db->get_where('tests', array('plan_id'=>$id))->result();
-		$sql = "SELECT id FROM `tests` WHERE plan_id = ?";
-		$query = $this->db->query($sql, $id);
-		$testsIdArr = $query->result();
-		
-		$testsId = array();
-		foreach($testsIdArr as $i => $result){
-			$testsId[$i] = $result->id;
-		}
+//		$sql = "SELECT id FROM `tests` WHERE plan_id = ?";
+//		$query = $this->db->query($sql, $id);
+//		$testsIdArr = $query->result();
+////		die(var_dump($tests));
+//		$testsId = array();
+//		foreach($testsIdArr as $i => $result){
+//			$testsId[$i] = $result->id;
+//		}
 //		die(var_dump($tests));
-		foreach($testsId as $key => $id){
-			if($tests[$key]->station == 'M-CB1' || $tests[$key]->station == 'M-CB2') {
-				$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$id))->result();
-				$tests[$key]->xifs = $xifRes;
+		foreach($tests as $key => $res){
+			if($res->station == 'M-CB1' || $res->station == 'M-CB2') {
+				$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$res->id))->result();
+				$res->xifs = $xifRes;
 
-			} else if($tests[$key]->station == 'R-CB1' || $tests[$key]->station == 'R-CB2'){
-				$ant = $this->db->get_where('test_antennas', array('test_id'=>$id))->result();
+			} else if($res->station == 'R-CB1' || $res->station == 'R-CB2'){
+				$ant = $this->db->get_where('test_antennas', array('test_id'=>$res->id))->result();
 				foreach($ant as $i => $value){
 					$antenna[$i] = $value->antenna;
 				}
-				$tests[$key]->antennas = $antenna;	
-			}
-			if($tests[$key]->station != 'PTAT/ABS/Vgb+TEMP' || $tests[$key]->station != 'TalynM+A'){
-				$ch = $this->db->get_where('test_channels', array('test_id'=>$id))->result();
-					foreach($ch as $i => $value){
-						$channel[$i] = $value->channel;
-					}
-				$tests[$key]->channels = $channel;
+				$res->antennas = $antenna;	
 			}
 			
-			$chip = $this->db->get_where('test_chips', array('test_id'=>$id))->result();
+			$ch = $this->db->get_where('test_channels', array('test_id'=>$res->id))->result();
+//				foreach($ch as $i => $value){
+//					$channel[$i] = $value->channel;
+////					var_dump($channel[$i]);
+//				}
+			$res->channels = $ch;
+//			var_dump($ch);
+			
+			$chip = $this->db->get_where('test_chips', array('test_id'=>$res->id))->result();
 //			foreach($chip as $i => $value){
 //				$chip[$i] = $value->chip;
 //				
 //			}
 			
-			$tests[$key]->chips = $chip;
+			$res->chips = $chip;
 			
-			$temp = $this->db->get_where('test_temps', array('test_id'=>$id))->result();
+			$temp = $this->db->get_where('test_temps', array('test_id'=>$res->id))->result();
 			foreach($temp as $i => $value){
 				$temp[$i] = $value->temp;
 			}
-			$tests[$key]->temps = $temp;
-			$tests[$key]->stations = $this->db->get_where('params_stations', array('station'=>$tests[$key]->station))->result();
-//			var_dump($tests[$key]->stations);
+			$res->temps = $temp;
+			$res->stations = $this->db->get_where('params_stations', array('station'=>$res->station))->result();
+//			var_dump($res);
 		}
+//		var_dump($tests);
 //		$tests = (object) $tests;
 		$plan = array(
 			'plan'=>$q,
@@ -359,16 +361,19 @@ class plan_model extends CI_Model {
 				foreach($testObj->chips as $i => $chipRes){
 //					var_dump($chipRes);
 					foreach($testObj->xifs as $xifRes){
-//						var_dump($xifRes);
+//						var_dump($chipRes);
+//						var_dump($xifRes->xif);
+						
 						$xif = array(
 							'test_id'=>$testObj->id,
 							'plan_id'=>$testObj->plan_id,
 							'chip_id'=>$chipRes->id,
 							'chip'=>$chipRes->serial_number,
-							'xif'=>$xifRes
+							'xif'=>$xifRes->xif
 							);
 						$this->db->replace('test_xifs', $xif);
 						}
+//					die();
 				}
 			}
 		}

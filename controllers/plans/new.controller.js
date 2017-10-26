@@ -49,7 +49,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 			} else {
 				var message = response.data;
 				var id = Flash.create('danger', message, 3500);
-//				console.log(response.data);
+				console.log(response.data);
 			}
 		})
 //		console.log($scope.array);

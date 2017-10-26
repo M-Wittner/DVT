@@ -88,3 +88,13 @@ ERROR - 201720172017-1010-2323 2121:1010:5151 --> Severity: Parsing Error --> sy
 ERROR - 201720172017-1010-2323 2121:1010:5757 --> Severity: Parsing Error --> syntax error, unexpected ')' C:\xampp\htdocs\application\models\plan_model.php 337
 ERROR - 201720172017-1010-2323 2121:1010:2222 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-2323 2121:1010:2121 --> Severity: Parsing Error --> syntax error, unexpected 'else' (T_ELSE), expecting function (T_FUNCTION) C:\xampp\htdocs\application\models\plan_model.php 339
+ERROR - 201720172017-1010-2323 2222:1010:2424 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2323 2222:1010:2424 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2323 2323:1010:0303 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2323 2323:1010:0303 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2323 2323:1010:0303 --> Severity: Notice --> Undefined property: stdClass::$pcName C:\xampp\htdocs\application\controllers\admin.php 42
+ERROR - 201720172017-1010-2323 2323:1010:0303 --> Severity: Notice --> Undefined property: stdClass::$pcWwc C:\xampp\htdocs\application\controllers\admin.php 43
+ERROR - 201720172017-1010-2323 2323:1010:0303 --> Severity: Notice --> Undefined property: stdClass::$pcChip C:\xampp\htdocs\application\controllers\admin.php 44
+ERROR - 201720172017-1010-2323 2323:1010:0303 --> Query error: Column 'pc_name' cannot be null - Invalid query: INSERT INTO `params_stations` (`station`, `pc_name`, `pc_wwc`, `pc_chip`) VALUES ('54', NULL, NULL, NULL)
+ERROR - 201720172017-1010-2323 2323:1010:5858 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2323 2323:1010:5858 --> 404 Page Not Found: Faviconico/index

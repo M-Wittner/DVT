@@ -165,7 +165,7 @@
 						<div class="panel-body">
 							<span class="label label-primary">Channels:</span>
 							<ul class="list-group">
-								<li ng-if="(test.channels).length < (params.chList1).length" ng-repeat="channel in test.channels track by $index" class="list-group-item"> {{channel}}
+								<li ng-if="(test.channels).length < (params.chList1).length" ng-repeat="channel in test.channels track by $index" class="list-group-item"> {{channel.channel}}
 								</li>
 								<li ng-if="(test.channels).length == (params.chList1).length" class="list-group-item"> All Channels
 								</li>
