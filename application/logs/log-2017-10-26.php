@@ -51,3 +51,7 @@ ERROR - 201720172017-1010-2626 0404:1010:2424 --> Severity: Notice --> Trying to
 ERROR - 201720172017-1010-2626 0404:1010:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 334
 ERROR - 201720172017-1010-2626 0404:1010:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 336
 ERROR - 201720172017-1010-2626 0404:1010:4646 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2626 1616:1010:2121 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 119
+ERROR - 201720172017-1010-2626 1616:1010:2121 --> Query error: Column 'lineup' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`) VALUES ('2', NULL, 'M-CB1', 'TX-EVM', 12, NULL, 282)
+ERROR - 201720172017-1010-2626 1616:1010:3232 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 119
+ERROR - 201720172017-1010-2626 1616:1010:3232 --> Query error: Column 'lineup' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`) VALUES ('2', NULL, 'M-CB1', 'TX-EVM', 12, NULL, 283)
