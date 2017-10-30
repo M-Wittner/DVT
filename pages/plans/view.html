@@ -128,6 +128,7 @@
 							<span class="label label-primary">XIF:</span>
 							<table class="table col-xs-3 col-sm-3 col-md-3">
 								<thead>
+<<<<<<< HEAD
 									<tr>
 										<th class="col-xs-3 col-sm-3 col-md-3">chip/xif</th>
 										<th ng-repeat="xif in test.xifs| unique: 'xif'">{{xif.xif}}</th>
@@ -141,6 +142,21 @@
 										<td ng-repeat="xifRes in test.xifs" ng-click="xifStatus(xifRes, chip.chip, chip.test_id)" ng-if="xifRes.chip == chip.chip"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == true, 'glyphicon-ok': xifRes.completed == true, 'glyphicon-remove': xifRes.error == true}"></span></td>
 									</tr>
 								</tbody>
+=======
+								<tr>
+									<th class="col-xs-3 col-sm-3 col-md-3">chip/xif</th>
+									<th ng-repeat="xif in test.xifs| unique: 'xif'">{{xif.xif}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="chip in test.chips">
+									<td>
+										{{chip.chip}}
+									</td>
+									<td ng-repeat="xifRes in test.xifs"  ng-click="xifStatus(xifRes)" ng-if="xifRes.chip == chip.chip"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == '1', 'glyphicon-ok': xifRes.completed == '1', 'glyphicon-remove': xifRes.error == '1'}"></span></td>
+								</tr>
+							</tbody>
+>>>>>>> master
 							</table>
 						</div>
 						<div class="panel-body col-md-offset-1 col-md-3" ng-if="test.station == 'Calibration'">

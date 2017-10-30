@@ -272,7 +272,7 @@ class plan_model extends CI_Model {
 	function update_test($data){
 //		$planObj = $data->plan;
 		$testObj = $data->test;
-//		var_dump($data);
+//		var_dump($testObj->xif);
 //		die();
 		if(isset($testObj->notes)){
 			$notes = $testObj->notes;
@@ -359,11 +359,17 @@ class plan_model extends CI_Model {
 				$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 				$this->db->delete('test_xifs');
 				foreach($testObj->chips as $i => $chipRes){
+<<<<<<< HEAD
 //					var_dump($chipRes);
 					foreach($testObj->xifs as $xifRes){
 //						var_dump($chipRes);
 //						var_dump($xifRes->xif);
 						
+=======
+//					var_dump($testObj->xif);
+					foreach($testObj->xif as $xifRes){
+//						var_dump($xifRes);
+>>>>>>> master
 						$xif = array(
 							'test_id'=>$testObj->id,
 							'plan_id'=>$testObj->plan_id,
@@ -449,25 +455,25 @@ class plan_model extends CI_Model {
 	
 	function update_xif_status($result){
 //		die(var_dump($result));
-		$runs = $result->xif->running;
-		$complete = $result->xif->completed;
-		$error = $result->xif->error;
+		$runs = $result->running;
+		$complete = $result->completed;
+		$error = $result->error;
 		if($runs == false && $complete == false && $error == false){
-			$this->db->where(array('chip_id'=>$result->xif->chip_id, 'plan_id'=>$result->planId, 'test_id'=>$result->testId, 'id'=>$result->xif->id));
+			$this->db->where(array('id'=>$result->id));
 			$insertStatus = $this->db->update('test_xifs', array('running'=>true, 'completed'=>false, 'error'=>false));
 		} else if($runs == true && $complete == false && $error == false){
-			$this->db->where(array('chip_id'=>$result->xif->chip_id, 'plan_id'=>$result->planId, 'test_id'=>$result->testId ,'id'=>$result->xif->id));
+			$this->db->where(array('id'=>$result->id));
 			$insertStatus = $this->db->update('test_xifs', array('running'=>false, 'completed'=>true, 'error'=>false));
 		} else if($runs == false && $complete == true && $error == false){
-			$this->db->where(array('chip_id'=>$result->xif->chip_id, 'plan_id'=>$result->planId, 'test_id'=>$result->testId ,'id'=>$result->xif->id));
+			$this->db->where(array('id'=>$result->id));
 			$insertStatus = $this->db->update('test_xifs', array('running'=>false, 'completed'=>false ,'error'=>true));
 		} else if($runs == false && $complete == false && $error == true){
-			$this->db->where(array('chip_id'=>$result->xif->chip_id, 'plan_id'=>$result->planId, 'test_id'=>$result->testId ,'id'=>$result->xif->id));
+			$this->db->where(array('id'=>$result->id));
 			$insertStatus = $this->db->update('test_xifs', array('running'=>false, 'completed'=>false, 'error'=>false));
 		} else{
 			echo 'nothing';
 		}
-		return $result;
+		return $this->db->get_where('test_xifs', array('id'=>$result->id))->result();
 	}
 	
 	function delete_test($id){
