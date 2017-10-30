@@ -142,7 +142,7 @@
 									<td>
 										{{chip.chip}}
 									</td>
-									<td ng-repeat="xifRes in test.xifs"  ng-click="xifStatus(xifRes, chip.chip, chip.test_id)" ng-if="xifRes.chip == chip.chip"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == true, 'glyphicon-ok': xifRes.completed == true, 'glyphicon-remove': xifRes.error == true}"></span></td>
+									<td ng-repeat="xifRes in test.xifs"  ng-click="xifStatus(xifRes)" ng-if="xifRes.chip == chip.chip"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == '1', 'glyphicon-ok': xifRes.completed == '1', 'glyphicon-remove': xifRes.error == '1'}"></span></td>
 								</tr>
 							</tbody>
 							</table>

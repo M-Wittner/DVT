@@ -444,25 +444,25 @@ class plan_model extends CI_Model {
 	
 	function update_xif_status($result){
 //		die(var_dump($result));
-		$runs = $result->xif->running;
-		$complete = $result->xif->completed;
-		$error = $result->xif->error;
+		$runs = $result->running;
+		$complete = $result->completed;
+		$error = $result->error;
 		if($runs == false && $complete == false && $error == false){
-			$this->db->where(array('chip_id'=>$result->xif->chip_id, 'plan_id'=>$result->planId, 'test_id'=>$result->testId, 'id'=>$result->xif->id));
+			$this->db->where(array('id'=>$result->id));
 			$insertStatus = $this->db->update('test_xifs', array('running'=>true, 'completed'=>false, 'error'=>false));
 		} else if($runs == true && $complete == false && $error == false){
-			$this->db->where(array('chip_id'=>$result->xif->chip_id, 'plan_id'=>$result->planId, 'test_id'=>$result->testId ,'id'=>$result->xif->id));
+			$this->db->where(array('id'=>$result->id));
 			$insertStatus = $this->db->update('test_xifs', array('running'=>false, 'completed'=>true, 'error'=>false));
 		} else if($runs == false && $complete == true && $error == false){
-			$this->db->where(array('chip_id'=>$result->xif->chip_id, 'plan_id'=>$result->planId, 'test_id'=>$result->testId ,'id'=>$result->xif->id));
+			$this->db->where(array('id'=>$result->id));
 			$insertStatus = $this->db->update('test_xifs', array('running'=>false, 'completed'=>false ,'error'=>true));
 		} else if($runs == false && $complete == false && $error == true){
-			$this->db->where(array('chip_id'=>$result->xif->chip_id, 'plan_id'=>$result->planId, 'test_id'=>$result->testId ,'id'=>$result->xif->id));
+			$this->db->where(array('id'=>$result->id));
 			$insertStatus = $this->db->update('test_xifs', array('running'=>false, 'completed'=>false, 'error'=>false));
 		} else{
 			echo 'nothing';
 		}
-		return $result;
+		return $this->db->get_where('test_xifs', array('id'=>$result->id))->result();
 	}
 	
 	function delete_test($id){
