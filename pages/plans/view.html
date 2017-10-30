@@ -45,7 +45,7 @@
 	<div class="panel-body" id="planBody" ng-repeat="test in tests | orderBy:[priority] | filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
 		<div id="desc" class="panel panel-default">
 			<div class="panel-heading" ng-click="onOff=!onOff">Station: {{test.station}}, Test: {{test.name}}</div>
-			<div ng-if="onOff" class="panel-body nga-default nga-stagger-slow nga-collapse nga-fade">
+			<div ng-if="onOff" class="panel-body nga-default nga-stagger-slow nga-fade">
 				<div ng-if="currentUser.username == plan.user_username || currentUser.rank > '10'" class="col-md-3 col-sm-2 col-sm-offset-10">
 					<a class="btn btn-xs btn-warning col-sm-offset-4" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
 					<a class="btn btn-xs btn-danger btn-crud" ng-click="removeTest()">
@@ -128,21 +128,6 @@
 							<span class="label label-primary">XIF:</span>
 							<table class="table col-xs-3 col-sm-3 col-md-3">
 								<thead>
-<<<<<<< HEAD
-									<tr>
-										<th class="col-xs-3 col-sm-3 col-md-3">chip/xif</th>
-										<th ng-repeat="xif in test.xifs| unique: 'xif'">{{xif.xif}}</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="chip in test.chips">
-										<td>
-											{{chip.chip}}
-										</td>
-										<td ng-repeat="xifRes in test.xifs" ng-click="xifStatus(xifRes, chip.chip, chip.test_id)" ng-if="xifRes.chip == chip.chip"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == true, 'glyphicon-ok': xifRes.completed == true, 'glyphicon-remove': xifRes.error == true}"></span></td>
-									</tr>
-								</tbody>
-=======
 								<tr>
 									<th class="col-xs-3 col-sm-3 col-md-3">chip/xif</th>
 									<th ng-repeat="xif in test.xifs| unique: 'xif'">{{xif.xif}}</th>
@@ -156,7 +141,6 @@
 									<td ng-repeat="xifRes in test.xifs"  ng-click="xifStatus(xifRes)" ng-if="xifRes.chip == chip.chip"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == '1', 'glyphicon-ok': xifRes.completed == '1', 'glyphicon-remove': xifRes.error == '1'}"></span></td>
 								</tr>
 							</tbody>
->>>>>>> master
 							</table>
 						</div>
 						<div class="panel-body col-md-offset-1 col-md-3" ng-if="test.station == 'Calibration'">

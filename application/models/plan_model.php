@@ -359,17 +359,9 @@ class plan_model extends CI_Model {
 				$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 				$this->db->delete('test_xifs');
 				foreach($testObj->chips as $i => $chipRes){
-<<<<<<< HEAD
-//					var_dump($chipRes);
-					foreach($testObj->xifs as $xifRes){
-//						var_dump($chipRes);
-//						var_dump($xifRes->xif);
-						
-=======
 //					var_dump($testObj->xif);
 					foreach($testObj->xif as $xifRes){
 //						var_dump($xifRes);
->>>>>>> master
 						$xif = array(
 							'test_id'=>$testObj->id,
 							'plan_id'=>$testObj->plan_id,

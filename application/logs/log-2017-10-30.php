@@ -77,3 +77,5 @@ ERROR - 201720172017-1010-3030 1616:1010:0000 --> 404 Page Not Found: Faviconico
 ERROR - 201720172017-1010-3030 1616:1010:1414 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-3030 1616:1010:1414 --> 404 Page Not Found: Faviconico/index
 >>>>>>> master
+ERROR - 201720172017-1010-3030 1818:1010:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\application\models\plan_model.php 362
+ERROR - 201720172017-1010-3030 1818:1010:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\application\models\plan_model.php 362
