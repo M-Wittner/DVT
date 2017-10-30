@@ -22,6 +22,12 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		$location.path('/');
 	};
 	
+	$scope.toggleTest = function(index){
+		console.log(index);
+		$scope.toggleCollapse = !$scope.toggleCollapse;
+		setTimeout($scope.toggleFade = $scope.toggleFade, 1500);
+	}
+	
 	$scope.params = testParams.params;
 	$scope.lock = true;
 	

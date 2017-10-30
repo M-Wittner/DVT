@@ -42,18 +42,18 @@
         	</button>
 		</span>
 	</div>
-	<div class="panel-body" id="planBody">
-		<div id="desc" class="panel panel-default appear" ng-repeat="test in tests | orderBy:[priority] | filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
+	<div class="panel-body" id="planBody" ng-repeat="test in tests | orderBy:[priority] | filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
+		<div id="desc" class="panel panel-default">
 			<div class="panel-heading" ng-click="onOff=!onOff">Station: {{test.station}}, Test: {{test.name}}</div>
-			<div class="appear" ng-class="{on:onOff}" ng-show="onOff">
-				<div ng-show="currentUser.username == plan.user_username || currentUser.rank > '10'" class="col-md-3 col-sm-2 col-sm-offset-10">
+			<div ng-if="onOff" class="panel-body nga-default nga-stagger-slow nga-collapse nga-fade">
+				<div ng-if="currentUser.username == plan.user_username || currentUser.rank > '10'" class="col-md-3 col-sm-2 col-sm-offset-10">
 					<a class="btn btn-xs btn-warning col-sm-offset-4" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
 					<a class="btn btn-xs btn-danger btn-crud" ng-click="removeTest()">
 						Delete
 					</a>
 				</div>
 				<div class="row">
-					<div class="panel-body">
+					<div class="panel-body" >
 						<div class="col-md-2 col-sm-2">
 							<span class="label label-primary">Test Priority:</span>
 							<label class="form-control">{{test.priority}}</label>
