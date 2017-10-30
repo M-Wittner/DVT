@@ -270,7 +270,7 @@ class plan_model extends CI_Model {
 	function update_test($data){
 //		$planObj = $data->plan;
 		$testObj = $data->test;
-//		var_dump($data);
+//		var_dump($testObj->xif);
 //		die();
 		if(isset($testObj->notes)){
 			$notes = $testObj->notes;
@@ -357,8 +357,8 @@ class plan_model extends CI_Model {
 				$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 				$this->db->delete('test_xifs');
 				foreach($testObj->chips as $i => $chipRes){
-//					var_dump($chipRes);
-					foreach($testObj->xifs as $xifRes){
+//					var_dump($testObj->xif);
+					foreach($testObj->xif as $xifRes){
 //						var_dump($xifRes);
 						$xif = array(
 							'test_id'=>$testObj->id,
@@ -369,6 +369,7 @@ class plan_model extends CI_Model {
 							);
 						$this->db->replace('test_xifs', $xif);
 						}
+//					die();
 				}
 			}
 		}
