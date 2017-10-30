@@ -71,14 +71,14 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	}
 	
 	$scope.xifStatus = function(xif){
-		console.log(xif);
+//		console.log(xif);
 		$http.post('http://wigig-584/plans/xifstatus', xif)
 		.then(function(response){
 			this.xif = response.data[0];
 			var message = 'XIF '+this.xif.xif+' Status Updated!';
 			var id = Flash.create('success', message, 3500);
-//			setTimeout(function(){$window.location.reload();}, 2250);
-			console.log(this.xif);
+			setTimeout(function(){$window.location.reload();}, 2250);
+//			console.log(this.xif);
 //			$scope.$apply();
 //			$route.reload();
 		});

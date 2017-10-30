@@ -21,3 +21,6 @@ ERROR - 201720172017-1010-3030 0303:1010:1616 --> 404 Page Not Found: Faviconico
 ERROR - 201720172017-1010-3030 0303:1010:1616 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-3030 0303:1010:3535 --> 404 Page Not Found: Ng-table/filters
 ERROR - 201720172017-1010-3030 0303:1010:0808 --> 404 Page Not Found: Ng-table/filters
+ERROR - 201720172017-1010-3030 0404:1010:5151 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 49
+ERROR - 201720172017-1010-3030 0404:1010:5757 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-3030 0404:1010:5757 --> 404 Page Not Found: Faviconico/index
