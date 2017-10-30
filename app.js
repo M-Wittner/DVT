@@ -184,20 +184,20 @@ myApp.factory('testParams', function($http, $log){
 	var testParams = {};
 	testParams.params = {};
 	
-	testParams.params.stationList = [
-		"R-CB1",
-		'R-CB2',
-		'M-CB1',
-		'M-CB2',
-		'Calibration',
-		'TalynM+A',
-//		'RFC/CAL',
-		'PTAT/ABS/Vgb+TEMP',
-	];
-//	$http.get('http://wigig-584/params/stations')
-//	.then(function(response){
-//		testParams.params.stationList = response.data;
-//	});
+//	testParams.params.stationList = [
+//		"R-CB1",
+//		'R-CB2',
+//		'M-CB1',
+//		'M-CB2',
+//		'Calibration',
+//		'TalynM+A',
+////		'RFC/CAL',
+//		'PTAT/ABS/Vgb+TEMP',
+//	];
+	$http.get('http://wigig-584/params/stations')
+	.then(function(response){
+		testParams.params.stationList = response.data;
+	});
 	
 	testParams.params.newTest = [
 		'R - Stations',
