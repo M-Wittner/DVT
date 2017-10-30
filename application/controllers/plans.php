@@ -49,7 +49,7 @@ class Plans extends CI_Controller {
 						$antennasArr = $testArr->antenna;
 //						die(var_dump($testArr));
 						if(isset($testArr->calc)){
-							$time = $testArr->calc->ants*$testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins;
+							$time = $testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins*$testArr->calc->ants*$testArr->calc->temps*$testArr->calc->channels;
 						} else {
 							$time = null;
 						}
@@ -123,6 +123,11 @@ class Plans extends CI_Controller {
 							'notes'=>$notes,
 							'plan_id'=>$planId
 						);
+						if(isset($testArr->calc)){
+							$time = $testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->xifs*$testArr->calc->sweeps*$testArr->calc->temps*$testArr->calc->channels;
+						} else {
+							$time = null;
+						}
 						if($testArr->station[0] == 'Calibration'){
 							if(isset($testArr->miniC)){
 								$test['mini_circuits'] = $testArr->miniC;

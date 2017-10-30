@@ -52,6 +52,6 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 //				console.log(response.data);
 //			}
 //		})
-		console.log(this);
+		console.log($scope.array);
 	};
 }]);
