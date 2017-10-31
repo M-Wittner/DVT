@@ -180,20 +180,20 @@ myApp.factory('testParams', function($http, $log){
 	var testParams = {};
 	testParams.params = {};
 	
-	testParams.params.stationList = [
-		"R-CB1",
-		'R-CB2',
-		'M-CB1',
-		'M-CB2',
-		'Calibration',
-		'TalynM+A',
-//		'RFC/CAL',
-		'PTAT/ABS/Vgb+TEMP',
-	];
-//	$http.get('http://wigig-584/params/stations')
-//	.then(function(response){
-//		testParams.params.stationList = response.data;
-//	});
+//	testParams.params.stationList = [
+//		"R-CB1",
+//		'R-CB2',
+//		'M-CB1',
+//		'M-CB2',
+//		'Calibration',
+//		'TalynM+A',
+////		'RFC/CAL',
+//		'PTAT/ABS/Vgb+TEMP',
+//	];
+	$http.get('http://wigig-584/params/stations')
+	.then(function(response){
+		testParams.params.stationList = response.data;
+	});
 	
 	testParams.params.newTest = [
 		'R - Stations',
@@ -234,6 +234,13 @@ myApp.factory('testParams', function($http, $log){
 	$http.get('http://wigig-584/params/testsFS')
 	.then(function(response){
 		testParams.params.nameListFS = response.data;
+//			console.log(response.data);
+	});
+	
+	testParams.params.nameListRobot = {};
+	$http.get('http://wigig-584/params/testsRobot')
+	.then(function(response){
+		testParams.params.nameListRobot = response.data;
 //			console.log(response.data);
 	});
 	

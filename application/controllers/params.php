@@ -61,6 +61,12 @@ class Params extends CI_Controller {
 		$result = $data->result();
 		echo json_encode($result);
 	}
+	public function testsRobot(){
+		$this->db->where('station', 'Robot');
+		$data = $this->db->get('params_test_names');
+		$result = $data->result();
+		echo json_encode($result);
+	}
 	public function stations(){
 		$data = $this->db->get('params_stations');
 		$result = $data->result();
