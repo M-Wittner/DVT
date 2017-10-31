@@ -1,6 +1,25 @@
 #mainDiv {
 	margin-top: 80px;
 }
+.panel-default{
+	-webkit-transition:all .8s ease-in-out;
+	-moz-transition:all .8s ease-in-out;
+	-o-transition:all .8s ease-in-out;
+	transition:all .8s ease-in-out;
+}
+.panel-default.ng-hide-add,.panel-default.ng-hide-remove{
+	display:block!important;
+}
+
+.panel-default{
+	overflow:hidden;
+}
+
+.panel-default.ng-enter:not(.ng-enter-active),.panel-default.ng-hide-add.ng-hide-add-active,.panel-default.ng-hide-remove:not(.ng-hide-remove-active),.panel-default.ng-leave.ng-leave-active,.panel-default.ng-move{
+	max-height:0;
+	padding-top:0;
+	padding-bottom:0
+}
 
 ul {
     list-style-type: none;
