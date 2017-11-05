@@ -31,3 +31,13 @@ ERROR - 201720172017-1111-0202 1616:1111:4444 --> Severity: Notice --> Undefined
 ERROR - 201720172017-1111-0202 1616:1111:4444 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\plan_model.php 299
 ERROR - 201720172017-1111-0202 1616:1111:1616 --> Severity: Notice --> Undefined property: stdClass::$antennas C:\xampp\htdocs\application\models\plan_model.php 304
 ERROR - 201720172017-1111-0202 1616:1111:1616 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\plan_model.php 304
+ERROR - 201720172017-1111-0202 1717:1111:0707 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-0202 1717:1111:0707 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-0202 1717:1111:1313 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-0202 1818:1111:0505 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-0202 2020:1111:4848 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-0202 2020:1111:3939 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-0202 2020:1111:3939 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-0202 2323:1111:4242 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-0202 2323:1111:4242 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-0202 2323:1111:3232 --> 404 Page Not Found: Faviconico/index
