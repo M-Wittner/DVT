@@ -2,3 +2,5 @@
 
 ERROR - 201720172017-1111-0606 0000:1111:3838 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 49
 ERROR - 201720172017-1111-0606 0000:1111:3838 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 49
+ERROR - 201720172017-1111-0606 0000:1111:3434 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-0606 0000:1111:3434 --> 404 Page Not Found: Faviconico/index
