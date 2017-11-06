@@ -44,12 +44,12 @@
 	</div>
 	<div class="panel-body" id="planBody" ng-repeat="test in tests | orderBy:[priority] | filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
 		<div id="desc" class="panel panel-default">
-			<div class="panel-heading" ng-click="onOff=!onOff">
+			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="true" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
 				<strong>Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.name}}</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
 			</div>
-			<div>
-				<div ng-if="onOff" class="panel-body nga-default nga-stagger-slow nga-fade">
+			<div class="collapse fade" id="{{test.id}}">
+				<div class="panel-body">
 					<div ng-if="currentUser.username == plan.user_username || currentUser.rank > '10'" class="col-md-3 col-sm-2 col-sm-offset-10">
 						<a class="btn btn-xs btn-warning col-sm-offset-4" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
 						<a class="btn btn-xs btn-danger btn-crud" ng-click="removeTest()">

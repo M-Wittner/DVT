@@ -76,6 +76,10 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		});
 	}
 	
+	$scope.panelLink = function(){
+		console.log($location.path());
+	}
+	
 	$scope.xifStatus = function(xif){
 //		console.log(xif);
 		$http.post('http://wigig-584/plans/xifstatus', xif)
