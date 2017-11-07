@@ -11,6 +11,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 		templateUrl: 'pages/register.html',
 		controller: 'regCtrl'
 	})
+//		--------------------	DVT PAGES --------------------
 		.when('/plans', {
 			templateUrl: 'pages/plans/index.html',
 			controller: 'plansCtrl'
@@ -31,6 +32,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/comments/new.html',
 			controller: 'newCommentCtrl'
 	})
+//		--------------------	ADMIN PAGES --------------------
 		.when('/admin', {
 			templateUrl: 'pages/admin/panel.html',
 			controller: 'adminCtrl'
@@ -75,9 +77,29 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/plans/addtest.html',
 			controller: 'addTestCtrl'
 	})
+//		--------------------	Robot PAGES --------------------
+		.when('/robot', {
+			templateUrl: 'pages/robot/index.html',
+			controller: 'robotCtrl'
+	})
+		.when('/robot/new', {
+			templateUrl: 'pages/robot/new.html',
+			controller: 'newRobotPlanCtrl'
+	})
+		.when('/robot/:id', {
+			templateUrl: 'pages/robot/view.html',
+			controller: 'viewRobotPlanCtrl'
+	})
+		.when('/robot/:planId/test/:testId/edit', {
+			templateUrl: 'pages/robot/edit.html',
+			controller: 'editRobotPlanCtrl'
+	})
+//		.when('/robot/:planId/test/:testId/comments/new', {
+//			templateUrl: 'pages/robotnts/new.html',
+//			controller: 'newCommentCtrl'
+//	})
 		.otherwise({redirectTo: '/'});
-	;
-	
+
 	$locationProvider.hashPrefix('');
 
 }]);
@@ -86,6 +108,22 @@ myApp.directive('testForm', function(){
 	return {
 		templateUrl: 'pages/plans/newTest.html',
 //		controller: 'testCtrl',
+		scope: {
+			planParams: '=',
+			params: '=',
+			index: '&',
+			locked: '='
+		},
+		link: function(scope, element, attrs){
+			
+		}
+	}
+});
+
+myApp.directive('robotTestform', function(){
+	return {
+		templateUrl: 'pages/robot/robotTestform.html',
+		controller: 'newRobotPlanCtrl',
 		scope: {
 			planParams: '=',
 			params: '=',
