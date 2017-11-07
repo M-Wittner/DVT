@@ -25,48 +25,50 @@
 				</div>
 			</div>
 		</div>
-		<a class="btn btn-primary" role="button" data-toggle="collapse" href="#testStruct" aria-expanded="false" aria-controls="testStruct">
-  		Link with href
-		</a>
-		<div class="collapse" id="testStruct">
-			<div class="well">
-				<p>bla bla</p>
+		<div class="panel-body">
+			<div class="panel panel-default panel">
+			  <div class="panel-heading" Data-toggle="collapse" data-target="#struct" aria-expanded="false" aria-controls="struct">
+				  Test Struct
+				</div>
+				<div class="collapse panel-body" id="struct">
+					<div class="row">
+						<div class="col-md-2">
+						<span class="label label-primary">R Silicon</span>
+						<select ng-model="test.module" class="form-control">
+						  <option>Sparrow</option>
+						  <option>Talyn</option>
+						</select>
+					</div>
+					<div class="col-md-2">
+						<span class="label label-primary">M Silicon</span>
+						<select ng-model="test.module" class="form-control">
+						  <option>Sparrow</option>
+						  <option>Talyn</option>
+						</select>
+					</div>
+					<div class="col-md-4">
+						<span class="label label-primary">AZ Vector:</span></br>
+						<span>From</span>
+						<input ng-model="test.azFrom" type="number" class="Pin" ng-disabled="lock">
+						<span>Step</span>
+						<input ng-model="test.azStep" type="number" class="Pin" ng-disabled="lock">
+						<span>To</span>
+						<input ng-model="test.azTo" type="number" class="Pin" ng-disabled="lock">				
+					</div>
+					<div class="col-md-4">
+							<span class="label label-primary">EL Vector:</span></br>
+							<span>From</span>
+							<input ng-model="test.elFrom" type="number" class="Pin" ng-disabled="lock">
+							<span>Step</span>
+							<input ng-model="test.elStep" type="number" class="Pin" ng-disabled="lock">
+							<span>To</span>
+							<input ng-model="test.elTo" type="number" class="Pin" ng-disabled="lock">				
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="row panel-body">
-			<div class="col-md-2">
-				<span class="label label-primary">R Silicon</span>
-				<select ng-model="test.module" class="form-control">
-				  <option>Sparrow</option>
-				  <option>Talyn</option>
-				</select>
-			</div>
-			<div class="col-md-2">
-				<span class="label label-primary">M Silicon</span>
-				<select ng-model="test.module" class="form-control">
-				  <option>Sparrow</option>
-				  <option>Talyn</option>
-				</select>
-			</div>
-			<div class="col-md-4">
-				<span class="label label-primary">AZ Vector:</span></br>
-				<span>From</span>
-				<input ng-model="test.azFrom" type="number" class="Pin" ng-disabled="lock">
-				<span>Step</span>
-				<input ng-model="test.azStep" type="number" class="Pin" ng-disabled="lock">
-				<span>To</span>
-				<input ng-model="test.azTo" type="number" class="Pin" ng-disabled="lock">				
-			</div>
-		<div class="col-md-4">
-				<span class="label label-primary">EL Vector:</span></br>
-				<span>From</span>
-				<input ng-model="test.elFrom" type="number" class="Pin" ng-disabled="lock">
-				<span>Step</span>
-				<input ng-model="test.elStep" type="number" class="Pin" ng-disabled="lock">
-				<span>To</span>
-				<input ng-model="test.elTo" type="number" class="Pin" ng-disabled="lock">				
-			</div>
-		</div>
+			
 		<div class="panel-body">
 			<span class="label label-primary">File Name</span>
 			<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.file" ng-disabled="lock">
