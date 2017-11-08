@@ -1,0 +1,231 @@
+<div id="desc" ng-controller="newRobotPlanCtrl">
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-2">
+				<span class="label label-primary">Test Priority</span>
+				<multiselect ng-model="test.priority" options="testParams.params.priorityList" selection-limit="1" ng-disabled="lock">
+				</multiselect>
+			</div>
+			<div class="col-md-3">
+				<span class="label label-primary">Test Name</span>
+				<multiselect ng-model="test.name" options="testParams.params.nameListRobot" show-search="true" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
+				</multiselect>
+			</div>
+			<div class="col-md-3">
+				<span class="label label-primary">Module Placement:</span>
+				<select ng-model="test.module" class="form-control">
+				  <option>Standard</option>
+				  <option>Reversed</option>
+				</select>
+			</div>
+			<div class="col-md-4">
+				<span class="label label-primary">Matlab File (*.M)</span>
+				<input class="form-control" type="text" placeholder="Matlab File" name="lineup" ng-model="test.matlab" ng-disabled="lock">
+			</div>
+		</div>
+		<div class="row rowMarg">
+			<div class="col-md-3">
+				<span class="label label-primary">RF Cables</span>
+				<select ng-model="test.RF" class="form-control">
+				  <option>Standard</option>
+				  <option>Flip</option>
+				</select>
+			</div>
+			<div class="col-md-2">
+				<span class="label label-primary">Second Plarization Flag</span></br>
+				<input class="checkbox" ng-model="test.pol2Flag" type="checkbox" class="Pin" ng-disabled="lock" style="display: inline;"> On/Off
+			</div>
+			<div class="col-md-7">
+				<span class="label label-primary">Board File Name</span>
+				<input class="form-control" type="text" placeholder="Matlab File" name="lineup" ng-model="test.board" ng-disabled="lock">
+			</div>
+		</div>
+		<div class="row rowMarg">
+			<div class="col-md-12">
+				<span class="label label-primary">File Name</span>
+				<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.file" ng-disabled="lock">
+			</div>
+		</div>
+		<div>
+			<!---------------------	Test Struct	--------------------->
+			<div class="panel panel-default rowMarg">
+				<div class="panel-heading" Data-toggle="collapse" data-target="#struct" aria-expanded="false" aria-controls="struct">
+					Test Struct
+				</div>
+				<div class="collapse panel-body" id="struct">
+					<div class="row">
+						<div class="col-md-2">
+							<span class="label label-primary">R Silicon</span>
+							<select ng-model="test.module" class="form-control">
+							  <option>Sparrow</option>
+							  <option>Talyn</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<span class="label label-primary">M Silicon</span>
+							<select ng-model="test.module" class="form-control">
+							  <option>Sparrow</option>
+							  <option>Talyn</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<span class="label label-primary">AZ Vector:</span></br>
+							<span>From</span>
+							<input ng-model="test.azFrom" type="number" class="Pin" ng-disabled="lock">
+							<span>Step</span>
+							<input ng-model="test.azStep" type="number" class="Pin" ng-disabled="lock">
+							<span>To</span>
+							<input ng-model="test.azTo" type="number" class="Pin" ng-disabled="lock">
+						</div>
+						<div class="col-md-4">
+							<span class="label label-primary">EL Vector:</span></br>
+							<span>From</span>
+							<input ng-model="test.elFrom" type="number" class="Pin" ng-disabled="lock">
+							<span>Step</span>
+							<input ng-model="test.elStep" type="number" class="Pin" ng-disabled="lock">
+							<span>To</span>
+							<input ng-model="test.elTo" type="number" class="Pin" ng-disabled="lock">
+						</div>
+					</div>
+					<div class="row rowMarg">
+						<div class="col-md-4">
+							<span class="label label-primary">Checked Antennas</span>
+							<input class="form-control" type="text" placeholder="Checked Antennas" ng-model="test.checkedAnts" ng-disabled="lock">
+						</div>
+						<div class="col-md-2">
+							<span class="label label-primary">Sector Burn Flag </span></br>
+							<input class="checkbox" ng-model="test.sectorBflag" type="checkbox" class="Pin" ng-disabled="lock" style="display: inline;"> On/Off
+						</div>
+						<div class="col-md-3">
+							<span class="label label-primary">Desired Board File</span>
+							<input class="form-control" type="text" placeholder="Desired Board File" ng-model="test.dBoardFile" ng-disabled="lock">
+						</div>
+						<div class="col-md-3">
+							<span class="label label-primary">Default Antennas</span>
+							<input class="form-control" type="text" placeholder="Default Antennas" ng-model="test.defAnts" ng-disabled="lock">
+						</div>
+					</div>
+					<div class="row rowMarg">
+						<div class="col-md-2">
+							<span class="label label-primary">Direction</span>
+							<select ng-model="test.direct" class="form-control">
+							  <option>TX</option>
+							  <option>RX</option>
+							  <option>BRP</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<span class="label label-primary">BRP Struct File</span>
+							<input class="form-control" type="text" placeholder="Used Sectors" ng-model="test.strcutBRPfile" ng-disabled="lock">
+						</div>
+						<div class="col-md-4">
+							<span class="label label-primary">EIRP File</span>
+							<input class="form-control" type="text" placeholder="Used Sectors" ng-model="test.strcutEIRPfile" ng-disabled="lock">
+						</div>
+						<div class="col-md-4">
+							<span class="label label-primary">Path Meas File</span>
+							<input class="form-control" type="text" placeholder="Path Meas File" ng-model="test.strcutMeasFile" ng-disabled="lock">
+						</div>
+					</div>
+					<div class="row rowMarg">
+						<div class="col-md-6">
+							<span class="label label-primary">Used Sectors</span>
+							<input class="form-control" type="text" placeholder="Used Sectors" ng-model="test.strcutSec" ng-disabled="lock">
+						</div>
+						<div class="col-md-2">
+							<span class="label label-primary">Channel</span>
+							<multiselect ng-model="test.channel" options="testParams.params.robotChList" selection-limit="1" ng-disabled="lock">
+							</multiselect>
+						</div>
+						<div class="col-md-2">
+							<span class="label label-primary">Gain Index</span>
+							<multiselect ng-model="test.gainIdx" options="testParams.params.robotGainIdxList" selection-limit="1" ng-disabled="lock">
+							</multiselect>
+						</div>
+						<div class="col-md-2">
+							<span class="label label-primary">Polarization</span>
+							<select ng-model="test.polstruct" class="form-control">
+							  <option>Vpol</option>
+							  <option>Hpol</option>
+							</select>
+						</div>
+					</div>
+					<div class="row rowMarg">
+						<div class="col-md-12">
+							<span class="label label-primary">First Polarization Path</span>
+							<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.pol1path" ng-disabled="lock">
+						</div>
+					</div>
+					<div ng-if="test.name[0].test_name == 'rx pattern scan' || test.name[0].test_name == 'BRP scan'">
+						<div class="row rowMarg">
+							<div class="col-md-4">
+								<span class="label label-primary">Antenna</span>
+								<input class="form-control" type="text" placeholder="Antenna" ng-model="test.strcutAnt" ng-disabled="lock">
+							</div>
+							<div class="col-md-4">
+								<span class="label label-primary">Antenna Gain</span>
+								<input class="form-control" type="text" placeholder="Antenna Gain" ng-model="test.strcutAntGain" ng-disabled="lock">
+							</div>
+							<div class="col-md-4">
+								<span class="label label-primary">Chain Gain</span>
+								<input class="form-control" type="text" placeholder="Chain Gain" ng-model="test.strcutChainGain" ng-disabled="lock">
+							</div>
+						</div>
+						<div class="row rowMarg">
+							<div class="col-md-6">
+								<span class="label label-primary">Robot Azimuth</span>
+								<input class="form-control" type="text" placeholder="Robot Azimuth" ng-model="test.strcutRobAz" ng-disabled="lock">
+							</div>
+							<div class="col-md-6">
+								<span class="label label-primary">Robot Elevation</span>
+								<input class="form-control" type="text" placeholder="Robot Elevation" ng-model="test.strcutRobEl" ng-disabled="lock">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!---------------------	Test Struct	--------------------->
+		</div>
+		<div class="row panel-body">
+			<div class="col-md-8">
+				<span class="label label-primary">Notes:</span>
+				<div trumbowyg-ng placeholder="Test Notes" ng-model="test.notes" editor-config="{btns: ['viewHTML', ['undo', 'redo'],['strong', 'em', 'del'], ['link'], ['formatting'], ['foreColor', 'backColor'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['unorderedList', 'orderedList'], ['removeformat'],]}">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div ng-show="calc == true" class="col-md-12">
+			<div class="panel-body row">
+				<div class="col-md-9">
+					<span class="label label-primary">Time Calculator:</span>
+					<span>lineups</span>
+					<input ng-model="test.calc.lineups" type="number" class="Pin" ng-disabled="lock">
+					<span>Iteration time (sec)</span>
+					<input ng-model="test.calc.seconds" type="number" class="Pin" ng-disabled="lock">
+					<span>Number of Azimuth Degreess</span>
+					<input ng-model="test.calc.za" type="number" class="Pin" ng-disabled="lock">
+					<span>Number of Elevation Degrees</span>
+					<input ng-model="test.calc.el" type="number" class="Pin" ng-disabled="lock">
+				</div>
+				<div class="col-md-3">
+					<span class="label label-primary">Total:</span>
+					<label class="form-control">{{(test.calc.lineups * test.calc.seconds * test.calc.za * test.calc.el)/3600}} Hours Per Chip</label>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-md-12">
+	<button class="btn btn-xs btn-default addButton" ng-click="showCalc()" ng-disabled="lock">
+			Time Calculater
+		</button>
+	<button class="btn btn-xs btn-info addButton" ng-click="insertTest()" ng-disabled="lock">
+		Insert!
+	</button>
+	<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">
+		Edit!
+	</button>
+</div>
+</div>
+<hr/>

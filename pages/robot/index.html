@@ -1,0 +1,35 @@
+<div class="panel panel-primary">
+	<!-- Default panel contents -->
+	<div class="panel-heading">
+		All Plans
+		<span class="pull-right">
+			<a href="#/robot/new" class="btn btn-default btn-xs">Create New</a>
+			<a href="#/robot/search" class="btn btn-default btn-xs" ng-disabled="true">Search</a>
+		</span>
+	</div>
+	<div class="panel-body">
+	</div>
+	<!-- Table -->
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Author</th>
+				<th>View</th>
+				<th>Seen</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="plan in plans  | orderBy:'-date' track by $index">
+				<th class="PopupTooltip">{{ plan.date }}</th>
+				<td>{{ plan.user_username }}</td>
+				<td><a ng-click="view(plan.id)" class="btn btn-info">View</a></td>
+				<td>
+					<button ng-click="seen(plan)" ng-show="currentUser.rank > '10'" class="btn btn-xs btn-default">update</button>
+					<span ng-model="test.checked" class="btn-lg glyphicon" ng-class="{'glyphicon-ok check-seen': plan.checked == true, 'glyphicon-minus check-unseen': plan.checked == false}"></span>
+					<span ng-if="plan.checked == true">  By {{plan.checked_by}} </span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
