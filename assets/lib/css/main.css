@@ -6,6 +6,10 @@
 	margin-top: 15px;
 }
 
+#struct {
+	background-color: #e8e8e8;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -39,7 +43,7 @@ ul {
 .form-control{
 	height: inherit;
 	width: inherit;
-	min-width: 70%;
+	min-width: 100%;
 }
 .check-seen {
 	color: #419641;

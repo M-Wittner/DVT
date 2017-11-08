@@ -238,7 +238,7 @@ myApp.factory('testParams', function($http, $log){
 		'M - Stations',
 		'Calibration',
 		'TalynM+A',
-//		'RFC/CAL',
+		'Robot',
 		'PTAT/ABS/Vgb+TEMP',
 	];
 	
@@ -275,12 +275,38 @@ myApp.factory('testParams', function($http, $log){
 //			console.log(response.data);
 	});
 	
-	testParams.params.nameListRobot = {};
+//	testParams.params.nameListRobot = {};
 	$http.get('http://wigig-584/params/testsRobot')
 	.then(function(response){
 		testParams.params.nameListRobot = response.data;
 //			console.log(response.data);
 	});
+	
+	testParams.params.robotChList = [
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+	];	
+	
+	testParams.params.robotGainIdxList = [
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+		'6',
+		'7',
+		'8',
+		'9',
+		'10',
+		'11',
+		'12',
+		'13',
+		'14',
+		'15',
+	];
 	
 	testParams.params.xifList = [
 		'0',
