@@ -11,7 +11,14 @@
 				<multiselect ng-model="test.name" options="testParams.params.nameListRobot" show-search="true" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
 				</multiselect>
 			</div>
-			<div class="col-md-7">
+			<div class="col-md-3">
+				<span class="label label-primary">Module Placement:</span>
+				<select ng-model="test.module" class="form-control">
+				  <option>Standard</option>
+				  <option>Reversed</option>
+				</select>
+			</div>
+			<div class="col-md-4">
 				<span class="label label-primary">Matlab File (*.M)</span>
 				<input class="form-control" type="text" placeholder="Matlab File" name="lineup" ng-model="test.matlab" ng-disabled="lock">
 			</div>
@@ -178,18 +185,6 @@
 				</div>
 			</div>
 			<!---------------------	Test Struct	--------------------->
-		</div>
-
-		<div>
-			<div class="row rowMarg">
-				<div class="col-md-3">
-					<span class="label label-primary">Module Placement:</span>
-					<select ng-model="test.module" class="form-control">
-					  <option>Standard</option>
-					  <option>Reversed</option>
-					</select>
-				</div>
-			</div>
 		</div>
 		<div class="row panel-body">
 			<div class="col-md-8">
