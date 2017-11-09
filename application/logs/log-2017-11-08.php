@@ -13,3 +13,6 @@ ERROR - 201720172017-1111-0808 0808:1111:0808 --> 404 Page Not Found: Faviconico
 ERROR - 201720172017-1111-0808 1212:1111:4242 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 62
 ERROR - 201720172017-1111-0808 1212:1111:4242 --> Query error: Column 'lineup' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `pin_from`, `pin_to`, `pin_step`, `pin_additional`, `mcs`, `voltage`, `notes`, `seconds`, `plan_id`) VALUES ('1', NULL, 'R-CB2', 'TX-EVM', -46, -20, 2, '-15,-10', 12, 1, NULL, 14400, 318)
 >>>>>>> Work
+ERROR - 201720172017-1111-0808 1515:1111:5959 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-0808 1515:1111:2525 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-0808 1818:1111:1616 --> 404 Page Not Found: Faviconico/index
