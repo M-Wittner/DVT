@@ -35,9 +35,9 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 		});
 	}
 	
-	$scope.tooltip= function(id){
-		$('a').tooltip();
-	}
+//	$scope.tooltip= function(id){
+//		$('a').tooltip(id);
+//	}
 //	console.log($scope);
 //	$log.info($location.path());
 //	$log.info('test');
