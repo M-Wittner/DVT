@@ -29,7 +29,7 @@ Flash, Session, $cookies, $window) {
 				$location.path('/plans');
 				var message = 'Welcome, '+ user.username + '!';
 				var id = Flash.create('success', message, 5000);
-				console.log(date);
+//				console.log(date);
 			} else {
 				var message = 'Failed to log in';
 				var id = Flash.create('danger', message, 5000);

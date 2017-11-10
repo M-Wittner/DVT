@@ -1,5 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
+<<<<<<< HEAD
+ERROR - 201720172017-1010-3030 0000:1010:3535 --> 404 Page Not Found: Faviconico/index
+=======
 ERROR - 201720172017-1010-3030 0202:1010:0606 --> Severity: Error --> Call to a member function result() on boolean C:\xampp\htdocs\application\models\plan_model.php 459
 ERROR - 201720172017-1010-3030 0202:1010:0404 --> Severity: Notice --> Undefined variable: insertId C:\xampp\htdocs\application\models\plan_model.php 466
 ERROR - 201720172017-1010-3030 0202:1010:1414 --> Severity: Notice --> Undefined variable: insertId C:\xampp\htdocs\application\models\plan_model.php 466
@@ -73,3 +76,7 @@ ERROR - 201720172017-1010-3030 1616:1010:0000 --> 404 Page Not Found: Faviconico
 ERROR - 201720172017-1010-3030 1616:1010:0000 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-3030 1616:1010:1414 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-3030 1616:1010:1414 --> 404 Page Not Found: Faviconico/index
+>>>>>>> master
+ERROR - 201720172017-1010-3030 1818:1010:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\application\models\plan_model.php 362
+ERROR - 201720172017-1010-3030 1818:1010:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\application\models\plan_model.php 362
+ERROR - 201720172017-1010-3030 1919:1010:5454 --> 404 Page Not Found: Ng-table/filters

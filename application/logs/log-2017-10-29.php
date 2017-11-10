@@ -1,5 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
+<<<<<<< HEAD
+ERROR - 201720172017-1010-2929 1414:1010:5252 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2929 1414:1010:0303 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2929 1414:1010:5151 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1010-2929 1515:1010:1212 --> 404 Page Not Found: Faviconico/index
+=======
 ERROR - 201720172017-1010-2929 1010:1010:3535 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 49
 ERROR - 201720172017-1010-2929 1010:1010:4040 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 49
 ERROR - 201720172017-1010-2929 1313:1010:5959 --> Severity: Notice --> Undefined variable: channel C:\xampp\htdocs\application\models\plan_model.php 49
@@ -26,3 +32,4 @@ ERROR - 201720172017-1010-2929 1717:1010:2020 --> 404 Page Not Found: Faviconico
 ERROR - 201720172017-1010-2929 1717:1010:2020 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-2929 1818:1010:1919 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1010-2929 1818:1010:0606 --> 404 Page Not Found: Faviconico/index
+>>>>>>> master

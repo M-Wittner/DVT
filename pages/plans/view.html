@@ -42,224 +42,224 @@
         	</button>
 		</span>
 	</div>
-	<div>
-		<div class="panel-body" id="planBody">
-			
-		</div>
-		<div id="desc" ng-repeat="test in tests | orderBy:[priority] | filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
-			<div>
-				<div ng-show="currentUser.username == plan.user_username || currentUser.rank > '10'" class="col-md-3 col-sm-2 col-sm-offset-10">
-					<a class="btn btn-xs btn-warning col-sm-offset-4" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
-					<a class="btn btn-xs btn-danger btn-crud" ng-click="removeTest()">
-						Delete
-					</a>
-				</div>
-				<div class="row">
-					<div class="panel-body">
-						<div class="col-md-2 col-sm-2">
-							<span class="label label-primary">Test Priority:</span>
-							<label class="form-control">{{test.priority}}</label>
-						</div>
-						<div class="col-md-7 col-sm-8">
-							<span class="label label-primary">Test Lineup:</span>
-							<label class="form-control" id="lineup-box">{{test.lineup}}</label>
-						</div>
-						<div class="col-md-1 col-sm-2">
-							<span class="label label-primary">Test ID:</span>
-							<label class="form-control">{{test.id}}</label>
-						</div>
+	<div class="panel-body" id="planBody" ng-repeat="test in tests | orderBy: 'priority'| filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
+		<div id="desc" class="panel panel-default">
+			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="false" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
+				<strong>Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.name}}</strong>
+				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
+			</div>
+			<div class="collapse fade" id="{{test.id}}">
+				<div class="panel-body">
+					<div ng-if="currentUser.username == plan.user_username || currentUser.rank > '10'" class="col-md-3 col-sm-2 col-sm-offset-10">
+						<a class="btn btn-xs btn-warning col-sm-offset-4" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
+						<a class="btn btn-xs btn-danger btn-crud" ng-click="removeTest()">
+							Delete
+						</a>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2">
-						<div class="panel-body">
-							<span class="label label-primary">Station:</span>
-							<label class="form-control">{{test.station}}</label>
-							<ul class="list-group" >
-							  <li class="list-group-item">
-								<strong>Station Computer: </strong>  {{test.stations[0].pc_name}}
-								</li>
-							  <li class="list-group-item">
-								  <strong>WWC Computer: </strong>
-								  {{test.stations[0].pc_wwc}}
-								</li>
-							  <li class="list-group-item">
-								  <strong>Chip Computer: </strong>
-								  {{test.stations[0].pc_chip}}
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="panel-body">
-							<span class="label label-primary">Test Name:</span>
-							<label class="form-control">{{test.name}}</label>
-						</div>
-					</div>
-					<div class="panel-body col-md-3" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
-						<span class="label label-primary">Pin:</span></br>
-						<div class="col-md-4">
-							<span>From</span>
-							<label class="form-control">{{test.pin_from}}</label>
-						</div>
-						<div class="col-md-4">
-							<span>To</span>
-							<label class="form-control">{{test.pin_to}}</label>
-						</div>
-						<div class="col-md-4">
-							<span>Step</span>
-							<label class="form-inline form-control">{{test.pin_step}}</label>
-						</div>
-						<div class="col-md-5" ng-if="test.pin_additional != null">
-							<span>More</span>
-							<label class="form-control">{{test.pin_additional}}</label>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="panel-body col-md-10">
-							<span class="label label-primary">Chip S/N:</span>
-							<ul class="list-group">
-								<li ng-repeat="chip in test.chips track by $index" class="list-group-item" ng-click="chipStatus(chip, test.id)">{{chip.chip}}<span class="pull-right glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span></li>
-								<span class="pull-right btn btn-info btn-xs btn-crud" ng-click="reload()">update</span>
-							</ul>
-							
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4" ng-if="test.station == 'M-CB1' || test.station == 'M-CB2' || test.station == 'Calibration'">
-						<div class="panel-body col-md-5">
-							<span class="label label-primary">XIF:</span>
-							<table class="table col-xs-3 col-sm-3 col-md-3">
-								<thead>
-								<tr>
-									<th class="col-xs-3 col-sm-3 col-md-3">chip/xif</th>
-									<th ng-repeat="xif in test.xifs| unique: 'xif'">{{xif.xif}}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="chip in test.chips">
-									<td>
-										{{chip.chip}}
-									</td>
-									<td ng-repeat="xifRes in test.xifs"  ng-click="xifStatus(xifRes)" ng-if="xifRes.chip == chip.chip"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == '1', 'glyphicon-ok': xifRes.completed == '1', 'glyphicon-remove': xifRes.error == '1'}"></span></td>
-								</tr>
-							</tbody>
-							</table>
-						</div>
-						<div class="panel-body col-md-offset-1 col-md-3" ng-if="test.station == 'Calibration'">
-							<span class="label label-primary">Mini Circuits:</span></br>
-							<label class="form-control" ng-if="test.mini_circuits == true">On</label>
-							<label class="form-control" ng-if="test.mini_circuits == false">Off</label>
-						</div>
-					</div>
-					<div class="col-md-2" ng-if="test.station != 'PTAT/ABS/Vgb+TEMP' && test.station != 'TalynM+A'">
-						<div class="panel-body">
-							<span class="label label-primary">Temperatures:</span>
-							<ul class="list-group">
-								<li ng-repeat="temp in test.temps" class="list-group-item">{{temp}}</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md-2" ng-if="test.station != 'PTAT/ABS/Vgb+TEMP'">
-						<div class="panel-body">
-							<span class="label label-primary">Channels:</span>
-							<ul class="list-group">
-								<li ng-if="(test.channels).length < (params.chList1).length" ng-repeat="channel in test.channels track by $index" class="list-group-item"> {{channel}}
-								</li>
-								<li ng-if="(test.channels).length == (params.chList1).length" class="list-group-item"> All Channels
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md-2" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
-						<div class="panel-body">
-							<span class="label label-primary">Anthenas:</span>
-							<ul class="list-group">
-								<li ng-if="(test.antennas).length < (params.antList).length" ng-repeat="antenna in test.antennas track by $index" class="list-group-item"> {{antenna}}
-								</li>
-								<li ng-if="(test.antennas).length == (params.antList).length" class="list-group-item"> All Antennas
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md-3" ng-if="(test.station == 'R-CB1' || test.station == 'R-CB2') && test.seconds !== null">
-						<div class="panel-body">
-							<span class="label label-primary">time:</span>
-							<label class="form-control">
-								{{test.seconds/120}} Hours per chip</label>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2' || test.station == 'Calibration'">
-						<div class="panel-body col-md-6">
-							<span class="label label-primary">MCS:</span></br>
-							<label class="form-control">{{test.mcs}}</label>
-						</div>
-					</div>
-					<div class="col-md-2" ng-if="test.station != 'PTAT/ABS/Vgb+TEMP'">
-						<div class="panel-body">
-							<span class="label label-primary">Voltage:</span>
-							<label class="form-control">{{test.voltage}}</label>
-						</div>
-					</div>
-					<div class="col-md-6" ng-hide="test.notes == null">
-						<div class="panel-body">
-							<span class="label label-primary">Notes:</span>
-							<div trumbowyg-ng ng-disabled="lock" ng-model="test.notes" editor-config="{hideButtonTexts: true}">
+					<div class="row">
+						<div class="panel-body" >
+							<div class="col-md-2 col-sm-2">
+								<span class="label label-primary">Test Priority:</span>
+								<label class="form-control">{{test.priority}}</label>
+							</div>
+							<div class="col-md-7 col-sm-8">
+								<span class="label label-primary">Test Lineup:</span>
+								<label class="form-control" id="lineup-box">{{test.lineup}}</label>
+							</div>
+							<div class="col-md-1 col-sm-2">
+								<span class="label label-primary">Test ID:</span>
+								<label class="form-control">{{test.id}}</label>
 							</div>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<div class="panel-body">
+								<span class="label label-primary">Station:</span>
+								<label class="form-control">{{test.station}}</label>
+								<ul class="list-group">
+									<li class="list-group-item">
+										<strong>Station Computer: </strong> {{test.stations[0].pc_name}}
+									</li>
+									<li class="list-group-item">
+										<strong>WWC Computer: </strong> {{test.stations[0].pc_wwc}}
+									</li>
+									<li class="list-group-item">
+										<strong>Chip Computer: </strong> {{test.stations[0].pc_chip}}
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="panel-body">
+								<span class="label label-primary">Test Name:</span>
+								<label class="form-control">{{test.name}}</label>
+							</div>
+						</div>
+						<div class="panel-body col-md-3" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
+							<span class="label label-primary">Pin:</span></br>
+							<div class="col-md-4">
+								<span>From</span>
+								<label class="form-control">{{test.pin_from}}</label>
+							</div>
+							<div class="col-md-4">
+								<span>To</span>
+								<label class="form-control">{{test.pin_to}}</label>
+							</div>
+							<div class="col-md-4">
+								<span>Step</span>
+								<label class="form-inline form-control">{{test.pin_step}}</label>
+							</div>
+							<div class="col-md-5" ng-if="test.pin_additional != null">
+								<span>More</span>
+								<label class="form-control">{{test.pin_additional}}</label>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="panel-body col-md-10">
+								<span class="label label-primary">Chip S/N:</span>
+								<ul class="list-group">
+									<li ng-repeat="chip in test.chips track by $index" class="list-group-item" ng-click="chipStatus(chip, test.id)">{{chip.chip}}<span class="pull-right glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span></li>
+									<span class="pull-right btn btn-info btn-xs btn-crud" ng-click="reload()">update</span>
+								</ul>
+
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4" ng-if="test.station == 'M-CB1' || test.station == 'M-CB2' || test.station == 'Calibration'">
+							<div class="panel-body col-md-5">
+								<span class="label label-primary">XIF:</span>
+								<table class="table col-xs-3 col-sm-3 col-md-3">
+									<thead>
+									<tr>
+										<th class="col-xs-3 col-sm-3 col-md-3">chip/xif</th>
+										<th ng-repeat="xif in test.xifs| unique: 'xif'">{{xif.xif}}</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="chip in test.chips">
+										<td>
+											{{chip.chip}}
+										</td>
+										<td ng-repeat="xifRes in test.xifs"  ng-click="xifStatus(xifRes)" ng-if="xifRes.chip == chip.chip"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == '1', 'glyphicon-ok': xifRes.completed == '1', 'glyphicon-remove': xifRes.error == '1'}"></span></td>
+									</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="panel-body col-md-offset-1 col-md-3" ng-if="test.station == 'Calibration'">
+								<span class="label label-primary">Mini Circuits:</span></br>
+								<label class="form-control" ng-if="test.mini_circuits == true">On</label>
+								<label class="form-control" ng-if="test.mini_circuits == false">Off</label>
+							</div>
+						</div>
+						<div class="col-md-2" ng-if="test.station != 'PTAT/ABS/Vgb+TEMP' && test.station != 'TalynM+A'">
+							<div class="panel-body">
+								<span class="label label-primary">Temperatures:</span>
+								<ul class="list-group">
+									<li ng-repeat="temp in test.temps" class="list-group-item">{{temp}}</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-2" ng-if="test.station != 'PTAT/ABS/Vgb+TEMP'">
+							<div class="panel-body">
+								<span class="label label-primary">Channels:</span>
+								<ul class="list-group">
+									<li ng-if="(test.channels).length < (params.chList1).length" ng-repeat="channel in test.channels track by $index" class="list-group-item"> {{channel.channel}}
+									</li>
+									<li ng-if="(test.channels).length == (params.chList1).length" class="list-group-item"> All Channels
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-2" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
+							<div class="panel-body">
+								<span class="label label-primary">Anthenas:</span>
+								<ul class="list-group">
+									<li ng-if="(test.antennas).length < (params.antList).length" ng-repeat="antenna in test.antennas track by $index" class="list-group-item"> {{antenna}}
+									</li>
+									<li ng-if="(test.antennas).length == (params.antList).length" class="list-group-item"> All Antennas
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-3" ng-if="(test.station == 'R-CB1' || test.station == 'R-CB2') && test.seconds !== null">
+							<div class="panel-body">
+								<span class="label label-primary">time:</span>
+								<label class="form-control">
+									{{test.seconds/120}} Hours per chip</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2' || test.station == 'Calibration'">
+							<div class="panel-body col-md-6">
+								<span class="label label-primary">MCS:</span></br>
+								<label class="form-control">{{test.mcs}}</label>
+							</div>
+						</div>
+						<div class="col-md-2" ng-if="test.station != 'PTAT/ABS/Vgb+TEMP'">
+							<div class="panel-body">
+								<span class="label label-primary">Voltage:</span>
+								<label class="form-control">{{test.voltage}}</label>
+							</div>
+						</div>
+						<div class="col-md-6" ng-hide="test.notes == null">
+							<div class="panel-body">
+								<span class="label label-primary">Notes:</span>
+								<div trumbowyg-ng ng-disabled="lock" ng-model="test.notes" editor-config="{hideButtonTexts: true}">
+								</div>
+							</div>
+						</div>
+					</div>
+					<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/test/{{test.id}}/comments/new">Add New Comment</a>
 				</div>
-				<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/test/{{test.id}}/comments/new">Add New Comment</a>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div ng-repeat="comment in comments">
-	<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
-		<div class="panel-heading">
-			<h3 class="panel-title">test: {{comment.test_id}} {{comment.test_name}} ,From: {{comment.author}}
-				<div class="pull-right" ng-show="currentUser.username == comment.author  ||  currentUser.rank > '10'">
-					<button class="btn btn-xs btn-warning" href="#/plans/{{comment.plan_id}}/test/{{comment.test_id}}/comment/{{comment.id}}/edit" ng-click="editComment()">Edit</button>
-					<button class="btn btn-xs btn-danger" ng-click="removeComment()">
+	<div ng-repeat="comment in comments">
+		<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
+			<div class="panel-heading">
+				<h3 class="panel-title">test: {{comment.test_id}} {{comment.test_name}} ,From: {{comment.author}}
+					<div class="pull-right" ng-show="currentUser.username == comment.author  ||  currentUser.rank > '10'">
+						<button class="btn btn-xs btn-warning" href="#/plans/{{comment.plan_id}}/test/{{comment.test_id}}/comment/{{comment.id}}/edit" ng-click="editComment()">Edit</button>
+						<button class="btn btn-xs btn-danger" ng-click="removeComment()">
 						Delete
 					</button>
-				</div>
-			</h3>
-			
-		</div>
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-md-3 col-sm-3 col-xs-3">
-					<span class="label label-primary">Severity</span>
-					<label class="form-control">{{comment.severity}}</label>
-				</div>
-				<div class="col-md-3 col-sm-3 col-xs-3">
-					<span class="label label-primary">Test Station</span>
-					<label class="form-control">{{comment.station}}</label>
-				</div>
-				<div ng-if="comment.severity == 'Minor'">
-					<div class="col-md-3 col-sm-3 col-xs-3">
-						<span class="label label-primary">Test Name</span>
-						<label class="form-control">{{comment.test_name}}</label>
 					</div>
-					<div class="col-md-3 col-sm-3 col-xs-3">
-						<span class="label label-primary">Chip</span>
-						<label class="form-control">{{comment.chip}}</label>
-					</div>
-				</div>
+				</h3>
+
 			</div>
-			<div class="row">
-				<div class="col-md-8">
-					<span class="label label-primary">Details:</span>
-					<div class="col-md-2 col-sm-2" trumbowyg-ng ng-model="comment.details" ng-disabled="lock">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-3 col-sm-3 col-xs-3">
+						<span class="label label-primary">Severity</span>
+						<label class="form-control">{{comment.severity}}</label>
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-3">
+						<span class="label label-primary">Test Station</span>
+						<label class="form-control">{{comment.station}}</label>
+					</div>
+					<div ng-if="comment.severity == 'Minor'">
+						<div class="col-md-3 col-sm-3 col-xs-3">
+							<span class="label label-primary">Test Name</span>
+							<label class="form-control">{{comment.test_name}}</label>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-3">
+							<span class="label label-primary">Chip</span>
+							<label class="form-control">{{comment.chip}}</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<span class="label label-primary">Details:</span>
+						<div class="col-md-2 col-sm-2" trumbowyg-ng ng-model="comment.details" ng-disabled="lock">
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>

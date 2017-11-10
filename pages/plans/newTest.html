@@ -7,7 +7,11 @@
 					<multiselect ng-model="test.priority" options="testParams.params.priorityList" selection-limit="1" ng-disabled="lock">
 					</multiselect>
 				</div>
+<<<<<<< HEAD
 				<div class="col-md-10" ng-if="test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A' && test.station[0].station != 'Robot'">
+=======
+				<div class="col-md-10" ng-if="test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'">
+>>>>>>> AnimatioN-Work
 					<span class="label label-primary">Test Lineup</span>
 					<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.lineup" value="{{test.lineup}}" ng-disabled="lock">
 				</div>
@@ -17,7 +21,7 @@
 			<div class="col-md-4">
 				<div class="panel-body">
 					<span class="label label-primary">Station:</span>
-					<multiselect required ng-model="test.station" options="testParams.params.stationList" show-search="true" selection-limit="1" id-prop="id" display-prop="station" ng-disabled="lock">
+					<multiselect required ng-model="test.station" options="testParams.params.stationList" show-search="true" selection-limit="1" display-prop="station" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
@@ -35,8 +39,11 @@
 					<multiselect ng-if="test.station[0].station == 'PTAT/ABS/Vgb+TEMP'" ng-model="test.name" options="testParams.params.nameListPTAT" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
 					</multiselect>
 					<multiselect ng-if="test.station[0].station == 'TalynM+A'" ng-model="test.name" options="testParams.params.nameListFS" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
+<<<<<<< HEAD
 					</multiselect>
 					<multiselect ng-if="test.station[0].station == 'Robot'" ng-model="test.name" options="testParams.params.nameListRobot" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
+=======
+>>>>>>> AnimatioN-Work
 					</multiselect>
 				</div>
 			</div>
@@ -60,7 +67,11 @@
 				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
 		<div class="row" ng-if="test.station[0].station != 'Robot'">
+=======
+		<div class="row">
+>>>>>>> AnimatioN-Work
 			<div class="col-md-4" ng-if="test.station[0].station == 'R-CB1' || test.station[0].station == 'R-CB2'">
 				<div class="panel-body">
 					<span class="label label-primary">Pin:</span></br>
@@ -117,7 +128,11 @@
 				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
 		<div class="row" ng-if="test.station[0].station != 'Robot'">
+=======
+		<div class="row">
+>>>>>>> AnimatioN-Work
 			<div class="col-md-2" ng-if="test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'">
 				<div class="panel-body">
 					<span class="label label-primary">Voltage:</span>

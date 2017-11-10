@@ -107,7 +107,12 @@ class Plans extends CI_Controller {
 							$this->plan_model->add_antennas($antenna);
 						};
 //			------------- M station test -------------
+<<<<<<< HEAD
 					} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
+=======
+					} else if($testArr->station[0] == 'M-CB1' || $testArr->station[0] == 'M-CB2' || $testArr->station[0] == 'Calibration'){
+//						die(var_dump($testArr));
+>>>>>>> AnimatioN-Work
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
 						$xifsArr = $testArr->xif;
@@ -171,8 +176,9 @@ class Plans extends CI_Controller {
 								'test_id'=>$testId
 							);
 							$this->plan_model->add_channels($channel);
-		//					print_r($channel);
+//							print_r($channel);
 						};
+//						die();
 //------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
 					} elseif($testArr->station[0]->station == 'PTAT/ABS/Vgb+TEMP'|| $testArr->station[0]->station == 'TalynM+A') {
 							$chipsArr = $testArr->chips;

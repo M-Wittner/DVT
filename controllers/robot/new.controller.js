@@ -1,5 +1,6 @@
 myApp.controller('newRobotPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
-	$scope.isAuthenticated = AuthService.isAuthenticated();
+//	$scope.isAuthenticated = AuthService.isAuthenticated();
+	$scope.isAuthenticated = true;
 	$scope.testParams = testParams;
 //	console.log($scope.testParams);
 
@@ -12,8 +13,8 @@ myApp.controller('newRobotPlanCtrl', ['$scope', '$http', '$location', 'Flash', '
 	
 	$scope.array = [];
 	$scope.plan = {};
-	$scope.plan.userId = $cookies.getObject('loggedUser').userId;
-	$scope.plan.username = $cookies.getObject('loggedUser').username;
+//	$scope.plan.userId = $cookies.getObject('loggedUser').userId;
+//	$scope.plan.username = $cookies.getObject('loggedUser').username;
 	
 	$scope.testCount = [{}];
 	$scope.addTest = function(){
@@ -39,19 +40,19 @@ myApp.controller('newRobotPlanCtrl', ['$scope', '$http', '$location', 'Flash', '
 	};
 
 	$scope.addPlan = function() {
-		$http.post('http://wigig-584/plans/create', {plan: $scope.plan, test: $scope.array})
-		.then(function(response){
-			if(response.data == 'success'){
-				var message = 'Plan Created Succesfully!';
-				var id = Flash.create('success', message, 3500);
-				$location.path('/plans');
-				console.log(response.data);
-			} else {
-				var message = response.data;
-				var id = Flash.create('danger', message, 3500);
-				console.log(response.data);
-			}
-		})
-//		console.log($scope.array);
+//		$http.post('http://wigig-584/plans/create', {plan: $scope.plan, test: $scope.array})
+//		.then(function(response){
+//			if(response.data == 'success'){
+//				var message = 'Plan Created Succesfully!';
+//				var id = Flash.create('success', message, 3500);
+//				$location.path('/plans');
+//				console.log(response.data);
+//			} else {
+//				var message = response.data;
+//				var id = Flash.create('danger', message, 3500);
+//				console.log(response.data);
+//			}
+//		})
+		console.log($scope.array);
 	};
 }]);

@@ -1,4 +1,4 @@
-myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', function ($scope, $location, $http, Flash, $cookies, $window, AuthService) {
+myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', 'NgTableParams', function ($scope, $location, $http, Flash, $cookies, $window, AuthService, NgTableParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
 //	$scope.user = $scope.currentUser.username;
@@ -11,6 +11,7 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 			$scope.plans=response.data;
 			console.log($scope);
 		});
+		$scope.tableParams = new NgTableParams({}, { dataset: $scope.plans });
 		$scope.view = function(data){
 			$location.path('/plans/'+data);
 		};
@@ -35,7 +36,9 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 		});
 	}
 	
-	
+//	$scope.tooltip= function(id){
+//		$('a').tooltip(id);
+//	}
 //	console.log($scope);
 //	$log.info($location.path());
 //	$log.info('test');

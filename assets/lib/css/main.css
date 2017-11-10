@@ -44,6 +44,7 @@ ul {
 	height: inherit;
 	width: inherit;
 	min-width: 100%;
+	background-color: #fbfcff;
 }
 .check-seen {
 	color: #419641;
@@ -62,12 +63,9 @@ ul {
  }
 
 #desc {
-    width: 98%;
-	margin-left: 1%;
+    width: 100%;
 	padding-bottom: 1%;
     display: inline-block;
-    border: 4px solid #337ab7;
-    border-radius: 6px;
 }
 
 #details {
@@ -116,4 +114,16 @@ textarea {
 
 #subBTN {
     margin-bottom: 1%;
+}
+
+body{
+	background-color: #f7faff;
+}
+
+.panel{
+	background-color: #fbfcff;
+}
+
+.list-group-item{
+	background-color: #fbfcff;
 }

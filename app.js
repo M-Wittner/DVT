@@ -1,7 +1,13 @@
 var myApp = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngTable', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
-	
+	$httpProvider.defaults.cache = false;
+    if (!$httpProvider.defaults.headers.get) {
+      $httpProvider.defaults.headers.get = {};
+    }
+    // disable IE ajax request caching
+    $httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
+    //.....here proceed with your routes
 	$routeProvider
 		.when('/', {
 		templateUrl: 'pages/home.html',
@@ -103,6 +109,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 	$locationProvider.hashPrefix('');
 
 }]);
+
+myApp.run(function($animate) {
+  $animate.enabled(true);
+})
 
 myApp.directive('testForm', function(){
 	return {
