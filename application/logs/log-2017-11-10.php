@@ -40,3 +40,6 @@ ERROR - 201720172017-1111-1010 1212:1111:4343 --> Severity: Parsing Error --> sy
 ERROR - 201720172017-1111-1010 1212:1111:5050 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1111-1010 1212:1111:5050 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\application\controllers\plans.php 110
 ERROR - 201720172017-1111-1010 1212:1111:0404 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\application\controllers\plans.php 110
+ERROR - 201720172017-1111-1010 1212:1111:3838 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1010 1212:1111:0202 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1010 1212:1111:3131 --> 404 Page Not Found: Faviconico/index

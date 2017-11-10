@@ -5,10 +5,10 @@ myApp.controller('robotCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 //	console.log($scope.currentUser);
 	
 	if($scope.isAuthenticated == true) {
-		$http.get('http://wigig-584/plans')
-		.then(function(response) {
-//			console.log(AuthService.isAuthenticated());
-			$scope.plans=response.data;
+//		$http.get('http://wigig-584/plans')
+//		.then(function(response) {
+////			console.log(AuthService.isAuthenticated());
+//			$scope.plans=response.data;
 		});
 		$scope.view = function(data){
 			$location.path('/plans/'+data);
