@@ -19,6 +19,7 @@ class plan_model extends CI_Model {
 	
 	function get_plan($id) {
 		$q = $this->db->get_where('plans', array('id'=> $id))->result();
+//		$this->db->group_by('station');
 		$tests =$this->db->get_where('tests', array('plan_id'=>$id))->result();
 //		$sql = "SELECT id FROM `tests` WHERE plan_id = ?";
 //		$query = $this->db->query($sql, $id);
