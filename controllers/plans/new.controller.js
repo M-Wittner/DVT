@@ -39,7 +39,6 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	};
 
 	$scope.addPlan = function() {
-<<<<<<< HEAD
 		$http.post('http://wigig-584/plans/create', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
 			if(response.data == 'success'){
@@ -54,21 +53,5 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 			}
 		})
 //		console.log($scope.array);
-=======
-//		$http.post('http://wigig-584/plans/create', {plan: $scope.plan, test: $scope.array})
-//		.then(function(response){
-//			if(response.data == 'success'){
-//				var message = 'Plan Created Succesfully!';
-//				var id = Flash.create('success', message, 3500);
-//				$location.path('/plans');
-////				console.log(response.data)
-//			} else {
-//				var message = response.data;
-//				var id = Flash.create('danger', message, 3500);
-//				console.log(response.data);
-//			}
-//		})
-		console.log($scope.array);
->>>>>>> AnimatioN-Work
 	};
 }]);

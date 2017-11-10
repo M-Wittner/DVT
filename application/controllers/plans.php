@@ -107,12 +107,7 @@ class Plans extends CI_Controller {
 							$this->plan_model->add_antennas($antenna);
 						};
 //			------------- M station test -------------
-<<<<<<< HEAD
 					} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
-=======
-					} else if($testArr->station[0] == 'M-CB1' || $testArr->station[0] == 'M-CB2' || $testArr->station[0] == 'Calibration'){
-//						die(var_dump($testArr));
->>>>>>> AnimatioN-Work
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
 						$xifsArr = $testArr->xif;
