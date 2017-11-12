@@ -81,24 +81,33 @@ class plan_model extends CI_Model {
 		$test =$this->db->get_where('tests', array('plan_id'=>$id->planId, 'id'=>$id->testId))->result();
 		
 		$test = $test[0];
-//		die(var_dump($test->station));
+//		die(var_dump($test));
 		if($test->station == 'M-CB1' || $test->station == 'M-CB2') {
 			$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$id->testId))->result();
 			$test->xifs = $xifRes;
 
 		} else if($test->station == 'R-CB1' || $test->station == 'R-CB2'){
 			$ant = $this->db->get_where('test_antennas', array('test_id'=>$id->testId))->result();
-			foreach($ant as $i => $value){
-				$antenna[$i] = $value->antenna;
+			if(isset($ant)){
+				foreach($ant as $i => $value){
+					$antenna[$i] = $value->antenna;
+					}
+					$test->antennas = $ant;	
+			} else{
+				$ant = null;
 			}
-			$test->antennas = $antenna;	
 		}
 		if($test->station !='TalynM+A'){
 			$ch = $this->db->get_where('test_channels', array('test_id'=>$id->testId))->result();
-			foreach($ch as $i => $value){
-					$channel[$i] = $value->channel;
-				}
-			$test->channels = $channel;
+//			die(var_dump($ch));
+			if(isset($ch)){
+				foreach($ch as $i => $value){
+						$channel[$i] = $value->channel;
+					}
+				$test->channels = $ch;
+			}else{
+				$ch = null;
+			}
 		}
 
 		$chip = $this->db->get_where('test_chips', array('test_id'=>$id->testId))->result();
