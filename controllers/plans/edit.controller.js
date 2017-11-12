@@ -12,7 +12,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 		$scope.test = response.data;
 		$scope.test.mcs = parseInt(response.data.mcs);
 		$scope.test.voltage = parseInt(response.data.voltage);
-		console.log(response.data);
+//		console.log(response.data);
 	});
 		
 	} else {

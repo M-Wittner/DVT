@@ -91,6 +91,7 @@ class Plans extends CI_Controller {
 							$this->plan_model->add_temps($temp);
 						};
 						foreach($channelsArr as $result){
+//							var_dump($result);
 							$channel = array(
 								'channel'=>$result,
 								'plan_id'=>$planId,
@@ -98,6 +99,7 @@ class Plans extends CI_Controller {
 							);
 							$this->plan_model->add_channels($channel);
 						};
+//						die();
 						foreach($antennasArr as $result){
 							$antenna = array(
 								'antenna'=>$result,
@@ -105,7 +107,9 @@ class Plans extends CI_Controller {
 								'test_id'=>$testId
 							);
 							$this->plan_model->add_antennas($antenna);
+//							var_dump($result);
 						};
+//						die();
 //			------------- M station test -------------
 					} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
 						$chipsArr = $testArr->chips;
@@ -526,5 +530,12 @@ class Plans extends CI_Controller {
 		$id = json_decode(file_get_contents('php://input'));
 		$result = $this->plan_model->delete_comment($id);
 		return $result;
+	}
+	
+	function planStatus(){
+		$id = json_decode(file_get_contents('php://input'));
+		$this->db->where('plan_id', $id);
+		$test = $this->db->get('tests')->result();
+		echo json_encode($test);
 	}
 }

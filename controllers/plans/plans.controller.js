@@ -9,7 +9,6 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 		.then(function(response) {
 //			console.log(AuthService.isAuthenticated());
 			$scope.plans=response.data;
-			console.log($scope);
 		});
 		$scope.tableParams = new NgTableParams({}, { dataset: $scope.plans });
 		$scope.view = function(data){
@@ -36,10 +35,13 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 		});
 	}
 	
-//	$scope.tooltip= function(id){
-//		$('a').tooltip(id);
-//	}
-//	console.log($scope);
-//	$log.info($location.path());
-//	$log.info('test');
+	$scope.tooltip= function(id){
+		
+//		$http.post('http://wigig-584/plans/planStatus', id)
+//		.then(function(response){
+//			console.log(response.data);
+//			$scope.tests = response.data;
+//		});
+	}
+	$('[data-toggle="tooltip"]').tooltip();
 }]);

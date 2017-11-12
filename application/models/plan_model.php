@@ -311,7 +311,7 @@ class plan_model extends CI_Model {
 			);
 			
 			// Update antennas
-			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+			$this->db->where(array('test_id'=>$testObj->id));
 			$this->db->delete('test_antennas');
 			foreach($testObj->antenna as $i => $antennaRes){
 				$antenna = array(
@@ -319,9 +319,10 @@ class plan_model extends CI_Model {
 					'plan_id'=>$testObj->plan_id,
 					'antenna'=>$antennaRes
 					);
-//				die(var_dump($antennaRes));
+//				var_dump($antennaRes);
 				$this->db->replace('test_antennas', $antenna);
 			}
+//			die();
 		}elseif($testObj->station[0]->station == "M-CB1" || $testObj->station[0]->station == "M-CB2"){
 			$test = array(
 				'plan_id'=>$testObj->plan_id,
@@ -377,12 +378,13 @@ class plan_model extends CI_Model {
 //					var_dump($testObj->xif);
 					foreach($testObj->xif as $xifRes){
 //						var_dump($xifRes);
+//						die();
 						$xif = array(
 							'test_id'=>$testObj->id,
 							'plan_id'=>$testObj->plan_id,
 							'chip_id'=>$chipRes->id,
 							'chip'=>$chipRes->serial_number,
-							'xif'=>$xifRes->xif
+							'xif'=>$xifRes
 							);
 						$this->db->replace('test_xifs', $xif);
 						}
@@ -406,10 +408,11 @@ class plan_model extends CI_Model {
 			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 			$this->db->delete('test_channels');
 			foreach($testObj->channels as $i => $channelRes){
+//				die(var_dump($channelRes));
 				$channel = array(
 					'test_id'=>$testObj->id,
 					'plan_id'=>$testObj->plan_id,
-					'channel'=>$channelRes
+					'channel'=>$channelRes->channel
 					);
 				$this->db->replace('test_channels', $channel);
 			}
