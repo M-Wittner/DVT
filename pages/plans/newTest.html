@@ -36,9 +36,17 @@
 					</multiselect>
 					<multiselect ng-if="test.station[0].station == 'TalynM+A'" ng-model="test.name" options="testParams.params.nameListFS" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
 					</multiselect>
+					<multiselect ng-if="test.station[0].station == 'Robot'" ng-model="test.name" options="testParams.params.nameListRobot" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
+					</multiselect>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4" ng-if="test.station[0].station == 'Robot'">
+				<div class="panel-body">
+					<span class="label label-primary">Matlab File:</span>
+					<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.matlab" ng-disabled="lock">
+				</div>
+			</div>
+			<div class="col-md-4" ng-if="test.station[0].station != 'Robot'">
 				<div class="panel-body">
 					<span class="label label-primary">Chip S/N:</span>
 					<multiselect ng-if="test.station[0].station == 'M-CB1' || test.station[0].station == 'M-CB2' || test.station[0].station == 'Calibration'" ng-model="test.chips" options="testParams.params.chipListM" id-prop="id" display-prop="serial_number" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
@@ -118,6 +126,67 @@
 			</div>
 			<div class="col-md-8">
 				<div class="panel-body" >
+					<span class="label label-primary" >Notes:</span>
+					<div trumbowyg-ng placeholder="Test Notes"
+						 ng-model="test.notes"
+						 editor-config="{btns: ['viewHTML', ['undo', 'redo'],['strong', 'em', 'del'], ['link'], ['formatting'], ['foreColor', 'backColor'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['unorderedList', 'orderedList'], ['removeformat'],]}">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-if="test.station[0].station == 'Robot'" class="panel-body">
+			<div class="row panel-body">
+				<span class="label label-primary">File Name</span>
+				<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.file" ng-disabled="lock">
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<span class="label label-primary">Cable Connected To Port 1:</span>
+					<select ng-model="test.module" class="form-control">
+					  <option>P60A</option>
+					  <option>P60B</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<span class="label label-primary">Module Placement:</span>
+					<select ng-model="test.module" class="form-control">
+					  <option>Standard</option>
+					  <option>Reversed</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<span class="label label-primary">Second Plarization Flag:</span>
+					<select ng-model="test.pol2flag" class="form-control">
+					  <option>0</option>
+					  <option>1</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<span class="label label-primary">Test Struct Plarization:</span>
+					<select ng-model="test.polstruct" class="form-control">
+					  <option>Vpol</option>
+					  <option>Hpol</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="panel-body">
+					<span class="label label-primary">First Polarization Path</span>
+					<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.pol1path" value="{{test.lineup}}" ng-disabled="lock">
+				</div>
+				<div class="panel-body">
+					<span class="label label-primary">Test Struct az.vec:</span></br>
+					<span>From</span>
+					<input ng-model="test.azFrom" type="number" class="Pin" ng-disabled="lock">
+					<span>To</span>
+					<input ng-model="test.azTo" type="number" class="Pin" ng-disabled="lock">
+					<span>Step</span>
+					<input ng-model="test.azStep" type="number" class="Pin" ng-disabled="lock"></br>
+					</br>
+				</div>
+			</div>
+			<div class="row panel-body">
+				<div class="col-md-8">
 					<span class="label label-primary" >Notes:</span>
 					<div trumbowyg-ng placeholder="Test Notes"
 						 ng-model="test.notes"

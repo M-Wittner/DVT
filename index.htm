@@ -5,7 +5,8 @@
 	<!--	<base href="/">-->
 	<title>DVT Reporter</title>
 	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<!--	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>-->
 
 	<!-- Angular -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
@@ -13,7 +14,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
 <!--	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-touch.min.js"></script>-->
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-cookies.min.js"></script>
-	<link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
 	<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
 	<!-- Angular Flash -->
 	<script src="assets/lib/angular-flash/dist/angular-flash.min.js"></script>
@@ -64,6 +65,10 @@
 	<script type="text/javascript" src="controllers/plans/new.controller.js"></script>
 	<script type="text/javascript" src="controllers/plans/addtest.controller.js"></script>
 	<script type="text/javascript" src="controllers/plans/edit.controller.js"></script>
+	<script type="text/javascript" src="controllers/robot/index.controller.js"></script>
+	<script type="text/javascript" src="controllers/robot/new.controller.js"></script>
+	<script type="text/javascript" src="controllers/robot/edit.controller.js"></script>
+	<script type="text/javascript" src="controllers/robot/view.controller.js"></script>
 	<script type="text/javascript" src="controllers/admin/search.controller.js"></script>
 	<script type="text/javascript" src="controllers/comments/new.controller.js"></script>
 	<script type="text/javascript" src="controllers/comments/edit.controller.js"></script>
@@ -99,6 +104,7 @@
 						<li><a href="#/plans/new">New Plan</a></li>
 						<li><a href="#/admin">Admin Panel</a></li>
 						<li><a href="#/admin/search">Search</a></li>
+						<li><a href="#/robot">Robot</a></li>
 <!--						<li><input type="text" id="searchBox" ng-model="searchText" class="form-control" placeholder="Search"></li>-->
 					</ul>
 					  

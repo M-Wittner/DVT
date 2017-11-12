@@ -1,17 +1,15 @@
-myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', 'NgTableParams', function ($scope, $location, $http, Flash, $cookies, $window, AuthService, NgTableParams) {
+myApp.controller('robotCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', function ($scope, $location, $http, Flash, $cookies, $window, AuthService) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
 //	$scope.user = $scope.currentUser.username;
 //	console.log($scope.currentUser);
 	
 	if($scope.isAuthenticated == true) {
-		$http.get('http://wigig-584/plans')
-		.then(function(response) {
-//			console.log(AuthService.isAuthenticated());
-			$scope.plans=response.data;
-			console.log($scope);
-		});
-		$scope.tableParams = new NgTableParams({}, { dataset: $scope.plans });
+//		$http.get('http://wigig-584/plans')
+//		.then(function(response) {
+////			console.log(AuthService.isAuthenticated());
+//			$scope.plans=response.data;
+//		});
 		$scope.view = function(data){
 			$location.path('/plans/'+data);
 		};
@@ -36,9 +34,7 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 		});
 	}
 	
-//	$scope.tooltip= function(id){
-//		$('a').tooltip(id);
-//	}
+	
 //	console.log($scope);
 //	$log.info($location.path());
 //	$log.info('test');

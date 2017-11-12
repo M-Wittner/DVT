@@ -24,7 +24,6 @@ class Plans extends CI_Controller {
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
 //		die(var_dump($postData));
-		// plan data
 		$planData = $postData->plan;
 		$plan = array(
 			'user_id'=>$planData->userId,
@@ -42,7 +41,7 @@ class Plans extends CI_Controller {
 						$notes = null;
 					}
 //			------------- R station test -------------
-					if($testArr->station[0] == 'R-CB1' || $testArr->station[0] == 'R-CB2'){
+					if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
 						$channelsArr = $testArr->channel;
@@ -61,7 +60,7 @@ class Plans extends CI_Controller {
 						$test = array(
 							'priority'=>$testArr->priority[0],
 							'lineup'=>$testArr->lineup,
-							'station'=>$testArr->station[0],
+							'station'=>$testArr->station[0]->station,
 							'name'=>$testArr->name[0]->test_name,
 							'pin_from'=>$testArr->pinFrom,
 							'pin_to'=>$testArr->pinTo,
@@ -108,8 +107,7 @@ class Plans extends CI_Controller {
 							$this->plan_model->add_antennas($antenna);
 						};
 //			------------- M station test -------------
-					} else if($testArr->station[0] == 'M-CB1' || $testArr->station[0] == 'M-CB2' || $testArr->station[0] == 'Calibration'){
-//						die(var_dump($testArr));
+					} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
 						$xifsArr = $testArr->xif;
@@ -117,7 +115,7 @@ class Plans extends CI_Controller {
 						$test = array(
 							'priority'=>$testArr->priority[0],
 							'lineup'=>$testArr->lineup,
-							'station'=>$testArr->station[0],
+							'station'=>$testArr->station[0]->station,
 							'name'=>$testArr->name[0]->test_name,
 							'voltage'=>$testArr->voltage,
 							'notes'=>$notes,
@@ -128,7 +126,7 @@ class Plans extends CI_Controller {
 						} else {
 							$time = null;
 						}
-						if($testArr->station[0] == 'Calibration'){
+						if($testArr->station[0]->station == 'Calibration'){
 							if(isset($testArr->miniC)){
 								$test['mini_circuits'] = $testArr->miniC;
 							}else{ 
@@ -177,12 +175,12 @@ class Plans extends CI_Controller {
 						};
 //						die();
 //------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
-					} elseif($testArr->station[0] == 'PTAT/ABS/Vgb+TEMP'|| $testArr->station[0] == 'TalynM+A') {
+					} elseif($testArr->station[0]->station == 'PTAT/ABS/Vgb+TEMP'|| $testArr->station[0]->station == 'TalynM+A') {
 							$chipsArr = $testArr->chips;
 							$test = array(
 								'priority'=>$testArr->priority[0],
 								'lineup'=>'/',
-								'station'=>$testArr->station[0],
+								'station'=>$testArr->station[0]->station,
 								'name'=>$testArr->name[0]->test_name,
 								'notes'=>$notes,
 								'plan_id'=>$planId
@@ -348,7 +346,7 @@ class Plans extends CI_Controller {
 						$notes = null;
 					}
 //			------------- R station test -------------
-					if($testArr->station[0] == 'R-CB1' || $testArr->station[0] == 'R-CB2'){
+					if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
 						$channelsArr = $testArr->channel;
@@ -372,7 +370,7 @@ class Plans extends CI_Controller {
 						$test = array(
 							'priority'=>$testArr->priority[0],
 							'lineup'=>$testArr->lineup,
-							'station'=>$testArr->station[0],
+							'station'=>$testArr->station[0]->station,
 							'name'=>$testArr->name[0]->test_name,
 							'pin_from'=>$testArr->pinFrom,
 							'pin_to'=>$testArr->pinTo,
@@ -419,7 +417,7 @@ class Plans extends CI_Controller {
 							$this->plan_model->add_antennas($antenna);
 						};
 //			------------- M station test -------------
-					} else if($testArr->station[0] == 'M-CB1' || $testArr->station[0] == 'M-CB2' || $testArr->station[0] == 'Calibration'){
+					} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
 						$xifsArr = $testArr->xif;
@@ -427,13 +425,13 @@ class Plans extends CI_Controller {
 						$test = array(
 							'priority'=>$testArr->priority[0],
 							'lineup'=>$testArr->lineup,
-							'station'=>$testArr->station[0],
+							'station'=>$testArr->station[0]->station,
 							'name'=>$testArr->name[0]->test_name,
 							'voltage'=>$testArr->voltage,
 							'notes'=>$notes,
 							'plan_id'=>$planId
 						);
-						if($testArr->station[0] == 'Calibration'){
+						if($testArr->station[0]->station == 'Calibration'){
 							if(isset($testArr->miniC)){
 								$test['mini_circuits'] = $testArr->miniC;
 							}else{ 
@@ -481,12 +479,12 @@ class Plans extends CI_Controller {
 		//					print_r($channel);
 						};
 //------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
-					} elseif($testArr->station[0] == 'PTAT/ABS/Vgb+TEMP'|| $testArr->station[0] == 'TalynM+A') {
+					} elseif($testArr->station[0]->station == 'PTAT/ABS/Vgb+TEMP'|| $testArr->station[0]->station == 'TalynM+A') {
 							$chipsArr = $testArr->chips;
 							$test = array(
 								'priority'=>$testArr->priority[0],
 								'lineup'=>'/',
-								'station'=>$testArr->station[0],
+								'station'=>$testArr->station[0]->station,
 								'name'=>$testArr->name[0]->test_name,
 								'notes'=>$notes,
 								'plan_id'=>$planId

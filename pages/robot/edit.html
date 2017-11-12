@@ -13,7 +13,7 @@
 				</div>
 				<div class="col-md-10" ng-if="test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'">
 					<span class="label label-primary">Test Lineup</span>
-					<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.lineup" ng-disabled="lock">
+					<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.lineup" value="{{test.lineup}}" ng-disabled="lock">
 				</div>
 			</div>
 		</div>

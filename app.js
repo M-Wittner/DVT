@@ -1,7 +1,13 @@
 var myApp = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngTable', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
-	
+	$httpProvider.defaults.cache = false;
+    if (!$httpProvider.defaults.headers.get) {
+      $httpProvider.defaults.headers.get = {};
+    }
+    // disable IE ajax request caching
+    $httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
+    //.....here proceed with your routes
 	$routeProvider
 		.when('/', {
 		templateUrl: 'pages/home.html',
@@ -11,6 +17,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 		templateUrl: 'pages/register.html',
 		controller: 'regCtrl'
 	})
+//		--------------------	DVT PAGES --------------------
 		.when('/plans', {
 			templateUrl: 'pages/plans/index.html',
 			controller: 'plansCtrl'
@@ -31,6 +38,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/comments/new.html',
 			controller: 'newCommentCtrl'
 	})
+//		--------------------	ADMIN PAGES --------------------
 		.when('/admin', {
 			templateUrl: 'pages/admin/panel.html',
 			controller: 'adminCtrl'
@@ -75,9 +83,29 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/plans/addtest.html',
 			controller: 'addTestCtrl'
 	})
+//		--------------------	Robot PAGES --------------------
+		.when('/robot', {
+			templateUrl: 'pages/robot/index.html',
+			controller: 'robotCtrl'
+	})
+		.when('/robot/new', {
+			templateUrl: 'pages/robot/new.html',
+			controller: 'newRobotPlanCtrl'
+	})
+		.when('/robot/:id', {
+			templateUrl: 'pages/robot/view.html',
+			controller: 'viewRobotPlanCtrl'
+	})
+		.when('/robot/:planId/test/:testId/edit', {
+			templateUrl: 'pages/robot/edit.html',
+			controller: 'editRobotPlanCtrl'
+	})
+//		.when('/robot/:planId/test/:testId/comments/new', {
+//			templateUrl: 'pages/robotnts/new.html',
+//			controller: 'newCommentCtrl'
+//	})
 		.otherwise({redirectTo: '/'});
-	;
-	
+
 	$locationProvider.hashPrefix('');
 
 }]);
@@ -90,6 +118,22 @@ myApp.directive('testForm', function(){
 	return {
 		templateUrl: 'pages/plans/newTest.html',
 //		controller: 'testCtrl',
+		scope: {
+			planParams: '=',
+			params: '=',
+			index: '&',
+			locked: '='
+		},
+		link: function(scope, element, attrs){
+			
+		}
+	}
+});
+
+myApp.directive('robotTestform', function(){
+	return {
+		templateUrl: 'pages/robot/robotTestform.html',
+		controller: 'newRobotPlanCtrl',
 		scope: {
 			planParams: '=',
 			params: '=',
@@ -204,7 +248,7 @@ myApp.factory('testParams', function($http, $log){
 		'M - Stations',
 		'Calibration',
 		'TalynM+A',
-//		'RFC/CAL',
+		'Robot',
 		'PTAT/ABS/Vgb+TEMP',
 	];
 	
@@ -240,6 +284,39 @@ myApp.factory('testParams', function($http, $log){
 		testParams.params.nameListFS = response.data;
 //			console.log(response.data);
 	});
+	
+//	testParams.params.nameListRobot = {};
+	$http.get('http://wigig-584/params/testsRobot')
+	.then(function(response){
+		testParams.params.nameListRobot = response.data;
+//			console.log(response.data);
+	});
+	
+	testParams.params.robotChList = [
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+	];	
+	
+	testParams.params.robotGainIdxList = [
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+		'6',
+		'7',
+		'8',
+		'9',
+		'10',
+		'11',
+		'12',
+		'13',
+		'14',
+		'15',
+	];
 	
 	testParams.params.xifList = [
 		'0',

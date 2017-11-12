@@ -2,6 +2,14 @@
 	margin-top: 80px;
 }
 
+.rowMarg {
+	margin-top: 15px;
+}
+
+#struct {
+	background-color: #e8e8e8;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -35,7 +43,8 @@ ul {
 .form-control{
 	height: inherit;
 	width: inherit;
-	min-width: 70%;
+	min-width: 100%;
+	background-color: #fbfcff;
 }
 .check-seen {
 	color: #419641;
@@ -105,4 +114,16 @@ textarea {
 
 #subBTN {
     margin-bottom: 1%;
+}
+
+body{
+	background-color: #f7faff;
+}
+
+.panel{
+	background-color: #fbfcff;
+}
+
+.list-group-item{
+	background-color: #fbfcff;
 }

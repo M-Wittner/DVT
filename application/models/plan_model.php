@@ -81,24 +81,33 @@ class plan_model extends CI_Model {
 		$test =$this->db->get_where('tests', array('plan_id'=>$id->planId, 'id'=>$id->testId))->result();
 		
 		$test = $test[0];
-//		die(var_dump($test->station));
+//		die(var_dump($test));
 		if($test->station == 'M-CB1' || $test->station == 'M-CB2') {
 			$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$id->testId))->result();
 			$test->xifs = $xifRes;
 
 		} else if($test->station == 'R-CB1' || $test->station == 'R-CB2'){
 			$ant = $this->db->get_where('test_antennas', array('test_id'=>$id->testId))->result();
-			foreach($ant as $i => $value){
-				$antenna[$i] = $value->antenna;
+			if(isset($ant)){
+				foreach($ant as $i => $value){
+					$antenna[$i] = $value->antenna;
+					}
+					$test->antennas = $ant;	
+			} else{
+				$ant = null;
 			}
-			$test->antennas = $antenna;	
 		}
 		if($test->station !='TalynM+A'){
 			$ch = $this->db->get_where('test_channels', array('test_id'=>$id->testId))->result();
-			foreach($ch as $i => $value){
-					$channel[$i] = $value->channel;
-				}
-			$test->channels = $channel;
+//			die(var_dump($ch));
+			if(isset($ch)){
+				foreach($ch as $i => $value){
+						$channel[$i] = $value->channel;
+					}
+				$test->channels = $ch;
+			}else{
+				$ch = null;
+			}
 		}
 
 		$chip = $this->db->get_where('test_chips', array('test_id'=>$id->testId))->result();
@@ -273,24 +282,29 @@ class plan_model extends CI_Model {
 	function update_test($data){
 //		$planObj = $data->plan;
 		$testObj = $data->test;
-//		var_dump($testObj->xif);
+//		var_dump($testObj->antenna);
 //		die();
 		if(isset($testObj->notes)){
 			$notes = $testObj->notes;
 		} else {
 			$notes = null;
 		}
-		if($testObj->station[0] == "R-CB1" || $testObj->station[0] == "R-CB2"){
+		if(isset($testObj->pinAdd)){
+			$pinAdd = $testObj->pinAdd;
+		} else {
+			$pinAdd = null;
+		}
+		if($testObj->station[0]->station == "R-CB1" || $testObj->station[0]->station == "R-CB2"){
 			$test = array(
 				'plan_id'=>$testObj->plan_id,
 				'priority'=>$testObj->priority[0],
 				'lineup'=>$testObj->lineup,
-				'station'=>$testObj->station[0],
+				'station'=>$testObj->station[0]->station,
 				'name'=>$testObj->name[0]->test_name,
 				'pin_from'=>$testObj->pinFrom,
 				'pin_to'=>$testObj->pinTo,
 				'pin_step'=>$testObj->pinStep,
-				'pin_additional'=>$testObj->pinAdd,
+				'pin_additional'=>$pinAdd,
 				'mcs'=>$testObj->mcs,
 				'voltage'=>$testObj->voltage,
 				'notes'=>$notes,
@@ -299,7 +313,7 @@ class plan_model extends CI_Model {
 			// Update antennas
 			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 			$this->db->delete('test_antennas');
-			foreach($testObj->antennas as $i => $antennaRes){
+			foreach($testObj->antenna as $i => $antennaRes){
 				$antenna = array(
 					'test_id'=>$testObj->id,
 					'plan_id'=>$testObj->plan_id,
@@ -308,22 +322,22 @@ class plan_model extends CI_Model {
 //				die(var_dump($antennaRes));
 				$this->db->replace('test_antennas', $antenna);
 			}
-		}elseif($testObj->station[0] == "M-CB1" || $testObj->station[0] == "M-CB2"){
+		}elseif($testObj->station[0]->station == "M-CB1" || $testObj->station[0]->station == "M-CB2"){
 			$test = array(
 				'plan_id'=>$testObj->plan_id,
 				'priority'=>$testObj->priority[0],
 				'lineup'=>$testObj->lineup,
-				'station'=>$testObj->station[0],
+				'station'=>$testObj->station[0]->station,
 				'name'=>$testObj->name[0]->test_name,
 				'voltage'=>$testObj->voltage,
 				'notes'=>$notes,
 			);
 //------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
-		} elseif($testObj->station[0] == 'PTAT/ABS/Vgb+TEMP'|| $testObj->station[0] == 'TalynM+A') {
+		} elseif($testObj->station[0]->station == 'PTAT/ABS/Vgb+TEMP'|| $testObj->station[0]->station == 'TalynM+A') {
 			$test = array(
 				'priority'=>$testObj->priority[0],
 				'lineup'=>'/',
-				'station'=>$testObj->station[0],
+				'station'=>$testObj->station[0]->station,
 				'name'=>$testObj->name[0]->test_name,
 				'notes'=>$notes,
 				'plan_id'=>$testObj->plan_id
@@ -355,7 +369,7 @@ class plan_model extends CI_Model {
 			$insertStatus = $this->db->replace('test_chips', $chip);
 			$insertId = $this->db->insert_id($insertStatus);
 //			var_dump($insertId);
-			if($testObj->station[0] == "M-CB1" || $testObj->station[0] == "M-CB2"){
+			if($testObj->station[0]->station == "M-CB1" || $testObj->station[0]->station == "M-CB2"){
 				// Update xifs
 				$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 				$this->db->delete('test_xifs');
@@ -376,7 +390,7 @@ class plan_model extends CI_Model {
 				}
 			}
 		}
-		if($testObj->station[0] != 'TalynM+A'){
+		if($testObj->station[0]->station != 'TalynM+A'){
 		// Update temps
 			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 			$this->db->delete('test_temps');
