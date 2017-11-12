@@ -377,12 +377,13 @@ class plan_model extends CI_Model {
 //					var_dump($testObj->xif);
 					foreach($testObj->xif as $xifRes){
 //						var_dump($xifRes);
+//						die();
 						$xif = array(
 							'test_id'=>$testObj->id,
 							'plan_id'=>$testObj->plan_id,
 							'chip_id'=>$chipRes->id,
 							'chip'=>$chipRes->serial_number,
-							'xif'=>$xifRes->xif
+							'xif'=>$xifRes
 							);
 						$this->db->replace('test_xifs', $xif);
 						}
@@ -406,10 +407,11 @@ class plan_model extends CI_Model {
 			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 			$this->db->delete('test_channels');
 			foreach($testObj->channels as $i => $channelRes){
+//				die(var_dump($channelRes));
 				$channel = array(
 					'test_id'=>$testObj->id,
 					'plan_id'=>$testObj->plan_id,
-					'channel'=>$channelRes
+					'channel'=>$channelRes->channel
 					);
 				$this->db->replace('test_channels', $channel);
 			}

@@ -527,4 +527,11 @@ class Plans extends CI_Controller {
 		$result = $this->plan_model->delete_comment($id);
 		return $result;
 	}
+	
+	function planStatus(){
+		$id = json_decode(file_get_contents('php://input'));
+		$this->db->where('plan_id', $id);
+		$test = $this->db->get('tests')->result();
+		echo json_encode($test);
+	}
 }
