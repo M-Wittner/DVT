@@ -103,3 +103,35 @@ ERROR - 201720172017-1111-1212 1717:1111:3030 --> Severity: Notice --> Trying to
 ERROR - 201720172017-1111-1212 1717:1111:3030 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 325
 ERROR - 201720172017-1111-1212 1717:1111:3030 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 336
 ERROR - 201720172017-1111-1212 1717:1111:3030 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 336
+ERROR - 201720172017-1111-1212 1818:1111:2222 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1212 1818:1111:4949 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 43
+ERROR - 201720172017-1111-1212 1818:1111:0303 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 43
+ERROR - 201720172017-1111-1212 1818:1111:3737 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 43
+ERROR - 201720172017-1111-1212 1818:1111:1414 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 43
+ERROR - 201720172017-1111-1212 1818:1111:1717 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1212 1818:1111:1717 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 43
+ERROR - 201720172017-1111-1212 1818:1111:3737 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 43
+ERROR - 201720172017-1111-1212 1818:1111:3939 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 43
+ERROR - 201720172017-1111-1212 1818:1111:3434 --> Severity: Notice --> Undefined property: stdClass::$antenna C:\xampp\htdocs\application\controllers\plans.php 48
+ERROR - 201720172017-1111-1212 1818:1111:3434 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 101
+ERROR - 201720172017-1111-1212 1818:1111:1212 --> Severity: Notice --> Undefined property: stdClass::$antennas C:\xampp\htdocs\application\controllers\plans.php 48
+ERROR - 201720172017-1111-1212 1818:1111:1212 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 101
+ERROR - 201720172017-1111-1212 1818:1111:1212 --> Severity: Notice --> Undefined property: stdClass::$antennas C:\xampp\htdocs\application\controllers\plans.php 48
+ERROR - 201720172017-1111-1212 1818:1111:1212 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 101
+ERROR - 201720172017-1111-1212 1818:1111:2727 --> Severity: Notice --> Undefined property: stdClass::$antenna C:\xampp\htdocs\application\controllers\plans.php 48
+ERROR - 201720172017-1111-1212 1818:1111:2727 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 101
+ERROR - 201720172017-1111-1212 1818:1111:3737 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 43
+ERROR - 201720172017-1111-1212 1818:1111:4949 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 43
+ERROR - 201720172017-1111-1212 1818:1111:5757 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 43
+ERROR - 201720172017-1111-1212 1818:1111:0000 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 43
+ERROR - 201720172017-1111-1212 1818:1111:0000 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 43
+ERROR - 201720172017-1111-1212 1818:1111:0404 --> Severity: Notice --> Undefined property: stdClass::$antenna C:\xampp\htdocs\application\controllers\plans.php 48
+ERROR - 201720172017-1111-1212 1818:1111:0404 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 103
+ERROR - 201720172017-1111-1212 1818:1111:4646 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 83
+ERROR - 201720172017-1111-1212 1818:1111:4747 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 85
+ERROR - 201720172017-1111-1212 1818:1111:4747 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 85
+ERROR - 201720172017-1111-1212 1818:1111:4747 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 89
+ERROR - 201720172017-1111-1212 1818:1111:4747 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 89
+ERROR - 201720172017-1111-1212 1818:1111:4747 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 100
+ERROR - 201720172017-1111-1212 1818:1111:4747 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\models\plan_model.php 107
+ERROR - 201720172017-1111-1212 1919:1111:0202 --> 404 Page Not Found: Faviconico/index

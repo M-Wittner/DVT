@@ -311,7 +311,7 @@ class plan_model extends CI_Model {
 			);
 			
 			// Update antennas
-			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+			$this->db->where(array('test_id'=>$testObj->id));
 			$this->db->delete('test_antennas');
 			foreach($testObj->antenna as $i => $antennaRes){
 				$antenna = array(
@@ -319,9 +319,10 @@ class plan_model extends CI_Model {
 					'plan_id'=>$testObj->plan_id,
 					'antenna'=>$antennaRes
 					);
-//				die(var_dump($antennaRes));
+//				var_dump($antennaRes);
 				$this->db->replace('test_antennas', $antenna);
 			}
+//			die();
 		}elseif($testObj->station[0]->station == "M-CB1" || $testObj->station[0]->station == "M-CB2"){
 			$test = array(
 				'plan_id'=>$testObj->plan_id,
