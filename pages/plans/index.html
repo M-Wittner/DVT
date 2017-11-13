@@ -23,7 +23,7 @@
 				<th class="PopupTooltip">{{ plan.date }}</th>
 				<td>{{ plan.user_username }}</td>
 				<td>
-					<div ng-click="view(plan.id)" class="btn btn-info" ng-mouseover="tooltip(plan.id)" data-toggle="tooltip" title="vla" data-placement="top">View</div>
+					<div ng-click="view(plan.id)" class="btn btn-info" uib-tooltip-template="'pages/plans/tooltipTemplate.html'">View</div>
 				</td>
 				<td>
 					<button ng-click="seen(plan)" ng-show="currentUser.rank > '10'" class="btn btn-xs btn-default">update</button>
