@@ -34,13 +34,12 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 		});
 	}
 	
-//	$scope.tooltip= function(id){
-//		$('[ng-mouseover="tooltip()"]').tooltip({ placement: 'top', title: 'blaaaa', template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'});
-//////		$http.post('http://wigig-584/plans/planStatus', id)
-//////		.then(function(response){
-//////			console.log(response.data);
-//////			$scope.tests = response.data;
-//////		});
-//	}
+	$scope.tooltip= function(id){
+		$http.post('http://wigig-584/plans/planStatus', id)
+		.then(function(response){
+//			console.log(response.data);
+			$scope.tests = response.data;
+		});
+	}
 	
 }]);

@@ -47,6 +47,9 @@
 			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="false" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
 				<strong>Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.name}} , ID: {{test.id}}</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
+				<span class="pull-right">
+					<span class="label label-default" id="testStatus" ng-model="test.status">status</span>
+				</span>
 			</div>
 			<div class="collapse fade" id="{{test.id}}">
 				<div class="panel-body">
@@ -214,7 +217,7 @@
 					</div>
 					<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/test/{{test.id}}/comments/new">Add New Comment</a>
 				</div>
-				<div class="panel-footer">
+				<div class="panel-footer" ng-if="test.comments[0]">
 					<div ng-repeat="comment in test.comments track by $index">
 						<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
 							<div class="panel-heading" Data-toggle="collapse" data-target="#{{comment.id}}" aria-expanded="false" aria-controls="{{comment.id}}">

@@ -1,4 +1,14 @@
-<ul>
-	<li>{{plan.id}}</li>
-	<li>{{plan.date}}</li>
-</ul>
+<table>
+	<thead style="color:red">
+		<tr>
+			<th style="font-weight:800" class="col-md-1">ID</th>
+			<th style="font-weight:800" class="col-md-offset-1">Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="test in tests">
+			<td>{{test.id}}</td>
+			<td>{{test.name}}</td>
+		</tr>
+	</tbody>
+</table>

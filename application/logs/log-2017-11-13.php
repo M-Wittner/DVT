@@ -29,3 +29,10 @@ ERROR - 201720172017-1111-1313 1010:1111:4646 --> 404 Page Not Found: Faviconico
 ERROR - 201720172017-1111-1313 1010:1111:0303 --> 404 Page Not Found: Angular-flashminjsmap/index
 ERROR - 201720172017-1111-1313 1010:1111:2121 --> 404 Page Not Found: Angular-flashminjsmap/index
 ERROR - 201720172017-1111-1313 1010:1111:1919 --> 404 Page Not Found: Temp/index
+ERROR - 201720172017-1111-1313 1313:1111:4747 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1313 1313:1111:4747 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1313 1313:1111:1111 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1313 1313:1111:1111 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1313 1414:1111:1717 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1313 1414:1111:1717 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1313 1414:1111:1818 --> 404 Page Not Found: Faviconico/index
