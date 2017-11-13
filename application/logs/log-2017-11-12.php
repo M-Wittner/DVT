@@ -135,3 +135,6 @@ ERROR - 201720172017-1111-1212 1818:1111:4747 --> Severity: Notice --> Trying to
 ERROR - 201720172017-1111-1212 1818:1111:4747 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 100
 ERROR - 201720172017-1111-1212 1818:1111:4747 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\models\plan_model.php 107
 ERROR - 201720172017-1111-1212 1919:1111:0202 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1212 2020:1111:4040 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1212 2323:1111:0404 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1212 2323:1111:3939 --> 404 Page Not Found: Faviconico/index

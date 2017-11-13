@@ -45,7 +45,7 @@
 	<div class="panel-body" id="planBody" ng-repeat="test in tests | orderBy: 'priority'| filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
 		<div id="desc" class="panel panel-default">
 			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="false" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
-				<strong>Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.name}}</strong>
+				<strong>Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.name}} , ID: {{test.id}}</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
 			</div>
 			<div class="collapse fade" id="{{test.id}}">
@@ -57,7 +57,7 @@
 						</a>
 					</div>
 					<div class="row">
-						<div class="panel-body" >
+						<div class="panel-body">
 							<div class="col-md-2 col-sm-2">
 								<span class="label label-primary">Test Priority:</span>
 								<label class="form-control">{{test.priority}}</label>
@@ -132,19 +132,19 @@
 								<span class="label label-primary">XIF:</span>
 								<table class="table col-xs-3 col-sm-3 col-md-3">
 									<thead>
-									<tr>
-										<th class="col-xs-3 col-sm-3 col-md-3">chip/xif</th>
-										<th ng-repeat="xif in test.xifs| unique: 'xif'">{{xif.xif}}</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="chip in test.chips">
-										<td>
-											{{chip.chip}}
-										</td>
-										<td ng-repeat="xifRes in test.xifs"  ng-click="xifStatus(xifRes)" ng-if="xifRes.chip == chip.chip"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == '1', 'glyphicon-ok': xifRes.completed == '1', 'glyphicon-remove': xifRes.error == '1'}"></span></td>
-									</tr>
-								</tbody>
+										<tr>
+											<th class="col-xs-3 col-sm-3 col-md-3">chip/xif</th>
+											<th ng-repeat="xif in test.xifs| unique: 'xif'">{{xif.xif}}</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="chip in test.chips">
+											<td>
+												{{chip.chip}}
+											</td>
+											<td ng-repeat="xifRes in test.xifs" ng-click="xifStatus(xifRes)" ng-if="xifRes.chip == chip.chip"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == '1', 'glyphicon-ok': xifRes.completed == '1', 'glyphicon-remove': xifRes.error == '1'}"></span></td>
+										</tr>
+									</tbody>
 								</table>
 							</div>
 							<div class="panel-body col-md-offset-1 col-md-3" ng-if="test.station == 'Calibration'">
@@ -214,48 +214,49 @@
 					</div>
 					<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/test/{{test.id}}/comments/new">Add New Comment</a>
 				</div>
-			</div>
-		</div>
-	</div>
+				<div class="panel-footer">
+					<div ng-repeat="comment in test.comments track by $index">
+						<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
+							<div class="panel-heading" Data-toggle="collapse" data-target="#{{comment.id}}" aria-expanded="false" aria-controls="{{comment.id}}">
+								<h3 class="panel-title">test: {{comment.test_id}} {{comment.test_name}} ,From: {{comment.author}}
+									<div class="pull-right" ng-show="currentUser.username == comment.author  ||  currentUser.rank > '10'">
+										<button class="btn btn-xs btn-warning" href="#/plans/{{comment.plan_id}}/test/{{comment.test_id}}/comment/{{comment.id}}/edit" ng-click="editComment()">Edit</button>
+										<button class="btn btn-xs btn-danger" ng-click="removeComment()">
+											Delete
+										</button>
+									</div>
+								</h3>
 
-	<div ng-repeat="comment in comments">
-		<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
-			<div class="panel-heading">
-				<h3 class="panel-title">test: {{comment.test_id}} {{comment.test_name}} ,From: {{comment.author}}
-					<div class="pull-right" ng-show="currentUser.username == comment.author  ||  currentUser.rank > '10'">
-						<button class="btn btn-xs btn-warning" href="#/plans/{{comment.plan_id}}/test/{{comment.test_id}}/comment/{{comment.id}}/edit" ng-click="editComment()">Edit</button>
-						<button class="btn btn-xs btn-danger" ng-click="removeComment()">
-						Delete
-					</button>
-					</div>
-				</h3>
-
-			</div>
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-md-3 col-sm-3 col-xs-3">
-						<span class="label label-primary">Severity</span>
-						<label class="form-control">{{comment.severity}}</label>
-					</div>
-					<div class="col-md-3 col-sm-3 col-xs-3">
-						<span class="label label-primary">Test Station</span>
-						<label class="form-control">{{comment.station}}</label>
-					</div>
-					<div ng-if="comment.severity == 'Minor'">
-						<div class="col-md-3 col-sm-3 col-xs-3">
-							<span class="label label-primary">Test Name</span>
-							<label class="form-control">{{comment.test_name}}</label>
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-3">
-							<span class="label label-primary">Chip</span>
-							<label class="form-control">{{comment.chip}}</label>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-8">
-						<span class="label label-primary">Details:</span>
-						<div class="col-md-2 col-sm-2" trumbowyg-ng ng-model="comment.details" ng-disabled="lock">
+							</div>
+							<div class="panel-body collapse" id="{{comment.id}}">
+								<div class="row">
+									<div class="col-md-3 col-sm-3 col-xs-3">
+										<span class="label label-primary">Severity</span>
+										<label class="form-control">{{comment.severity}}</label>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3">
+										<span class="label label-primary">Test Station</span>
+										<label class="form-control">{{comment.station}}</label>
+									</div>
+									<div ng-if="comment.severity == 'Minor'">
+										<div class="col-md-3 col-sm-3 col-xs-3">
+											<span class="label label-primary">Test Name</span>
+											<label class="form-control">{{comment.test_name}}</label>
+										</div>
+										<div class="col-md-3 col-sm-3 col-xs-3">
+											<span class="label label-primary">Chip</span>
+											<label class="form-control">{{comment.chip}}</label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-8">
+										<span class="label label-primary">Details:</span>
+										<div class="col-md-2 col-sm-2" trumbowyg-ng ng-model="comment.details" ng-disabled="lock">
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

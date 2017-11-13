@@ -21,15 +21,6 @@ class plan_model extends CI_Model {
 		$q = $this->db->get_where('plans', array('id'=> $id))->result();
 //		$this->db->group_by('station');
 		$tests =$this->db->get_where('tests', array('plan_id'=>$id))->result();
-//		$sql = "SELECT id FROM `tests` WHERE plan_id = ?";
-//		$query = $this->db->query($sql, $id);
-//		$testsIdArr = $query->result();
-////		die(var_dump($tests));
-//		$testsId = array();
-//		foreach($testsIdArr as $i => $result){
-//			$testsId[$i] = $result->id;
-//		}
-//		die(var_dump($tests));
 		foreach($tests as $key => $res){
 			if($res->station == 'M-CB1' || $res->station == 'M-CB2') {
 				$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$res->id))->result();
@@ -65,9 +56,11 @@ class plan_model extends CI_Model {
 			}
 			$res->temps = $temp;
 			$res->stations = $this->db->get_where('params_stations', array('station'=>$res->station))->result();
-//			var_dump($res);
+			
+			$res->comments = $this->db->get_where('test_comments', array('test_id'=>$res->id))->result();
+//			var_dump($comments);
 		}
-//		var_dump($tests);
+//		die(var_dump($tests));
 //		$tests = (object) $tests;
 		$plan = array(
 			'plan'=>$q,
@@ -230,11 +223,14 @@ class plan_model extends CI_Model {
 		$chips = $this->db->get_where('test_chips', array('test_id'=>$data->testId))->result();
 		$temps = $this->db->get_where('test_temps', array('test_id'=>$data->testId))->result();
 		$antennas = $this->db->get_where('test_antennas', array('test_id'=>$data->testId))->result();
+		$comments = $this_db->get_where('test_comments', array('test_id'=>$data->testId))->result();
+		die(var_dump($comments));
 
 		$test[0]->channels = $channels;
 		$test[0]->chips = $chips;
 		$test[0]->antennas = $antennas;
 		$test[0]->temps = $temps;
+		$test[0]->comments = $comments;
 
 		$plan = array(
 			'plan'=>$q,
