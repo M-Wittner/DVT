@@ -43,13 +43,20 @@ class plan_model extends CI_Model {
 //			var_dump($ch);
 			
 			$chip = $this->db->get_where('test_chips', array('test_id'=>$res->id))->result();
-//			foreach($chip as $i => $value){
-//				$chip[$i] = $value->chip;
-//				
-//			}
+			$i = 0;
+			foreach($chip as $i => $value){
+				if($value->completed == true){
+					$i++;
+				}
+			}
+			
+			if($i == count($chip)){
+				$res->status = 'Completed';
+			} elseif($i < count($chip)){
+				$res->status = 'In Progress';
+			}
 			
 			$res->chips = $chip;
-			
 			$temp = $this->db->get_where('test_temps', array('test_id'=>$res->id))->result();
 			foreach($temp as $i => $value){
 				$temp[$i] = $value->temp;
@@ -58,7 +65,7 @@ class plan_model extends CI_Model {
 			$res->stations = $this->db->get_where('params_stations', array('station'=>$res->station))->result();
 			
 			$res->comments = $this->db->get_where('test_comments', array('test_id'=>$res->id))->result();
-//			var_dump($comments);
+//			print_r($chip);
 		}
 //		die(var_dump($tests));
 //		$tests = (object) $tests;

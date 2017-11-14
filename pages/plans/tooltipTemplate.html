@@ -3,12 +3,14 @@
 		<tr>
 			<th style="font-weight:800" class="col-md-1">ID</th>
 			<th style="font-weight:800" class="col-md-offset-1">Name</th>
+			<th style="font-weight:800" class="col-md-offset-1">Status</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="test in tests">
+		<tr ng-repeat="test in tests track by $index">
 			<td>{{test.id}}</td>
 			<td>{{test.name}}</td>
+			<td>{{test.status}}</td>
 		</tr>
 	</tbody>
 </table>

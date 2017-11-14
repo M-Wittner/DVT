@@ -48,7 +48,7 @@
 				<strong>Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.name}} , ID: {{test.id}}</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
 				<span class="pull-right">
-					<span class="label label-default" id="testStatus" ng-model="test.status">status</span>
+					<span class="label" ng-class="test.status == 'Completed' ? 'label-success' : 'label-warning'" id="testStatus" ng-model="test.status">{{test.status}}</span>
 				</span>
 			</div>
 			<div class="collapse fade" id="{{test.id}}">

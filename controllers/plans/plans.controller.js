@@ -37,7 +37,7 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 	$scope.tooltip= function(id){
 		$http.post('http://wigig-584/plans/planStatus', id)
 		.then(function(response){
-//			console.log(response.data);
+			console.log(response.data);
 			$scope.tests = response.data;
 		});
 	}
