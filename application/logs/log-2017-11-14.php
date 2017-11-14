@@ -28,3 +28,5 @@ WHERE `plan_id` = 371
 AND `test_id` = '449'
 ERROR - 201720172017-1111-1414 0808:1111:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\controllers\plans.php 541
 ERROR - 201720172017-1111-1414 0808:1111:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 544
+ERROR - 201720172017-1111-1414 0808:1111:5454 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1414 0808:1111:5454 --> 404 Page Not Found: Faviconico/index
