@@ -22,7 +22,7 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 	$scope.seen = function(plan){
 		$http.post('http://wigig-584/plans/planCheck', {plan: plan, user: $scope.currentUser})
 		.then(function(response){
-			console.log(response.data);
+//			console.log(response.data);
 			if(response.data == 'true'){
 				var message = 'Plan Marked As Seen';
 				var id = Flash.create('success', message, 3500);
@@ -37,7 +37,7 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 	$scope.tooltip= function(id){
 		$http.post('http://wigig-584/plans/planStatus', id)
 		.then(function(response){
-//			console.log(response.data);
+			console.log(response.data);
 			$scope.tests = response.data;
 		});
 	}

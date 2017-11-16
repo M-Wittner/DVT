@@ -292,6 +292,12 @@ myApp.factory('testParams', function($http, $log){
 //			console.log(response.data);
 	});
 	
+	$http.get('http://wigig-584/params/modulesRobot')
+	.then(function(response){
+		testParams.params.moduleListRobot = response.data;
+//			console.log(response.data);
+	});
+	
 	testParams.params.robotChList = [
 		'1',
 		'2',

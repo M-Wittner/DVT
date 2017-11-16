@@ -26,10 +26,16 @@
 		</div>
 		<div class="row rowMarg">
 			<div class="col-md-3">
+				<span class="label label-primary">RF Module</span>
+				<multiselect ng-model="test.module" options="testParams.params.moduleListRobot" show-search="true" selection-limit="1" id-prop="id" display-prop="module" ng-disabled="lock">
+				</multiselect>
+			</div>
+			<div class="col-md-3">
 				<span class="label label-primary">RF Cables</span>
 				<select ng-model="test.RF" class="form-control">
 				  <option>Standard</option>
-				  <option>Flip</option>
+				  <option>Flip Vpol</option>
+				  <option>Flip Hpol</option>
 				</select>
 			</div>
 			<div class="col-md-2" ng-if="test.name[0].test_name == 'rx pattern scan' || test.name[0].test_name == 'BRP scan'">
@@ -48,7 +54,7 @@
 		<div class="row rowMarg">
 			<div class="col-md-12">
 				<span class="label label-primary">File Name</span>
-				<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.file" ng-disabled="lock">
+				<input class="form-control" type="text" placeholder="File Name" name="lineup" ng-model="test.file" ng-disabled="lock">
 			</div>
 		</div>
 		<div>
@@ -73,9 +79,9 @@
 							  <option>Talyn</option>
 							</select>
 						</div>
-						<div ng-if="test.name[0].test_name == 'Noise Figure' || test.name[0].test_name == 'Power consumption' || test.name[0].test_name == 'RX Spurious emission' || test.name[0].test_name == 'TX Spurious emission' || test.name[0].test_name == 'Temperature Model'">
+						<div ng-if="test.name[0].test_name == 'rx pattern scan' || test.name[0].test_name == 'BRP scan'">
 							<div class="col-md-4">
-								<span class="label label-primary">AZ Vector:</span></br>
+								<span class="label label-danger">AZ Vector:</span></br>
 								<span>From</span>
 								<input ng-model="test.azFrom" type="number" class="Pin" ng-disabled="lock">
 								<span>Step</span>
@@ -108,8 +114,8 @@
 							<input class="form-control" type="text" placeholder="Desired Board File" ng-model="test.dBoardFile" ng-disabled="lock">
 						</div>
 						<div class="col-md-3" ng-if="test.name[0].test_name != 'Power consumption'">
-							<span class="label label-primary">Default Antennas</span>
-							<input class="form-control" type="text" placeholder="Default Antennas" ng-model="test.defAnts" ng-disabled="lock">
+							<span class="label label-primary">Default Antenna</span>
+							<input class="form-control" type="text" placeholder="Default Antenna" ng-model="test.dfltAnt" ng-disabled="lock">
 						</div>
 					</div>
 					<div class="row rowMarg">
@@ -121,8 +127,8 @@
 							  <option>BRP</option>
 							</select>
 						</div>
-					<div class="col-md-4" ng-if="test.name[0].test_name == 'rx pattern scan' || test.name[0].test_name == 'BRP scan'">
-						<span class="label label-primary">BRP Struct File</span>
+					<div class="col-md-4" ng-if="test.name[0].test_name == 'BRP scan'">
+						<span class="label label-danger">BRP Struct File</span>
 						<input class="form-control" type="text" placeholder="BRP Struct File" ng-model="test.strcutBRPfile" ng-disabled="lock">
 					</div>
 						<div class="col-md-4" ng-if="test.name[0].test_name == 'Noise Figure'">
@@ -163,7 +169,7 @@
 						<div class="row rowMarg">
 							<div class="col-md-12">
 								<span class="label label-danger">First Polarization Path</span>
-								<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.pol1path" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="First Polarization Path" name="lineup" ng-model="test.pol1path" ng-disabled="lock">
 							</div>
 						</div>
 						<div class="row rowMarg">
