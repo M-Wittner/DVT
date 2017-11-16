@@ -39,7 +39,7 @@
 				</select>
 			</div>
 			<div class="col-md-2" ng-if="test.name[0].test_name == 'rx pattern scan' || test.name[0].test_name == 'BRP scan'">
-				<span class="label label-primary">Second Plarization Flag</span></br>
+				<span class="label label-danger">Second Plarization Flag</span></br>
 				<input class="checkbox" ng-model="test.pol2Flag" type="checkbox" class="Pin" ng-disabled="lock" style="display: inline;"> On/Off
 			</div>
 			<div class="col-md-7" ng-if="test.name[0].test_name == 'Sector EIRP scan'">
@@ -106,11 +106,13 @@
 							<input class="form-control" type="text" placeholder="Checked Antennas" ng-model="test.checkedAnts" ng-disabled="lock">
 						</div>
 						<div class="col-md-2">
-							<span class="label label-primary">Sector Burn Flag </span></br>
+							<span ng-if="test.name[0].test_name == 'tx sector pattern scan' || test.name[0].test_name == 'Sector EIRP scan'" class="label label-danger">Sector Burn Flag </span>
+							<span ng-if="test.name[0].test_name != 'tx sector pattern scan' && test.name[0].test_name != 'Sector EIRP scan'" class="label label-primary">Sector Burn Flag </span></br>
 							<input class="checkbox" ng-model="test.sectorBflag" type="checkbox" class="Pin" ng-disabled="lock" style="display: inline;"> On/Off
 						</div>
 						<div class="col-md-3">
-							<span class="label label-primary">Desired Board File</span>
+							<span ng-if="test.name[0].test_name == 'tx sector pattern scan'" class="label label-danger">Desired Board File</span>
+							<span ng-if="test.name[0].test_name != 'tx sector pattern scan'" class="label label-primary">Desired Board File</span>
 							<input class="form-control" type="text" placeholder="Desired Board File" ng-model="test.dBoardFile" ng-disabled="lock">
 						</div>
 						<div class="col-md-3" ng-if="test.name[0].test_name != 'Power consumption'">
@@ -120,7 +122,7 @@
 					</div>
 					<div class="row rowMarg">
 						<div class="col-md-2" ng-if="test.name[0].test_name == 'rx pattern scan' || test.name[0].test_name == 'BRP scan' || test.name[0].test_name == 'TX Spurious emmision' || test.name[0].test_name == 'RX Spurious emmision'">
-							<span class="label label-primary">Direction</span>
+							<span class="label label-danger">Direction</span>
 							<select ng-model="test.direct" class="form-control">
 							  <option>TX</option>
 							  <option>RX</option>
@@ -152,12 +154,12 @@
 						</div>
 						<div ng-if="test.name[0].test_name != 'Power consumption' &&  test.name[0].test_name != 'Temperature Model'">
 							<div class="col-md-2">
-								<span class="label label-primary">Gain Index</span>
+								<span class="label label-danger">Gain Index</span>
 								<multiselect ng-model="test.gainIdx" options="testParams.params.robotGainIdxList" show-select-all="true" show-unselect-all="true" selection-limit="1" ng-disabled="lock">
 								</multiselect>
 							</div>
 							<div class="col-md-2">
-								<span class="label label-primary">Polarization</span>
+								<span class="label label-danger">Polarization</span>
 								<select ng-model="test.polstruct" class="form-control">
 								  <option>Vpol</option>
 								  <option>Hpol</option>
