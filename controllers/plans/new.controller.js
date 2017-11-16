@@ -21,13 +21,15 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	}
 	
 	$scope.insertTest = function(){
-		$scope.planParams.push($scope.test);
+		$scope.planParams.push(this.test);
 		$scope.lock = true;
-//		console.log(this);
+		console.log(this.test);
 	}
 	$scope.editToggle = function(){
 		$scope.lock = false;
-		$scope.planParams.splice($scope.test, 1);
+		$scope.planParams.splice(this.test, 1);
+//		console.log($scope);
+		console.log(this.test);
 	}
 	
 	$scope.removeTest = function() {

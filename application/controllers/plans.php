@@ -46,7 +46,7 @@ class Plans extends CI_Controller {
 						$tempsArr = $testArr->temp;
 						$channelsArr = $testArr->channel;
 						$antennasArr = $testArr->antenna;
-//						die(var_dump($testArr));
+////						die(var_dump($testArr));
 						if(isset($testArr->calc)){
 							$time = $testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins*$testArr->calc->ants*$testArr->calc->temps*$testArr->calc->channels;
 						} else {
@@ -109,8 +109,8 @@ class Plans extends CI_Controller {
 							$this->plan_model->add_antennas($antenna);
 //							var_dump($result);
 						};
-//						die();
-//			------------- M station test -------------
+////						die();
+////			------------- M station test -------------
 					} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
@@ -202,8 +202,10 @@ class Plans extends CI_Controller {
 					} else {
 						echo 'not valid station';
 					}
+					var_dump($test);
 			};
-			echo 'success';
+				die();
+			echo 'successsssssss';
 			} else {
 				echo 'No plan inserted!';
 			}	
