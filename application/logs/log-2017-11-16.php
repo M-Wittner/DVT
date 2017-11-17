@@ -170,3 +170,29 @@ ERROR - 201720172017-1111-1616 0303:1111:5656 --> Severity: Warning --> Invalid 
 ERROR - 201720172017-1111-1616 0303:1111:4949 --> Severity: Notice --> Undefined property: stdClass::$antenna C:\xampp\htdocs\application\controllers\plans.php 48
 ERROR - 201720172017-1111-1616 0303:1111:4949 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 103
 ERROR - 201720172017-1111-1616 0303:1111:4242 --> Severity: Notice --> Undefined variable: antenna C:\xampp\htdocs\application\models\plan_model.php 34
+ERROR - 201720172017-1111-1616 0404:1111:5555 --> Severity: Parsing Error --> syntax error, unexpected '{' C:\xampp\htdocs\application\models\plan_model.php 62
+ERROR - 201720172017-1111-1616 0505:1111:1717 --> Severity: Parsing Error --> syntax error, unexpected ')' C:\xampp\htdocs\application\models\plan_model.php 64
+ERROR - 201720172017-1111-1616 0505:1111:3434 --> Severity: Parsing Error --> syntax error, unexpected '{' C:\xampp\htdocs\application\controllers\plans.php 571
+ERROR - 201720172017-1111-1616 0505:1111:2323 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 572
+ERROR - 201720172017-1111-1616 0505:1111:2424 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 572
+ERROR - 201720172017-1111-1616 0505:1111:3434 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 572
+ERROR - 201720172017-1111-1616 0505:1111:4242 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 572
+ERROR - 201720172017-1111-1616 0505:1111:4848 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 572
+ERROR - 201720172017-1111-1616 0505:1111:0101 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 572
+ERROR - 201720172017-1111-1616 0505:1111:0505 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 572
+ERROR - 201720172017-1111-1616 0505:1111:0505 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 572
+ERROR - 201720172017-1111-1616 0505:1111:4545 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 570
+ERROR - 201720172017-1111-1616 0505:1111:4646 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1616 0707:1111:3333 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1616 0909:1111:4747 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1616 0909:1111:5858 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1616 0909:1111:0808 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1616 1111:1111:0909 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1616 1616:1111:5454 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1616 1717:1111:0303 --> Severity: Notice --> Undefined property: stdClass::$mcs C:\xampp\htdocs\application\controllers\plans.php 385
+ERROR - 201720172017-1111-1616 2020:1111:2424 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1616 2020:1111:2424 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1616 2020:1111:1414 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1616 2020:1111:3131 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1616 2020:1111:2424 --> Severity: Parsing Error --> syntax error, unexpected '=>' (T_DOUBLE_ARROW) C:\xampp\htdocs\application\models\plan_model.php 64
+ERROR - 201720172017-1111-1616 2020:1111:3232 --> Severity: Parsing Error --> syntax error, unexpected ')' C:\xampp\htdocs\application\models\plan_model.php 58

@@ -1,6 +1,19 @@
 #mainDiv {
 	margin-top: 80px;
 }
+.bs-callout {
+    margin: 20px 0;
+    padding: 20px;
+    border-left: 3px solid #eee;
+}
+.bs-callout-info {
+    background-color: #F2F3F6;
+    border-color: #bce8f1;
+}
+.bs-callout-warning {
+    background-color: #faf8f0;
+    border-color: #faebcc;
+}
 
 #testStatus{
 	margin-right: 10px;

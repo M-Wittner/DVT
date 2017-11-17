@@ -542,17 +542,27 @@ class Plans extends CI_Controller {
 			$test->chips = $this->db->get_where('test_chips', array('plan_id'=>$id, 'test_id'=>$test->id))->result();
 			$chips = $test->chips;
 //			die(var_dump($test->chips));
-			$i = 0;
+			$c = 0;
+			$e = 0;
+			$r = 0;
 			foreach($chips as $chip){
 				if($chip->completed == true){
-					$i++;
-					}
+					$c++;
+				}elseif($chip->error == true){
+					$e++;
+				}elseif($chip->running == true){
+					$r++;
 				}
-				if($i == count($chips)){
-					$test->status = 'Completed';
-				} elseif($i < count($chips)){
-					$test->status = 'In Progress';
-				}
+			}
+			if($c == count($chips)){
+				$test->status = 'Completed';
+			} elseif($e > 0){
+				$test->status = 'Error';
+			}elseif($e = 0 && $r> 0){
+				$test->status == 'In Progress';
+			}else{
+				$test->status = 'IDLE';
+			} 
 		}
 		echo json_encode($tests);
 	}

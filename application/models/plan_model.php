@@ -43,21 +43,34 @@ class plan_model extends CI_Model {
 //			var_dump($ch);
 			
 			$chip = $this->db->get_where('test_chips', array('test_id'=>$res->id))->result();
-			$i = 0;
+			$c = 0;
+			$e = 0;
+			$r = 0;
 			foreach($chip as $value){
 				if($value->completed == true){
-					$i++;
-//					print_r('yayy!!!!');
+					$c++;
+				}elseif($value->error == true){
+					$e++;
+				}elseif($value->running == true){
+					$r++;
 				}
 			}
-//			print_r('chip!!!!!!!!!');
+//			print_r($value);
+//			print_r('c'.$c);
+//			print_r('r'.$r);
+//			print_r('e'.$e);
 //			var_dump(count($chip));
-			if($i == count($chip)){
+			if($c == count($chip)){
 				$res->status = 'Completed';
-			} elseif($i < count($chip)){
-				$res->status = 'In Progress';
-			}
-//			die();
+			} elseif($e > 0){
+				$res->status = 'Error';
+			} elseif($r > 0){
+				$res->status = 'In Progress' ;
+			} else{
+				$res->status = 'IDLE';
+			} 
+//			print_r($res->status);
+//			echo "\r\n";
 			
 			$res->chips = $chip;
 			$temp = $this->db->get_where('test_temps', array('test_id'=>$res->id))->result();
