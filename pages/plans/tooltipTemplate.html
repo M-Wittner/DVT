@@ -1,13 +1,15 @@
 <table>
 	<thead style="color:red">
 		<tr>
+			<th style="font-weight:800" class="col-md-1">Priority</th>
 			<th style="font-weight:800" class="col-md-1">Station</th>
 			<th style="font-weight:800" class="col-md-1">Name</th>
 			<th style="font-weight:800" class="col-md-1">Status</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="test in tests track by $index">
+		<tr ng-repeat="test in tests | orderBy: 'priority' track by $index">
+			<td>{{test.priority}}</td>
 			<td>{{test.station}}</td>
 			<td>{{test.name}}</td>
 			<td>{{test.status}}</td>

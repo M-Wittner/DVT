@@ -558,8 +558,8 @@ class Plans extends CI_Controller {
 				$test->status = 'Completed';
 			} elseif($e > 0){
 				$test->status = 'Error';
-			}elseif($e = 0 && $r> 0){
-				$test->status == 'In Progress';
+			}elseif($r> 0){
+				$test->status = 'In Progress';
 			}else{
 				$test->status = 'IDLE';
 			} 
