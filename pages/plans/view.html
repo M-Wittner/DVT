@@ -59,7 +59,7 @@
         	</button>
 		</span>
 	</div>
-	<div class="panel-body" id="planBody" ng-repeat="test in tests | orderBy: 'priority'| filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
+	<div class="panel-body" id="planBody" ng-repeat="test in plan.tests | orderBy: 'priority'| filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
 		<div id="desc" class="panel panel-default">
 			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="false" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
 				<strong>Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.name}} , ID: {{test.id}}</strong>

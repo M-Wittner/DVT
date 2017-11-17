@@ -21,28 +21,28 @@ class plan_model extends CI_Model {
 		$q = $this->db->get_where('plans', array('id'=> $id))->result();
 		foreach ($q as $plan){
 			$plan->tests =$this->db->get_where('tests', array('plan_id'=>$id))->result();
-			foreach($plan->tests as $key => $res){
-				if($res->station == 'M-CB1' || $res->station == 'M-CB2') {
-					$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$res->id))->result();
-					$res->xifs = $xifRes;
+			foreach($plan->tests as $test){
+				if($test->station == 'M-CB1' || $test->station == 'M-CB2') {
+					$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$test->id))->result();
+					$test->xifs = $xifRes;
 
-				} else if($res->station == 'R-CB1' || $res->station == 'R-CB2'){
-					$ant = $this->db->get_where('test_antennas', array('test_id'=>$res->id))->result();
+				} else if($test->station == 'R-CB1' || $test->station == 'R-CB2'){
+					$ant = $this->db->get_where('test_antennas', array('test_id'=>$test->id))->result();
 					foreach($ant as $i => $value){
 						$antenna[$i] = $value->antenna;
 					}
-					$res->antennas = $antenna;	
+					$test->antennas = $antenna;	
 				}
 
-				$ch = $this->db->get_where('test_channels', array('test_id'=>$res->id))->result();
+				$ch = $this->db->get_where('test_channels', array('test_id'=>$test->id))->result();
 	//				foreach($ch as $i => $value){
 	//					$channel[$i] = $value->channel;
 	////					var_dump($channel[$i]);
 	//				}
-				$res->channels = $ch;
+				$test->channels = $ch;
 	//			var_dump($ch);
 
-				$chip = $this->db->get_where('test_chips', array('test_id'=>$res->id))->result();
+				$chip = $this->db->get_where('test_chips', array('test_id'=>$test->id))->result();
 				$c = 0;
 				$e = 0;
 				$r = 0;
@@ -61,27 +61,31 @@ class plan_model extends CI_Model {
 	//			print_r('e'.$e);
 	//			var_dump(count($chip));
 				if($c == count($chip)){
-					$res->status = 'Completed';
+					$test->status = 'Completed';
 				} elseif($e > 0){
-					$res->status = 'Error';
+					$test->status = 'Error';
 				} elseif($r > 0){
-					$res->status = 'In Progress' ;
+					$test->status = 'In Progress' ;
 				} else{
-					$res->status = 'IDLE';
+					$test->status = 'IDLE';
 				} 
-	//			print_r($res->status);
+	//			print_r($test->status);
 	//			echo "\r\n";
-				$res->progress = ($c / count($chip))*100;
+				$progress = (($c + ($r/2)) / count($chip))*100;
+				$test->progress = $progress;
+				$this->db->where('id', $test->id);
+				$this->db->set('progress', $test->progress);
+				$this->db->update('tests');
 
-				$res->chips = $chip;
-				$temp = $this->db->get_where('test_temps', array('test_id'=>$res->id))->result();
+				$test->chips = $chip;
+				$temp = $this->db->get_where('test_temps', array('test_id'=>$test->id))->result();
 				foreach($temp as $i => $value){
 					$temp[$i] = $value->temp;
 				}
-				$res->temps = $temp;
-				$res->stations = $this->db->get_where('params_stations', array('station'=>$res->station))->result();
+				$test->temps = $temp;
+				$test->stations = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
 
-				$res->comments = $this->db->get_where('test_comments', array('test_id'=>$res->id))->result();
+				$test->comments = $this->db->get_where('test_comments', array('test_id'=>$test->id))->result();
 	//			print_r($chip);
 			}	
 		}
