@@ -5,16 +5,17 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	if($scope.isAuthenticated == true) {	
 	$http.post('http://wigig-584/plans/show', $routeParams.id)
 	.then(function(response){
-		$scope.plan = response.data.plan[0];
+//		console.log(response.data);
+		$scope.plan = response.data.plan;
 		$scope.tests = response.data.tests;
-		console.log(response.data);
+		
 	});
 	
-	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
-	.then(function(response){
-		$scope.comments = response.data;
-//		console.log(response.data);
-	});
+//	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
+//	.then(function(response){
+//		$scope.comments = response.data;
+////		console.log(response.data);
+//	});
 		
 	} else {
 		var message = 'Please Login first!';
@@ -94,6 +95,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		});
 	};
 	
+//	console.log($scope);
 	
 	$scope.reload= function(index){
 		$route.reload();

@@ -1,4 +1,4 @@
-myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', 'NgTableParams', function ($scope, $location, $http, Flash, $cookies, $window, AuthService, NgTableParams) {
+myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', function ($scope, $location, $http, Flash, $cookies, $window, AuthService) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
 //	$scope.user = $scope.currentUser.username;
@@ -9,8 +9,8 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 		.then(function(response) {
 //			console.log(AuthService.isAuthenticated());
 			$scope.plans=response.data;
+//			console.log(response.data);
 		});
-		$scope.tableParams = new NgTableParams({}, { dataset: $scope.plans });
 		$scope.view = function(data){
 			$location.path('/plans/'+data);
 		};
@@ -23,7 +23,7 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 	$scope.seen = function(plan){
 		$http.post('http://wigig-584/plans/planCheck', {plan: plan, user: $scope.currentUser})
 		.then(function(response){
-			console.log(response.data);
+//			console.log(response.data);
 			if(response.data == 'true'){
 				var message = 'Plan Marked As Seen';
 				var id = Flash.create('success', message, 3500);
@@ -36,12 +36,11 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 	}
 	
 	$scope.tooltip= function(id){
-		
-//		$http.post('http://wigig-584/plans/planStatus', id)
-//		.then(function(response){
+		$http.post('http://wigig-584/plans/planStatus', id)
+		.then(function(response){
 //			console.log(response.data);
-//			$scope.tests = response.data;
-//		});
+			$scope.tests = response.data;
+		});
 	}
-	$('[data-toggle="tooltip"]').tooltip();
+	
 }]);

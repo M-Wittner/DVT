@@ -16,8 +16,49 @@ class Plans extends CI_Controller {
 
 	function index() {
 
-		$result = $this->plan_model->Plans();
-		echo json_encode($result);	
+		$plans = $this->db->get('plans')->result();
+			foreach($plans as $plan){
+				$this->db->where('plan_id', $plan->id);
+				$plan->tests = $this->db->get('tests')->result();
+				$chipTot = 0;
+				$cmpltChips = 0;
+				foreach($plan->tests as $test){
+					$chipNum = 0;
+					$test->chips = $this->db->get_where('test_chips', array('plan_id'=>$plan->id, 'test_id'=>$test->id))->result();
+					$chips = $test->chips;
+		//			die(var_dump($test->chips));
+					$c = 0;
+					$e = 0;
+					$r = 0;
+					foreach($chips as $chip){
+						$chipNum++;
+						if($chip->completed == true){
+							$c++;
+						}elseif($chip->error == true){
+							$e++;
+						}elseif($chip->running == true){
+							$r++;
+						}
+					}
+//					print_r($chipNum);
+					if($c == count($chips)){
+						$test->status = 'Completed';
+					} elseif($e > 0){
+						$test->status = 'Error';
+					}elseif($r> 0){
+						$test->status = 'In Progress';
+					}else{
+						$test->status = 'IDLE';
+					}
+					$cmpltChips = $cmpltChips + $c;
+					$chipTot = $chipTot + $chipNum;
+				}
+				$progress = ($cmpltChips / $chipTot)*100;
+				$plan->progress = round($progress);
+				$this->db->update('plans', array('progress'=>$plan->progress));
+//				die();
+			}
+		echo json_encode($plans);	
 	}
 	
 	function Create() {
@@ -46,7 +87,7 @@ class Plans extends CI_Controller {
 						$tempsArr = $testArr->temp;
 						$channelsArr = $testArr->channel;
 						$antennasArr = $testArr->antenna;
-//						die(var_dump($testArr));
+////						die(var_dump($testArr));
 						if(isset($testArr->calc)){
 							$time = $testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins*$testArr->calc->ants*$testArr->calc->temps*$testArr->calc->channels;
 						} else {
@@ -109,8 +150,8 @@ class Plans extends CI_Controller {
 							$this->plan_model->add_antennas($antenna);
 //							var_dump($result);
 						};
-//						die();
-//			------------- M station test -------------
+////						die();
+////			------------- M station test -------------
 					} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
@@ -202,8 +243,10 @@ class Plans extends CI_Controller {
 					} else {
 						echo 'not valid station';
 					}
+					var_dump($test);
 			};
-			echo 'success';
+				die();
+			echo 'successsssssss';
 			} else {
 				echo 'No plan inserted!';
 			}	
@@ -535,7 +578,33 @@ class Plans extends CI_Controller {
 	function planStatus(){
 		$id = json_decode(file_get_contents('php://input'));
 		$this->db->where('plan_id', $id);
-		$test = $this->db->get('tests')->result();
-		echo json_encode($test);
+		$tests = $this->db->get('tests')->result();
+		foreach($tests as $test){
+			$test->chips = $this->db->get_where('test_chips', array('plan_id'=>$id, 'test_id'=>$test->id))->result();
+			$chips = $test->chips;
+//			die(var_dump($test->chips));
+			$c = 0;
+			$e = 0;
+			$r = 0;
+			foreach($chips as $chip){
+				if($chip->completed == true){
+					$c++;
+				}elseif($chip->error == true){
+					$e++;
+				}elseif($chip->running == true){
+					$r++;
+				}
+			}
+			if($c == count($chips)){
+				$test->status = 'Completed';
+			} elseif($e > 0){
+				$test->status = 'Error';
+			}elseif($r> 0){
+				$test->status = 'In Progress';
+			}else{
+				$test->status = 'IDLE';
+			} 
+		}
+		echo json_encode($tests);
 	}
 }

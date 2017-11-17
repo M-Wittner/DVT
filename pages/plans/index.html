@@ -13,6 +13,7 @@
 		<thead>
 			<tr>
 				<th>Date</th>
+				<th>Progress</th>
 				<th>Author</th>
 				<th>View</th>
 				<th>Seen</th>
@@ -20,10 +21,18 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="plan in plans | filter:searchText | orderBy:'-date' track by $index" id="{{plan.id}}">
-				<th class="PopupTooltip">{{ plan.date }}</th>
+				<th>{{ plan.date }}</th>
+				<td><div class="progress"> 
+						<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: {{plan.progress}}%">
+							<span ng-class="plan.progress < 10 ? 'progressBlack' : ''">
+								<strong>{{plan.progress}}%</strong>
+							</span>
+						</div>
+					</div>
+				</td>
 				<td>{{ plan.user_username }}</td>
 				<td>
-					<div ng-click="view(plan.id)" class="btn btn-info" ng-mouseover="tooltip(plan.id)" data-toggle="tooltip" title="vla" data-placement="top">View</div>
+					<div ng-click="view(plan.id)" class="btn btn-info" uib-tooltip-template="'pages/plans/tooltipTemplate.html'" ng-mouseover="tooltip(plan.id)" tooltip-popup-delay="100">View</div>
 				</td>
 				<td>
 					<button ng-click="seen(plan)" ng-show="currentUser.rank > '10'" class="btn btn-xs btn-default">update</button>

@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngTable', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$httpProvider.defaults.cache = false;
@@ -289,6 +289,12 @@ myApp.factory('testParams', function($http, $log){
 	$http.get('http://wigig-584/params/testsRobot')
 	.then(function(response){
 		testParams.params.nameListRobot = response.data;
+//			console.log(response.data);
+	});
+	
+	$http.get('http://wigig-584/params/modulesRobot')
+	.then(function(response){
+		testParams.params.moduleListRobot = response.data;
 //			console.log(response.data);
 	});
 	
