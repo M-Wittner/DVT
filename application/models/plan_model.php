@@ -7,10 +7,10 @@ class plan_model extends CI_Model {
         parent::__construct();
     }
 	
-	function Plans() {
-		$q = $this->db->get('plans');
-		return $q->result();
-	}
+//	function Plans() {
+//		$q = $this->db->get('plans')->result();
+//		return $q;
+//	}
 	
 	function delete_plan($id){
 		$q = $this->db->query("DELETE FROM `plans` WHERE id = ?", $id);
@@ -19,76 +19,78 @@ class plan_model extends CI_Model {
 	
 	function get_plan($id) {
 		$q = $this->db->get_where('plans', array('id'=> $id))->result();
-//		$this->db->group_by('station');
-		$tests =$this->db->get_where('tests', array('plan_id'=>$id))->result();
-		foreach($tests as $key => $res){
-			if($res->station == 'M-CB1' || $res->station == 'M-CB2') {
-				$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$res->id))->result();
-				$res->xifs = $xifRes;
+		foreach ($q as $plan){
+			$plan->tests =$this->db->get_where('tests', array('plan_id'=>$id))->result();
+			foreach($plan->tests as $key => $res){
+				if($res->station == 'M-CB1' || $res->station == 'M-CB2') {
+					$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$res->id))->result();
+					$res->xifs = $xifRes;
 
-			} else if($res->station == 'R-CB1' || $res->station == 'R-CB2'){
-				$ant = $this->db->get_where('test_antennas', array('test_id'=>$res->id))->result();
-				foreach($ant as $i => $value){
-					$antenna[$i] = $value->antenna;
+				} else if($res->station == 'R-CB1' || $res->station == 'R-CB2'){
+					$ant = $this->db->get_where('test_antennas', array('test_id'=>$res->id))->result();
+					foreach($ant as $i => $value){
+						$antenna[$i] = $value->antenna;
+					}
+					$res->antennas = $antenna;	
 				}
-				$res->antennas = $antenna;	
-			}
-			
-			$ch = $this->db->get_where('test_channels', array('test_id'=>$res->id))->result();
-//				foreach($ch as $i => $value){
-//					$channel[$i] = $value->channel;
-////					var_dump($channel[$i]);
-//				}
-			$res->channels = $ch;
-//			var_dump($ch);
-			
-			$chip = $this->db->get_where('test_chips', array('test_id'=>$res->id))->result();
-			$c = 0;
-			$e = 0;
-			$r = 0;
-			foreach($chip as $value){
-				if($value->completed == true){
-					$c++;
-				}elseif($value->error == true){
-					$e++;
-				}elseif($value->running == true){
-					$r++;
+
+				$ch = $this->db->get_where('test_channels', array('test_id'=>$res->id))->result();
+	//				foreach($ch as $i => $value){
+	//					$channel[$i] = $value->channel;
+	////					var_dump($channel[$i]);
+	//				}
+				$res->channels = $ch;
+	//			var_dump($ch);
+
+				$chip = $this->db->get_where('test_chips', array('test_id'=>$res->id))->result();
+				$c = 0;
+				$e = 0;
+				$r = 0;
+				foreach($chip as $value){
+					if($value->completed == true){
+						$c++;
+					}elseif($value->error == true){
+						$e++;
+					}elseif($value->running == true){
+						$r++;
+					}
 				}
-			}
-//			print_r($value);
-//			print_r('c'.$c);
-//			print_r('r'.$r);
-//			print_r('e'.$e);
-//			var_dump(count($chip));
-			if($c == count($chip)){
-				$res->status = 'Completed';
-			} elseif($e > 0){
-				$res->status = 'Error';
-			} elseif($r > 0){
-				$res->status = 'In Progress' ;
-			} else{
-				$res->status = 'IDLE';
-			} 
-//			print_r($res->status);
-//			echo "\r\n";
-			
-			$res->chips = $chip;
-			$temp = $this->db->get_where('test_temps', array('test_id'=>$res->id))->result();
-			foreach($temp as $i => $value){
-				$temp[$i] = $value->temp;
-			}
-			$res->temps = $temp;
-			$res->stations = $this->db->get_where('params_stations', array('station'=>$res->station))->result();
-			
-			$res->comments = $this->db->get_where('test_comments', array('test_id'=>$res->id))->result();
-//			print_r($chip);
+	//			print_r($value);
+	//			print_r('c'.$c);
+	//			print_r('r'.$r);
+	//			print_r('e'.$e);
+	//			var_dump(count($chip));
+				if($c == count($chip)){
+					$res->status = 'Completed';
+				} elseif($e > 0){
+					$res->status = 'Error';
+				} elseif($r > 0){
+					$res->status = 'In Progress' ;
+				} else{
+					$res->status = 'IDLE';
+				} 
+	//			print_r($res->status);
+	//			echo "\r\n";
+				$res->progress = ($c / count($chip))*100;
+
+				$res->chips = $chip;
+				$temp = $this->db->get_where('test_temps', array('test_id'=>$res->id))->result();
+				foreach($temp as $i => $value){
+					$temp[$i] = $value->temp;
+				}
+				$res->temps = $temp;
+				$res->stations = $this->db->get_where('params_stations', array('station'=>$res->station))->result();
+
+				$res->comments = $this->db->get_where('test_comments', array('test_id'=>$res->id))->result();
+	//			print_r($chip);
+			}	
 		}
 //		die(var_dump($tests));
 //		$tests = (object) $tests;
-		$plan = array(
-			'plan'=>$q,
-			'tests'=>$tests,
-		);
+//		$plan = array(
+//			'plan'=>$q,
+//			'tests'=>$tests,
+//		);
 		return $plan;
 	}
 	

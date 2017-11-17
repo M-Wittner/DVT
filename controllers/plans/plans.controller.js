@@ -9,6 +9,7 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 		.then(function(response) {
 //			console.log(AuthService.isAuthenticated());
 			$scope.plans=response.data;
+//			console.log(response.data);
 		});
 		$scope.view = function(data){
 			$location.path('/plans/'+data);

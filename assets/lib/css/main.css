@@ -15,12 +15,16 @@
     border-color: #faebcc;
 }
 
+.progressBlack{
+	color: black;
+}
+
 #testStatus{
 	margin-right: 10px;
 }
 
 .tooltip-inner{
-	max-width: 500px;
+	max-width: 400px;
 }
 
 .rowMarg {

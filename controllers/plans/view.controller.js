@@ -6,7 +6,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$http.post('http://wigig-584/plans/show', $routeParams.id)
 	.then(function(response){
 //		console.log(response.data);
-		$scope.plan = response.data.plan[0];
+		$scope.plan = response.data.plan;
 		$scope.tests = response.data.tests;
 		
 	});

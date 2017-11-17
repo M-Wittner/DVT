@@ -16,8 +16,49 @@ class Plans extends CI_Controller {
 
 	function index() {
 
-		$result = $this->plan_model->Plans();
-		echo json_encode($result);	
+		$plans = $this->db->get('plans')->result();
+			foreach($plans as $plan){
+				$this->db->where('plan_id', $plan->id);
+				$plan->tests = $this->db->get('tests')->result();
+				$chipTot = 0;
+				$cmpltChips = 0;
+				foreach($plan->tests as $test){
+					$chipNum = 0;
+					$test->chips = $this->db->get_where('test_chips', array('plan_id'=>$plan->id, 'test_id'=>$test->id))->result();
+					$chips = $test->chips;
+		//			die(var_dump($test->chips));
+					$c = 0;
+					$e = 0;
+					$r = 0;
+					foreach($chips as $chip){
+						$chipNum++;
+						if($chip->completed == true){
+							$c++;
+						}elseif($chip->error == true){
+							$e++;
+						}elseif($chip->running == true){
+							$r++;
+						}
+					}
+//					print_r($chipNum);
+					if($c == count($chips)){
+						$test->status = 'Completed';
+					} elseif($e > 0){
+						$test->status = 'Error';
+					}elseif($r> 0){
+						$test->status = 'In Progress';
+					}else{
+						$test->status = 'IDLE';
+					}
+					$cmpltChips = $cmpltChips + $c;
+					$chipTot = $chipTot + $chipNum;
+				}
+				$progress = ($cmpltChips / $chipTot)*100;
+				$plan->progress = round($progress);
+				$this->db->update('plans', array('progress'=>$plan->progress));
+//				die();
+			}
+		echo json_encode($plans);	
 	}
 	
 	function Create() {
