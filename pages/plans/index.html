@@ -45,12 +45,12 @@
 	</table>
 -->
 	<table ng-table="tableParams" class="table table-striped">
-		<tr ng-repeat="plan in plans track by plan.id | orderBy:'-date'">
+		<tr ng-repeat="plan in $data track by plan.id">
 			<td data-title="'Date'">{{plan.date}}</td>
 			<td data-title="'Progress'">
-				<div class="progress"> 
+				<div class="progress" uib-tooltip-template="'pages/plans/tooltipTemplate.html'" ng-mouseover="tooltip(plan.id)" tooltip-popup-delay="100"> 
 						<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: {{plan.progress}}%">
-								<span ng-class="plan.progress < 10 ? 'progressBlack' : ''">
+								<span ng-class="plan.progress <= 15 ? 'progressBlack' : ''">
 									<strong>{{plan.progress}}%</strong>
 								</span>
 							</div>
@@ -58,7 +58,7 @@
 			</td>
 			<td data-title="'Author'">{{plan.user_username}}</td>
 			<td data-title="'View'">
-				<div ng-click="view(plan.id)" class="btn btn-info" uib-tooltip-template="'pages/plans/tooltipTemplate.html'" ng-mouseover="tooltip(plan.id)" tooltip-popup-delay="100">View</div>	
+				<div ng-click="view(plan.id)" class="btn btn-info">View</div>	
 			</td>
 			<td data-title="'Seen'">
 				<button ng-click="seen(plan)" ng-show="currentUser.rank > '10'" class="btn btn-xs btn-default">update</button>

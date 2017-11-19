@@ -7,7 +7,11 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 	if($scope.isAuthenticated == true) {
 		$http.get('http://wigig-584/plans')
 		.then(function(response) {
-//			console.log(AuthService.isAuthenticated());
+			$scope.tableParams = new NgTableParams({count:15}, {
+				counts:[],
+				total: response.data.length,
+				dataset: response.data
+			})
 			$scope.plans=response.data;
 //			console.log(response.data);
 		});
@@ -42,15 +46,4 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 			$scope.tests = response.data;
 		});
 	}
-	
-	$scope.tableParams =  new NgTableParams({}, {
-		getData: function(params){
-			return $http.get('http://wigig-584/plans')
-				.then(function(response) {
-					params.total(10);
-					return response.data;
-				});
-		}
-	})
-	
 }]);

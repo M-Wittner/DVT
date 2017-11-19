@@ -15,7 +15,7 @@ class Plans extends CI_Controller {
     }
 
 	function index() {
-
+		$this->db->order_by('date', 'desc');
 		$plans = $this->db->get('plans')->result();
 			foreach($plans as $plan){
 				$this->db->where('plan_id', $plan->id);
