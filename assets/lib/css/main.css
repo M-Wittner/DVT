@@ -15,7 +15,7 @@
     border-color: #faebcc;
 }
 
-.table-striped>tbody>tr:nth-of-type(odd) {
+.table-tooltip-striped>tbody>tr:nth-of-type(odd) {
     background-color: #131313;
 }
 

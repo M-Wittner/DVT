@@ -9,6 +9,7 @@
 	<div class="panel-body">
 	</div>
 	<!-- Table -->
+<!--
 	<table class="table">
 		<thead>
 			<tr>
@@ -42,12 +43,28 @@
 			</tr>
 		</tbody>
 	</table>
-<!--
-	<table ng-table="tableParams" class="table" show-filter="true">
-		<tr ng-repeat="plan in plans track by $index">
-			<td title="Date" filter="{date: 'text'}">{{plan.date}}</td>
-			<td title="user_username" filter="{user_username: 'text'}">{{plan.user_username}}</td>
+-->
+	<table ng-table="tableParams" class="table table-striped">
+		<tr ng-repeat="plan in plans track by plan.id | orderBy:'-date'">
+			<td data-title="'Date'">{{plan.date}}</td>
+			<td data-title="'Progress'">
+				<div class="progress"> 
+						<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: {{plan.progress}}%">
+								<span ng-class="plan.progress < 10 ? 'progressBlack' : ''">
+									<strong>{{plan.progress}}%</strong>
+								</span>
+							</div>
+						</div>
+			</td>
+			<td data-title="'Author'">{{plan.user_username}}</td>
+			<td data-title="'View'">
+				<div ng-click="view(plan.id)" class="btn btn-info" uib-tooltip-template="'pages/plans/tooltipTemplate.html'" ng-mouseover="tooltip(plan.id)" tooltip-popup-delay="100">View</div>	
+			</td>
+			<td data-title="'Seen'">
+				<button ng-click="seen(plan)" ng-show="currentUser.rank > '10'" class="btn btn-xs btn-default">update</button>
+				<span ng-model="test.checked" class="btn-lg glyphicon" ng-class="{'glyphicon-ok check-seen': plan.checked == true, 'glyphicon-minus check-unseen': plan.checked == false}"></span>
+				<span ng-if="plan.checked == true">  By {{plan.checked_by}} </span>
+			</td>
 		</tr>
 	</table>
--->
 </div>

@@ -1,4 +1,4 @@
-myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', function ($scope, $location, $http, Flash, $cookies, $window, AuthService) {
+myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', function ($scope, NgTableParams, $location, $http, Flash, $cookies, $window, AuthService) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
 //	$scope.user = $scope.currentUser.username;
@@ -42,5 +42,15 @@ myApp.controller('plansCtrl', ['$scope', '$location','$http', 'Flash', '$cookies
 			$scope.tests = response.data;
 		});
 	}
+	
+	$scope.tableParams =  new NgTableParams({}, {
+		getData: function(params){
+			return $http.get('http://wigig-584/plans')
+				.then(function(response) {
+					params.total(10);
+					return response.data;
+				});
+		}
+	})
 	
 }]);
