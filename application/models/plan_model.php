@@ -28,8 +28,9 @@ class plan_model extends CI_Model {
 
 				} else if($test->station == 'R-CB1' || $test->station == 'R-CB2'){
 					$ant = $this->db->get_where('test_antennas', array('test_id'=>$test->id))->result();
-					foreach($ant as $i => $value){
-						$antenna[$i] = $value->antenna;
+					$antenna = array();
+					foreach($ant as $value){
+						array_push($antenna, $value->antenna);
 					}
 					$test->antennas = $antenna;	
 				}
@@ -172,11 +173,6 @@ class plan_model extends CI_Model {
 	function add_chips($chips)
     {
         $insertStatus = $this->db->insert('test_chips', $chips);
-		return $insertStatus;
-    }
-	function add_xifs($xifs)
-    {
-        $insertStatus = $this->db->insert('test_xifs', $xifs);
 		return $insertStatus;
     }
 	

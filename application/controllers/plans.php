@@ -58,7 +58,7 @@ class Plans extends CI_Controller {
 						$tempsArr = $testArr->temp;
 						$channelsArr = $testArr->channel;
 						$antennasArr = $testArr->antenna;
-////						die(var_dump($testArr));
+						var_dump($antennasArr);
 						if(isset($testArr->calc)){
 							$time = $testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins*$testArr->calc->ants*$testArr->calc->temps*$testArr->calc->channels;
 						} else {
@@ -127,6 +127,7 @@ class Plans extends CI_Controller {
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
 						$xifsArr = $testArr->xif;
+						var_dump($xifsArr);
 						$channelsArr = $testArr->channel;
 						$test = array(
 							'priority'=>$testArr->priority[0],
@@ -160,6 +161,7 @@ class Plans extends CI_Controller {
 							);
 							$insertChip = $this->plan_model->add_chips($chip);
 							$chipId = $this->db->insert_id($insertChip);
+							$xifs = array();
 							foreach($xifsArr as $xifRes){
 								$xif = array(
 									'chip_id'=>$chipId,
@@ -168,8 +170,10 @@ class Plans extends CI_Controller {
 									'plan_id'=>$planId,
 									'test_id'=>$testId
 								);
-								$this->plan_model->add_xifs($xif);
+								array_push($xifs, $xif);
 							};
+//							var_dump($xifs);
+							$this->db->insert_batch('test_xifs', $xifs);
 						};
 						foreach($tempsArr as $result){
 							$temp = array(
@@ -214,10 +218,10 @@ class Plans extends CI_Controller {
 					} else {
 						echo 'not valid station';
 					}
-//					var_dump($test);
+					var_dump($test);
 			};
 //				die();
-			echo 'success';
+			echo 'successsss';
 			} else {
 				echo 'No plan inserted!';
 			}	
@@ -467,6 +471,7 @@ class Plans extends CI_Controller {
 							);
 							$insertChip = $this->plan_model->add_chips($chip);
 							$chipId = $this->db->insert_id($insertChip);
+							$xifs = array();
 							foreach($xifsArr as $xifRes){
 								$xif = array(
 									'chip_id'=>$chipId,
@@ -475,8 +480,9 @@ class Plans extends CI_Controller {
 									'plan_id'=>$planId,
 									'test_id'=>$testId
 								);
-								$this->plan_model->add_xifs($xif);
+								array_push($xifs, $xif);
 							};
+							$this->db->insert_batch('test_xifs', $xifs);
 						};
 						foreach($tempsArr as $result){
 							$temp = array(
