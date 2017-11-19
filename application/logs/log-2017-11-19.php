@@ -13,6 +13,7 @@ ERROR - 201720172017-1111-1919 1212:1111:1111 --> Severity: Notice --> Array to 
 ERROR - 201720172017-1111-1919 1212:1111:1111 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\system\database\DB_driver.php 1476
 ERROR - 201720172017-1111-1919 1212:1111:1111 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0, 1) VALUES (Array, Array)' at line 1 - Invalid query: INSERT INTO `test_xifs` (0, 1) VALUES (Array, Array)
 ERROR - 201720172017-1111-1919 1212:1111:1717 --> Could not find the language line "insert_batch() called with no data"
+<<<<<<< HEAD
 ERROR - 201720172017-1111-1919 1313:1111:4242 --> 404 Page Not Found: Ng-table/filters
 ERROR - 201720172017-1111-1919 1313:1111:1919 --> 404 Page Not Found: Ng-table/filters
 ERROR - 201720172017-1111-1919 1313:1111:1414 --> 404 Page Not Found: Ng-table/filters
@@ -25,3 +26,15 @@ ERROR - 201720172017-1111-1919 1313:1111:5151 --> 404 Page Not Found: Ng-table/f
 ERROR - 201720172017-1111-1919 1313:1111:1414 --> 404 Page Not Found: Ng-table/filters
 ERROR - 201720172017-1111-1919 1313:1111:3737 --> 404 Page Not Found: Ng-table/filters
 ERROR - 201720172017-1111-1919 1313:1111:4444 --> 404 Page Not Found: Ng-table/filters
+=======
+ERROR - 201720172017-1111-1919 1515:1111:4040 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 134
+ERROR - 201720172017-1111-1919 1515:1111:4040 --> Query error: Column 'lineup' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`) VALUES ('1', NULL, 'M-CB2', 'RX-EVM', 12, '<b>Force Mode</b><p><b>~ 3 Hours</b></p>', 437)
+ERROR - 201720172017-1111-1919 1717:1111:3636 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1919 1717:1111:3030 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1919 1717:1111:4141 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1919 1717:1111:4242 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1919 1717:1111:5353 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1919 1717:1111:5454 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1919 1818:1111:4545 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1919 1818:1111:4545 --> 404 Page Not Found: Faviconico/index
+>>>>>>> master
