@@ -43,3 +43,4 @@ ERROR - 201720172017-1111-1919 1818:1111:5252 --> Severity: Error --> Call to un
 ERROR - 201720172017-1111-1919 1818:1111:2727 --> Severity: Error --> Call to undefined method CI_DB_mysqli_driver::orderBy() C:\xampp\htdocs\application\controllers\plans.php 18
 ERROR - 201720172017-1111-1919 1818:1111:2727 --> Severity: Error --> Call to undefined method CI_DB_mysqli_driver::orderBy() C:\xampp\htdocs\application\controllers\plans.php 18
 ERROR - 201720172017-1111-1919 1818:1111:4747 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1919 2020:1111:4444 --> 404 Page Not Found: Faviconico/index
