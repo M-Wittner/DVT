@@ -46,7 +46,7 @@
 -->
 	<table ng-table="tableParams" class="table table-striped">
 		<tr ng-repeat="plan in $data track by plan.id">
-			<td data-title="'Date'">{{plan.date}}</td>
+			<td class="col-md-2" data-title="'Date'">{{plan.date}}</td>
 			<td data-title="'Progress'">
 				<div class="progress" uib-tooltip-template="'pages/plans/tooltipTemplate.html'" ng-mouseover="tooltip(plan.id)" tooltip-popup-delay="100"> 
 						<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: {{plan.progress}}%">
@@ -56,11 +56,11 @@
 							</div>
 						</div>
 			</td>
-			<td data-title="'Author'">{{plan.user_username}}</td>
-			<td data-title="'View'">
+			<td class="col-md-1 text-center" data-title="'Author'">{{plan.user_username}}</td>
+			<td class="col-md-1 text-center" data-title="'View'">
 				<div ng-click="view(plan.id)" class="btn btn-info">View</div>	
 			</td>
-			<td data-title="'Seen'">
+			<td class="col-md-3 text-center" data-title="'Seen'">
 				<button ng-click="seen(plan)" ng-show="currentUser.rank > '10'" class="btn btn-xs btn-default">update</button>
 				<span ng-model="test.checked" class="btn-lg glyphicon" ng-class="{'glyphicon-ok check-seen': plan.checked == true, 'glyphicon-minus check-unseen': plan.checked == false}"></span>
 				<span ng-if="plan.checked == true">  By {{plan.checked_by}} </span>

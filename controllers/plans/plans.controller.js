@@ -7,7 +7,7 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 	if($scope.isAuthenticated == true) {
 		$http.get('http://wigig-584/plans')
 		.then(function(response) {
-			$scope.tableParams = new NgTableParams({count:15}, {
+			$scope.tableParams = new NgTableParams({count:12}, {
 				counts:[],
 				total: response.data.length,
 				dataset: response.data
