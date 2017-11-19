@@ -946,3 +946,6 @@ ERROR - 201720172017-1111-1717 1414:1111:5858 --> Severity: Warning --> Division
 ERROR - 201720172017-1111-1717 1414:1111:4747 --> Severity: Parsing Error --> syntax error, unexpected ')' C:\xampp\htdocs\application\controllers\plans.php 63
 ERROR - 201720172017-1111-1717 1414:1111:5656 --> Severity: Error --> Call to undefined function float() C:\xampp\htdocs\application\controllers\plans.php 27
 ERROR - 201720172017-1111-1717 1414:1111:4444 --> Severity: Error --> Call to undefined function float() C:\xampp\htdocs\application\controllers\plans.php 27
+ERROR - 201720172017-1111-1717 1919:1111:0303 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1717 2020:1111:4848 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-1717 2020:1111:4848 --> 404 Page Not Found: Faviconico/index

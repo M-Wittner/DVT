@@ -26,14 +26,11 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	$scope.lock = false;
 	
 	$scope.addTest1 = function(){
-//		$scope.planParams.push($scope.test);
 		$scope.lock = true;
-//		console.log($scope.tests);
 	};
 	
 	$scope.editToggle = function(){
 		$scope.lock = !$scope.lock;
-//		$scope.planParams.splice($scope.planParams.length-1,1);
 	};
 	
 	$scope.editPlan = function(){
