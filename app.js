@@ -7,7 +7,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
     }
     // disable IE ajax request caching
     $httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
-    //.....here proceed with your routes
+    //.... proceed routes
 	$routeProvider
 		.when('/', {
 		templateUrl: 'pages/home.html',
