@@ -58,7 +58,7 @@ class Plans extends CI_Controller {
 						$tempsArr = $testArr->temp;
 						$channelsArr = $testArr->channel;
 						$antennasArr = $testArr->antenna;
-						var_dump($antennasArr);
+//						var_dump($antennasArr);
 						if(isset($testArr->calc)){
 							$time = $testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins*$testArr->calc->ants*$testArr->calc->temps*$testArr->calc->channels;
 						} else {
@@ -87,8 +87,10 @@ class Plans extends CI_Controller {
 						$insertTest = $this->plan_model->add_test($test);
 						$testId = $this->plan_model->tests_id($insertTest);
 						foreach($chipsArr as $result){
+							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\\test_results\\" .$result->chip. "\TalynA_YA591-H511_Flip_Chip_QCA6425_B0_".$result->serial_number;
 							$chip = array(
 								'chip'=> $result->serial_number,
+								'results_path'=>$path,
 								'plan_id'=>$planId,
 								'test_id'=>$testId
 							);
@@ -127,7 +129,7 @@ class Plans extends CI_Controller {
 						$chipsArr = $testArr->chips;
 						$tempsArr = $testArr->temp;
 						$xifsArr = $testArr->xif;
-						var_dump($xifsArr);
+//						var_dump($xifsArr);
 						$channelsArr = $testArr->channel;
 						$test = array(
 							'priority'=>$testArr->priority[0],
@@ -154,8 +156,10 @@ class Plans extends CI_Controller {
 						$insertTest = $this->plan_model->add_test($test);
 						$testId = $this->plan_model->tests_id($insertTest);
 						foreach($chipsArr as $result){
+							$path = "\\\\filer4\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
 							$chip = array(
 								'chip'=>$result->serial_number,
+								'results_path'=>$path,
 								'plan_id'=>$planId,
 								'test_id'=>$testId
 							);
@@ -218,10 +222,10 @@ class Plans extends CI_Controller {
 					} else {
 						echo 'not valid station';
 					}
-					var_dump($test);
+//					var_dump($test);
 			};
 //				die();
-			echo 'successsss';
+			echo 'success';
 			} else {
 				echo 'No plan inserted!';
 			}	

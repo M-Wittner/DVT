@@ -142,7 +142,10 @@
 							<div class="panel-body col-md-10">
 								<span class="label label-primary">Chip S/N:</span>
 								<ul class="list-group">
-									<li ng-repeat="chip in test.chips track by $index" class="list-group-item" ng-click="chipStatus(chip, test.id)">{{chip.chip}}<span class="pull-right glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span></li>
+									<li ng-repeat="chip in test.chips track by $index" class="list-group-item">
+										<span role="button" uib-popover="{{chip.results_path}}" popover-trigger="'outsideClick'" tabindex="0" popover-title="Path:">{{chip.chip}}</span>
+										<span ng-click="chipStatus(chip, test.id)" class="pull-right glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span>
+									</li>
 									<span class="pull-right btn btn-info btn-xs btn-crud" ng-click="reload()">update</span>
 								</ul>
 

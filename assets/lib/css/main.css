@@ -6,6 +6,10 @@
     padding: 20px;
     border-left: 3px solid #eee;
 }
+
+.popover{
+	max-width: fit-content;
+}
 .bs-callout-info {
     background-color: #F2F3F6;
     border-color: #bce8f1;
