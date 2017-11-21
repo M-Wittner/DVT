@@ -69,23 +69,15 @@ class plan_model extends CI_Model {
 						}
 					}
 				}
-				
-	//			print_r($value);
-	//			print_r('c'.$c);
-	//			print_r('r'.$r);
-	//			print_r('e'.$e);
-	//			var_dump(count($chip));
 				if($c == count($chip)){
 					$test->status = 'Completed';
 				} elseif($e > 0){
 					$test->status = 'Error';
-				} elseif($r > 0){
+				} elseif($r > 0 && $c < count($chip)){
 					$test->status = 'In Progress' ;
 				} else{
 					$test->status = 'IDLE';
 				} 
-	//			print_r($test->status);
-	//			echo "\r\n";
 				$progress = (($c + ($r/2)) / count($chip))*100;
 				$test->progress = $progress;
 				$this->db->where('id', $test->id);
@@ -104,12 +96,6 @@ class plan_model extends CI_Model {
 	//			print_r($chip);
 			}	
 		}
-//		die(var_dump($tests));
-//		$tests = (object) $tests;
-//		$plan = array(
-//			'plan'=>$q,
-//			'tests'=>$tests,
-//		);
 		return $plan;
 	}
 	
