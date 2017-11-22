@@ -10,7 +10,15 @@
 .popover{
 	max-width: fit-content;
 }
-.bs-callout-info {
+.label-dangerC{
+	background-color: #8e0400;
+}
+.bs-callout-info{
+    border-left-color: #1b809e;
+	padding: 10px;
+	margin: 0px 0;
+}
+.bs-callout-infoC {
     background-color: #F2F3F6;
     border-color: #bce8f1;
 }

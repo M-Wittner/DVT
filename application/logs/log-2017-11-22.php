@@ -31,3 +31,10 @@ ERROR - 201720172017-1111-2222 1818:1111:3636 --> Severity: Parsing Error --> sy
 ERROR - 201720172017-1111-2222 1818:1111:4242 --> Severity: Parsing Error --> syntax error, unexpected '=>' (T_DOUBLE_ARROW) C:\xampp\htdocs\application\controllers\plans.php 75
 ERROR - 201720172017-1111-2222 1818:1111:0404 --> Severity: Parsing Error --> syntax error, unexpected '$testArr' (T_VARIABLE), expecting ')' C:\xampp\htdocs\application\controllers\plans.php 88
 ERROR - 201720172017-1111-2222 1818:1111:4040 --> Severity: Parsing Error --> syntax error, unexpected '$testArr' (T_VARIABLE), expecting ')' C:\xampp\htdocs\application\controllers\plans.php 89
+ERROR - 201720172017-1111-2222 1818:1111:0909 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-2222 1818:1111:3737 --> Severity: Notice --> Undefined property: stdClass::$loPinFrom C:\xampp\htdocs\application\controllers\plans.php 88
+ERROR - 201720172017-1111-2222 1818:1111:3737 --> Severity: Notice --> Undefined property: stdClass::$loPinTo C:\xampp\htdocs\application\controllers\plans.php 89
+ERROR - 201720172017-1111-2222 1818:1111:3737 --> Severity: Notice --> Undefined property: stdClass::$loPinStep C:\xampp\htdocs\application\controllers\plans.php 90
+ERROR - 201720172017-1111-2222 1818:1111:1010 --> Severity: Notice --> Undefined property: stdClass::$loPinFrom C:\xampp\htdocs\application\controllers\plans.php 88
+ERROR - 201720172017-1111-2222 1818:1111:1010 --> Severity: Notice --> Undefined property: stdClass::$loPinTo C:\xampp\htdocs\application\controllers\plans.php 89
+ERROR - 201720172017-1111-2222 1818:1111:1010 --> Severity: Notice --> Undefined property: stdClass::$loPinStep C:\xampp\htdocs\application\controllers\plans.php 90
