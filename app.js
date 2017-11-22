@@ -202,6 +202,7 @@ myApp.factory('AuthService', function($http, Session, $cookies){
 			} else {
 				console.log('Error! Not logged in');
 			}
+			console.log(res.data);
 		});
 	};
 	
@@ -360,11 +361,13 @@ myApp.factory('testParams', function($http, $log){
 		'-10 C',
 		'0 C',
 		'10 C',
+		'20 C',
 		'25 C',
 		'40 C',
 		'60 C',
 		'80 C',
 		'85 C',
+		'95 C',
 		'105 C',
 	];
 	

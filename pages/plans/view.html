@@ -1,5 +1,5 @@
 <div class="containter">
-	<div class="row">
+	<div class="row" ng-hide="true">
 		<div class="col-md-2 col-sm-2 col-xs-3">
 			<span class="label label-primary">Test Priority:</span>
 			<select class="form-control" ng-model="testPriority">
@@ -85,7 +85,7 @@
 								<span class="label label-primary">Test Priority:</span>
 								<label class="form-control">{{test.priority}}</label>
 							</div>
-							<div class="col-md-7 col-sm-8">
+							<div class="col-md-7 col-sm-8" ng-if="test.lineup != null">
 								<span class="label label-primary">Test Lineup:</span>
 								<label class="form-control" id="lineup-box">{{test.lineup}}</label>
 							</div>
@@ -120,22 +120,43 @@
 							</div>
 						</div>
 						<div class="panel-body col-md-3" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
-							<span class="label label-primary">Pin:</span></br>
-							<div class="col-md-4">
-								<span>From</span>
-								<label class="form-control">{{test.pin_from}}</label>
+							<div class="row">
+								<span class="label label-primary">Pin:</span></br>
+								<div class="col-md-4">
+									<span>From</span>
+									<label class="form-control">{{test.pin_from}}</label>
+								</div>
+								<div class="col-md-4">
+									<span>To</span>
+									<label class="form-control">{{test.pin_to}}</label>
+								</div>
+								<div class="col-md-4">
+									<span>Step</span>
+									<label class="form-inline form-control">{{test.pin_step}}</label>
+								</div>
+								<div class="col-md-5" ng-if="test.pin_additional != null">
+									<span>More</span>
+									<label class="form-control">{{test.pin_additional}}</label>
+								</div>
 							</div>
-							<div class="col-md-4">
-								<span>To</span>
-								<label class="form-control">{{test.pin_to}}</label>
-							</div>
-							<div class="col-md-4">
-								<span>Step</span>
-								<label class="form-inline form-control">{{test.pin_step}}</label>
-							</div>
-							<div class="col-md-5" ng-if="test.pin_additional != null">
-								<span>More</span>
-								<label class="form-control">{{test.pin_additional}}</label>
+							<div class="row rowMarg" ng-if="test.name == 'Rx EVM vs. LO power' || test.name == 'Tx EVM vs. LO Power'">
+								<span class="label label-primary">LO Pin:</span></br>
+								<div class="col-md-4">
+									<span>From</span>
+									<label class="form-control">{{test.lo_pin_from}}</label>
+								</div>
+								<div class="col-md-4">
+									<span>To</span>
+									<label class="form-control">{{test.lo_pin_to}}</label>
+								</div>
+								<div class="col-md-4">
+									<span>Step</span>
+									<label class="form-inline form-control">{{test.lo_pin_step}}</label>
+								</div>
+								<div class="col-md-5" ng-if="test.lo_pin_additional != null">
+									<span>More</span>
+									<label class="form-control">{{test.lo_pin_additional}}</label>
+								</div>
 							</div>
 						</div>
 						<div class="col-md-3">

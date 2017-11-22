@@ -71,21 +71,30 @@ class Plans extends CI_Controller {
 						} else{
 							$pinAdd = null;
 						}
+						if(isset($testArr->loPinAdd)){
+							$loPinAdd = $testArr->loPinAdd;
+						} else{
+							$loPinAdd = null;
+						}
 						$test = array(
-							'priority'=>$testArr->priority[0],
-							'lineup'=>$testArr->lineup,
-							'station'=>$testArr->station[0]->station,
-							'name'=>$testArr->name[0]->test_name,
-							'pin_from'=>$testArr->pinFrom,
-							'pin_to'=>$testArr->pinTo,
-							'pin_step'=>$testArr->pinStep,
-							'pin_additional'=>$pinAdd,
-							'mcs'=>$testArr->mcs,
-							'voltage'=>$testArr->voltage,
-							'notes'=>$notes,
-							'seconds'=>$time,
-							'plan_id'=>$planId
-						);
+								'priority'=>$testArr->priority[0],
+								'lineup'=>$testArr->lineup,
+								'station'=>$testArr->station[0]->station,
+								'name'=>$testArr->name[0]->test_name,
+								'pin_from'=>$testArr->pinFrom,
+								'pin_to'=>$testArr->pinTo,
+								'pin_step'=>$testArr->pinStep,
+								'pin_additional'=>$pinAdd,
+								'lo_pin_from'=>$testArr->loPinFrom,
+								'lo_pin_to'=>$testArr->loPinTo,
+								'lo_pin_step'=>$testArr->loPinStep,
+								'lo_pin_additional'=>$loPinAdd,
+								'mcs'=>$testArr->mcs,
+								'voltage'=>$testArr->voltage,
+								'notes'=>$notes,
+								'seconds'=>$time,
+								'plan_id'=>$planId
+							);
 						$insertTest = $this->plan_model->add_test($test);
 						$testId = $this->plan_model->tests_id($insertTest);
 						foreach($chipsArr as $result){
@@ -205,7 +214,7 @@ class Plans extends CI_Controller {
 							$chipsArr = $testArr->chips;
 							$test = array(
 								'priority'=>$testArr->priority[0],
-								'lineup'=>'/',
+								'lineup'=>null,
 								'station'=>$testArr->station[0]->station,
 								'name'=>$testArr->name[0]->test_name,
 								'notes'=>$notes,

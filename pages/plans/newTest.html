@@ -75,6 +75,20 @@
 					<input ng-model="test.pinAdd" name="pinAdd" type="text" class="Pin" ng-disabled="lock">
 				</div>
 			</div>
+			<div class="col-md-4" ng-if="test.name[0].test_name == 'Rx EVM vs. LO power' || test.name[0].test_name == 'Tx EVM vs. LO Power'">
+				<div class="panel-body">
+					<span class="label label-primary">LO Pin:</span></br>
+					<span>From</span>
+					<input ng-model="test.loPinFrom" type="number" class="Pin" ng-disabled="lock">
+					<span>To</span>
+					<input ng-model="test.loPinTo" type="number" class="Pin" ng-disabled="lock">
+					<span>Step</span>
+					<input ng-model="test.loPinStep" type="number" class="Pin" ng-disabled="lock"></br>
+					</br>
+					<span>Additional</span>
+					<input ng-model="test.loPinAdd" name="pinAdd" type="text" class="Pin" ng-disabled="lock">
+				</div>
+			</div>
 			<div class="col-md-2" ng-if="test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'">
 				<div class="panel-body">
 					<span class="label label-primary">Temperature:</span>
@@ -126,67 +140,6 @@
 			</div>
 			<div class="col-md-8">
 				<div class="panel-body" >
-					<span class="label label-primary" >Notes:</span>
-					<div trumbowyg-ng placeholder="Test Notes"
-						 ng-model="test.notes"
-						 editor-config="{btns: ['viewHTML', ['undo', 'redo'],['strong', 'em', 'del'], ['link'], ['formatting'], ['foreColor', 'backColor'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['unorderedList', 'orderedList'], ['removeformat'],]}">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div ng-if="test.station[0].station == 'Robot'" class="panel-body">
-			<div class="row panel-body">
-				<span class="label label-primary">File Name</span>
-				<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.file" ng-disabled="lock">
-			</div>
-			<div class="row">
-				<div class="col-md-3">
-					<span class="label label-primary">Cable Connected To Port 1:</span>
-					<select ng-model="test.module" class="form-control">
-					  <option>P60A</option>
-					  <option>P60B</option>
-					</select>
-				</div>
-				<div class="col-md-3">
-					<span class="label label-primary">Module Placement:</span>
-					<select ng-model="test.module" class="form-control">
-					  <option>Standard</option>
-					  <option>Reversed</option>
-					</select>
-				</div>
-				<div class="col-md-3">
-					<span class="label label-primary">Second Plarization Flag:</span>
-					<select ng-model="test.pol2flag" class="form-control">
-					  <option>0</option>
-					  <option>1</option>
-					</select>
-				</div>
-				<div class="col-md-3">
-					<span class="label label-primary">Test Struct Plarization:</span>
-					<select ng-model="test.polstruct" class="form-control">
-					  <option>Vpol</option>
-					  <option>Hpol</option>
-					</select>
-				</div>
-			</div>
-			<div class="row">
-				<div class="panel-body">
-					<span class="label label-primary">First Polarization Path</span>
-					<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.pol1path" value="{{test.lineup}}" ng-disabled="lock">
-				</div>
-				<div class="panel-body">
-					<span class="label label-primary">Test Struct az.vec:</span></br>
-					<span>From</span>
-					<input ng-model="test.azFrom" type="number" class="Pin" ng-disabled="lock">
-					<span>To</span>
-					<input ng-model="test.azTo" type="number" class="Pin" ng-disabled="lock">
-					<span>Step</span>
-					<input ng-model="test.azStep" type="number" class="Pin" ng-disabled="lock"></br>
-					</br>
-				</div>
-			</div>
-			<div class="row panel-body">
-				<div class="col-md-8">
 					<span class="label label-primary" >Notes:</span>
 					<div trumbowyg-ng placeholder="Test Notes"
 						 ng-model="test.notes"

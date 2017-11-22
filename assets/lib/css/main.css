@@ -74,8 +74,8 @@ ul {
 }
 
 .form-control{
-	height: inherit;
-	width: inherit;
+	height: fit-content;
+	width: fit-content;
 	min-width: 100%;
 	background-color: #fbfcff;
 }
