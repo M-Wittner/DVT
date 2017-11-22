@@ -57,12 +57,13 @@ class plan_model extends CI_Model {
 					}
 					if($value->results_path == null){
 						if($test->station == 'R-CB1' || $test->station == 'R-CB2') {
-							$path = "\\\\filer4'\fileserver\Projects\dvt\Results\\test_results\TalynA\TalynA_YA591-H511_Flip_Chip_QCA6425_B0_".$value->chip;
+							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\\test_results\TalynA\TalynA_YA591-H511_Flip_Chip_QCA6425_B0_".$value->chip;
+//							print_r($path);
 							$this->db->where('id', $value->id);
 							$this->db->set('results_path', $path);
 							$this->db->update('test_chips');
 						} else if($test->station == 'M-CB1' || $test->station == 'M-CB2'){
-							$path = "\\\\filer4'\fileserver\Projects\dvt\Results\test_results\TalynM\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$value->chip;
+							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\TalynM\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$value->chip;
 							$this->db->where('id', $value->id);
 							$this->db->set('results_path', $path);
 							$this->db->update('test_chips');

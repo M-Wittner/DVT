@@ -24,10 +24,12 @@ class Plans extends CI_Controller {
 				foreach($plan->tests as $test){
 					$testProgress = $testProgress + $test->progress;			
 				}
-				$plan->progress = round((($testProgress / count($plan->tests))), 2);
-				$this->db->where('id', $plan->id);
-				$this->db->set('progress', $plan->progress);
-				$this->db->update('plans');
+				if(count($plan->tests) > 0){
+					$plan->progress = round((($testProgress / count($plan->tests))), 2);
+					$this->db->where('id', $plan->id);
+					$this->db->set('progress', $plan->progress);
+					$this->db->update('plans');
+				}
 			}
 		echo json_encode($plans);	
 	}
@@ -87,10 +89,10 @@ class Plans extends CI_Controller {
 						$insertTest = $this->plan_model->add_test($test);
 						$testId = $this->plan_model->tests_id($insertTest);
 						foreach($chipsArr as $result){
-							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\\test_results\\" .$result->chip. "\TalynA_YA591-H511_Flip_Chip_QCA6425_B0_".$result->serial_number;
+//							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\\test_results\\" .$result->chip. "\TalynA_YA591-H511_Flip_Chip_QCA6425_B0_".$result->serial_number;
 							$chip = array(
 								'chip'=> $result->serial_number,
-								'results_path'=>$path,
+//								'results_path'=>$path,
 								'plan_id'=>$planId,
 								'test_id'=>$testId
 							);
@@ -156,10 +158,10 @@ class Plans extends CI_Controller {
 						$insertTest = $this->plan_model->add_test($test);
 						$testId = $this->plan_model->tests_id($insertTest);
 						foreach($chipsArr as $result){
-							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
+//							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
 							$chip = array(
 								'chip'=>$result->serial_number,
-								'results_path'=>$path,
+//								'results_path'=>$path,
 								'plan_id'=>$planId,
 								'test_id'=>$testId
 							);
