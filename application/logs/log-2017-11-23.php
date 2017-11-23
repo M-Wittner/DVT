@@ -90,3 +90,7 @@ ERROR - 201720172017-1111-2323 2121:1111:1616 --> Severity: Notice --> Trying to
 ERROR - 201720172017-1111-2323 2121:1111:1616 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 627
 ERROR - 201720172017-1111-2323 2121:1111:1616 --> Severity: Notice --> Undefined property: stdClass::$id C:\xampp\htdocs\application\controllers\plans.php 630
 ERROR - 201720172017-1111-2323 2121:1111:1616 --> Severity: Notice --> Undefined property: stdClass::$id C:\xampp\htdocs\application\controllers\plans.php 632
+ERROR - 201720172017-1111-2323 2121:1111:5757 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-2323 2121:1111:3939 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\controllers\plans.php 613
+ERROR - 201720172017-1111-2323 2121:1111:4444 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\controllers\plans.php 613
+ERROR - 201720172017-1111-2323 2121:1111:5454 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\controllers\plans.php 613

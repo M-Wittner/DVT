@@ -62,7 +62,7 @@
 	<div class="panel-body" id="planBody" ng-repeat="test in plan.tests | orderBy: 'priority'| filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
 		<div id="desc" class="panel panel-default">
 			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="false" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
-				<strong>Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.name}} , ID: {{test.id}}</strong>
+				<strong>Priority: {{test.priority}}, Station: {{test.station[0].station}}, Test: {{test.name}} , ID: {{test.id}}</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
 				<span class="pull-right">
 					<span class="label label-default" ng-if="test.status == 'IDLE'" id="testStatus" ng-model="test.status">{{test.status}}</span>
@@ -99,7 +99,7 @@
 						<div class="col-md-2">
 							<div class="panel-body">
 								<span class="label label-primary">Station:</span>
-								<label class="form-control">{{test.station}}</label>
+								<label class="form-control">{{test.station[0].station}}</label>
 								<ul class="list-group">
 									<li class="list-group-item">
 										<strong>Station Computer: </strong> {{test.stations[0].pc_name}}
