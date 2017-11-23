@@ -1,6 +1,12 @@
 #mainDiv {
 	margin-top: 80px;
 }
+
+#copy{
+	height: 23px;
+	width: 100px;
+}
+
 .bs-callout {
     margin: 20px 0;
     padding: 20px;

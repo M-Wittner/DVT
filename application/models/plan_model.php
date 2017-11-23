@@ -91,7 +91,7 @@ class plan_model extends CI_Model {
 					$temp[$i] = $value->temp;
 				}
 				$test->temps = $temp;
-				$test->stations = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
+				$test->station = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
 
 				$test->comments = $this->db->get_where('test_comments', array('test_id'=>$test->id))->result();
 	//			print_r($chip);

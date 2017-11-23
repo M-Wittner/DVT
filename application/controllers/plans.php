@@ -243,7 +243,6 @@ class Plans extends CI_Controller {
 		} else {
 			echo 'No Test Detected!';
 		}
-		
 	}
 	
 	function Show() {
@@ -404,21 +403,30 @@ class Plans extends CI_Controller {
 						} else{
 							$voltage = null;
 						}
+						if(isset($testArr->loPinAdd)){
+							$loPinAdd = $testArr->loPinAdd;
+						} else{
+							$loPinAdd = null;
+						}
 						$test = array(
-							'priority'=>$testArr->priority[0],
-							'lineup'=>$testArr->lineup,
-							'station'=>$testArr->station[0]->station,
-							'name'=>$testArr->name[0]->test_name,
-							'pin_from'=>$testArr->pinFrom,
-							'pin_to'=>$testArr->pinTo,
-							'pin_step'=>$testArr->pinStep,
-							'pin_additional'=>$pinAdd,
-							'mcs'=>$testArr->mcs,
-							'voltage'=>$voltage,
-							'notes'=>$notes,
-							'seconds'=>$time,
-							'plan_id'=>$planId
-						);
+								'priority'=>$testArr->priority[0],
+								'lineup'=>$testArr->lineup,
+								'station'=>$testArr->station[0]->station,
+								'name'=>$testArr->name[0]->test_name,
+								'pin_from'=>$testArr->pinFrom,
+								'pin_to'=>$testArr->pinTo,
+								'pin_step'=>$testArr->pinStep,
+								'pin_additional'=>$pinAdd,
+								'lo_pin_from'=>$testArr->loPinFrom,
+								'lo_pin_to'=>$testArr->loPinTo,
+								'lo_pin_step'=>$testArr->loPinStep,
+								'lo_pin_additional'=>$loPinAdd,
+								'mcs'=>$testArr->mcs,
+								'voltage'=>$voltage,
+								'notes'=>$notes,
+								'seconds'=>$time,
+								'plan_id'=>$planId
+							);
 						$insertTest = $this->plan_model->add_test($test);
 						$testId = $this->plan_model->tests_id($insertTest);
 						foreach($chipsArr as $result){
@@ -598,5 +606,35 @@ class Plans extends CI_Controller {
 			} 
 		}
 		echo json_encode($tests);
+	}
+	
+	function copyTest(){
+		$id = json_decode(file_get_contents('php://input'));
+		$test = $this->db->get_where('tests', array('id'=>$id))->result()[0];
+//		if($test->station == 'M-CB1' || $test->station == 'M-CB2') {
+//			$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$test->id))->result();
+//			$test->xifs = $xifRes;
+//
+//		} else if($test->station == 'R-CB1' || $test->station == 'R-CB2'){
+//			$ant = $this->db->get_where('test_antennas', array('test_id'=>$test->id))->result();
+//			$antenna = array();
+//			foreach($ant as $value){
+//				array_push($antenna, $value->antenna);
+//			}
+//			$test->antennas = $antenna;	
+//		}
+//		$ch = $this->db->get_where('test_channels', array('test_id'=>$test->id))->result();
+//		$test->channels = $ch;
+////			var_dump($ch);
+//
+//		$chip = $this->db->get_where('test_chips', array('test_id'=>$test->id))->result();
+//		$test->chips = $chip;
+//		$temp = $this->db->get_where('test_temps', array('test_id'=>$test->id))->result();
+//		foreach($temp as $i => $value){
+//			$temp[$i] = $value->temp;
+//		}
+//		$test->temps = $temp;
+//		$test->station = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
+		echo json_encode($test);
 	}
 }
