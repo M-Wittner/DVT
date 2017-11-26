@@ -1,6 +1,12 @@
 #mainDiv {
 	margin-top: 80px;
 }
+
+#copy{
+	height: 23px;
+	width: 100px;
+}
+
 .bs-callout {
     margin: 20px 0;
     padding: 20px;
@@ -10,7 +16,15 @@
 .popover{
 	max-width: fit-content;
 }
-.bs-callout-info {
+.label-dangerC{
+	background-color: #8e0400;
+}
+.bs-callout-info{
+    border-left-color: #1b809e;
+	padding: 10px;
+	margin: 0px 0;
+}
+.bs-callout-infoC {
     background-color: #F2F3F6;
     border-color: #bce8f1;
 }
@@ -74,8 +88,8 @@ ul {
 }
 
 .form-control{
-	height: inherit;
-	width: inherit;
+	height: fit-content;
+	width: fit-content;
 	min-width: 100%;
 	background-color: #fbfcff;
 }

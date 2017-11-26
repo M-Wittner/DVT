@@ -23,7 +23,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	$scope.insertTest = function(){
 		$scope.planParams.push(this.test);
 		$scope.lock = true;
-		console.log(this.test);
+		console.log($scope.test);
 	}
 	$scope.editToggle = function(){
 		$scope.lock = false;
@@ -56,4 +56,13 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 		})
 //		console.log($scope.array);
 	};
+	
+	$scope.copyTest = function(){
+		$http.post('http://wigig-584/plans/copyTest', $scope.copyId)
+		.then(function(response){
+			console.log(response.data);
+			$scope.test = response.data;
+		})
+//		console.log($scope.copyId);
+	}
 }]);

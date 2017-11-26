@@ -3,12 +3,12 @@
 		<div class="row">
 			<div class="panel-body">
 				<div class="col-md-2">
-					<span class="label label-primary">Test Priority</span>
+					<span class="label label-dangerC">Test Priority</span>
 					<multiselect ng-model="test.priority" options="testParams.params.priorityList" selection-limit="1" ng-disabled="lock">
 					</multiselect>
 				</div>
 				<div class="col-md-10" ng-if="test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'">
-					<span class="label label-primary">Test Lineup</span>
+					<span class="label label-dangerC">Test Lineup</span>
 					<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.lineup" value="{{test.lineup}}" ng-disabled="lock">
 				</div>
 			</div>
@@ -16,14 +16,14 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="panel-body">
-					<span class="label label-primary">Station:</span>
+					<span class="label label-dangerC">Station:</span>
 					<multiselect required ng-model="test.station" options="testParams.params.stationList" show-search="true" selection-limit="1" display-prop="station" id-prop="id" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="panel-body">
-					<span class="label label-primary">Test Name:</span>
+					<span class="label label-dangerC">Test Name:</span>
 					<!--	M stations	-->
 					<multiselect ng-if="test.station[0].station == 'M-CB1' || test.station[0].station == 'M-CB2'" ng-model="test.name" options="testParams.params.nameListM" show-search="true" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
 					</multiselect>
@@ -36,19 +36,11 @@
 					</multiselect>
 					<multiselect ng-if="test.station[0].station == 'TalynM+A'" ng-model="test.name" options="testParams.params.nameListFS" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
 					</multiselect>
-					<multiselect ng-if="test.station[0].station == 'Robot'" ng-model="test.name" options="testParams.params.nameListRobot" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
-					</multiselect>
 				</div>
 			</div>
-			<div class="col-md-4" ng-if="test.station[0].station == 'Robot'">
+			<div class="col-md-4">
 				<div class="panel-body">
-					<span class="label label-primary">Matlab File:</span>
-					<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.matlab" ng-disabled="lock">
-				</div>
-			</div>
-			<div class="col-md-4" ng-if="test.station[0].station != 'Robot'">
-				<div class="panel-body">
-					<span class="label label-primary">Chip S/N:</span>
+					<span class="label label-dangerC">Chip S/N:</span>
 					<multiselect ng-if="test.station[0].station == 'M-CB1' || test.station[0].station == 'M-CB2' || test.station[0].station == 'Calibration'" ng-model="test.chips" options="testParams.params.chipListM" id-prop="id" display-prop="serial_number" search-limit="15" show-select-all="true" show-search="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 					
@@ -75,38 +67,52 @@
 					<input ng-model="test.pinAdd" name="pinAdd" type="text" class="Pin" ng-disabled="lock">
 				</div>
 			</div>
+			<div class="col-md-4" ng-if="test.name[0].test_name == 'Rx EVM vs. LO power' || test.name[0].test_name == 'Tx EVM vs. LO Power'">
+				<div class="panel-body">
+					<span class="label label-primary">LO Pin:</span></br>
+					<span>From</span>
+					<input ng-model="test.loPinFrom" type="number" class="Pin" ng-disabled="lock">
+					<span>To</span>
+					<input ng-model="test.loPinTo" type="number" class="Pin" ng-disabled="lock">
+					<span>Step</span>
+					<input ng-model="test.loPinStep" type="number" class="Pin" ng-disabled="lock"></br>
+					</br>
+					<span>Additional</span>
+					<input ng-model="test.loPinAdd" name="pinAdd" type="text" class="Pin" ng-disabled="lock">
+				</div>
+			</div>
 			<div class="col-md-2" ng-if="test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'">
 				<div class="panel-body">
-					<span class="label label-primary">Temperature:</span>
+					<span class="label label-dangerC">Temperature:</span>
 					<multiselect ng-model="test.temp" options="testParams.params.tempList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-2" ng-if="test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'">
 				<div class="panel-body">
-					<span class="label label-primary">Channel:</span>
+					<span class="label label-dangerC">Channel:</span>
 					<multiselect ng-model="test.channel" options="testParams.params.chList1" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-2" ng-if="test.station[0].station == 'R-CB1' || test.station[0].station == 'R-CB2' || test.station[0].station == 'Calibration'">
 				<div class="panel-body">
-					<span class="label label-primary">Antenna:</span>
+					<span class="label label-dangerC">Antenna:</span>
 					<multiselect ng-model="test.antenna" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-2" ng-if="test.station[0].station != 'R-CB1' && test.station[0].station != 'R-CB2' && test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'">
 				<div class="panel-body">
-					<span class="label label-primary">XIF:</span>
+					<span class="label label-dangerC">XIF:</span>
 					<multiselect ng-model="test.xif" options="testParams.params.xifList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 					</multiselect>
 				</div>
 			</div>
 			<div class="col-md-2" ng-if="test.station[0].station != 'M-CB1' && test.station[0].station != 'M-CB2' && test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'">
 				<div class="panel-body">
-					<span class="label label-primary">MCS:</span></br>
-					<input ng-model="test.mcs" type="number" class="Pin" ng-disabled="lock">
+					<span class="label label-dangerC">MCS:</span></br>
+					<input ng-model="test.mcs" type="text" class="Pin" ng-disabled="lock">
 				</div>
 			</div>
 			<div class="col-md-2" ng-if="test.station[0].station == 'Calibration'">
@@ -120,73 +126,12 @@
 		<div class="row">
 			<div class="col-md-2" ng-if="test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'">
 				<div class="panel-body">
-					<span class="label label-primary">Voltage:</span>
+					<span class="label label-dangerC">Voltage:</span>
 					<input ng-model="test.voltage" type="number" class="Pin" ng-disabled="lock">
 				</div>
 			</div>
 			<div class="col-md-8">
 				<div class="panel-body" >
-					<span class="label label-primary" >Notes:</span>
-					<div trumbowyg-ng placeholder="Test Notes"
-						 ng-model="test.notes"
-						 editor-config="{btns: ['viewHTML', ['undo', 'redo'],['strong', 'em', 'del'], ['link'], ['formatting'], ['foreColor', 'backColor'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['unorderedList', 'orderedList'], ['removeformat'],]}">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div ng-if="test.station[0].station == 'Robot'" class="panel-body">
-			<div class="row panel-body">
-				<span class="label label-primary">File Name</span>
-				<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.file" ng-disabled="lock">
-			</div>
-			<div class="row">
-				<div class="col-md-3">
-					<span class="label label-primary">Cable Connected To Port 1:</span>
-					<select ng-model="test.module" class="form-control">
-					  <option>P60A</option>
-					  <option>P60B</option>
-					</select>
-				</div>
-				<div class="col-md-3">
-					<span class="label label-primary">Module Placement:</span>
-					<select ng-model="test.module" class="form-control">
-					  <option>Standard</option>
-					  <option>Reversed</option>
-					</select>
-				</div>
-				<div class="col-md-3">
-					<span class="label label-primary">Second Plarization Flag:</span>
-					<select ng-model="test.pol2flag" class="form-control">
-					  <option>0</option>
-					  <option>1</option>
-					</select>
-				</div>
-				<div class="col-md-3">
-					<span class="label label-primary">Test Struct Plarization:</span>
-					<select ng-model="test.polstruct" class="form-control">
-					  <option>Vpol</option>
-					  <option>Hpol</option>
-					</select>
-				</div>
-			</div>
-			<div class="row">
-				<div class="panel-body">
-					<span class="label label-primary">First Polarization Path</span>
-					<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.pol1path" value="{{test.lineup}}" ng-disabled="lock">
-				</div>
-				<div class="panel-body">
-					<span class="label label-primary">Test Struct az.vec:</span></br>
-					<span>From</span>
-					<input ng-model="test.azFrom" type="number" class="Pin" ng-disabled="lock">
-					<span>To</span>
-					<input ng-model="test.azTo" type="number" class="Pin" ng-disabled="lock">
-					<span>Step</span>
-					<input ng-model="test.azStep" type="number" class="Pin" ng-disabled="lock"></br>
-					</br>
-				</div>
-			</div>
-			<div class="row panel-body">
-				<div class="col-md-8">
 					<span class="label label-primary" >Notes:</span>
 					<div trumbowyg-ng placeholder="Test Notes"
 						 ng-model="test.notes"
@@ -247,11 +192,17 @@
 			Time Calculater
 		</button>
 		<button class="btn btn-xs btn-info addButton" ng-click="insertTest()" ng-disabled="lock">
-		Insert!
-	</button>
-		<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">
-		Edit!
-	</button>
+			Insert!
+		</button>
+			<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">
+			Edit!
+		</button>
+		<span class="form-inline">
+			<div class="form-group">
+				<input type="number" ng-model="copyId" class="form-control" id="copy" placeholder="Test ID">
+			</div>
+			<button type="submit" class="btn btn-default" ng-click="copyTest()">Copy</button>
+		</span>
 	</div>
 </div>
 <hr/>

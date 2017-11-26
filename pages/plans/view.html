@@ -1,5 +1,5 @@
 <div class="containter">
-	<div class="row">
+	<div class="row" ng-hide="true">
 		<div class="col-md-2 col-sm-2 col-xs-3">
 			<span class="label label-primary">Test Priority:</span>
 			<select class="form-control" ng-model="testPriority">
@@ -30,7 +30,7 @@
 		</div>
 	</div>
 	<div class="row rowMarg">
-		<div class="bs-callout bs-callout-info col-md-offset-3 col-md-6">
+		<div class="bs-callout bs-callout-infoC col-md-offset-3 col-md-6">
 			<p>Color Assitance:</p>
 			<div class="col-md-5">
 				<span class="label label-default">IDLE</span> - No chip running
@@ -62,7 +62,7 @@
 	<div class="panel-body" id="planBody" ng-repeat="test in plan.tests | orderBy: 'priority'| filter:{id: testId, priority: testPriority, station: testStation, name: testName} track by $index">
 		<div id="desc" class="panel panel-default">
 			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="false" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
-				<strong>Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.name}} , ID: {{test.id}}</strong>
+				<strong>Priority: {{test.priority}}, Station: {{test.station[0].station}}, Test: {{test.name}} , ID: {{test.id}}</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
 				<span class="pull-right">
 					<span class="label label-default" ng-if="test.status == 'IDLE'" id="testStatus" ng-model="test.status">{{test.status}}</span>
@@ -85,7 +85,7 @@
 								<span class="label label-primary">Test Priority:</span>
 								<label class="form-control">{{test.priority}}</label>
 							</div>
-							<div class="col-md-7 col-sm-8">
+							<div class="col-md-7 col-sm-8" ng-if="test.lineup != null">
 								<span class="label label-primary">Test Lineup:</span>
 								<label class="form-control" id="lineup-box">{{test.lineup}}</label>
 							</div>
@@ -99,7 +99,7 @@
 						<div class="col-md-2">
 							<div class="panel-body">
 								<span class="label label-primary">Station:</span>
-								<label class="form-control">{{test.station}}</label>
+								<label class="form-control">{{test.station[0].station}}</label>
 								<ul class="list-group">
 									<li class="list-group-item">
 										<strong>Station Computer: </strong> {{test.stations[0].pc_name}}
@@ -114,42 +114,68 @@
 							</div>
 						</div>
 						<div class="col-md-3">
-							<div class="panel-body">
-								<span class="label label-primary">Test Name:</span>
-								<label class="form-control">{{test.name}}</label>
+							<div class="row col-md-11">
+								<div class="panel-body">
+									<span class="label label-primary">Test Name:</span>
+									<label class="form-control">{{test.name}}</label>
+								</div>
 							</div>
-						</div>
-						<div class="panel-body col-md-3" ng-if="test.station == 'R-CB1' || test.station == 'R-CB2'">
-							<span class="label label-primary">Pin:</span></br>
-							<div class="col-md-4">
-								<span>From</span>
-								<label class="form-control">{{test.pin_from}}</label>
-							</div>
-							<div class="col-md-4">
-								<span>To</span>
-								<label class="form-control">{{test.pin_to}}</label>
-							</div>
-							<div class="col-md-4">
-								<span>Step</span>
-								<label class="form-inline form-control">{{test.pin_step}}</label>
-							</div>
-							<div class="col-md-5" ng-if="test.pin_additional != null">
-								<span>More</span>
-								<label class="form-control">{{test.pin_additional}}</label>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="panel-body col-md-10">
-								<span class="label label-primary">Chip S/N:</span>
-								<ul class="list-group">
-									<li ng-repeat="chip in test.chips track by $index" class="list-group-item">
-										<span role="button" uib-popover="{{chip.results_path}}" popover-trigger="'outsideClick'" tabindex="0" popover-title="Path:">{{chip.chip}}</span>
-										<span ng-click="chipStatus(chip, test.id)" class="pull-right glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span>
-									</li>
-									<span class="pull-right btn btn-info btn-xs btn-crud" ng-click="reload()">update</span>
-								</ul>
+							<div class="row col-md-11">
+								<div class="panel-body">
+									<span class="label label-primary">Chip S/N:</span>
+									<ul class="list-group">
+										<li ng-repeat="chip in test.chips track by $index" class="list-group-item">
+											<span role="button" uib-popover="{{chip.results_path}}" popover-trigger="'outsideClick'" tabindex="0" popover-title="Path:">{{chip.chip}}</span>
+											<span ng-click="chipStatus(chip, test.id)" class="pull-right glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span>
+										</li>
+										<span class="pull-right btn btn-info btn-xs btn-crud" ng-click="reload()">update</span>
+									</ul>
 
+								</div>
 							</div>
+						</div>
+						<div class="panel-body col-md-3" ng-if="test.station[0].station == 'R-CB1' || test.station[0].station == 'R-CB2'">
+							<div class="row">
+								<span class="label label-primary">Pin:</span></br>
+								<div class="col-md-4">
+									<span>From</span>
+									<label class="form-control">{{test.pin_from}}</label>
+								</div>
+								<div class="col-md-4">
+									<span>To</span>
+									<label class="form-control">{{test.pin_to}}</label>
+								</div>
+								<div class="col-md-4">
+									<span>Step</span>
+									<label class="form-inline form-control">{{test.pin_step}}</label>
+								</div>
+								<div class="col-md-5" ng-if="test.pin_additional != null">
+									<span>More</span>
+									<label class="form-control">{{test.pin_additional}}</label>
+								</div>
+							</div>
+							<div class="row rowMarg" ng-if="(test.name == 'Rx EVM vs. LO power' || test.name == 'Tx EVM vs. LO Power') && test.lo_pin_from != null">
+								<span class="label label-primary">LO Pin:</span></br>
+								<div class="col-md-4">
+									<span>From</span>
+									<label class="form-control">{{test.lo_pin_from}}</label>
+								</div>
+								<div class="col-md-4">
+									<span>To</span>
+									<label class="form-control">{{test.lo_pin_to}}</label>
+								</div>
+								<div class="col-md-4">
+									<span>Step</span>
+									<label class="form-inline form-control">{{test.lo_pin_step}}</label>
+								</div>
+								<div class="col-md-5" ng-if="test.lo_pin_additional != null">
+									<span>More</span>
+									<label class="form-control">{{test.lo_pin_additional}}</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							
 						</div>
 					</div>
 					<div class="row">

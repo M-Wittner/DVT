@@ -55,23 +55,30 @@ class plan_model extends CI_Model {
 					}elseif($value->running == true){
 						$r++;
 					}
+					if($value->results_path == null){
+						if($test->station == 'R-CB1' || $test->station == 'R-CB2') {
+							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\\test_results\TalynA\TalynA_YA591-H511_Flip_Chip_QCA6425_B0_".$value->chip;
+//							print_r($path);
+							$this->db->where('id', $value->id);
+							$this->db->set('results_path', $path);
+							$this->db->update('test_chips');
+						} else if($test->station == 'M-CB1' || $test->station == 'M-CB2'){
+							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\TalynM\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$value->chip;
+							$this->db->where('id', $value->id);
+							$this->db->set('results_path', $path);
+							$this->db->update('test_chips');
+						}
+					}
 				}
-	//			print_r($value);
-	//			print_r('c'.$c);
-	//			print_r('r'.$r);
-	//			print_r('e'.$e);
-	//			var_dump(count($chip));
 				if($c == count($chip)){
 					$test->status = 'Completed';
 				} elseif($e > 0){
 					$test->status = 'Error';
-				} elseif($r > 0){
+				} elseif($r > 0 && $c < count($chip)){
 					$test->status = 'In Progress' ;
 				} else{
 					$test->status = 'IDLE';
 				} 
-	//			print_r($test->status);
-	//			echo "\r\n";
 				$progress = (($c + ($r/2)) / count($chip))*100;
 				$test->progress = $progress;
 				$this->db->where('id', $test->id);
@@ -84,18 +91,12 @@ class plan_model extends CI_Model {
 					$temp[$i] = $value->temp;
 				}
 				$test->temps = $temp;
-				$test->stations = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
+				$test->station = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
 
 				$test->comments = $this->db->get_where('test_comments', array('test_id'=>$test->id))->result();
 	//			print_r($chip);
 			}	
 		}
-//		die(var_dump($tests));
-//		$tests = (object) $tests;
-//		$plan = array(
-//			'plan'=>$q,
-//			'tests'=>$tests,
-//		);
 		return $plan;
 	}
 	
