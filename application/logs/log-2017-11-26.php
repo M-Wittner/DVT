@@ -33,3 +33,22 @@ ERROR - 201720172017-1111-2626 1616:1111:3838 --> Severity: Notice --> Undefined
 ERROR - 201720172017-1111-2626 1616:1111:3838 --> Severity: Notice --> Undefined property: stdClass::$loPinTo C:\xampp\htdocs\application\controllers\plans.php 421
 ERROR - 201720172017-1111-2626 1616:1111:3838 --> Severity: Notice --> Undefined property: stdClass::$loPinStep C:\xampp\htdocs\application\controllers\plans.php 422
 >>>>>>> work
+ERROR - 201720172017-1111-2626 1717:1111:2222 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-2626 1818:1111:4848 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-2626 1818:1111:2727 --> Severity: Notice --> Undefined property: stdClass::$chips C:\xampp\htdocs\application\controllers\plans.php 386
+ERROR - 201720172017-1111-2626 1818:1111:2727 --> Severity: Notice --> Undefined property: stdClass::$loPinFrom C:\xampp\htdocs\application\controllers\plans.php 420
+ERROR - 201720172017-1111-2626 1818:1111:2727 --> Severity: Notice --> Undefined property: stdClass::$loPinTo C:\xampp\htdocs\application\controllers\plans.php 421
+ERROR - 201720172017-1111-2626 1818:1111:2727 --> Severity: Notice --> Undefined property: stdClass::$loPinStep C:\xampp\htdocs\application\controllers\plans.php 422
+ERROR - 201720172017-1111-2626 1818:1111:2727 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 432
+ERROR - 201720172017-1111-2626 1818:1111:2727 --> Severity: Notice --> Undefined property: stdClass::$loPinFrom C:\xampp\htdocs\application\controllers\plans.php 420
+ERROR - 201720172017-1111-2626 1818:1111:2727 --> Severity: Notice --> Undefined property: stdClass::$loPinTo C:\xampp\htdocs\application\controllers\plans.php 421
+ERROR - 201720172017-1111-2626 1818:1111:2727 --> Severity: Notice --> Undefined property: stdClass::$loPinStep C:\xampp\htdocs\application\controllers\plans.php 422
+ERROR - 201720172017-1111-2626 1818:1111:3636 --> Severity: Warning --> Division by zero C:\xampp\htdocs\application\models\plan_model.php 82
+ERROR - 201720172017-1111-2626 1818:1111:3838 --> Severity: Warning --> Division by zero C:\xampp\htdocs\application\models\plan_model.php 82
+ERROR - 201720172017-1111-2626 1818:1111:3939 --> Severity: Warning --> Division by zero C:\xampp\htdocs\application\models\plan_model.php 82
+ERROR - 201720172017-1111-2626 1818:1111:5757 --> Severity: Notice --> Undefined property: stdClass::$loPinFrom C:\xampp\htdocs\application\controllers\plans.php 420
+ERROR - 201720172017-1111-2626 1818:1111:5757 --> Severity: Notice --> Undefined property: stdClass::$loPinTo C:\xampp\htdocs\application\controllers\plans.php 421
+ERROR - 201720172017-1111-2626 1818:1111:5757 --> Severity: Notice --> Undefined property: stdClass::$loPinStep C:\xampp\htdocs\application\controllers\plans.php 422
+ERROR - 201720172017-1111-2626 1818:1111:5757 --> Severity: Notice --> Undefined property: stdClass::$loPinFrom C:\xampp\htdocs\application\controllers\plans.php 420
+ERROR - 201720172017-1111-2626 1818:1111:5757 --> Severity: Notice --> Undefined property: stdClass::$loPinTo C:\xampp\htdocs\application\controllers\plans.php 421
+ERROR - 201720172017-1111-2626 1818:1111:5757 --> Severity: Notice --> Undefined property: stdClass::$loPinStep C:\xampp\htdocs\application\controllers\plans.php 422

@@ -79,7 +79,11 @@ class plan_model extends CI_Model {
 				} else{
 					$test->status = 'IDLE';
 				} 
-				$progress = (($c + ($r/2)) / count($chip))*100;
+				if(count($chip) > 0){
+					$progress = (($c + ($r/2)) / count($chip))*100;
+				} else{
+					$progress = null;
+				}
 				$test->progress = $progress;
 				$this->db->where('id', $test->id);
 				$this->db->set('progress', $test->progress);
