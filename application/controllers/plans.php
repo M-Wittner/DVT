@@ -550,7 +550,7 @@ class Plans extends CI_Controller {
 						echo 'not R or M station';
 					}
 			};
-			echo 'success';
+			echo 'successs';
 			} else {
 				echo 'No plan inserted!';
 			}	
