@@ -197,15 +197,13 @@
 								</div>
 							</div>
 							<div class="col-md-7" ng-if="test.station[0].station == 'R-CB1' || test.station[0].station == 'R-CB2'">
-								<div class="panel-body">
-									<span class="label label-primary">Antennas:</span>
-									<ul class="list-group">
-										<li ng-if="(test.antennas).length < (params.antList).length" ng-repeat="antenna in test.antennas track by $index" class="list-group-item"> {{antenna}}
-										</li>
-										<li ng-if="(test.antennas).length == (params.antList).length" class="list-group-item"> All Antennas
-										</li>
-									</ul>
-								</div>
+								<span class="label label-primary">Antennas:</span>
+								<ul class="list-group">
+									<li ng-if="(test.antennas).length < (params.antList).length" ng-repeat="antenna in test.antennas track by $index" class="list-group-item"> {{antenna}}
+									</li>
+									<li ng-if="(test.antennas).length == (params.antList).length" class="list-group-item"> All Antennas
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>

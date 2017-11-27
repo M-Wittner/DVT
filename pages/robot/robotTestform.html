@@ -1,4 +1,4 @@
-<form id="desc" ng-controller="newRobotPlanCtrl" role="form" data-toggle="validator">
+<div id="desc" ng-controller="newRobotPlanCtrl">
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-2">
@@ -13,7 +13,7 @@
 			</div>
 			<div class="col-md-3">
 				<span class="label label-primary">Module Placement:</span>
-				<select ng-model="test.module" class="form-control">
+				<select ng-model="test.module_state" class="form-control">
 				  <option>Standard</option>
 				  <option>Reversed</option>
 				</select>
@@ -27,12 +27,12 @@
 		<div class="row rowMarg">
 			<div class="col-md-3">
 				<span class="label label-primary">RF Module</span>
-				<multiselect ng-model="test.module" options="testParams.params.moduleListRobot" show-search="true" selection-limit="1" id-prop="id" display-prop="module" ng-disabled="lock">
+				<multiselect ng-model="test.rf_module" options="testParams.params.moduleListRobot" show-search="true" selection-limit="1" id-prop="id" display-prop="module" ng-disabled="lock">
 				</multiselect>
 			</div>
 			<div class="col-md-3">
 				<span class="label label-primary">RF Cables</span>
-				<select ng-model="test.RF" class="form-control">
+				<select ng-model="test.rf_cable" class="form-control">
 				  <option>Standard</option>
 				  <option>Flip Vpol</option>
 				  <option>Flip Hpol</option>
@@ -40,7 +40,7 @@
 			</div>
 			<div class="col-md-2" ng-if="test.name[0].test_name == 'rx pattern scan' || test.name[0].test_name == 'BRP scan'">
 				<span class="label label-danger">Second Plarization Flag</span></br>
-				<input class="checkbox" ng-model="test.pol2Flag" type="checkbox" class="Pin" ng-disabled="lock" style="display: inline;"> On/Off
+				<input class="checkbox" ng-model="test.pol2_flag" type="checkbox" class="Pin" ng-disabled="lock" style="display: inline;"> On/Off
 			</div>
 			<div class="col-md-7" ng-if="test.name[0].test_name == 'Sector EIRP scan'">
 				<span class="label label-primary">Board File Name</span>
@@ -48,7 +48,7 @@
 			</div>
 			<div class="col-md-6" ng-if="test.name[0].test_name == 'Sector EIRP scan' || test.name[0].test_name == 'Single-chain EIRP scan'">
 				<span class="label label-primary">Used Sectors</span>
-				<input class="form-control" type="text" placeholder="Used Sectors" ng-model="test.usedSec" ng-disabled="lock">
+				<input class="form-control" type="text" placeholder="Used Sectors" ng-model="test.used_sectors" ng-disabled="lock">
 			</div>
 		</div>
 		<div class="row rowMarg">
@@ -67,14 +67,14 @@
 					<div class="row">
 						<div class="col-md-2">
 							<span class="label label-primary">R Silicon</span>
-							<select ng-model="test.module" class="form-control">
+							<select ng-model="test.silicon_r" class="form-control">
 							  <option>Sparrow</option>
 							  <option>Talyn</option>
 							</select>
 						</div>
 						<div class="col-md-2">
 							<span class="label label-primary">M Silicon</span>
-							<select ng-model="test.module" class="form-control">
+							<select ng-model="test.silicon_m" class="form-control">
 							  <option>Sparrow</option>
 							  <option>Talyn</option>
 							</select>
@@ -145,7 +145,7 @@
 					<div class="row rowMarg">
 						<div class="col-md-6" ng-if="test.name[0].test_name == 'Power consumption'">
 							<span class="label label-primary">Struct Used Sectors</span>
-							<input class="form-control" type="text" placeholder="Used Sectors" ng-model="test.strcutSec" ng-disabled="lock">
+							<input class="form-control" type="text" placeholder="Used Sectors" ng-model="test.strcut_sectors" ng-disabled="lock">
 						</div>
 						<div class="col-md-2" ng-if="test.name[0].test_name == 'Sector EIRP scan' || test.name[0].test_name == 'Single-chain EIRP scan'">
 							<span class="label label-primary">Channel</span>
@@ -155,12 +155,12 @@
 						<div ng-if="test.name[0].test_name != 'Power consumption' &&  test.name[0].test_name != 'Temperature Model'">
 							<div class="col-md-2">
 								<span class="label label-danger">Gain Index</span>
-								<multiselect ng-model="test.gainIdx" options="testParams.params.robotGainIdxList" show-select-all="true" show-unselect-all="true" selection-limit="1" ng-disabled="lock">
+								<multiselect ng-model="test.gain_index" options="testParams.params.robotGainIdxList" show-select-all="true" show-unselect-all="true" selection-limit="1" ng-disabled="lock">
 								</multiselect>
 							</div>
 							<div class="col-md-2">
 								<span class="label label-danger">Polarization</span>
-								<select ng-model="test.polstruct" class="form-control">
+								<select ng-model="test.polarization" class="form-control">
 								  <option>Vpol</option>
 								  <option>Hpol</option>
 								</select>
@@ -171,31 +171,31 @@
 						<div class="row rowMarg">
 							<div class="col-md-12">
 								<span class="label label-danger">First Polarization Path</span>
-								<input class="form-control" type="text" placeholder="First Polarization Path" name="lineup" ng-model="test.pol1path" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="First Polarization Path" name="lineup" ng-model="test.pol1_path" ng-disabled="lock">
 							</div>
 						</div>
 						<div class="row rowMarg">
 							<div class="col-md-4">
 								<span class="label label-danger">Antenna</span>
-								<input class="form-control" type="text" placeholder="Antenna" ng-model="test.strcutAnt" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="Antenna" ng-model="test.strcut_ant" ng-disabled="lock">
 							</div>
 							<div class="col-md-4">
 								<span class="label label-danger">Antenna Gain</span>
-								<input class="form-control" type="text" placeholder="Antenna Gain" ng-model="test.strcutAntGain" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="Antenna Gain" ng-model="test.strcut_ant_gain" ng-disabled="lock">
 							</div>
 							<div class="col-md-4">
 								<span class="label label-danger">Chain Gain</span>
-								<input class="form-control" type="text" placeholder="Chain Gain" ng-model="test.strcutChainGain" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="Chain Gain" ng-model="test.strcut_chain_gain" ng-disabled="lock">
 							</div>
 						</div>
 						<div class="row rowMarg">
 							<div class="col-md-6">
 								<span class="label label-danger">Robot Azimuth</span>
-								<input class="form-control" type="text" placeholder="Robot Azimuth" ng-model="test.strcutRobAz" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="Robot Azimuth" ng-model="test.strcut_az" ng-disabled="lock">
 							</div>
 							<div class="col-md-6">
 								<span class="label label-danger">Robot Elevation</span>
-								<input class="form-control" type="text" placeholder="Robot Elevation" ng-model="test.strcutRobEl" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="Robot Elevation" ng-model="test.strcut_el" ng-disabled="lock">
 							</div>
 						</div>
 					</div>
@@ -232,12 +232,12 @@
 			</div>
 		</div>
 	</div>
-</form>
+</div>
 <div class="col-md-12">
 	<button class="btn btn-xs btn-default addButton" ng-click="showCalc()" ng-disabled="lock">
 			Time Calculater
 		</button>
-	<button class="btn btn-xs btn-info addButton" ng-click="insertTest()" ng-disabled="lock">
+	<button class="btn btn-xs btn-info addButton" ng-click="insertTest(test.$index)" ng-disabled="lock">
 		Insert!
 	</button>
 	<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">

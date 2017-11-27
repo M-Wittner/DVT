@@ -52,3 +52,6 @@ ERROR - 201720172017-1111-2626 1818:1111:5757 --> Severity: Notice --> Undefined
 ERROR - 201720172017-1111-2626 1818:1111:5757 --> Severity: Notice --> Undefined property: stdClass::$loPinFrom C:\xampp\htdocs\application\controllers\plans.php 420
 ERROR - 201720172017-1111-2626 1818:1111:5757 --> Severity: Notice --> Undefined property: stdClass::$loPinTo C:\xampp\htdocs\application\controllers\plans.php 421
 ERROR - 201720172017-1111-2626 1818:1111:5757 --> Severity: Notice --> Undefined property: stdClass::$loPinStep C:\xampp\htdocs\application\controllers\plans.php 422
+ERROR - 201720172017-1111-2626 1919:1111:0707 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-2626 2121:1111:5555 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\controllers\plans.php 613
+ERROR - 201720172017-1111-2626 2323:1111:2929 --> 404 Page Not Found: Faviconico/index

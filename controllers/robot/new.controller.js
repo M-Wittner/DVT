@@ -11,28 +11,29 @@ myApp.controller('newRobotPlanCtrl', ['$scope', '$http', '$location', 'Flash', '
 		$window.location.reload();
 	};
 	
-	$scope.array = [];
+	$scope.arr = [];
 	$scope.plan = {};
-//	$scope.plan.userId = $cookies.getObject('loggedUser').userId;
-//	$scope.plan.username = $cookies.getObject('loggedUser').username;
+	$scope.plan.userId = $cookies.getObject('loggedUser').userId;
+	$scope.plan.username = $cookies.getObject('loggedUser').username;
 	
-	$scope.testCount = [{}];
+	$scope.testsCount = [{}];
 	$scope.addTest = function(){
-		$scope.testCount.push({})
+		$scope.testsCount.push({})
 	}
 	
 	$scope.insertTest = function(){
-		$scope.planParams.push($scope.test);
+		$scope.test.push(this.test);
 		$scope.lock = true;
-//		console.log(this);
+		console.log(this.test);
+		console.log($scope);
 	}
 	$scope.editToggle = function(){
 		$scope.lock = false;
-		$scope.planParams.splice($scope.test, 1);
+		$scope.plan.tests(this.test, 1);
 	}
 	
 	$scope.removeTest = function() {
-		$scope.testCount.splice($scope.testCount.length-1,1);
+		$scope.testsCount.splice($scope.testsCount.length-1,1);
 	}
 	$scope.calc = false;
 	$scope.showCalc = function(){
@@ -40,19 +41,10 @@ myApp.controller('newRobotPlanCtrl', ['$scope', '$http', '$location', 'Flash', '
 	};
 
 	$scope.addPlan = function() {
-//		$http.post('http://wigig-584/plans/create', {plan: $scope.plan, test: $scope.array})
+//		$http.post('http://wigig-584/robot/create', {plan: $scope.plan, test: $scope.array})
 //		.then(function(response){
-//			if(response.data == 'success'){
-//				var message = 'Plan Created Succesfully!';
-//				var id = Flash.create('success', message, 3500);
-//				$location.path('/plans');
-//				console.log(response.data);
-//			} else {
-//				var message = response.data;
-//				var id = Flash.create('danger', message, 3500);
-//				console.log(response.data);
-//			}
-//		})
-		console.log($scope.array);
+//			console.log(response.data);
+//		});
+		console.log($scope);
 	};
 }]);
