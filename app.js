@@ -135,7 +135,7 @@ myApp.directive('robotTestform', function(){
 		templateUrl: 'pages/robot/robotTestform.html',
 		controller: 'newRobotPlanCtrl',
 		scope: {
-			tests: '=arr',
+			test: '=',
 			test: '=',
 			params: '=',
 		},

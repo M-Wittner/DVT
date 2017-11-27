@@ -39,6 +39,14 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 		});
 	}
 	
+	$scope.TCP = function(){
+		$http.post('http://wigig-584/admin/tcp', {id: 'id'})
+		.then(function(response){
+			console.log(response.data);
+//			$scope.tests = response.data;
+		});
+	}
+	
 	$scope.tooltip= function(id){
 		$http.post('http://wigig-584/plans/planStatus', id)
 		.then(function(response){

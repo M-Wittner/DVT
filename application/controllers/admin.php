@@ -179,5 +179,22 @@ class Admin extends CI_Controller {
 		}
 		echo json_encode($plans);
 	}
+	
+	public function TCP(){
+		$data =json_decode(file_get_contents('php://input'));
+		$host = '10.18.134.163';
+		$port = 5000;
+		
+		$fp = fsockopen($host,$port, $errno, $errstr, 30);
+			if (!$fp) {
+				echo "$errstr ($errno)<br />\n";
+			} else {
+				fwrite($fp, "You message");
+				while (!feof($fp)) {
+					echo fgets($fp, 128);
+				}
+				fclose($fp);
+			}
+	}
 }
 ?>
