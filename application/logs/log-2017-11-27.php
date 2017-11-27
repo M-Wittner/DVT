@@ -3963,3 +3963,5 @@ ERROR - 201720172017-1111-2727 1414:1111:5454 --> Query error: Duplicate entry '
 ERROR - 201720172017-1111-2727 1515:1111:1919 --> Severity: Error --> Maximum execution time of 30 seconds exceeded C:\xampp\htdocs\application\controllers\admin.php 194
 ERROR - 201720172017-1111-2727 1515:1111:2424 --> Severity: Error --> Maximum execution time of 30 seconds exceeded C:\xampp\htdocs\application\controllers\admin.php 194
 ERROR - 201720172017-1111-2727 1515:1111:2424 --> Severity: Error --> Maximum execution time of 30 seconds exceeded C:\xampp\htdocs\system\libraries\Session\drivers\Session_files_driver.php 178
+ERROR - 201720172017-1111-2727 1515:1111:3939 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-2727 1515:1111:2929 --> 404 Page Not Found: Faviconico/index
