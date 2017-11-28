@@ -72,30 +72,37 @@ class Plans extends CI_Controller {
 						} else{
 							$pinAdd = null;
 						}
-						if(isset($testArr->loPinAdd)){
-							$loPinAdd = $testArr->loPinAdd;
-						} else{
-							$loPinAdd = null;
+						$loPinFrom = null;
+						$loPinTo = null;
+						$loPinStep = null;
+						$loPinAdd = null;
+						if($testArr->name[0]->test_name == 'Tx EVM vs. LO Power' || $testArr->name[0]->test_name == 'Rx EVM vs. LO power'){
+							$loPinFrom=$testArr->loPinFrom;
+							$loPinTo=$testArr->loPinTo;
+							$loPinStep=$testArr->loPinStep;
+							if(isset($testArr->loPinAdd)){
+								$loPinAdd = $testArr->loPinAdd;
+							}
 						}
 						$test = array(
-								'priority'=>$testArr->priority[0],
-								'lineup'=>$testArr->lineup,
-								'station'=>$testArr->station[0]->station,
-								'name'=>$testArr->name[0]->test_name,
-								'pin_from'=>$testArr->pinFrom,
-								'pin_to'=>$testArr->pinTo,
-								'pin_step'=>$testArr->pinStep,
-								'pin_additional'=>$pinAdd,
-								'lo_pin_from'=>$testArr->loPinFrom,
-								'lo_pin_to'=>$testArr->loPinTo,
-								'lo_pin_step'=>$testArr->loPinStep,
-								'lo_pin_additional'=>$loPinAdd,
-								'mcs'=>$testArr->mcs,
-								'voltage'=>$testArr->voltage,
-								'notes'=>$notes,
-								'seconds'=>$time,
-								'plan_id'=>$planId
-							);
+							'priority'=>$testArr->priority[0],
+							'lineup'=>$testArr->lineup,
+							'station'=>$testArr->station[0]->station,
+							'name'=>$testArr->name[0]->test_name,
+							'pin_from'=>$testArr->pinFrom,
+							'pin_to'=>$testArr->pinTo,
+							'pin_step'=>$testArr->pinStep,
+							'pin_additional'=>$pinAdd,
+							'lo_pin_from'=>$loPinFrom,
+							'lo_pin_to'=>$loPinTo,
+							'lo_pin_step'=>$loPinStep,
+							'lo_pin_additional'=>$loPinAdd,
+							'mcs'=>$testArr->mcs,
+							'voltage'=>$testArr->voltage,
+							'notes'=>$notes,
+							'seconds'=>$time,
+							'plan_id'=>$planId
+						);
 						$insertTest = $this->plan_model->add_test($test);
 						$testId = $this->plan_model->tests_id($insertTest);
 						foreach($chipsArr as $result){
@@ -404,30 +411,39 @@ class Plans extends CI_Controller {
 						} else{
 							$voltage = null;
 						}
-						if(isset($testArr->loPinAdd)){
-							$loPinAdd = $testArr->loPinAdd;
-						} else{
-							$loPinAdd = null;
+						$loPinFrom = null;
+						$loPinTo = null;
+						$loPinStep = null;
+						$loPinAdd = null;
+						if($testArr->name[0]->test_name == 'Tx EVM vs. LO Power' || $testArr->name[0]->test_name == 'Rx EVM vs. LO power'){
+							$loPinFrom=$testArr->loPinFrom;
+							$loPinTo=$testArr->loPinTo;
+							$loPinStep=$testArr->loPinStep;
+							if(isset($testArr->loPinAdd)){
+								$loPinAdd = $testArr->loPinAdd;
+							} else{
+								$loPinAdd = null;
+							}
 						}
 						$test = array(
-								'priority'=>$testArr->priority[0],
-								'lineup'=>$testArr->lineup,
-								'station'=>$testArr->station[0]->station,
-								'name'=>$testArr->name[0]->test_name,
-								'pin_from'=>$testArr->pinFrom,
-								'pin_to'=>$testArr->pinTo,
-								'pin_step'=>$testArr->pinStep,
-								'pin_additional'=>$pinAdd,
-								'lo_pin_from'=>$testArr->loPinFrom,
-								'lo_pin_to'=>$testArr->loPinTo,
-								'lo_pin_step'=>$testArr->loPinStep,
-								'lo_pin_additional'=>$loPinAdd,
-								'mcs'=>$testArr->mcs,
-								'voltage'=>$voltage,
-								'notes'=>$notes,
-								'seconds'=>$time,
-								'plan_id'=>$planId
-							);
+							'priority'=>$testArr->priority[0],
+							'lineup'=>$testArr->lineup,
+							'station'=>$testArr->station[0]->station,
+							'name'=>$testArr->name[0]->test_name,
+							'pin_from'=>$testArr->pinFrom,
+							'pin_to'=>$testArr->pinTo,
+							'pin_step'=>$testArr->pinStep,
+							'pin_additional'=>$pinAdd,
+							'lo_pin_from'=>$loPinFrom,
+							'lo_pin_to'=>$loPinTo,
+							'lo_pin_step'=>$loPinStep,
+							'lo_pin_additional'=>$loPinAdd,
+							'mcs'=>$testArr->mcs,
+							'voltage'=>$testArr->voltage,
+							'notes'=>$notes,
+							'seconds'=>$time,
+							'plan_id'=>$planId
+						);
 						$insertTest = $this->plan_model->add_test($test);
 						$testId = $this->plan_model->tests_id($insertTest);
 						foreach($chipsArr as $result){
@@ -551,7 +567,7 @@ class Plans extends CI_Controller {
 						echo 'not R or M station';
 					}
 			};
-			echo 'successs';
+			echo 'success';
 			} else {
 				echo 'No plan inserted!';
 			}	

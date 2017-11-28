@@ -3965,3 +3965,28 @@ ERROR - 201720172017-1111-2727 1515:1111:2424 --> Severity: Error --> Maximum ex
 ERROR - 201720172017-1111-2727 1515:1111:2424 --> Severity: Error --> Maximum execution time of 30 seconds exceeded C:\xampp\htdocs\system\libraries\Session\drivers\Session_files_driver.php 178
 ERROR - 201720172017-1111-2727 1515:1111:3939 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1111-2727 1515:1111:2929 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-2727 1717:1111:4848 --> Severity: Notice --> Undefined property: stdClass::$loPinFrom C:\xampp\htdocs\application\controllers\plans.php 89
+ERROR - 201720172017-1111-2727 1717:1111:4848 --> Severity: Notice --> Undefined property: stdClass::$loPinTo C:\xampp\htdocs\application\controllers\plans.php 90
+ERROR - 201720172017-1111-2727 1717:1111:4848 --> Severity: Notice --> Undefined property: stdClass::$loPinStep C:\xampp\htdocs\application\controllers\plans.php 91
+ERROR - 201720172017-1111-2727 1717:1111:4040 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-2727 1717:1111:4444 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-2727 1717:1111:5151 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-2727 1919:1111:5353 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 473
+ERROR - 201720172017-1111-2727 1919:1111:4949 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 329
+ERROR - 201720172017-1111-2727 1919:1111:4949 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 329
+ERROR - 201720172017-1111-2727 1919:1111:4949 --> Severity: Notice --> Undefined property: stdClass::$pinFrom C:\xampp\htdocs\application\models\plan_model.php 330
+ERROR - 201720172017-1111-2727 1919:1111:4949 --> Severity: Notice --> Undefined property: stdClass::$pinTo C:\xampp\htdocs\application\models\plan_model.php 331
+ERROR - 201720172017-1111-2727 1919:1111:4949 --> Severity: Notice --> Undefined property: stdClass::$pinStep C:\xampp\htdocs\application\models\plan_model.php 332
+ERROR - 201720172017-1111-2727 1919:1111:4949 --> Severity: Notice --> Undefined property: stdClass::$antenna C:\xampp\htdocs\application\models\plan_model.php 342
+ERROR - 201720172017-1111-2727 1919:1111:4949 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\plan_model.php 342
+ERROR - 201720172017-1111-2727 1919:1111:1212 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 329
+ERROR - 201720172017-1111-2727 1919:1111:1212 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 329
+ERROR - 201720172017-1111-2727 1919:1111:1212 --> Severity: Notice --> Undefined property: stdClass::$pinFrom C:\xampp\htdocs\application\models\plan_model.php 330
+ERROR - 201720172017-1111-2727 1919:1111:1212 --> Severity: Notice --> Undefined property: stdClass::$pinTo C:\xampp\htdocs\application\models\plan_model.php 331
+ERROR - 201720172017-1111-2727 1919:1111:1212 --> Severity: Notice --> Undefined property: stdClass::$pinStep C:\xampp\htdocs\application\models\plan_model.php 332
+ERROR - 201720172017-1111-2727 1919:1111:1212 --> Severity: Notice --> Undefined property: stdClass::$antenna C:\xampp\htdocs\application\models\plan_model.php 342
+ERROR - 201720172017-1111-2727 1919:1111:1212 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\plan_model.php 342
+ERROR - 201720172017-1111-2727 2020:1111:4444 --> Severity: Notice --> Undefined property: stdClass::$loPinFrom C:\xampp\htdocs\application\controllers\plans.php 421
+ERROR - 201720172017-1111-2727 2020:1111:4444 --> Severity: Notice --> Undefined property: stdClass::$loPinTo C:\xampp\htdocs\application\controllers\plans.php 422
+ERROR - 201720172017-1111-2727 2020:1111:4444 --> Severity: Notice --> Undefined property: stdClass::$loPinStep C:\xampp\htdocs\application\controllers\plans.php 423
+ERROR - 201720172017-1111-2727 2222:1111:5454 --> 404 Page Not Found: Faviconico/index
