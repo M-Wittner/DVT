@@ -71,6 +71,20 @@
 					<input ng-model="test.pinAdd" name="pinAdd" type="text" class="Pin" ng-disabled="lock">
 				</div>
 			</div>
+			<div class="col-md-4" ng-if="test.name[0].test_name == 'Rx EVM vs. LO power' || test.name[0].test_name == 'Tx EVM vs. LO Power'">
+				<div class="panel-body">
+					<span class="label label-primary">LO Pin:</span></br>
+					<span>From</span>
+					<input ng-model="test.loPinFrom" type="number" class="Pin" ng-disabled="lock">
+					<span>To</span>
+					<input ng-model="test.loPinTo" type="number" class="Pin" ng-disabled="lock">
+					<span>Step</span>
+					<input ng-model="test.loPinStep" type="number" class="Pin" ng-disabled="lock"></br>
+					</br>
+					<span>Additional</span>
+					<input ng-model="test.loPinAdd" name="pinAdd" type="text" class="Pin" ng-disabled="lock">
+				</div>
+			</div>
 			<div class="col-md-2" ng-if="test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'">
 				<div class="panel-body">
 					<span class="label label-primary">Temperature:</span>

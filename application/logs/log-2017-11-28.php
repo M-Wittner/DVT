@@ -35,3 +35,10 @@ ERROR - 201720172017-1111-2828 1616:1111:0101 --> Severity: Parsing Error --> sy
 ERROR - 201720172017-1111-2828 1616:1111:2626 --> 404 Page Not Found: Faviconico/index
 ERROR - 201720172017-1111-2828 1616:1111:2525 --> Severity: Notice --> Undefined variable: loPinAdd C:\xampp\htdocs\application\controllers\plans.php 100
 ERROR - 201720172017-1111-2828 1616:1111:2222 --> Severity: Notice --> Undefined variable: loPinAdd C:\xampp\htdocs\application\controllers\plans.php 439
+ERROR - 201720172017-1111-2828 1919:1111:2020 --> 404 Page Not Found: Faviconico/index
+ERROR - 201720172017-1111-2828 1919:1111:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 387
+ERROR - 201720172017-1111-2828 1919:1111:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 389
+ERROR - 201720172017-1111-2828 1919:1111:1818 --> Severity: Parsing Error --> syntax error, unexpected 'foreach' (T_FOREACH) C:\xampp\htdocs\application\models\plan_model.php 383
+ERROR - 201720172017-1111-2828 1919:1111:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 388
+ERROR - 201720172017-1111-2828 1919:1111:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 390
+ERROR - 201720172017-1111-2828 1919:1111:2020 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 388

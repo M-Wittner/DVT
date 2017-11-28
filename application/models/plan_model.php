@@ -308,21 +308,32 @@ class plan_model extends CI_Model {
 	function update_test($data){
 //		$planObj = $data->plan;
 		$testObj = $data->test;
-//		var_dump($testObj->antenna);
+//		var_dump($testObj);
 //		die();
 		if(isset($testObj->notes)){
 			$notes = $testObj->notes;
 		} else {
 			$notes = null;
 		}
-		if(isset($testObj->pinAdd)){
-			$pinAdd = $testObj->pinAdd;
-		} else {
-			$pinAdd = null;
-		}
 		if($testObj->station[0]->station == "R-CB1" || $testObj->station[0]->station == "R-CB2"){
+			if(isset($testObj->pinAdd)){
+				$pinAdd = $testObj->pinAdd;
+			} else{
+				$pinAdd = null;
+			}
+			$loPinFrom = null;
+			$loPinTo = null;
+			$loPinStep = null;
+			$loPinAdd = null;
+			if($testObj->name[0]->test_name == 'Tx EVM vs. LO Power' || $testObj->name[0]->test_name == 'Rx EVM vs. LO power'){
+				$loPinFrom=$testObj->loPinFrom;
+				$loPinTo=$testObj->loPinTo;
+				$loPinStep=$testObj->loPinStep;
+				if(isset($testObj->loPinAdd)){
+					$loPinAdd = $testObj->loPinAdd;
+				}
+			}
 			$test = array(
-				'plan_id'=>$testObj->plan_id,
 				'priority'=>$testObj->priority[0],
 				'lineup'=>$testObj->lineup,
 				'station'=>$testObj->station[0]->station,
@@ -331,9 +342,15 @@ class plan_model extends CI_Model {
 				'pin_to'=>$testObj->pinTo,
 				'pin_step'=>$testObj->pinStep,
 				'pin_additional'=>$pinAdd,
+				'lo_pin_from'=>$loPinFrom,
+				'lo_pin_to'=>$loPinTo,
+				'lo_pin_step'=>$loPinStep,
+				'lo_pin_additional'=>$loPinAdd,
 				'mcs'=>$testObj->mcs,
 				'voltage'=>$testObj->voltage,
 				'notes'=>$notes,
+//				'seconds'=>$time,
+				'plan_id'=>$testObj->plan_id
 			);
 			
 			// Update antennas
@@ -348,6 +365,31 @@ class plan_model extends CI_Model {
 //				var_dump($antennaRes);
 				$this->db->replace('test_antennas', $antenna);
 			}
+			// Update temps
+			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+			$this->db->delete('test_temps');
+			foreach($testObj->temp as $i => $tempRes){
+				$temp = array(
+					'test_id'=>$testObj->id,
+					'plan_id'=>$testObj->plan_id,
+					'temp'=>$tempRes
+					);
+				$this->db->replace('test_temps', $temp);
+			}
+			// Update channels
+			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+			$this->db->delete('test_channels');
+//			die(var_dump($testObj->channel));
+			foreach($testObj->channel as $i => $channelRes){
+//				die(var_dump($channelRes));
+				$channel = array(
+					'test_id'=>$testObj->id,
+					'plan_id'=>$testObj->plan_id,
+					'channel'=>$channelRes
+					);
+//				var_dump($channelRes);
+				$this->db->replace('test_channels', $channel);
+			}
 //			die();
 		}elseif($testObj->station[0]->station == "M-CB1" || $testObj->station[0]->station == "M-CB2"){
 			$test = array(
@@ -359,6 +401,31 @@ class plan_model extends CI_Model {
 				'voltage'=>$testObj->voltage,
 				'notes'=>$notes,
 			);
+			// Update temps
+			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+			$this->db->delete('test_temps');
+			foreach($testObj->temp as $i => $tempRes){
+				$temp = array(
+					'test_id'=>$testObj->id,
+					'plan_id'=>$testObj->plan_id,
+					'temp'=>$tempRes
+					);
+				$this->db->replace('test_temps', $temp);
+			}
+			// Update channels
+			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+			$this->db->delete('test_channels');
+//			die(var_dump($testObj->channel));
+			foreach($testObj->channel as $i => $channelRes){
+//				die(var_dump($channelRes));
+				$channel = array(
+					'test_id'=>$testObj->id,
+					'plan_id'=>$testObj->plan_id,
+					'channel'=>$channelRes
+					);
+//				var_dump($channelRes);
+				$this->db->replace('test_channels', $channel);
+			}
 //------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
 		} elseif($testObj->station[0]->station == 'PTAT/ABS/Vgb+TEMP'|| $testObj->station[0]->station == 'TalynM+A') {
 			$test = array(
@@ -418,31 +485,8 @@ class plan_model extends CI_Model {
 				}
 			}
 		}
-		if($testObj->station[0]->station != 'TalynM+A'){
-		// Update temps
-			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
-			$this->db->delete('test_temps');
-			foreach($testObj->temps as $i => $tempRes){
-				$temp = array(
-					'test_id'=>$testObj->id,
-					'plan_id'=>$testObj->plan_id,
-					'temp'=>$tempRes
-					);
-				$this->db->replace('test_temps', $temp);
-			}
-			// Update channels
-			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
-			$this->db->delete('test_channels');
-			foreach($testObj->channels as $i => $channelRes){
-//				die(var_dump($channelRes));
-				$channel = array(
-					'test_id'=>$testObj->id,
-					'plan_id'=>$testObj->plan_id,
-					'channel'=>$channelRes->channel
-					);
-				$this->db->replace('test_channels', $channel);
-			}
-		}
+//		if($testObj->station[0]->station != 'TalynM+A'){
+//		}
 //		var_dump($test);
 //		die();
 		$this->db->where(array('id'=>$testObj->id,'plan_id'=>$testObj->plan_id));
