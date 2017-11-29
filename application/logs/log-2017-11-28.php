@@ -42,3 +42,4 @@ ERROR - 201720172017-1111-2828 1919:1111:1818 --> Severity: Parsing Error --> sy
 ERROR - 201720172017-1111-2828 1919:1111:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 388
 ERROR - 201720172017-1111-2828 1919:1111:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 390
 ERROR - 201720172017-1111-2828 1919:1111:2020 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 388
+ERROR - 201720172017-1111-2828 2323:1111:5959 --> 404 Page Not Found: Faviconico/index
