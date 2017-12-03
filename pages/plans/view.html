@@ -65,6 +65,7 @@
 				<strong>Priority: {{test.priority}}, Station: {{test.station[0].station}}, Test: {{test.name}} , ID: {{test.id}}</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
 				<span class="pull-right">
+					<span class="glyphicon glyphicon-envelope" ng-if="test.comments.length > 0" id="testStatus"></span>
 					<span class="label label-default" ng-if="test.status == 'IDLE'" id="testStatus" ng-model="test.status">{{test.status}}</span>
 					<span class="label label-success" ng-if="test.status == 'Completed'" id="testStatus" ng-model="test.status">{{test.status}}</span>
 					<span class="label label-warning" ng-if="test.status == 'In Progress'" id="testStatus" ng-model="test.status">{{test.status}}</span>

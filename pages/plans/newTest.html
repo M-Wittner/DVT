@@ -102,6 +102,19 @@
 					</multiselect>
 				</div>
 			</div>
+			<div class="col-md-3" ng-if="test.station[0].station == 'R-CB1' || test.station[0].station == 'R-CB2' || test.station[0].station == 'TalynM+A'">
+				<div class="panel-body">
+					<span class="label label-primary">Sectors:</span></br>
+					Board? <input type="checkbox" label="board" ng-model="secBrd">
+					<input ng-if="!secBrd" ng-model="test.sectors" type="text" ng-disabled="lock">
+					<div class="row" ng-if="secBrd == true">
+						<span class="label label-primary">Custom: </span>
+						<input ng-model="test.sectors" type="text" ng-disabled="lock">
+						<multiselect ng-model="test.secAnt" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+					</multiselect>
+					</div>
+				</div>
+			</div>
 			<div class="col-md-2" ng-if="test.station[0].station != 'R-CB1' && test.station[0].station != 'R-CB2' && test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'">
 				<div class="panel-body">
 					<span class="label label-dangerC">XIF:</span>
