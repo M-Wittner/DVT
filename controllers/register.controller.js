@@ -5,7 +5,7 @@ myApp.controller('regCtrl', ['$scope', '$http', '$location', 'Flash', 'AuthServi
 	$scope.user = {};
 	$scope.register = function() {
 //		console.log($scope.user);
-		$http.post('http://wigig-584/register', $scope.user)
+		$http.post('http://localhost/register', $scope.user)
 		.then(function(response){
 //			console.log(response.data);
 			var message = 'Signed-Up Succesfully!';

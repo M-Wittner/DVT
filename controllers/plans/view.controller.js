@@ -3,13 +3,13 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
 	if($scope.isAuthenticated == true) {	
-	$http.post('http://wigig-584/plans/show', $routeParams.id)
+	$http.post('http://localhost/plans/show', $routeParams.id)
 	.then(function(response){
 		console.log(response.data);
 		$scope.plan = response.data;
 	});
 	
-//	$http.post('http://wigig-584/plans/showcomments', $routeParams.id)
+//	$http.post('http://localhost/plans/showcomments', $routeParams.id)
 //	.then(function(response){
 //		$scope.comments = response.data;
 ////		console.log(response.data);
@@ -31,7 +31,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$scope.lock = true;
 	
 	$scope.removePlan = function() {
-		$http.post('http://wigig-584/plans/removePlan', this.plan.id)
+		$http.post('http://localhost/plans/removePlan', this.plan.id)
 		.then(function(response){
 			var message = 'Plan Deleted Succesfully!';
 			var id = Flash.create('success', message, 3500);
@@ -40,7 +40,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	};
 	
 	$scope.removeTest = function() {
-		$http.post('http://wigig-584/plans/removeTest', this.test.id)
+		$http.post('http://localhost/plans/removeTest', this.test.id)
 		.then(function(response){
 			if(response.data = 'success'){
 				$window.scrollTo(0, 0);
@@ -56,7 +56,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		});
 	};
 	$scope.removeComment = function() {
-		$http.post('http://wigig-584/plans/removeComment', this.comment.id)
+		$http.post('http://localhost/plans/removeComment', this.comment.id)
 		.then(function(response){
 			$window.scrollTo(0, 0);
 			var message = 'Comment Deleted Succesfully!';
@@ -66,7 +66,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	};
 	
 	$scope.chipStatus = function(chip, testId, index){
-		$http.post('http://wigig-584/plans/chipstatus', {chip: chip, planId: $routeParams.id, testId: testId})
+		$http.post('http://localhost/plans/chipstatus', {chip: chip, planId: $routeParams.id, testId: testId})
 		.then(function(response){
 			chip = response.data.chip.chip;
 			var message = 'Chip '+chip+' Status Updated!';
@@ -81,7 +81,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	
 	$scope.xifStatus = function(xif){
 //		console.log(xif);
-		$http.post('http://wigig-584/plans/xifstatus', xif)
+		$http.post('http://localhost/plans/xifstatus', xif)
 		.then(function(response){
 			this.xif = response.data[0];
 			var message = 'XIF '+this.xif.xif+' Status Updated!';

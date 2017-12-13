@@ -6,7 +6,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	$scope.user = $scope.currentUser.username;
 		
 	$scope.test = {};
-	$http.post('http://wigig-584/plans/edit', $routeParams)
+	$http.post('http://localhost/plans/edit', $routeParams)
 	.then(function(response){
 //		$scope.plan = response.data.plan[0];
 		$scope.test = response.data;
@@ -34,7 +34,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	};
 	
 	$scope.editPlan = function(){
-		$http.post('http://wigig-584/plans/update', {plan: $scope.plan, test: $scope.test})
+		$http.post('http://localhost/plans/update', {plan: $scope.plan, test: $scope.test})
 		.then(function(response){
 			if(response.data == 'success'){
 				$location.path('/plans/'+$routeParams.planId);

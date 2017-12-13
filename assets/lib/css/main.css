@@ -7,8 +7,25 @@
 	width: 100px;
 }
 
+.panel-M1 > .panel-heading {
+	border-bottom-width: 4px;
+	border-color: #ffe34c;
+}
+.panel-M2 > .panel-heading {
+	border-bottom-width: 4px;
+	border-color: #e89900;
+}
+.panel-R1 > .panel-heading {
+	border-bottom-width: 4px;
+	border-color: #b376cb;
+}
+.panel-R2 > .panel-heading {
+	border-bottom-width: 4px;
+	border-color: #3e16cf;
+}
+
 .bs-callout {
-    margin: 20px 0;
+    margin: 20px;
     padding: 20px;
     border-left: 3px solid #eee;
 }

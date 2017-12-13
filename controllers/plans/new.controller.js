@@ -41,7 +41,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	};
 
 	$scope.addPlan = function() {
-		$http.post('http://wigig-584/plans/create', {plan: $scope.plan, test: $scope.array})
+		$http.post('http://localhost/plans/create', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
 			if(response.data == 'success'){
 				var message = 'Plan Created Succesfully!';
@@ -58,7 +58,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	};
 	
 	$scope.copyTest = function(){
-		$http.post('http://wigig-584/plans/copyTest', $scope.copyId)
+		$http.post('http://localhost/plans/copyTest', $scope.copyId)
 		.then(function(response){
 			console.log(response.data);
 			$scope.test = response.data;
