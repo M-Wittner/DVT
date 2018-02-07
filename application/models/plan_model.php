@@ -43,11 +43,11 @@ class plan_model extends CI_Model {
 				$test->channels = $ch;
 	//			var_dump($ch);
 
-				$chip = $this->db->get_where('test_chips', array('test_id'=>$test->id))->result();
+				$chips = $this->db->get_where('test_chips', array('test_id'=>$test->id))->result();
 				$c = 0;
 				$e = 0;
 				$r = 0;
-				foreach($chip as $value){
+				foreach($chips as $value){
 					if($value->completed == true){
 						$c++;
 					}elseif($value->error == true){
@@ -57,30 +57,30 @@ class plan_model extends CI_Model {
 					}
 					if($value->results_path == null){
 						if($test->station == 'R-CB1' || $test->station == 'R-CB2') {
-							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\\test_results\TalynA\TalynA_YA591-H511_Flip_Chip_QCA6425_B0_".$value->chip;
+							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\\test_results\TalynA\TalynA_YA591-H511_Flip_Chip_QCA6425_B0_".$value->serial_number;
 //							print_r($path);
 							$this->db->where('id', $value->id);
 							$this->db->set('results_path', $path);
 							$this->db->update('test_chips');
 						} else if($test->station == 'M-CB1' || $test->station == 'M-CB2'){
-							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\TalynM\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$value->chip;
+							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\TalynM\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$value->serial_number;
 							$this->db->where('id', $value->id);
 							$this->db->set('results_path', $path);
 							$this->db->update('test_chips');
 						}
 					}
 				}
-				if($c == count($chip)){
+				if($c == count($chips)){
 					$test->status = 'Completed';
 				} elseif($e > 0){
 					$test->status = 'Error';
-				} elseif($r > 0 && $c < count($chip)){
+				} elseif($r > 0 && $c < count($chips)){
 					$test->status = 'In Progress' ;
 				} else{
 					$test->status = 'IDLE';
 				} 
-				if(count($chip) > 0){
-					$progress = (($c + ($r/2)) / count($chip))*100;
+				if(count($chips) > 0){
+					$progress = (($c + ($r/2)) / count($chips))*100;
 				} else{
 					$progress = null;
 				}
@@ -89,16 +89,17 @@ class plan_model extends CI_Model {
 				$this->db->set('progress', $test->progress);
 				$this->db->update('tests');
 
-				$test->chips = $chip;
+				$test->chips = $chips;
+//				$test->mChips = $mChips;
+				$this->db->order_by('temp', 'ASC');
 				$temp = $this->db->get_where('test_temps', array('test_id'=>$test->id))->result();
-				foreach($temp as $i => $value){
-					$temp[$i] = $value->temp;
-				}
+//				foreach($temp as $i => $value){
+//					$temp[$i] = $value->temp;
+//				}
 				$test->temps = $temp;
 				$test->station = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
 
 				$test->comments = $this->db->get_where('test_comments', array('test_id'=>$test->id))->result();
-	//			print_r($chip);
 			}	
 		}
 		return $plan;
@@ -106,40 +107,40 @@ class plan_model extends CI_Model {
 	
 	function edit_test($id) {
 		$plan = $this->db->get_where('plans', array('id'=> $id->planId))->result();
-		$test =$this->db->get_where('tests', array('plan_id'=>$id->planId, 'id'=>$id->testId))->result();
+		$test =$this->db->get_where('tests', array('plan_id'=>$id->planId, 'id'=>$id->testId))->result()[0];
 		
-		$test = $test[0];
 //		die(var_dump($test));
-		if($test->station == 'M-CB1' || $test->station == 'M-CB2') {
+		$test->name = $this->db->get_where('params_test_names', array('test_name'=>$test->name, 'station'=>$test->station[0]))->result();
+		$test->station = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
+		if($test->station[0]->station == 'M-CB1' || $test->station[0]->station == 'M-CB2') {
 			$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$id->testId))->result();
 			$test->xifs = $xifRes;
 
-		} else if($test->station == 'R-CB1' || $test->station == 'R-CB2'){
+		} else if($test->station[0]->station == 'R-CB1' || $test->station[0]->station == 'R-CB2'){
+			$test->antennas = array();
 			$ant = $this->db->get_where('test_antennas', array('test_id'=>$id->testId))->result();
 			if(isset($ant)){
-				foreach($ant as $i => $value){
-					$antenna[$i] = $value->antenna;
+				foreach($ant as $value){
+					array_push($test->antennas, $value->antenna);
 					}
-					$test->antennas = $ant;	
 			} else{
 				$ant = null;
 			}
 		}
-		if($test->station !='TalynM+A'){
+		$test->channels = array();
+		if($test->station[0]->station !='TalynM+A'){
+			$this->db->select('channel');
 			$ch = $this->db->get_where('test_channels', array('test_id'=>$id->testId))->result();
-//			die(var_dump($ch));
 			if(isset($ch)){
-				foreach($ch as $i => $value){
-						$channel[$i] = $value->channel;
+				foreach($ch as $value){
+						array_push($test->channels, $value->channel);
 					}
-				$test->channels = $ch;
 			}else{
 				$ch = null;
 			}
 		}
 
-		$chip = $this->db->get_where('test_chips', array('test_id'=>$id->testId))->result();
-		$test->chips = $chip;
+		$test->chips = $this->db->get_where('test_chips', array('test_id'=>$id->testId))->result();
 
 		$temp = $this->db->get_where('test_temps', array('test_id'=>$id->testId))->result();
 		foreach($temp as $i => $value){
@@ -306,31 +307,38 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_test($data){
-//		$planObj = $data->plan;
 		$testObj = $data->test;
-//		var_dump($testObj);
-//		die();
+
 		if(isset($testObj->notes)){
 			$notes = $testObj->notes;
 		} else {
 			$notes = null;
 		}
 		if($testObj->station[0]->station == "R-CB1" || $testObj->station[0]->station == "R-CB2"){
-			if(isset($testObj->pinAdd)){
-				$pinAdd = $testObj->pinAdd;
+			$pinFrom = null;
+			$pinTo = null;
+			$pinStep = null;
+			if(isset($testObj->pin_from) && isset($testObj->pin_to) && isset($testObj->pin_step)){
+				$pinFrom = $testObj->pin_from;
+				$pinTo = $testObj->pin_to;
+				$pinStep = $testObj->pin_step;
+			}
+			if(isset($testObj->pin_additional)){
+				$pinAdd = $testObj->pin_additional;
 			} else{
 				$pinAdd = null;
 			}
+			
 			$loPinFrom = null;
 			$loPinTo = null;
 			$loPinStep = null;
 			$loPinAdd = null;
 			if($testObj->name[0]->test_name == 'Tx EVM vs. LO Power' || $testObj->name[0]->test_name == 'Rx EVM vs. LO power'){
-				$loPinFrom=$testObj->loPinFrom;
-				$loPinTo=$testObj->loPinTo;
-				$loPinStep=$testObj->loPinStep;
-				if(isset($testObj->loPinAdd)){
-					$loPinAdd = $testObj->loPinAdd;
+				$loPinFrom=$testObj->lo_pin_from;
+				$loPinTo=$testObj->lo_pin_to;
+				$loPinStep=$testObj->lo_pin_step;
+				if(isset($testObj->lo_pin_additional)){
+					$loPinAdd = $testObj->lo_pin_additional;
 				}
 			}
 			$test = array(
@@ -338,9 +346,9 @@ class plan_model extends CI_Model {
 				'lineup'=>$testObj->lineup,
 				'station'=>$testObj->station[0]->station,
 				'name'=>$testObj->name[0]->test_name,
-				'pin_from'=>$testObj->pinFrom,
-				'pin_to'=>$testObj->pinTo,
-				'pin_step'=>$testObj->pinStep,
+				'pin_from'=>$pinFrom,
+				'pin_to'=>$pinTo,
+				'pin_step'=>$pinStep,
 				'pin_additional'=>$pinAdd,
 				'lo_pin_from'=>$loPinFrom,
 				'lo_pin_to'=>$loPinTo,
@@ -349,14 +357,14 @@ class plan_model extends CI_Model {
 				'mcs'=>$testObj->mcs,
 				'voltage'=>$testObj->voltage,
 				'notes'=>$notes,
-//				'seconds'=>$time,
+//				'time'=>$time,
 				'plan_id'=>$testObj->plan_id
 			);
 			
 			// Update antennas
 			$this->db->where(array('test_id'=>$testObj->id));
 			$this->db->delete('test_antennas');
-			foreach($testObj->antenna as $i => $antennaRes){
+			foreach($testObj->antennas as $i => $antennaRes){
 				$antenna = array(
 					'test_id'=>$testObj->id,
 					'plan_id'=>$testObj->plan_id,
@@ -368,7 +376,7 @@ class plan_model extends CI_Model {
 			// Update temps
 			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 			$this->db->delete('test_temps');
-			foreach($testObj->temp as $i => $tempRes){
+			foreach($testObj->temps as $i => $tempRes){
 				$temp = array(
 					'test_id'=>$testObj->id,
 					'plan_id'=>$testObj->plan_id,
@@ -380,7 +388,7 @@ class plan_model extends CI_Model {
 			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 			$this->db->delete('test_channels');
 //			die(var_dump($testObj->channel));
-			foreach($testObj->channel as $i => $channelRes){
+			foreach($testObj->channels as $i => $channelRes){
 //				die(var_dump($channelRes));
 				$channel = array(
 					'test_id'=>$testObj->id,
@@ -401,30 +409,32 @@ class plan_model extends CI_Model {
 				'voltage'=>$testObj->voltage,
 				'notes'=>$notes,
 			);
-			// Update temps
-			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
-			$this->db->delete('test_temps');
-			foreach($testObj->temp as $i => $tempRes){
-				$temp = array(
-					'test_id'=>$testObj->id,
-					'plan_id'=>$testObj->plan_id,
-					'temp'=>$tempRes
-					);
-				$this->db->replace('test_temps', $temp);
-			}
-			// Update channels
-			$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
-			$this->db->delete('test_channels');
-//			die(var_dump($testObj->channel));
-			foreach($testObj->channel as $i => $channelRes){
-//				die(var_dump($channelRes));
-				$channel = array(
-					'test_id'=>$testObj->id,
-					'plan_id'=>$testObj->plan_id,
-					'channel'=>$channelRes
-					);
-//				var_dump($channelRes);
-				$this->db->replace('test_channels', $channel);
+			if($testObj->name[0]->test_name != 'Temp-Calibration' || $testObj->name[0]->test_name != 'PTAT Calibration'){
+				// Update temps
+				$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+				$this->db->delete('test_temps');
+				foreach($testObj->temps as $i => $tempRes){
+					$temp = array(
+						'test_id'=>$testObj->id,
+						'plan_id'=>$testObj->plan_id,
+						'temp'=>$tempRes
+						);
+					$this->db->replace('test_temps', $temp);
+				}
+				// Update channels
+				$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
+				$this->db->delete('test_channels');
+	//			die(var_dump($testObj->channel));
+				foreach($testObj->channels as $i => $channelRes){
+	//				die(var_dump($channelRes));
+					$channel = array(
+						'test_id'=>$testObj->id,
+						'plan_id'=>$testObj->plan_id,
+						'channel'=>$channelRes
+						);
+	//				var_dump($channelRes);
+					$this->db->replace('test_channels', $channel);
+				}					
 			}
 //------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
 		} elseif($testObj->station[0]->station == 'PTAT/ABS/Vgb+TEMP'|| $testObj->station[0]->station == 'TalynM+A') {
@@ -436,17 +446,6 @@ class plan_model extends CI_Model {
 				'notes'=>$notes,
 				'plan_id'=>$testObj->plan_id
 			);
-//			$chipsArr = $testObj->chips;
-//			$insertTest = $this->plan_model->add_test($test);
-//			foreach($chipsArr as $result){
-//				$chip = array(
-//					'chip'=>$result->serial_number,
-//					'plan_id'=>$planId,
-//					'test_id'=>$testId
-//				);
-//			$insertChip = $this->plan_model->add_chips($chip);
-//			break;
-//			}
 		} else{
 			echo 'Station not operetional right now';
 			die();
@@ -455,10 +454,12 @@ class plan_model extends CI_Model {
 		$this->db->where(array('test_id'=>$testObj->id,'plan_id'=>$testObj->plan_id,));
 		$this->db->delete('test_chips');
 		foreach($testObj->chips as $i => $chipRes){
+//			die(var_dump($chipRes));
 			$chip = array(
 				'test_id'=>$testObj->id,
 				'plan_id'=>$testObj->plan_id,
-				'chip'=>$chipRes->serial_number
+				'serial_number'=>$chipRes->serial_number,
+				'chip'=>$chipRes->chip,
 				);
 			$insertStatus = $this->db->replace('test_chips', $chip);
 			$insertId = $this->db->insert_id($insertStatus);
@@ -469,7 +470,7 @@ class plan_model extends CI_Model {
 				$this->db->delete('test_xifs');
 				foreach($testObj->chips as $i => $chipRes){
 //					var_dump($testObj->xif);
-					foreach($testObj->xif as $xifRes){
+					foreach($testObj->xifs as $xifRes){
 //						var_dump($xifRes);
 //						die();
 						$xif = array(
@@ -477,7 +478,7 @@ class plan_model extends CI_Model {
 							'plan_id'=>$testObj->plan_id,
 							'chip_id'=>$chipRes->id,
 							'chip'=>$chipRes->serial_number,
-							'xif'=>$xifRes
+							'xif'=>$xifRes->xif
 							);
 						$this->db->replace('test_xifs', $xif);
 						}
@@ -501,21 +502,71 @@ class plan_model extends CI_Model {
 		$error = $result->chip->error;
 //		die(var_dump($result));
 		if($runs == false && $complete == false && $error == false){
-			$this->db->where(array('chip'=>$result->chip->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-			$insertStatus = $this->db->update('test_chips', array('running'=>true, 'completed'=>false, 'error'=>false));
+			$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_chips', array('running'=>true, 'completed'=>false, 'error'=>false, 'update_by'=>$result->user->username));
 		} else if($runs == true && $complete == false && $error == false){
-			$this->db->where(array('chip'=>$result->chip->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>true, 'error'=>false));
+			$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>true, 'error'=>false, 'update_by'=>$result->user->username));
 		} else if($runs == false && $complete == true && $error == false){
-			$this->db->where(array('chip'=>$result->chip->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false ,'error'=>true));
+			$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false ,'error'=>true, 'update_by'=>$result->user->username));
 		} else if($runs == false && $complete == false && $error == true){
-			$this->db->where(array('chip'=>$result->chip->chip, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false, 'error'=>false));
+			$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false, 'error'=>false, 'update_by'=>$result->user->username));
 		} else{
 			echo 'nothing';
 		}
 		return $result;
+	}
+	function update_temp_status($result){
+		$runs = $result->temp->running;
+		$complete = $result->temp->completed;
+		$error = $result->temp->error;
+//		die(var_dump($result)); 
+		if($runs == false && $complete == false && $error == false){
+			$this->db->where(array('temp'=>$result->temp->temp, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_temps', array('running'=>true, 'completed'=>false, 'error'=>false));
+		} else if($runs == true && $complete == false && $error == false){
+			$this->db->where(array('temp'=>$result->temp->temp, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_temps', array('running'=>false, 'completed'=>true, 'error'=>false));
+		} else if($runs == false && $complete == true && $error == false){
+			$this->db->where(array('temp'=>$result->temp->temp, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_temps', array('running'=>false, 'completed'=>false ,'error'=>true));
+		} else if($runs == false && $complete == false && $error == true){
+			$this->db->where(array('temp'=>$result->temp->temp, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$insertStatus = $this->db->update('test_temps', array('running'=>false, 'completed'=>false, 'error'=>false));
+		} else{
+			echo 'nothing';
+		}
+		return $result;
+	}
+	
+	function update_hotcold_status($data){
+//		die(var_dump($data));
+		$chip = $data->chip;
+		$this->db->where(['id'=>$chip->id]);
+//		--------------- Update Hot ---------------
+		if($chip->hotCold == 'hot'){
+			if($chip->hot == false){
+				$status = $this->db->update('test_chips', ['hot'=>true]);
+			} elseif($chip->hot == true){
+				$status = $this->db->update('test_chips', ['hot'=>false]);
+			} else{
+				$status = 'hot error';
+			}
+//		--------------- Update Cold --------------
+		} elseif($chip->hotCold == 'cold'){
+			if($chip->cold == false){
+				$status = $this->db->update('test_chips', ['cold'=>true]);
+			} elseif($chip->hot = true){
+				$status = $this->db->update('test_chips', ['cold'=>false]);
+			} else{
+				$status = 'cold error';
+			}
+		} else {
+			$status = 'Hot Cold error';
+		}
+		return $status;
 	}
 	
 	function update_plan_status($result){
@@ -564,5 +615,72 @@ class plan_model extends CI_Model {
 	function delete_comment($id){
 		$q = $this->db->query("DELETE FROM `test_comments` WHERE id = ?", $id);
 		return;
+	}
+	
+	function calc_pinAdd($data){
+		$array = explode(",", $data);
+		if(sizeof($array) > 0) {
+			return sizeof($array);	
+		} else {
+			return 0;
+		}
+		
+	}
+	
+	function calc_pins($pinFrom, $pinTo, $pinStep, $pinAddNum){
+		$pinFrom = abs(floatval($pinFrom));
+		$pinTo = abs(floatval($pinTo));
+		$pinStep = abs(floatval($pinStep));
+		if(!isset($pinAddNum)){
+			$pinAddNum = 0;	
+		}
+//		die(var_dump($pinFrom, $pinTo, $pinStep, $pinAddNum));
+		if($pinFrom > $pinTo){
+			$pins = ((($pinFrom - $pinTo) + $pinAddNum) / $pinStep) + 1;
+		} elseif($pinFrom < $pinTo){
+			$pins = ((($pinTo - $pinFrom) + $pinAddNum) / $pinStep) + 1;
+		}
+		
+		if(isset($pins)){
+			return $pins;
+		} else{
+			$pins = 1;
+		}
+		
+	}
+	
+	function calc_runtime($variables){
+		if(!isset($variables->pins)){
+			$pins = 1;
+		}
+		if(!isset($variables->loPins)){
+			$loPins = 1;
+		}
+		
+		$this->db->select('iteration_time');
+		$iteration_time = floatval($this->db->get_where('params_test_iteration', ['station'=>$variables->station, 'test_name'=>$variables->test_name])->result()[0]->iteration_time);
+		if(!isset($iteration_time)){
+			echo 'error';
+			exit;
+		}
+//		var_dump($iteration_time);
+		$pins = 1;
+		$loPins = 1;
+		if($variables->station == 'R-CB1' || $variables->station == 'R-CB2'){
+			$antsXIFS = $variables->antennas;
+			$pins = $variables->pins;
+			$loPins = $variables->loPins;
+		} elseif($variables->station == 'M-CB1' || $variables->station == 'M-CB1'){
+			$antsXIFS = $variables->xifs;
+		} else{
+			$antsXIFS = 1;
+		}
+		
+		$estimate_time = $variables->temps * $variables->channels * $antsXIFS * $pins * $loPins * $iteration_time;
+		
+		$form_time = gmdate("H:i:s", $estimate_time);
+//		var_dump($form_time);
+//		die();
+		return $form_time;
 	}
 }

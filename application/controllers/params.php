@@ -77,5 +77,16 @@ class Params extends CI_Controller {
 		$result = $data->result();
 		echo json_encode($result);
 	}
+	public function xifs(){
+		$data = $this->db->get('params_xifs');
+		$result = $data->result();
+		echo json_encode($result);
+	}
+	public function iterations(){
+		$this->db->order_by('station');
+		$data = $this->db->get('params_test_iteration');
+		$result = $data->result();
+		echo json_encode($result);
+	}
 }
 ?>

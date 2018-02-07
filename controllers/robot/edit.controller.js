@@ -6,12 +6,9 @@ myApp.controller('editRobotPlanCtrl', ['$scope', '$location','$http', '$routePar
 	$scope.user = $scope.currentUser.username;
 		
 	$scope.test = {};
-	$http.post('http://wigig-584/plans/edit', $routeParams)
+	$http.post('http://wigig-584/robot/edit', $routeParams)
 	.then(function(response){
-//		$scope.plan = response.data.plan[0];
 		$scope.test = response.data;
-		$scope.test.mcs = parseInt(response.data.mcs);
-		$scope.test.voltage = parseInt(response.data.voltage);
 		console.log(response.data);
 	});
 		
@@ -37,17 +34,17 @@ myApp.controller('editRobotPlanCtrl', ['$scope', '$location','$http', '$routePar
 	};
 	
 	$scope.editPlan = function(){
-		$http.post('http://wigig-584/plans/update', {plan: $scope.plan, test: $scope.test})
+		$http.post('http://wigig-584/robot/update', {plan: $scope.plan, test: $scope.test})
 		.then(function(response){
-			if(response.data == 'success'){
-				$location.path('/plans/'+$routeParams.planId);
-				var message = 'Test was edited successfully';
-				var id = Flash.create('success', message, 5000);
-			}else {
-				var message = response.data;
-				var id = Flash.create('danger', message, 3500);
+//			if(response.data == 'success'){
+//				$location.path('/plans/'+$routeParams.planId);
+//				var message = 'Test was edited successfully';
+//				var id = Flash.create('success', message, 5000);
+//			}else {
+//				var message = response.data;
+//				var id = Flash.create('danger', message, 3500);
 				console.log(response.data);
-			}
+//			}
 		});
 	};
 }]);

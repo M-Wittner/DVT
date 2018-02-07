@@ -23,7 +23,7 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	$scope.insertTest = function(){
 		$scope.planParams.push(this.test);
 		$scope.lock = true;
-		console.log(this.test);
+		console.log(this);
 	}
 	$scope.editToggle = function(){
 		$scope.lock = false;
@@ -41,7 +41,7 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	};
 
 	$scope.addTestToPlan = function() {
-		$http.post('http://localhost/plans/addTests', {plan: $scope.plan, test: $scope.array})
+		$http.post('http://wigig-584/plans/addTests', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
 			if(response.data == 'success'){
 				var message = 'Plan Created Succesfully!';
@@ -54,5 +54,14 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 				console.log(response.data);
 			}
 		})
-	};
+	}
+	
+	$scope.copyTest = function(){
+		$http.post('http://wigig-584/plans/copyTest', $scope.copyId)
+		.then(function(response){
+			console.log(response.data);
+			$scope.test = response.data;
+		})
+//		console.log($scope.copyId);
+	}
 }]);

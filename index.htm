@@ -11,6 +11,7 @@
 	<!-- Angular -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-sanitize.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-touch.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
@@ -54,6 +55,14 @@
 	<link rel="stylesheet" href="assets/lib/Trumbowyg/dist/ui/trumbowyg.min.css">
 	<link rel="stylesheet" href="assets/lib/Trumbowyg/dist/plugins/colors/ui/trumbowyg.colors.css">
 	
+	<!-- Select2 -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.min.js"></script>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+<!--	<script src="assets/lib/ui-select2/select2.js"></script>-->
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+	
+	
 	<!-- Costum -->
 	<script type="text/javascript" src="app.js"></script>
 	<link rel="stylesheet" href="assets/lib/css/main.css" type="text/css">
@@ -73,6 +82,7 @@
 	<script type="text/javascript" src="controllers/plans/edit.controller.js"></script>
 	<script type="text/javascript" src="controllers/robot/index.controller.js"></script>
 	<script type="text/javascript" src="controllers/robot/new.controller.js"></script>
+	<script type="text/javascript" src="controllers/robot/addtests.controller.js"></script>
 	<script type="text/javascript" src="controllers/robot/edit.controller.js"></script>
 	<script type="text/javascript" src="controllers/robot/view.controller.js"></script>
 	<script type="text/javascript" src="controllers/admin/search.controller.js"></script>
@@ -86,6 +96,8 @@
 	<script type="text/javascript" src="controllers/admin/chiplist.controller.js"></script>
 	<script type="text/javascript" src="controllers/admin/testlist.controller.js"></script>
 	<script type="text/javascript" src="controllers/admin/stationlist.controller.js"></script>
+	<script type="text/javascript" src="controllers/admin/iterationlist.controller.js"></script>
+	<script type="text/javascript" src="controllers/admin/edititeration.controller.js"></script>
 </head>
 
 <body ng-app="myApp" ng-controller="homeCtrl">

@@ -8,9 +8,10 @@ myApp.factory('authenticationService', ['$http', '$cookies', '$rootScope', '$tim
 	return service;
 	
 	function Login(username, password, callback){
-		$http.post('http://localhost/login', {username: username, password: password})
+		$http.post('http://wigig-584/login', {username: username, password: password})
 		.then(function(response){
 			callback(response);
+			console.log(response.data);
 		})
 	}
 	

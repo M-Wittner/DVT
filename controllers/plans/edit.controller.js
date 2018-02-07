@@ -6,13 +6,16 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	$scope.user = $scope.currentUser.username;
 		
 	$scope.test = {};
-	$http.post('http://localhost/plans/edit', $routeParams)
+	$http.post('http://wigig-584/plans/edit', $routeParams)
 	.then(function(response){
 //		$scope.plan = response.data.plan[0];
 		$scope.test = response.data;
 		$scope.test.mcs = parseInt(response.data.mcs);
 		$scope.test.voltage = parseInt(response.data.voltage);
-//		console.log(response.data);
+		console.log(response.data);
+//		console.log($routeParams);
+//		console.log($scope.test.temps);
+		console.log(testParams.params.xifList);
 	});
 		
 	} else {
@@ -34,7 +37,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	};
 	
 	$scope.editPlan = function(){
-		$http.post('http://localhost/plans/update', {plan: $scope.plan, test: $scope.test})
+		$http.post('http://wigig-584/plans/update', {plan: $scope.plan, test: $scope.test})
 		.then(function(response){
 			if(response.data == 'success'){
 				$location.path('/plans/'+$routeParams.planId);
@@ -46,5 +49,6 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 				console.log(response.data);
 			}
 		});
+//		console.log(this.test.station);
 	};
 }]);

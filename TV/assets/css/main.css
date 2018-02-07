@@ -1,0 +1,30 @@
+body {
+	background-color: #f5f5f5;
+}
+
+.panel {
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.panel-title{
+	color: #f5f5f5 !important;
+}
+.panel-si > .panel-heading {
+  color: #bc8f8f;
+  background-color: #222222;
+  border-color: #5f0707;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+.glyphicon-remove{
+	color: #cc0000;
+}
+.glyphicon-minus{
+	color: grey;
+}

@@ -1,0 +1,22 @@
+<div class="container-fluid col-md-offset-3 col-md-5" ng-if="isAuthenticated == true">
+	<form>
+		<div class="panel panel-primary">
+			<div class="panel-heading">Edit Iteration</div>
+			<div class="panel-body">
+				<div class="form-group col-md-10">
+					<label>Station Name</label>
+					<input type="text" class="form-control" placeholder="Station Name" ng-model="test.station">
+				</div>
+				<div class="form-group col-md-10">
+					 <label>Test Name</label>
+					 <input type="text" class="form-control" placeholder="Test Name" ng-model="test.test_name">
+				</div>
+				<div class="form-group col-md-10">
+					<label>Iteration Time</label>
+					 <input type="text" class="form-control" placeholder="Iteration Time" ng-model="test.iteration_time">
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-lg btn-success" ng-click="editIteration()">Submit!</button>
+	</form>
+</div>

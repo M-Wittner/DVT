@@ -15,9 +15,9 @@ myApp.controller('chipCtrl', ['$scope', '$location','$http', '$routeParams', 'Fl
 		.then(function(response){
 			if(response.data == 'success'){
 //				$location.path('/plans/');
-				var message = 'New chip was added successfully';
+				var message = 'New chip was added successfully, Page will NOT refresh for convenience';
 				var id = Flash.create('success', message, 5000);
-				setTimeout(function(){$window.location.reload();}, 2250);
+//				setTimeout(function(){$window.location.reload();}, 2250);
 			}else {
 				var message = response.data;
 				var id = Flash.create('danger', message, 3500);

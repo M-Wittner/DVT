@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$httpProvider.defaults.cache = false;
@@ -38,6 +38,14 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/comments/new.html',
 			controller: 'newCommentCtrl'
 	})
+		.when('/plans/:planId/test/:testId/comment/:commentId/edit', {
+			templateUrl: 'pages/comments/edit.html',
+			controller: 'editCommentCtrl'
+	})
+		.when('/plans/:planId/addtests', {
+			templateUrl: 'pages/plans/addtest.html',
+			controller: 'addTestCtrl'
+	})
 //		--------------------	ADMIN PAGES --------------------
 		.when('/admin', {
 			templateUrl: 'pages/admin/panel.html',
@@ -75,13 +83,13 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/admin/stationlist.html',
 			controller: 'stationlistCtrl'
 	})
-		.when('/plans/:planId/test/:testId/comment/:commentId/edit', {
-			templateUrl: 'pages/comments/edit.html',
-			controller: 'editCommentCtrl'
+		.when('/admin/iterationlist', {
+			templateUrl: 'pages/admin/iterationlist.html',
+			controller: 'iterationlistCtrl'
 	})
-		.when('/plans/:planId/addtests', {
-			templateUrl: 'pages/plans/addtest.html',
-			controller: 'addTestCtrl'
+		.when('/admin/edititeration/:id', {
+			templateUrl: 'pages/admin/edititeration.html',
+			controller: 'edititerationCtrl'
 	})
 //		--------------------	Robot PAGES --------------------
 		.when('/robot', {
@@ -95,6 +103,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 		.when('/robot/:id', {
 			templateUrl: 'pages/robot/view.html',
 			controller: 'viewRobotPlanCtrl'
+	})
+		.when('/robot/:id/addtests', {
+			templateUrl: 'pages/robot/addTest.html',
+			controller: 'addTestsRobotCtrl'
 	})
 		.when('/robot/:planId/test/:testId/edit', {
 			templateUrl: 'pages/robot/edit.html',
@@ -135,9 +147,11 @@ myApp.directive('robotTestform', function(){
 		templateUrl: 'pages/robot/robotTestform.html',
 		controller: 'newRobotPlanCtrl',
 		scope: {
-			test: '=',
+			planParams: '=',
 			test: '=',
 			params: '=',
+			index: '&',
+			locked: '='
 		},
 		link: function(scope, element, attrs){
 			
@@ -151,6 +165,22 @@ myApp.directive('testFormedit', function(){
 		controller: 'addTestCtrl',
 		scope: {
 			planParams: '=',
+			params: '=',
+			index: '&',
+			locked: '='
+		},
+		link: function(scope, element, attrs){
+			
+		}
+	}
+});
+myApp.directive('robotTestformadd', function(){
+	return {
+		templateUrl: 'pages/robot/robotTestFormAdd.html',
+		controller: 'addTestsRobotCtrl',
+		scope: {
+			planParams: '=',
+			test: '=',
 			params: '=',
 			index: '&',
 			locked: '='
@@ -193,7 +223,7 @@ myApp.factory('AuthService', function($http, Session, $cookies){
 	var authService = {};
 	
 	authService.login = function (credentials){
-		return $http.post('http://localhost/auth/login', {user: credentials})
+		return $http.post('http://wigig-584/auth/login', {user: credentials})
 		.then(function(res){
 			if(res.data.login = true){
 				Session.create(res.data.__ci_last_regenerate, res.data.userId, res.data.username, res.data.firstName, res.data.lastName, res.data.rank);
@@ -238,7 +268,7 @@ myApp.factory('testParams', function($http, $log){
 ////		'RFC/CAL',
 //		'PTAT/ABS/Vgb+TEMP',
 //	];
-	$http.get('http://localhost/params/stations')
+	$http.get('http://wigig-584/params/stations')
 	.then(function(response){
 		testParams.params.stationList = response.data;
 	});
@@ -253,46 +283,46 @@ myApp.factory('testParams', function($http, $log){
 	];
 	
 	testParams.params.nameListM = {};
-	$http.get('http://localhost/params/testsM')
+	$http.get('http://wigig-584/params/testsM')
 	.then(function(response){
 		testParams.params.nameListM = response.data;
 	});
 	
 	testParams.params.nameListR = {};
-	$http.get('http://localhost/params/testsR')
+	$http.get('http://wigig-584/params/testsR')
 	.then(function(response){
 		testParams.params.nameListR = response.data;
 //			console.log(response.data);
 	});
 	
 	testParams.params.nameListCal = {};
-	$http.get('http://localhost/params/testsCal')
+	$http.get('http://wigig-584/params/testsCal')
 	.then(function(response){
 		testParams.params.nameListCal = response.data;
 //			console.log(response.data);
 	});
 	
 	testParams.params.nameListPTAT = {};
-	$http.get('http://localhost/params/testsPTAT')
+	$http.get('http://wigig-584/params/testsPTAT')
 	.then(function(response){
 		testParams.params.nameListPTAT = response.data;
 //			console.log(response.data);
 	});
 	testParams.params.nameListFS = {};
-	$http.get('http://localhost/params/testsFS')
+	$http.get('http://wigig-584/params/testsFS')
 	.then(function(response){
 		testParams.params.nameListFS = response.data;
 //			console.log(response.data);
 	});
 	
 //	testParams.params.nameListRobot = {};
-	$http.get('http://localhost/params/testsRobot')
+	$http.get('http://wigig-584/params/testsRobot')
 	.then(function(response){
 		testParams.params.nameListRobot = response.data;
 //			console.log(response.data);
 	});
 	
-	$http.get('http://localhost/params/modulesRobot')
+	$http.get('http://wigig-584/params/modulesRobot')
 	.then(function(response){
 		testParams.params.moduleListRobot = response.data;
 //			console.log(response.data);
@@ -324,31 +354,27 @@ myApp.factory('testParams', function($http, $log){
 		'15',
 	];
 	
-	testParams.params.xifList = [
-		'0',
-		'1',
-		'2',
-		'3',
-		'4',
-		'5',
-		'6',
-		'7',
-	];
+	testParams.params.xifList = {};
+	$http.get('http://wigig-584/params/xifs')
+	.then(function(response){
+		testParams.params.xifList = response.data;
+	});
+	
 	testParams.params.chipListM = {};
-    $http.get('http://localhost/params/chipsM')
+    $http.get('http://wigig-584/params/chipsM')
 	.then(function(response){
 		testParams.params.chipListM = response.data;
 	});
 	
 	testParams.params.chipListR = {};
-	$http.get('http://localhost/params/chipsR')
+	$http.get('http://wigig-584/params/chipsR')
 	.then(function(response){
 		testParams.params.chipListR = response.data;
 //		console.log(response.data);
 	});
 		
 	testParams.params.chipListMR = {};
-	$http.get('http://localhost/params/chipsMR')
+	$http.get('http://wigig-584/params/chipsMR')
 	.then(function(response){
 		testParams.params.chipListMR = response.data;
 //		console.log(response.data);
@@ -357,15 +383,20 @@ myApp.factory('testParams', function($http, $log){
 	testParams.params.tempList = [
 		'-40 C',
 		'-30 C',
+		'-20 C',
 		'-10 C',
 		'0 C',
 		'10 C',
 		'20 C',
 		'25 C',
+		'30 C',
 		'40 C',
+		'50 C',
 		'60 C',
+		'70 C',
 		'80 C',
 		'85 C',
+		'90 C',
 		'95 C',
 		'100 C',
 		'105 C',
@@ -374,7 +405,11 @@ myApp.factory('testParams', function($http, $log){
 	testParams.params.priorityList = [
 		'1',
 		'2',
-		'3'
+		'3',
+		'4',
+		'5',
+		'6',
+		'7',
 	];
 	
 	testParams.params.chList1 = [

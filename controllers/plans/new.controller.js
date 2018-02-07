@@ -23,13 +23,14 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	$scope.insertTest = function(){
 		$scope.planParams.push(this.test);
 		$scope.lock = true;
-		console.log($scope.test);
+//		console.log($scope.test);
+		console.log(this);
 	}
 	$scope.editToggle = function(){
 		$scope.lock = false;
 		$scope.planParams.splice(this.test, 1);
 //		console.log($scope);
-		console.log(this.test);
+//		console.log(this.test);
 	}
 	
 	$scope.removeTest = function() {
@@ -41,7 +42,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	};
 
 	$scope.addPlan = function() {
-		$http.post('http://localhost/plans/create', {plan: $scope.plan, test: $scope.array})
+		$http.post('http://wigig-584/plans/create', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
 			if(response.data == 'success'){
 				var message = 'Plan Created Succesfully!';
@@ -54,11 +55,11 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 				console.log(response.data);
 			}
 		})
-		console.log($scope);
+//		console.log($scope.array);
 	};
 	
 	$scope.copyTest = function(){
-		$http.post('http://localhost/plans/copyTest', $scope.copyId)
+		$http.post('http://wigig-584/plans/copyTest', $scope.copyId)
 		.then(function(response){
 			console.log(response.data);
 			$scope.test = response.data;

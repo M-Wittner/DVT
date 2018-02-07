@@ -2,7 +2,7 @@ myApp.controller('newRobotPlanCtrl', ['$scope', '$http', '$location', 'Flash', '
 //	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.isAuthenticated = true;
 	$scope.testParams = testParams;
-//	console.log($scope.testParams);
+//	console.log($scope.plan);
 
 	if($scope.isAuthenticated == false){
 		var message = 'Please Login first!';
@@ -11,29 +11,27 @@ myApp.controller('newRobotPlanCtrl', ['$scope', '$http', '$location', 'Flash', '
 		$window.location.reload();
 	};
 	
-	$scope.arr = [];
+	$scope.array = [];
 	$scope.plan = {};
 	$scope.plan.userId = $cookies.getObject('loggedUser').userId;
 	$scope.plan.username = $cookies.getObject('loggedUser').username;
 	
-	$scope.testsCount = [{}];
+	$scope.testCount = [{}];
 	$scope.addTest = function(){
-		$scope.testsCount.push({})
+		$scope.testCount.push({})
 	}
 	
-	$scope.insertTest = function(){
-		$scope.test.push(this.test);
+	$scope.insertTest = function(test){
+		$scope.planParams.push(this.test);
 		$scope.lock = true;
-		console.log(this.test);
-		console.log($scope);
 	}
 	$scope.editToggle = function(){
 		$scope.lock = false;
-		$scope.plan.tests(this.test, 1);
+		$scope.planParams.splice(this.test, 1);
 	}
 	
 	$scope.removeTest = function() {
-		$scope.testsCount.splice($scope.testsCount.length-1,1);
+		$scope.testCount.splice($scope.testCount.length-1,1);
 	}
 	$scope.calc = false;
 	$scope.showCalc = function(){
@@ -41,10 +39,10 @@ myApp.controller('newRobotPlanCtrl', ['$scope', '$http', '$location', 'Flash', '
 	};
 
 	$scope.addPlan = function() {
-//		$http.post('http://wigig-584/robot/create', {plan: $scope.plan, test: $scope.array})
-//		.then(function(response){
-//			console.log(response.data);
-//		});
-		console.log($scope);
+		$http.post('http://wigig-584/robot/create', {plan: $scope.plan, test: $scope.array})
+		.then(function(response){
+			console.log(response.data);
+		});
+//		console.log($scope);
 	};
 }]);

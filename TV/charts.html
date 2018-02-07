@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>   
+<head>
+	 <title>GETTING STARTED WITH BRACKETS</title>
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	 <link rel="stylesheet" href="assets/css/main.css">
+	 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+	 <script src="app.js"></script>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<span class="pull-left"><img style="height: 79px; color: white;" src="assets/images/qualcomm-logo-1024x405.png"></span>
+	<h1 style="color:#bc8f8f; padding-left:100px" class="col-md-offset-4">
+<!--		<img src="assets/images/continiousLogo.png" style="width:50px;">-->
+	Continuous Integration</h1>
+</div>
+<div style="margin-top: 100px; margin-left: 3%;">
+	<div class="col-md-5">
+		<div class="row">
+			<div class="panel panel-si">
+				<div class="panel-heading">
+					<h3 class="panel-title" style="color: #1b0f0f"><strong>5.1</strong></h3>
+				</div>
+				<div class="chart-container" style="border: 1px solid #5f0707;border-bottom-left-radius: 4px; border-bottom-right-radius: 4px">
+					<canvas id="5.1" height="100vh;"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="panel panel-si">
+				<div class="panel-heading">
+					<h3 class="panel-title" style="color: #1b0f0f"><strong>6.1</strong></h3>
+				</div>
+				<div class="chart-container" style="border: 1px solid #5f0707;border-bottom-left-radius: 4px; border-bottom-right-radius: 4px">
+					<canvas id="6.1" height="100vh;"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="panel panel-si">
+				<div class="panel-heading">
+					<h3 class="panel-title" style="color: #1b0f0f"><strong>7.1</strong></h3>
+				</div>
+				<div class="chart-container" style="border: 1px solid #5f0707;border-bottom-left-radius: 4px; border-bottom-right-radius: 4px">
+					<canvas id="7.1" height="100vh;"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4" style="margin-left: 2%">
+		<div class="row">
+			<h3 class="text-left">Setups Division</h3>
+			<div class="chart-container">
+						<canvas id="division" height="200vh;"></canvas>
+				</div>
+		</div>
+		<div class="row">
+			<h3 class="text-left">Setups Progress</h3>
+			<div class="chart-container">
+						<canvas id="progress" height="190vh;"></canvas>
+				</div>
+		</div>
+	</div>
+	<div class="col-md-2 col-sm-3" style="margin-left: 2%">
+		<h3>Setup Status</h3>
+		<table class="table table-striped table-bordered table-condensed">
+			<thead>
+				<td>Host Name</td>
+				<td>Status</td>
+			</thead>
+			<tbody>
+				<tr>
+						<td>CI-MULTI-B0-61</td>
+					<td><span class="glyphicon glyphicon-remove"></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-B0-62</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-D0-63</td>
+					<td><span class="glyphicon glyphicon-minus" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-D0-66</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-B0-61</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-B0-62</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-D0-63</td>
+					<td><span class="glyphicon glyphicon-minus" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-D0-66</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-B0-61</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-B0-62</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-D0-63</td>
+					<td><span class="glyphicon glyphicon-minus" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-D0-66</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-B0-61</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-B0-62</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-D0-63</td>
+					<td><span class="glyphicon glyphicon-minus" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-D0-66</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-B0-61</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-B0-62</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-D0-63</td>
+					<td><span class="glyphicon glyphicon-minus" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-D0-66</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-B0-61</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-B0-62</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-D0-63</td>
+					<td><span class="glyphicon glyphicon-minus" ></span></td>
+				</tr>
+				<tr>
+						<td>CI-MULTI-D0-66</td>
+					<td><span class="glyphicon glyphicon-remove" ></span></td>
+				</tr>
+			</tbody>
+		</table>
+		<ul style="list-style-type:none">
+			<li><span class="glyphicon glyphicon-remove" ></span> - Offline</li>
+			<li><span class="glyphicon glyphicon-minus" ></span> - Disabled</li>
+		</ul>
+	</div>
+<!--
+	<div class="row">
+		<img src="assets/images/Capture.JPG" alt="chart" class="col-md-8 col-md-offset-2">
+	</div>
+-->
+</div>
+</body>
+	
+<script>
+	var ctx = document.getElementById("5.1");
+	var chart = new Chart(ctx, {
+			type: 'line',
+			data: {
+					labels: ["5.1.0.3817300", "5.1.0.533", "5.1.0.540", "5.1.0.537", "5.1.0.541", "5.1.0.540"],
+					datasets: [{
+							label: 'Grade',
+							data: [50, 97, 0, 90, 50, 35],
+							backgroundColor: [
+									'rgba(0, 0, 0, 0.0)',
+							],
+							borderColor: [
+									'#bc8f8f',
+							],
+							borderWidth: 2
+					}]
+			},
+			options: {
+					legend: {
+						padding: 5,
+						position: 'top',
+					},
+					scales: {
+							yAxes: [{
+								stacked: true,
+									ticks: {
+											beginAtZero:true,
+											padding: -10
+									}
+							}],
+						xAxes: [{
+							stacked: true,
+							ticks: {
+								padding: 0
+							}
+						}]
+					}
+			}
+	});
+	chart.canvas.parentNode.style.height = 'inherit';
+	
+	var canvas6 = document.getElementById("6.1");
+	var chart6 = new Chart(canvas6, {
+			type: 'line',
+			data: {
+					labels: ["5.1.0.3817300", "5.1.0.533", "5.1.0.540", "5.1.0.537", "5.1.0.541", "5.1.0.540"],
+					datasets: [{
+							label: 'Grade',
+							data: [50, 97, 92, 90, 50, 35],
+							backgroundColor: [
+									'rgba(0, 0, 0, 0.0)',
+							],
+							borderColor: [
+									'#bc8f8f',
+							],
+							borderWidth: 2
+					}]
+			},
+			options: {
+//				legend: {
+//					position: 'left',
+//				},
+					scales: {
+							yAxes: [{
+									ticks: {
+											beginAtZero:true
+									}
+							}]
+					}
+			}
+	});	
+	var canvas7 = document.getElementById("7.1");
+	var chart7 = new Chart(canvas7, {
+			type: 'line',
+			data: {
+					labels: ["5.1.0.3817300", "5.1.0.533", "5.1.0.540", "5.1.0.537", "5.1.0.541", "5.1.0.540"],
+					datasets: [{
+							label: 'Grade',
+							data: [80, 57, 92, 80, 50, 75],
+							backgroundColor: [
+									'rgba(0, 0, 0, 0.0)',
+							],
+							borderColor: [
+									'#bc8f8f',
+							],
+							borderWidth: 2
+					}]
+			},
+			options: {
+				
+					scales: {
+							yAxes: [{
+									ticks: {
+											beginAtZero:true
+									}
+							}]
+					}
+			}
+	});
+	var division = document.getElementById("division");
+	var chartDiv = new Chart(division, {
+			type: 'polarArea',
+			data: {
+					labels: ["5.1", "6.1", "7.1", "IDLE"],
+					datasets: [{
+							label: '5.1',
+							data: [9, 14, 12, 3],
+							backgroundColor: [
+								'rgba(169, 26, 56, 1)',
+                'rgba(36, 118, 173, 1)',
+                'rgba(224, 163, 15, 1)',
+                'rgba(110, 110, 110, 1)',
+							],
+							borderColor: [
+									'#bc8f8f',
+							],
+							borderWidth: 1
+					}]
+			},
+			options: {
+				legend: {
+					position: 'left',
+				},
+				scale: {
+						ticks: {
+							beginAtZero: true,
+							max: 30,
+						}
+				}
+			}
+	});
+	var progress = document.getElementById("progress");
+	var chartProg = new Chart(progress, {
+			type: 'bar',
+			data: {
+					labels: ["5.1", "6.1", "7.1", "IDLE"],
+					datasets: [{
+							data: [9, 14, 12, 3],
+							backgroundColor: [
+								'rgba(169, 26, 56, 1)',
+                'rgba(36, 118, 173, 1)',
+                'rgba(224, 163, 15, 1)',
+                'rgba(110, 110, 110, 1)',
+							],
+							borderColor: [
+									'#4bc0c0',
+							],
+							borderWidth: 1
+					}]
+			},
+			options: {
+				legend: {
+						display: false
+					},
+					scales: {
+							yAxes: [{
+									ticks: {
+											beginAtZero:true
+									}
+							}]
+					}
+			}
+	});
+	
+	
+</script>
+</html>

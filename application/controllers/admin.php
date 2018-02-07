@@ -95,8 +95,9 @@ class Admin extends CI_Controller {
 	}
 	
 	public function chipList(){
-		$chipList = $this->db->get('params_chips');
-		echo json_encode($chipList->result());
+		$this->db->order_by('chip_id', 'DESC');
+		$chipList = $this->db->get('chips')->result();
+		echo json_encode($chipList);
 	}	
 	public function testList(){
 		$chipList = $this->db->get('params_test_names');
@@ -160,6 +161,41 @@ class Admin extends CI_Controller {
 		$station = json_decode(file_get_contents('php://input'));
 		$this->db->where(array('station'=>$station->station));
 		$status = $this->db->replace('params_stations', $station);
+//		die(var_dump($station));
+		if($status){
+			echo 'success';
+		} else {
+			echo 'fulire';
+		}
+	}
+	public function removeIteration(){
+		$station = json_decode(file_get_contents('php://input'));
+		$this->db->where(array('id'=>$station->id));
+		$status = $this->db->delete('param_test_iteration');
+		if($status) {
+			echo 'success';
+		} else{
+			echo 'failure';
+		}
+	}	
+	public function editIteration(){
+		$data = json_decode(file_get_contents('php://input'));
+//		die(var_dump($station));
+		$this->db->where(array('id'=>$data->id));
+		$result = $this->db->get('params_test_iteration')->result();
+//		die(var_dump($stationRes));
+		if($result) {
+			echo json_encode($result);
+		} else{
+			echo 'failure';
+		}
+	}
+	
+	public function updateIteration(){
+		$data = json_decode(file_get_contents('php://input'));
+//		die(var_dump($data));
+		$this->db->where(array('station'=>$data->id));
+		$status = $this->db->replace('params_test_iteration', $data);
 //		die(var_dump($station));
 		if($status){
 			echo 'success';

@@ -3,7 +3,7 @@ myApp.controller('editCommentCtrl', ['$scope', '$location','$http', '$routeParam
 	
 	if($scope.isAuthenticated == true) {
 		
-		$http.post('http://localhost/plans/getComment', $routeParams)
+		$http.post('http://wigig-584/plans/getComment', $routeParams)
 		.then(function(response){
 			$scope.comment = response.data.comment[0];
 			$scope.comment.test_name = response.data.test[0].name;
@@ -22,7 +22,7 @@ myApp.controller('editCommentCtrl', ['$scope', '$location','$http', '$routeParam
 	$scope.comment = {};
 	$scope.testParams = testParams;
 	$scope.newCmt = function(){
-		$http.post('http://localhost/plans/editcomment', $scope.comment)
+		$http.post('http://wigig-584/plans/editcomment', $scope.comment)
 		.then(function(response){
 			if(response.data == '1') {
 //				console.log(response.data);

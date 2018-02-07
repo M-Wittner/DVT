@@ -8,20 +8,23 @@
 			</div>
 			<div class="col-md-3">
 				<span class="label label-primary">Test Name</span>
-				<multiselect ng-model="test.name" options="testParams.params.nameListRobot" show-search="true" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
+				<multiselect ng-model="test.test_name" options="testParams.params.nameListRobot" show-search="true" selection-limit="1" id-prop="id" display-prop="test_name" ng-disabled="lock">
 				</multiselect>
 			</div>
 			<div class="col-md-3">
 				<span class="label label-primary">Module Placement:</span>
-				<select ng-model="test.module_state" class="form-control">
+				<select ng-model="test.module_placement" class="form-control" ng-disabled="lock">
 				  <option>Standard</option>
 				  <option>Reversed</option>
 				</select>
 			</div>
 			<div class="col-md-4">
 				<span class="label label-primary">Matlab File (*.M)</span>
-				<input class="form-control" type="text" placeholder="Matlab File" name="lineup" ng-model="test.matlab" ng-disabled="lock" required data-minlength="6">
-<!--				<div class="help-block with-errors">bla: </div>-->
+				<input class="form-control" type="text" placeholder="Matlab File" name="lineup" ng-model="test.matlab_file" ng-disabled="lock" required>
+			</div>
+			<div class="col-md-4">
+				<span class="label label-primary">Module File (*.M)</span>
+				<input class="form-control" type="text" placeholder="Matlab File" name="lineup" ng-model="test.module_file" ng-disabled="lock" required>
 			</div>
 		</div>
 		<div class="row rowMarg">
@@ -32,21 +35,21 @@
 			</div>
 			<div class="col-md-3">
 				<span class="label label-primary">RF Cables</span>
-				<select ng-model="test.rf_cable" class="form-control">
+				<select ng-model="test.rf_cable" class="form-control" ng-disabled="lock">
 				  <option>Standard</option>
 				  <option>Flip Vpol</option>
 				  <option>Flip Hpol</option>
 				</select>
 			</div>
-			<div class="col-md-2" ng-if="test.name[0].test_name == 'rx pattern scan' || test.name[0].test_name == 'BRP scan'">
-				<span class="label label-danger">Second Plarization Flag</span></br>
+			<div class="col-md-2" ng-if="test.test_name[0].test_name == 'rx pattern scan' || test.test_name[0].test_name == 'BRP scan'">
+				<span class="label label-danger">Second Polarization Flag</span></br>
 				<input class="checkbox" ng-model="test.pol2_flag" type="checkbox" class="Pin" ng-disabled="lock" style="display: inline;"> On/Off
 			</div>
-			<div class="col-md-7" ng-if="test.name[0].test_name == 'Sector EIRP scan'">
+			<div class="col-md-7" ng-if="test.test_name[0].test_name == 'Sector EIRP scan'">
 				<span class="label label-primary">Board File Name</span>
-				<input class="form-control" type="text" placeholder="Matlab File" name="lineup" ng-model="test.board" ng-disabled="lock">
+				<input class="form-control" type="text" placeholder="Matlab File" name="lineup" ng-model="test.board_file" ng-disabled="lock">
 			</div>
-			<div class="col-md-6" ng-if="test.name[0].test_name == 'Sector EIRP scan' || test.name[0].test_name == 'Single-chain EIRP scan'">
+			<div class="col-md-6" ng-if="test.test_name[0].test_name == 'Sector EIRP scan' || test.test_name[0].test_name == 'Single-chain EIRP scan'">
 				<span class="label label-primary">Used Sectors</span>
 				<input class="form-control" type="text" placeholder="Used Sectors" ng-model="test.used_sectors" ng-disabled="lock">
 			</div>
@@ -54,148 +57,148 @@
 		<div class="row rowMarg">
 			<div class="col-md-12">
 				<span class="label label-primary">File Name</span>
-				<input class="form-control" type="text" placeholder="File Name" name="lineup" ng-model="test.file" ng-disabled="lock">
+				<input class="form-control" type="text" placeholder="File Name" name="lineup" ng-model="test.file_name" ng-disabled="lock">
 			</div>
 		</div>
 		<div>
 			<!---------------------	Test Struct	--------------------->
 			<div class="panel panel-default rowMarg">
-				<div class="panel-heading" Data-toggle="collapse" data-target="#struct" aria-expanded="false" aria-controls="struct">
+				<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="false" aria-controls="struct">
 					Test Struct
 				</div>
-				<div class="collapse panel-body" id="struct">
+				<div class="collapse panel-body" id="{{$id}}">
 					<div class="row">
 						<div class="col-md-2">
 							<span class="label label-primary">R Silicon</span>
-							<select ng-model="test.silicon_r" class="form-control">
+							<select ng-model="test.struct.r_silicon" class="form-control" ng-disabled="lock">
 							  <option>Sparrow</option>
 							  <option>Talyn</option>
 							</select>
 						</div>
 						<div class="col-md-2">
 							<span class="label label-primary">M Silicon</span>
-							<select ng-model="test.silicon_m" class="form-control">
+							<select ng-model="test.struct.m_silicon" class="form-control" ng-disabled="lock">
 							  <option>Sparrow</option>
 							  <option>Talyn</option>
 							</select>
 						</div>
-						<div ng-if="test.name[0].test_name == 'rx pattern scan' || test.name[0].test_name == 'BRP scan'">
+						<div ng-if="test.test_name[0].test_name == 'rx pattern scan' || test.test_name[0].test_name == 'BRP scan' || test.test_name[0].test_name == 'tx single-chain pattern scan'">
 							<div class="col-md-4">
 								<span class="label label-danger">AZ Vector:</span></br>
 								<span>From</span>
-								<input ng-model="test.azFrom" type="number" class="Pin" ng-disabled="lock">
+								<input ng-model="test.struct.az_from" type="number" class="Pin" ng-disabled="lock">
 								<span>Step</span>
-								<input ng-model="test.azStep" type="number" class="Pin" ng-disabled="lock">
+								<input ng-model="test.struct.az_step" type="number" class="Pin" ng-disabled="lock">
 								<span>To</span>
-								<input ng-model="test.azTo" type="number" class="Pin" ng-disabled="lock">
+								<input ng-model="test.struct.az_to" type="number" class="Pin" ng-disabled="lock">
 							</div>
 							<div class="col-md-4">
 								<span class="label label-primary">EL Vector:</span></br>
 								<span>From</span>
-								<input ng-model="test.elFrom" type="number" class="Pin" ng-disabled="lock">
+								<input ng-model="test.struct.el_from" type="number" class="Pin" ng-disabled="lock">
 								<span>Step</span>
-								<input ng-model="test.elStep" type="number" class="Pin" ng-disabled="lock">
+								<input ng-model="test.struct.el_step" type="number" class="Pin" ng-disabled="lock">
 								<span>To</span>
-								<input ng-model="test.elTo" type="number" class="Pin" ng-disabled="lock">
+								<input ng-model="test.struct.el_to" type="number" class="Pin" ng-disabled="lock">
 							</div>	
 						</div>
 					</div>
-					<div class="row rowMarg" ng-if="test.name[0].test_name != 'BRP scan' && test.name[0].test_name != 'Temperature Model'">
-						<div class="col-md-4" ng-if="test.name[0].test_name != 'Single-chain EIRP scan' && test.name[0].test_name != 'Sector EIRP scan' && test.name[0].test_name != 'Power consumption'">
+					<div class="row rowMarg" ng-if="test.test_name[0].test_name != 'BRP scan' && test.test_name[0].test_name != 'Temperature Model'">
+						<div class="col-md-4" ng-if="test.test_name[0].test_name != 'Single-chain EIRP scan' && test.test_name[0].test_name != 'Sector EIRP scan' && test.test_name[0].test_name != 'Power consumption'">
 							<span class="label label-primary">Checked Antennas</span>
-							<input class="form-control" type="text" placeholder="Checked Antennas" ng-model="test.checkedAnts" ng-disabled="lock">
+							<input class="form-control" type="text" placeholder="Checked Antennas" ng-model="test.struct.checked_ants" ng-disabled="lock">
 						</div>
 						<div class="col-md-2">
-							<span ng-if="test.name[0].test_name == 'tx sector pattern scan' || test.name[0].test_name == 'Sector EIRP scan'" class="label label-danger">Sector Burn Flag </span>
-							<span ng-if="test.name[0].test_name != 'tx sector pattern scan' && test.name[0].test_name != 'Sector EIRP scan'" class="label label-primary">Sector Burn Flag </span></br>
-							<input class="checkbox" ng-model="test.sectorBflag" type="checkbox" class="Pin" ng-disabled="lock" style="display: inline;"> On/Off
+							<span ng-if="test.test_name[0].test_name == 'tx sector pattern scan' || test.test_name[0].test_name == 'Sector EIRP scan'" class="label label-danger">Sector Burn Flag </span>
+							<span ng-if="test.test_name[0].test_name != 'tx sector pattern scan' && test.test_name[0].test_name != 'Sector EIRP scan'" class="label label-primary">Sector Burn Flag </span></br>
+							<input class="checkbox" ng-model="test.struct.sector_burn" type="checkbox" class="Pin" ng-disabled="lock" style="display: inline;"> On/Off
 						</div>
 						<div class="col-md-3">
-							<span ng-if="test.name[0].test_name == 'tx sector pattern scan'" class="label label-danger">Desired Board File</span>
-							<span ng-if="test.name[0].test_name != 'tx sector pattern scan'" class="label label-primary">Desired Board File</span>
-							<input class="form-control" type="text" placeholder="Desired Board File" ng-model="test.dBoardFile" ng-disabled="lock">
+							<span ng-if="test.test_name[0].test_name == 'tx sector pattern scan'" class="label label-danger">Desired Board File</span>
+							<span ng-if="test.test_name[0].test_name != 'tx sector pattern scan'" class="label label-primary">Desired Board File</span>
+							<input class="form-control" type="text" placeholder="Desired Board File" ng-model="test.struct.dBoard_file" ng-disabled="lock">
 						</div>
-						<div class="col-md-3" ng-if="test.name[0].test_name != 'Power consumption'">
+						<div class="col-md-3" ng-if="test.test_name[0].test_name != 'Power consumption'">
 							<span class="label label-primary">Default Antenna</span>
-							<input class="form-control" type="text" placeholder="Default Antenna" ng-model="test.dfltAnt" ng-disabled="lock">
+							<input class="form-control" type="text" placeholder="Default Antenna" ng-model="test.struct.default_ant" ng-disabled="lock">
 						</div>
 					</div>
 					<div class="row rowMarg">
-						<div class="col-md-2" ng-if="test.name[0].test_name == 'rx pattern scan' || test.name[0].test_name == 'BRP scan' || test.name[0].test_name == 'TX Spurious emmision' || test.name[0].test_name == 'RX Spurious emmision'">
+						<div class="col-md-2" ng-if="test.test_name[0].test_name == 'rx pattern scan' || test.test_name[0].test_name == 'BRP scan' || test.test_name[0].test_name == 'TX Spurious emmision' || test.test_name[0].test_name == 'RX Spurious emmision'">
 							<span class="label label-danger">Direction</span>
-							<select ng-model="test.direct" class="form-control">
+							<select ng-model="test.struct.direction" class="form-control" ng-disabled="lock">
 							  <option>TX</option>
 							  <option>RX</option>
 							  <option>BRP</option>
 							</select>
 						</div>
-					<div class="col-md-4" ng-if="test.name[0].test_name == 'BRP scan'">
+					<div class="col-md-4" ng-if="test.test_name[0].test_name == 'BRP scan'">
 						<span class="label label-danger">BRP Struct File</span>
-						<input class="form-control" type="text" placeholder="BRP Struct File" ng-model="test.strcutBRPfile" ng-disabled="lock">
+						<input class="form-control" type="text" placeholder="BRP Struct File" ng-model="test.struct.brp_file" ng-disabled="lock">
 					</div>
-						<div class="col-md-4" ng-if="test.name[0].test_name == 'Noise Figure'">
+						<div class="col-md-4" ng-if="test.test_name[0].test_name == 'Noise Figure'">
 							<span class="label label-primary">EIRP File</span>
-							<input class="form-control" type="text" placeholder="EIRP File" ng-model="test.strcutEIRPfile" ng-disabled="lock">
+							<input class="form-control" type="text" placeholder="EIRP File" ng-model="test.struct.eirp_file" ng-disabled="lock">
 						</div>
-						<div class="col-md-8" ng-if="test.name[0].test_name == 'RX Spurious emission'">
+						<div class="col-md-8" ng-if="test.test_name[0].test_name == 'RX Spurious emission'">
 							<span class="label label-primary">Path Meas File</span>
-							<input class="form-control" type="text" placeholder="Path Meas File" ng-model="test.strcutMeasFile" ng-disabled="lock">
+							<input class="form-control" type="text" placeholder="Path Meas File" ng-model="test.struct.meas_file" ng-disabled="lock">
 						</div>
 					</div>
 					<div class="row rowMarg">
-						<div class="col-md-6" ng-if="test.name[0].test_name == 'Power consumption'">
+						<div class="col-md-6" ng-if="test.test_name[0].test_name == 'Power consumption'">
 							<span class="label label-primary">Struct Used Sectors</span>
-							<input class="form-control" type="text" placeholder="Used Sectors" ng-model="test.strcut_sectors" ng-disabled="lock">
+							<input class="form-control" type="text" placeholder="Used Sectors" ng-model="test.struct.sectors" ng-disabled="lock">
 						</div>
-						<div class="col-md-2" ng-if="test.name[0].test_name == 'Sector EIRP scan' || test.name[0].test_name == 'Single-chain EIRP scan'">
+						<div class="col-md-2" ng-if="test.test_name[0].test_name == 'Sector EIRP scan' || test.test_name[0].test_name == 'Single-chain EIRP scan' || test.test_name[0].test_name == 'tx single-chain pattern scan'">
 							<span class="label label-primary">Channel</span>
-							<multiselect ng-model="test.channel" options="testParams.params.robotChList" selection-limit="1" ng-disabled="lock">
+							<multiselect ng-model="test.struct.channel" options="testParams.params.robotChList" selection-limit="1" ng-disabled="lock">
 							</multiselect>
 						</div>
-						<div ng-if="test.name[0].test_name != 'Power consumption' &&  test.name[0].test_name != 'Temperature Model'">
+						<div ng-if="test.test_name[0].test_name != 'Power consumption' &&  test.test_name[0].test_name != 'Temperature Model'">
 							<div class="col-md-2">
 								<span class="label label-danger">Gain Index</span>
-								<multiselect ng-model="test.gain_index" options="testParams.params.robotGainIdxList" show-select-all="true" show-unselect-all="true" selection-limit="1" ng-disabled="lock">
+								<multiselect ng-model="test.struct.gain_index" options="testParams.params.robotGainIdxList" show-select-all="true" show-unselect-all="true" selection-limit="1" ng-disabled="lock">
 								</multiselect>
 							</div>
 							<div class="col-md-2">
 								<span class="label label-danger">Polarization</span>
-								<select ng-model="test.polarization" class="form-control">
+								<select ng-model="test.struct.polarization" class="form-control" ng-disabled="lock">
 								  <option>Vpol</option>
 								  <option>Hpol</option>
 								</select>
 							</div>
 						</div>
 					</div>
-					<div ng-if="test.name[0].test_name == 'rx pattern scan' || test.name[0].test_name == 'BRP scan'">
+					<div ng-if="test.test_name[0].test_name == 'rx pattern scan' || test.test_name[0].test_name == 'BRP scan'">
 						<div class="row rowMarg">
 							<div class="col-md-12">
 								<span class="label label-danger">First Polarization Path</span>
-								<input class="form-control" type="text" placeholder="First Polarization Path" name="lineup" ng-model="test.pol1_path" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="First Polarization Path" name="lineup" ng-model="test.struct.pol1_path" ng-disabled="lock">
 							</div>
 						</div>
 						<div class="row rowMarg">
 							<div class="col-md-4">
 								<span class="label label-danger">Antenna</span>
-								<input class="form-control" type="text" placeholder="Antenna" ng-model="test.strcut_ant" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="Antenna" ng-model="test.struct.antenna" ng-disabled="lock">
 							</div>
 							<div class="col-md-4">
 								<span class="label label-danger">Antenna Gain</span>
-								<input class="form-control" type="text" placeholder="Antenna Gain" ng-model="test.strcut_ant_gain" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="Antenna Gain" ng-model="test.struct.ant_gain" ng-disabled="lock">
 							</div>
 							<div class="col-md-4">
 								<span class="label label-danger">Chain Gain</span>
-								<input class="form-control" type="text" placeholder="Chain Gain" ng-model="test.strcut_chain_gain" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="Chain Gain" ng-model="test.struct.chain_gain" ng-disabled="lock">
 							</div>
 						</div>
 						<div class="row rowMarg">
 							<div class="col-md-6">
 								<span class="label label-danger">Robot Azimuth</span>
-								<input class="form-control" type="text" placeholder="Robot Azimuth" ng-model="test.strcut_az" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="Robot Azimuth" ng-model="test.struct.azimuth" ng-disabled="lock">
 							</div>
 							<div class="col-md-6">
 								<span class="label label-danger">Robot Elevation</span>
-								<input class="form-control" type="text" placeholder="Robot Elevation" ng-model="test.strcut_el" ng-disabled="lock">
+								<input class="form-control" type="text" placeholder="Robot Elevation" ng-model="test.struct.elevation" ng-disabled="lock">
 							</div>
 						</div>
 					</div>
@@ -206,7 +209,7 @@
 		<div class="row panel-body">
 			<div class="col-md-8">
 				<span class="label label-primary">Notes:</span>
-				<div trumbowyg-ng placeholder="Test Notes" ng-model="test.notes" editor-config="{btns: ['viewHTML', ['undo', 'redo'],['strong', 'em', 'del'], ['link'], ['formatting'], ['foreColor', 'backColor'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['unorderedList', 'orderedList'], ['removeformat'],]}">
+				<div trumbowyg-ng placeholder="Test Notes" ng-disabled="lock" ng-model="test.notes" editor-config="{btns: ['viewHTML', ['undo', 'redo'],['strong', 'em', 'del'], ['link'], ['formatting'], ['foreColor', 'backColor'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['unorderedList', 'orderedList'], ['removeformat'],]}">
 				</div>
 			</div>
 		</div>
@@ -237,7 +240,7 @@
 	<button class="btn btn-xs btn-default addButton" ng-click="showCalc()" ng-disabled="lock">
 			Time Calculater
 		</button>
-	<button class="btn btn-xs btn-info addButton" ng-click="insertTest(test.$index)" ng-disabled="lock">
+	<button class="btn btn-xs btn-info addButton" ng-click="insertTest(test)" ng-disabled="lock">
 		Insert!
 	</button>
 	<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">

@@ -1,0 +1,29 @@
+<div class="panel panel-primary">
+	<!-- Default panel contents -->
+	<div class="panel-heading">All Test's Iteration Time <a ng-disabled="true" class="pull-right btn btn-sm btn-default" href="#/admin/newiteration">
+            	Add New</span>
+        	</a></div>
+	<!-- Table -->
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Station</th>
+				<th>Test Name</th>
+				<th>Iteration Time(sec)</th>
+				<th style="text-align: center">Modify</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="test in tests">
+				<th>{{ test.station }}</th>
+				<th>{{ test.test_name }}</th>
+				<th>{{ test.iteration_time }}</th>
+				<td class="text-center">
+					<a href="#/admin/edititeration/{{test.id}}" class="btn btn-warning btn-sm">Edit</a>
+				
+					<button class="btn btn-danger btn-sm" ng-click="removeIteration()">Delete</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

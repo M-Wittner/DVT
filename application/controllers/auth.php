@@ -23,6 +23,9 @@ class Auth extends CI_Controller {
 			'username'=>$userData->username,
 			'password'=>md5($userData->password),
 		);
+		
+		$planId = $this->db->query('SELECT id FROM `plans` ORDER BY id desc LIMIT 1')->result()[0]->id;
+		$robotPlanId = $this->db->query('SELECT id FROM `robot_plans` ORDER BY id desc LIMIT 1')->result()[0]->id;
 		$uresult = $this->user_model->get_user($user);
 			if(count($uresult) > 0) {
 				//set sesison
@@ -33,6 +36,8 @@ class Auth extends CI_Controller {
 					'firstName' => $uresult[0]->fname,
 					'lastName' => $uresult[0]->lname,
 					'rank' => $uresult[0]->rank,
+					'lastPlan' => $planId,
+					'lastPlanRobot' => $robotPlanId,
 				);
 				$this->session->set_userdata($sessData);
 				$session = $this->session->userdata();
@@ -47,6 +52,10 @@ class Auth extends CI_Controller {
 		$postData = json_decode(file_get_contents('php://input'));
 //		$userData = $postData->user;
 		die(var_dump($postData));
+//		$planId = $this->db->query('SELECT id FROM `plans` ORDER BY id desc LIMIT 1')->result()[0]->id;
+//		$robotPlanId = $this->db->query('SELECT id FROM `robot_plans` ORDER BY id desc LIMIT 1')->result()[0]->id;
+		
+		
 		$sessDestroy = $this->session->sess_destroy();
 		return $sessDestroy;
 	}
