@@ -98,6 +98,11 @@ class Admin extends CI_Controller {
 		$this->db->order_by('chip_id', 'DESC');
 		$chipList = $this->db->get('chips')->result();
 		echo json_encode($chipList);
+	}
+	public function operations(){
+		$this->db->order_by('date_time', 'DESC');
+		$chipList = $this->db->get('operation_view')->result();
+		echo json_encode($chipList);
 	}	
 	public function testList(){
 		$chipList = $this->db->get('params_test_names');
@@ -114,7 +119,14 @@ class Admin extends CI_Controller {
 		$newline = "\r\n";
 		$data = $this->dbutil->csv_from_result($chipList, $delimiter, $newline);
 		force_download('Web_Chip_List.csv', $data, TRUE);
-	}	
+	}
+	public function lineup(){
+		$file = fopen('\\\\filer4\fileserver\Projects\dvt\lineups\TalynA\R - CB1\Rx\night run 06_02_2018\RX_FB_CH1_2_3_4_8_all temps_TalynA2.0_06_02.xlsx', "r");
+//		$file = fopen('\\\\filer4\fileserver\Projects\dvt\lineups\TalynA\R - CB1\Rx\night run 06_02_2018\bla.txt', "r");
+		$handle = fread($file, 999);
+//		echo '\\\\filer4\fileserver\Projects\dvt\lineups\TalynA\R - CB1\Rx\night run 06_02_2018\RX_FB_CH1_2_3_4_8_all temps_TalynA2.0_06_02.xlsx';
+		echo $handle;
+	}
 	public function removeChip(){
 		$chipId = json_decode(file_get_contents('php://input'));
 		$this->db->where(array('id'=>$chipId));

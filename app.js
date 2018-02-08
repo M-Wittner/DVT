@@ -91,6 +91,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/admin/edititeration.html',
 			controller: 'edititerationCtrl'
 	})
+		.when('/admin/operations', {
+			templateUrl: 'pages/admin/operations.html',
+			controller: 'operationsCtrl'
+	})
 //		--------------------	Robot PAGES --------------------
 		.when('/robot', {
 			templateUrl: 'pages/robot/index.html',
