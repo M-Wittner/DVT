@@ -1,11 +1,11 @@
-myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', function ($scope, NgTableParams, $location, $http, Flash, $cookies, $window, AuthService) {
+myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', 'testParams', function ($scope, NgTableParams, $location, $http, Flash, $cookies, $window, AuthService, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
+	var site = testParams.site;
 	
 //	$scope.user = $scope.currentUser.username;
-//	console.log($scope.currentUser);
 	
 	if($scope.isAuthenticated == true) {
-		$http.get('http://wigig-584/plans')
+		$http.get(site+'/plans')
 		.then(function(response) {
 			$scope.tableParams = new NgTableParams({count:12}, {
 				counts:[],
@@ -25,7 +25,7 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 	};
 //	console.log();
 	$scope.seen = function(plan){
-		$http.post('http://wigig-584/plans/planCheck', {plan: plan, user: $scope.currentUser})
+		$http.post(site+'/plans/planCheck', {plan: plan, user: $scope.currentUser})
 		.then(function(response){
 //			console.log(response.data);
 			if(response.data == 'true'){
@@ -39,16 +39,8 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 		});
 	}
 	
-	$scope.TCP = function(){
-		$http.post('http://wigig-584/admin/tcp', {id: 'id'})
-		.then(function(response){
-			console.log(response.data);
-//			$scope.tests = response.data;
-		});
-	}
-	
 	$scope.tooltip= function(id){
-		$http.post('http://wigig-584/plans/planStatus', id)
+		$http.post(site+'/plans/planStatus', id)
 		.then(function(response){
 //			console.log(response.data);
 			$scope.tests = response.data;

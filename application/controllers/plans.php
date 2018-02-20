@@ -12,7 +12,7 @@ class Plans extends CI_Controller {
 	$this->load->helper(array('form','url'));
 //	$this->load->library(array('session'));
 	$this->load->database('');
-	$this->load->model('plan_model');
+	$this->load->model(['plan_model', 'excel_model']);
     }
 
 	function index() {
@@ -46,20 +46,26 @@ class Plans extends CI_Controller {
 		);
 		$testsObj = $postData->test;
 		if(sizeof($postData->test) > 0){
-			$insertPlan = $this->plan_model->add_plan($plan);
+//			$insertPlan = $this->plan_model->add_plan($plan);
+			$insertPlan = true;
 			if($insertPlan){
-				$planId = $this->plan_model->get_id($insertPlan);
+//				$planId = $this->plan_model->get_id($insertPlan);
+				$planId = 750;
 				foreach($testsObj as $i => $testArr){
 					if(isset($testArr->notes)){
 						$notes = $testArr->notes;
 					} else {
 						$notes = null;
 					}
+//					die(print_r($res));
+					$chipsArr = $testArr->chips;
+					$tempsArr = $testArr->temps;
+					$channelsArr = $testArr->channels;
+					$res = $this->lineup($testArr);
 //			------------- R station test -------------
 					if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
-						$chipsArr = $testArr->chips;
-						$tempsArr = $testArr->temps;
-						$channelsArr = $testArr->channels;
+						
+
 						$antennasArr = $testArr->antennas;
 //						var_dump($antennasArr);
 //						$this->db->select('iteration_time');
@@ -108,7 +114,7 @@ class Plans extends CI_Controller {
 						$variables->station = $testArr->station[0]->station;
 						$variables->test_name = $testArr->name[0]->test_name;
 						
-						$estimate_runtime = $this->plan_model->calc_runtime($variables);
+//						$estimate_runtime = $this->plan_model->calc_runtime($variables);
 						
 						if(isset($testArr->calc)){
 							$time = $testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins*$testArr->calc->ants*$testArr->calc->temps*$testArr->calc->channels;
@@ -189,7 +195,7 @@ class Plans extends CI_Controller {
 						$variables->station = $testArr->station[0]->station;
 						$variables->test_name = $testArr->name[0]->test_name;
 						
-						$estimate_runtime = $this->plan_model->calc_runtime($variables);
+//						$estimate_runtime = $this->plan_model->calc_runtime($variables);
 						if(isset($testArr->calc)){
 							$time = $testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins*$testArr->calc->ants*$testArr->calc->temps*$testArr->calc->channels;
 						} else {
@@ -837,5 +843,90 @@ class Plans extends CI_Controller {
 		$test->temps = $temp;
 		$test->station = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
 		echo json_encode($test);
+	}
+		public function lineup($test){
+//			die(print_r($test));
+			$lineup = $test->lineup;
+			$station = $test->station[0]->station;
+
+		$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+		if(in_array($station, ['R-CB1', 'R-CB2'])){
+			$sheets = ['Typical', 'LO Lineup'];
+			$spreadsheet = $reader->load($lineup);
+		} elseif(in_array($station, ['M-CB1', 'M-CB2'])) {
+			// CREATE SPREADSHEET FROM CSV
+			$path = $this->excel_model->ss_from_csv($lineup);
+			$spreadsheet = $reader->load($path);
+			$sheets = $spreadsheet->getSheetNames();
+		}
+		$reader->setReadDataOnly(true);	
+		if ($spreadsheet){
+			foreach($sheets as $sheetName){
+	// 		EXTRACTS  HIGHEST COL, HIGHEST ROW, FIRST ROW
+				$currentSheet = $spreadsheet->getSheetByName($sheetName);
+
+				$highestColumn = $currentSheet->getHighestColumn();
+				$highestRow = $currentSheet->getHighestRow();
+//				die(print($highestRow));
+				$firstRowRaw = $currentSheet->rangeToArray('A1:'.$highestColumn.'1', null, false, false, true)[1];
+	//		GET PARAMS FOUND BOTH IN EXCEL AND DB (NOT: TEMP CH V)
+				$this->db->where_in('parameter_name', $firstRowRaw);
+				$match = $this->db->get('lineup_params')->result();
+
+				$paramNameArr = array_column($match, 'parameter_name');
+				foreach($firstRowRaw as $index => $param){
+					$paramIdx = array_search($param, $paramNameArr);
+					$data = new stdClass();
+	//		INSERT TEMP CH V INTO SQL RESULT
+					if($paramIdx === false){
+							$data->parameter_name = $param;
+							$data->parameter_id = -1;
+							$data->parameter_range = -1;
+							$data->excel_index = $index;
+							array_push($match, $data);
+					}else{
+						$match[$paramIdx]->excel_index = $index;
+					}
+				}
+//				foreach ($match as $value){
+//					print($value->excel_index."\n");
+//				}
+
+	//		INSERT EXCEL INDEX TO EACH PARAM
+				foreach ($match as $value){
+
+	//  		GET THIS COLUMN DATA
+					$col = $currentSheet->rangeToArray($value->excel_index.'2:'.$value->excel_index.$highestRow, -1, false, false, false);
+					$value->rows = array_column($col, 0);
+				switch($value->parameter_range){
+					// RANGE NULL: VALUE IS NOT A NUMBER AND OPTIONAL(NOTE COL)
+						case -1:	
+							break;
+					// RANGE 0 IS BOOLEAN VALUE
+						case 0:
+							$res = $this->excel_model->check_exist($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+							if($res = true){
+									$this->excel_model->check_bool($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+								}
+							break;
+					// RANGE -1 IS NO RANGE, CHECKS EXISTANCE
+						case null:
+							$this->excel_model->check_exist($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+								if(in_array($value->parameter_name, ['CH', 'ChipChannel'])){
+								// CHECK IF CH IS VALID
+									$this->excel_model->is_ch_valid($value->rows, $value->excel_index, $sheetName);
+								}
+							break;
+					// RANGE IS NOT NULL AND NOT -1, CHECKS EXISTANCE AND IS NUMERIC
+						default:
+							$res = $this->excel_model->check_exist($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+							if($res = true){
+								$this->excel_model->check_num($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+							}
+							break;
+					}
+				}	
+			}		
+		}
 	}
 }

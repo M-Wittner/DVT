@@ -88,5 +88,13 @@ class Params extends CI_Controller {
 		$result = $data->result();
 		echo json_encode($result);
 	}
+	public function fields(){
+		$result = $this->db->get('work_stations')->result();
+		echo json_encode($result);
+	}
+	public function taskTypes(){
+		$result = $this->db->get('task_types')->result();
+		echo json_encode($result);
+	}
 }
 ?>
