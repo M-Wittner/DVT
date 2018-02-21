@@ -30,6 +30,7 @@ use UnexpectedValueException as BaseUnexpectedValueException;
  */
 class UnexpectedValueException extends BaseUnexpectedValueException implements ExceptionInterface
 {
+<<<<<<< HEAD
     /**
      * @param ReflectionClass $reflectionClass
      * @param Exception       $exception
@@ -38,6 +39,12 @@ class UnexpectedValueException extends BaseUnexpectedValueException implements E
      */
     public static function fromSerializationTriggeredException(ReflectionClass $reflectionClass, Exception $exception)
     {
+=======
+    public static function fromSerializationTriggeredException(
+        ReflectionClass $reflectionClass,
+        Exception $exception
+    ) : self {
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
         return new self(
             sprintf(
                 'An exception was raised while trying to instantiate an instance of "%s" via un-serialization',
@@ -48,6 +55,7 @@ class UnexpectedValueException extends BaseUnexpectedValueException implements E
         );
     }
 
+<<<<<<< HEAD
     /**
      * @param ReflectionClass $reflectionClass
      * @param string          $errorString
@@ -64,6 +72,15 @@ class UnexpectedValueException extends BaseUnexpectedValueException implements E
         $errorFile,
         $errorLine
     ) {
+=======
+    public static function fromUncleanUnSerialization(
+        ReflectionClass $reflectionClass,
+        string $errorString,
+        int $errorCode,
+        string $errorFile,
+        int $errorLine
+    ) : self {
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
         return new self(
             sprintf(
                 'Could not produce an instance of "%s" via un-serialization, since an error was triggered '

@@ -1,6 +1,10 @@
 <?php
 /*
+<<<<<<< HEAD
  * This file is part of the PHP_TokenStream package.
+=======
+ * This file is part of php-token-stream.
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
  *
  * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
@@ -8,6 +12,7 @@
  * file that was distributed with this source code.
  */
 
+<<<<<<< HEAD
 /**
  * Tests for the PHP_Token_FUNCTION class.
  *
@@ -23,6 +28,16 @@
 class PHP_Token_FunctionTest extends PHPUnit_Framework_TestCase
 {
     protected $functions;
+=======
+use PHPUnit\Framework\TestCase;
+
+class PHP_Token_FunctionTest extends TestCase
+{
+    /**
+     * @var PHP_Token_FUNCTION[]
+     */
+    private $functions;
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 
     protected function setUp()
     {
@@ -40,6 +55,7 @@ class PHP_Token_FunctionTest extends PHPUnit_Framework_TestCase
      */
     public function testGetArguments()
     {
+<<<<<<< HEAD
         $this->assertEquals(array(), $this->functions[0]->getArguments());
 
         $this->assertEquals(
@@ -57,6 +73,25 @@ class PHP_Token_FunctionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $this->functions[4]->getArguments());
 
         $this->assertEquals(array('$x' => null, '$y' => null), $this->functions[5]->getArguments());
+=======
+        $this->assertEquals([], $this->functions[0]->getArguments());
+
+        $this->assertEquals(
+          ['$baz' => 'Baz'], $this->functions[1]->getArguments()
+        );
+
+        $this->assertEquals(
+          ['$foobar' => 'Foobar'], $this->functions[2]->getArguments()
+        );
+
+        $this->assertEquals(
+          ['$barfoo' => 'Barfoo'], $this->functions[3]->getArguments()
+        );
+
+        $this->assertEquals([], $this->functions[4]->getArguments());
+
+        $this->assertEquals(['$x' => null, '$y' => null], $this->functions[5]->getArguments());
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     }
 
     /**

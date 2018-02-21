@@ -182,6 +182,7 @@ php: |
       'simple' => 12,
     )
 ---
+<<<<<<< HEAD
 test: Positive Big Integer
 deprecated: true
 dump_skip: true
@@ -210,6 +211,8 @@ php: |
       'negative one-thousand' => -1000.0
     )
 ---
+=======
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 test: Floats
 dump_skip: true
 brief: >
@@ -225,6 +228,7 @@ php: |
        'scientific notation' => 1000.09
      )
 ---
+<<<<<<< HEAD
 test: Larger Float
 dump_skip: true
 deprecated: true
@@ -239,6 +243,8 @@ php: |
        'larger float' => 1000.09,
      )
 ---
+=======
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 test: Time
 todo: true
 brief: >

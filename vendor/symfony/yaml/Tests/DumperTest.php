@@ -77,6 +77,7 @@ EOF;
         $this->assertEquals($expected, $dumper->dump($this->array, 4, 0));
     }
 
+<<<<<<< HEAD
     /**
      * @group legacy
      */
@@ -106,6 +107,8 @@ EOF;
         $this->assertEquals($expected, $this->dumper->dump($this->array, 4, 0));
     }
 
+=======
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     public function testSpecifications()
     {
         $files = $this->parser->parse(file_get_contents($this->path.'/index.yml'));
@@ -213,6 +216,7 @@ EOF;
         $this->assertEquals('{ foo: !php/object \'O:30:"Symfony\Component\Yaml\Tests\A":1:{s:1:"a";s:3:"foo";}\', bar: 1 }', $dump, '->dump() is able to dump objects');
     }
 
+<<<<<<< HEAD
     /**
      * @group legacy
      */
@@ -223,6 +227,8 @@ EOF;
         $this->assertEquals('{ foo: !php/object \'O:30:"Symfony\Component\Yaml\Tests\A":1:{s:1:"a";s:3:"foo";}\', bar: 1 }', $dump, '->dump() is able to dump objects');
     }
 
+=======
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     public function testObjectSupportDisabledButNoExceptions()
     {
         $dump = $this->dumper->dump(array('foo' => new A(), 'bar' => 1));
@@ -239,6 +245,7 @@ EOF;
     }
 
     /**
+<<<<<<< HEAD
      * @group legacy
      * @expectedException \Symfony\Component\Yaml\Exception\DumpException
      */
@@ -266,6 +273,8 @@ EOF;
     }
 
     /**
+=======
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
      * @dataProvider getEscapeSequences
      */
     public function testEscapedEscapeSequencesInQuotedScalar($input, $expected)

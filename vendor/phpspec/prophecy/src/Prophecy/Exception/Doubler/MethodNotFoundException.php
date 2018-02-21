@@ -14,7 +14,11 @@ namespace Prophecy\Exception\Doubler;
 class MethodNotFoundException extends DoubleException
 {
     /**
+<<<<<<< HEAD
      * @var string|object
+=======
+     * @var string
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
      */
     private $classname;
 
@@ -30,7 +34,11 @@ class MethodNotFoundException extends DoubleException
 
     /**
      * @param string $message
+<<<<<<< HEAD
      * @param string|object $classname
+=======
+     * @param string $classname
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
      * @param string $methodName
      * @param null|Argument\ArgumentsWildcard|array $arguments
      */

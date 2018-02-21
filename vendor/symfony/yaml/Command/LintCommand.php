@@ -36,7 +36,11 @@ class LintCommand extends Command
     private $directoryIteratorProvider;
     private $isReadableProvider;
 
+<<<<<<< HEAD
     public function __construct($name = null, $directoryIteratorProvider = null, $isReadableProvider = null)
+=======
+    public function __construct(string $name = null, callable $directoryIteratorProvider = null, callable $isReadableProvider = null)
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     {
         parent::__construct($name);
 

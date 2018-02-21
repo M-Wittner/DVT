@@ -1,6 +1,10 @@
 <?php
 /*
+<<<<<<< HEAD
  * This file is part of the PHP_TokenStream package.
+=======
+ * This file is part of php-token-stream.
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
  *
  * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
@@ -8,6 +12,7 @@
  * file that was distributed with this source code.
  */
 
+<<<<<<< HEAD
 /**
  * Tests for the PHP_Token class.
  *
@@ -21,6 +26,11 @@
  * @since      Class available since Release 1.0.0
  */
 class PHP_TokenTest extends PHPUnit_Framework_TestCase
+=======
+use PHPUnit\Framework\TestCase;
+
+class PHP_TokenTest extends TestCase
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 {
     /**
      * @covers PHP_Token::__construct

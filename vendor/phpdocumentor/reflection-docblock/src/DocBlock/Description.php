@@ -69,7 +69,11 @@ class Description
         $this->bodyTemplate = $bodyTemplate;
         $this->tags = $tags;
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     /**
      * Returns the tags for this DocBlock.
      *
@@ -98,6 +102,10 @@ class Description
         foreach ($this->tags as $tag) {
             $tags[] = '{' . $formatter->format($tag) . '}';
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
         return vsprintf($this->bodyTemplate, $tags);
     }
 

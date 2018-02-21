@@ -1,0 +1,115 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Task #{{task.id}} <span class="pull-right">{{task.date}}</span></h3>
+	</div>
+	<div ng-if="currentUser.username == task.creator || currentUser.rank > '60'" class="panel container-fluid">
+		<span class="col-md-2">
+			approved:
+			<input type="checkbox" ng-model="task.approved" ng-click="approveUpdate(task.id, task.approved)">
+		</span>
+		<span class="col-md-3">
+			Status:
+			<div class="btn-group" ng-model="task.status" uib-dropdown>
+				<button id="single-button" type="button" class="btn btn-default"  uib-dropdown-toggle>{{task.status}} <span class="caret"></span></button>
+				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+					<li ng-repeat="option in params.taskStatus"><a  ng-click="statusUpdate(task.id, option.id)">{{option.task_status}}</a></li>
+				</ul>
+			</div>
+		</span>
+		<span class="col-md-2">
+			Status:
+			<div class="btn-group" ng-model="task.prpriority" uib-dropdown>
+				<button id="single-button" type="button" class="btn btn-default"  uib-dropdown-toggle>{{task.priority}} <span class="caret"></span></button>
+				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+					<li ng-repeat="option in params.taskPriority"><a  ng-click="priorityUpdate(task.id, option.id)">{{option.task_priority}}</a></li>
+				</ul>
+			</div>
+		</span>
+		<span class="col-md-offset-4">
+			<a class="btn btn-xs btn-warning" href="#/task/{{task.id}}/edit" ng-disabled="true">Edit</a>
+			<a class="btn btn-xs btn-danger btn-crud" ng-click="deleteTask(task.id)">
+				Delete
+			</a>
+		</span>
+	</div>
+	<div class="panel-body">
+		<div class="col-md-4">
+			<div class="row">
+				<div class="col-md-6">
+					<span class="label label-primary">Priority</span>
+					<label class="form-control">{{task.priority}}</label>
+				</div>
+				<div class="col-md-6">
+					<span class="label label-primary">Station</span>
+					<label class="form-control">{{task.station}}</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<span class="label label-primary">Requested By:</span>
+					<label class="form-control">{{task.creator}}</label>
+				</div>
+				<div class="col-md-6">
+					<span class="label label-primary">Task Status:</span>
+					<label class="form-control">{{task.status}}</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<span class="label label-primary">Type</span>
+					<label class="form-control">{{task.type}}</label>
+				</div>
+				<div class="col-md-6">
+					<span class="label label-primary">Approved:</span>
+					<label class="form-control">{{task.approved}}</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<span class="label label-primary">Assigned To:</span>
+					<label class="form-control" ng-hide="!task.assigned">{{task.assigned}}</label>
+					<label class="form-control" ng-hide="task.assigned">Not assigned yet</label>
+				</div>	
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="col-md-12">
+				<div trumbowyg-ng ng-disabled="true" ng-model="task.description" editor-config="{hideButtonTexts: true}"></div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-footer">
+		<a href="#/task/{{task.id}}/comment/new" class="btn btn-success btn-sm col-md-offset-11">New Comment</a>
+	</div>
+</div>
+
+<div class="panel panel-warning">
+	<div class="panel-heading">
+		<h3 class="panel-title">Comments</h3>
+	</div>
+	<div class="panel-body">
+		<div ng-repeat="comment in task.comments track by comment.comment_id">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title" Data-toggle="collapse" data-target="#{{comment.comment_id}}" aria-expanded="false" aria-controls="{{comment.comment_id}}">By: {{comment.username}}<span class="pull-right">{{comment.date}}</span></h3>
+				</div>
+				<div ng-if="currentUser.username == comment.username || currentUser.rank > '60'" class="panel container-fluid">
+					<span class="col-md-offset-11">
+						<a class="btn btn-xs btn-warning" href="#/task/{{task.id}}/comment/{{comment.comment_id}}/edit" ng-disabled="true">Edit</a>
+						<a class="btn btn-xs btn-danger btn-crud" ng-click="removeComment(comment.comment_id)">
+							Delete
+						</a>
+					</span>
+				</div>
+				<div class="panel-body collapse" id="{{comment.comment_id}}">
+					<div class="row">
+						<div class="col-md-12">
+							<div trumbowyg-ng ng-model="comment.comment" ng-disabled="true">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

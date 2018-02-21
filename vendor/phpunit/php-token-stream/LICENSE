@@ -1,6 +1,10 @@
 PHP_TokenStream
 
+<<<<<<< HEAD
 Copyright (c) 2009-2015, Sebastian Bergmann <sebastian@phpunit.de>.
+=======
+Copyright (c) 2009-2017, Sebastian Bergmann <sebastian@phpunit.de>.
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

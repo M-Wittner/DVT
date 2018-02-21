@@ -27,10 +27,14 @@ class Dumper
      */
     protected $indentation;
 
+<<<<<<< HEAD
     /**
      * @param int $indentation
      */
     public function __construct($indentation = 4)
+=======
+    public function __construct(int $indentation = 4)
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     {
         if ($indentation < 1) {
             throw new \InvalidArgumentException('The indentation must be greater than zero.');
@@ -40,6 +44,7 @@ class Dumper
     }
 
     /**
+<<<<<<< HEAD
      * Sets the indentation.
      *
      * @param int $num The amount of spaces to use for indentation of nested nodes
@@ -54,6 +59,8 @@ class Dumper
     }
 
     /**
+=======
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
      * Dumps a PHP value to YAML.
      *
      * @param mixed $input  The PHP value
@@ -63,6 +70,7 @@ class Dumper
      *
      * @return string The YAML representation of the PHP value
      */
+<<<<<<< HEAD
     public function dump($input, $inline = 0, $indent = 0, $flags = 0)
     {
         if (is_bool($flags)) {
@@ -83,6 +91,10 @@ class Dumper
             }
         }
 
+=======
+    public function dump($input, int $inline = 0, int $indent = 0, int $flags = 0): string
+    {
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
         $output = '';
         $prefix = $indent ? str_repeat(' ', $indent) : '';
         $dumpObjectAsInlineMap = true;

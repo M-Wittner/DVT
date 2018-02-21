@@ -20,6 +20,7 @@ namespace Prophecy\Doubler\Generator;
 class ClassCodeGenerator
 {
     /**
+<<<<<<< HEAD
      * @var TypeHintReference
      */
     private $typeHintReference;
@@ -30,6 +31,8 @@ class ClassCodeGenerator
     }
 
     /**
+=======
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
      * Generates PHP code for class node.
      *
      * @param string         $classname
@@ -101,8 +104,12 @@ class ClassCodeGenerator
 
     private function generateArguments(array $arguments)
     {
+<<<<<<< HEAD
         $typeHintReference = $this->typeHintReference;
         return array_map(function (Node\ArgumentNode $argument) use ($typeHintReference) {
+=======
+        return array_map(function (Node\ArgumentNode $argument) {
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
             $php = '';
 
             if (version_compare(PHP_VERSION, '7.1', '>=')) {
@@ -110,7 +117,38 @@ class ClassCodeGenerator
             }
 
             if ($hint = $argument->getTypeHint()) {
+<<<<<<< HEAD
                 $php .= $typeHintReference->isBuiltInParamTypeHint($hint) ? $hint : '\\'.$hint;
+=======
+                switch ($hint) {
+                    case 'array':
+                    case 'callable':
+                        $php .= $hint;
+                        break;
+
+                    case 'iterable':
+                        if (version_compare(PHP_VERSION, '7.1', '>=')) {
+                            $php .= $hint;
+                            break;
+                        }
+
+                        $php .= '\\'.$hint;
+                        break;
+
+                    case 'string':
+                    case 'int':
+                    case 'float':
+                    case 'bool':
+                        if (version_compare(PHP_VERSION, '7.0', '>=')) {
+                            $php .= $hint;
+                            break;
+                        }
+                        // Fall-through to default case for PHP 5.x
+
+                    default:
+                        $php .= '\\'.$hint;
+                }
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
             }
 
             $php .= ' '.($argument->isPassedByReference() ? '&' : '');

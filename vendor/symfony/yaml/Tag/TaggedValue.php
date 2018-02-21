@@ -20,27 +20,38 @@ final class TaggedValue
     private $tag;
     private $value;
 
+<<<<<<< HEAD
     /**
      * @param string $tag
      * @param mixed  $value
      */
     public function __construct($tag, $value)
+=======
+    public function __construct(string $tag, $value)
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     {
         $this->tag = $tag;
         $this->value = $value;
     }
 
+<<<<<<< HEAD
     /**
      * @return string
      */
     public function getTag()
+=======
+    public function getTag(): string
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     {
         return $this->tag;
     }
 
+<<<<<<< HEAD
     /**
      * @return mixed
      */
+=======
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     public function getValue()
     {
         return $this->value;

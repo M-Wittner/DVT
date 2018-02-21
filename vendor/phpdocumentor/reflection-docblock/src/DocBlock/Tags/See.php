@@ -12,14 +12,23 @@
 
 namespace phpDocumentor\Reflection\DocBlock\Tags;
 
+<<<<<<< HEAD
+=======
+use phpDocumentor\Reflection\DocBlock\Description;
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 use phpDocumentor\Reflection\DocBlock\DescriptionFactory;
 use phpDocumentor\Reflection\DocBlock\Tags\Reference\Fqsen as FqsenRef;
 use phpDocumentor\Reflection\DocBlock\Tags\Reference\Reference;
 use phpDocumentor\Reflection\DocBlock\Tags\Reference\Url;
+<<<<<<< HEAD
 use phpDocumentor\Reflection\Fqsen;
 use phpDocumentor\Reflection\FqsenResolver;
 use phpDocumentor\Reflection\Types\Context as TypeContext;
 use phpDocumentor\Reflection\DocBlock\Description;
+=======
+use phpDocumentor\Reflection\FqsenResolver;
+use phpDocumentor\Reflection\Types\Context as TypeContext;
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 use Webmozart\Assert\Assert;
 
 /**

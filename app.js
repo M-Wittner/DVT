@@ -46,6 +46,19 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/plans/addtest.html',
 			controller: 'addTestCtrl'
 	})
+//		--------------------	TASKS PAGES --------------------
+		.when('/tasks', {
+			templateUrl: 'pages/tasks/index.html',
+			controller: 'tasksCtrl'
+	})
+		.when('/tasks/new', {
+			templateUrl: 'pages/tasks/new.html',
+			controller: 'newTaskCtrl'
+	})
+		.when('/tasks/:id', {
+			templateUrl: 'pages/tasks/view.html',
+			controller: 'viewTaskCtrl'
+	})
 //		--------------------	ADMIN PAGES --------------------
 		.when('/admin', {
 			templateUrl: 'pages/admin/panel.html',
@@ -260,19 +273,28 @@ myApp.factory('AuthService', function($http, Session, $cookies){
 
 myApp.factory('testParams', function($http, $log){
 	var testParams = {};
+	testParams.site = "http://localhost";
+	var site = testParams.site;
 	testParams.params = {};
 	
-//	testParams.params.stationList = [
-//		"R-CB1",
-//		'R-CB2',
-//		'M-CB1',
-//		'M-CB2',
-//		'Calibration',
-//		'TalynM+A',
-////		'RFC/CAL',
-//		'PTAT/ABS/Vgb+TEMP',
-//	];
-	$http.get('http://wigig-584/params/stations')
+	$http.get(site+'/params/fields')
+	.then(function(response){
+		testParams.params.fieldList = response.data;
+	});
+	$http.get(site+'/params/taskTypes')
+	.then(function(response){
+		testParams.params.taskTypes = response.data;
+	});
+	$http.get(site+'/params/taskStatus')
+	.then(function(response){
+		testParams.params.taskStatus = response.data;
+	});
+	$http.get(site+'/params/taskPriority')
+	.then(function(response){
+		testParams.params.taskPriority = response.data;
+	});
+	
+	$http.get(site+'/params/stations')
 	.then(function(response){
 		testParams.params.stationList = response.data;
 	});
@@ -286,47 +308,47 @@ myApp.factory('testParams', function($http, $log){
 		'PTAT/ABS/Vgb+TEMP',
 	];
 	
-	testParams.params.nameListM = {};
-	$http.get('http://wigig-584/params/testsM')
+//	testParams.params.nameListM = {};
+	$http.get(site+'/params/testsM')
 	.then(function(response){
 		testParams.params.nameListM = response.data;
 	});
 	
 	testParams.params.nameListR = {};
-	$http.get('http://wigig-584/params/testsR')
+	$http.get(site+'/params/testsR')
 	.then(function(response){
 		testParams.params.nameListR = response.data;
 //			console.log(response.data);
 	});
 	
 	testParams.params.nameListCal = {};
-	$http.get('http://wigig-584/params/testsCal')
+	$http.get(site+'/params/testsCal')
 	.then(function(response){
 		testParams.params.nameListCal = response.data;
 //			console.log(response.data);
 	});
 	
 	testParams.params.nameListPTAT = {};
-	$http.get('http://wigig-584/params/testsPTAT')
+	$http.get(site+'/params/testsPTAT')
 	.then(function(response){
 		testParams.params.nameListPTAT = response.data;
 //			console.log(response.data);
 	});
 	testParams.params.nameListFS = {};
-	$http.get('http://wigig-584/params/testsFS')
+	$http.get(site+'/params/testsFS')
 	.then(function(response){
 		testParams.params.nameListFS = response.data;
 //			console.log(response.data);
 	});
 	
 //	testParams.params.nameListRobot = {};
-	$http.get('http://wigig-584/params/testsRobot')
+	$http.get(site+'/params/testsRobot')
 	.then(function(response){
 		testParams.params.nameListRobot = response.data;
 //			console.log(response.data);
 	});
 	
-	$http.get('http://wigig-584/params/modulesRobot')
+	$http.get(site+'/params/modulesRobot')
 	.then(function(response){
 		testParams.params.moduleListRobot = response.data;
 //			console.log(response.data);
@@ -359,26 +381,26 @@ myApp.factory('testParams', function($http, $log){
 	];
 	
 	testParams.params.xifList = {};
-	$http.get('http://wigig-584/params/xifs')
+	$http.get(site+'/params/xifs')
 	.then(function(response){
 		testParams.params.xifList = response.data;
 	});
 	
 	testParams.params.chipListM = {};
-    $http.get('http://wigig-584/params/chipsM')
+    $http.get(site+'/params/chipsM')
 	.then(function(response){
 		testParams.params.chipListM = response.data;
 	});
 	
 	testParams.params.chipListR = {};
-	$http.get('http://wigig-584/params/chipsR')
+	$http.get(site+'/params/chipsR')
 	.then(function(response){
 		testParams.params.chipListR = response.data;
 //		console.log(response.data);
 	});
 		
 	testParams.params.chipListMR = {};
-	$http.get('http://wigig-584/params/chipsMR')
+	$http.get(site+'/params/chipsMR')
 	.then(function(response){
 		testParams.params.chipListMR = response.data;
 //		console.log(response.data);

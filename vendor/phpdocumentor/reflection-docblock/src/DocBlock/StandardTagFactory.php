@@ -166,7 +166,11 @@ final class StandardTagFactory implements TagFactory
      */
     private function extractTagParts($tagLine)
     {
+<<<<<<< HEAD
         $matches = array();
+=======
+        $matches = [];
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
         if (! preg_match('/^@(' . self::REGEX_TAGNAME . ')(?:\s*([^\s].*)|$)/us', $tagLine, $matches)) {
             throw new \InvalidArgumentException(
                 'The tag "' . $tagLine . '" does not seem to be wellformed, please check it for errors'
@@ -196,8 +200,12 @@ final class StandardTagFactory implements TagFactory
         $arguments        = $this->getArgumentsForParametersFromWiring(
             $this->fetchParametersForHandlerFactoryMethod($handlerClassName),
             $this->getServiceLocatorWithDynamicParameters($context, $name, $body)
+<<<<<<< HEAD
         )
         ;
+=======
+        );
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 
         return call_user_func_array([$handlerClassName, 'create'], $arguments);
     }

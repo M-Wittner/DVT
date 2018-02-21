@@ -1,0 +1,54 @@
+<div class="panel panel-primary">
+	<!-- Default panel contents -->
+	<div class="panel-heading">All Operations</div>
+	<div class="panel-body">
+	</div>
+	<!-- Table -->
+	<table ng-table="tableParams" class="table table-striped">
+		<tr ng-repeat="data in $data track by $index">
+			<td class="col-md-1 text-center" data-title="'Test ID'" sortable="'data.test_id'">{{data.test_id}}</td>
+			<td class="col-md-2 text-center" data-title="'Date'" filter="{date_time: 'text'}" sortable="'date_time'">{{data.date_time}}</td>
+			<td class="col-md-1 text-center" data-title="'Test Type'">{{data.test_type}}</td>
+			<td class="col-md-1 text-center" data-title="'Station'">{{data.work_station}}</td>
+			<td class="col-md-1 text-center" data-title="'Chip Type'"><span ng-if="data.chip_m_id == '-1' ? Type = 'TalynA' : data.chip_r_id == '-1' ? Type = 'TalynM': Type = null">{{Type}}</span></td>
+			<td class="col-md-1 text-center" data-title="'Serial Number'"><span ng-if="data.chip_m_id == '-1' ? chip = data.chip_r_sn : data.chip_r_id == '-1' ? chip = data.chip_m_sn : chip = 'null'">{{chip}}</span></td>
+			<td class="col-md-1 text-center" data-title="'Oeprator'">{{data.operator}}</td>
+			<td class="col-md-1 text-center" data-title="'Test Status'">{{data.test_status}}</td>
+			<td class="col-md-1 text-center" data-title="'Status'">{{data.status}}</td>
+		</tr>
+	</table>
+	
+	<!--
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Chip</th>
+				<th>Board</th>
+				<th>Package</th>
+				<th>Model</th>
+				<th>Revision</th>
+				<th>Serial Number</th>
+				<th>Corner</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="chip in chips | orderBy:'chip'">
+				<th>{{ chip.chip }}</th>
+				<td>{{ chip.board }}</td>
+				<td>{{ chip.package }}</td>
+				<td>{{ chip.model }}</td>
+				<td>{{ chip.revision }}</td>
+				<td>{{ chip.serial_number }}</td>
+				<td>{{ chip.corner }}</td>
+				<td>
+					<button class="btn btn-warning btn-sm">Edit</button>
+				</td>
+				<td>
+					<button class="btn btn-danger btn-sm" ng-click="removeChip(chip.id, chip.serial_number)">Delete</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+-->
+</div>

@@ -43,8 +43,12 @@ final class Return_ extends BaseTag implements Factory\StaticMethod
         TypeResolver $typeResolver = null,
         DescriptionFactory $descriptionFactory = null,
         TypeContext $context = null
+<<<<<<< HEAD
     )
     {
+=======
+    ) {
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
         Assert::string($body);
         Assert::allNotNull([$typeResolver, $descriptionFactory]);
 

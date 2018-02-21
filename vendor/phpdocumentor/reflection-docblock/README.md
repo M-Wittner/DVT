@@ -10,6 +10,7 @@ that is 100% compatible with the [PHPDoc standard](http://phpdoc.org/docs/latest
 With this component, a library can provide support for annotations via DocBlocks
 or otherwise retrieve information that is embedded in a DocBlock.
 
+<<<<<<< HEAD
 > **Note**: *this is a core component of phpDocumentor and is constantly being
 > optimized for performance.*
 
@@ -20,6 +21,14 @@ You can install the component in the following ways:
 
 * Use the official Github repository (https://github.com/phpDocumentor/ReflectionDocBlock)
 * Via Composer (http://packagist.org/packages/phpdocumentor/reflection-docblock)
+=======
+Installation
+------------
+
+```bash
+composer require phpdocumentor/reflection-docblock
+```
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 
 Usage
 -----
@@ -52,6 +61,7 @@ $docblock = $factory->create($docComment);
 ```
 
 The `create` method will yield an object of type `\phpDocumentor\Reflection\DocBlock`
+<<<<<<< HEAD
 whose methods can be queried as shown in the following example.
 
 ```php
@@ -67,3 +77,22 @@ $description = $docblock->getDescription();
 > For more examples it would be best to review the scripts in the `/examples` 
 > folder.
 
+=======
+whose methods can be queried:
+
+```php
+// Contains the summary for this DocBlock
+$summary = $docblock->getSummary();
+
+// Contains \phpDocumentor\Reflection\DocBlock\Description object
+$description = $docblock->getDescription();
+
+// You can either cast it to string
+$description = (string) $docblock->getDescription();
+
+// Or use the render method to get a string representation of the Description.
+$description = $docblock->getDescription()->render();
+```
+
+> For more examples it would be best to review the scripts in the [`/examples` folder](/examples).
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57

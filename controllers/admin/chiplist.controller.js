@@ -1,6 +1,7 @@
-myApp.controller('chiplistCtrl', ['$scope', 'NgTableParams', '$location','$http', '$routeParams', 'Flash', 'AuthService', '$window', function ($scope, NgTableParams, $location, $http, $routeParams, Flash, AuthService, $window) {
+myApp.controller('chiplistCtrl', ['$scope', 'NgTableParams', '$location','$http', '$routeParams', 'Flash', 'AuthService', '$window', 'testParams', function ($scope, NgTableParams, $location, $http, $routeParams, Flash, AuthService, $window, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.isAuthenticated = true;
+	var site = testParams.site;
 	
 	if($scope.isAuthenticated == true) {
 		$http.get('http://localhost/admin/chiplist')
@@ -32,5 +33,13 @@ myApp.controller('chiplistCtrl', ['$scope', 'NgTableParams', '$location','$http'
 				var id = Flash.create('danger', message, 3500);
 			}
 		});
+	};
+	$scope.lineup = function(){
+		var file = document.getElementById("file");
+			console.log(file.value);
+//		$http.post(site+'/plans/lineup')
+//		.then(function(response){
+//			
+//		})
 	}
 }]);

@@ -518,6 +518,7 @@ php: |
     'hexadecimal' => 0xC
   )
 ---
+<<<<<<< HEAD
 test: Decimal Integer
 deprecated: true
 spec: 2.19
@@ -528,6 +529,8 @@ php: |
     'decimal' => 12345.0,
   )
 ---
+=======
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 # FIX: spec shows parens around -inf and NaN
 test: Floating point
 spec: 2.20
@@ -546,6 +549,7 @@ php: |
     'float as whole number' => (float) 1
   )
 ---
+<<<<<<< HEAD
 test: Fixed Floating point
 deprecated: true
 spec: 2.20
@@ -556,6 +560,8 @@ php: |
     'fixed' => 1230.15,
   )
 ---
+=======
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 test: Timestamps
 todo: true
 spec: 2.22
@@ -928,6 +934,7 @@ documents: 2
 
 ---
 test: Explicit typing
+<<<<<<< HEAD
 deprecated: Using the non-specific tag "!" is deprecated since Symfony 3.4 as its behavior will change in 4.0.
 yaml: |
    integer: 12
@@ -935,6 +942,14 @@ yaml: |
    string: !!str 12
 php: |
    array( 'integer' => 12, 'also int' => 12, 'string' => '12' )
+=======
+yaml: |
+   integer: 12
+   no int: ! 12
+   string: !!str 12
+php: |
+   array( 'integer' => 12, 'no int' => '12', 'string' => '12' )
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 ---
 test: Private types
 todo: true
@@ -1531,6 +1546,7 @@ php: |
      'hexadecimal' => 12
    )
 ---
+<<<<<<< HEAD
 test: Decimal
 deprecated: true
 yaml: |
@@ -1549,6 +1565,8 @@ php: |
     'fixed' => 1230.15,
   )
 ---
+=======
+>>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 test: Float
 yaml: |
    canonical: 1.23015e+3
