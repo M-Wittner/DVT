@@ -12,4 +12,15 @@ myApp.controller('tasksCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 		console.log(response.data);
 	})
 	
+	$scope.deleteTask = function(taskId){
+		$http.post(site+'/tasks/delete', taskId)
+		.then(function(response){
+			if(response.data == 'true'){
+				var message = 'Task Deleted Succesfully!';
+				var id = Flash.create('success', message, 3500);
+				setTimeout(function(){$window.location.reload();}, 2250);
+			}
+		})
+	}
+	
 }]);

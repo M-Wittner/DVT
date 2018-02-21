@@ -55,6 +55,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/tasks/new.html',
 			controller: 'newTaskCtrl'
 	})
+		.when('/tasks/:id', {
+			templateUrl: 'pages/tasks/view.html',
+			controller: 'viewTaskCtrl'
+	})
 //		--------------------	ADMIN PAGES --------------------
 		.when('/admin', {
 			templateUrl: 'pages/admin/panel.html',
@@ -280,6 +284,14 @@ myApp.factory('testParams', function($http, $log){
 	$http.get(site+'/params/taskTypes')
 	.then(function(response){
 		testParams.params.taskTypes = response.data;
+	});
+	$http.get(site+'/params/taskStatus')
+	.then(function(response){
+		testParams.params.taskStatus = response.data;
+	});
+	$http.get(site+'/params/taskPriority')
+	.then(function(response){
+		testParams.params.taskPriority = response.data;
 	});
 	
 	$http.get(site+'/params/stations')

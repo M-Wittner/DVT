@@ -96,5 +96,13 @@ class Params extends CI_Controller {
 		$result = $this->db->get('task_types')->result();
 		echo json_encode($result);
 	}
+	public function taskStatus(){
+		$result = $this->db->get('task_status')->result();
+		echo json_encode($result);
+	}
+	public function taskPriority(){
+		$result = $this->db->get('task_priority')->result();
+		echo json_encode($result);
+	}
 }
 ?>
