@@ -1,57 +1,23 @@
 <div class="panel panel-primary">
 	<!-- Default panel contents -->
-	<div class="panel-heading">All Chips<a class="pull-right btn btn-sm btn-default" href="http://wigig-584/admin/updatechiplist" download="Web-ChipList.csv">
-            	Download <span class="glyphicon glyphicon-save"></span>
-        	</a></div>
+	<div class="panel-heading">All Chips <input type="file" id="file"><button class="pull-right btn btn-sm btn-default" ng-click="lineup()">
+            	lineup <span class="glyphicon glyphicon-save"></span>
+        	</button></div>
 	<div class="panel-body">
 	</div>
 	<!-- Table -->
 	<table ng-table="tableParams" class="table table-striped">
 		<tr ng-repeat="(title, chip) in $data track by chip.chip_id">
-			<td class="col-md-1 text-center" data-title="'ID'">{{chip.chip_id}}</td>
-			<td class="col-md-1 text-center" data-title="'Serial Number'">{{chip.chip_sn}}</td>
+			<td class="col-md-1 text-center" data-title="'ID'" sortable="'chip_id'">{{chip.chip_id}}</td>
+			<td class="col-md-1 text-center" data-title="'Serial Number'" filter="{chip_sn: 'text'}" sortable="'chip_sn'">{{chip.chip_sn}}</td>
 			<td class="col-md-1 text-center" data-title="'Board'">{{chip.board}}</td>
 			<td class="col-md-1 text-center" data-title="'Package'">{{chip.package}}</td>
 			<td class="col-md-1 text-center" data-title="'Revision'">{{chip.revision}}</td>
-			<td class="col-md-1 text-center" data-title="'Type'"><span ng-if="chip.chip_type_id == '1' ? Type = 'TalynA' : chip.chip_type_id == '2' ? Type = 'TalynM': chip.chip_type_id == '3' ? Type = 'TalynA-2' : chip.chip_type_id == '4' ? Type = 'TalynM-2' : Type = null">{{Type}}</span></td>
+			<td class="col-md-1 text-center" data-title="'Type'" filter="{chip_type_id: 'text'}" sortable="'chip_type_id'"><span ng-if="chip.chip_type_id == '1' ? Type = 'TalynA' : chip.chip_type_id == '2' ? Type = 'TalynM': chip.chip_type_id == '3' ? Type = 'TalynA-2' : chip.chip_type_id == '4' ? Type = 'TalynM-2' : Type = null">{{Type}}</span></td>
 			<td class="col-md-1 text-center" data-title="'Modify'">
 				<div ng-click="edit(chip.chip_id)" class="btn btn-warning">Edit</div>	
 				<div ng-click="delete(chip.chip_id)" class="btn btn-danger">Delete</div>	
 			</td>
 		</tr>
 	</table>
-	
-	<!--
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Chip</th>
-				<th>Board</th>
-				<th>Package</th>
-				<th>Model</th>
-				<th>Revision</th>
-				<th>Serial Number</th>
-				<th>Corner</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="chip in chips | orderBy:'chip'">
-				<th>{{ chip.chip }}</th>
-				<td>{{ chip.board }}</td>
-				<td>{{ chip.package }}</td>
-				<td>{{ chip.model }}</td>
-				<td>{{ chip.revision }}</td>
-				<td>{{ chip.serial_number }}</td>
-				<td>{{ chip.corner }}</td>
-				<td>
-					<button class="btn btn-warning btn-sm">Edit</button>
-				</td>
-				<td>
-					<button class="btn btn-danger btn-sm" ng-click="removeChip(chip.id, chip.serial_number)">Delete</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
--->
 </div>
