@@ -188,8 +188,4 @@ class DescriptionFactory
 
         return implode("\n", $lines);
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 }

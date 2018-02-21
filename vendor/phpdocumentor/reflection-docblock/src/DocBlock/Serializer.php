@@ -81,16 +81,12 @@ class Serializer
             )
         );
 
-<<<<<<< HEAD
-        $comment = "{$firstIndent}/**\n{$indent} * {$text}\n{$indent} *\n";
-=======
         $comment = "{$firstIndent}/**\n";
         if ($text) {
             $comment .= "{$indent} * {$text}\n";
             $comment .= "{$indent} *\n";
         }
 
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
         $comment = $this->addTagBlock($docblock, $wrapLength, $indent, $comment);
         $comment .= $indent . ' */';
 
@@ -130,10 +126,7 @@ class Serializer
             $text = wordwrap($text, $wrapLength);
             return $text;
         }
-<<<<<<< HEAD
-=======
 
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
         return $text;
     }
 
@@ -151,10 +144,7 @@ class Serializer
             if ($wrapLength !== null) {
                 $tagText = wordwrap($tagText, $wrapLength);
             }
-<<<<<<< HEAD
-=======
 
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
             $tagText = str_replace("\n", "\n{$indent} * ", $tagText);
 
             $comment .= "{$indent} * {$tagText}\n";

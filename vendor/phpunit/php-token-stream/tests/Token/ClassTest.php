@@ -1,10 +1,6 @@
 <?php
 /*
-<<<<<<< HEAD
- * This file is part of the PHP_TokenStream package.
-=======
  * This file is part of php-token-stream.
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
  *
  * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
@@ -12,24 +8,6 @@
  * file that was distributed with this source code.
  */
 
-<<<<<<< HEAD
-/**
- * Tests for the PHP_Token_CLASS class.
- *
- * @package    PHP_TokenStream
- * @subpackage Tests
- * @author     Laurent Laville <pear@laurent-laville.org>
- * @copyright  Sebastian Bergmann <sebastian@phpunit.de>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @version    Release: @package_version@
- * @link       http://github.com/sebastianbergmann/php-token-stream/
- * @since      Class available since Release 1.0.2
- */
-class PHP_Token_ClassTest extends PHPUnit_Framework_TestCase
-{
-    protected $class;
-    protected $function;
-=======
 use PHPUnit\Framework\TestCase;
 
 class PHP_Token_ClassTest extends TestCase
@@ -43,7 +21,6 @@ class PHP_Token_ClassTest extends TestCase
      * @var PHP_Token_FUNCTION
      */
     private $function;
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 
     protected function setUp()
     {
@@ -102,26 +79,12 @@ class PHP_Token_ClassTest extends TestCase
         $this->assertCount(1, $ts->getClasses());
     }
 
-<<<<<<< HEAD
-    /**
-     * @requires PHP 7
-     */
-=======
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     public function testAnonymousClassesAreHandledCorrectly()
     {
         $ts = new PHP_Token_Stream(TEST_FILES_PATH . 'class_with_method_that_declares_anonymous_class.php');
 
         $classes = $ts->getClasses();
 
-<<<<<<< HEAD
-        $this->assertEquals(array('class_with_method_that_declares_anonymous_class'), array_keys($classes));
-    }
-
-    /**
-     * @requires PHP 7
-     * @ticket   https://github.com/sebastianbergmann/php-token-stream/issues/52
-=======
         $this->assertEquals(
             [
                 'class_with_method_that_declares_anonymous_class',
@@ -137,7 +100,6 @@ class PHP_Token_ClassTest extends TestCase
 
     /**
      * @ticket https://github.com/sebastianbergmann/php-token-stream/issues/52
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
      */
     public function testAnonymousClassesAreHandledCorrectly2()
     {
@@ -145,23 +107,12 @@ class PHP_Token_ClassTest extends TestCase
 
         $classes = $ts->getClasses();
 
-<<<<<<< HEAD
-        $this->assertEquals(array('Test'), array_keys($classes));
-        $this->assertEquals(array('methodOne', 'methodTwo'), array_keys($classes['Test']['methods']));
-=======
         $this->assertEquals(['Test', 'AnonymousClass:4#23'], array_keys($classes));
         $this->assertEquals(['methodOne', 'methodTwo'], array_keys($classes['Test']['methods']));
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 
         $this->assertEmpty($ts->getFunctions());
     }
 
-<<<<<<< HEAD
-    /**
-     * @requires PHP 5.6
-     */
-=======
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     public function testImportedFunctionsAreHandledCorrectly()
     {
         $ts = new PHP_Token_Stream(TEST_FILES_PATH . 'classUsesNamespacedFunction.php');
@@ -169,8 +120,6 @@ class PHP_Token_ClassTest extends TestCase
         $this->assertEmpty($ts->getFunctions());
         $this->assertCount(1, $ts->getClasses());
     }
-<<<<<<< HEAD
-=======
 
     /**
      * @ticket https://github.com/sebastianbergmann/php-code-coverage/issues/543
@@ -217,5 +166,4 @@ class PHP_Token_ClassTest extends TestCase
         $this->assertSame(7, $classes['Example']['methods']['anonymousFunction:7#28']['startLine']);
         $this->assertSame(9, $classes['Example']['methods']['anonymousFunction:7#28']['endLine']);
     }
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 }

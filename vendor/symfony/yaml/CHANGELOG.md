@@ -1,8 +1,6 @@
 CHANGELOG
 =========
 
-<<<<<<< HEAD
-=======
 4.0.0
 -----
 
@@ -33,7 +31,6 @@ CHANGELOG
    // returns TaggedValue('foo', 'bar');
    ```
 
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 3.4.0
 -----
 

@@ -17,9 +17,5 @@ namespace phpDocumentor\Reflection\DocBlock\Tags\Reference;
  */
 interface Reference
 {
-<<<<<<< HEAD
-   public function __toString();
-=======
     public function __toString();
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
 }

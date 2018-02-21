@@ -27,14 +27,7 @@ class Dumper
      */
     protected $indentation;
 
-<<<<<<< HEAD
-    /**
-     * @param int $indentation
-     */
-    public function __construct($indentation = 4)
-=======
     public function __construct(int $indentation = 4)
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     {
         if ($indentation < 1) {
             throw new \InvalidArgumentException('The indentation must be greater than zero.');
@@ -44,23 +37,6 @@ class Dumper
     }
 
     /**
-<<<<<<< HEAD
-     * Sets the indentation.
-     *
-     * @param int $num The amount of spaces to use for indentation of nested nodes
-     *
-     * @deprecated since version 3.1, to be removed in 4.0. Pass the indentation to the constructor instead.
-     */
-    public function setIndentation($num)
-    {
-        @trigger_error('The '.__METHOD__.' method is deprecated since Symfony 3.1 and will be removed in 4.0. Pass the indentation to the constructor instead.', E_USER_DEPRECATED);
-
-        $this->indentation = (int) $num;
-    }
-
-    /**
-=======
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
      * Dumps a PHP value to YAML.
      *
      * @param mixed $input  The PHP value
@@ -70,31 +46,8 @@ class Dumper
      *
      * @return string The YAML representation of the PHP value
      */
-<<<<<<< HEAD
-    public function dump($input, $inline = 0, $indent = 0, $flags = 0)
-    {
-        if (is_bool($flags)) {
-            @trigger_error('Passing a boolean flag to toggle exception handling is deprecated since Symfony 3.1 and will be removed in 4.0. Use the Yaml::DUMP_EXCEPTION_ON_INVALID_TYPE flag instead.', E_USER_DEPRECATED);
-
-            if ($flags) {
-                $flags = Yaml::DUMP_EXCEPTION_ON_INVALID_TYPE;
-            } else {
-                $flags = 0;
-            }
-        }
-
-        if (func_num_args() >= 5) {
-            @trigger_error('Passing a boolean flag to toggle object support is deprecated since Symfony 3.1 and will be removed in 4.0. Use the Yaml::DUMP_OBJECT flag instead.', E_USER_DEPRECATED);
-
-            if (func_get_arg(4)) {
-                $flags |= Yaml::DUMP_OBJECT;
-            }
-        }
-
-=======
     public function dump($input, int $inline = 0, int $indent = 0, int $flags = 0): string
     {
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
         $output = '';
         $prefix = $indent ? str_repeat(' ', $indent) : '';
         $dumpObjectAsInlineMap = true;

@@ -175,3 +175,115 @@ WHERE `id` = 1
 ERROR - 201820182018-0202-2121 1515:0202:5959 --> Query error: Cannot delete or update a parent row: a foreign key constraint fails (`dvt_60g_web`.`task_comments`, CONSTRAINT `task_id` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION) - Invalid query: DELETE FROM `tasks`
 WHERE `id` = 1
 >>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
+ERROR - 201820182018-0202-2121 1616:0202:2020 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:2020 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 5
+ERROR - 201820182018-0202-2121 1616:0202:5858 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5959 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1616 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1717 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1717 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1717 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1717 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1717 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:1717 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0909 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:1010 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\vendor\composer\autoload_real.php 23
+ERROR - 201820182018-0202-2121 1616:0202:4343 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4343 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4343 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4343 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4343 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4343 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4444 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4444 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4444 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4444 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4444 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4444 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4444 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4444 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4444 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4444 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4444 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4545 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4545 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:4848 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5252 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:5555 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0303 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php
+ERROR - 201820182018-0202-2121 1616:0202:0303 --> Could not find the specified $config['composer_autoload'] path: vendor/autoupload.php

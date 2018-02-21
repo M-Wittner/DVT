@@ -77,11 +77,7 @@ final class Param extends BaseTag implements Factory\StaticMethod
         }
 
         // if the next item starts with a $ or ...$ it must be the variable name
-<<<<<<< HEAD
-        if (isset($parts[0]) && (strlen($parts[0]) > 0) && ($parts[0][0] == '$' || substr($parts[0], 0, 4) === '...$')) {
-=======
         if (isset($parts[0]) && (strlen($parts[0]) > 0) && ($parts[0][0] === '$' || substr($parts[0], 0, 4) === '...$')) {
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
             $variableName = array_shift($parts);
             array_shift($parts);
 

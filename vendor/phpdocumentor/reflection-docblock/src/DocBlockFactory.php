@@ -93,11 +93,7 @@ final class DocBlockFactory implements DocBlockFactoryInterface
         return new DocBlock(
             $summary,
             $description ? $this->descriptionFactory->create($description, $context) : null,
-<<<<<<< HEAD
-            array_filter($this->parseTagBlock($tags, $context), function($tag) {
-=======
             array_filter($this->parseTagBlock($tags, $context), function ($tag) {
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
                 return $tag instanceof Tag;
             }),
             $context,
@@ -124,19 +120,11 @@ final class DocBlockFactory implements DocBlockFactoryInterface
         $comment = trim(preg_replace('#[ \t]*(?:\/\*\*|\*\/|\*)?[ \t]{0,1}(.*)?#u', '$1', $comment));
 
         // reg ex above is not able to remove */ from a single line docblock
-<<<<<<< HEAD
-        if (substr($comment, -2) == '*/') {
-            $comment = trim(substr($comment, 0, -2));
-        }
-
-        return str_replace(array("\r\n", "\r"), "\n", $comment);
-=======
         if (substr($comment, -2) === '*/') {
             $comment = trim(substr($comment, 0, -2));
         }
 
         return str_replace(["\r\n", "\r"], "\n", $comment);
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
     }
 
     /**
@@ -155,11 +143,7 @@ final class DocBlockFactory implements DocBlockFactoryInterface
         // method does not split tags so we return this verbatim as the fourth result (tags). This saves us the
         // performance impact of running a regular expression
         if (strpos($comment, '@') === 0) {
-<<<<<<< HEAD
-            return array('', '', '', $comment);
-=======
             return ['', '', '', $comment];
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
         }
 
         // clears all extra horizontal whitespace from the line endings to prevent parsing issues
@@ -257,11 +241,7 @@ final class DocBlockFactory implements DocBlockFactoryInterface
      */
     private function splitTagBlockIntoTagLines($tags)
     {
-<<<<<<< HEAD
-        $result = array();
-=======
         $result = [];
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
         foreach (explode("\n", $tags) as $tag_line) {
             if (isset($tag_line[0]) && ($tag_line[0] === '@')) {
                 $result[] = $tag_line;

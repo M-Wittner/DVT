@@ -273,7 +273,7 @@ myApp.factory('AuthService', function($http, Session, $cookies){
 
 myApp.factory('testParams', function($http, $log){
 	var testParams = {};
-	testParams.site = "http://localhost";
+	testParams.site = "http://wigig-584";
 	var site = testParams.site;
 	testParams.params = {};
 	

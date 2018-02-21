@@ -59,10 +59,7 @@ final class Source extends BaseTag implements Factory\StaticMethod
             if (isset($matches[2]) && $matches[2] !== '') {
                 $lineCount = (int)$matches[2];
             }
-<<<<<<< HEAD
-=======
 
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
             $description = $matches[3];
         }
 

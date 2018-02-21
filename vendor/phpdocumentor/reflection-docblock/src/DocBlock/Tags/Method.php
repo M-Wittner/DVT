@@ -135,11 +135,7 @@ final class Method extends BaseTag implements Factory\StaticMethod
 
         if (is_string($arguments) && strlen($arguments) > 0) {
             $arguments = explode(',', $arguments);
-<<<<<<< HEAD
-            foreach($arguments as &$argument) {
-=======
             foreach ($arguments as &$argument) {
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
                 $argument = explode(' ', self::stripRestArg(trim($argument)), 2);
                 if ($argument[0][0] === '$') {
                     $argumentName = substr($argument[0], 1);
@@ -218,12 +214,6 @@ final class Method extends BaseTag implements Factory\StaticMethod
             if (is_string($argument)) {
                 $argument = [ 'name' => $argument ];
             }
-<<<<<<< HEAD
-            if (! isset($argument['type'])) {
-                $argument['type'] = new Void_();
-            }
-            $keys = array_keys($argument);
-=======
 
             if (! isset($argument['type'])) {
                 $argument['type'] = new Void_();
@@ -231,7 +221,6 @@ final class Method extends BaseTag implements Factory\StaticMethod
 
             $keys = array_keys($argument);
             sort($keys);
->>>>>>> eb25bd2e3f08ed0703676cf8b19fe06d45060d57
             if ($keys !== [ 'name', 'type' ]) {
                 throw new \InvalidArgumentException(
                     'Arguments can only have the "name" and "type" fields, found: ' . var_export($keys, true)
