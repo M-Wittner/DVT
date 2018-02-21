@@ -351,7 +351,7 @@ class Plans extends CI_Controller {
 //					var_dump($test);
 			};
 //				die();
-			echo 'successs';
+			echo 'success';
 			} else {
 				echo 'No plan inserted!';
 			}	
