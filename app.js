@@ -59,6 +59,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/tasks/view.html',
 			controller: 'viewTaskCtrl'
 	})
+		.when('/tasks/:id/comment/new', {
+			templateUrl: 'pages/tasks/comments/new.html',
+			controller: 'newTaskCommentCtrl'
+	})
 //		--------------------	ADMIN PAGES --------------------
 		.when('/admin', {
 			templateUrl: 'pages/admin/panel.html',
@@ -279,19 +283,29 @@ myApp.factory('testParams', function($http, $log){
 	
 	$http.get(site+'/params/fields')
 	.then(function(response){
-		testParams.params.fieldList = response.data;
+		testParams.params.fieldList = response.data.obj;
+		testParams.params.fieldListArr = response.data.arr;
+//		console.log(response.data);
 	});
 	$http.get(site+'/params/taskTypes')
 	.then(function(response){
-		testParams.params.taskTypes = response.data;
+		testParams.params.taskTypes = response.data.obj;
+		testParams.params.taskTypesArr = response.data.arr;
 	});
 	$http.get(site+'/params/taskStatus')
 	.then(function(response){
-		testParams.params.taskStatus = response.data;
+		testParams.params.taskStatus = response.data.obj;
+		testParams.params.taskStatusArr = response.data.arr;
 	});
 	$http.get(site+'/params/taskPriority')
 	.then(function(response){
-		testParams.params.taskPriority = response.data;
+		testParams.params.taskPriority = response.data.obj;
+		testParams.params.taskPriorityArr = response.data.arr;
+	});
+	$http.get(site+'/params/autoUsers')
+	.then(function(response){
+		testParams.params.autoUsers = response.data.obj;
+		testParams.params.autoUsersArr = response.data.arr;
 	});
 	
 	$http.get(site+'/params/stations')

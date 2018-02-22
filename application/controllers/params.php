@@ -88,21 +88,46 @@ class Params extends CI_Controller {
 		$result = $data->result();
 		echo json_encode($result);
 	}
+	public function autoUsers(){
+		$this->db->select(['id', 'fname', 'lname', 'username']);
+		$result = $this->db->get_where('users', ['group_id'=>7])->result_array();
+		$data = new stdClass();
+		$data->obj = $result;
+		$data->arr = array_column($result, 'username');
+		
+		echo json_encode($data);
+	}
 	public function fields(){
-		$result = $this->db->get('work_stations')->result();
-		echo json_encode($result);
+		$result = $this->db->get('work_stations')->result_array();
+		$data = new stdClass();
+		$data->obj = $result;
+		$data->arr = array_column($result, 'work_station');
+		
+		echo json_encode($data);
 	}
 	public function taskTypes(){
-		$result = $this->db->get('task_types')->result();
-		echo json_encode($result);
+		$result = $this->db->get('task_types')->result_array();
+		$data = new stdClass();
+		$data->obj = $result;
+		$data->arr = array_column($result, 'task_type');
+		
+		echo json_encode($data);
 	}
 	public function taskStatus(){
-		$result = $this->db->get('task_status')->result();
-		echo json_encode($result);
+		$result = $this->db->get('task_status')->result_array();
+		$data = new stdClass();
+		$data->obj = $result;
+		$data->arr = array_column($result, 'task_status');
+		
+		echo json_encode($data);
 	}
 	public function taskPriority(){
-		$result = $this->db->get('task_priority')->result();
-		echo json_encode($result);
+		$result = $this->db->get('task_priority')->result_array();
+		$data = new stdClass();
+		$data->obj = $result;
+		$data->arr = array_column($result, 'task_priority');
+		
+		echo json_encode($data);
 	}
 }
 ?>

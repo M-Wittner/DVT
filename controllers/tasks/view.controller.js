@@ -8,10 +8,8 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 		$http.post(site+'/tasks/view', $routeParams.id)
 		.then(function(response){
 			$scope.task = response.data;
-				
-			console.log($scope.task);
+//			console.log($scope.task);
 		})
-		
 		$scope.statusUpdate = function(taskId, status){
 			$http.post(site+'/tasks/statusUpdate', {id: taskId, status: status})
 			.then(function(response){
@@ -34,6 +32,20 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 		$http.post(site+'/tasks/approveUpdate', {id: taskId, approved: approved})
 			.then(function(response){
 			console.log(response.data);
+			if(response.data != false){
+				$scope.task.priority = response.data;
+			}
+		})
+		}
+		
+		$scope.assignedUpdate = function(taskId, userId){
+		$http.post(site+'/tasks/assignedUpdate', {id: taskId, userId: userId})
+			.then(function(response){
+			if(response.data != false){
+				$scope.task.assigned = response.data
+			}
+			console.log(response.data);
+			
 		})
 		}
 		
@@ -45,6 +57,19 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 				var message = 'Task Deleted Succesfully!';
 				var id = Flash.create('success', message, 3500);
 				$location.path('/tasks');
+			}
+		})
+		}
+	$scope.deleteComment = function(taskId, commentId){
+		console.log(taskId);
+		console.log(commentId);
+		$http.post(site+'/tasks/deleteComment', {taskId: taskId, commentId: commentId})
+		.then(function(response){
+			console.log(response.data);
+			if(response.data == 'true'){
+				var message = 'Comment Deleted Succesfully!';
+				var id = Flash.create('success', message, 3500);
+				setTimeout(function(){$window.location.reload();}, 2000);
 			}
 		})
 		}

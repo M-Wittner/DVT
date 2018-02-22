@@ -16,6 +16,7 @@ class Tasks extends CI_Controller {
 	}
 
 	function index() {
+		$this->db->order_by('date', 'DESC');
 		$tasks = $this->db->get('tasks_view')->result();
 		echo json_encode($tasks);
 	}
@@ -45,7 +46,7 @@ class Tasks extends CI_Controller {
 		} else {
 			$task->approved = true;
 		}
-		$task->comments = $this->db->get_where('task_comments_view', ['task_id'=>$id])->result();
+		$task->comments = $this->db->get_where('tasks_comments_view', ['task_id'=>$id])->result();
 		echo json_encode($task);
 	}
 	public function delete(){
@@ -94,7 +95,38 @@ class Tasks extends CI_Controller {
 			$status = false;
 		}
 		echo $status;
+	}	
+	public function assignedUpdate(){
+		$data = json_decode(file_get_contents('php://input'));
+		$id = $data->id;
+		$userId = $data->userId;
+		$this->db->where('id', $id);
+		$res = $this->db->update('tasks', ['assigned_to'=>$userId]);
+		
+		if($res = true){
+			$this->db->select(['assigned']);
+			$status = $this->db->get_where('tasks_view',['id'=>$id])->result()[0]->assigned;
+		} else {
+			$status = false;
+		}
+		echo $status;
 	}
 	
+	public function newComment(){
+		$comment = json_decode(file_get_contents('php://input'));
+		$res = $this->db->insert('task_comments', $comment);
+		echo json_encode($res);
+	}
+	public function deleteComment(){
+		$data = json_decode(file_get_contents('php://input'));
+		$array = [
+			'task_id'=>$data->taskId,
+			'id'=>$data->commentId
+		];
+		$this->db->where($array);
+		$res = $this->db->delete('task_comments');
+		
+		echo json_encode($res);
+	}
 
 }

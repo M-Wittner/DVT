@@ -1,6 +1,8 @@
 myApp.controller('tasksCtrl', ['$scope', 'NgTableParams', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', 'testParams', function ($scope, NgTableParams, $location, $http, Flash, $cookies, $window, AuthService, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	var site = testParams.site;
+	$scope.testParams = testParams;
+	console.log($scope.testParams.params);
 	
 	$http.get(site+'/tasks')
 	.then(function(response){

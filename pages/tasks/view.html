@@ -2,7 +2,7 @@
 	<div class="panel-heading">
 		<h3 class="panel-title">Task #{{task.id}} <span class="pull-right">{{task.date}}</span></h3>
 	</div>
-	<div ng-if="currentUser.username == task.creator || currentUser.rank > '60'" class="panel container-fluid">
+	<div ng-if="currentUser.rank > 60" class="panel container-fluid">
 		<span class="col-md-2">
 			approved:
 			<input type="checkbox" ng-model="task.approved" ng-click="approveUpdate(task.id, task.approved)">
@@ -18,14 +18,23 @@
 		</span>
 		<span class="col-md-2">
 			Status:
-			<div class="btn-group" ng-model="task.prpriority" uib-dropdown>
+			<div class="btn-group" ng-model="task.priority" uib-dropdown>
 				<button id="single-button" type="button" class="btn btn-default"  uib-dropdown-toggle>{{task.priority}} <span class="caret"></span></button>
 				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
 					<li ng-repeat="option in params.taskPriority"><a  ng-click="priorityUpdate(task.id, option.id)">{{option.task_priority}}</a></li>
 				</ul>
 			</div>
 		</span>
-		<span class="col-md-offset-4">
+		<span class="col-md-3">
+			Assign To:
+			<div class="btn-group" ng-model="task.assigned" uib-dropdown>
+				<button id="single-button" type="button" class="btn btn-default"  uib-dropdown-toggle><span ng-if="!task.assigned">Not Assigned</span>{{task.assigned}} <span class="caret"></span></button>
+				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+					<li ng-repeat="user in params.autoUsers"><a  ng-click="assignedUpdate(task.id, user.id)">{{user.fname}} {{user.lname}}</a></li>
+				</ul>
+			</div>
+		</span>
+		<span class="col-md-offset-1">
 			<a class="btn btn-xs btn-warning" href="#/task/{{task.id}}/edit" ng-disabled="true">Edit</a>
 			<a class="btn btn-xs btn-danger btn-crud" ng-click="deleteTask(task.id)">
 				Delete
@@ -79,11 +88,11 @@
 		</div>
 	</div>
 	<div class="panel-footer">
-		<a href="#/task/{{task.id}}/comment/new" class="btn btn-success btn-sm col-md-offset-11">New Comment</a>
+		<a href="#/tasks/{{task.id}}/comment/new" class="btn btn-success btn-sm col-md-offset-11">New Comment</a>
 	</div>
 </div>
 
-<div class="panel panel-warning">
+<div class="panel panel-warning" ng-if="task.comments.length > 0">
 	<div class="panel-heading">
 		<h3 class="panel-title">Comments</h3>
 	</div>
@@ -96,7 +105,7 @@
 				<div ng-if="currentUser.username == comment.username || currentUser.rank > '60'" class="panel container-fluid">
 					<span class="col-md-offset-11">
 						<a class="btn btn-xs btn-warning" href="#/task/{{task.id}}/comment/{{comment.comment_id}}/edit" ng-disabled="true">Edit</a>
-						<a class="btn btn-xs btn-danger btn-crud" ng-click="removeComment(comment.comment_id)">
+						<a class="btn btn-xs btn-danger btn-crud" ng-click="deleteComment(task.id, comment.comment_id)">
 							Delete
 						</a>
 					</span>
@@ -104,7 +113,7 @@
 				<div class="panel-body collapse" id="{{comment.comment_id}}">
 					<div class="row">
 						<div class="col-md-12">
-							<div trumbowyg-ng ng-model="comment.comment" ng-disabled="true">
+							<div trumbowyg-ng ng-model="comment.details" ng-disabled="true">
 							</div>
 						</div>
 					</div>
