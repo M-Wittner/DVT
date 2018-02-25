@@ -4,7 +4,7 @@ myApp.controller('chiplistCtrl', ['$scope', 'NgTableParams', '$location','$http'
 	var site = testParams.site;
 	
 	if($scope.isAuthenticated == true) {
-		$http.get('http://localhost/admin/chiplist')
+		$http.get(site+'/admin/chiplist')
 		.then(function(response) {
 			$scope.tableParams = new NgTableParams({count:30}, {
 				counts:[],

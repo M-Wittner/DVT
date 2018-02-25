@@ -46,11 +46,11 @@ class Plans extends CI_Controller {
 		);
 		$testsObj = $postData->test;
 		if(sizeof($postData->test) > 0){
-//			$insertPlan = $this->plan_model->add_plan($plan);
-			$insertPlan = true;
+			$insertPlan = $this->plan_model->add_plan($plan);
+//			$insertPlan = true;
 			if($insertPlan){
-//				$planId = $this->plan_model->get_id($insertPlan);
-				$planId = 750;
+				$planId = $this->plan_model->get_id($insertPlan);
+//				$planId = 750;
 				foreach($testsObj as $i => $testArr){
 					if(isset($testArr->notes)){
 						$notes = $testArr->notes;
@@ -61,7 +61,7 @@ class Plans extends CI_Controller {
 					$chipsArr = $testArr->chips;
 					$tempsArr = $testArr->temps;
 					$channelsArr = $testArr->channels;
-					$res = $this->lineup($testArr);
+//					$res = $this->lineup($testArr);
 //			------------- R station test -------------
 					if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
 						
