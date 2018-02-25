@@ -61,7 +61,7 @@ class Plans extends CI_Controller {
 					$chipsArr = $testArr->chips;
 					$tempsArr = $testArr->temps;
 					$channelsArr = $testArr->channels;
-//					$res = $this->lineup($testArr);
+					$res = $this->lineup($testArr);
 //			------------- R station test -------------
 					if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
 						
@@ -844,6 +844,8 @@ class Plans extends CI_Controller {
 		$test->station = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
 		echo json_encode($test);
 	}
+	
+
 		public function lineup($test){
 //			die(print_r($test));
 			$lineup = $test->lineup;
