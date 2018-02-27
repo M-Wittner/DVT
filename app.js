@@ -297,11 +297,13 @@ myApp.factory('testParams', function($http, $log){
 		testParams.params.taskStatus = response.data.obj;
 		testParams.params.taskStatusArr = response.data.arr;
 	});
+	
 	$http.get(site+'/params/taskPriority')
 	.then(function(response){
 		testParams.params.taskPriority = response.data.obj;
 		testParams.params.taskPriorityArr = response.data.arr;
 	});
+
 	$http.get(site+'/params/autoUsers')
 	.then(function(response){
 		testParams.params.autoUsers = response.data.obj;

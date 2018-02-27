@@ -137,7 +137,7 @@ class File
             throw new InvalidArgumentException('File "' . $filename . '" does not exist.');
         }
 
-        if (!is_readable($filename)) {
+        if (!file_exists($filename)) {
             throw new InvalidArgumentException('Could not open "' . $filename . '" for reading.');
         }
     }

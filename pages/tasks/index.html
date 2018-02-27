@@ -6,7 +6,7 @@
 		<table ng-table="tableParams" class="table table-hover">
 			<tr ng-repeat="task in $data track by task.id" ng-class="task.approved == false ? '' : {'info' : task.priority == 'Low','warning' : task.priority == 'Medium', 'danger' : task.priority == 'High'}">
 				<td class="col-md-2 text-center" data-title="'Date'"sortable="'date'">{{task.date}}</td>
-				<td class="col-md-1 text-center" data-title="'Priority'" filter="{priority: 'text'}" sortable="'priority'">{{task.priority}}</td>
+				<td class="col-md-1 text-center" data-title="'Priority'" filter="{priority: 'select'}" data-filter="priority" sortable="'priority'">{{task.priority}}</td>
 				<td class="col-md-1 text-center" data-title="'Station'" filter="{station: 'text'}" sortable="'station'">{{task.station}}</td>
 				<td class="col-md-1 text-center" data-title="'Type'" filter="{type: 'text'}" sortable="'task_type'">{{task.type}}</td>
 				<td class="col-md-1 text-center" data-title="'Status'" filter="{status: 'text'}" sortable="'task_status'">{{task.status}}</td>

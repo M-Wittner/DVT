@@ -57,15 +57,13 @@ class Plans extends CI_Controller {
 					} else {
 						$notes = null;
 					}
-//					die(print_r($res));
 					$chipsArr = $testArr->chips;
 					$tempsArr = $testArr->temps;
 					$channelsArr = $testArr->channels;
-					$res = $this->lineup($testArr);
+//					$res = $this->lineup($testArr);
+//					die();
 //			------------- R station test -------------
 					if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
-						
-
 						$antennasArr = $testArr->antennas;
 //						var_dump($antennasArr);
 //						$this->db->select('iteration_time');
@@ -84,12 +82,11 @@ class Plans extends CI_Controller {
 							$pinFrom = $testArr->pin_from;
 							$pinTo = $testArr->pin_to;
 							$pinStep = $testArr->pin_step;
-							if(isset($testArr->pin_additional)){
-								$pinAdd = $testArr->pin_additional;
-								$pinAddNum = $this->plan_model->calc_pinAdd($pinAdd);
-							}
-							$pins = $this->plan_model->calc_pins($pinFrom, $pinTo, $pinStep, $pinAddNum);
+//							$pins = $this->plan_model->calc_pins($pinFrom, $pinTo, $pinStep, $pinAddNum);
 						}
+						if(isset($testArr->pin_additional)){
+								$pinAdd = $testArr->pin_additional;
+							}
 						
 						$loPinFrom = null;
 						$loPinTo = null;
@@ -103,7 +100,7 @@ class Plans extends CI_Controller {
 								$loPinAdd = $testArr->lo_pin_additional;
 								$loPinAddNum = $this->plan_model->calc_pinAdd($loPinAdd);
 							}
-							$loPins = $this->plan_model->calc_pins($loPinFrom, $loPinTo, $loPinStep, $loPinAddNum);
+//							$loPins = $this->plan_model->calc_pins($loPinFrom, $loPinTo, $loPinStep, $loPinAddNum);
 						}
 						$variables = new stdClass();
 						$variables->temps = sizeof($tempsArr);
@@ -523,44 +520,61 @@ class Plans extends CI_Controller {
 						$channelsArr = $testArr->channels;
 						$antennasArr = $testArr->antennas;
 //						die(var_dump($testArr));
-						if(isset($testArr->calc)){
-							$time = $testArr->calc->ants*$testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins;
-						} else {
+//						if(isset($testArr->calc)){
+//							$time = $testArr->calc->ants*$testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins;
+//						} else {
 							$time = null;
-						}
+//						}
 						$pinFrom = null;
 						$pinTo = null;
 						$pinStep = null;
+						$pinAdd = null;
+						$pins = 1;
+						$loPins = 1;
+						$pinAddNum = 0;
 						if(isset($testArr->pin_from) && isset($testArr->pin_step) && isset($testArr->pin_to)){
 							$pinFrom = $testArr->pin_from;
 							$pinTo = $testArr->pin_to;
 							$pinStep = $testArr->pin_step;
+//							$pins = $this->plan_model->calc_pins($pinFrom, $pinTo, $pinStep, $pinAddNum);
 						}
 						if(isset($testArr->pin_additional)){
-							$pinAdd = $testArr->pin_additional;
-						} else{
-							$pinAdd = null;
-						}
-						if(isset($testArr->voltage)){
-							$voltage = $testArr->voltage;
-						} else{
-							$voltage = null;
-						}
+								$pinAdd = $testArr->pin_additional;
+							}
+						
 						$loPinFrom = null;
 						$loPinTo = null;
 						$loPinStep = null;
 						$loPinAdd = null;
-						if($testArr->name[0]->test_name == 'Tx EVM vs. LO Power' || $testArr->name[0]->test_name == 'Rx EVM vs. LO power'){
-							$loPinFrom=$testArr->loPinFrom;
-							$loPinTo=$testArr->loPinTo;
-							$loPinStep=$testArr->loPinStep;
-							if(isset($testArr->loPinAdd)){
-								$loPinAdd = $testArr->loPinAdd;
-							} else{
-								$loPinAdd = null;
-							}
+						if(isset($testArr->lo_pin_from) && isset($testArr->lo_pin_step) && isset($testArr->lo_pin_to)){
+							$loPinFrom=$testArr->lo_pin_from;
+							$loPinTo=$testArr->lo_pin_to;
+							$loPinStep=$testArr->lo_pin_step;
 						}
+						if(isset($testArr->lo_pin_additional)){
+							$loPinAdd = $testArr->lo_pin_additional;
+							$loPinAddNum = $this->plan_model->calc_pinAdd($loPinAdd);
+						}
+						$variables = new stdClass();
+						$variables->temps = sizeof($tempsArr);
+						$variables->channels = sizeof($channelsArr);
+						$variables->antennas = sizeof($antennasArr);
+						$variables->pins = $pins;
+						$variables->loPins = $loPins;
+						$variables->station = $testArr->station[0]->station;
+						$variables->test_name = $testArr->name[0]->test_name;
 						
+//						$estimate_runtime = $this->plan_model->calc_runtime($variables);
+						
+						if(isset($testArr->calc)){
+							$time = $testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins*$testArr->calc->ants*$testArr->calc->temps*$testArr->calc->channels;
+						} else {
+							$time = null;
+						}	
+						
+						if(isset($estimate_runtime)){
+							$time = $estimate_runtime;
+						}
 						$test = array(
 							'priority'=>$testArr->priority[0],
 							'lineup'=>$testArr->lineup,
@@ -580,13 +594,14 @@ class Plans extends CI_Controller {
 							'time'=>$time,
 							'plan_id'=>$planId
 						);
-//						die(var_dump($pinFrom));
 						$insertTest = $this->plan_model->add_test($test);
 						$testId = $this->plan_model->tests_id($insertTest);
 						foreach($chipsArr as $result){
+//							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\\test_results\\" .$result->chip. "\TalynA_YA591-H511_Flip_Chip_QCA6425_B0_".$result->serial_number;
 							$chip = array(
 								'serial_number'=> $result->serial_number,
 								'chip'=>$result->chip,
+//								'results_path'=>$path,
 								'plan_id'=>$planId,
 								'test_id'=>$testId
 							);
@@ -601,6 +616,7 @@ class Plans extends CI_Controller {
 							$this->plan_model->add_temps($temp);
 						};
 						foreach($channelsArr as $result){
+//							var_dump($result);
 							$channel = array(
 								'channel'=>$result,
 								'plan_id'=>$planId,
@@ -608,6 +624,7 @@ class Plans extends CI_Controller {
 							);
 							$this->plan_model->add_channels($channel);
 						};
+//						die();
 						foreach($antennasArr as $result){
 							$antenna = array(
 								'antenna'=>$result,
@@ -615,6 +632,7 @@ class Plans extends CI_Controller {
 								'test_id'=>$testId
 							);
 							$this->plan_model->add_antennas($antenna);
+//							var_dump($result);
 						};
 //			------------- M station test -------------
 					} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
@@ -846,9 +864,32 @@ class Plans extends CI_Controller {
 	}
 	
 
+		public function lineups(){
+			$i = 0;
+			$arr = [];
+			while($i < 20){
+				$num = rand(0, 100);
+				switch($i){
+					case 0:
+						array_push($arr, $num);
+						break;
+					default:
+						$avg = array_sum($arr)/count($arr);
+						
+				}
+				array_push($arr, $num);
+				$i++;
+			}
+			
+			foreach ($arr as $index => $number){
+				
+			}
+			echo json_encode($arr);
+		}
+	
 		public function lineup($test){
 //			die(print_r($test));
-			$lineup = $test->lineup;
+			$lineup = (string)$test->lineup;
 			$station = $test->station[0]->station;
 
 		$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
@@ -869,27 +910,33 @@ class Plans extends CI_Controller {
 
 				$highestColumn = $currentSheet->getHighestColumn();
 				$highestRow = $currentSheet->getHighestRow();
-//				die(print($highestRow));
+//				die(print($highestColumn));
 				$firstRowRaw = $currentSheet->rangeToArray('A1:'.$highestColumn.'1', null, false, false, true)[1];
 	//		GET PARAMS FOUND BOTH IN EXCEL AND DB (NOT: TEMP CH V)
 				$this->db->where_in('parameter_name', $firstRowRaw);
 				$match = $this->db->get('lineup_params')->result();
 
 				$paramNameArr = array_column($match, 'parameter_name');
+//				var_dump($firstRowRaw);
+//				die();
 				foreach($firstRowRaw as $index => $param){
+//					var_dump($index."     index");
 					$paramIdx = array_search($param, $paramNameArr);
 					$data = new stdClass();
 	//		INSERT TEMP CH V INTO SQL RESULT
-					if($paramIdx === false){
+					if($paramIdx == false){
 							$data->parameter_name = $param;
 							$data->parameter_id = -1;
 							$data->parameter_range = -1;
 							$data->excel_index = $index;
 							array_push($match, $data);
 					}else{
+						
 						$match[$paramIdx]->excel_index = $index;
 					}
+//					var_dump($param."    param");
 				}
+				die();
 //				foreach ($match as $value){
 //					print($value->excel_index."\n");
 //				}

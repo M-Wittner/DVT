@@ -35,11 +35,9 @@ myApp.controller('chiplistCtrl', ['$scope', 'NgTableParams', '$location','$http'
 		});
 	};
 	$scope.lineup = function(){
-		var file = document.getElementById("file");
-			console.log(file.value);
-//		$http.post(site+'/plans/lineup')
-//		.then(function(response){
-//			
-//		})
+		$http.post(site+'/plans/lineups')
+		.then(function(response){
+			console.log(response.data);
+		})
 	}
 }]);
