@@ -49,17 +49,18 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 		})
 		}
 		
-	$scope.deleteTask = function(taskId){
-		$http.post(site+'/tasks/delete', taskId)
+	$scope.activeTask = function(taskId, active){
+		$http.post(site+'/tasks/active', {taskId : taskId, active: active})
 		.then(function(response){
-			console.log(response.data);
+//			console.log(response.data);
 			if(response.data == 'true'){
 				var message = 'Task Deleted Succesfully!';
 				var id = Flash.create('success', message, 3500);
-				$location.path('/tasks');
+				setTimeout(function(){$window.location.reload();}, 2000);
 			}
 		})
-		}
+	}
+	
 	$scope.deleteComment = function(taskId, commentId){
 		console.log(taskId);
 		console.log(commentId);

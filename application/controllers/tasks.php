@@ -30,6 +30,7 @@ class Tasks extends CI_Controller {
 			'station_id'=>$taskData->station[0]->id,
 			'type_id'=>$taskData->type[0]->id,
 			'creator_id'=>$userData->userId,
+			'title'=>$taskData->title,
 			'description'=>$taskData->description
 		];
 		
@@ -46,13 +47,20 @@ class Tasks extends CI_Controller {
 		} else {
 			$task->approved = true;
 		}
+		if($task->active == "0"){
+			$task->active = false;
+		} else {
+			$task->active = true;
+		}
 		$task->comments = $this->db->get_where('tasks_comments_view', ['task_id'=>$id])->result();
 		echo json_encode($task);
 	}
-	public function delete(){
-		$id = json_decode(file_get_contents('php://input'));
+	public function active(){
+		$data = json_decode(file_get_contents('php://input'));
+		$id = $data->taskId;
+		$active = !$data->active;
 		$this->db->where('id', $id);
-		$res = $this->db->delete('tasks');
+		$res = $this->db->update('tasks', ['active'=>$active]);
 		
 		echo json_encode($res);
 	}

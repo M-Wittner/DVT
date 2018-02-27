@@ -36,8 +36,8 @@
 		</span>
 		<span class="col-md-offset-1">
 			<a class="btn btn-xs btn-warning" href="#/task/{{task.id}}/edit" ng-disabled="true">Edit</a>
-			<a class="btn btn-xs btn-danger btn-crud" ng-click="deleteTask(task.id)">
-				Delete
+			<a class="btn btn-xs btn-default btn-crud" ng-click="activeTask(task.id, task.active)">
+				active
 			</a>
 		</span>
 	</div>
@@ -74,11 +74,15 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<span class="label label-primary">Assigned To:</span>
 					<label class="form-control" ng-hide="!task.assigned">{{task.assigned}}</label>
 					<label class="form-control" ng-hide="task.assigned">Not assigned yet</label>
-				</div>	
+				</div>
+				<div class="col-md-6">
+					<span class="label label-primary">Active:</span>
+					<label class="form-control">{{task.active}}</label>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-8">

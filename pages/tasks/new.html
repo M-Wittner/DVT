@@ -3,19 +3,29 @@
     <h3 class="panel-title">New Task</h3>
   </div>
   <div class="panel-body">
-    <div class="col-md-2">
-			<span class="label label-dangerC">Operation Field</span>
-			<ui-select style="min-width: 100%" multiple close-on-select="true" limit="1" ng-model="task.station">
-				<ui-select-match>{{$item.work_station}}</ui-select-match>
-				<ui-select-choices repeat="station in testParams.params.fieldList | filter:$select.search" sortable="true">{{station.work_station}}</ui-select-choices>
-			</ui-select>
-		</div>
-		<div class="col-md-2">
-			<span class="label label-dangerC">Task Type</span>
-			<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="task.type">
-				<ui-select-match>{{$item.task_type}}</ui-select-match>
-				<ui-select-choices repeat="station in testParams.params.taskTypes | filter:$select.search" sortable="true">{{station.task_type}}</ui-select-choices>
-			</ui-select>
+    <div class=" col-md-4">
+			<div class="row">
+				<div class="col-md-6">
+					<span class="label label-dangerC">Operation Field</span>
+					<ui-select style="min-width: 100%" multiple close-on-select="true" limit="1" ng-model="task.station">
+						<ui-select-match>{{$item.work_station}}</ui-select-match>
+						<ui-select-choices repeat="station in testParams.params.fieldList | filter:$select.search" sortable="true">{{station.work_station}}</ui-select-choices>
+					</ui-select>
+				</div>
+				<div class="col-md-6">
+					<span class="label label-dangerC">Task Type</span>
+					<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="task.type">
+						<ui-select-match>{{$item.task_type}}</ui-select-match>
+						<ui-select-choices repeat="station in testParams.params.taskTypes | filter:$select.search" sortable="true">{{station.task_type}}</ui-select-choices>
+					</ui-select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<span class="label label-dangerC">Task Title</span>
+					<input type="text" class="form-control" ng-model="task.title">
+				</div>
+			</div>
 		</div>
 		<div class="col-md-8">
 			<span class="label label-dangerC"></span>
