@@ -12,7 +12,7 @@ myApp.controller('tasksCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 			total: response.data.length,
 			dataset: response.data
 		});
-//		console.log(response.data);
+		console.log(response.data);
 	})
 	
 	$scope.deleteTask = function(taskId){

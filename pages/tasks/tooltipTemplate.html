@@ -1,0 +1,22 @@
+<table class="table-tooltip-striped">
+	<thead style="color:red">
+		<tr>
+			<th style="font-weight:800" class="col-md-1">Priority</th>
+			<th style="font-weight:800" class="col-md-1">Station</th>
+			<th style="font-weight:800" class="col-md-1">Type</th>
+			<th style="font-weight:800" class="col-md-1">Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{task.priority}}</td>
+			<td>{{task.station}}</td>
+			<td>{{task.type}}</td>
+			<td>{{task.status}}</td>
+		</tr>
+	</tbody>
+</table>
+<div>
+	<h6 style="font-weight:800; color: red">Description</h6>
+	<p ng-bind-html="task.description"></p>
+</div>

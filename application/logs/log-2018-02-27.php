@@ -77,3 +77,9 @@ ERROR - 201820182018-0202-2727 0909:0202:2626 --> Severity: Notice --> Undefined
 ERROR - 201820182018-0202-2727 0909:0202:5151 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\robot.php 38
 ERROR - 201820182018-0202-2727 0909:0202:5151 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\robot.php 39
 ERROR - 201820182018-0202-2727 0909:0202:5151 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\robot.php 40
+ERROR - 201820182018-0202-2727 1010:0202:1616 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0202-2727 1010:0202:1818 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0202-2727 1010:0202:1919 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0202-2727 1010:0202:2121 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0202-2727 1010:0202:5454 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0202-2727 1010:0202:0202 --> 404 Page Not Found: Faviconico/index

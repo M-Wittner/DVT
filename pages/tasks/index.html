@@ -3,16 +3,19 @@
     <h3 class="panel-title">All Tasks <span class="pull-right"><a class="btn btn-success btn-xs" href="#/tasks/new">New Task</a></span></h3>
   </div>
   <div class="panel-body">
-		<table ng-table="tableParams" class="table table-hover">
-			<tr ng-repeat="task in $data track by task.id" ng-class="task.approved == false ? '' : {'info' : task.priority == 'Low','warning' : task.priority == 'Medium', 'danger' : task.priority == 'High'}">
-				<td class="col-md-2 text-center" data-title="'Date'"sortable="'date'">{{task.date}}</td>
-				<td class="col-md-1 text-center" data-title="'Priority'" filter="{priority: 'select'}" data-filter="priority" sortable="'priority'">{{task.priority}}</td>
+		<table ng-table="tableParams" class="table table-hover" >
+			<tr ng-repeat="task in $data track by task.id" 
+					uib-tooltip-template="'pages/tasks/tooltipTemplate.html'" tooltip-popup-delay="100"
+					ng-class="task.approved == false ? '' : {'info' : task.priority == 'Low','warning' : task.priority == 'Medium', 'danger' : task.priority == 'High'}">
+				<td class="col-md-1 text-center" data-title="'Date'"sortable="'date'">{{task.date}}</td>
+				<td class="col-md-1 text-center" data-title="'Priority'" filter="{priority: 'text'}" sortable="'priority'">{{task.priority}}</td>
 				<td class="col-md-1 text-center" data-title="'Station'" filter="{station: 'text'}" sortable="'station'">{{task.station}}</td>
-				<td class="col-md-1 text-center" data-title="'Type'" filter="{type: 'text'}" sortable="'task_type'">{{task.type}}</td>
+				<td class="col-md-2 text-center" data-title="'Title'" filter="{title: 'text'}">{{task.title}}</td>
+<!--				<td class="col-md-1 text-center" data-title="'Type'" filter="{type: 'text'}" sortable="'task_type'">{{task.type}}</td>-->
 				<td class="col-md-1 text-center" data-title="'Status'" filter="{status: 'text'}" sortable="'task_status'">{{task.status}}</td>
 				<td class="col-md-1 text-center" data-title="'Creator'" filter="{creator: 'text'}" sortable="'creator'">{{task.creator}}</td>
 				<td class="col-md-2 text-center" data-title="'Assigned To'" filter="{assigned: 'text'}" sortable="'assigned'">{{task.assigned}}</td>
-				<td class="col-md-1 text-center" data-title="'Approved'" filter="{approved: 'text'}" sortable="'approved'">{{task.approved}}</td>
+				<td class="col-md-1 text-center" data-title="'Approved'" filter="{approved: 'text'}" sortable="'approved'"><span ng-class="{'glyphicon glyphicon-thumbs-up' : task.approved == 1, 'glyphicon glyphicon-minus' : task.approved == 0}"></span></td>
 				<td class="col-md-2 text-center" data-title="'Operation'">
 					<a href="#/tasks/{{task.id}}" class="btn btn-info">View</a>
 					<button ng-if="currentUser.rank > '60'" ng-click="deleteTask(task.id)" class="btn btn-danger">Delete</button>
