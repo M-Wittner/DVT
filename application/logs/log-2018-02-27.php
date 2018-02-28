@@ -85,3 +85,29 @@ ERROR - 201820182018-0202-2727 1010:0202:5454 --> 404 Page Not Found: Faviconico
 ERROR - 201820182018-0202-2727 1010:0202:0202 --> 404 Page Not Found: Faviconico/index
 ERROR - 201820182018-0202-2727 1010:0202:0303 --> 404 Page Not Found: Faviconico/index
 ERROR - 201820182018-0202-2727 1010:0202:0303 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0202-2727 1515:0202:1414 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0202-2727 1515:0202:2121 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 207
+ERROR - 201820182018-0202-2727 1515:0202:2121 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\controllers\plans.php 210
+ERROR - 201820182018-0202-2727 1515:0202:2121 --> Query error: Column 'voltage' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `time`, `plan_id`) VALUES ('1', NULL, 'M-CB1', 'LO Accuracy', NULL, NULL, NULL, 789)
+ERROR - 201820182018-0202-2727 1515:0202:3131 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 207
+ERROR - 201820182018-0202-2727 1515:0202:3131 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\controllers\plans.php 210
+ERROR - 201820182018-0202-2727 1515:0202:3131 --> Query error: Column 'voltage' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `time`, `plan_id`) VALUES ('1', NULL, 'M-CB1', 'LO Accuracy', NULL, NULL, NULL, 790)
+ERROR - 201820182018-0202-2727 1515:0202:3232 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 207
+ERROR - 201820182018-0202-2727 1515:0202:3232 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\controllers\plans.php 210
+ERROR - 201820182018-0202-2727 1515:0202:3232 --> Query error: Column 'voltage' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `time`, `plan_id`) VALUES ('1', NULL, 'M-CB1', 'LO Accuracy', NULL, NULL, NULL, 791)
+ERROR - 201820182018-0202-2727 1515:0202:4545 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 641
+ERROR - 201820182018-0202-2727 1515:0202:4545 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\controllers\plans.php 644
+ERROR - 201820182018-0202-2727 1515:0202:4545 --> Query error: Column 'voltage' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`) VALUES ('2', NULL, 'M-CB1', 'TX-XIF Coupling', NULL, NULL, '790')
+ERROR - 201820182018-0202-2727 1515:0202:5656 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 641
+ERROR - 201820182018-0202-2727 1515:0202:5656 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\controllers\plans.php 644
+ERROR - 201820182018-0202-2727 1515:0202:5656 --> Query error: Column 'voltage' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`) VALUES ('2', NULL, 'M-CB1', 'TX-XIF Coupling', NULL, NULL, '790')
+ERROR - 201820182018-0202-2727 1515:0202:5757 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 641
+ERROR - 201820182018-0202-2727 1515:0202:5757 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\controllers\plans.php 644
+ERROR - 201820182018-0202-2727 1515:0202:5757 --> Query error: Column 'voltage' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`) VALUES ('2', NULL, 'M-CB1', 'TX-XIF Coupling', NULL, NULL, '790')
+ERROR - 201820182018-0202-2727 1515:0202:2626 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\controllers\plans.php 644
+ERROR - 201820182018-0202-2727 1515:0202:2626 --> Query error: Column 'voltage' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`) VALUES ('2', '\\\\filer4\\fileserver\\Projects\\dvt\\lineups\\TalynM\\M - CB1\\TxEVM\\8dB\\Weekend 22-23.2.18\\TxEVM_15_All_XIFs_All_channels_All_temp_Matrix.csv', 'M-CB1', 'TX-XIF Coupling', NULL, NULL, '790')
+ERROR - 201820182018-0202-2727 1515:0202:2828 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\controllers\plans.php 644
+ERROR - 201820182018-0202-2727 1515:0202:2828 --> Query error: Column 'voltage' cannot be null - Invalid query: INSERT INTO `tests` (`priority`, `lineup`, `station`, `name`, `voltage`, `notes`, `plan_id`) VALUES ('2', '\\\\filer4\\fileserver\\Projects\\dvt\\lineups\\TalynM\\M - CB1\\TxEVM\\8dB\\Weekend 22-23.2.18\\TxEVM_15_All_XIFs_All_channels_All_temp_Matrix.csv', 'M-CB1', 'TX-XIF Coupling', NULL, NULL, '790')
+ERROR - 201820182018-0202-2727 1717:0202:2727 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0202-2727 1818:0202:3636 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0202-2727 2323:0202:0505 --> 404 Page Not Found: Faviconico/index

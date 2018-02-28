@@ -55,6 +55,13 @@ class Tasks extends CI_Controller {
 		$task->comments = $this->db->get_where('tasks_comments_view', ['task_id'=>$id])->result();
 		echo json_encode($task);
 	}
+	public function delete(){
+		$id = json_decode(file_get_contents('php://input'));
+		$this->db->where('id', $id);
+		$res = $this->db->delete('tasks');
+		
+		echo json_encode($res);
+	}
 	public function active(){
 		$data = json_decode(file_get_contents('php://input'));
 		$id = $data->taskId;
@@ -109,7 +116,7 @@ class Tasks extends CI_Controller {
 		$id = $data->id;
 		$userId = $data->userId;
 		$this->db->where('id', $id);
-		$res = $this->db->update('tasks', ['assigned_to'=>$userId]);
+		$res = $this->db->update('tasks', ['assigned_to'=>$userId, 'approved'=>true]);
 		
 		if($res = true){
 			$this->db->select(['assigned']);

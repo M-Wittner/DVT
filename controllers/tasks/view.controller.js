@@ -43,6 +43,7 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 			.then(function(response){
 			if(response.data != false){
 				$scope.task.assigned = response.data
+				$scope.task.approved = true;
 			}
 			console.log(response.data);
 			
@@ -54,9 +55,20 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 		.then(function(response){
 //			console.log(response.data);
 			if(response.data == 'true'){
-				var message = 'Task Deleted Succesfully!';
+				var message = 'Task Active Status updated Succesfully!';
 				var id = Flash.create('success', message, 3500);
 				setTimeout(function(){$window.location.reload();}, 2000);
+			}
+		})
+	}
+	$scope.deleteTask = function(taskId){
+		$http.post(site+'/tasks/delete', taskId)
+		.then(function(response){
+//			console.log(response.data);
+			if(response.data == 'true'){
+				var message = 'Task Deleted Succesfully!';
+				var id = Flash.create('success', message, 3500);
+				$location.path('/tasks');
 			}
 		})
 	}

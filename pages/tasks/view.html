@@ -34,10 +34,13 @@
 				</ul>
 			</div>
 		</span>
-		<span class="col-md-offset-1">
+		<span class="col-md-2">
 			<a class="btn btn-xs btn-warning" href="#/task/{{task.id}}/edit" ng-disabled="true">Edit</a>
 			<a class="btn btn-xs btn-default btn-crud" ng-click="activeTask(task.id, task.active)">
-				active
+				Active
+			</a>
+			<a class="btn btn-xs btn-danger btn-crud" ng-click="deleteTask(task.id)">
+				Delete
 			</a>
 		</span>
 	</div>

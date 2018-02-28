@@ -3,8 +3,16 @@
     <h3 class="panel-title">All Tasks <span class="pull-right"><a class="btn btn-success btn-xs" href="#/tasks/new">New Task</a></span></h3>
   </div>
 	<div class="panel col-md-12">
-    <h3 class="panel-title">Filters: 
+    <h3 class="panel-title"><span class="label label-primary">Filters:</span> 
 			<span class="col-md-offset-1">Inactive: <input type="checkbox" ng-model="activeTasks"></span>
+<!--
+			<span>
+				Priority:
+				<select>
+					<option ng-repeat="item in testParams.params.taskPriorityArr">{{item}}</option>
+				</select>
+			</span>
+-->
 		</h3>
   </div>
   <div class="panel-body">
@@ -23,8 +31,11 @@
 				<td class="col-md-2 text-center" data-title="'Assigned To'" filter="{assigned: 'text'}" sortable="'assigned'">{{task.assigned}}</td>
 				<td class="col-md-1 text-center" data-title="'Approved'" filter="{approved: 'text'}" sortable="'approved'"><span ng-class="{'glyphicon glyphicon-thumbs-up' : task.approved == 1, 'glyphicon glyphicon-minus' : task.approved == 0}"></span></td>
 				<td class="col-md-2 text-center" data-title="'Operation'">
-					<a href="#/tasks/{{task.id}}" class="btn btn-info btn-sm">View</a>
-					<button ng-if="currentUser.rank > '60'" ng-click="activeTask(task.id, task.active)" class="btn btn-default btn-sm">active</button>
+						<a href="#/tasks/{{task.id}}" class="btn btn-info btn-sm">View</a>
+					<div ng-if="currentUser.rank > '60'">
+						<button ng-click="activeTask(task.id, task.active)" class="btn btn-default btn-sm">active</button>
+						<button ng-click="deleteTask(task.id)" class="btn btn-danger btn-sm">Delete</button>
+					</div>
 				</td>
 			</tr>
 		</table>
