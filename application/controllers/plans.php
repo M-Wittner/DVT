@@ -60,7 +60,7 @@ class Plans extends CI_Controller {
 					$chipsArr = $testArr->chips;
 					$tempsArr = $testArr->temps;
 					$channelsArr = $testArr->channels;
-//					$res = $this->lineup($testArr);
+					$res = $this->lineup($testArr);
 //					die();
 //			------------- R station test -------------
 					if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
@@ -862,31 +862,6 @@ class Plans extends CI_Controller {
 		$test->station = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
 		echo json_encode($test);
 	}
-	
-
-		public function lineups(){
-			$i = 0;
-			$arr = [];
-			while($i < 20){
-				$num = rand(0, 100);
-				switch($i){
-					case 0:
-						array_push($arr, $num);
-						break;
-					default:
-						$avg = array_sum($arr)/count($arr);
-						
-				}
-				array_push($arr, $num);
-				$i++;
-			}
-			
-			foreach ($arr as $index => $number){
-				
-			}
-			echo json_encode($arr);
-		}
-	
 		public function lineup($test){
 //			die(print_r($test));
 			$lineup = (string)$test->lineup;
@@ -910,37 +885,45 @@ class Plans extends CI_Controller {
 
 				$highestColumn = $currentSheet->getHighestColumn();
 				$highestRow = $currentSheet->getHighestRow();
-//				die(print($highestColumn));
 				$firstRowRaw = $currentSheet->rangeToArray('A1:'.$highestColumn.'1', null, false, false, true)[1];
 	//		GET PARAMS FOUND BOTH IN EXCEL AND DB (NOT: TEMP CH V)
 				$this->db->where_in('parameter_name', $firstRowRaw);
 				$match = $this->db->get('lineup_params')->result();
-
-				$paramNameArr = array_column($match, 'parameter_name');
-//				var_dump($firstRowRaw);
-//				die();
+				
+				$paramNameArr = [];
+				// GET PARAM NAMES FROM $MATCH INTO ARRAY
+				foreach ($match as $obj){
+					$value = $obj->parameter_name;
+					array_push($paramNameArr, $value);
+				}
 				foreach($firstRowRaw as $index => $param){
-//					var_dump($index."     index");
+//					var_dump($param."     param");
+					$trimSpace = " ";
+					$trimParam = trim($param, $trimSpace);
 					$paramIdx = array_search($param, $paramNameArr);
+//					var_dump($paramIdx);
 					$data = new stdClass();
+					$localParams = ["Temp", "V", "Ch"];
 	//		INSERT TEMP CH V INTO SQL RESULT
-					if($paramIdx == false){
+					if($paramIdx === false){
+						if(in_array($param, $localParams)){
 							$data->parameter_name = $param;
 							$data->parameter_id = -1;
 							$data->parameter_range = -1;
 							$data->excel_index = $index;
 							array_push($match, $data);
+						}elseif($trimParam != $param){
+							echo "The \"".$param."\" parameter in column ".$index." is invalid! It might contain a space!";
+							die();
+						}
 					}else{
 						
 						$match[$paramIdx]->excel_index = $index;
 					}
-//					var_dump($param."    param");
-				}
-				die();
-//				foreach ($match as $value){
-//					print($value->excel_index."\n");
-//				}
 
+				}
+				echo json_encode($match);
+				die();
 	//		INSERT EXCEL INDEX TO EACH PARAM
 				foreach ($match as $value){
 

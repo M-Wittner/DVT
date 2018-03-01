@@ -122,6 +122,7 @@ class Params extends CI_Controller {
 		echo json_encode($data);
 	}
 	public function taskPriority(){
+//		$this->db->select("task_priority As 'title'");
 		$result = $this->db->get('task_priority')->result_array();
 		$data = new stdClass();
 		$data->obj = $result;

@@ -2,8 +2,9 @@ myApp.controller('tasksCtrl', ['$scope', 'NgTableParams', '$location', '$http', 
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	var site = testParams.site;
 	$scope.testParams = testParams.params;
+	console.log($scope.testParams);
 	$scope.activeTasks = false;
-		console.log($scope.testParams);
+	$scope.isFilterDisabled = true;
 
 	$http.get(site + '/tasks')
 		.then(function (response) {
@@ -11,9 +12,6 @@ myApp.controller('tasksCtrl', ['$scope', 'NgTableParams', '$location', '$http', 
 				count: 15
 			}, {
 				counts: [],
-				filter: {
-					priority: "high"
-				},
 				total: response.data.length,
 				dataset: response.data
 			});

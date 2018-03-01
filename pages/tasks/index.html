@@ -3,25 +3,26 @@
     <h3 class="panel-title">All Tasks <span class="pull-right"><a class="btn btn-success btn-xs" href="#/tasks/new">New Task</a></span></h3>
   </div>
 	<div class="panel col-md-12">
-    <h3 class="panel-title"><span class="label label-primary">Filters:</span> 
-			<span class="col-md-offset-1">Inactive: <input type="checkbox" ng-model="activeTasks"></span>
+    <h3 class="panel-title col-md-1"><span class="label label-primary">Filters:</span></h3>
+		<span class="">Inactive Tasks: <input type="checkbox" ng-model="activeTasks"></span>
+		<span class="">  Show Filters: <input type="checkbox" ng-model="isFilterDisabled"></span>
 <!--
-			<span>
-				Priority:
-				<select>
-					<option ng-repeat="item in testParams.params.taskPriorityArr">{{item}}</option>
-				</select>
-			</span>
+		<span class="col-md-2">
+			Priority:
+			<select class="form-control">
+				<option ng-model="filterPriority" ng-repeat="item in testParams.taskPriorityArr">{{item}}</option>
+			</select>
+		</span>
 -->
-		</h3>
   </div>
   <div class="panel-body">
-		<table ng-table="tableParams" class="table table-hover table-responsive">
+		<table ng-table="tableParams" class="table table-hover table-responsive" show-filter="isFilterDisabled">
 			<tr ng-repeat="task in $data track by task.id" 
 					uib-tooltip-template="'pages/tasks/tooltipTemplate.html'" tooltip-popup-delay="100"
 					ng-hide="(activeTasks == false ? task.active == 0: '')"
-					ng-class="task.approved == false ? '' : {'info' : task.priority == 'Low','warning' : task.priority == 'Medium', 'danger' : task.priority == 'High'}">
-				<td class="col-md-1 text-center" data-title="'Date'"sortable="'date'">{{task.date}}</td>
+					ng-class="[task.approved == false ? '' : {'info' : task.priority == 'Low','warning' : task.priority == 'Medium', 'danger' : task.priority == 'High'},
+										{'bug-report': task.type_id == 1, 'feature': task.type_id == 2}]">
+				<td class="col-md-1 text-center"  data-title="'Date'"sortable="'date'">{{task.date}}</td>
 				<td class="col-md-1 text-center" data-title="'Priority'" filter="{priority: 'text'}" sortable="'priority'">{{task.priority}}</td>
 				<td class="col-md-1 text-center" data-title="'Station'" filter="{station: 'text'}" sortable="'station'">{{task.station}}</td>
 				<td class="col-md-2 text-center" data-title="'Title'" filter="{title: 'text'}">{{task.title}}</td>

@@ -51,8 +51,9 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 				$location.path('/plans');
 				console.log(response.data);
 			} else {
+				$window.scrollTo(0, 0);
 				var message = response.data;
-				var id = Flash.create('danger', message, 3500);
+				var id = Flash.create('danger', message, 10000);
 				console.log(response.data);
 			}
 		})
