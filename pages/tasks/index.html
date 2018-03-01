@@ -32,10 +32,11 @@
 				<td class="col-md-2 text-center" data-title="'Assigned To'" filter="{assigned: 'text'}" sortable="'assigned'">{{task.assigned}}</td>
 				<td class="col-md-1 text-center" data-title="'Approved'" filter="{approved: 'text'}" sortable="'approved'"><span ng-class="{'glyphicon glyphicon-thumbs-up' : task.approved == 1, 'glyphicon glyphicon-minus' : task.approved == 0}"></span></td>
 				<td class="col-md-2 text-center" data-title="'Operation'">
-						<a href="#/tasks/{{task.id}}" class="btn btn-info btn-sm">View</a>
-					<div ng-if="currentUser.rank > '60'">
-						<button ng-click="activeTask(task.id, task.active)" class="btn btn-default btn-sm">active</button>
-						<button ng-click="deleteTask(task.id)" class="btn btn-danger btn-sm">Delete</button>
+						<a  href="#/tasks/{{task.id}}" class="btn btn-info btn-sm btn-witdhC">View</a>
+						<a  ng-if="currentUser.rank > '60'" href="#/tasks/{{task.id}}/edit" class="btn btn-warning btn-sm btn-witdhC">Edit</a>
+					<div ng-if="currentUser.rank > '60'" class="btn-crud">
+						<button ng-click="activeTask(task.id, task.active)" class="btn btn-default btn-sm btn-witdhC">active</button>
+						<button ng-click="deleteTask(task.id)" class="btn btn-danger btn-sm btn-witdhC">Delete</button>
 					</div>
 				</td>
 			</tr>

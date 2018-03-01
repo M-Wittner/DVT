@@ -52,9 +52,30 @@ class Tasks extends CI_Controller {
 		} else {
 			$task->active = true;
 		}
+		$task->station = $this->db->get_where('work_stations', ['work_station'=>$task->station])->result();
+		$task->type = $this->db->get_where('task_types', ['task_type'=>$task->type])->result();
 		$task->comments = $this->db->get_where('tasks_comments_view', ['task_id'=>$id])->result();
 		echo json_encode($task);
 	}
+	
+	public function edit(){
+		$data = json_decode(file_get_contents('php://input'));
+		$station = $data->station[0]->id;
+		$type = $data->type[0]->id;
+		$title = $data->title;
+		$description = $data->description;
+		$task = [
+			'station_id'=>$station,
+			'type_id'=>$type,
+			'title'=>$title,
+			'description'=>$description,
+		];
+		$this->db->set($task);
+		$this->db->where('id', $data->id);
+		$res = $this->db->update('tasks');
+		echo json_encode($res);
+	}
+	
 	public function delete(){
 		$id = json_decode(file_get_contents('php://input'));
 		$this->db->where('id', $id);

@@ -245,6 +245,15 @@
 								</ul>
 							</div>
 						</div>
+				<div class="col-md-1" ng-if="test.station[0].station == 'M-CB1' || test.station[0].station == 'M-CB2' || test.station[0].station == 'Calibration'">
+								<span class="label label-primary">XIF:</span>
+								<ul class="list-group">
+										<li ng-repeat="xif in test.xifs | unique: 'xif' track by $index" class="list-group-item"> {{xif.xif}}
+										</li>
+										<li ng-if="(test.xifs).length == (params.xifList).length" class="list-group-item"> All XIFs
+										</li>
+									</ul>
+							</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4" ng-if="test.station[0].station == 'M-CB1' || test.station[0].station == 'M-CB2' || test.station[0].station == 'Calibration'" ng-hide="true">

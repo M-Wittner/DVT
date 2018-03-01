@@ -131,3 +131,16 @@ ERROR - 201820182018-0303-0101 0909:0303:1818 --> Severity: Error --> Call to a 
 ERROR - 201820182018-0303-0101 0909:0303:5151 --> Severity: Error --> Call to a member function getHighestColumn() on null C:\xampp\htdocs\application\controllers\plans.php 887
 ERROR - 201820182018-0303-0101 0909:0303:4141 --> Severity: Error --> Call to a member function getHighestColumn() on null C:\xampp\htdocs\application\controllers\plans.php 887
 ERROR - 201820182018-0303-0101 0909:0303:5151 --> Severity: Error --> Call to a member function getHighestColumn() on null C:\xampp\htdocs\application\controllers\plans.php 887
+ERROR - 201820182018-0303-0101 1010:0303:4444 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-0101 1010:0303:2727 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-0101 1414:0303:2727 --> Severity: Parsing Error --> syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting ']' C:\xampp\htdocs\application\controllers\tasks.php 56
+ERROR - 201820182018-0303-0101 1414:0303:0202 --> Severity: Parsing Error --> syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting ']' C:\xampp\htdocs\application\controllers\tasks.php 66
+ERROR - 201820182018-0303-0101 1414:0303:5454 --> Severity: Parsing Error --> syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting ']' C:\xampp\htdocs\application\controllers\tasks.php 66
+ERROR - 201820182018-0303-0101 1414:0303:1313 --> Severity: Notice --> Undefined property: stdClass::$descrioption C:\xampp\htdocs\application\controllers\tasks.php 66
+ERROR - 201820182018-0303-0101 1414:0303:1313 --> Query error: Unknown column 'station' in 'field list' - Invalid query: UPDATE `tasks` SET `station` = 'Web', `type` = 'New Feature', `title` = 'aaaaaaaaaaaa', `description` = NULL
+WHERE `id` = '26'
+ERROR - 201820182018-0303-0101 1414:0303:1515 --> Severity: Notice --> Undefined property: stdClass::$descrioption C:\xampp\htdocs\application\controllers\tasks.php 66
+ERROR - 201820182018-0303-0101 1414:0303:4141 --> Severity: Notice --> Undefined variable: description C:\xampp\htdocs\application\controllers\tasks.php 66
+ERROR - 201820182018-0303-0101 1414:0303:4141 --> Severity: Notice --> Undefined variable: description C:\xampp\htdocs\application\controllers\tasks.php 71
+ERROR - 201820182018-0303-0101 1414:0303:0808 --> Severity: Notice --> Undefined variable: description C:\xampp\htdocs\application\controllers\tasks.php 66
+ERROR - 201820182018-0303-0101 1414:0303:0808 --> Severity: Notice --> Undefined variable: description C:\xampp\htdocs\application\controllers\tasks.php 71

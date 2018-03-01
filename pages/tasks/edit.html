@@ -1,0 +1,42 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">New Task</h3>
+  </div>
+  <div class="panel-body">
+    <div class=" col-md-4">
+			<div class="row">
+				<div class="col-md-6">
+					<span class="label label-dangerC">Operation Field</span>
+					<ui-select style="min-width: 100%" multiple close-on-select="true" limit="1" ng-model="task.station">
+<!--						<ui-select-match ng-if="!task.station">{{$item}}</ui-select-match>-->
+						<ui-select-match >{{$item.work_station}}</ui-select-match>
+						<ui-select-choices repeat="station in testParams.params.fieldList | filter:$select.search" sortable="true">{{station.work_station}}</ui-select-choices>
+					</ui-select>
+				</div>
+				<div class="col-md-6">
+					<span class="label label-dangerC">Task Type</span>
+					<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="task.type">
+						<ui-select-match>{{$item.task_type}}</ui-select-match>
+						<ui-select-choices repeat="station in testParams.params.taskTypes | filter:$select.search" sortable="true">{{station.task_type}}</ui-select-choices>
+					</ui-select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<span class="label label-dangerC">Task Title</span>
+					<input type="text" class="form-control" ng-model="task.title">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<span class="label label-dangerC"></span>
+				<div trumbowyg-ng placeholder="Task Description"
+				 ng-model="task.description"
+				 editor-config="{btns: ['viewHTML', ['undo', 'redo'],['strong', 'em', 'del'], ['link'], ['formatting'], ['foreColor', 'backColor'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['unorderedList', 'orderedList'], ['removeformat'],]}">
+				</div>
+		</div>
+		<div>
+			<button class="btn btn-success" ng-click="editTask()">Submit</button>
+		</div>
+  </div>
+</div>

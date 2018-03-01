@@ -35,7 +35,7 @@
 			</div>
 		</span>
 		<span class="col-md-2">
-			<a class="btn btn-xs btn-warning" href="#/task/{{task.id}}/edit" ng-disabled="true">Edit</a>
+			<a class="btn btn-xs btn-warning" href="#/task/{{task.id}}/edit">Edit</a>
 			<a class="btn btn-xs btn-default btn-crud" ng-click="activeTask(task.id, task.active)">
 				Active
 			</a>
@@ -53,7 +53,7 @@
 				</div>
 				<div class="col-md-6">
 					<span class="label label-primary">Station</span>
-					<label class="form-control">{{task.station}}</label>
+					<label class="form-control">{{task.station[0].work_station}}</label>
 				</div>
 			</div>
 			<div class="row">
@@ -69,7 +69,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<span class="label label-primary">Type</span>
-					<label class="form-control">{{task.type}}</label>
+					<label class="form-control">{{task.type[0].task_type}}</label>
 				</div>
 				<div class="col-md-6">
 					<span class="label label-primary">Approved:</span>

@@ -59,6 +59,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/tasks/view.html',
 			controller: 'viewTaskCtrl'
 	})
+		.when('/tasks/:id/edit', {
+			templateUrl: 'pages/tasks/edit.html',
+			controller: 'editTaskCtrl'
+	})
 		.when('/tasks/:id/comment/new', {
 			templateUrl: 'pages/tasks/comments/new.html',
 			controller: 'newTaskCommentCtrl'
