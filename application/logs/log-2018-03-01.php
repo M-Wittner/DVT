@@ -122,3 +122,12 @@ ERROR - 201820182018-0303-0101 0909:0303:4545 --> Severity: Parsing Error --> sy
 ERROR - 201820182018-0303-0101 0909:0303:5151 --> Severity: Parsing Error --> syntax error, unexpected ',' C:\xampp\htdocs\application\controllers\plans.php 907
 ERROR - 201820182018-0303-0101 0909:0303:5252 --> Severity: Parsing Error --> syntax error, unexpected ',' C:\xampp\htdocs\application\controllers\plans.php 907
 ERROR - 201820182018-0303-0101 0909:0303:0606 --> Severity: Parsing Error --> syntax error, unexpected ',' C:\xampp\htdocs\application\controllers\plans.php 907
+ERROR - 201820182018-0303-0101 0909:0303:3232 --> Severity: Error --> Call to a member function getHighestColumn() on null C:\xampp\htdocs\application\controllers\plans.php 886
+ERROR - 201820182018-0303-0101 0909:0303:0101 --> Severity: Error --> Call to a member function getHighestColumn() on null C:\xampp\htdocs\application\controllers\plans.php 886
+ERROR - 201820182018-0303-0101 0909:0303:5555 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-0101 0909:0303:2626 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-0101 0909:0303:3737 --> Severity: Error --> Call to a member function getHighestColumn() on null C:\xampp\htdocs\application\controllers\plans.php 886
+ERROR - 201820182018-0303-0101 0909:0303:1818 --> Severity: Error --> Call to a member function getHighestColumn() on null C:\xampp\htdocs\application\controllers\plans.php 887
+ERROR - 201820182018-0303-0101 0909:0303:5151 --> Severity: Error --> Call to a member function getHighestColumn() on null C:\xampp\htdocs\application\controllers\plans.php 887
+ERROR - 201820182018-0303-0101 0909:0303:4141 --> Severity: Error --> Call to a member function getHighestColumn() on null C:\xampp\htdocs\application\controllers\plans.php 887
+ERROR - 201820182018-0303-0101 0909:0303:5151 --> Severity: Error --> Call to a member function getHighestColumn() on null C:\xampp\htdocs\application\controllers\plans.php 887

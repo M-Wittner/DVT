@@ -46,11 +46,11 @@ class Plans extends CI_Controller {
 		);
 		$testsObj = $postData->test;
 		if(sizeof($postData->test) > 0){
-			$insertPlan = $this->plan_model->add_plan($plan);
-//			$insertPlan = true;
+//			$insertPlan = $this->plan_model->add_plan($plan);
+			$insertPlan = true;
 			if($insertPlan){
-				$planId = $this->plan_model->get_id($insertPlan);
-//				$planId = 750;
+//				$planId = $this->plan_model->get_id($insertPlan);
+				$planId = 750;
 				foreach($testsObj as $i => $testArr){
 					if(isset($testArr->notes)){
 						$notes = $testArr->notes;
@@ -61,7 +61,7 @@ class Plans extends CI_Controller {
 					$tempsArr = $testArr->temps;
 					$channelsArr = $testArr->channels;
 					$res = $this->lineup($testArr);
-//					die();
+					die();
 //			------------- R station test -------------
 					if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
 						$antennasArr = $testArr->antennas;
@@ -882,6 +882,10 @@ class Plans extends CI_Controller {
 			foreach($sheets as $sheetName){
 	// 		EXTRACTS  HIGHEST COL, HIGHEST ROW, FIRST ROW
 				$currentSheet = $spreadsheet->getSheetByName($sheetName);
+				if(!$currentSheet){
+					echo $sheetName." wasn't found! Might be misspelled";
+					die();
+				}
 
 				$highestColumn = $currentSheet->getHighestColumn();
 				$highestRow = $currentSheet->getHighestRow();
@@ -896,6 +900,7 @@ class Plans extends CI_Controller {
 					$value = $obj->parameter_name;
 					array_push($paramNameArr, $value);
 				}
+				$localParams = ["Temp", "V", "Ch"];
 				foreach($firstRowRaw as $index => $param){
 //					var_dump($param."     param");
 					$trimSpace = " ";
@@ -903,9 +908,8 @@ class Plans extends CI_Controller {
 					$paramIdx = array_search($param, $paramNameArr);
 //					var_dump($paramIdx);
 					$data = new stdClass();
-					$localParams = ["Temp", "V", "Ch"];
-	//		INSERT TEMP CH V INTO SQL RESULT
 					if($paramIdx === false){
+//					INSERT TEMP CH V INTO SQL RESULT
 						if(in_array($param, $localParams)){
 							$data->parameter_name = $param;
 							$data->parameter_id = -1;
@@ -922,8 +926,8 @@ class Plans extends CI_Controller {
 					}
 
 				}
-				echo json_encode($match);
-				die();
+//				echo json_encode($match);
+//				die();
 	//		INSERT EXCEL INDEX TO EACH PARAM
 				foreach ($match as $value){
 
