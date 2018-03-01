@@ -869,8 +869,9 @@ class Plans extends CI_Controller {
 
 		$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
 		if(in_array($station, ['R-CB1', 'R-CB2'])){
-			$sheets = ['Typical', 'LO Lineup'];
 			$spreadsheet = $reader->load($lineup);
+			$expectedSheets = ['Typical', 'LO Lineup'];
+			$sheets = $spreadsheet->getSheetNames();
 		} elseif(in_array($station, ['M-CB1', 'M-CB2'])) {
 			// CREATE SPREADSHEET FROM CSV
 			$path = $this->excel_model->ss_from_csv($lineup);
@@ -880,13 +881,13 @@ class Plans extends CI_Controller {
 		$reader->setReadDataOnly(true);	
 		if ($spreadsheet){
 			foreach($sheets as $sheetName){
-	// 		EXTRACTS  HIGHEST COL, HIGHEST ROW, FIRST ROW
-				$currentSheet = $spreadsheet->getSheetByName($sheetName);
-				if(!$currentSheet){
+			//CHECK FOR SHEET EXSITENCE
+				if(!in_array($sheetName, $sheets)){
 					echo $sheetName." wasn't found! Might be misspelled";
 					die();
 				}
-
+	// 		EXTRACTS  HIGHEST COL, HIGHEST ROW, FIRST ROW
+				$currentSheet = $spreadsheet->getSheetByName($sheetName);
 				$highestColumn = $currentSheet->getHighestColumn();
 				$highestRow = $currentSheet->getHighestRow();
 				$firstRowRaw = $currentSheet->rangeToArray('A1:'.$highestColumn.'1', null, false, false, true)[1];
