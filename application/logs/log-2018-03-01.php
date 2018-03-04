@@ -144,3 +144,21 @@ ERROR - 201820182018-0303-0101 1414:0303:4141 --> Severity: Notice --> Undefined
 ERROR - 201820182018-0303-0101 1414:0303:4141 --> Severity: Notice --> Undefined variable: description C:\xampp\htdocs\application\controllers\tasks.php 71
 ERROR - 201820182018-0303-0101 1414:0303:0808 --> Severity: Notice --> Undefined variable: description C:\xampp\htdocs\application\controllers\tasks.php 66
 ERROR - 201820182018-0303-0101 1414:0303:0808 --> Severity: Notice --> Undefined variable: description C:\xampp\htdocs\application\controllers\tasks.php 71
+ERROR - 201820182018-0303-0101 1515:0303:5555 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-0101 1616:0303:0202 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 445
+ERROR - 201820182018-0303-0101 1616:0303:0202 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 445
+ERROR - 201820182018-0303-0101 1616:0303:2020 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-0101 1717:0303:4141 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-0101 1717:0303:4343 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-0101 1717:0303:4545 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 641
+ERROR - 201820182018-0303-0101 1717:0303:4545 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 641
+ERROR - 201820182018-0303-0101 1717:0303:4545 --> Severity: Notice --> Undefined property: stdClass::$xifs C:\xampp\htdocs\application\controllers\plans.php 666
+ERROR - 201820182018-0303-0101 1717:0303:4545 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 696
+ERROR - 201820182018-0303-0101 1717:0303:4646 --> Could not find the language line "insert_batch() called with no data"
+ERROR - 201820182018-0303-0101 1717:0303:5656 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 641
+ERROR - 201820182018-0303-0101 1717:0303:5757 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 641
+ERROR - 201820182018-0303-0101 1717:0303:5757 --> Severity: Notice --> Undefined property: stdClass::$xifs C:\xampp\htdocs\application\controllers\plans.php 666
+ERROR - 201820182018-0303-0101 1717:0303:5757 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 696
+ERROR - 201820182018-0303-0101 1717:0303:5757 --> Could not find the language line "insert_batch() called with no data"
+ERROR - 201820182018-0303-0101 1919:0303:3232 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-0101 2323:0303:4545 --> 404 Page Not Found: Faviconico/index

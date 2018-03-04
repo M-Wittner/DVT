@@ -58,12 +58,14 @@ class Plans extends CI_Controller {
 						$notes = null;
 					}
 					$chipsArr = $testArr->chips;
-					$tempsArr = $testArr->temps;
-					$channelsArr = $testArr->channels;
-					$res = $this->lineup($testArr);
+//					$tempsArr = $testArr->temps;
+//					$channelsArr = $testArr->channels;
 //					die();
 //			------------- R station test -------------
 					if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
+						$res = $this->lineup($testArr);
+						$tempsArr = $testArr->temps;
+						$channelsArr = $testArr->channels;
 						$antennasArr = $testArr->antennas;
 //						var_dump($antennasArr);
 //						$this->db->select('iteration_time');
@@ -184,6 +186,9 @@ class Plans extends CI_Controller {
 ////						die();
 ////			------------- M station test -------------
 					} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
+						$res = $this->lineup($testArr);
+						$tempsArr = $testArr->temps;
+						$channelsArr = $testArr->channels;
 						
 						$variables = new stdClass();
 						$variables->temps = sizeof($tempsArr);
@@ -293,7 +298,7 @@ class Plans extends CI_Controller {
 							}
 						};
 //						die();
-//------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
+//------------ PTAT/ABS/Vgb+TEMP station test -------------
 					} elseif($testArr->station[0]->station == 'PTAT/ABS/Vgb+TEMP') {
 							$chipsArr = $testArr->chips;
 							$test = array(
@@ -308,13 +313,14 @@ class Plans extends CI_Controller {
 							$testId = $this->plan_model->tests_id($insertTest);
 							foreach($chipsArr as $result){
 								$chip = array(
-									'chip'=>$result->serial_number,
+									'serial_number'=>$result->serial_number,
 									'chip'=>$result->chip,
 									'plan_id'=>$planId,
 									'test_id'=>$testId
 								);
 								$insertChip = $this->plan_model->add_chips($chip);
 							}
+//------------ TalynM+A station test -------------
 					} elseif($testArr->station[0]->station == 'TalynM+A'){
 //						die(var_dump($testArr));
 							$aChipsArr = $testArr->chips;
@@ -354,7 +360,7 @@ class Plans extends CI_Controller {
 //					var_dump($test);
 			};
 //				die();
-			echo 'success';
+			echo 'successs';
 			} else {
 				echo 'No plan inserted!';
 			}	
@@ -727,7 +733,28 @@ class Plans extends CI_Controller {
 							}
 						};
 //------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
-					} elseif($testArr->station[0]->station == 'PTAT/ABS/Vgb+TEMP'|| $testArr->station[0]->station == 'TalynM+A') {
+					} elseif($testArr->station[0]->station == 'PTAT/ABS/Vgb+TEMP') {
+						$chipsArr = $testArr->chips;
+							$test = array(
+								'priority'=>$testArr->priority[0],
+								'lineup'=>null,
+								'station'=>$testArr->station[0]->station,
+								'name'=>$testArr->name[0]->test_name,
+								'notes'=>$notes,
+								'plan_id'=>$planId
+							);
+							$insertTest = $this->plan_model->add_test($test);
+							$testId = $this->plan_model->tests_id($insertTest);
+							foreach($chipsArr as $result){
+								$chip = array(
+									'serial_number'=>$result->serial_number,
+									'chip'=>$result->chip,
+									'plan_id'=>$planId,
+									'test_id'=>$testId
+								);
+								$insertChip = $this->plan_model->add_chips($chip);
+							}
+					}elseif( $testArr->station[0]->station == 'TalynM+A'){
 							$chipsArr = $testArr->chips;
 							$test = array(
 								'priority'=>$testArr->priority[0],

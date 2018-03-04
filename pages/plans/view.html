@@ -113,7 +113,7 @@
 							<div class="row col-md-11">
 								<div class="panel-body">
 									<span class="label label-primary">Chip S/N:</span>
-									<table class="table" ng-if="test.station[0].station == 'M-CB1' || test.station[0].station == 'M-CB2' || test.name == 'RX-EVM 1 Tone' || test.name == 'TX-EVM 1 Tone'">
+									<table class="table" ng-if="test.station[0].station == 'M-CB1' || test.station[0].station == 'M-CB2' || test.name == 'RX-EVM 1 Tone' || test.name == 'TX-EVM 1 Tone' || test.station[0].station == 'PTAT/ABS/Vgb+TEMP'">
 										<thead>
 											<tr>
 												<th>Chip</th>
@@ -132,7 +132,7 @@
 										</tbody>
 									</table>
 <!--
-									<ul class="list-group" ng-if="test.station[0].station == 'M-CB1' || test.station[0].station == 'M-CB2' || test.name == 'RX-EVM 1 Tone' || test.name == 'TX-EVM 1 Tone'">
+									<ul class="list-group" ng-if="test.station[0].station == 'PTAT/ABS/Vgb+TEMP' || test.station[0].station == 'M-CB2' || test.name == 'RX-EVM 1 Tone' || test.name == 'TX-EVM 1 Tone'">
 										<li ng-repeat="chip in test.chips track by $index" class="list-group-item">
 											<span role="button" uib-popover="{{chip.results_path}}" popover-trigger="'outsideClick'" tabindex="0" popover-title="Path:">{{chip.serial_number}}</span>
 											<span ng-click="chipStatus(chip, test.id)" class="pull-right glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span>
