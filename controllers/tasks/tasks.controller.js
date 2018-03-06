@@ -4,6 +4,7 @@ myApp.controller('tasksCtrl', ['$scope', 'NgTableParams', '$location', '$http', 
 	$scope.testParams = testParams.params;
 	console.log($scope.testParams);
 	$scope.activeTasks = false;
+	$scope.completedTasks = true;
 	$scope.isFilterDisabled = true;
 
 	$http.get(site + '/tasks')

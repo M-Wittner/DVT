@@ -58,12 +58,14 @@ class Plans extends CI_Controller {
 						$notes = null;
 					}
 					$chipsArr = $testArr->chips;
-//					$tempsArr = $testArr->temps;
-//					$channelsArr = $testArr->channels;
-//					die();
+					if(isset($testArr->checkLineup)){
+						if($testArr->checkLineup = true){
+							$res = $this->lineup($testArr);
+						}
+					}
 //			------------- R station test -------------
 					if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
-						$res = $this->lineup($testArr);
+						
 						$tempsArr = $testArr->temps;
 						$channelsArr = $testArr->channels;
 						$antennasArr = $testArr->antennas;
@@ -186,7 +188,6 @@ class Plans extends CI_Controller {
 ////						die();
 ////			------------- M station test -------------
 					} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
-						$res = $this->lineup($testArr);
 						$tempsArr = $testArr->temps;
 						$channelsArr = $testArr->channels;
 						
@@ -360,7 +361,7 @@ class Plans extends CI_Controller {
 //					var_dump($test);
 			};
 //				die();
-			echo 'successs';
+			echo 'success';
 			} else {
 				echo 'No plan inserted!';
 			}	
@@ -516,6 +517,11 @@ class Plans extends CI_Controller {
 						$notes = $testArr->notes;
 					} else {
 						$notes = null;
+					}
+					if(isset($testArr->checkLineup)){
+						if($testArr->checkLineup = true){
+							$res = $this->lineup($testArr);
+						}
 					}
 //			------------- R station test -------------
 					if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){

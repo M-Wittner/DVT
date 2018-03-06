@@ -1,6 +1,7 @@
 myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.testParams = testParams;
+//	$scope.checkLineup = false;
 	var site = testParams.site;
 //	console.log($scope.testParams);
 

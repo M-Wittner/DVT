@@ -6,6 +6,7 @@
     <h3 class="panel-title col-md-1"><span class="label label-primary">Filters:</span></h3>
 		<span class="">Inactive Tasks: <input type="checkbox" ng-model="activeTasks"></span>
 		<span class="">  Show Filters: <input type="checkbox" ng-model="isFilterDisabled"></span>
+		<span class="">  Show Completed: <input type="checkbox" ng-model="completedTasks"></span>
 <!--
 		<span class="col-md-2">
 			Priority:
@@ -20,6 +21,7 @@
 			<tr ng-repeat="task in $data track by task.id" 
 					uib-tooltip-template="'pages/tasks/tooltipTemplate.html'" tooltip-popup-delay="100"
 					ng-hide="(activeTasks == false ? task.active == 0: '')"
+					ng-show="completedTasks == false? task.status == 'Pending' || task.status == 'In Progress' || task.status == 'Declinded' : 'Completed'"
 					ng-class="[task.approved == false ? '' : {'info' : task.priority == 'Low','warning' : task.priority == 'Medium', 'danger' : task.priority == 'High'},
 										{'bug-report': task.type_id == 1, 'feature': task.type_id == 2}]">
 				<td class="col-md-1 text-center"  data-title="'Date'"sortable="'date'">{{task.date}}</td>
