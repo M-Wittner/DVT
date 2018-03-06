@@ -46,11 +46,11 @@ class Plans extends CI_Controller {
 		);
 		$testsObj = $postData->test;
 		if(sizeof($postData->test) > 0){
-			$insertPlan = $this->plan_model->add_plan($plan);
-//			$insertPlan = true;
+//			$insertPlan = $this->plan_model->add_plan($plan);
+			$insertPlan = true;
 			if($insertPlan){
-				$planId = $this->plan_model->get_id($insertPlan);
-//				$planId = 750;
+//				$planId = $this->plan_model->get_id($insertPlan);
+				$planId = 750;
 				foreach($testsObj as $i => $testArr){
 					if(isset($testArr->notes)){
 						$notes = $testArr->notes;
@@ -361,7 +361,7 @@ class Plans extends CI_Controller {
 //					var_dump($test);
 			};
 //				die();
-			echo 'success';
+			echo 'successs';
 			} else {
 				echo 'No plan inserted!';
 			}	
@@ -934,7 +934,7 @@ class Plans extends CI_Controller {
 					$value = $obj->parameter_name;
 					array_push($paramNameArr, $value);
 				}
-				$localParams = ["Temp", "V", "Ch"];
+				$localParams = ["temp", "v", "ch"];
 				foreach($firstRowRaw as $index => $param){
 //					var_dump($param."     param");
 					$trimSpace = " ";
@@ -944,12 +944,19 @@ class Plans extends CI_Controller {
 					$data = new stdClass();
 					if($paramIdx === false){
 //					INSERT TEMP CH V INTO SQL RESULT
-						if(in_array($param, $localParams)){
+						if(in_array(strtolower($param), $localParams)){
 							$data->parameter_name = $param;
 							$data->parameter_id = -1;
 							$data->parameter_range = -1;
 							$data->excel_index = $index;
 							array_push($match, $data);
+							if(in_array(strtolower($param), ['temp', 'ch'])){
+								$colData = $currentSheet->rangeToArray($index.'2:'.$index.$highestRow, -1, false, false, false);
+								$data = array_column($colData, 0);
+								$unique = array_unique($data);
+								$this->excel_model->validate($test, $param, $unique);
+							}
+							
 						}elseif($trimParam != $param){
 							echo "The \"".$param."\" parameter in column ".$index." is invalid! It might contain a space!";
 							die();
@@ -964,7 +971,13 @@ class Plans extends CI_Controller {
 //				die();
 	//		INSERT EXCEL INDEX TO EACH PARAM
 				foreach ($match as $value){
-
+					$name = strtolower($value->parameter_name);
+//					if(in_array($name, ['temp', 'ch'])){
+//						$colData = $currentSheet->rangeToArray($value->excel_index.'2:'.$value->excel_index.$highestRow, -1, false, false, false);
+//						$data = array_column($colData, 0);
+//						$unique = array_unique($data);
+//						$this->excel_model->validate($test, $value, $unique);
+//					}
 	//  		GET THIS COLUMN DATA
 					$col = $currentSheet->rangeToArray($value->excel_index.'2:'.$value->excel_index.$highestRow, -1, false, false, false);
 					$value->rows = array_column($col, 0);

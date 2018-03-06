@@ -81,4 +81,29 @@ class excel_model extends CI_Model {
 		return $path;
 		
 	}
+	
+	public function validate($test, $param, $unique){
+		$temps = $test->temps;
+		$channels = $test->channels;
+		$name = strtolower($param);
+//		var_dump($name);
+		if($name == 'temp'){
+			foreach($temps as $temp){
+				$res = in_array($temp, $unique);
+				if($res === false){
+					echo $temp." C is not found in excel file!";
+					die();
+				}
+			}
+		}
+		if($name == 'ch'){
+			foreach($channels as $ch){
+				$res = in_array($ch, $unique);
+				if($res == false){
+					echo "Channel ".$ch." is not found in excel file!";
+					die();
+				}
+			}
+		}
+	}
 }
