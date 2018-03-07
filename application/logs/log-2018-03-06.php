@@ -941,3 +941,4 @@ ERROR - 201820182018-0303-0606 1414:0303:3434 --> 404 Page Not Found: Faviconico
 ERROR - 201820182018-0303-0606 1515:0303:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 954
 ERROR - 201820182018-0303-0606 1515:0303:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 954
 ERROR - 201820182018-0303-0606 1515:0303:3737 --> Severity: error --> Exception: Invalid cell coordinate 2 C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Cell\Coordinate.php 41
+ERROR - 201820182018-0303-0606 1717:0303:5353 --> 404 Page Not Found: Faviconico/index

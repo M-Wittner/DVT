@@ -67,6 +67,15 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/tasks/comments/new.html',
 			controller: 'newTaskCommentCtrl'
 	})
+	//		--------------------	LINEUP PAGES --------------------
+		.when('/lineups', {
+			templateUrl: 'pages/lineups/index.html',
+			controller: 'lineupsCtrl'
+	})
+		.when('/lineups/new', {
+			templateUrl: 'pages/lineups/new.html',
+			controller: 'newLineupCtrl'
+	})
 //		--------------------	ADMIN PAGES --------------------
 		.when('/admin', {
 			templateUrl: 'pages/admin/panel.html',

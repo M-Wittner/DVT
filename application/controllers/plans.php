@@ -46,11 +46,11 @@ class Plans extends CI_Controller {
 		);
 		$testsObj = $postData->test;
 		if(sizeof($postData->test) > 0){
-//			$insertPlan = $this->plan_model->add_plan($plan);
-			$insertPlan = true;
+			$insertPlan = $this->plan_model->add_plan($plan);
+//			$insertPlan = true;
 			if($insertPlan){
-//				$planId = $this->plan_model->get_id($insertPlan);
-				$planId = 750;
+				$planId = $this->plan_model->get_id($insertPlan);
+//				$planId = 750;
 				foreach($testsObj as $i => $testArr){
 					if(isset($testArr->notes)){
 						$notes = $testArr->notes;
@@ -361,7 +361,7 @@ class Plans extends CI_Controller {
 //					var_dump($test);
 			};
 //				die();
-			echo 'successs';
+			echo 'success';
 			} else {
 				echo 'No plan inserted!';
 			}	
@@ -950,6 +950,7 @@ class Plans extends CI_Controller {
 							$data->parameter_range = -1;
 							$data->excel_index = $index;
 							array_push($match, $data);
+					// CHECK IF TEMPS AND CH FROM SITE ARE FOUND IN EXCEL FILE;
 							if(in_array(strtolower($param), ['temp', 'ch'])){
 								$colData = $currentSheet->rangeToArray($index.'2:'.$index.$highestRow, -1, false, false, false);
 								$data = array_column($colData, 0);
