@@ -1,0 +1,167 @@
+<div id="desc" ng-controller="newPlanCtrl" ng-init="test.checkLineup = false">
+	<div class="panel col-md-12">
+		<span class="">Check Lineups? <input type="checkbox" ng-model="test.checkLineup" ng-disabled="lock"></span>
+	</div>
+	<div class="panel-body" ng-switch="lineup.type[0].type_id">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="col-md-12">
+					<span class="label label-dangerC">Lineup Type:</span>
+					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="true" ng-model="lineup.type" data-placeholder="Lineup Type" ng-disabled="lock">
+						<ui-select-match>{{$item.lineup_type}}</ui-select-match>
+						<ui-select-choices repeat="type in testParams.lineups.types">{{type.lineup_type}}</option>
+					</ui-select>
+				</div>
+				<div class="col-md-12">
+					<span class="label label-dangerC">Direction:</span>
+					<ui-select multiple limit="1" close-on-select="true" ng-model="lineup.direction" ng-disabled="lock">
+						<ui-select-match>{{$item.direction}}</ui-select-match>
+						<ui-select-choices repeat="direct in testParams.lineups.directions">{{direct.direction}}</option>
+					</ui-select>
+				</div>
+				<div class="col-md-12">
+					<span class="label label-dangerC">Temperatures:</span>
+					<ui-select multiple close-on-select="false" ng-model="lineup.temps" ng-disabled="lock">
+						<ui-select-match>{{$item}}</ui-select-match>
+						<ui-select-choices repeat="temp in testParams.params.tempList">{{temp}}</option>
+					</ui-select>
+				</div>
+				<div class="col-md-12">
+					<span class="label label-dangerC">Channels:</span>
+					<multiselect ng-model="lineup.channels" options="testParams.params.chList1" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+					</multiselect>
+				</div>
+				<div ng-switch-when="1" class="col-md-12">
+					<span class="label label-dangerC">Antennas:</span>
+					<multiselect ng-model="lineup.antennas" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+					</multiselect>
+				</div>
+			</div>
+			<div class="col-md-10">
+				<div ng-switch-when="1">
+					<div class="panel panel-default rowMarg">
+						<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="false" aria-controls="struct">
+							<label>LO Lineup</label>
+						</div>
+						<div class="collapse panel-body" id="{{$id}}">
+							<div class="col-md-4" ng-repeat="(i, item) in testParams.lineups.aLoParams track by $index">
+								<div class="row">
+									<div class="col-md-9">
+										<label>{{item.parameter_name}}</label>
+									</div>
+									<div class="col-md-3">
+										<input type="text" class="form-control" style="width: 100%" ng-model="lineup.aLo_params[item.parameter_name]" ng-disabled="lock">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div ng-switch-when="2">
+					<div class="panel panel-default rowMarg">
+						<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="false" aria-controls="struct">
+							<label>General Lineup</label>
+						</div>
+						<div class="collapse panel-body" id="{{$id}}">
+							<div class="col-md-4" ng-repeat="(i, item) in testParams.lineups.mGeneralParams track by $index">
+								<div class="row">
+									<div class="col-md-9">
+										<label>{{item.parameter_name}}</label>
+									</div>
+									<div class="col-md-3">
+										<input type="text" class="form-control" style="width: 100%" ng-model="lineup.mGeneral_params[item.parameter_name]" ng-disabled="lock">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<!---------------------	TALYN A	--------------------->
+				<div ng-switch-when="1" class="panel panel-default rowMarg">
+					<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="false" aria-controls="struct">
+						<label>Typical</label>
+					</div>
+					<div ng-switch="lineup.direction[0].id" class="collapse panel-body" id="{{$id}}">
+						<!---------------------	TX	--------------------->
+						<div ng-switch-when="1" class="col-md-3" ng-repeat="(i, item) in testParams.lineups.aTxParams track by $index">
+							<div class="row">
+								<div class="col-md-8">
+									<label>{{item.parameter_name}}</label>
+								</div>
+								<div class="col-md-3">
+									<input type="text" class="form-control" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+								</div>
+							</div>
+						</div>
+						<!--------------------- RX	--------------------->
+						<div ng-switch-when="2" class="col-md-3" ng-repeat="(i, item) in testParams.lineups.aRxParams track by $index">
+							<div class="row">
+								<div class="col-md-8">
+									<label>{{item.parameter_name}}</label>
+								</div>
+								<div class="col-md-3">
+									<input type="text" class="form-control" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---------------------	END OF TALYN A	--------------------->
+				<!---------------------	TALYN M	--------------------->
+				<div ng-switch-when="2" class="panel panel-default rowMarg">
+					<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="false" aria-controls="struct">
+						<label>Typical</label>
+					</div>
+					<div ng-switch="lineup.direction[0].id" class="collapse panel-body" id="{{$id}}">
+						<!---------------------	TX	--------------------->
+						<div ng-switch-when="1" class="col-md-3" ng-repeat="(i, item) in testParams.lineups.mTxParams track by $index">
+							<div class="row">
+								<div class="col-md-8">
+									<label>{{item.parameter_name}}</label>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+								</div>
+							</div>
+						</div>
+						<!--------------------- RX	--------------------->
+						<div ng-switch-when="2" class="col-md-3" ng-repeat="(i, item) in testParams.lineups.mRxParams track by $index">
+							<div class="row">
+								<div class="col-md-8">
+									<label>{{item.parameter_name}}</label>
+								</div>
+								<div class="col-md-3">
+									<input type="text" class="form-control" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!---------------------	END OF TALYN M	--------------------->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--	Footer Controls	-->
+<div class="col-md-12">
+	<button class="btn btn-xs btn-info addButton" ng-click="insertLineup(lineup)" ng-disabled="lock">
+			Insert!
+		</button>
+	<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">
+			Edit!
+		</button>
+	<!--
+	<span class="form-inline">
+			<div class="form-group">
+				<input type="number" ng-model="copyId" class="form-control" id="copy" placeholder="Test ID">
+			</div>
+			<button type="submit" class="btn btn-default" ng-click="copyTest()">Copy</button>
+		</span>
+-->
+</div>
+<hr/>
