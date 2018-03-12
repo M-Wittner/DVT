@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngFileSaver', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$httpProvider.defaults.cache = false;

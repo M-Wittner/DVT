@@ -1,7 +1,10 @@
+<hr/>
 <div id="desc" ng-controller="newPlanCtrl" ng-init="test.checkLineup = false">
+<!--
 	<div class="panel col-md-12">
 		<span class="">Check Lineups? <input type="checkbox" ng-model="test.checkLineup" ng-disabled="lock"></span>
 	</div>
+-->
 	<div class="panel-body" ng-switch="lineup.type[0].type_id">
 		<div class="row">
 			<div class="col-md-2">
@@ -25,6 +28,14 @@
 						<ui-select-match>{{$item}}</ui-select-match>
 						<ui-select-choices repeat="temp in testParams.params.tempList">{{temp}}</option>
 					</ui-select>
+					<span ng-if="tempAdd">
+						<input uib-popover="Numbers,separated by comma (60, 70, -80)" popover-trigger="'mouseenter'" type="text" class="form-control btn-crud" ng-model="lineup.temp_add" placeholder="Extra Temps" ng-mouseover="" style="width: 100%;" ng-disabled="lock">
+					</span>
+					<button class="btn btn-success btn-xs pull-right" ng-click="addTemp()"><span class="glyphicon glyphicon-plus"></span></button>
+				</div>
+				<div class="col-md-12">
+					<span class="label label-dangerC">Voltage:</span>
+					<input type="number" class="form-control" style="width: 100%" ng-model="lineup.voltage" ng-disabled="lock">
 				</div>
 				<div class="col-md-12">
 					<span class="label label-dangerC">Channels:</span>
@@ -38,19 +49,37 @@
 				</div>
 			</div>
 			<div class="col-md-10">
+				<div class="row">
+					<div class="col-md-12">
+						<span class="label label-dangerC">Title:</span>
+						<input type="text" class="form-control" style="width: 100%" ng-model="lineup.title">
+					</div>
+				</div>
 				<div ng-switch-when="1">
-					<div class="panel panel-default rowMarg">
-						<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="false" aria-controls="struct">
-							<label>LO Lineup</label>
-						</div>
-						<div class="collapse panel-body" id="{{$id}}">
-							<div class="col-md-4" ng-repeat="(i, item) in testParams.lineups.aLoParams track by $index">
-								<div class="row">
-									<div class="col-md-9">
-										<label>{{item.parameter_name}}</label>
+					<div class="row">
+						<div class="panel panel-default rowMarg">
+							<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="false" aria-controls="struct">
+								<label>LO Lineup</label>
+							</div>
+							<div class="collapse panel-body" id="{{$id}}">
+								<div class="col-md-4">
+									<div class="row">
+										<div class="col-md-8">
+											<label>Index</label>
+										</div>
+										<div class="col-md-3">
+											<input type="text" class="form-control input-sm" style="width: 100%" ng-model="lineup.aLo_params.index" ng-disabled="lock">
+										</div>
 									</div>
-									<div class="col-md-3">
-										<input type="text" class="form-control" style="width: 100%" ng-model="lineup.aLo_params[item.parameter_name]" ng-disabled="lock">
+								</div>
+								<div class="col-md-4" ng-repeat="item in testParams.lineups.aLoParams track by $index">
+									<div class="row">
+										<div class="col-md-8">
+											<label>{{item.parameter_name}}</label>
+										</div>
+										<div class="col-md-3">
+											<input type="text" class="form-control input-sm" style="width: 100%" ng-model="lineup.aLo_params[item.parameter_name]" ng-disabled="lock" ng-value="{{4}}">
+										</div>
 									</div>
 								</div>
 							</div>
@@ -63,13 +92,13 @@
 							<label>General Lineup</label>
 						</div>
 						<div class="collapse panel-body" id="{{$id}}">
-							<div class="col-md-4" ng-repeat="(i, item) in testParams.lineups.mGeneralParams track by $index">
+							<div class="col-md-4" ng-repeat="item in testParams.lineups.mGeneralParams track by $index">
 								<div class="row">
 									<div class="col-md-9">
 										<label>{{item.parameter_name}}</label>
 									</div>
 									<div class="col-md-3">
-										<input type="text" class="form-control" style="width: 100%" ng-model="lineup.mGeneral_params[item.parameter_name]" ng-disabled="lock">
+										<input type="text" class="form-control input-sm" style="width: 100%" ng-model="lineup.mGeneral_params[item.parameter_name]" ng-disabled="lock">
 									</div>
 								</div>
 							</div>
@@ -87,24 +116,34 @@
 					</div>
 					<div ng-switch="lineup.direction[0].id" class="collapse panel-body" id="{{$id}}">
 						<!---------------------	TX	--------------------->
-						<div ng-switch-when="1" class="col-md-3" ng-repeat="(i, item) in testParams.lineups.aTxParams track by $index">
+						<div ng-switch-when="1" class="col-md-3" ng-repeat="item in testParams.lineups.aTxParams track by $index">
 							<div class="row">
 								<div class="col-md-8">
 									<label>{{item.parameter_name}}</label>
 								</div>
 								<div class="col-md-3">
-									<input type="text" class="form-control" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+									<input type="text" class="form-control input-sm" style="width: 100%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock" ng-value="{{1}}">
 								</div>
 							</div>
 						</div>
 						<!--------------------- RX	--------------------->
-						<div ng-switch-when="2" class="col-md-3" ng-repeat="(i, item) in testParams.lineups.aRxParams track by $index">
+						<div ng-switch-when="2" class="col-md-3" ng-repeat="item in testParams.lineups.aRxParams track by $index">
 							<div class="row">
 								<div class="col-md-8">
 									<label>{{item.parameter_name}}</label>
 								</div>
 								<div class="col-md-3">
-									<input type="text" class="form-control" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+									<input type="text" class="form-control input-sm" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="row">
+								<div class="col-md-2">
+									<label>Note</label>
+								</div>
+								<div class="col-md-10">
+									<input type="text" class="form-control input-sm" style="width: 100%" ng-model="lineup.typical_params.note" ng-disabled="lock">
 								</div>
 							</div>
 						</div>
@@ -117,25 +156,35 @@
 						<label>Typical</label>
 					</div>
 					<div ng-switch="lineup.direction[0].id" class="collapse panel-body" id="{{$id}}">
+						<div class="col-md-3">
+							<div class="row">
+								<div class="col-md-8">
+									<label>Note</label>
+								</div>
+								<div class="col-md-3">
+									<input type="text" class="form-control input-sm" style="width: 100%" ng-model="lineup.typical_params.note" ng-disabled="lock">
+								</div>
+							</div>
+						</div>
 						<!---------------------	TX	--------------------->
-						<div ng-switch-when="1" class="col-md-3" ng-repeat="(i, item) in testParams.lineups.mTxParams track by $index">
+						<div ng-switch-when="1" class="col-md-3" ng-repeat="item in testParams.lineups.mTxParams track by $index">
 							<div class="row">
 								<div class="col-md-8">
 									<label>{{item.parameter_name}}</label>
 								</div>
 								<div class="col-md-4">
-									<input type="text" class="form-control" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+									<input type="text" class="form-control input-sm" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
 								</div>
 							</div>
 						</div>
 						<!--------------------- RX	--------------------->
-						<div ng-switch-when="2" class="col-md-3" ng-repeat="(i, item) in testParams.lineups.mRxParams track by $index">
+						<div ng-switch-when="2" class="col-md-3" ng-repeat="item in testParams.lineups.mRxParams track by $index">
 							<div class="row">
 								<div class="col-md-8">
 									<label>{{item.parameter_name}}</label>
 								</div>
 								<div class="col-md-3">
-									<input type="text" class="form-control" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+									<input type="text" class="form-control input-sm" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
 								</div>
 							</div>
 						</div>
@@ -148,15 +197,16 @@
 </div>
 
 <!--	Footer Controls	-->
-<div class="col-md-12">
-	<button class="btn btn-xs btn-info addButton" ng-click="insertLineup(lineup)" ng-disabled="lock">
-			Insert!
-		</button>
-	<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">
-			Edit!
-		</button>
-	<!--
-	<span class="form-inline">
+<div class="panel-footer">
+<!--	<div class="col-md-12">-->
+		<button class="btn btn-xs btn-info addButton" ng-click="insertLineup(lineup)" ng-disabled="lock">
+				Insert!
+			</button>
+		<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">
+				Edit!
+			</button>
+<!--
+		<span class="form-inline">
 			<div class="form-group">
 				<input type="number" ng-model="copyId" class="form-control" id="copy" placeholder="Test ID">
 			</div>
@@ -164,4 +214,3 @@
 		</span>
 -->
 </div>
-<hr/>

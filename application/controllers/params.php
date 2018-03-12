@@ -139,10 +139,12 @@ class Params extends CI_Controller {
 		$this->db->where(['lineup_type'=>'1', 'parameter_type'=>'3']);
 		$data->aLoParams = $this->db->get('lineup_params')->result_array();
 		
-		$this->db->where(['lineup_type'=>'1', 'parameter_type'=>'1']);
+		$this->db->where('lineup_type', '1');
+		$this->db->where_in('parameter_type', [1,4]);
 		$data->aTxParams = $this->db->get('lineup_params')->result_array();
 		
-		$this->db->where(['lineup_type'=>'1', 'parameter_type'=>'2']);
+		$this->db->where('lineup_type', '1');
+		$this->db->where_in('parameter_type', [2,4]);
 		$data->aRxParams = $this->db->get('lineup_params')->result_array();
 		
 		$this->db->where(['lineup_type'=>'2', 'parameter_type'=>'4']);

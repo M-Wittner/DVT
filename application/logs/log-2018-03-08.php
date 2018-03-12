@@ -522,3 +522,61 @@ ERROR - 201820182018-0303-0808 1212:0303:5454 --> Severity: error --> Exception:
 ERROR - 201820182018-0303-0808 1212:0303:5454 --> Severity: error --> Exception: syntax error, unexpected '=', expecting ']' C:\xampp\htdocs\application\controllers\params.php 149
 ERROR - 201820182018-0303-0808 1212:0303:5454 --> Severity: error --> Exception: syntax error, unexpected '=', expecting ']' C:\xampp\htdocs\application\controllers\params.php 149
 ERROR - 201820182018-0303-0808 1212:0303:5454 --> Severity: error --> Exception: syntax error, unexpected '=', expecting ']' C:\xampp\htdocs\application\controllers\params.php 149
+ERROR - 201820182018-0303-0808 1414:0303:1111 --> Severity: error --> Exception: Unable to locate the model you have specified: Lineups_model C:\xampp\htdocs\system\core\Loader.php 344
+ERROR - 201820182018-0303-0808 1818:0303:1313 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:1313 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:1414 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:2929 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3030 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3131 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3131 --> Severity: Warning --> mysqli::real_connect(): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3131 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3131 --> Unable to connect to the database
+ERROR - 201820182018-0303-0808 1818:0303:3131 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: No such host is known.  C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 201820182018-0303-0808 1818:0303:3131 --> Unable to connect to the database
