@@ -12,3 +12,4 @@ ERROR - 201820182018-0303-1212 0808:0303:3131 --> Severity: Warning --> strlen()
 ERROR - 201820182018-0303-1212 0808:0303:3131 --> Severity: 4096 --> Object of class stdClass could not be converted to string C:\xampp\htdocs\system\helpers\download_helper.php 146
 ERROR - 201820182018-0303-1212 0808:0303:1919 --> Severity: Warning --> strlen() expects parameter 1 to be string, object given C:\xampp\htdocs\system\helpers\download_helper.php 83
 ERROR - 201820182018-0303-1212 0808:0303:1919 --> Severity: 4096 --> Object of class stdClass could not be converted to string C:\xampp\htdocs\system\helpers\download_helper.php 146
+ERROR - 201820182018-0303-1212 0808:0303:0505 --> 404 Page Not Found: Faviconico/index
