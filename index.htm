@@ -48,7 +48,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
 	<!-- Text Editor -->
-	<script src="assets/lib/Trumbowyg/dist/trumbowyg.min.js"></script>
+	<script src="./assets/lib/Trumbowyg/dist/trumbowyg.min.js"></script>
 	<script src="assets/lib/trumbowyg-ng/dist/trumbowyg-ng.js"></script>
 	<script src="assets/lib/Trumbowyg/dist/plugins/colors/trumbowyg.colors.js"></script>
 	<script src="assets/lib/Trumbowyg/dist/plugins/upload/trumbowyg.upload.min.js"></script>
@@ -62,6 +62,8 @@
 <!--	<script src="assets/lib/ui-select2/select2.js"></script>-->
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
 	
+	<!--	ngFileSave	-->
+	<script type="text/javascript" src="assets/lib/angular-file-saver/dist/angular-file-saver.bundle.min.js"></script>
 	
 	<!-- Costum -->
 	<script type="text/javascript" src="app.js"></script>
@@ -108,6 +110,7 @@
 	<!--  Lineups	-->
 	<script type="text/javascript" src="controllers/lineups/lineups.controller.js"></script>
 	<script type="text/javascript" src="controllers/lineups/new.controller.js"></script>
+	<script type="text/javascript" src="controllers/lineups/lineupForm.controller.js"></script>
 </head>
 
 <body ng-app="myApp" ng-controller="homeCtrl">
@@ -133,7 +136,7 @@
 						<li><a href="#/admin">Admin Panel</a></li>
 						<li><a href="#/tasks">Tasks</a></li>
 						<li><a href="#/admin/search">Search</a></li>
-<!--						<li><a href="#/lineups">Lineup GUI</a></li>-->
+						<li><a href="#/lineups">Lineup GUI</a></li>
 						<li><a href="#/robot">Robot</a></li>
 <!--						<li><input type="text" id="searchBox" ng-model="searchText" class="form-control" placeholder="Search"></li>-->
 					</ul>

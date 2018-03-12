@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngFileSaver', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$httpProvider.defaults.cache = false;
@@ -176,6 +176,20 @@ myApp.directive('testForm', function(){
 	}
 });
 
+myApp.directive('lineupForm', function(){
+	return {
+		templateUrl: 'pages/lineups/partials/lineupForm.html',
+		controller: 'newLineupCtrl',
+		scope: {
+			array: '=',
+//			lineup: '=',
+		},
+		link: function(scope, element, attrs){
+			
+		}
+	}
+});
+
 myApp.directive('robotTestform', function(){
 	return {
 		templateUrl: 'pages/robot/robotTestform.html',
@@ -290,9 +304,15 @@ myApp.factory('AuthService', function($http, Session, $cookies){
 
 myApp.factory('testParams', function($http, $log){
 	var testParams = {};
-	testParams.site = "http://wigig-584";
+	testParams.site = "http://localhost";
 	var site = testParams.site;
 	testParams.params = {};
+	testParams.lineups = {};
+	
+	$http.get(site+'/params/lineupParams')
+	.then(function(response){
+		testParams.lineups = response.data;
+	})
 	
 	$http.get(site+'/params/fields')
 	.then(function(response){
@@ -478,13 +498,6 @@ myApp.factory('testParams', function($http, $log){
 		'9',
 		'10'
 	];
-//	testParams.params.chList2 = [
-//		'6',
-//		'7',
-//		'8',
-//		'9',
-//		'10'
-//	];
 	
 	testParams.params.antList = [
 		'0',

@@ -12,21 +12,21 @@
 	</div>
 	<form class="rowMarg">
 		<div class="panel panel-primary">
-			<div class="panel-heading">New Test Plan</div>
+			<div class="panel-heading">New Lineup File</div>
 			<div id="plan">
-				<test-form ng-repeat="test in testCount track by $index" plan-params="array" params="params"></test-form>
+				<lineup-form ng-repeat="batch in batches track by $index" array="lineups"></lineup-form>
 			</div>
 			<div class="panel-body">
 				<div class="col-md-12">
-				<button class="btn btn-xs btn-primary addButton" ng-click="addTest()">
-					Add Test!
+				<button class="btn btn-xs btn-primary addButton" ng-click="addBatch()">
+					Add Batch!
 				</button>
-					<button class="btn btn-xs btn-danger addButton" ng-click="removeTest()">
-					Remove Test!
+					<button class="btn btn-xs btn-danger addButton" ng-click="removeBatch()">
+					Remove Batch!
 				</button>
 				</div>
 				<div class="col-md-12">
-					<button class="btn btn-lg btn-success col-lg-3" ng-click="addPlan()">Submit! <span class="glyphicon glyphicon-send"></span></button>
+					<button class="btn btn-lg btn-success col-lg-3" ng-click="submit()">Submit! <span class="glyphicon glyphicon-send"></span></button>
 				</div>
 			</div>
 		</div>
