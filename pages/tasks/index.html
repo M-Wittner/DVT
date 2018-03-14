@@ -25,11 +25,15 @@
 					ng-class="[task.approved == false ? '' : {'info' : task.priority == 'Low','warning' : task.priority == 'Medium', 'danger' : task.priority == 'High'},
 										{'bug-report': task.type_id == 1, 'feature': task.type_id == 2}]">
 				<td class="col-md-1 text-center"  data-title="'Date'"sortable="'date'">{{task.date}}</td>
+				<td class="col-md-1 text-center" data-title="'Status'" filter="{status: 'text'}" sortable="'task_status'">
+<!--					<span ng-if="task.status != 'Completed'">{{task.status}}</span>-->
+					<span class="label " ng-class="{'label-success': task.status == 'Completed', 'label-default': task.status == 'Pending', 'label-warning': task.status == 'In Progress', 'label-danger': task.status == 'Declined'}">{{task.status}}</span>
+<!--					<span ng-if="task.status == 'Completed'"></span>-->
+				</td>
 				<td class="col-md-1 text-center" data-title="'Priority'" filter="{priority: 'text'}" sortable="'priority'">{{task.priority}}</td>
 				<td class="col-md-1 text-center" data-title="'Station'" filter="{station: 'text'}" sortable="'station'">{{task.station}}</td>
 				<td class="col-md-2 text-center" data-title="'Title'" filter="{title: 'text'}">{{task.title}}</td>
 <!--				<td class="col-md-1 text-center" data-title="'Type'" filter="{type: 'text'}" sortable="'task_type'">{{task.type}}</td>-->
-				<td class="col-md-1 text-center" data-title="'Status'" filter="{status: 'text'}" sortable="'task_status'">{{task.status}}</td>
 				<td class="col-md-1 text-center" data-title="'Creator'" filter="{creator: 'text'}" sortable="'creator'">{{task.creator}}</td>
 				<td class="col-md-2 text-center" data-title="'Assigned To'" filter="{assigned: 'text'}" sortable="'assigned'">{{task.assigned}}</td>
 				<td class="col-md-1 text-center" data-title="'Approved'" filter="{approved: 'text'}" sortable="'approved'"><span ng-class="{'glyphicon glyphicon-thumbs-up' : task.approved == 1, 'glyphicon glyphicon-minus' : task.approved == 0}"></span></td>
