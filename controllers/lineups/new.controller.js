@@ -49,7 +49,7 @@ myApp.controller('newLineupCtrl', ['$scope', '$http', '$location', 'Flash', 'Ses
 	}
 	
 	$scope.submit = function(){
-		$http.post(site+'/lineups/create', {lineups: $scope.lineups, user: $scope.user})
+		$http.post(site+'/lineups/create', {lineups: $scope.lineups, title: $scope.lineup.title , user: $scope.user})
 		.then(function(response){
 			console.log(response.data);
 //			var buffer = new Uint8Array(response.data);

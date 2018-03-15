@@ -47,8 +47,8 @@ class lineup_gui_model extends CI_Model {
 		return $path;
 	}
 	
-	public function fsTalynA($lineup, $spreadsheet){
-		$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+	public function fsTalynA($lineup, $spreadsheet, $iteration){
+//		$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 		$sheetNames = ['Typical'];
 		$spreadsheet->removeSheetByIndex(0);
 		foreach($sheetNames as $sheetName){
@@ -60,8 +60,8 @@ class lineup_gui_model extends CI_Model {
 		switch($lineupType){
 			case 1:
 				//Config Typical Sheet TX
-				$this->initTypicalTx($lineup, $typical);
-				$this->ConfigTypicalTx($lineup, $typical);
+				$this->initTypicalTxA($lineup, $typical);
+				$this->ConfigTypicalTxA($lineup, $typical);
 				break;
 			case 2:
 			case 3:
@@ -75,13 +75,37 @@ class lineup_gui_model extends CI_Model {
 				$this->initLoLineup($lineup, $loLineup);
 				$this->configLoLineup($lineup, $loLineup);
 				break;
+			}
+			return ".xlsx";
 		}
 		
-
-//		$writer->save("blabla.xlsx");
-		$path = "lineups/".$lineup->title.".xlsx";
-		$writer->save($path);
-		return $path;
+		public function fsTalynM($lineup, $spreadsheet, $iteration){
+//			$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+			$sheetNames = ['Typical'];
+			$spreadsheet->removeSheetByIndex(0);
+			foreach($sheetNames as $sheetName){
+				$workSheet = $spreadsheet->createSheet();
+				$workSheet->setTitle($sheetName);
+			}
+			$lineupType = $lineup->type[0]->lineup_type_id;
+			$typical = $spreadsheet->getSheetByName('Typical');
+			$this->getXIFs($lineup);
+			switch($lineupType){
+				case 1:
+				case 2:
+				case 3:
+					//Config Typical Sheet TX
+					$this->initTypicalTxM($lineup, $typical);
+					$this->ConfigTypicalTxM($lineup, $typical);
+					break;
+				case 4:
+					//Config LO Sheet
+					$loLineup = $spreadsheet->getSheetByName('LO_Lineup');
+					$this->initLoLineup($lineup, $loLineup);
+					$this->configLoLineup($lineup, $loLineup);
+					break;
+		}
+		return ".xlsx";
 	}
 		
 	public function configTemps($tempsAdd, $temps){
@@ -110,9 +134,11 @@ class lineup_gui_model extends CI_Model {
 		$lineup->activeXIFs = $XIFsw;
 		$xifOff = substr_count($XIFsw, "0");
 		$lineup->inactiveXIFs = array();
-		for($i = 0; $i< $xifOff; $i++){
-			$int = strpos($XIFsw, "0", $i);
-			array_push($lineup->inactiveXIFs, $int);
+		for($i = 0; $i <= $xifOff; $i++){
+			$int = strpos($XIFsw, "0", $i+1);
+			if(!in_array($int, $lineup->inactiveXIFs)){
+				array_push($lineup->inactiveXIFs, $int);
+			}
 		}
 	}
 	
@@ -177,7 +203,7 @@ class lineup_gui_model extends CI_Model {
 		
 	}
 	
-	public function initTypicalTx($lineup, $typical){
+	public function initTypicalTxA($lineup, $typical){
 		$params = array();
 		foreach ($lineup->typical_params as $param => $value){
 			if($param != "note"){
@@ -194,8 +220,8 @@ class lineup_gui_model extends CI_Model {
 		$typical->fromArray($params, null, 'D1');
 	}
 	
-	public function configTypicalTx($lineup, $typical){
-		$i = 2;
+	public function configTypicalTxA($lineup, $typical){
+		$i = $typical->getHighestRow() + 1;
 		foreach ($lineup->temps as $temp){
 			foreach($lineup->channels as $channel){
 				$typical->getCell('A'.$i)
@@ -206,6 +232,41 @@ class lineup_gui_model extends CI_Model {
 					->setValue($channel);
 				$typical->fromArray((array)$lineup->typical_params, null, 'D'.$i);
 				$i++;
+			}
+		}
+	}
+	
+	public function initTypicalTxBrd($lineup, $typical){
+		$typical->getCell('A1')
+			->setValue('Temp');
+		$typical->getCell('B1')
+			->setValue('V');
+		$typical->getCell('C1')
+			->setValue('Ch');
+		$typical->getCell('D1')
+			->setValue('gain_table_idx');
+		$typical->getCell('E1')
+			->setValue('note');
+		return $typical;
+	}
+	
+	public function configTypicalTxBrd($lineup, $typical){
+		$i = $typical->getHighestRow() + 1;
+		foreach ($lineup->temps as $temp){
+			foreach($lineup->channels as $channel){
+				foreach($lineup->gain_table_idx as $idx){
+					$typical->getCell('A'.$i)
+						->setValue($temp);			
+					$typical->getCell('B'.$i)
+						->setValue($lineup->voltage);
+					$typical->getCell('C'.$i)
+						->setValue($channel);
+					$typical->getCell('D'.$i)
+						->setValue($idx);
+					$typical->getCell('E'.$i)
+						->setValue($lineup->typical_params->note);
+					$i++;
+				}
 			}
 		}
 	}
@@ -221,5 +282,63 @@ class lineup_gui_model extends CI_Model {
 	public function configLoLineup($lineup, $loLineup){
 		$i = 2;
 		$loLineup->fromArray((array)$lineup->aLo_params, null, 'A2');
+	}
+		
+	public function initTypicalTxM($lineup, $typical){
+		$row = $typical->getHighestRow();
+		$col = $typical->getHighestColumn();
+		$params = ['Temp', 'Volt', 'ChipChannel','XIF_0','XIF_1','XIF_2','XIF_3','XIF_4','XIF_5','XIF_6','XIF_7', 'XIF_Matrix'];
+		
+		$mGeneral_params = $lineup->mGeneral_params;
+		foreach($mGeneral_params as $param => $value){
+			array_push($params, $param);
+		}
+		if(isset($lineup->typical_params)){	
+			$typicalParams = $lineup->typical_params;
+			foreach($typicalParams as $param => $value){
+				array_push($params, $param);
+			}
+		}
+		$typical->fromArray($params, null, $col.$row);
+	}
+	
+	public function configTypicalTxM($lineup, $typical){
+//		echo json_encode($lineup);
+//		die();
+		$i = $typical->getHighestRow() + 1;
+		$xifs = $lineup->xifs;
+		$inactiveXIFs = $lineup->inactiveXIFs;
+		$xifsArr = $typical->rangeToArray("D1:K1", null, false, false, true)[1];
+
+		foreach ($lineup->temps as $temp){
+			foreach($lineup->channels as $channel){
+				foreach($lineup->xifs as $xif){
+					$typical->getCell('A'.$i)
+						->setValue($temp);			
+					$typical->getCell('B'.$i)
+						->setValue($lineup->voltage);
+					$typical->getCell('C'.$i)
+						->setValue($channel);
+					// XIF COLS
+					for($col = "D"; $col <= "K"; $col++){
+						if(in_array(substr($xifsArr[$col], -1), $inactiveXIFs)){
+							$typical->setCellValue($col.$i, 0);
+						} else{
+							$typical->setCellValue($col.$i, 1);
+						}
+					}
+					$typical->getCell($col.$i)
+						->setValue($xif->xif);
+					$col++;
+					// GENERAL PARAMS
+					$typical->fromArray((array)$lineup->mGeneral_params, null, $col.$i);
+					if(isset($lineup->typical_params)){
+						// TYPICAL PARAMS
+						$typical->fromArray((array)$lineup->typical_params, null, $col.$i);
+					}
+					$i++;
+				}
+			}
+		}
 	}
 }

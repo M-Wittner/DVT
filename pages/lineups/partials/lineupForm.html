@@ -32,13 +32,7 @@
 			</div>
 			<div class="col-md-10">
 				<div class="row">
-					<div class="col-md-12">
-						<span class="label label-dangerC">Title:</span>
-						<input type="text" class="form-control" style="width: 100%" ng-model="lineup.title" ng-disabled="lock">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<span class="label label-dangerC">Temperatures:</span>
 						<ui-select multiple close-on-select="false" ng-model="lineup.temps" ng-disabled="lock">
 							<ui-select-match>{{$item}}</ui-select-match>
@@ -49,20 +43,24 @@
 						</span>
 						<button class="btn btn-success btn-xs pull-right" ng-click="addTemp()"><span class="glyphicon glyphicon-plus"></span></button>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<span class="label label-dangerC">Channels:</span>
 						<multiselect ng-model="lineup.channels" options="testParams.params.chList1" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 						</multiselect>
 					</div>
-					<div ng-switch-when="2|3" ng-hide="lineup.chip_type[0].chip_type_id == 1" ng-switch-when-separator="|" class="col-md-3">
+					<div ng-switch-when="2|3" ng-hide="lineup.chip_type[0].chip_type_id == 1" ng-switch-when-separator="|" class="col-md-2">
 						<span class="label label-dangerC">XIFs:</span>
 						<multiselect ng-model="lineup.xifs" options="testParams.params.xifList" show-select-all="true" show-unselect-all="true" ng-disabled="lock" display-prop="xif" id-prop="id">
 						</multiselect>
 					</div>
-					<div ng-switch-when="3"  class="col-md-3" ng-if="(lineup.type[0].lineup_type_id == 3 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 1">
+					<div ng-switch-when="3"  class="col-md-2" ng-if="(lineup.type[0].lineup_type_id == 3 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 1">
 						<span class="label label-dangerC">Gain Table Index:</span>
 						<multiselect ng-model="lineup.gain_table_idx" options="testParams.params.gainTableIdx" show-select-all="true" show-unselect-all="true" ng-disabled="lock" display-prop="xif" id-prop="id">
 						</multiselect>
+					</div>
+					<div ng-switch-when="3"  class="col-md-3" ng-if="(lineup.type[0].lineup_type_id == 3 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 1">
+						<span class="label label-primary">Note:</span>
+						<input type="text" class="form-control" style="width: 100%" ng-model="lineup.typical_params.note" ng-disabled="lock">
 					</div>
 					<div class="col-md-1">
 						<span class="label label-dangerC">Voltage:</span>
@@ -106,7 +104,7 @@
 						</div>
 					</div>
 					<!---------------------	Typical	--------------------->
-					<div ng-if="lineup.type[0].lineup_type_id == 1" class="panel panel-default rowMarg">
+					<div ng-if="lineup.type[0].lineup_type_id == 1 && lineup.chip_type[0].chip_type_id == 1" class="panel panel-default rowMarg">
 						<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="false" aria-controls="struct">
 							<label>Typical</label>
 						</div>
@@ -149,59 +147,60 @@
 				</div>
 				<!---------------------	END OF TALYN A	--------------------->
 				<!---------------------	TALYN M	--------------------->
-				<div ng-switch-when="2" ng-switch-when-separator="|">
-					<div class="panel panel-default rowMarg">
-						<div class="panel-heading" Data-toggle="collapse" ng-click="isCollapsed = !isCollapsed">
-							<label>General Parameters</label>
-						</div>
-						<div class="panel-body" uib-collapse="isCollapsed">
-							<div class="col-md-4 lineup-input" ng-repeat="item in testParams.lineups.mGeneralParams track by $index">
-								<div class="row">
-									<div class="col-md-9">
-										<label>{{item.parameter_name}}</label>
-									</div>
-									<div class="col-md-3">
-										<!--										<input ng-if="item.parameter_name.includes('XIF')" type="checkbox" class="checkbox" style="width: 100%" ng-model="lineup.mGeneral_params.xifs[item.parameter_name]" ng-disabled="lock">-->
-										<input ng-if="!item.parameter_name.includes('XIF')" type="text" class="form-control input-sm" style="width: 100%" ng-model="lineup.mGeneral_params[item.parameter_name]" ng-disabled="lock">
+				<div ng-switch-when="2|3" ng-switch-when-separator="|">
+					<div ng-switch="lineup.chip_type[0].chip_type_id">
+						<div ng-switch-when="2" class="panel panel-default rowMarg">
+							<div class="panel-heading" Data-toggle="collapse" ng-click="isCollapsed = !isCollapsed">
+								<label>General Parameters</label>
+							</div>
+							<div class="panel-body" uib-collapse="isCollapsed">
+								<div class="col-md-3 lineup-input" ng-repeat="item in testParams.lineups.mGeneralParams track by $index">
+									<div class="row">
+										<div class="col-md-10">
+											<label>{{item.parameter_name}}</label>
+										</div>
+										<div class="col-md-2">
+											<input type="text" class="form-control input-sm" style="width: 250%" ng-model="lineup.mGeneral_params[item.parameter_name]" ng-disabled="lock">
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="panel panel-default rowMarg" ng-hide="lineup.type[0].lineup_type_id == 3">
-						<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="false" aria-controls="struct">
-							<label>Typical</label>
-						</div>
-						<div ng-switch="lineup.type[0].lineup_type_id" class="collapse panel-body" id="{{$id}}">
-							<!---------------------	TX / TX BoardFile	--------------------->
-							<div ng-switch-when="1-2" ng-switch-when-separator="-" class="col-md-4 lineup-input" ng-repeat="item in testParams.lineups.mTxParams track by $index">
-								<div class="row">
-									<div class="col-md-7">
-										<label>{{item.parameter_name}}</label>
-									</div>
-									<div class="col-md-2">
-										<input type="text" class="form-control input-sm" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+						<div class="panel panel-default rowMarg" ng-hide="lineup.type[0].lineup_type_id == 3" ng-switch-when="2">
+							<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="false" aria-controls="struct">
+								<label>Typical</label>
+							</div>
+							<div ng-switch="lineup.type[0].lineup_type_id" class="collapse panel-body" id="{{$id}}">
+								<!---------------------	TX / TX BoardFile	--------------------->
+								<div ng-switch-when="1-2" ng-switch-when-separator="-" class="col-md-4 lineup-input" ng-repeat="item in testParams.lineups.mTxParams track by $index">
+									<div class="row">
+										<div class="col-md-7">
+											<label>{{item.parameter_name}}</label>
+										</div>
+										<div class="col-md-2">
+											<input type="text" class="form-control input-sm" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+										</div>
 									</div>
 								</div>
-							</div>
-							<!--------------------- RX	--------------------->
-							<div ng-switch-when="5" class="col-md-3" ng-repeat="item in testParams.lineups.mRxParams track by $index">
-								<div class="row">
-									<div class="col-md-7">
-										<label>{{item.parameter_name}}</label>
-									</div>
-									<div class="col-md-3">
-										<input type="text" class="form-control input-sm" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+								<!--------------------- RX	--------------------->
+								<div ng-switch-when="5" class="col-md-3" ng-repeat="item in testParams.lineups.mRxParams track by $index">
+									<div class="row">
+										<div class="col-md-7">
+											<label>{{item.parameter_name}}</label>
+										</div>
+										<div class="col-md-3">
+											<input type="text" class="form-control input-sm" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="row">
-									<div class="col-md-3">
-										<label>Note</label>
-									</div>
-									<div class="col-md-7">
-										<input type="text" class="form-control input-sm" style="width: 100%" ng-model="lineup.typical_params.note" ng-disabled="lock">
+								<div class="col-md-4">
+									<div class="row">
+										<div class="col-md-3">
+											<label>Note</label>
+										</div>
+										<div class="col-md-7">
+											<input type="text" class="form-control input-sm" style="width: 100%" ng-model="lineup.typical_params.note" ng-disabled="lock">
+										</div>
 									</div>
 								</div>
 							</div>
