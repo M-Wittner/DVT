@@ -160,7 +160,8 @@
 											<label>{{item.parameter_name}}</label>
 										</div>
 										<div class="col-md-2">
-											<input type="text" class="form-control input-sm" style="width: 250%" ng-model="lineup.mGeneral_params[item.parameter_name]" ng-disabled="lock">
+											<input type="text" class="form-control input-sm" style="width: 250%" ng-model="lineup.mGeneral_params[item.parameter_name]" ng-disabled="lock" id="{{item.parameter_id}}" aria-describedby="{{item.parameter_name}}">
+											<span id="{{item.parameter_name}}" class="help-block" ng-if="lineup.typical_params[item.parameter_name] && inRange(item, lineup.typical_params[item.parameter_name]) != 'has-success'">Invalid!</span>
 										</div>
 									</div>
 								</div>
@@ -177,8 +178,9 @@
 										<div class="col-md-7">
 											<label>{{item.parameter_name}}</label>
 										</div>
-										<div class="col-md-2">
-											<input type="text" class="form-control input-sm" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock">
+										<div class="col-md-2"  ng-class="inRange(item, lineup.typical_params[item.parameter_name])">
+											<input type="text" class="form-control input-sm" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock" id="{{item.parameter_id}}" aria-describedby="{{item.parameter_name}}">
+											<span id="{{item.parameter_name}}" class="help-block" ng-if="lineup.typical_params[item.parameter_name] && inRange(item, lineup.typical_params[item.parameter_name]) != 'has-success'">Invalid!</span>
 										</div>
 									</div>
 								</div>
