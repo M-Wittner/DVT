@@ -134,7 +134,14 @@ class Params extends CI_Controller {
 	public function lineupParams(){
 		$data = new stdClass();
 		
+		$this->db->where_in('id', [1,2,3]);
+		$data->stations = $this->db->get('work_stations')->result_array();
+		
+		$this->db->not_like('lineup_type','RX');
+		$this->db->not_like('lineup_type','General');		
 		$data->types = $this->db->get('lineup_types')->result_array();
+		
+		$data->chipTypes = $this->db->get('chip_types')->result_array();
 		
 		$this->db->where(['lineup_type'=>'1', 'parameter_type'=>'3']);
 		$data->aLoParams = $this->db->get('lineup_params')->result_array();
@@ -147,11 +154,16 @@ class Params extends CI_Controller {
 		$this->db->where_in('parameter_type', [2,4]);
 		$data->aRxParams = $this->db->get('lineup_params')->result_array();
 		
-		$this->db->where(['lineup_type'=>'2', 'parameter_type'=>'4']);
-		$data->mGeneralParams = $this->db->get('lineup_params')->result_array();
+		$xifs = ["XIF_0","XIF_1","XIF_2","XIF_3","XIF_4","XIF_5","XIF_6","XIF_7"];
+		$this->db->where(['lineup_type'=>'8', 'chip_type'=>'2']);
+		$this->db->where_not_in('parameter_name', $xifs);
+		$data->mGeneralParams = $this->db->get('lineup_gen_params')->result_array();
 		
-		$this->db->where(['lineup_type'=>'2', 'parameter_type'=>'1']);
-		$data->mTxParams = $this->db->get('lineup_params')->result_array();
+		$this->db->where(['chip_type'=>'2', 'lineup_type'=>'1']);
+		$data->mTxParams = $this->db->get('lineup_gen_params')->result_array();
+		
+		$this->db->where(['chip_type'=>'2', 'lineup_type'=>'1']);
+		$data->mTxFwParams = $this->db->get('lineup_gen_params')->result_array();
 		
 		$this->db->where(['lineup_type'=>'2', 'parameter_type'=>'2']);
 		$data->mRxParams = $this->db->get('lineup_params')->result_array();

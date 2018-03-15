@@ -119,6 +119,9 @@ ul {
     margin-top: 0.4%;
     margin-bottom: 0.4%;
 }
+.lineup-input {
+	margin-bottom: 5px;
+}
  #editor {
      overflow: scroll;
      height: 250px;

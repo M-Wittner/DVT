@@ -926,6 +926,7 @@ class Plans extends CI_Controller {
 				$firstRowRaw = $currentSheet->rangeToArray('A1:'.$highestColumn.'1', null, false, false, true)[1];
 	//		GET PARAMS FOUND BOTH IN EXCEL AND DB (NOT: TEMP CH V)
 				$this->db->where_in('parameter_name', $firstRowRaw);
+				$this->db->group_by('parameter_name');
 				$match = $this->db->get('lineup_params')->result();
 				
 				$paramNameArr = [];

@@ -312,6 +312,7 @@ myApp.factory('testParams', function($http, $log){
 	$http.get(site+'/params/lineupParams')
 	.then(function(response){
 		testParams.lineups = response.data;
+		console.log(response.data);
 	})
 	
 	$http.get(site+'/params/fields')
@@ -428,6 +429,7 @@ myApp.factory('testParams', function($http, $log){
 		'14',
 		'15',
 	];
+	testParams.params.gainTableIdx = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'];
 	
 	testParams.params.xifList = {};
 	$http.get(site+'/params/xifs')
