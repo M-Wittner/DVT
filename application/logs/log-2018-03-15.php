@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
+<<<<<<< HEAD
 ERROR - 201820182018-0303-1515 0707:0303:2727 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
 ERROR - 201820182018-0303-1515 0707:0303:2727 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
 ERROR - 201820182018-0303-1515 0707:0303:2727 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
@@ -41,3 +42,6 @@ ERROR - 201820182018-0303-1515 1818:0303:3232 --> Could not find the language li
 ERROR - 201820182018-0303-1515 2121:0303:3030 --> 404 Page Not Found: Faviconico/index
 ERROR - 201820182018-0303-1515 2222:0303:5454 --> 404 Page Not Found: Faviconico/index
 ERROR - 201820182018-0303-1515 2222:0303:0505 --> 404 Page Not Found: Faviconico/index
+=======
+ERROR - 201820182018-0303-1515 0707:0303:4949 --> Severity: error --> Exception: Call to undefined method lineup_gui_model::initTypicalTx() C:\xampp\htdocs\application\models\lineup_gui_model.php 63
+>>>>>>> local-workPC
