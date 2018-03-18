@@ -32,7 +32,6 @@ class lineup_gui_model extends CI_Model {
 	}
 	
 	public function rTalynM($lineup, $spreadsheet){
-		$writer = new \PhpOffice\PhpSpreadsheet\Writer\Csv($spreadsheet);
 		$spreadsheet->getProperties()->setTitle($lineup->title);
 		$csvSheet = $spreadsheet->getActiveSheet();
 		$direction = $lineup->direction[0]->id;
@@ -48,15 +47,8 @@ class lineup_gui_model extends CI_Model {
 	}
 	
 	public function fsTalynA($lineup, $spreadsheet, $iteration){
-//		$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-		$sheetNames = ['Typical'];
-		$spreadsheet->removeSheetByIndex(0);
-		foreach($sheetNames as $sheetName){
-			$workSheet = $spreadsheet->createSheet();
-			$workSheet->setTitle($sheetName);
-		}
+		$typical = $spreadsheet->getActiveSheet();
 		$lineupType = $lineup->type[0]->lineup_type_id;
-		$typical = $spreadsheet->getSheetByName('Typical');
 		switch($lineupType){
 			case 1:
 				//Config Typical Sheet TX
@@ -72,7 +64,9 @@ class lineup_gui_model extends CI_Model {
 			case 4:
 				//Config LO Sheet
 				$loLineup = $spreadsheet->getSheetByName('LO_Lineup');
-				$this->initLoLineup($lineup, $loLineup);
+				if($iteration == 0){
+					$this->initLoLineup($lineup, $loLineup);
+				}
 				$this->configLoLineup($lineup, $loLineup);
 				break;
 			}
@@ -80,31 +74,29 @@ class lineup_gui_model extends CI_Model {
 		}
 		
 		public function fsTalynM($lineup, $spreadsheet, $iteration){
-//			$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-			$sheetNames = ['Typical'];
-			$spreadsheet->removeSheetByIndex(0);
-			foreach($sheetNames as $sheetName){
-				$workSheet = $spreadsheet->createSheet();
-				$workSheet->setTitle($sheetName);
-			}
+			$typical = $spreadsheet->getActiveSheet();
 			$lineupType = $lineup->type[0]->lineup_type_id;
-			$typical = $spreadsheet->getSheetByName('Typical');
 			$this->getXIFs($lineup);
 			switch($lineupType){
 				case 1:
 				case 2:
 				case 3:
 					//Config Typical Sheet TX
-					$this->initTypicalTxM($lineup, $typical);
+					if($iteration == 0){
+						$this->initTypicalTxM($lineup, $typical, $iteration);
+					}
 					$this->ConfigTypicalTxM($lineup, $typical);
 					break;
 				case 4:
 					//Config LO Sheet
 					$loLineup = $spreadsheet->getSheetByName('LO_Lineup');
-					$this->initLoLineup($lineup, $loLineup);
+					if($iteration == 0){
+						$this->initLoLineup($lineup, $loLineup);
+					}
 					$this->configLoLineup($lineup, $loLineup);
 					break;
 		}
+			$spreadsheet->getActiveSheet()->setTitle('Typical');
 		return ".xlsx";
 	}
 		
@@ -284,9 +276,19 @@ class lineup_gui_model extends CI_Model {
 		$loLineup->fromArray((array)$lineup->aLo_params, null, 'A2');
 	}
 		
-	public function initTypicalTxM($lineup, $typical){
-		$row = $typical->getHighestRow();
-		$col = $typical->getHighestColumn();
+	public function initTypicalTxM($lineup, $typical, $iteration){
+		$row;
+		$col;
+		switch($iteration){
+			case 0:
+				$row = 1;
+				$col = 'A';
+				break;
+			case $iteration > 0:
+				$row = $typical->getHighestRow();
+				$col = $typical->getHighestColumn();
+				break;
+		}
 		$params = ['Temp', 'Volt', 'ChipChannel','XIF_0','XIF_1','XIF_2','XIF_3','XIF_4','XIF_5','XIF_6','XIF_7', 'XIF_Matrix'];
 		
 		$mGeneral_params = $lineup->mGeneral_params;
@@ -299,12 +301,13 @@ class lineup_gui_model extends CI_Model {
 				array_push($params, $param);
 			}
 		}
-		$typical->fromArray($params, null, $col.$row);
+		$typical->fromArray($params, null, "A1");
 	}
 	
 	public function configTypicalTxM($lineup, $typical){
 //		echo json_encode($lineup);
 //		die();
+		$lineupType = $lineup->type[0]->lineup_type_id;
 		$i = $typical->getHighestRow() + 1;
 		$xifs = $lineup->xifs;
 		$inactiveXIFs = $lineup->inactiveXIFs;
@@ -332,10 +335,20 @@ class lineup_gui_model extends CI_Model {
 					$col++;
 					// GENERAL PARAMS
 					$typical->fromArray((array)$lineup->mGeneral_params, null, $col.$i);
+					// TYPICAL PARAMS
 					if(isset($lineup->typical_params)){
-						// TYPICAL PARAMS
-						$typical->fromArray((array)$lineup->typical_params, null, $col.$i);
+						//GET LAST COL AFTER INSERT GENERAL PARAM BY ASCI CONVERTION.
+						$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params));
+						$typical->fromArray((array)$lineup->typical_params, null, $lastCol.$i);
 					}
+					if($lineupType == 3){
+						$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params));
+						$typical->getCell($lastCol.'1')
+							->setValue('note');
+						$typical->getCell($lastCol.$i)
+							->setValue($lineup->note);
+					}
+					
 					$i++;
 				}
 			}

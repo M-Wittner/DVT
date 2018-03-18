@@ -58,13 +58,13 @@
 						<multiselect ng-model="lineup.gain_table_idx" options="testParams.params.gainTableIdx" show-select-all="true" show-unselect-all="true" ng-disabled="lock" display-prop="xif" id-prop="id">
 						</multiselect>
 					</div>
-					<div ng-switch-when="3"  class="col-md-3" ng-if="(lineup.type[0].lineup_type_id == 3 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 1">
-						<span class="label label-primary">Note:</span>
-						<input type="text" class="form-control" style="width: 100%" ng-model="lineup.typical_params.note" ng-disabled="lock">
-					</div>
 					<div class="col-md-1">
 						<span class="label label-dangerC">Voltage:</span>
 						<input type="number" class="form-control" style="width: 150%" ng-model="lineup.voltage" ng-disabled="lock">
+					</div>
+					<div ng-switch-when="3"  class="col-md-3" ng-if="lineup.type[0].lineup_type_id == 3 || (lineup.type[0].lineup_type_id == 2 && lineup.chip_type[0].chip_type_id == 1)">
+						<span class="label label-primary">Note:</span>
+						<input type="text" class="form-control" style="width: 100%" ng-model="lineup.note" ng-disabled="lock">
 					</div>
 				</div>
 			</div>

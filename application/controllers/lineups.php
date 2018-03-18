@@ -31,6 +31,7 @@ class Lineups extends CI_Controller {
  		$path = "lineups/".$data->title;
 
 		foreach($lineups as $iteration=>$lineup){
+			$lineup->path = $path;
 			if(isset($lineup->temp_add)){
 				$lineup->temps = $this->lineup_gui_model->configTemps($lineup->temp_add, $lineup->temps);
 			}
