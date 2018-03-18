@@ -22,40 +22,47 @@ class Lineups extends CI_Controller {
 		$data = json_decode(file_get_contents('php://input'));
 		$lineups = $data->lineups;
 		$user = $data->user;
-		
 //----------------------	CREATING NEW SHEET ----------------------
 		$spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 		$spreadsheet->getProperties()
 			->setCreator($user->username);
- 		$title;
-		foreach($lineups as $lineup){
+		$writerXlsx = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+		$writerCsv = new \PhpOffice\PhpSpreadsheet\Writer\Csv($spreadsheet);
+ 		$path = "lineups/".$data->title;
+
+		foreach($lineups as $iteration=>$lineup){
+			$lineup->path = $path;
 			if(isset($lineup->temp_add)){
 				$lineup->temps = $this->lineup_gui_model->configTemps($lineup->temp_add, $lineup->temps);
 			}
-			$lineupType = $lineup->type[0]->type_id;
-			
-			switch($lineupType){
+			$station = $lineup->station[0]->id;
+			$lineupType = $lineup->type[0]->lineup_type_id;
+			$chipType = $lineup->chip_type[0]->chip_type_id;	
+			switch($station){
 				case 1:
-					$res = $this->lineup_gui_model->TalynA($lineup, $spreadsheet);
-					$title = $res;
 					break;
 				case 2:
-					$res = $this->lineup_gui_model->TalynM($lineup);
-					$title = $res;
 					break;
 				case 3:
-					$res = $this->lineup_gui_model->boardFile($lineup);
-					$title = $res;
+					switch($chipType){
+						case 1:
+							$res = $this->lineup_gui_model->fsTalynA($lineup, $spreadsheet, $iteration);
+							break;
+						case 2:
+							$res = $this->lineup_gui_model->fsTalynM($lineup, $spreadsheet, $iteration);
+							break;
+					}
 					break;
-				case 4:
-					$res = $this->lineup_gui_model->boardFileFW($lineup);
-					$title = $res;
-					break;
-			}	
+			}		
 		}
-//		$data = file_get_contents($title);
-//		$res = readfile($title);
-//		force_download($title, $data);
-		echo $title;
+		switch($res){
+			case ".xlsx":
+				$writerXlsx->save($path.$res);
+				break;
+			case ".csv":
+				$writerCsv->save($path.$res);
+				break;
+		}
+		echo $path.$res;
 	}
 }

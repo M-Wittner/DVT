@@ -14,6 +14,10 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">New Lineup File</div>
 			<div id="plan">
+				<div class="col-md-12 container">
+					<span class="label label-dangerC">Title:</span>
+					<input type="text" class="form-control" style="width: 100%" ng-model="lineup.title" ng-disabled="lock">
+				</div>
 				<lineup-form ng-repeat="batch in batches track by $index" array="lineups"></lineup-form>
 			</div>
 			<div class="panel-body">
