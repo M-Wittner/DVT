@@ -101,3 +101,6 @@ ERROR - 201820182018-0303-1818 1010:0303:0808 --> Severity: error --> Exception:
 >>>>>>> local-workPC
 ERROR - 201820182018-0303-1818 1111:0303:2222 --> 404 Page Not Found: Faviconico/index
 ERROR - 201820182018-0303-1818 1111:0303:3131 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1212:0303:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201820182018-0303-1818 1212:0303:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201820182018-0303-1818 1212:0303:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24

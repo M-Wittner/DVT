@@ -16,7 +16,7 @@ myApp.controller('editTaskCtrl', ['$scope', '$http', '$location', '$routeParams'
 			if(response.data == 'true'){
 				var message = 'Task Edited Succesfully!';
 				var id = Flash.create('success', message, 3500);
-				$location.path('/tasks/'+$routeParams.id);
+				$location.path('/tasks/');
 			} else{
 				var message = response.data;
 				var id = Flash.create('danger', message, 3500);

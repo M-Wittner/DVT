@@ -24,8 +24,8 @@
 					ng-show="completedTasks == false? task.status == 'Pending' || task.status == 'In Progress' || task.status == 'Declinded' : 'Completed'"
 					ng-class="[task.approved == false ? '' : {'info' : task.priority == 'Low','warning' : task.priority == 'Medium', 'danger' : task.priority == 'High'},
 										{'bug-report': task.type_id == 1, 'feature': task.type_id == 2}]"
-					ng-click="viewTask(task.id)">
-<!--				<a href="#/tasks/{{task.id}}"></a>-->
+					ng-click="viewTask(task.id)"
+					style="cursor: pointer">
 				<td class="col-md-1 text-center"  data-title="'Date'"sortable="'date'">{{task.date}}</td>
 				<td class="col-md-1 text-center" data-title="'Status'" filter="{status: 'text'}" sortable="'task_status'">
 <!--					<span ng-if="task.status != 'Completed'">{{task.status}}</span>-->
@@ -43,7 +43,10 @@
 						<a  href="#/tasks/{{task.id}}" class="btn btn-info btn-sm btn-witdhC">View</a>
 						<a  ng-if="currentUser.rank > '60'" href="#/tasks/{{task.id}}/edit" class="btn btn-warning btn-sm btn-witdhC">Edit</a>
 					<div ng-if="currentUser.rank > '60'" class="btn-crud">
-						<button ng-click="activeTask(task.id, task.active)" class="btn btn-default btn-sm btn-witdhC">active</button>
+						<button ng-click="activeTask(task.id, task.active)" class="btn btn-default btn-sm btn-witdhC">
+							<small ng-if="task.active == true">Deactivate</small>
+							<span ng-if="task.active == false">Activate</span>
+						</button>
 						<button ng-click="deleteTask(task.id)" class="btn btn-danger btn-sm btn-witdhC">Delete</button>
 					</div>
 				</td>
