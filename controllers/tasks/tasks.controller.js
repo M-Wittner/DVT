@@ -7,18 +7,24 @@ myApp.controller('tasksCtrl', ['$scope', 'NgTableParams', '$uibModal', '$locatio
 	$scope.activeTasks = false;
 	$scope.completedTasks = true;
 	$scope.isFilterDisabled = true;
-
-	$http.get(site + '/tasks')
-		.then(function (response) {
-			$scope.tableParams = new NgTableParams({
-				count: 15
-			}, {
-				counts: [],
-				total: response.data.length,
-				dataset: response.data
-			});
-			console.log(response.data);
-		})
+	
+	if($scope.isAuthenticated == true) {
+		$http.get(site + '/tasks')
+			.then(function (response) {
+				$scope.tableParams = new NgTableParams({
+					count: 15
+				}, {
+					counts: [],
+					total: response.data.length,
+					dataset: response.data
+				});
+				console.log(response.data);
+			})
+	} else {
+		var message = 'Please Login first!';
+		var id = Flash.create('danger', message, 3500);
+		$location.path('/');
+	};
 
 	$scope.activeTask = function (taskId, active) {
 		$http.post(site + '/tasks/active', {
@@ -48,6 +54,11 @@ myApp.controller('tasksCtrl', ['$scope', 'NgTableParams', '$uibModal', '$locatio
 					}, 2000);
 				}
 			})
+	}
+	
+	$scope.viewTask = function(id){
+//		$window.location.href()
+		$location.path('/tasks/'+id);
 	}
 	
 	$scope.modal = function (taskId, size, parentSelector) {

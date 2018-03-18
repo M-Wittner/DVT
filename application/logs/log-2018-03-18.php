@@ -99,3 +99,5 @@ ERROR - 201820182018-0303-1818 1010:0303:0808 --> Severity: Warning --> unlink(l
 ERROR - 201820182018-0303-1818 1010:0303:0808 --> Severity: Warning --> ZipArchive::close(): Renaming temporary file failed: Permission denied C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx.php 374
 ERROR - 201820182018-0303-1818 1010:0303:0808 --> Severity: error --> Exception: Could not close zip file lineups/FS - TalynM.TxBrd.xlsx. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx.php 375
 >>>>>>> local-workPC
+ERROR - 201820182018-0303-1818 1111:0303:2222 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1111:0303:3131 --> 404 Page Not Found: Faviconico/index

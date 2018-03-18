@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		<h3 class="panel-title">Task #{{task.id}} <span class="pull-right">{{task.date}}</span></h3>
+		<h3 class="panel-title">#{{task.id}}, {{task.title}} <span class="pull-right">{{task.date}}</span></h3>
 	</div>
 	<div ng-if="currentUser.rank > 60" class="panel container-fluid">
 		<span class="col-md-2">
@@ -35,7 +35,7 @@
 			</div>
 		</span>
 		<span class="col-md-2">
-			<a class="btn btn-xs btn-warning" href="#/task/{{task.id}}/edit">Edit</a>
+			<a class="btn btn-xs btn-warning" href="#/tasks/{{task.id}}/edit">Edit</a>
 			<a class="btn btn-xs btn-default btn-crud" ng-click="activeTask(task.id, task.active)">
 				Active
 			</a>
