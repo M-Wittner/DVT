@@ -256,7 +256,7 @@ class lineup_gui_model extends CI_Model {
 					$typical->getCell('D'.$i)
 						->setValue($idx);
 					$typical->getCell('E'.$i)
-						->setValue($lineup->typical_params->note);
+						->setValue($lineup->note);
 					$i++;
 				}
 			}
