@@ -36,6 +36,7 @@ class Auth extends CI_Controller {
 					'firstName' => $uresult[0]->fname,
 					'lastName' => $uresult[0]->lname,
 					'rank' => $uresult[0]->rank,
+					'email' => $uresult[0]->email,
 					'lastPlan' => $planId,
 					'lastPlanRobot' => $robotPlanId,
 				);

@@ -4,6 +4,11 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 	var site = testParams.site;
 	$scope.params = testParams.params;
 	if($scope.isAuthenticated == true) {
+		$scope.sender = {
+			'userId' : $cookies.getObject('loggedUser').userId,
+			'username' : $cookies.getObject('loggedUser').username,
+			'email' : $cookies.getObject('loggedUser').email,
+		}
 		
 		$http.post(site+'/tasks/view', $routeParams.id)
 		.then(function(response){
@@ -39,7 +44,7 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 		}
 		
 		$scope.assignedUpdate = function(taskId, userId){
-		$http.post(site+'/tasks/assignedUpdate', {id: taskId, userId: userId})
+		$http.post(site+'/tasks/assignedUpdate', {id: taskId, userId: userId, sender: $scope.sender})
 			.then(function(response){
 			if(response.data != false){
 				$scope.task.assigned = response.data
