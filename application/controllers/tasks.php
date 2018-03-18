@@ -9,8 +9,8 @@ class Tasks extends CI_Controller {
 	public function __construct() {
 
 	parent::__construct();
-	$this->load->helper(array('form','url'));
-//	$this->load->library(array('session'));
+	$this->load->helper(['form','url']);
+	$this->load->library(['email']);
 	$this->load->database('');
 //	$this->load->model();
 	}
@@ -25,6 +25,8 @@ class Tasks extends CI_Controller {
 		$data = json_decode(file_get_contents('php://input'));
 		$taskData = $data->task;
 		$userData = $data->user;
+//		$this->db->select('email');
+//		$userData->email = $this->db->get_where('users', ['id'=>$data->user->userId])->result()[0]->email;
 
 		$task = [
 			'station_id'=>$taskData->station[0]->id,
@@ -133,15 +135,37 @@ class Tasks extends CI_Controller {
 		echo $status;
 	}	
 	public function assignedUpdate(){
+		$config['smtp-host'] = 'smtphost.qualcomm.com';
+		$this->email->initialize($config);
 		$data = json_decode(file_get_contents('php://input'));
+//		echo json_encode($data);
+//		die();
 		$id = $data->id;
 		$userId = $data->userId;
+		$this->db->select('email');
+		$userEmail = $this->db->get_where('users', ['id'=>$userId])->result()[0]->email;
+		
+		$sender = $data->sender;
+		$this->db->select('email');
+		$sender->email = $this->db->get_where('users', ['id'=>$sender->userId])->result()[0]->email;
+		
+//		$senderData = $this->db->get_where('users', ['id'=>$data->user->userId])->result()[0];
+//		$reciver
+		
 		$this->db->where('id', $id);
 		$res = $this->db->update('tasks', ['assigned_to'=>$userId, 'approved'=>true]);
 		
 		if($res = true){
 			$this->db->select(['assigned']);
 			$status = $this->db->get_where('tasks_view',['id'=>$id])->result()[0]->assigned;
+			
+			//SEND EMAIL
+			$this->email->from($sender->email, $sender->username);
+			$this->email->to($userEmail);
+			$this->email->subject("You've got a new task!");
+			$this->email->message("A new task has been assigned to you by ".$sender->username);
+			$this->email->send();
+			
 		} else {
 			$status = false;
 		}

@@ -1,4 +1,4 @@
-myApp.controller('newLineupCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'FileSaver', 'Blob', 'testParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, FileSaver, Blob, testParams) {
+myApp.controller('newLineupCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.testParams = testParams.lineups;
 	var site = testParams.site;
@@ -52,9 +52,16 @@ myApp.controller('newLineupCtrl', ['$scope', '$http', '$location', 'Flash', 'Ses
 		$http.post(site+'/lineups/create', {lineups: $scope.lineups, title: $scope.lineup.title , user: $scope.user})
 		.then(function(response){
 			console.log(response.data);
-//			var buffer = new Uint8Array(response.data);
-//			var blob = new Blob([buffer], {type: 'application/vnd.ms-excel;charset=charset=utf-8'});
-//			FileSaver.saveAs(blob, 'bla.xlsx', true);
+			//generate a temp <a /> tag
+			var link = document.createElement("a");
+			link.href = response.data;
+			//set the visibility hidden so it will not effect on web-layout
+			link.style = "visibility:hidden";
+			// appending the anchor tag and remove it after automatic click
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+			
 		});
 //		console.log($scope.lineups);
 	}

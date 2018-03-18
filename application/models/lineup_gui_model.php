@@ -70,6 +70,7 @@ class lineup_gui_model extends CI_Model {
 				$this->configLoLineup($lineup, $loLineup);
 				break;
 			}
+			$spreadsheet->getActiveSheet()->setTitle('Typical');
 			return ".xlsx";
 		}
 		
