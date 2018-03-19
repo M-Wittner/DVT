@@ -104,3 +104,318 @@ ERROR - 201820182018-0303-1818 1111:0303:3131 --> 404 Page Not Found: Faviconico
 ERROR - 201820182018-0303-1818 1212:0303:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
 ERROR - 201820182018-0303-1818 1212:0303:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
 ERROR - 201820182018-0303-1818 1212:0303:3131 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201820182018-0303-1818 1313:0303:1717 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1414:0303:2020 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1414:0303:2323 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1414:0303:2424 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1414:0303:2626 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1414:0303:3232 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1414:0303:3333 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1414:0303:2121 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-1818 1414:0303:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201820182018-0303-1818 1414:0303:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201820182018-0303-1818 1414:0303:4242 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201820182018-0303-1818 1414:0303:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201820182018-0303-1818 1414:0303:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201820182018-0303-1818 1414:0303:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201820182018-0303-1818 1414:0303:0707 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1414:0303:2929 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1414:0303:1515 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201820182018-0303-1818 1414:0303:1515 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201820182018-0303-1818 1414:0303:1515 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201820182018-0303-1818 1515:0303:0303 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1515:0303:5353 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1616:0303:3535 --> Severity: Notice --> Undefined property: stdClass::$sender C:\xampp\htdocs\application\controllers\tasks.php 148
+ERROR - 201820182018-0303-1818 1616:0303:3535 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\tasks.php 150
+ERROR - 201820182018-0303-1818 1616:0303:3535 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\controllers\tasks.php 150
+ERROR - 201820182018-0303-1818 1616:0303:3535 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\tasks.php 150
+ERROR - 201820182018-0303-1818 1616:0303:3535 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\tasks.php 150
+ERROR - 201820182018-0303-1818 1616:0303:3535 --> Severity: Notice --> Undefined property: stdClass::$username C:\xampp\htdocs\application\controllers\tasks.php 163
+ERROR - 201820182018-0303-1818 1616:0303:3535 --> Severity: Notice --> Undefined property: stdClass::$username C:\xampp\htdocs\application\controllers\tasks.php 166
+ERROR - 201820182018-0303-1818 1616:0303:3636 --> Severity: Warning --> mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() C:\xampp\htdocs\system\libraries\Email.php 1890
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Warning --> mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() C:\xampp\htdocs\system\libraries\Email.php 1896
+ERROR - 201820182018-0303-1818 1616:0303:1818 --> Severity: Warning --> mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() C:\xampp\htdocs\system\libraries\Email.php 1896
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5656 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5757 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3232 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2424 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2828 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3535 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2626 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2626 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2626 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2626 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2626 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2626 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2727 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1111 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:3434 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1717 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5151 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5151 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5252 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5757 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5959 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4545 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4545 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4545 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4545 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4545 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4545 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4646 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4444 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4545 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5151 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:5454 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1515 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2525 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0303 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:1616 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:0707 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2222 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2222 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2222 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2222 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2222 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2222 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2222 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2222 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2222 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2222 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2222 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2222 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:2323 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4141 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to undefined function mysqli_init() C:\xampp\htdocs\system\database\drivers\mysqli\mysqli_driver.php 135
+ERROR - 201820182018-0303-1818 1717:0303:5757 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 653
+ERROR - 201820182018-0303-1818 1818:0303:5555 --> Severity: error --> Exception: File "\\filer4\fileserver\Projects\dvt\lineups\TalynM\M - CB1\TxEVM\M2 Lineups\TxEVM_15_XIF_4_Ch_1_IFMUX sweep_all temp.csv" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
+ERROR - 201820182018-0303-1818 1818:0303:0303 --> Severity: error --> Exception: File "\\filer4\fileserver\Projects\dvt\lineups\TalynM\M - CB1\TxEVM\M2 Lineups\TxEVM_15_XIF_4_Ch_1_IFMUX sweep_all temp.csv" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
