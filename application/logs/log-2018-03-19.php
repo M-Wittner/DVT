@@ -48,3 +48,7 @@ ERROR - 201820182018-0303-1919 1212:0303:4949 --> Severity: Notice --> Trying to
 ERROR - 201820182018-0303-1919 1212:0303:4949 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\tasks.php 173
 ERROR - 201820182018-0303-1919 1212:0303:4949 --> Severity: Warning --> mail(): SMTP server response: 503 #5.5.1 RCPT first C:\xampp\htdocs\system\libraries\Email.php 1890
 ERROR - 201820182018-0303-1919 1212:0303:2222 --> Severity: Notice --> Undefined property: stdClass::$site C:\xampp\htdocs\application\controllers\tasks.php 144
+ERROR - 201820182018-0303-1919 1212:0303:2424 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201820182018-0303-1919 1212:0303:2424 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201820182018-0303-1919 1212:0303:2424 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201820182018-0303-1919 1212:0303:0505 --> 404 Page Not Found: Qualcomm-icon-2018ico/index
