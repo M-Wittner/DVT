@@ -1,8 +1,8 @@
-myApp.controller('searchCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', function ($scope, $location, $http, Flash, $cookies, $window, AuthService) {
+myApp.controller('searchCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window','testParams', 'AuthService', function ($scope, $location, $http, Flash, $cookies, $window, testParams, AuthService) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-	
+	var site = testParams.site;
 	if($scope.isAuthenticated == true) {
-		$http.get('http://wigig-584/admin/search')
+		$http.get(site+'/admin/search')
 		.then(function(response) {
 //			console.log(AuthService.isAuthenticated());
 			$scope.plans=response.data;
@@ -18,7 +18,7 @@ myApp.controller('searchCtrl', ['$scope', '$location','$http', 'Flash', '$cookie
 	};
 //	console.log();
 	$scope.seen = function(plan){
-		$http.post('http://wigig-584/plans/planCheck', {plan: plan, user: $scope.currentUser})
+		$http.post(site+'/plans/planCheck', {plan: plan, user: $scope.currentUser})
 		.then(function(response){
 			console.log(response.data);
 			if(response.data == 'true'){

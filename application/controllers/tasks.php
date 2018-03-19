@@ -134,9 +134,7 @@ class Tasks extends CI_Controller {
 		}
 		echo $status;
 	}	
-	public function assignedUpdate(){
-		
-//		$this->email->initialize($config);
+	public function assignedUpdate(){	
 		$data = json_decode(file_get_contents('php://input'));
 //		echo json_encode($data);
 //		die();
@@ -145,17 +143,13 @@ class Tasks extends CI_Controller {
 		$task = $data->task;
 		$site = $data->site;
 		$this->db->select(['assigned']);
-			$status = $this->db->get_where('tasks_view',['id'=>$to->id])->result();
-//		echo json_encode($to->id);
-//		die();
-		
+		$status = $this->db->get_where('tasks_view',['id'=>$to->id])->result();
 		
 		$this->db->select('email');
 		$to->email = $this->db->get_where('users', ['id'=>$to->id])->result()[0]->email;
 		
 		$this->db->select('email');
 		$from->email = $this->db->get_where('users', ['id'=>$from->userId])->result()[0]->email;
-		
 		
 		$this->db->where('id', $to->id);
 		$res = $this->db->update('tasks', ['assigned_to'=>$to->id, 'approved'=>true]);
@@ -180,6 +174,38 @@ class Tasks extends CI_Controller {
 			$status = false;
 		}
 		echo $status;
+	}
+	
+	public function imDone(){
+		$data = json_decode(file_get_contents('php://input'));
+//		echo json_encode($data);
+//		die();
+		$from = $data->user;
+		$task = $data->task;
+		$site = $data->site;
+		
+		$this->db->where('id', $task->id);
+		$res = $this->db->update('tasks', ['status_id'=>3]);
+		
+		$this->db->select('email');
+		$creatorEmail = $this->db->get_where("users", ['username'=>$task->creator])->result()[0]->email;
+		
+		if($res = true){
+			//SEND EMAIL
+			$this->email->from("DVT - WEB");
+//			$this->email->from($sender->email, $sender->username);
+			$this->email->to($creatorEmail);
+			$this->email->cc("ykeren@qti.qualcomm.com");
+			$this->email->subject($from->username." has completed a task you requested");
+			$this->email->message($from->username." marked '".$task->title."' task as 'Completed'! \n".
+														"You can view it in the following link: \n".
+													 	$site."/tasks/".$task->id
+													 );
+			$this->email->send();
+			echo "Completed";
+		} else{
+			echo "Faliure!";
+		}
 	}
 	
 	public function newComment(){
