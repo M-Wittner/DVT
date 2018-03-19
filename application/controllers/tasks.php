@@ -135,8 +135,8 @@ class Tasks extends CI_Controller {
 		echo $status;
 	}	
 	public function assignedUpdate(){
-		$config['smtp-host'] = 'smtphost.qualcomm.com';
-		$this->email->initialize($config);
+		
+//		$this->email->initialize($config);
 		$data = json_decode(file_get_contents('php://input'));
 //		echo json_encode($data);
 //		die();
@@ -160,7 +160,8 @@ class Tasks extends CI_Controller {
 			$status = $this->db->get_where('tasks_view',['id'=>$id])->result()[0]->assigned;
 			
 			//SEND EMAIL
-			$this->email->from($sender->email, $sender->username);
+			$this->email->from("DVT - WEB");
+//			$this->email->from($sender->email, $sender->username);
 			$this->email->to($userEmail);
 			$this->email->subject("You've got a new task!");
 			$this->email->message("A new task has been assigned to you by ".$sender->username);

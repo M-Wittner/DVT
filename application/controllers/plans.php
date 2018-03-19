@@ -9,8 +9,8 @@ class Plans extends CI_Controller {
 	public function __construct() {
 
 	parent::__construct();
-	$this->load->helper(array('form','url'));
-//	$this->load->library(array('session'));
+	$this->load->helper(['form','url']);
+	$this->load->library(['email']);
 	$this->load->database('');
 	$this->load->model(['plan_model', 'excel_model']);
     }
@@ -1013,5 +1013,19 @@ class Plans extends CI_Controller {
 				}	
 			}		
 		}
+	}
+	
+	public function sendMail(){
+		$data = json_decode(file_get_contents('php://input'));
+//		$data = file_get_contents('php://input');
+//		$this->email->from("DVT - WEB");
+////		$this->email->from($sender->email, $sender->username);
+//		$this->email->to("c_matanw@qti.qualcomm.com");
+////		$this->email->to("DVT-system-all@qti.qualcomm.com");
+//		$this->email->subject("New Plan");
+//		$this->email->message($data);
+//		$this->email->send();
+		
+	$title = "Plan #".$data->id." Submitted by: ".$data->user_username;
 	}
 }

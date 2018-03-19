@@ -155,7 +155,7 @@
 							</div>
 							<div class="panel-body" uib-collapse="isCollapsed">
 								<div class="col-md-3 lineup-input" ng-repeat="item in testParams.lineups.mGeneralParams track by $index">
-									<div class="row">
+									<div class="row"  ng-hide="item.parameter_id == 309 && lineup.type[0].lineup_type_id == 1">
 										<div class="col-md-10">
 											<label>{{item.parameter_name}}</label>
 										</div>

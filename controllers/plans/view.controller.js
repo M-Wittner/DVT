@@ -8,7 +8,8 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		console.log(response.data);
 		$scope.plan = response.data;
 	});
-		
+	
+	var site = testParams.site;
 	$scope.user = {};
 	$scope.user.id = $cookies.getObject('loggedUser').userId;
 	$scope.user.username = $cookies.getObject('loggedUser').username;
@@ -53,6 +54,14 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 			}
 		});
 	};
+	
+	$scope.sendMail = function(){
+		$http.post(site+'/plans/sendMail', $scope.plan)
+		.then(function(response){
+			console.log(response.data);
+		})
+	}
+	
 	$scope.removeComment = function() {
 		$http.post('http://wigig-584/plans/removeComment', this.comment.id)
 		.then(function(response){
@@ -126,6 +135,4 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 //			$route.reload();
 		});
 	};
-	
-//	console.log($scope);
 }]);

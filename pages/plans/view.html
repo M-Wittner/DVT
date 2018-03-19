@@ -39,13 +39,21 @@
 </br>
 <div class="panel panel-primary">
 	<div class="panel-heading">Submitted by: {{plan.user_username}}
-		<span class="pull-right">{{ plan.date }}
-			<a class="btn btn-sm btn-success" href="#/plans/{{plan.id}}/addtests">
-            	Add Tests
-        	</a>
-			<button class="btn btn-sm btn-danger" ng-click="removePlan()">
-            	Delete
-        	</button>
+		<span class="pull-right"> {{ plan.date }} </span>
+	</div>
+	<div class="panel col-md-12">
+		<span class="pull-right btn-crud">
+			<a class="btn btn-xs btn-success" href="#/plans/{{plan.id}}/addtests">
+					Add Tests
+			</a>
+			<button class="btn btn-xs btn-danger" ng-click="removePlan()">
+					Delete
+			</button>
+<!--
+			<button class="btn btn-xs btn-info" ng-click="sendMail()">
+					Send Mail
+			</button>
+-->
 		</span>
 	</div>
 	<div class="panel-body" id="planBody" ng-repeat="test in plan.tests | orderBy: 'priority'| filter:{priority: testPriority, station: testStation, name: testName} track by $index">
