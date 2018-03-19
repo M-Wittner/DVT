@@ -135,11 +135,12 @@ class Tasks extends CI_Controller {
 		echo $status;
 	}	
 	public function assignedUpdate(){
-		$config['smtp-host'] = 'smtphost.qualcomm.com';
-		$this->email->initialize($config);
 		$data = json_decode(file_get_contents('php://input'));
 //		echo json_encode($data);
 //		die();
+		$config['smtp-host'] = 'smtphost.qualcomm.com';
+		$this->email->initialize($config);
+		
 		$id = $data->id;
 		$userId = $data->userId;
 		$this->db->select('email');
