@@ -34,25 +34,24 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 		})
 		}
 		$scope.approveUpdate = function(taskId, approved){
-		$http.post(site+'/tasks/approveUpdate', {id: taskId, approved: approved})
-			.then(function(response){
-			console.log(response.data);
-			if(response.data != false){
-				$scope.task.priority = response.data;
-			}
-		})
+			$http.post(site+'/tasks/approveUpdate', {id: taskId, approved: approved})
+				.then(function(response){
+				console.log(response.data);
+				if(response.data != false){
+					$scope.task.priority = response.data;
+				}
+			})
 		}
 		
-		$scope.assignedUpdate = function(taskId, userId){
-		$http.post(site+'/tasks/assignedUpdate', {id: taskId, userId: userId, sender: $scope.sender})
-			.then(function(response){
-			if(response.data != false){
-				$scope.task.assigned = response.data
-				$scope.task.approved = true;
-			}
-			console.log(response.data);
-			
-		})
+		$scope.assignedUpdate = function(task, user){
+			$http.post(site+'/tasks/assignedUpdate', {task: task, user: user, sender: $scope.sender, site: site})
+				.then(function(response){
+				if(response.data != false){
+					$scope.task.assigned = response.data
+					$scope.task.approved = true;
+				}
+				console.log(response.data);
+			})
 		}
 		
 	$scope.activeTask = function(taskId, active){

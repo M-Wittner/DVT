@@ -138,33 +138,40 @@ class Tasks extends CI_Controller {
 		$data = json_decode(file_get_contents('php://input'));
 //		echo json_encode($data);
 //		die();
-		$config['smtp-host'] = 'smtphost.qualcomm.com';
-		$this->email->initialize($config);
+		$to = $data->user;
+		$from = $data->sender;
+		$task = $data->task;
+		$site = $data->site;
+		$this->db->select(['assigned']);
+			$status = $this->db->get_where('tasks_view',['id'=>$to->id])->result();
+//		echo json_encode($to->id);
+//		die();
 		
-		$id = $data->id;
-		$userId = $data->userId;
+		
 		$this->db->select('email');
-		$userEmail = $this->db->get_where('users', ['id'=>$userId])->result()[0]->email;
+		$to->email = $this->db->get_where('users', ['id'=>$to->id])->result()[0]->email;
 		
-		$sender = $data->sender;
 		$this->db->select('email');
-		$sender->email = $this->db->get_where('users', ['id'=>$sender->userId])->result()[0]->email;
+		$from->email = $this->db->get_where('users', ['id'=>$from->userId])->result()[0]->email;
 		
-//		$senderData = $this->db->get_where('users', ['id'=>$data->user->userId])->result()[0];
-//		$reciver
 		
-		$this->db->where('id', $id);
-		$res = $this->db->update('tasks', ['assigned_to'=>$userId, 'approved'=>true]);
+		$this->db->where('id', $to->id);
+		$res = $this->db->update('tasks', ['assigned_to'=>$to->id, 'approved'=>true]);
 		
 		if($res = true){
 			$this->db->select(['assigned']);
-			$status = $this->db->get_where('tasks_view',['id'=>$id])->result()[0]->assigned;
+			$status = $this->db->get_where('tasks_view',['id'=>$task->id])->result()[0]->assigned;
 			
 			//SEND EMAIL
-			$this->email->from($sender->email, $sender->username);
-			$this->email->to($userEmail);
+			$this->email->from("DVT - WEB");
+//			$this->email->from($sender->email, $sender->username);
+			$this->email->to($to->email);
 			$this->email->subject("You've got a new task!");
-			$this->email->message("A new task has been assigned to you by ".$sender->username);
+			$this->email->message("A new task has been assigned to you by ".$from->username."\n\n".
+														"Title: ".$task->title."\n".
+														"You can view it in the following link: \n".
+													 	$site."/tasks/".$task->id
+													 );
 			$this->email->send();
 			
 		} else {
