@@ -135,6 +135,11 @@ class Tasks extends CI_Controller {
 		echo $status;
 	}	
 	public function assignedUpdate(){
+<<<<<<< HEAD
+=======
+		
+//		$this->email->initialize($config);
+>>>>>>> local-workPC
 		$data = json_decode(file_get_contents('php://input'));
 //		echo json_encode($data);
 //		die();
@@ -167,7 +172,7 @@ class Tasks extends CI_Controller {
 //			$this->email->from($sender->email, $sender->username);
 			$this->email->to($to->email);
 			$this->email->subject("You've got a new task!");
-			$this->email->message("A new task has been assigned to you by ".$from->username."\n\n".
+			$this->email->message("A new task has been assigned to you by ".$from->username."\n".
 														"Title: ".$task->title."\n".
 														"You can view it in the following link: \n".
 													 	$site."/tasks/".$task->id

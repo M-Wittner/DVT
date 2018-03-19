@@ -52,7 +52,7 @@ myApp.controller('newLineupCtrl', ['$scope', '$http', '$location', 'Flash', 'Ses
 		$http.post(site+'/lineups/create', {lineups: $scope.lineups, title: $scope.lineup.title , user: $scope.user})
 		.then(function(response){
 			console.log(response.data);
-			//generate a temp <a /> tag
+			//generate a temp <a/> tag
 			var link = document.createElement("a");
 			link.href = response.data;
 			//set the visibility hidden so it will not effect on web-layout
