@@ -43,15 +43,14 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 		})
 		}
 		
-		$scope.assignedUpdate = function(taskId, userId){
-		$http.post(site+'/tasks/assignedUpdate', {id: taskId, userId: userId, sender: $scope.sender})
+		$scope.assignedUpdate = function(task, user){
+		$http.post(site+'/tasks/assignedUpdate', {task: task, user: user, sender: $scope.sender, site: site})
 			.then(function(response){
 			if(response.data != false){
 				$scope.task.assigned = response.data
 				$scope.task.approved = true;
 			}
 			console.log(response.data);
-			
 		})
 		}
 		

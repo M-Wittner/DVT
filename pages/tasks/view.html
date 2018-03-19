@@ -30,7 +30,7 @@
 			<div class="btn-group" ng-model="task.assigned" uib-dropdown>
 				<button id="single-button" type="button" class="btn btn-default"  uib-dropdown-toggle><span ng-if="!task.assigned">Not Assigned</span>{{task.assigned}} <span class="caret"></span></button>
 				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
-					<li ng-repeat="user in params.autoUsers"><a  ng-click="assignedUpdate(task.id, user.id)">{{user.fname}} {{user.lname}}</a></li>
+					<li ng-repeat="user in params.autoUsers"><a  ng-click="assignedUpdate(task, user)">{{user.fname}} {{user.lname}}</a></li>
 				</ul>
 			</div>
 		</span>
