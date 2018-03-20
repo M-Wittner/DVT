@@ -40,7 +40,7 @@ myApp.controller('newLineupCtrl', ['$scope', '$http', '$location', 'Flash', 'Ses
 	$scope.inRange = function(param, value){
 		var value = parseInt(value);
 		var range = Math.pow(2, param.parameter_range);
-		if(value < range && value >= 0){
+		if(value <= range && value >= 0){
 			var returnClass = "has-success";
 		}else if(value >= range || isNaN(value) || value < 0){
 			var returnClass = "has-error";

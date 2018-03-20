@@ -320,6 +320,39 @@ class CI_Config {
 		}
 
 		return $base_url.$this->_uri_string($uri);
+	}	
+	
+	// -------------------------------------------------------------
+
+	/**
+	 * Custom URL
+	 *
+	 * Returns custom_url [. uri_string]
+	 *
+	 * @uses	CI_Config::_uri_string()
+	 *
+	 * @param	string|string[]	$uri	URI string or an array of segments
+	 * @param	string	$protocol
+	 * @return	string
+	 */
+	public function custom_url($uri = '', $protocol = NULL)
+	{
+		$custom_url = $this->slash_item('custom_url');
+
+		if (isset($protocol))
+		{
+			// For protocol-relative links
+			if ($protocol === '')
+			{
+				$base_url = substr($custom_url, strpos($custom_url, '//'));
+			}
+			else
+			{
+				$custom_url = $protocol.substr($custom_url, strpos($custom_url, '://'));
+			}
+		}
+
+		return $custom_url.$this->_uri_string($uri);
 	}
 
 	// -------------------------------------------------------------

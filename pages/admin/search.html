@@ -39,7 +39,7 @@
 				<th>Stations</th>
 				<th>Tests</th>
 				<th>Chips</th>
-				<th>Seen</th>
+<!--				<th>Seen</th>-->
 			</tr>
 		</thead>
 		<tbody>
@@ -64,14 +64,16 @@
 				</td>
 				<td>
 					<ul ng-repeat="test in plan.tests">
-						<li ng-repeat="chip in test.chips ">{{chip.chip}}<span class="pull-right glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span></li>
+						<li ng-repeat="chip in test.chips ">{{chip.serial_number}}<span class="pull-right glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span></li>
 					<ul>
 				</td>
+<!--
 				<td>
 					<button ng-click="seen(plan)" ng-show="currentUser.rank > '10'" class="btn btn-xs btn-default">update</button>
 					<span ng-model="test.checked" class="btn-lg glyphicon" ng-class="{'glyphicon-ok check-seen': plan.checked == true, 'glyphicon-minus check-unseen': plan.checked == false}"></span>
 					<span ng-if="plan.checked == true">  By {{plan.checked_by}} </span>
 				</td>
+-->
 			</tr>
 		</tbody>
 	</table>

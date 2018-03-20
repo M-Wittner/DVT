@@ -1017,15 +1017,39 @@ class Plans extends CI_Controller {
 	
 	public function sendMail(){
 		$data = json_decode(file_get_contents('php://input'));
+//		echo json_encode($data);
+//		die();
+		$testPlans = $data->tests;
+		$progress = $data->progress;
 //		$data = file_get_contents('php://input');
-//		$this->email->from("DVT - WEB");
-////		$this->email->from($sender->email, $sender->username);
-//		$this->email->to("c_matanw@qti.qualcomm.com");
-////		$this->email->to("DVT-system-all@qti.qualcomm.com");
-//		$this->email->subject("New Plan");
-//		$this->email->message($data);
-//		$this->email->send();
+		$this->email->from("DVT - WEB");
+//		$this->email->from($sender->email, $sender->username);
+		$this->email->to("c_matanw@qti.qualcomm.com");
+//		$this->email->to("DVT-system-all@qti.qualcomm.com");
+		$this->email->subject("New Plan");
+
 		
-	$title = "Plan #".$data->id." Submitted by: ".$data->user_username;
+		$details = array();
+		
+		$subject = "Daily Plan";
+		$title = "Plan #".$data->id." Submitted by: ".$data->user_username;
+//		$body = ;
+		
+		foreach($testPlans as $i=>$testPlan){
+			$test = new stdClass();
+			$test->id = $testPlan->id;
+			$test->station = $testPlan->station[0]->station;
+			$test->antennas = $testPlan->antennas;
+			$test->channels = array_column($testPlan->channels, 'channel');
+			$test->chips = array_column($testPlan->chips, 'serial_number');
+			$test->temps = array_column($testPlan->temps, 'temp');
+			$test->progress = $testPlan->progress;
+			$msg = "test #".$test->id." station: ".$test->station."\n";
+			array_push($details, $msg);
+		}
+			$this->email->message(implode("\n",$details));
+//			$this->email->message(join("\n",$details));
+			$this->email->send();
+//		echo json_encode($details);
 	}
 }

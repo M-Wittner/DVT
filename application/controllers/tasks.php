@@ -134,6 +134,7 @@ class Tasks extends CI_Controller {
 		}
 		echo $status;
 	}	
+	
 	public function assignedUpdate(){
 		$data = json_decode(file_get_contents('php://input'));
 //		echo json_encode($data);
@@ -143,17 +144,13 @@ class Tasks extends CI_Controller {
 		$task = $data->task;
 		$site = $data->site;
 		$this->db->select(['assigned']);
-			$status = $this->db->get_where('tasks_view',['id'=>$to->id])->result();
-//		echo json_encode($to->id);
-//		die();
-		
+		$status = $this->db->get_where('tasks_view',['id'=>$to->id])->result();
 		
 		$this->db->select('email');
 		$to->email = $this->db->get_where('users', ['id'=>$to->id])->result()[0]->email;
 		
 		$this->db->select('email');
 		$from->email = $this->db->get_where('users', ['id'=>$from->userId])->result()[0]->email;
-		
 		
 		$this->db->where('id', $to->id);
 		$res = $this->db->update('tasks', ['assigned_to'=>$to->id, 'approved'=>true]);

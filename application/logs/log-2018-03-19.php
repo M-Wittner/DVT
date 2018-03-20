@@ -104,5 +104,34 @@ ERROR - 201820182018-0303-1919 1010:0303:5252 --> Severity: Notice --> Array to 
 ERROR - 201820182018-0303-1919 1010:0303:1010 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\application\controllers\tasks.php 182
 ERROR - 201820182018-0303-1919 1010:0303:3838 --> Severity: Notice --> Undefined property: stdClass::$assinged C:\xampp\htdocs\application\controllers\tasks.php 165
 ERROR - 201820182018-0303-1919 1010:0303:5050 --> Severity: 4096 --> Object of class stdClass could not be converted to string C:\xampp\htdocs\application\controllers\tasks.php 182
+<<<<<<< HEAD
 >>>>>>> local-workPC
 ERROR - 201820182018-0303-1919 1515:0303:1414 --> 404 Page Not Found: Tasks/imDone
+=======
+ERROR - 201820182018-0303-1919 1212:0303:0909 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-1919 1313:0303:2020 --> Severity: error --> Exception: syntax error, unexpected '$title' (T_VARIABLE) C:\xampp\htdocs\application\controllers\plans.php 1032
+ERROR - 201820182018-0303-1919 1313:0303:5151 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 1045
+ERROR - 201820182018-0303-1919 1313:0303:5151 --> Severity: Notice --> Undefined property: stdClass::$antennas C:\xampp\htdocs\application\controllers\plans.php 1040
+ERROR - 201820182018-0303-1919 1313:0303:5151 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 1045
+ERROR - 201820182018-0303-1919 1313:0303:5151 --> Severity: Notice --> Undefined property: stdClass::$antennas C:\xampp\htdocs\application\controllers\plans.php 1040
+ERROR - 201820182018-0303-1919 1313:0303:5151 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 1045
+ERROR - 201820182018-0303-1919 1313:0303:5151 --> Severity: Notice --> Undefined property: stdClass::$antennas C:\xampp\htdocs\application\controllers\plans.php 1040
+ERROR - 201820182018-0303-1919 1313:0303:5151 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 1045
+ERROR - 201820182018-0303-1919 1313:0303:5151 --> Severity: Notice --> Undefined property: stdClass::$antennas C:\xampp\htdocs\application\controllers\plans.php 1040
+ERROR - 201820182018-0303-1919 1313:0303:5151 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 1045
+ERROR - 201820182018-0303-1919 1313:0303:5151 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 1045
+ERROR - 201820182018-0303-1919 1313:0303:5151 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 1045
+ERROR - 201820182018-0303-1919 1313:0303:4242 --> Severity: Notice --> Undefined property: stdClass::$antennas C:\xampp\htdocs\application\controllers\plans.php 1040
+ERROR - 201820182018-0303-1919 1313:0303:4242 --> Severity: Notice --> Undefined property: stdClass::$antennas C:\xampp\htdocs\application\controllers\plans.php 1040
+ERROR - 201820182018-0303-1919 1313:0303:4242 --> Severity: Notice --> Undefined property: stdClass::$antennas C:\xampp\htdocs\application\controllers\plans.php 1040
+ERROR - 201820182018-0303-1919 1313:0303:4242 --> Severity: Notice --> Undefined property: stdClass::$antennas C:\xampp\htdocs\application\controllers\plans.php 1040
+ERROR - 201820182018-0303-1919 1313:0303:1414 --> Severity: error --> Exception: syntax error, unexpected 'foreach' (T_FOREACH) C:\xampp\htdocs\application\controllers\plans.php 1048
+ERROR - 201820182018-0303-1919 1313:0303:3333 --> Severity: Warning --> rtrim() expects parameter 1 to be string, array given C:\xampp\htdocs\system\libraries\Email.php 677
+ERROR - 201820182018-0303-1919 1414:0303:2222 --> Severity: Notice --> Undefined property: stdClass::$ceator C:\xampp\htdocs\application\controllers\tasks.php 191
+ERROR - 201820182018-0303-1919 1414:0303:2222 --> Query error: Unknown column 'user_username' in 'where clause' - Invalid query: SELECT `email`
+FROM `users`
+WHERE `user_username` IS NULL
+ERROR - 201820182018-0303-1919 1414:0303:3535 --> Query error: Unknown column 'user_username' in 'where clause' - Invalid query: SELECT `email`
+FROM `users`
+WHERE `user_username` = 'c_matanw'
+>>>>>>> local-workPC
