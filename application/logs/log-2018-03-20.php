@@ -72,3 +72,7 @@ ERROR - 201820182018-0303-2020 1515:0303:1313 --> Severity: Notice --> Undefined
 ERROR - 201820182018-0303-2020 1515:0303:2121 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
 ERROR - 201820182018-0303-2020 1515:0303:4040 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
 ERROR - 201820182018-0303-2020 1515:0303:4141 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-2020 1515:0303:0606 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-2020 1515:0303:4949 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-2020 1616:0303:5959 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-2020 1616:0303:0000 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
