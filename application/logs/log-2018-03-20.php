@@ -43,3 +43,32 @@ ERROR - 201820182018-0303-2020 1010:0303:2323 --> Severity: Notice --> Undefined
 ERROR - 201820182018-0303-2020 1010:0303:2323 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\controllers\plans.php 154
 ERROR - 201820182018-0303-2020 1010:0303:3838 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\controllers\plans.php 154
 ERROR - 201820182018-0303-2020 1010:0303:3838 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\controllers\plans.php 154
+ERROR - 201820182018-0303-2020 1010:0303:4646 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-2020 1010:0303:0000 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-2020 1010:0303:5858 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-2020 1212:0303:3030 --> Severity: Notice --> Undefined property: stdClass::$title C:\xampp\htdocs\application\controllers\lineups.php 31
+ERROR - 201820182018-0303-2020 1212:0303:5656 --> Severity: error --> Exception: syntax error, unexpected '}' C:\xampp\htdocs\application\models\lineup_gui_model.php 353
+ERROR - 201820182018-0303-2020 1313:0303:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:5959 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:5959 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:5959 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:5959 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:5959 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:5959 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:5959 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1313:0303:5959 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\lineup_gui_model.php 328
+ERROR - 201820182018-0303-2020 1414:0303:2323 --> Severity: error --> Exception: syntax error, unexpected end of file, expecting function (T_FUNCTION) or const (T_CONST) C:\xampp\htdocs\application\models\lineup_gui_model.php 435
+ERROR - 201820182018-0303-2020 1414:0303:4141 --> Severity: Notice --> Undefined variable: res C:\xampp\htdocs\application\controllers\lineups.php 59
+ERROR - 201820182018-0303-2020 1414:0303:4242 --> Severity: Notice --> Undefined variable: res C:\xampp\htdocs\application\controllers\lineups.php 62
+ERROR - 201820182018-0303-2020 1414:0303:4242 --> Severity: Notice --> Undefined variable: res C:\xampp\htdocs\application\controllers\lineups.php 66
+ERROR - 201820182018-0303-2020 1515:0303:1313 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-2020 1515:0303:2121 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-2020 1515:0303:4040 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0303-2020 1515:0303:4141 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105

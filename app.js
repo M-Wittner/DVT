@@ -438,6 +438,8 @@ myApp.factory('testParams', function($http, $log){
 		'15',
 	];
 	testParams.params.gainTableIdx = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'];
+	testParams.params.txGainRow = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
+	testParams.params.dacFssel = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40'];
 	
 	testParams.params.xifList = {};
 	$http.get(site+'/params/xifs')
@@ -456,7 +458,7 @@ myApp.factory('testParams', function($http, $log){
 	$http.get(site+'/params/chipsR')
 	.then(function(response){
 		testParams.params.chipListR = response.data;
-		console.log(response.data);
+//		console.log(response.data);
 	});
 		
 	testParams.params.chipListMR = {};

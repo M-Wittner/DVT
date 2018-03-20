@@ -226,6 +226,7 @@ class Plans extends CI_Controller {
 //								$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
 									$chip = array(
 										'serial_number'=>$result->chip_sn,
+										'corner'=>$result->chip_chip_process_abb,
 										'chip'=>$result->chip_type_id,
 //									'results_path'=>$path,
 										'plan_id'=>$planId,
@@ -258,6 +259,7 @@ class Plans extends CI_Controller {
 		//							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
 									$chip = array(
 										'serial_number'=>$result->chip_sn,
+										'corner'=>$result->chip_chip_process_abb,
 		//								'results_path'=>$path,
 										'plan_id'=>$planId,
 										'test_id'=>$testId
@@ -315,6 +317,7 @@ class Plans extends CI_Controller {
 							foreach($chipsArr as $result){
 								$chip = array(
 									'serial_number'=>$result->chip_sn,
+									'corner'=>$result->chip_chip_process_abb,
 									'chip'=>$result->chip_type_id,
 									'plan_id'=>$planId,
 									'test_id'=>$testId
@@ -340,6 +343,7 @@ class Plans extends CI_Controller {
 							foreach($aChipsArr as $result){
 								$chip = array(
 									'serial_number'=>$result->chip_sn,
+									'corner'=>$result->chip_chip_process_abb,
 									'chip'=>$result->chip_type_id,
 									'plan_id'=>$planId,
 									'test_id'=>$testId
@@ -349,6 +353,7 @@ class Plans extends CI_Controller {
 							foreach($mChipsArr as $result){
 								$chip = array(
 									'serial_number'=>$result->chip_sn,
+									'corner'=>$result->chip_chip_process_abb,
 									'chip'=>$result->chip_type_id,
 									'plan_id'=>$planId,
 									'test_id'=>$testId
@@ -665,6 +670,7 @@ class Plans extends CI_Controller {
 //								$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
 									$chip = array(
 										'serial_number'=>$result->chip_sn,
+										'corner'=>$result->chip_chip_process_abb,
 										'chip'=>$result->chip_type_id,
 //									'results_path'=>$path,
 										'plan_id'=>$planId,
@@ -697,6 +703,7 @@ class Plans extends CI_Controller {
 		//							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
 									$chip = array(
 										'serial_number'=>$result->chip_sn,
+										'corner'=>$result->chip_chip_process_abb,
 										'chip'=>$result->chip_type_id,
 		//								'results_path'=>$path,
 										'plan_id'=>$planId,
@@ -754,6 +761,7 @@ class Plans extends CI_Controller {
 							foreach($chipsArr as $result){
 								$chip = array(
 									'serial_number'=>$result->chip_sn,
+									'corner'=>$result->chip_chip_process_abb,
 									'chip'=>$result->chip_type_id,
 									'plan_id'=>$planId,
 									'test_id'=>$testId
@@ -775,6 +783,7 @@ class Plans extends CI_Controller {
 							foreach($chipsArr as $result){
 								$chip = array(
 									'serial_number'=>$result->chip_sn,
+									'corner'=>$result->chip_chip_process_abb,
 									'chip'=>$result->chip_type_id,
 									'plan_id'=>$planId,
 									'test_id'=>$testId
