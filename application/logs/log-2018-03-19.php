@@ -105,3 +105,4 @@ ERROR - 201820182018-0303-1919 1010:0303:1010 --> Severity: Notice --> Array to 
 ERROR - 201820182018-0303-1919 1010:0303:3838 --> Severity: Notice --> Undefined property: stdClass::$assinged C:\xampp\htdocs\application\controllers\tasks.php 165
 ERROR - 201820182018-0303-1919 1010:0303:5050 --> Severity: 4096 --> Object of class stdClass could not be converted to string C:\xampp\htdocs\application\controllers\tasks.php 182
 >>>>>>> local-workPC
+ERROR - 201820182018-0303-1919 1515:0303:1414 --> 404 Page Not Found: Tasks/imDone

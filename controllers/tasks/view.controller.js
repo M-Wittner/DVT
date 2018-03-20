@@ -53,6 +53,15 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 				console.log(response.data);
 			})
 		}
+		$scope.imDone = function(task){
+			$http.post(site+'/tasks/imDone', {task: task, user: $scope.sender, site: site})
+			.then(function(response){
+				console.log(response.data);
+				if(response.data != false){
+					$scope.task.status = response.data;
+				}
+			})
+		}
 		
 	$scope.activeTask = function(taskId, active){
 		$http.post(site+'/tasks/active', {taskId : taskId, active: active})
