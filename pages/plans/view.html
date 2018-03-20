@@ -125,6 +125,7 @@
 										<thead>
 											<tr>
 												<th>Chip</th>
+<!--												<th>Corner</th>-->
 												<th>Status</th>
 												<th class="text-center">By</th>
 											</tr>
@@ -132,6 +133,7 @@
 										<tbody>
 											<tr ng-repeat="chip in test.chips | orderBy: 'serial_number' track by $index">
 												<td>{{chip.serial_number}}</td>
+<!--												<td>{{chip.chip_process_abb}}</td>-->
 												<td class="text-center">
 													<span ng-click="chipStatus(chip, test.id)" class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span>
 												</td>
@@ -153,6 +155,7 @@
 											<tr>
 												<th class="col-xs-3 col-sm-3 col-md-3">Chip/Temp</th>
 												<th>Status</th>
+<!--												<th>Corner</th>-->
 												<th>Cold</th>
 												<th>Hot</th>
 												<th>By</th>
@@ -163,6 +166,11 @@
 												<td>
 													{{chip.serial_number}}
 												</td>
+<!--
+												<td>
+													{{chip}}
+												</td>
+-->
 												<td>
 													<span ng-click="chipStatus(chip, test.id)" class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span>
 												</td>

@@ -106,6 +106,9 @@
 	<!--  Lineups	-->
 	<script type="text/javascript" src="controllers/lineups/lineups.controller.js"></script>
 	<script type="text/javascript" src="controllers/lineups/new.controller.js"></script>
+	<!--  Profile	-->
+	
+	<script type="text/javascript" src="controllers/profile/myTasks.controller.js"></script>
 </head>
 
 <body ng-app="myApp" ng-controller="homeCtrl">
@@ -137,8 +140,14 @@
 					</ul>
 					  
 					<ul ng-if=" isAuthenticated == true" class="nav navbar-nav navbar-right">
-						<li><a href="#">Logged in as {{ currentUser.username }}</a></li>
-						<li><a href="" ng-click="logout()">Log Out</a></li>
+						 <li  class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUser.firstName}} {{currentUser.lastName}}<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li ng-if="currentUser.group_id == 7"><a href="#/{{currentUser.username}}/tasks">My tasks</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="" ng-click="logout()">Log Out</a></li>
+							</ul>
+						</li>
 					</ul>
 					
 					<!--	Dropdown user panel	-->

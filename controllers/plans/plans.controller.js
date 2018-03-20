@@ -1,6 +1,7 @@
 myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', 'testParams', function ($scope, NgTableParams, $location, $http, Flash, $cookies, $window, AuthService, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	var site = testParams.site;
+//	console.log($scope.currentUser);
 	
 //	$scope.user = $scope.currentUser.username;
 	

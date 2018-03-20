@@ -71,41 +71,41 @@
 					<div ng-if="test.station[0].station == 'M-CB1' || test.station[0].station == 'M-CB2'">
 						<div ng-if="test.name[0].test_name == 'Temp-Calibration' || test.name[0].test_name == 'PTAT Calibration'">
 							<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.chips" data-placeholder="Pick Chips">
-								<ui-select-match>{{$item.serial_number}}</ui-select-match>
-								<ui-select-choices repeat="chip in testParams.params.chipListMR | filter:$select.search" group-by="'corner'" sortable="true">{{chip.serial_number}}</ui-select-choices>
+								<ui-select-match>{{$item.chip_sn}}</ui-select-match>
+								<ui-select-choices repeat="chip in testParams.params.chipListMR | filter:$select.search" group-by="'corner'" sortable="true">{{chip.chip_sn}}</ui-select-choices>
 							</ui-select>
 						</div>
 						<div ng-if="test.name[0].test_name != 'Temp-Calibration' && test.name[0].test_name != 'PTAT Calibration'">
 							<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.chips" data-placeholder="Pick Chips">
-								<ui-select-match>{{$item.serial_number}}</ui-select-match>
-								<ui-select-choices repeat="chip in testParams.params.chipListM | filter:$select.search" group-by="'corner'" sortable="true">{{chip.serial_number}}</ui-select-choices>
+								<ui-select-match>{{$item.chip_sn}}</ui-select-match>
+								<ui-select-choices repeat="chip in testParams.params.chipListM | filter:$select.search" group-by="'corner'" sortable="true">{{chip.chip_sn}}</ui-select-choices>
 							</ui-select>
 						</div>
 					</div>
 
 					<div ng-if="test.station[0].station == 'R-CB1' || test.station[0].station == 'R-CB2'">
 						<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.chips" data-placeholder="Pick Chips">
-							<ui-select-match>{{$item.serial_number}}</ui-select-match>
-							<ui-select-choices repeat="chip in testParams.params.chipListR | filter:$select.search" group-by="'corner'" sortable="true">{{chip.serial_number}}</ui-select-choices>
+							<ui-select-match>{{$item.chip_sn}}</ui-select-match>
+							<ui-select-choices repeat="chip in testParams.params.chipListR | filter:$select.search" group-by="'corner'" sortable="true">{{chip.chip_sn}}</ui-select-choices>
 						</ui-select>
 					</div>
 					
 					<div ng-if="test.station[0].station == 'PTAT/ABS/Vgb+TEMP' || test.station[0].station == 'Calibration'">
 						<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.chips" data-placeholder="Pick Chips">
-							<ui-select-match>{{$item.serial_number}}</ui-select-match>
-							<ui-select-choices repeat="chip in testParams.params.chipListMR | filter:$select.search" group-by="'corner'" sortable="true">{{chip.serial_number}}</ui-select-choices>
+							<ui-select-match>{{$item.chip_sn}}</ui-select-match>
+							<ui-select-choices repeat="chip in testParams.params.chipListMR | filter:$select.search" group-by="'corner'" sortable="true">{{chip.chip_sn}}</ui-select-choices>
 						</ui-select>
 					</div>
 					<div ng-if="test.station[0].station == 'TalynM+A'">
 						<span class="label label-dangerC">Chip A:</span>
 						<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.chips" data-placeholder="Pick Chips">
-							<ui-select-match>{{$item.serial_number}}</ui-select-match>
-							<ui-select-choices repeat="chip in testParams.params.chipListR | filter:$select.search" group-by="'corner'" sortable="true">{{chip.serial_number}}</ui-select-choices>
+							<ui-select-match>{{$item.chip_sn}}</ui-select-match>
+							<ui-select-choices repeat="chip in testParams.params.chipListR | filter:$select.search" group-by="'corner'" sortable="true">{{chip.chip_sn}}</ui-select-choices>
 						</ui-select>
 						<span class="label label-dangerC">Chip M:</span>
 						<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.mChips" data-placeholder="Pick Chips">
-							<ui-select-match>{{$item.serial_number}}</ui-select-match>
-							<ui-select-choices repeat="chip in testParams.params.chipListM | filter:$select.search" group-by="'corner'" sortable="true">{{chip.serial_number}}</ui-select-choices>
+							<ui-select-match>{{$item.chip_sn}}</ui-select-match>
+							<ui-select-choices repeat="chip in testParams.params.chipListM | filter:$select.search" group-by="'corner'" sortable="true">{{chip.chip_sn}}</ui-select-choices>
 						</ui-select>
 					</div>
 				</div>

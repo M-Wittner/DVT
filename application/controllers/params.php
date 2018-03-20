@@ -14,14 +14,14 @@ class Params extends CI_Controller {
     }
 	
 	public function chipsM() {
-		$this->db->where('chip', 'TalynM');
-		$data = $this->db->get('params_chips');
+		$this->db->where_in('chip_type_id', [2, 4]);
+		$data = $this->db->get('chip_view');
 		$result = $data->result();
 		echo json_encode($result);
 	}
 	public function chipsR() {
-		$this->db->where('chip', 'TalynA');
-		$data = $this->db->get('params_chips');
+		$this->db->where_in('chip_type_id', [1,3]);
+		$data = $this->db->get('chip_view');
 		$result = $data->result();
 		echo json_encode($result);
 	}

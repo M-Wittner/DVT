@@ -67,7 +67,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/tasks/comments/new.html',
 			controller: 'newTaskCommentCtrl'
 	})
-	//		--------------------	LINEUP PAGES --------------------
+//		--------------------	LINEUP PAGES --------------------
 		.when('/lineups', {
 			templateUrl: 'pages/lineups/index.html',
 			controller: 'lineupsCtrl'
@@ -76,6 +76,12 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/lineups/new.html',
 			controller: 'newLineupCtrl'
 	})
+//		--------------------	PROFILE PAGES --------------------
+		.when('/:username/tasks', {
+				templateUrl: 'pages/profile/myTasks.html',
+				controller: 'myTasksCtrl'
+		})
+	
 //		--------------------	ADMIN PAGES --------------------
 		.when('/admin', {
 			templateUrl: 'pages/admin/panel.html',
@@ -267,14 +273,16 @@ myApp.factory('LS', function($window, $rootScope){
 	return LS;
 });
 
-myApp.factory('AuthService', function($http, Session, $cookies){
+myApp.factory('AuthService', function(testParams, $http, Session, $cookies){
 	var authService = {};
+	var site = testParams.site
 	
 	authService.login = function (credentials){
 		return $http.post('http://wigig-584/auth/login', {user: credentials})
 		.then(function(res){
+//			console.log(res.data);
 			if(res.data.login = true){
-				Session.create(res.data.__ci_last_regenerate, res.data.userId, res.data.username, res.data.firstName, res.data.lastName, res.data.rank, res.data.email);
+				Session.create(res.data.__ci_last_regenerate, res.data.userId, res.data.username, res.data.firstName, res.data.lastName, res.data.rank, res.data.email, res.data.group_id);
 				return res.data;	
 			} else {
 				console.log('Error! Not logged in');
@@ -441,13 +449,14 @@ myApp.factory('testParams', function($http, $log){
     $http.get(site+'/params/chipsM')
 	.then(function(response){
 		testParams.params.chipListM = response.data;
+			
 	});
 	
 	testParams.params.chipListR = {};
 	$http.get(site+'/params/chipsR')
 	.then(function(response){
 		testParams.params.chipListR = response.data;
-//		console.log(response.data);
+		console.log(response.data);
 	});
 		
 	testParams.params.chipListMR = {};
@@ -573,13 +582,15 @@ myApp.filter('unique', function() {
 });
 
 myApp.service('Session', function(){
-	this.create = function(sessionId, userId, username, fisrtName, lastName, rank){
+	this.create = function(sessionId, userId, username, fisrtName, lastName, rank, email, groupId){
 		this.id = sessionId;
 		this.userId = userId;
 		this.username = username;
 		this.fisrtName = fisrtName;
 		this.lastName = lastName;
 		this.rank = parseInt(rank);
+		this.email = email;
+		this.group_id = groupId;
 	};
 	
 	this.destroy = function(){
@@ -589,5 +600,7 @@ myApp.service('Session', function(){
 		this.fisrtName = null;
 		this.lastName = null;
 		this.rank = null;
+		this.email = null;
+		this.group_id = null;
 	};
 });
