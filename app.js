@@ -67,7 +67,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/tasks/comments/new.html',
 			controller: 'newTaskCommentCtrl'
 	})
-	//		--------------------	LINEUP PAGES --------------------
+//		--------------------	LINEUP PAGES --------------------
 		.when('/lineups', {
 			templateUrl: 'pages/lineups/index.html',
 			controller: 'lineupsCtrl'
@@ -76,6 +76,12 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/lineups/new.html',
 			controller: 'newLineupCtrl'
 	})
+//		--------------------	PROFILE PAGES --------------------
+		.when('/:username/tasks', {
+				templateUrl: 'pages/profile/myTasks.html',
+				controller: 'myTasksCtrl'
+		})
+	
 //		--------------------	ADMIN PAGES --------------------
 		.when('/admin', {
 			templateUrl: 'pages/admin/panel.html',
@@ -267,12 +273,14 @@ myApp.factory('LS', function($window, $rootScope){
 	return LS;
 });
 
-myApp.factory('AuthService', function($http, Session, $cookies){
+myApp.factory('AuthService', function(testParams, $http, Session, $cookies){
 	var authService = {};
+	var site = testParams.site
 	
 	authService.login = function (credentials){
 		return $http.post('http://wigig-584/auth/login', {user: credentials})
 		.then(function(res){
+//			console.log(res.data);
 			if(res.data.login = true){
 				Session.create(res.data.__ci_last_regenerate, res.data.userId, res.data.username, res.data.firstName, res.data.lastName, res.data.rank, res.data.email, res.data.group_id);
 				return res.data;	
@@ -430,6 +438,8 @@ myApp.factory('testParams', function($http, $log){
 		'15',
 	];
 	testParams.params.gainTableIdx = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'];
+	testParams.params.txGainRow = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
+	testParams.params.dacFssel = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40'];
 	
 	testParams.params.xifList = {};
 	$http.get(site+'/params/xifs')
@@ -441,6 +451,7 @@ myApp.factory('testParams', function($http, $log){
     $http.get(site+'/params/chipsM')
 	.then(function(response){
 		testParams.params.chipListM = response.data;
+			
 	});
 	
 	testParams.params.chipListR = {};

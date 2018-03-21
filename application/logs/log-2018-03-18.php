@@ -98,6 +98,7 @@ ERROR - 201820182018-0303-1818 1010:0303:1818 --> Severity: error --> Exception:
 ERROR - 201820182018-0303-1818 1010:0303:0808 --> Severity: Warning --> unlink(lineups/FS - TalynM.TxBrd.xlsx): Resource temporarily unavailable C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx.php 213
 ERROR - 201820182018-0303-1818 1010:0303:0808 --> Severity: Warning --> ZipArchive::close(): Renaming temporary file failed: Permission denied C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx.php 374
 ERROR - 201820182018-0303-1818 1010:0303:0808 --> Severity: error --> Exception: Could not close zip file lineups/FS - TalynM.TxBrd.xlsx. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx.php 375
+<<<<<<< HEAD
 >>>>>>> local-workPC
 ERROR - 201820182018-0303-1818 1111:0303:2222 --> 404 Page Not Found: Faviconico/index
 ERROR - 201820182018-0303-1818 1111:0303:3131 --> 404 Page Not Found: Faviconico/index
@@ -419,3 +420,71 @@ ERROR - 201820182018-0303-1818 1616:0303:4242 --> Severity: Error --> Call to un
 ERROR - 201820182018-0303-1818 1717:0303:5757 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 653
 ERROR - 201820182018-0303-1818 1818:0303:5555 --> Severity: error --> Exception: File "\\filer4\fileserver\Projects\dvt\lineups\TalynM\M - CB1\TxEVM\M2 Lineups\TxEVM_15_XIF_4_Ch_1_IFMUX sweep_all temp.csv" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
 ERROR - 201820182018-0303-1818 1818:0303:0303 --> Severity: error --> Exception: File "\\filer4\fileserver\Projects\dvt\lineups\TalynM\M - CB1\TxEVM\M2 Lineups\TxEVM_15_XIF_4_Ch_1_IFMUX sweep_all temp.csv" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
+=======
+ERROR - 201820182018-0303-1818 1010:0303:0101 --> Severity: Notice --> Undefined property: stdClass::$title C:\xampp\htdocs\application\controllers\lineups.php 31
+ERROR - 201820182018-0303-1818 1010:0303:0101 --> Severity: Notice --> Undefined property: stdClass::$note C:\xampp\htdocs\application\models\lineup_gui_model.php 349
+ERROR - 201820182018-0303-1818 1010:0303:0101 --> Severity: Notice --> Undefined property: stdClass::$note C:\xampp\htdocs\application\models\lineup_gui_model.php 349
+ERROR - 201820182018-0303-1818 1010:0303:0101 --> Severity: Notice --> Undefined property: stdClass::$note C:\xampp\htdocs\application\models\lineup_gui_model.php 349
+ERROR - 201820182018-0303-1818 1010:0303:0101 --> Severity: Notice --> Undefined property: stdClass::$note C:\xampp\htdocs\application\models\lineup_gui_model.php 349
+ERROR - 201820182018-0303-1818 1010:0303:0101 --> Severity: Notice --> Undefined property: stdClass::$note C:\xampp\htdocs\application\models\lineup_gui_model.php 349
+ERROR - 201820182018-0303-1818 1010:0303:0101 --> Severity: Notice --> Undefined property: stdClass::$note C:\xampp\htdocs\application\models\lineup_gui_model.php 349
+ERROR - 201820182018-0303-1818 1010:0303:0101 --> Severity: Notice --> Undefined property: stdClass::$note C:\xampp\htdocs\application\models\lineup_gui_model.php 349
+ERROR - 201820182018-0303-1818 1010:0303:0101 --> Severity: Notice --> Undefined property: stdClass::$note C:\xampp\htdocs\application\models\lineup_gui_model.php 349
+ERROR - 201820182018-0303-1818 1010:0303:0101 --> Severity: Notice --> Undefined property: stdClass::$note C:\xampp\htdocs\application\models\lineup_gui_model.php 349
+ERROR - 201820182018-0303-1818 1010:0303:0101 --> Severity: Notice --> Undefined property: stdClass::$note C:\xampp\htdocs\application\models\lineup_gui_model.php 349
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Undefined property: stdClass::$typical_params C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1010:0303:5454 --> Severity: Notice --> Trying to get property 'note' of non-object C:\xampp\htdocs\application\models\lineup_gui_model.php 259
+ERROR - 201820182018-0303-1818 1111:0303:2424 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1111:0303:2727 --> 404 Page Not Found: Faviconico/index
+ERROR - 201820182018-0303-1818 1212:0303:0404 --> Severity: Warning --> readfile(FS - TalynA.TxBrdFW.xlsx): failed to open stream: No such file or directory C:\xampp\htdocs\application\controllers\lineups.php 67
+ERROR - 201820182018-0303-1818 1313:0303:2626 --> 404 Page Not Found: Controllers/lineups
+ERROR - 201820182018-0303-1818 1313:0303:2626 --> 404 Page Not Found: Controllers/lineups
+ERROR - 201820182018-0303-1818 1414:0303:1515 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\application\controllers\tasks.php 30
+ERROR - 201820182018-0303-1818 1414:0303:5858 --> Severity: Warning --> unlink(lineups/FS - TalynA.TxBrdFW.xlsx): Resource temporarily unavailable C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx.php 213
+ERROR - 201820182018-0303-1818 1414:0303:5858 --> Severity: Warning --> ZipArchive::close(): Renaming temporary file failed: Permission denied C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx.php 374
+ERROR - 201820182018-0303-1818 1414:0303:5858 --> Severity: error --> Exception: Could not close zip file lineups/FS - TalynA.TxBrdFW.xlsx. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx.php 375
+ERROR - 201820182018-0303-1818 1515:0303:1010 --> Severity: error --> Exception: syntax error, unexpected 'die' (T_EXIT), expecting ',' or ';' C:\xampp\htdocs\application\controllers\tasks.php 140
+ERROR - 201820182018-0303-1818 1515:0303:5050 --> Severity: Notice --> Undefined property: CI_DB_mysqli_result::$result C:\xampp\htdocs\application\controllers\tasks.php 144
+ERROR - 201820182018-0303-1818 1515:0303:5050 --> Severity: Notice --> Trying to get property 'email' of non-object C:\xampp\htdocs\application\controllers\tasks.php 144
+ERROR - 201820182018-0303-1818 1515:0303:5050 --> Severity: Notice --> Undefined property: CI_DB_mysqli_result::$result C:\xampp\htdocs\application\controllers\tasks.php 148
+ERROR - 201820182018-0303-1818 1515:0303:5151 --> Severity: Notice --> Trying to get property 'email' of non-object C:\xampp\htdocs\application\controllers\tasks.php 148
+ERROR - 201820182018-0303-1818 1515:0303:5151 --> Severity: error --> Exception: Call to undefined method CI_DB_mysqli_driver::to() C:\xampp\htdocs\application\controllers\tasks.php 162
+ERROR - 201820182018-0303-1818 1515:0303:3434 --> Severity: Notice --> Undefined property: CI_DB_mysqli_result::$result C:\xampp\htdocs\application\controllers\tasks.php 144
+ERROR - 201820182018-0303-1818 1515:0303:3434 --> Severity: Notice --> Trying to get property 'email' of non-object C:\xampp\htdocs\application\controllers\tasks.php 144
+ERROR - 201820182018-0303-1818 1515:0303:5858 --> Severity: error --> Exception: Call to undefined method CI_DB_mysqli_driver::to() C:\xampp\htdocs\application\controllers\tasks.php 162
+ERROR - 201820182018-0303-1818 1515:0303:2626 --> Severity: error --> Exception: Call to undefined method CI_DB_mysqli_driver::send() C:\xampp\htdocs\application\controllers\tasks.php 165
+ERROR - 201820182018-0303-1818 1515:0303:3838 --> Severity: Warning --> mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() C:\xampp\htdocs\system\libraries\Email.php 1896
+ERROR - 201820182018-0303-1818 1616:0303:3737 --> Severity: Warning --> mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() C:\xampp\htdocs\system\libraries\Email.php 1896
+ERROR - 201820182018-0303-1818 1616:0303:5858 --> Severity: Warning --> mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() C:\xampp\htdocs\system\libraries\Email.php 1896
+ERROR - 201820182018-0303-1818 1717:0303:0000 --> 404 Page Not Found: Faviconico/index
+>>>>>>> local-workPC

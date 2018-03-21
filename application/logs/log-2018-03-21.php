@@ -25,3 +25,8 @@ ERROR - 201820182018-0303-2121 1010:0303:5858 --> Severity: Notice --> Undefined
 ERROR - 201820182018-0303-2121 1010:0303:5151 --> Severity: Notice --> Undefined property: stdClass::$chip_process_bb C:\xampp\htdocs\application\controllers\plans.php 154
 ERROR - 201820182018-0303-2121 1010:0303:5151 --> Severity: Notice --> Undefined property: stdClass::$chip_process_bb C:\xampp\htdocs\application\controllers\plans.php 154
 ERROR - 201820182018-0303-2121 1010:0303:2424 --> Severity: Notice --> Undefined property: stdClass::$chip_process_bb C:\xampp\htdocs\application\controllers\plans.php 621
+ERROR - 201820182018-0303-2121 1212:0303:1515 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL), expecting ')' C:\xampp\htdocs\application\controllers\plans.php 154
+ERROR - 201820182018-0303-2121 1212:0303:1515 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL), expecting ')' C:\xampp\htdocs\application\controllers\plans.php 154
+ERROR - 201820182018-0303-2121 1212:0303:2222 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL), expecting ')' C:\xampp\htdocs\application\controllers\plans.php 154
+ERROR - 201820182018-0303-2121 1212:0303:1414 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL), expecting ')' C:\xampp\htdocs\application\controllers\plans.php 154
+ERROR - 201820182018-0303-2121 1212:0303:3535 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL), expecting ')' C:\xampp\htdocs\application\controllers\plans.php 230

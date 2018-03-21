@@ -134,4 +134,8 @@ WHERE `user_username` IS NULL
 ERROR - 201820182018-0303-1919 1414:0303:3535 --> Query error: Unknown column 'user_username' in 'where clause' - Invalid query: SELECT `email`
 FROM `users`
 WHERE `user_username` = 'c_matanw'
+<<<<<<< HEAD
+>>>>>>> local-workPC
+=======
+ERROR - 201820182018-0303-1919 1515:0303:1515 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
 >>>>>>> local-workPC

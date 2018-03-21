@@ -38,8 +38,9 @@ class Auth extends CI_Controller {
 					'rank' => $uresult[0]->rank,
 					'email' => $uresult[0]->email,
 					'group_id' => $uresult[0]->group_id,
-					'lastPlan' => $planId,
-					'lastPlanRobot' => $robotPlanId,
+//					'lastPlan' => $planId,
+//					'lastPlanRobot' => $robotPlanId,
+
 				);
 				$this->session->set_userdata($sessData);
 				$session = $this->session->userdata();

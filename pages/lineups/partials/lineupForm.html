@@ -55,7 +55,17 @@
 					</div>
 					<div ng-switch-when="3"  class="col-md-2" ng-if="(lineup.type[0].lineup_type_id == 3 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 1">
 						<span class="label label-dangerC">Gain Table Index:</span>
-						<multiselect ng-model="lineup.gain_table_idx" options="testParams.params.gainTableIdx" show-select-all="true" show-unselect-all="true" ng-disabled="lock" display-prop="xif" id-prop="id">
+						<multiselect ng-model="lineup.gain_table_idx" options="testParams.params.gainTableIdx" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+						</multiselect>
+					</div>
+					<div ng-switch-when="3"  class="col-md-2" ng-if="(lineup.type[0].lineup_type_id == 3 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 2">
+						<span class="label label-dangerC">TX Gain Row:</span>
+						<multiselect ng-model="lineup.tx_gain_row" options="testParams.params.txGainRow" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+						</multiselect>
+					</div>
+					<div ng-switch-when="3"  class="col-md-2" ng-if="(lineup.type[0].lineup_type_id == 1 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 2">
+						<span class="label label-dangerC">Dac fssel val:</span>
+						<multiselect ng-model="lineup.Dac_fssel_val" options="testParams.params.dacFssel" show-search="true" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 						</multiselect>
 					</div>
 					<div class="col-md-1">
@@ -155,7 +165,7 @@
 							</div>
 							<div class="panel-body" uib-collapse="isCollapsed">
 								<div class="col-md-3 lineup-input" ng-repeat="item in testParams.lineups.mGeneralParams track by $index">
-									<div class="row"  ng-hide="item.parameter_id == 309 && lineup.type[0].lineup_type_id == 1">
+									<div class="row">
 										<div class="col-md-10">
 											<label>{{item.parameter_name}}</label>
 										</div>

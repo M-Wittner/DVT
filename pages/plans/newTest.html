@@ -105,7 +105,11 @@
 						<span class="label label-dangerC">Chip M:</span>
 						<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.mChips" data-placeholder="Pick Chips">
 							<ui-select-match>{{$item.chip_sn}}-{{$item.chip_process_abb}}</ui-select-match>
+<<<<<<< HEAD
 							<ui-select-choices repeat="chip in testParams.params.chipListM | filter:$select.search" group-by="'corner'" sortable="true">{{chip.chip_sn}-{{chip.chip_process_abb}}}</ui-select-choices>
+=======
+							<ui-select-choices repeat="chip in testParams.params.chipListM | filter:$select.search" group-by="'corner'" sortable="true">{{chip.chip_sn}}-{{chip.chip_process_abb}}</ui-select-choices>
+>>>>>>> local-workPC
 						</ui-select>
 					</div>
 				</div>

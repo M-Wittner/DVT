@@ -318,7 +318,7 @@ class Plans extends CI_Controller {
 							foreach($chipsArr as $result){
 								$chip = array(
 									'serial_number'=>$result->chip_sn,
-									'corner'=>$result->chip_process_abb,
+									'corner'=>$result->chip_chip_process_abb,
 									'chip'=>$result->chip_type_id,
 									'plan_id'=>$planId,
 									'test_id'=>$testId
@@ -344,7 +344,7 @@ class Plans extends CI_Controller {
 							foreach($aChipsArr as $result){
 								$chip = array(
 									'serial_number'=>$result->chip_sn,
-									'corner'=>$result->chip_process_abb,
+									'corner'=>$result->chip_chip_process_abb,
 									'chip'=>$result->chip_type_id,
 									'plan_id'=>$planId,
 									'test_id'=>$testId
@@ -354,7 +354,7 @@ class Plans extends CI_Controller {
 							foreach($mChipsArr as $result){
 								$chip = array(
 									'serial_number'=>$result->chip_sn,
-									'corner'=>$result->chip_process_abb,
+									'corner'=>$result->chip_chip_process_abb,
 									'chip'=>$result->chip_type_id,
 									'plan_id'=>$planId,
 									'test_id'=>$testId
