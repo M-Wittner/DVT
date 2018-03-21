@@ -312,7 +312,7 @@ myApp.factory('testParams', function($http, $log){
 	$http.get(site+'/params/lineupParams')
 	.then(function(response){
 		testParams.lineups = response.data;
-		console.log(response.data);
+//		console.log(response.data);
 	})
 	
 	$http.get(site+'/params/fields')

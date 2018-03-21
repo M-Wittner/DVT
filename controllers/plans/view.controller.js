@@ -1,15 +1,16 @@
 myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', 'LS', '$cookies', function ($scope, $route, $location, $http, $routeParams, $window, Flash, AuthService, testParams, LS, $cookies) {
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
+		var site = testParams.site;
 	
 	if($scope.isAuthenticated == true) {	
-	$http.post('http://localhost/plans/show', $routeParams.id)
+	$http.post(site+'/plans/show', $routeParams.id)
 	.then(function(response){
 		console.log(response.data);
 		$scope.plan = response.data;
 	});
 	
-	var site = testParams.site;
+
 	$scope.user = {};
 	$scope.user.id = $cookies.getObject('loggedUser').userId;
 	$scope.user.username = $cookies.getObject('loggedUser').username;

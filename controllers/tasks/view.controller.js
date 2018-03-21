@@ -62,7 +62,6 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 			}
 		})
 	}
->>>>>>> local-workPC
 		
 	$scope.activeTask = function(taskId, active){
 		$http.post(site+'/tasks/active', {taskId : taskId, active: active})
