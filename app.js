@@ -184,11 +184,12 @@ myApp.directive('testForm', function(){
 
 myApp.directive('lineupForm', function(){
 	return {
+		restrict: 'EM',
 		templateUrl: 'pages/lineups/partials/lineupForm.html',
 		controller: 'newLineupCtrl',
 		scope: {
 			array: '=',
-//			lineup: '=',
+			sec: '=',
 		},
 		link: function(scope, element, attrs){
 			

@@ -32,6 +32,10 @@ myApp.controller('newLineupCtrl', ['$scope', '$http', '$location', 'Flash', 'Ses
 		console.log(this.lineup);
 	}
 	
+	$scope.copy = function(){
+//		$scope.lineup = (scope.$parent.$$prevSibling.$$childTail.lineup);
+	}
+	
 	$scope.editToggle = function(){
 		$scope.array.splice(this.lineup, 1);;
 		$scope.lock = false;
@@ -53,15 +57,15 @@ myApp.controller('newLineupCtrl', ['$scope', '$http', '$location', 'Flash', 'Ses
 		.then(function(response){
 			console.log(response.data);
 			//generate a temp <a/> tag
-//			var link = document.createElement("a");
-//			link.href = response.data;
-//			//set the visibility hidden so it will not effect on web-layout
-//			link.style = "visibility:hidden";
-//			// appending the anchor tag and remove it after automatic click
-//			document.body.appendChild(link);
-//			link.click();
-//			document.body.removeChild(link);
-//			
+			var link = document.createElement("a");
+			link.href = response.data;
+			//set the visibility hidden so it will not effect on web-layout
+			link.style = "visibility:hidden";
+			// appending the anchor tag and remove it after automatic click
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+			
 		});
 //		console.log($scope.lineups);
 	}

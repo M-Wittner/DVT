@@ -315,10 +315,21 @@ class lineup_gui_model extends CI_Model {
 //		die(var_dump($params));
 	}
 	
+	public function calcXifMatrix($xifs){
+		$sum = 0;
+		foreach($xifs as $xif){
+			$sum = $sum + pow(2, $xif->xif);
+		}
+		return $sum;
+	}
+	
 	public function configTypicalTxBrdFwM($lineup, $typical){
 		$lineupType = $lineup->type[0]->lineup_type_id;
 		$i = $typical->getHighestRow() + 1;
 		$xifs = $lineup->xifs;
+		$xifMatrix = $this->calcXifMatrix($xifs);
+		$xifsw = decbin($xifMatrix);
+		die(var_dump($xifsw));
 		$inactiveXIFs = $lineup->inactiveXIFs;
 		$xifsArr = $typical->rangeToArray("D1:K1", null, false, false, true)[1];
 
@@ -341,7 +352,7 @@ class lineup_gui_model extends CI_Model {
 							}
 						}
 						$typical->getCell($col.$i)
-							->setValue($xif->xif);
+							->setValue($xifMatrix);
 						$col++;
 						// GENERAL PARAMS
 						$typical->fromArray((array)$lineup->mGeneral_params, null, $col.$i);
@@ -400,13 +411,11 @@ class lineup_gui_model extends CI_Model {
 		$lineupType = $lineup->type[0]->lineup_type_id;
 		$i = $typical->getHighestRow() + 1;
 		$xifs = $lineup->xifs;
+		$xifMatrix = $this->calcXifMatrix($xifs);
+		$xifsw = decbin($xifMatrix);
+		die(var_dump($xifMatrix));
 		$inactiveXIFs = $lineup->inactiveXIFs;
 		$xifsArr = $typical->rangeToArray("D1:K1", null, false, false, true)[1];
-//		if(isset($lineup->Dac_fssel_val)){
-//			$dacFssel= $lineup->Dac_fssel_val;
-//		} else{
-//			$txGainRows = 1;
-//		}
 
 		foreach ($lineup->temps as $temp){
 			foreach($lineup->channels as $channel){
@@ -427,7 +436,7 @@ class lineup_gui_model extends CI_Model {
 							}
 						}
 						$typical->getCell($col.$i)
-							->setValue($xif->xif);
+							->setValue($xifMatrix);
 						$col++;
 						// GENERAL PARAMS
 						$typical->fromArray((array)$lineup->mGeneral_params, null, $col.$i);
@@ -444,13 +453,6 @@ class lineup_gui_model extends CI_Model {
 						if(isset($lineup->typical_params)){
 							//GET LAST COL AFTER INSERT GENERAL PARAM BY ASCI CONVERTION.
 							$typical->fromArray((array)$lineup->typical_params, null, $lastCol.$i);
-						}
-						if($lineupType == 3){
-//							$lastCol = chr(ord($lastCol) + 1);
-							$typical->getCell($lastCol.'1')
-								->setValue("Note");
-							$typical->getCell($lastCol.$i)
-								->setValue($lineup->note);
 						}
 						$i++;
 					}
