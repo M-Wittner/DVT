@@ -36,3 +36,7 @@ ERROR - 201820182018-0303-2222 1212:0303:2424 --> Severity: Notice --> Undefined
 ERROR - 201820182018-0303-2222 1212:0303:2424 --> Severity: error --> Exception: File "" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
 ERROR - 201820182018-0303-2222 1212:0303:5757 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 915
 ERROR - 201820182018-0303-2222 1212:0303:5757 --> Severity: error --> Exception: File "" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
+ERROR - 201820182018-0303-2222 1414:0303:1111 --> 404 Page Not Found: Pages/lineups
+ERROR - 201820182018-0303-2222 1414:0303:5151 --> 404 Page Not Found: Pages/lineups
+ERROR - 201820182018-0303-2222 1414:0303:1717 --> 404 Page Not Found: Pages/lineups
+ERROR - 201820182018-0303-2222 1414:0303:2727 --> 404 Page Not Found: Pages/lineups

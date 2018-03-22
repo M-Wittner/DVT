@@ -5,31 +5,10 @@
 		<span class="">Check Lineups? <input type="checkbox" ng-model="test.checkLineup" ng-disabled="lock"></span>
 	</div>
 -->
-	<div class="panel-body" ng-switch="lineup.station[0].id">
+<!--	<div class="panel-body" ng-switch="lineup.station[0].id">-->
+	<div class="panel-body">
+		<full-system ng-switch-when="3"></full-system>
 		<div class="row">
-			<div class="col-md-2">
-				<div class="col-md-12">
-					<span class="label label-dangerC">Work Station:</span>
-					<ui-select multiple limit="1" close-on-select="true" ng-model="lineup.station" ng-disabled="lock">
-						<ui-select-match>{{$item.work_station}}</ui-select-match>
-						<ui-select-choices repeat="station in testParams.lineups.stations">{{station.work_station}}</option>
-					</ui-select>
-				</div>
-				<div class="col-md-12" ng-switch-when="3">
-					<span class="label label-dangerC">Chip Type:</span>
-					<ui-select multiple limit="1" close-on-select="true" ng-model="lineup.chip_type" ng-disabled="lock">
-						<ui-select-match>{{$item.chip_type}}</ui-select-match>
-						<ui-select-choices repeat="chip in testParams.lineups.chipTypes">{{chip.chip_type}}</option>
-					</ui-select>
-				</div>
-				<div class="col-md-12">
-					<span class="label label-dangerC">Lineup Type:</span>
-					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="true" ng-model="lineup.type" data-placeholder="Lineup Type" ng-disabled="lock">
-						<ui-select-match>{{$item.lineup_type}}</ui-select-match>
-						<ui-select-choices repeat="type in testParams.lineups.types">{{type.lineup_type}}</option>
-					</ui-select>
-				</div>
-			</div>
 			<div class="col-md-10">
 				<div class="row">
 					<div class="col-md-2">

@@ -184,7 +184,6 @@ myApp.directive('testForm', function(){
 
 myApp.directive('lineupForm', function(){
 	return {
-		restrict: 'EM',
 		templateUrl: 'pages/lineups/partials/lineupForm.html',
 		controller: 'newLineupCtrl',
 		scope: {
@@ -193,6 +192,48 @@ myApp.directive('lineupForm', function(){
 		},
 		link: function(scope, element, attrs){
 			
+		}
+	}
+});
+
+myApp.directive('fullSystem', function(){
+	return {
+		require: '^^lineupForm',
+		templateUrl: 'pages/lineups/partials/stations/Full System/fullSystem.html',
+//		controller: 'newLineupCtrl',
+//		scope: {
+//			array: '=',
+//			sec: '=',
+//		},
+		link: function(scope, element, attrs){
+			
+		}
+	}
+});
+
+myApp.directive('talynA', function(){
+	return {
+		require: ['^^lineupForm'],
+		templateUrl: 'pages/lineups/partials/stations/Full System/TalynA/TalynA.html',
+//		controller: 'newLineupCtrl',
+//		scope: {
+//			array: '=',
+//			sec: '=',
+//		},
+		link: function(scope, element, attrs){
+			
+		}
+	}
+});
+myApp.directive('talynM', function(){
+	return {
+		require: ['^^lineupForm'],
+		templateUrl: 'pages/lineups/partials/stations/Full System/TalynM/TalynM.html',
+//		controller: 'newLineupCtrl',
+//		scope: {
+//		},
+		link: function(scope, element, attrs){
+			this.lineup = scope.lineup;
 		}
 	}
 });
