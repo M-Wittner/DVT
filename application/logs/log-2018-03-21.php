@@ -30,7 +30,3 @@ ERROR - 201820182018-0303-2121 1212:0303:1515 --> Severity: Parsing Error --> sy
 ERROR - 201820182018-0303-2121 1212:0303:2222 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL), expecting ')' C:\xampp\htdocs\application\controllers\plans.php 154
 ERROR - 201820182018-0303-2121 1212:0303:1414 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL), expecting ')' C:\xampp\htdocs\application\controllers\plans.php 154
 ERROR - 201820182018-0303-2121 1212:0303:3535 --> Severity: Parsing Error --> syntax error, unexpected '<<' (T_SL), expecting ')' C:\xampp\htdocs\application\controllers\plans.php 230
-ERROR - 201820182018-0303-2121 1616:0303:3535 --> Severity: Notice --> Undefined property: stdClass::$password C:\xampp\htdocs\application\controllers\auth.php 24
-ERROR - 201820182018-0303-2121 1717:0303:5555 --> Severity: Notice --> Undefined property: stdClass::$password C:\xampp\htdocs\application\controllers\auth.php 24
-ERROR - 201820182018-0303-2121 1717:0303:4949 --> Severity: error --> Exception: File "\\filer4\fileserver\Projects\dvt\lineups\TalynM\M - CB1\TxEVM\M2 Lineups\night run 200318" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
-ERROR - 201820182018-0303-2121 1717:0303:1515 --> Severity: error --> Exception: File "\\filer4\fileserver\Projects\dvt\lineups\TalynM\M - CB1\TxEVM\M2 Lineups\night run 200318" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137

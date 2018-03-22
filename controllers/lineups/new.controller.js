@@ -32,6 +32,7 @@ myApp.controller('newLineupCtrl', ['$scope', '$http', '$location', 'Flash', 'Ses
 		console.log(this.lineup);
 	}
 	
+
 	$scope.copy = function(){
 //		$scope.lineup = (scope.$parent.$$prevSibling.$$childTail.lineup);
 		console.log(this);
@@ -54,21 +55,21 @@ myApp.controller('newLineupCtrl', ['$scope', '$http', '$location', 'Flash', 'Ses
 	}
 	
 	$scope.submit = function(){
-//		$http.post(site+'/lineups/create', {lineups: $scope.lineups, title: $scope.lineup.title , user: $scope.user})
-//		.then(function(response){
-//			console.log(response.data);
-//			//generate a temp <a/> tag
-//			var link = document.createElement("a");
-//			link.href = response.data;
-//			//set the visibility hidden so it will not effect on web-layout
-//			link.style = "visibility:hidden";
-//			// appending the anchor tag and remove it after automatic click
-//			document.body.appendChild(link);
-//			link.click();
-//			document.body.removeChild(link);
-//			
-//		});
-		console.log($scope);
+		$http.post(site+'/lineups/create', {lineups: $scope.lineups, title: $scope.lineup.title , user: $scope.user})
+		.then(function(response){
+			console.log(response.data);
+			//generate a temp <a/> tag
+			var link = document.createElement("a");
+			link.href = response.data;
+			//set the visibility hidden so it will not effect on web-layout
+			link.style = "visibility:hidden";
+			// appending the anchor tag and remove it after automatic click
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+			
+		});
+//		console.log($scope.lineups);
 	}
 
 }]);

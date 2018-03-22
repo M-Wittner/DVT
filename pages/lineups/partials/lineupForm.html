@@ -5,12 +5,35 @@
 		<span class="">Check Lineups? <input type="checkbox" ng-model="test.checkLineup" ng-disabled="lock"></span>
 	</div>
 -->
-<!--	<div class="panel-body" ng-switch="lineup.station[0].id">-->
-	<div class="panel-body">
-		<full-system ng-switch-when="3"></full-system>
+	<div class="panel-body" ng-switch="lineup.station[0].id">
+<!--	<div class="panel-body">-->
+<!--		<full-system ng-switch-when="3"></full-system>-->
 		<div class="row">
 			<div class="col-md-10">
 				<div class="row">
+					<div class="col-md-2">
+						<div class="col-md-12">
+							<span class="label label-dangerC">Work Station:</span>
+							<ui-select multiple limit="1" close-on-select="true" ng-model="lineup.station" ng-disabled="lock">
+								<ui-select-match>{{$item.work_station}}</ui-select-match>
+								<ui-select-choices repeat="station in testParams.stations">{{station.work_station}}</option>
+							</ui-select>
+						</div>
+						<div class="col-md-12">
+							<span class="label label-dangerC">Chip Type:</span>
+							<ui-select multiple limit="1" close-on-select="true" ng-model="lineup.chip_type" ng-disabled="lock">
+								<ui-select-match>{{$item.chip_type}}</ui-select-match>
+								<ui-select-choices repeat="chip in testParams.chipTypes">{{chip.chip_type}}</option>
+							</ui-select>
+						</div>
+						<div class="col-md-12">
+							<span class="label label-dangerC">Lineup Type:</span>
+							<ui-select style="min-width: 100%" multiple limit="1" close-on-select="true" ng-model="lineup.type" data-placeholder="Lineup Type" ng-disabled="lock">
+								<ui-select-match>{{$item.lineup_type}}</ui-select-match>
+								<ui-select-choices repeat="type in testParams.types">{{type.lineup_type}}</option>
+							</ui-select>
+						</div>
+					</div>
 					<div class="col-md-2">
 						<span class="label label-dangerC">Temperatures:</span>
 						<ui-select multiple close-on-select="false" ng-model="lineup.temps" ng-disabled="lock">
@@ -32,17 +55,17 @@
 						<multiselect ng-model="lineup.xifs" options="testParams.params.xifList" show-select-all="true" show-unselect-all="true" ng-disabled="lock" display-prop="xif" id-prop="id">
 						</multiselect>
 					</div>
-					<div ng-switch-when="3" class="col-md-2" ng-if="(lineup.type[0].lineup_type_id == 3 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 1">
+					<div ng-switch-when="3"  class="col-md-2" ng-if="(lineup.type[0].lineup_type_id == 3 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 1">
 						<span class="label label-dangerC">Gain Table Index:</span>
 						<multiselect ng-model="lineup.gain_table_idx" options="testParams.params.gainTableIdx" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 						</multiselect>
 					</div>
-					<div ng-switch-when="3" class="col-md-2" ng-if="(lineup.type[0].lineup_type_id == 3 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 2">
+					<div ng-switch-when="3"  class="col-md-2" ng-if="(lineup.type[0].lineup_type_id == 3 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 2">
 						<span class="label label-dangerC">TX Gain Row:</span>
 						<multiselect ng-model="lineup.tx_gain_row" options="testParams.params.txGainRow" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 						</multiselect>
 					</div>
-					<div ng-switch-when="3" class="col-md-2" ng-if="(lineup.type[0].lineup_type_id == 1 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 2">
+					<div ng-switch-when="3"  class="col-md-2" ng-if="(lineup.type[0].lineup_type_id == 1 || lineup.type[0].lineup_type_id == 2) && lineup.chip_type[0].chip_type_id == 2">
 						<span class="label label-dangerC">Dac fssel val:</span>
 						<multiselect ng-model="lineup.Dac_fssel_val" options="testParams.params.dacFssel" show-search="true" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 						</multiselect>
@@ -51,7 +74,7 @@
 						<span class="label label-dangerC">Voltage:</span>
 						<input type="number" class="form-control" style="width: 150%" ng-model="lineup.voltage" ng-disabled="lock">
 					</div>
-					<div ng-switch-when="3" class="col-md-3" ng-if="lineup.type[0].lineup_type_id == 3 || (lineup.type[0].lineup_type_id == 2 && lineup.chip_type[0].chip_type_id == 1)">
+					<div ng-switch-when="3"  class="col-md-3" ng-if="lineup.type[0].lineup_type_id == 3 || (lineup.type[0].lineup_type_id == 2 && lineup.chip_type[0].chip_type_id == 1)">
 						<span class="label label-primary">Note:</span>
 						<input type="text" class="form-control" style="width: 100%" ng-model="lineup.note" ng-disabled="lock">
 					</div>
@@ -167,7 +190,7 @@
 										<div class="col-md-7">
 											<label>{{item.parameter_name}}</label>
 										</div>
-										<div class="col-md-2" ng-class="inRange(item, lineup.typical_params[item.parameter_name])">
+										<div class="col-md-2"  ng-class="inRange(item, lineup.typical_params[item.parameter_name])">
 											<input type="text" class="form-control input-sm" style="width: 150%" ng-model="lineup.typical_params[item.parameter_name]" ng-disabled="lock" id="{{item.parameter_id}}" aria-describedby="{{item.parameter_name}}">
 											<span id="{{item.parameter_name}}" class="help-block" ng-if="lineup.typical_params[item.parameter_name] && inRange(item, lineup.typical_params[item.parameter_name]) != 'has-success'">Invalid!</span>
 										</div>
@@ -208,14 +231,11 @@
 <div class="panel-footer">
 	<!--	<div class="col-md-12">-->
 	<button class="btn btn-xs btn-info addButton" ng-click="insertLineup(lineup)" ng-disabled="lock">
-		Insert!
-	</button>
+				Insert!
+			</button>
 	<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">
-		Edit!
-	</button>
-	<button class="btn btn-xs btn-default addButton" ng-click="copy()">
-		Copy!
-	</button>
+				Edit!
+			</button>
 	<!--
 		<span class="form-inline">
 			<div class="form-group">

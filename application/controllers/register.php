@@ -17,27 +17,22 @@ class Register extends CI_Controller
     {
 		$this->register();
     }
-    function register(){
-			$request = json_decode(file_get_contents('php://input'));
-			$user = array(
-				'username'=>$request->username,
-				'password'=>md5($request->password),
-				'email'=>$request->email,
-				'fname'=>$request->fname,
-				'lname'=>$request->lname
-			);
-			$userExist = $this->db->get_where('users', ['username'=>$request->username])->result()[0];
-			if(isset($userExist)){
-				echo 'This username already exists!';
-				die();
-			}
-
-			$data = $this->user_model->insertUser($user);
-			if($data) {
-				echo "OK";
-			} else {
-				echo "failure";
-			}
+    function register()
+    {
+        $request = json_decode(file_get_contents('php://input'));
+		$user = array(
+			'username'=>$request->username,
+			'password'=>md5($request->password),
+			'email'=>$request->email,
+			'fname'=>$request->fname,
+			'lname'=>$request->lname
+		);
+		$data = $this->user_model->insertUser($user);
+		if($data) {
+			echo "success";
+		} else {
+			echo "failure";
+		}
     }
     
     function verify($hash=NULL)

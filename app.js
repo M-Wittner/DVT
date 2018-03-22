@@ -188,7 +188,7 @@ myApp.directive('lineupForm', function(){
 		controller: 'newLineupCtrl',
 		scope: {
 			array: '=',
-			sec: '=',
+//			lineup: '=',
 		},
 		link: function(scope, element, attrs){
 			
