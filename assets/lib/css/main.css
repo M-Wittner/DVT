@@ -23,6 +23,10 @@
 	border-bottom-width: 4px;
 	border-color: #3e16cf;
 }
+.panel-fs > .panel-heading {
+	border-bottom-width: 4px;
+	border-color: #059813;
+}
 
 .bs-callout {
     margin: 20px;

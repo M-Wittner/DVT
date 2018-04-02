@@ -6,10 +6,14 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	if($scope.isAuthenticated == true) {	
 	$http.post(site+'/plans/show', $routeParams.id)
 	.then(function(response){
-		console.log(response.data);
-		$scope.plan = response.data;
+		$scope.plan = response.data.tests;
+		if(response.data.fs.length > 0){
+			response.data.fs.forEach(function(elem){
+				$scope.plan.tests.push(elem);
+			})
+		}
+		console.log($scope.plan);
 	});
-	
 
 	$scope.user = {};
 	$scope.user.id = $cookies.getObject('loggedUser').userId;
@@ -41,6 +45,22 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	
 	$scope.removeTest = function() {
 		$http.post('http://wigig-584/plans/removeTest', this.test.id)
+		.then(function(response){
+			if(response.data = 'success'){
+				$window.scrollTo(0, 0);
+				var message = 'Test Deleted Succesfully!';
+				var id = Flash.create('success', message, 3500);
+				setTimeout(function(){$window.location.reload();}, 2250);
+			} else{
+				$window.scrollTo(0, 0);
+				var message = 'Test Was Not Deleted!';
+				var id = Flash.create('danger', message, 3500);
+				console.log(response.data);
+			}
+		});
+	};
+	$scope.removeTestFS = function() {
+		$http.post('http://wigig-584/plans/removeTestFS', this.test.id)
 		.then(function(response){
 			if(response.data = 'success'){
 				$window.scrollTo(0, 0);

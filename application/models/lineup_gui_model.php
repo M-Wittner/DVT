@@ -131,19 +131,25 @@ class lineup_gui_model extends CI_Model {
 			$XIFsw = substr_replace($XIFsw, "1", substr($xif->xif, -1), 1);
 		}
 		$lineup->activeXIFs = $XIFsw;
-		$xifOff = substr_count($XIFsw, "0");
+		$xifOff = substr_count($XIFsw, "0")+1;
 		$lineup->inactiveXIFs = array();
 		for($i = 0; $i <= $xifOff; $i++){
-			$int = strpos($XIFsw, "0", $i+1);
-			if(!in_array($int, $lineup->inactiveXIFs)){
+			$int = strpos($XIFsw, "0", $i);
+			if(!in_array($int, $lineup->inactiveXIFs) && $int !== false){
 				array_push($lineup->inactiveXIFs, $int);
 			}
 		}
 	}
 	
+	public function calcXifMatrix($xifs){
+		$sum = 0;
+		foreach($xifs as $xif){
+			$sum = $sum + pow(2, $xif->xif);
+		}
+		return $sum;
+	}
+	
 	public function initCsv($lineup, $sheet){
-//		echo json_encode($lineup);
-//		die();
 		$params = ['Lineup_Index', 'Temp', 'Volt', 'ChipChannel','XIF_0','XIF_1','XIF_2','XIF_3','XIF_4','XIF_5','XIF_6','XIF_7', 'XIF_Matrix'];
 		
 		$mGeneral_params = $lineup->mGeneral_params;
@@ -158,8 +164,6 @@ class lineup_gui_model extends CI_Model {
 			array_push($params, $param);
 		}
 		$sheet->fromArray($params, null, 'A1');
-//		echo json_encode($params);
-//		die();
 	}
 	
 	public function configCsv($lineup, $sheet){
@@ -321,7 +325,9 @@ class lineup_gui_model extends CI_Model {
 		$xifs = $lineup->xifs;
 		$inactiveXIFs = $lineup->inactiveXIFs;
 		$xifsArr = $typical->rangeToArray("D1:K1", null, false, false, true)[1];
-
+		$xifMatrix = $this->calcXifMatrix($xifs);
+//		$xifsw = decbin($xifMatrix);
+//		die(var_dump($xifMatrix));
 		foreach ($lineup->temps as $temp){
 			foreach($lineup->channels as $channel){
 				foreach($lineup->xifs as $xif){
@@ -341,7 +347,7 @@ class lineup_gui_model extends CI_Model {
 							}
 						}
 						$typical->getCell($col.$i)
-							->setValue($xif->xif);
+							->setValue($xifMatrix);
 						$col++;
 						// GENERAL PARAMS
 						$typical->fromArray((array)$lineup->mGeneral_params, null, $col.$i);
@@ -349,7 +355,7 @@ class lineup_gui_model extends CI_Model {
 						//TX GAIN ROW
 						$typical->setCellValue($lastCol.$i, $txRow);
 //							$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params) + 1);
-						if($lineupType == 3){
+						if($lineupType == 3 && isset($lineup->note)){
 							$lastCol = chr(ord($lastCol) + 1);
 							$typical->getCell($lastCol.'1')
 								->setValue("Note");
@@ -402,6 +408,7 @@ class lineup_gui_model extends CI_Model {
 		$xifs = $lineup->xifs;
 		$inactiveXIFs = $lineup->inactiveXIFs;
 		$xifsArr = $typical->rangeToArray("D1:K1", null, false, false, true)[1];
+		$xifMatrix = $this->calcXifMatrix($xifs);
 //		if(isset($lineup->Dac_fssel_val)){
 //			$dacFssel= $lineup->Dac_fssel_val;
 //		} else{
@@ -427,7 +434,7 @@ class lineup_gui_model extends CI_Model {
 							}
 						}
 						$typical->getCell($col.$i)
-							->setValue($xif->xif);
+							->setValue($xifMatrix);
 						$col++;
 						// GENERAL PARAMS
 						$typical->fromArray((array)$lineup->mGeneral_params, null, $col.$i);

@@ -14,6 +14,11 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	$scope.plan.userId = $cookies.getObject('loggedUser').userId;
 	$scope.plan.username = $cookies.getObject('loggedUser').username;
 	$scope.plan.id = $routeParams.planId;
+	$scope.chipPairs = [{}];
+	
+	$scope.addPair = function(){
+		$scope.chipPairs.push({});
+	}
 	
 	$scope.testCount = [{}];
 	$scope.addTest = function(){

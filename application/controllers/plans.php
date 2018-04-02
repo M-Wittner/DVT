@@ -38,7 +38,8 @@ class Plans extends CI_Controller {
 	function Create() {
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
-//		die(var_dump($postData));
+//		echo json_encode($postData);
+//		die();
 		$planData = $postData->plan;
 		$plan = array(
 			'user_id'=>$planData->userId,
@@ -327,40 +328,111 @@ class Plans extends CI_Controller {
 							}
 //------------ TalynM+A station test -------------
 					} elseif($testArr->station[0]->station == 'TalynM+A'){
-//						die(var_dump($testArr));
-							$aChipsArr = $testArr->chips;
-							$mChipsArr = $testArr->mChips;
-							$test = array(
-								'priority'=>$testArr->priority[0],
-								'lineup'=>$testArr->lineup,
-								'm_lineup'=>$testArr->m_lineup,
-								'station'=>$testArr->station[0]->station,
-								'name'=>$testArr->name[0]->test_name,
-								'notes'=>$notes,
-								'plan_id'=>$planId
+//							echo json_encode($postData);
+//							die();
+							$test = new stdClass();
+							$test->struct = array(
+									'priority'=>$testArr->priority[0],
+									'work_station_id'=>$testArr->station[0]->id,
+									'test_name_id'=>$testArr->name[0]->id,
+									'a_lineup'=>$testArr->lineup,
+									'm_lineup'=>$testArr->m_lineup,
+									'notes'=>$notes,
+									'plan_id'=>$planId,
+									'user_id'=>$planData->userId,
+								);
+							$test->params = array();
+							$params = $test->params;
+						
+							$insertTest = $this->db->insert('tests_new', $test->struct);
+							$testId = $this->db->insert_id($insertTest);
+							$chips = $testArr->chips;
+							$chipPairs = array();
+							
+							foreach($chips as $key=>$chip){
+								$pairData = array(
+									'plan_id'=>$planId,
+									'test_id'=>$testId,
+									'chip_r_type_id'=>$chip->chip_r[0]->chip_type_id,
+									'chip_r_id'=>$chip->chip_r[0]->chip_id,
+									'chip_m_type_id'=>$chip->chip_m[0]->chip_type_id,
+									'chip_m_id'=>$chip->chip_m[0]->chip_id,
+									'pair_id'=>$key+1,
+								);
+								
+								$this->db->insert('test_chips_new', $pairData);
+							}
+						$params['temps'] = array();
+						foreach($testArr->temps as $temp){
+							$data = array(
+								'plan_id'=>$planId,
+								'test_id'=>$testId,
+								'param_id'=>3,
+								'param_value_id'=>$temp,
 							);
-							$insertTest = $this->plan_model->add_test($test);
-							$testId = $this->plan_model->tests_id($insertTest);
-							foreach($aChipsArr as $result){
-								$chip = array(
-									'serial_number'=>$result->chip_sn,
-									'corner'=>$result->chip_chip_process_abb,
-									'chip'=>$result->chip_type_id,
+							array_push($params['temps'], $data);
+						}
+						$params['channels'] = array();
+						foreach($testArr->channels as $ch){
+							$data = array(
+								'plan_id'=>$planId,
+								'test_id'=>$testId,
+								'param_id'=>4,
+								'param_value_id'=>$ch,
+							);
+							array_push($params['channels'], $data);
+						}
+						if(isset($testArr->antennas)){
+							$params['antennas'] = array();
+							foreach($testArr->antennas as $ant){
+								$data = array(
 									'plan_id'=>$planId,
-									'test_id'=>$testId
+									'test_id'=>$testId,
+									'param_id'=>5,
+									'param_value_id'=>$ant,
 								);
-								$insertChip = $this->plan_model->add_chips($chip);
+								array_push($params['antennas'], $data);
 							}
-							foreach($mChipsArr as $result){
-								$chip = array(
-									'serial_number'=>$result->chip_sn,
-									'corner'=>$result->chip_chip_process_abb,
-									'chip'=>$result->chip_type_id,
+						} elseif(isset($testArr->num_ants)){
+								$params['num_ant'] = array();
+								foreach($testArr->num_ants as $ant){
+									$data = array(
+										'plan_id'=>$planId,
+										'test_id'=>$testId,
+										'param_id'=>11,
+										'param_value_id'=>$ant,
+									);
+									array_push($params['num_ant'], $data);
+								}
+							}
+							elseif(isset($testArr->sectors)){
+							$params['sector'] = array();
+							foreach($testArr->sectors as $sector){
+								$data = array(
 									'plan_id'=>$planId,
-									'test_id'=>$testId
+									'test_id'=>$testId,
+									'param_id'=>12,
+									'param_value_id'=>$sector,
 								);
-								$insertChip = $this->plan_model->add_chips($chip);
+								array_push($params['sector'], $data);
 							}
+						}
+						$params['MCSs'] = array();
+						foreach($testArr->mcs as $mcs){
+							$data = array(
+								'plan_id'=>$planId,
+								'test_id'=>$testId,
+								'param_id'=>7,
+								'param_value_id'=>$mcs,
+							);
+							array_push($params['MCSs'], $data);
+						}
+//						echo json_encode($params);
+//						die();
+						foreach ($params as $param){
+							$status = $this->db->insert_batch('test_config', $param);
+						}
+						echo $status."aaa";
 					} else {
 						echo 'not valid station';
 					}
@@ -378,7 +450,14 @@ class Plans extends CI_Controller {
 	
 	function Show() {
 		$id = json_decode(file_get_contents('php://input'));
-		$result = $this->plan_model->get_plan($id);
+		$result = new stdClass();
+		$result->tests = $this->plan_model->get_plan($id);
+//		$result->fs = $this->db->get_where('test_params_view', ['plan_id'=>$id])->result();
+		$result->fs = $this->db->get_where('tests_view_new', ['plan_id'=>$id])->result();
+		foreach ($result->fs as $test){
+			$test->chips = $this->db->get_where('test_chips_view', ['test_id'=>$test->id])->result();
+			$test->params = $this->db->get_where('test_params_view', ['test_id'=>$test->id])->result();
+		}
 		echo json_encode($result);
 		
 	}
@@ -747,7 +826,7 @@ class Plans extends CI_Controller {
 		//							print_r($channel);
 							}
 						};
-//------------ PTAT/ABS/Vgb+TEMP and TalynM+A station test -------------
+//------------ PTAT/ABS/Vgb+TEMP station test -------------
 					} elseif($testArr->station[0]->station == 'PTAT/ABS/Vgb+TEMP') {
 						$chipsArr = $testArr->chips;
 							$test = array(
@@ -770,28 +849,110 @@ class Plans extends CI_Controller {
 								);
 								$insertChip = $this->plan_model->add_chips($chip);
 							}
+//------------ TalynM+A station station test -------------	
 					}elseif( $testArr->station[0]->station == 'TalynM+A'){
-							$chipsArr = $testArr->chips;
-							$test = array(
-								'priority'=>$testArr->priority[0],
-								'lineup'=>'/',
-								'station'=>$testArr->station[0]->station,
-								'name'=>$testArr->name[0]->test_name,
-								'notes'=>$notes,
-								'plan_id'=>$planId
-							);
-							$insertTest = $this->plan_model->add_test($test);
-							$testId = $this->plan_model->tests_id($insertTest);
-							foreach($chipsArr as $result){
-								$chip = array(
-									'serial_number'=>$result->chip_sn,
-									'corner'=>$result->chip_process_abb,
-									'chip'=>$result->chip_type_id,
+							$test = new stdClass();
+							$test->struct = array(
+									'priority'=>$testArr->priority[0],
+									'work_station_id'=>$testArr->station[0]->id,
+									'test_name_id'=>$testArr->name[0]->id,
+									'a_lineup'=>$testArr->lineup,
+									'm_lineup'=>$testArr->m_lineup,
+									'notes'=>$notes,
 									'plan_id'=>$planId,
-									'test_id'=>$testId
+									'user_id'=>$planData->userId,
 								);
-								$insertChip = $this->plan_model->add_chips($chip);
+							$test->params = array();
+							$params = $test->params;
+							$insertTest = $this->db->insert('tests_new', $test->struct);
+							$testId = $this->db->insert_id($insertTest);
+							$chips = $testArr->chips;
+							$chipPairs = array();
+							
+							foreach($chips as $key=>$chip){
+								$pairData = array(
+									'plan_id'=>$planId,
+									'test_id'=>$testId,
+									'chip_r_type_id'=>$chip->chip_r[0]->chip_type_id,
+									'chip_r_id'=>$chip->chip_r[0]->chip_id,
+									'chip_m_type_id'=>$chip->chip_m[0]->chip_type_id,
+									'chip_m_id'=>$chip->chip_m[0]->chip_id,
+									'pair_id'=>$key+1,
+								);
+								
+								$this->db->insert('test_chips_new', $pairData);
 							}
+						$params['temps'] = array();
+						foreach($testArr->temps as $temp){
+							$data = array(
+								'plan_id'=>$planId,
+								'test_id'=>$testId,
+								'param_id'=>3,
+								'param_value_id'=>$temp,
+							);
+							array_push($params['temps'], $data);
+						}
+						$params['channels'] = array();
+						foreach($testArr->channels as $ch){
+							$data = array(
+								'plan_id'=>$planId,
+								'test_id'=>$testId,
+								'param_id'=>4,
+								'param_value_id'=>$ch,
+							);
+							array_push($params['channels'], $data);
+						}
+						if(isset($testArr->antennas)){
+							$params['antennas'] = array();
+							foreach($testArr->antennas as $ant){
+								$data = array(
+									'plan_id'=>$planId,
+									'test_id'=>$testId,
+									'param_id'=>5,
+									'param_value_id'=>$ant,
+								);
+								array_push($params['antennas'], $data);
+							}
+						} elseif(isset($testArr->num_ants)){
+								$params['num_ant'] = array();
+								foreach($testArr->num_ants as $ant){
+									$data = array(
+										'plan_id'=>$planId,
+										'test_id'=>$testId,
+										'param_id'=>11,
+										'param_value_id'=>$ant,
+									);
+									array_push($params['num_ant'], $data);
+								}
+							}
+							elseif(isset($testArr->sectors)){
+							$params['sector'] = array();
+							foreach($testArr->sectors as $sector){
+								$data = array(
+									'plan_id'=>$planId,
+									'test_id'=>$testId,
+									'param_id'=>12,
+									'param_value_id'=>$sector,
+								);
+								array_push($params['sector'], $data);
+							}
+						}
+						$params['MCSs'] = array();
+						foreach($testArr->mcs as $mcs){
+							$data = array(
+								'plan_id'=>$planId,
+								'test_id'=>$testId,
+								'param_id'=>7,
+								'param_value_id'=>$mcs,
+							);
+							array_push($params['MCSs'], $data);
+						}
+//						echo json_encode($params);
+//						die();
+						foreach ($params as $param){
+							$status = $this->db->insert_batch('test_config', $param);
+						}
+						echo $status."aaa";
 					} else {
 						echo 'not R or M station';
 					}
@@ -809,6 +970,15 @@ class Plans extends CI_Controller {
 	function removeTest(){
 		$id = json_decode(file_get_contents('php://input'));
 		$result = $this->plan_model->delete_test($id);
+		if ($result){
+			echo 'success';
+		} else{
+			return $result;
+		}
+	}
+	function removeTestFS(){
+		$id = json_decode(file_get_contents('php://input'));
+		$result = $this->db->query("DELETE FROM `tests_new` WHERE id = ?", $id);
 		if ($result){
 			echo 'success';
 		} else{

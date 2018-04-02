@@ -14,6 +14,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	
 	$scope.array = [];
 	$scope.plan = {};
+	$scope.chipPairs = [{}];
 	$scope.plan.userId = $cookies.getObject('loggedUser').userId;
 	$scope.plan.username = $cookies.getObject('loggedUser').username;
 	
@@ -42,6 +43,10 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	$scope.showCalc = function(){
 		$scope.calc = !$scope.calc;
 	};
+	
+	$scope.addPair = function(){
+		$scope.chipPairs.push({});
+	}
 
 	$scope.addPlan = function() {
 		$http.post(site+'/plans/create', {plan: $scope.plan, test: $scope.array})

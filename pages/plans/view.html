@@ -57,7 +57,8 @@
 		</span>
 	</div>
 	<div class="panel-body" id="planBody" ng-repeat="test in plan.tests | orderBy: 'priority'| filter:{priority: testPriority, station: testStation, name: testName} track by $index">
-		<div id="desc" class="panel panel-default" ng-class="{'panel-R1' : test.station[0].station == 'R-CB1', 'panel-R2' : test.station[0].station == 'R-CB2', 'panel-M1' : test.station[0].station == 'M-CB1', 'panel-M2' : test.station[0].station == 'M-CB2'}">
+		<!----------------------------------------------------	R M CAL	---------------------------------------------------->
+		<div id="desc" class="panel panel-default" ng-class="{'panel-R1' : test.station[0].station == 'R-CB1', 'panel-R2' : test.station[0].station == 'R-CB2', 'panel-M1' : test.station[0].station == 'M-CB1', 'panel-M2' : test.station[0].station == 'M-CB2'}" ng-if="test.station != 'TalynM+A'">
 			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="false" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
 				<strong>Priority: {{test.priority}}, Station: {{test.station[0].station}}, Test: {{test.name}} , ID: {{test.id}}</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
@@ -323,6 +324,220 @@
 					<div class="row">
 		
 						
+					</div>
+					<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/test/{{test.id}}/comments/new">Add New Comment</a>
+				</div>
+				<div class="panel-footer" ng-if="test.comments[0]">
+					<div ng-repeat="comment in test.comments track by $index">
+						<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
+							<div class="panel-heading" Data-toggle="collapse" data-target="#{{comment.id}}" aria-expanded="false" aria-controls="{{comment.id}}">
+								<h3 class="panel-title">From: {{comment.author}}
+									<div class="pull-right" ng-show="currentUser.username == comment.author  ||  currentUser.rank > '10'">
+										<button class="btn btn-xs btn-warning" href="#/plans/{{comment.plan_id}}/test/{{comment.test_id}}/comment/{{comment.id}}/edit" ng-click="editComment()">Edit</button>
+										<button class="btn btn-xs btn-danger" ng-click="removeComment()">
+											Delete
+										</button>
+									</div>
+								</h3>
+
+							</div>
+							<div class="panel-body collapse" id="{{comment.id}}">
+								<div class="row">
+									<div class="col-md-3 col-sm-3 col-xs-3">
+										<span class="label label-primary">Severity</span>
+										<label class="form-control">{{comment.severity}}</label>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3">
+										<span class="label label-primary">Test Station</span>
+										<label class="form-control">{{comment.station}}</label>
+									</div>
+									<div ng-if="comment.severity == 'Minor'">
+										<div class="col-md-3 col-sm-3 col-xs-3">
+											<span class="label label-primary">Test Name</span>
+											<label class="form-control">{{comment.test_name}}</label>
+										</div>
+										<div class="col-md-3 col-sm-3 col-xs-3">
+											<span class="label label-primary">Chip</span>
+											<label class="form-control">{{comment.chip}}</label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-8">
+										<span class="label label-primary">Details:</span>
+										<div class="col-md-2 col-sm-2" trumbowyg-ng ng-model="comment.details" ng-disabled="lock">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!----------------------------------------------------	fULL System	---------------------------------------------------->
+		<div id="desc" class="panel panel-default panel-fs" ng-if="test.station == 'TalynM+A'">
+			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="false" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
+				<strong>Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.test_name}} , ID: {{test.id}}</strong>
+				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
+				<span class="pull-right">
+					<span class="glyphicon glyphicon-envelope" ng-if="test.comments.length > 0" id="testStatus"></span>
+					<span class="label label-default" ng-if="test.status == 'IDLE'" id="testStatus" ng-model="test.status">{{test.status}}</span>
+					<span class="label label-success" ng-if="test.status == 'Completed'" id="testStatus" ng-model="test.status">{{test.status}}</span>
+					<span class="label label-warning" ng-if="test.status == 'In Progress'" id="testStatus" ng-model="test.status">{{test.status}}</span>
+					<span class="label label-danger" ng-if="test.status == 'Error'" id="testStatus" ng-model="test.status">{{test.status}}</span>
+				</span>
+			</div>
+			<div class="collapse fade" id="{{test.id}}">
+				<div class="panel-body">
+					<div class="panel col-md-12">
+						<div ng-if="currentUser.username == plan.user_username || currentUser.rank > '10'">
+							<span class="pull-right">
+<!--								<a class="btn btn-xs btn-warning" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>-->
+								<a class="btn btn-xs btn-danger" ng-click="removeTestFS()">
+									Delete
+								</a>
+							</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="panel-body">
+							<div class="col-md-2 col-sm-2">
+								<span class="label label-primary">Test ID:</span>
+								<label class="form-control">{{test.id}}</label>
+								<span class="label label-primary">Test Priority:</span>
+								<label class="form-control">{{test.priority}}</label>
+							</div>
+							<div class="col-md-9 col-sm-8">
+								<div class="row">
+									<span class="label label-primary">A Lineup:</span>
+									<label class="form-control">{{test.a_lineup}}</label>
+								</div>
+								<div class="row">
+									<span class="label label-primary">M Lineup:</span>
+									<label class="form-control">{{test.m_lineup}}</label>
+								</div>
+							</div>
+							<div class="col-md-1 col-sm-2">
+								
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<div class="panel-body">
+								<span class="label label-primary">Station:</span>
+								<label class="form-control">{{test.station}}</label>
+								<ul class="list-group">
+									<li class="list-group-item">
+										<strong>Station Computer: </strong> {{test.pc_name}}
+									</li>
+									<li class="list-group-item">
+										<strong>WWC Computer: </strong> {{test.pc_wwc}}
+									</li>
+									<li class="list-group-item">
+										<strong>Chip Computer: </strong> {{test.pc_chip}}
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-10">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="panel-body">
+										<span class="label label-primary">Test Name:</span>
+										<label class="form-control">{{test.test_name}}</label>
+									</div>
+								</div>
+								<div class="col-md-9">
+										<div class="col-md-3">
+											<div class="panel-body">
+												<span class="label label-primary">Temperatures:</span>
+												<ul class="list-group">
+													<li ng-repeat="param in test.params | unique: 'param_value'" ng-if="param.param_name == 'Temperature'" class="list-group-item">{{param.param_value}}
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="panel-body">
+												<span class="label label-primary">Channels:</span>
+												<ul class="list-group">
+													<li ng-repeat="param in test.params | unique: 'param_value'" ng-if="param.param_name == 'Channel'" class="list-group-item">{{param.param_value}}
+												</ul>
+											</div>
+										</div>
+									<div class="col-md-3">
+										<div class="panel-body"  ng-if="test.test_name == 'TX-EVM'">
+											<span class="label label-primary">Antennas:</span>
+											<ul class="list-group">
+												<li ng-repeat="param in test.params | unique: 'param_value'" ng-if="param.param_name == 'Antenna'" class="list-group-item">{{param.param_value}}
+											</ul>
+										</div>
+<!--									</div>-->
+<!--									<div class="col-md-3" >-->
+										<div class="panel-body" ng-if="test.test_name == 'TX-BRP'">
+											<span class="label label-primary"># Of Antennas:</span>
+											<ul class="list-group">
+												<li ng-repeat="param in test.params | unique: 'param_value'" ng-if="param.param_name == 'num_ant'" class="list-group-item">{{param.param_value}}
+											</ul>
+										</div>
+<!--									</div>-->
+<!--										<div class="col-md-3" >-->
+											<div class="panel-body" ng-if="test.test_name == 'TX-EVM BF' || test.test_name == 'TX-EVM BFFW'">
+												<span class="label label-primary">Sectors:</span></br>
+												<ul class="list-group">
+													<li ng-repeat="param in test.params | unique: 'param_value'" ng-if="param.param_name == 'Sector'" class="list-group-item">{{param.param_value}}
+												</ul>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="panel-body">
+												<span class="label label-primary">MCS:</span></br>
+												<ul class="list-group">
+													<li ng-repeat="param in test.params | unique: 'param_value'" ng-if="param.param_name == 'MCS'" class="list-group-item">{{param.param_value}}
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="panel-body">
+											<span class="label label-primary">Chip S/N:</span>
+											<table class="table">
+												<thead>
+													<tr>
+														<th>Chip R</th>
+														<th>Chip M</th>
+														<th>Status</th>
+														<th class="text-center">By</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="param in test.chips track by $index">
+														<td>{{param.chip_r_sn}}-{{param.corner_r}}</td>
+														<td>{{param.chip_m_sn}}-{{param.corner_m}}</td>
+														<td class="text-center">
+															<span ng-click="chipStatus(chip, test.id)" class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span>
+														</td>
+														<td>{{chip.update_by}}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="col-md-6" ng-hide="test.notes == '' || test.notes == null">
+										<div class="panel-body">
+											<span class="label label-primary">Notes:</span>
+											<div trumbowyg-ng ng-disabled="lock" ng-model="test.notes" editor-config="{hideButtonTexts: true}">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/test/{{test.id}}/comments/new">Add New Comment</a>
 				</div>

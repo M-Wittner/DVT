@@ -40,3 +40,24 @@ ERROR - 201820182018-0303-2222 1414:0303:1111 --> 404 Page Not Found: Pages/line
 ERROR - 201820182018-0303-2222 1414:0303:5151 --> 404 Page Not Found: Pages/lineups
 ERROR - 201820182018-0303-2222 1414:0303:1717 --> 404 Page Not Found: Pages/lineups
 ERROR - 201820182018-0303-2222 1414:0303:2727 --> 404 Page Not Found: Pages/lineups
+ERROR - 201820182018-0303-2222 1515:0303:0808 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201820182018-0303-2222 1515:0303:0808 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201820182018-0303-2222 1515:0303:0808 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201820182018-0303-2222 1515:0303:1010 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201820182018-0303-2222 1515:0303:1010 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201820182018-0303-2222 1515:0303:1010 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201820182018-0303-2222 1515:0303:1414 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201820182018-0303-2222 1515:0303:1414 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201820182018-0303-2222 1515:0303:1414 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201820182018-0303-2222 1515:0303:1717 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201820182018-0303-2222 1515:0303:1717 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201820182018-0303-2222 1515:0303:1717 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201820182018-0303-2222 1515:0303:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201820182018-0303-2222 1515:0303:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201820182018-0303-2222 1515:0303:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+ERROR - 201820182018-0303-2222 1616:0303:0808 --> Severity: Notice --> Undefined property: stdClass::$excel_index C:\xampp\htdocs\application\controllers\plans.php 999
+ERROR - 201820182018-0303-2222 1616:0303:0808 --> Severity: Notice --> Undefined property: stdClass::$excel_index C:\xampp\htdocs\application\controllers\plans.php 999
+ERROR - 201820182018-0303-2222 1616:0303:0808 --> Severity: error --> Exception: Invalid cell coordinate 2 C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Cell\Coordinate.php 41
+ERROR - 201820182018-0303-2222 1616:0303:4141 --> Severity: Notice --> Undefined property: stdClass::$excel_index C:\xampp\htdocs\application\controllers\plans.php 999
+ERROR - 201820182018-0303-2222 1616:0303:4141 --> Severity: Notice --> Undefined property: stdClass::$excel_index C:\xampp\htdocs\application\controllers\plans.php 999
+ERROR - 201820182018-0303-2222 1616:0303:4141 --> Severity: error --> Exception: Invalid cell coordinate 2 C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Cell\Coordinate.php 41
