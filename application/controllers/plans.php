@@ -5,7 +5,7 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type");
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Plans extends CI_Controller {
+class Plans extends CI_Controller {	
 	public function __construct() {
 
 	parent::__construct();
@@ -36,10 +36,15 @@ class Plans extends CI_Controller {
 	}
 	
 	function Create() {
+		$test_params = $this->db->get('test_params')->result();
+		$paramsArr = array();
+		foreach($test_params as $param){
+			$paramsArr[$param->param_name] = $param->param_id;
+		}
+
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
-//		echo json_encode($postData);
-//		die();
+		
 		$planData = $postData->plan;
 		$plan = array(
 			'user_id'=>$planData->userId,
@@ -361,36 +366,48 @@ class Plans extends CI_Controller {
 								
 								$this->db->insert('test_chips_new', $pairData);
 							}
-						$params['temps'] = array();
-						foreach($testArr->temps as $temp){
+						$params['temp_r'] = array();
+						foreach($testArr->temps_r as $temp){
 							$data = array(
 								'plan_id'=>$planId,
 								'test_id'=>$testId,
-								'param_id'=>3,
+								'param_id'=>$paramsArr['temp_r'],
 								'param_value_id'=>$temp,
 							);
-							array_push($params['temps'], $data);
+							array_push($params['temp_r'], $data);
 						}
-						$params['channels'] = array();
+						if(isset($testArr->temps_m)){
+							$params['temp_m'] = array();
+							foreach($testArr->temps_m as $temp){
+								$data = array(
+									'plan_id'=>$planId,
+									'test_id'=>$testId,
+									'param_id'=>$paramsArr['temp_m'],
+									'param_value_id'=>$temp,
+								);
+								array_push($params['temp_m'], $data);
+							}
+						}
+						$params['channel'] = array();
 						foreach($testArr->channels as $ch){
 							$data = array(
 								'plan_id'=>$planId,
 								'test_id'=>$testId,
-								'param_id'=>4,
+								'param_id'=>$paramsArr['channel'],
 								'param_value_id'=>$ch,
 							);
-							array_push($params['channels'], $data);
+							array_push($params['channel'], $data);
 						}
 						if(isset($testArr->antennas)){
-							$params['antennas'] = array();
+							$params['antenna'] = array();
 							foreach($testArr->antennas as $ant){
 								$data = array(
 									'plan_id'=>$planId,
 									'test_id'=>$testId,
-									'param_id'=>5,
+									'param_id'=>$paramsArr['antenna'],
 									'param_value_id'=>$ant,
 								);
-								array_push($params['antennas'], $data);
+								array_push($params['antenna'], $data);
 							}
 						} elseif(isset($testArr->num_ants)){
 								$params['num_ant'] = array();
@@ -398,7 +415,7 @@ class Plans extends CI_Controller {
 									$data = array(
 										'plan_id'=>$planId,
 										'test_id'=>$testId,
-										'param_id'=>11,
+										'param_id'=>$paramsArr['num_ant'],
 										'param_value_id'=>$ant,
 									);
 									array_push($params['num_ant'], $data);
@@ -410,21 +427,21 @@ class Plans extends CI_Controller {
 								$data = array(
 									'plan_id'=>$planId,
 									'test_id'=>$testId,
-									'param_id'=>12,
+									'param_id'=>$paramsArr['sector'],
 									'param_value_id'=>$sector,
 								);
 								array_push($params['sector'], $data);
 							}
 						}
-						$params['MCSs'] = array();
+						$params['mcs'] = array();
 						foreach($testArr->mcs as $mcs){
 							$data = array(
 								'plan_id'=>$planId,
 								'test_id'=>$testId,
-								'param_id'=>7,
+								'param_id'=>$paramsArr['mcs'],
 								'param_value_id'=>$mcs,
 							);
-							array_push($params['MCSs'], $data);
+							array_push($params['mcs'], $data);
 						}
 //						echo json_encode($params);
 //						die();
@@ -581,6 +598,12 @@ class Plans extends CI_Controller {
 	}
 	
 	function addtests(){
+		$test_params = $this->db->get('test_params')->result();
+		$paramsArr = array();
+		foreach($test_params as $param){
+			$paramsArr[$param->param_name] = $param->param_id;
+		}
+		
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
 //		die(var_dump($postData));
@@ -887,36 +910,48 @@ class Plans extends CI_Controller {
 								
 								$this->db->insert('test_chips_new', $pairData);
 							}
-						$params['temps'] = array();
-						foreach($testArr->temps as $temp){
+						$params['temp_r'] = array();
+						foreach($testArr->temps_r as $temp){
 							$data = array(
 								'plan_id'=>$planId,
 								'test_id'=>$testId,
-								'param_id'=>3,
+								'param_id'=>$paramsArr['temp_r'],
 								'param_value_id'=>$temp,
 							);
-							array_push($params['temps'], $data);
+							array_push($params['temp_r'], $data);
 						}
-						$params['channels'] = array();
+						if(isset($testArr->temps_m)){
+							$params['temp_m'] = array();
+							foreach($testArr->temps_m as $temp){
+								$data = array(
+									'plan_id'=>$planId,
+									'test_id'=>$testId,
+									'param_id'=>$paramsArr['temp_m'],
+									'param_value_id'=>$temp,
+								);
+								array_push($params['temp_m'], $data);
+							}
+						}
+						$params['channel'] = array();
 						foreach($testArr->channels as $ch){
 							$data = array(
 								'plan_id'=>$planId,
 								'test_id'=>$testId,
-								'param_id'=>4,
+								'param_id'=>$paramsArr['channel'],
 								'param_value_id'=>$ch,
 							);
-							array_push($params['channels'], $data);
+							array_push($params['channel'], $data);
 						}
 						if(isset($testArr->antennas)){
-							$params['antennas'] = array();
+							$params['antenna'] = array();
 							foreach($testArr->antennas as $ant){
 								$data = array(
 									'plan_id'=>$planId,
 									'test_id'=>$testId,
-									'param_id'=>5,
+									'param_id'=>$paramsArr['antenna'],
 									'param_value_id'=>$ant,
 								);
-								array_push($params['antennas'], $data);
+								array_push($params['antenna'], $data);
 							}
 						} elseif(isset($testArr->num_ants)){
 								$params['num_ant'] = array();
@@ -924,7 +959,7 @@ class Plans extends CI_Controller {
 									$data = array(
 										'plan_id'=>$planId,
 										'test_id'=>$testId,
-										'param_id'=>11,
+										'param_id'=>$paramsArr['num_ant'],
 										'param_value_id'=>$ant,
 									);
 									array_push($params['num_ant'], $data);
@@ -936,24 +971,22 @@ class Plans extends CI_Controller {
 								$data = array(
 									'plan_id'=>$planId,
 									'test_id'=>$testId,
-									'param_id'=>12,
+									'param_id'=>$paramsArr['sector'],
 									'param_value_id'=>$sector,
 								);
 								array_push($params['sector'], $data);
 							}
 						}
-						$params['MCSs'] = array();
+						$params['mcs'] = array();
 						foreach($testArr->mcs as $mcs){
 							$data = array(
 								'plan_id'=>$planId,
 								'test_id'=>$testId,
-								'param_id'=>7,
+								'param_id'=>$paramsArr['mcs'],
 								'param_value_id'=>$mcs,
 							);
-							array_push($params['MCSs'], $data);
+							array_push($params['mcs'], $data);
 						}
-//						echo json_encode($params);
-//						die();
 						foreach ($params as $param){
 							$status = $this->db->insert_batch('test_config', $param);
 						}

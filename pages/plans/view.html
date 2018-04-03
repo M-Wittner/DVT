@@ -451,19 +451,35 @@
 								</div>
 								<div class="col-md-9">
 										<div class="col-md-3">
-											<div class="panel-body">
+											<div ng-if="test.test_name != 'RX-EVM PVT'" class="panel-body">
 												<span class="label label-primary">Temperatures:</span>
 												<ul class="list-group">
-													<li ng-repeat="param in test.params | unique: 'param_value'" ng-if="param.param_name == 'Temperature'" class="list-group-item">{{param.param_value}}
+													<li ng-repeat="param in test.params " ng-if="param.param_name == 'temp_r'" class="list-group-item">{{param.param_value}}
 													</li>
 												</ul>
+											</div>
+											<div ng-if="test.test_name == 'RX-EVM PVT'" class="panel-body">
+												<div class="row">
+													<span class="label label-primary">TalynA Temperatures:</span>
+													<ul class="list-group">
+														<li ng-repeat="param in test.params " ng-if="param.param_name == 'temp_r'" class="list-group-item">{{param.param_value}}
+														</li>
+													</ul>
+												</div>
+												<div class="row">
+													<span class="label label-primary">TalynM Temperatures:</span>
+													<ul class="list-group">
+														<li ng-repeat="param in test.params " ng-if="param.param_name == 'temp_m'" class="list-group-item">{{param.param_value}}
+														</li>
+													</ul>
+												</div>
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="panel-body">
 												<span class="label label-primary">Channels:</span>
 												<ul class="list-group">
-													<li ng-repeat="param in test.params | unique: 'param_value'" ng-if="param.param_name == 'Channel'" class="list-group-item">{{param.param_value}}
+													<li ng-repeat="param in test.params " ng-if="param.param_name == 'channel'" class="list-group-item">{{param.param_value}}
 												</ul>
 											</div>
 										</div>
@@ -471,19 +487,19 @@
 										<div class="panel-body"  ng-if="test.test_name == 'TX-EVM'">
 											<span class="label label-primary">Antennas:</span>
 											<ul class="list-group">
-												<li ng-repeat="param in test.params | unique: 'param_value'" ng-if="param.param_name == 'Antenna'" class="list-group-item">{{param.param_value}}
+												<li ng-repeat="param in test.params" ng-if="param.param_name == 'antenna'" class="list-group-item">{{param.param_value}}
 											</ul>
 										</div>
-										<div class="panel-body" ng-if="test.test_name == 'TX-BRP'">
+										<div class="panel-body" ng-if="test.test_name == 'TX-BRP'  || test.test_name == 'RX-EVM PVT'">
 											<span class="label label-primary"># Of Antennas:</span>
 											<ul class="list-group">
-												<li ng-repeat="param in test.params | unique: 'param_value'" ng-if="param.param_name == 'num_ant'" class="list-group-item">{{param.param_value}}
+												<li ng-repeat="param in test.params " ng-if="param.param_name == 'num_ant'" class="list-group-item">{{param.param_value}}
 											</ul>
 										</div>
 											<div class="panel-body" ng-if="test.test_name == 'TX-EVM BF' || test.test_name == 'TX-EVM BFFW'">
 												<span class="label label-primary">Sectors:</span></br>
 												<ul class="list-group">
-													<li ng-repeat="param in test.params | unique: 'param_value'" ng-if="param.param_name == 'Sector'" class="list-group-item">{{param.param_value}}
+													<li ng-repeat="param in test.params " ng-if="param.param_name == 'Sector'" class="list-group-item">{{param.param_value}}
 												</ul>
 											</div>
 										</div>
@@ -491,7 +507,7 @@
 											<div class="panel-body">
 												<span class="label label-primary">MCS:</span></br>
 												<ul class="list-group">
-													<li ng-repeat="param in test.params | unique: 'param_value'" ng-if="param.param_name == 'MCS'" class="list-group-item">{{param.param_value}}
+													<li ng-repeat="param in test.params " ng-if="param.param_name == 'mcs'" class="list-group-item">{{param.param_value}}
 													</li>
 												</ul>
 											</div>
