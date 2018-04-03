@@ -487,7 +487,7 @@ myApp.factory('testParams', function($http, $log){
 	$http.get(site+'/params/xifs')
 	.then(function(response){
 		testParams.params.xifList = response.data;
-		console.log(response.data);
+//		console.log(response.data);
 	});
 	
 	testParams.params.chipListM = {};

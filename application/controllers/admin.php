@@ -46,8 +46,8 @@ class Admin extends CI_Controller {
 		}
 //		die(var_dump($chip));
 		if(isset($chip['chip_sn'])){
-			$this->load->database('main');
-			$insertStatus = $this->db->insert('chips', $chip);
+			$this->other_db= $this->load->database('main', TRUE);
+			$insertStatus = $this->other_db->insert('chips', $chip);
 			if($insertStatus == true){
 				echo 'success';
 			}

@@ -70,15 +70,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-$active_group = 'default';
+// Main DB
+$active_group = 'main';
 $query_builder = TRUE;
 
-$db['default'] = array(
+$db['main'] = array(
 	'dsn'	=> '',
 	'hostname' => 'DBCRPMYSQLHFPRD02',
 	'username' => 'wigig',
 	'password' => 'lDY4Ynf1h8p',
-	'database' => 'dvt_60g_web',
+	'database' => 'dvt_60g',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -95,12 +96,16 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
-$db['main'] = array(
+// Default DB
+$active_group = 'default';
+$query_builder = TRUE;
+
+$db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'DBCRPMYSQLHFPRD02',
 	'username' => 'wigig',
 	'password' => 'lDY4Ynf1h8p',
-	'database' => 'dvt_60g',
+	'database' => 'dvt_60g_web',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
