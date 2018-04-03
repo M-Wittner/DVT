@@ -169,7 +169,7 @@
 					</multiselect>
 				</div>
 			</div>
-			<div class="col-md-2" ng-if="test.station[0].station == 'TalynM+A' && test.name[0].test_name == 'TX-BRP'">
+			<div class="col-md-2" ng-if="test.station[0].station == 'TalynM+A' && (test.name[0].test_name == 'TX-BRP' || test.name[0].test_name == 'RX-EVM PVT')">
 				<div class="panel-body">
 					<span class="label label-dangerC"># Of Antennas:</span>
 					<multiselect ng-model="test.num_ants" options="testParams.params.numAntsList" show-search="true" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
@@ -183,7 +183,7 @@
 					</multiselect>
 				</div>
 			</div>
-			<div class="col-md-2" ng-if="test.station[0].station != 'R-CB1' && test.station[0].station != 'R-CB2' && test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'" ng-hide="test.name[0].test_name == 'Temp-Calibration' || test.name[0].test_name == 'PTAT Calibration'">
+			<div ng-hide="true" class="col-md-2" ng-if="test.station[0].station != 'R-CB1' && test.station[0].station != 'R-CB2' && test.station[0].station != 'PTAT/ABS/Vgb+TEMP' && test.station[0].station != 'TalynM+A'" ng-hide="test.name[0].test_name == 'Temp-Calibration' || test.name[0].test_name == 'PTAT Calibration'">
 				<div class="panel-body">
 					<span class="label label-dangerC">XIF:</span>
 					<multiselect ng-model="test.xifs" id-prop="id" display-prop="xif" options="testParams.params.xifList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">

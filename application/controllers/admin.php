@@ -13,24 +13,41 @@ class Admin extends CI_Controller {
 			parent::__construct();
 			$this->load->helper(array('form','url','download', 'file'));
 			$this->load->library('Filter');
-			$this->load->database('');
+			$this->load->database('default');
 			$this->load->model('excel_model');
     }
 	
 	public function addChip() {
 		$postData = json_decode(file_get_contents('php://input'));
+		$chipType = $postData->chip;
 		$chip = array(
-			'chip'=>$postData->chip,
 			'board'=>$postData->board,
-			'package'=>$postData->package,
-			'model'=>$postData->model,
-			'revision'=>$postData->revision,
-			'serial_number'=>$postData->sn,
-			'corner'=>$postData->corner,
+			'chip_sn'=>$postData->sn,
+			'chip_process_abb'=>$postData->corner,
+			'package'=>'Flip_Chip',
+			'model'=>'OCA6425',
 		);
-		
-		if(isset($chip['chip'])){
-			$insertStatus = $this->db->insert('params_chips', $chip);
+		switch($chipType){
+			case 'TalynA 1':
+				$chip['revision'] = 'A0';
+				$chip['chip_type_id'] = 1;
+				break;
+			case 'TalynA 2':
+				$chip['revision'] = 'A0';
+				$chip['chip_type_id'] = 3;
+				break;
+			case 'TalynM 1':
+				$chip['revision'] = 'B0';
+				$chip['chip_type_id'] = 2;
+			case 'TalynM 2':
+				$chip['revision'] = 'B0';
+				$chip['chip_type_id'] = 4;
+				break;
+		}
+//		die(var_dump($chip));
+		if(isset($chip['chip_sn'])){
+			$this->load->database('main');
+			$insertStatus = $this->db->insert('chips', $chip);
 			if($insertStatus == true){
 				echo 'success';
 			}

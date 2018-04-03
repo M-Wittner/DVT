@@ -126,3 +126,9 @@ ERROR - 201820182018-0404-0202 1313:0404:3939 --> Severity: Notice --> Trying to
 ERROR - 201820182018-0404-0202 1313:0404:3939 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 131
 ERROR - 201820182018-0404-0202 1313:0404:3939 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 131
 ERROR - 201820182018-0404-0202 1313:0404:3434 --> Severity: Parsing Error --> syntax error, unexpected 'if' (T_IF) C:\xampp\htdocs\application\controllers\plans.php 982
+ERROR - 201820182018-0404-0202 1515:0404:3232 --> Severity: Parsing Error --> syntax error, unexpected ',' C:\xampp\htdocs\application\controllers\admin.php 40
+ERROR - 201820182018-0404-0202 1515:0404:2323 --> Query error: Unknown column 'chip' in 'field list' - Invalid query: INSERT INTO `chips` (`chip`, `board`, `serial_number`, `corner`, `package`, `model`) VALUES ('TalynA 1', 'YA591-H502', 'dsadsa', 'TT', 'Flip_Chip', 'OCA6425')
+ERROR - 201820182018-0404-0202 1515:0404:5858 --> Query error: Unknown column 'corner' in 'field list' - Invalid query: INSERT INTO `chips` (`board`, `chip_sn`, `corner`, `package`, `model`, `revision`, `chip_type_id`) VALUES ('YA591-H502', 'dsadsa', 'TT', 'Flip_Chip', 'OCA6425', 'A0', 1)
+ERROR - 201820182018-0404-0202 1515:0404:0505 --> Severity: Error --> Cannot use object of type CI_DB_mysqli_driver as array C:\xampp\htdocs\application\controllers\admin.php 50
+ERROR - 201820182018-0404-0202 1515:0404:4949 --> Severity: Warning --> Illegal offset type in isset or empty C:\xampp\htdocs\system\database\DB.php 99
+ERROR - 201820182018-0404-0202 1515:0404:4949 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\system\database\DB.php 101

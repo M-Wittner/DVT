@@ -26,7 +26,8 @@ class Params extends CI_Controller {
 		echo json_encode($result);
 	}
 	public function chipsMR() {
-		$data = $this->db->get('params_chips');
+		$this->db->where_in('chip_type_id', [1, 2, 3, 4]);
+		$data = $this->db->get('chip_view');
 		$result = $data->result();
 		echo json_encode($result);
 	}

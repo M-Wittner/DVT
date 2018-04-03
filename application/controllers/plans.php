@@ -193,13 +193,6 @@ class Plans extends CI_Controller {
 						$tempsArr = $testArr->temps;
 						$channelsArr = $testArr->channels;
 						
-						$variables = new stdClass();
-						$variables->temps = sizeof($tempsArr);
-						$variables->channels = sizeof($channelsArr);
-						$variables->xifs = sizeof($testArr->xifs);
-						$variables->station = $testArr->station[0]->station;
-						$variables->test_name = $testArr->name[0]->test_name;
-						
 //						$estimate_runtime = $this->plan_model->calc_runtime($variables);
 						if(isset($testArr->calc)){
 							$time = $testArr->calc->lineups*$testArr->calc->seconds*$testArr->calc->pins*$testArr->calc->ants*$testArr->calc->temps*$testArr->calc->channels;
@@ -239,7 +232,11 @@ class Plans extends CI_Controller {
 							} else{
 							$chipsArr = $testArr->chips;
 							$tempsArr = $testArr->temps;
-							$xifsArr = $testArr->xifs;
+							if(isset($testArr->xifs)){
+								$xifsArr = $testArr->xifs;
+							} else{
+								$xifsArr = null;
+							}
 	//						var_dump($xifsArr);
 							$channelsArr = $testArr->channels;
 								if(isset($testArr->calc)){
@@ -268,20 +265,22 @@ class Plans extends CI_Controller {
 									);
 									$insertChip = $this->plan_model->add_chips($chip);
 									$chipId = $this->db->insert_id($insertChip);
-									$xifs = array();
-									foreach($xifsArr as $xifRes){
-										$xif = array(
-											'chip_id'=>$chipId,
-											'chip'=>$chip['serial_number'],
-											'xif'=>$xifRes->xif,
-											'plan_id'=>$planId,
-											'test_id'=>$testId
-										);
-										array_push($xifs, $xif);
-									};
-		//							var_dump($xifs);
-		//							die();
-									$this->db->insert_batch('test_xifs', $xifs);
+									if(isset($xifsArr)){	
+										$xifs = array();
+										foreach($xifsArr as $xifRes){
+											$xif = array(
+												'chip_id'=>$chipId,
+												'chip'=>$chip['serial_number'],
+												'xif'=>$xifRes->xif,
+												'plan_id'=>$planId,
+												'test_id'=>$testId
+											);
+											array_push($xifs, $xif);
+										};
+			//							var_dump($xifs);
+			//							die();
+										$this->db->insert_batch('test_xifs', $xifs);
+									}
 								};
 								foreach($tempsArr as $result){
 									$temp = array(
@@ -762,7 +761,11 @@ class Plans extends CI_Controller {
 							} else{
 							$chipsArr = $testArr->chips;
 							$tempsArr = $testArr->temps;
-							$xifsArr = $testArr->xifs;
+							if(isset($testArr->xifs)){
+								$xifsArr = $testArr->xifs;
+							} else {
+								$xifsArr = null;
+							}
 	//						var_dump($xifsArr);
 							$channelsArr = $testArr->channels;
 								if(isset($testArr->calc)){
@@ -781,7 +784,7 @@ class Plans extends CI_Controller {
 								$insertTest = $this->plan_model->add_test($test);
 								$testId = $this->plan_model->tests_id($insertTest);
 								foreach($chipsArr as $result){
-		//							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
+	//							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
 									$chip = array(
 										'serial_number'=>$result->chip_sn,
 										'corner'=>$result->chip_process_abb,
@@ -792,21 +795,23 @@ class Plans extends CI_Controller {
 									);
 									$insertChip = $this->plan_model->add_chips($chip);
 									$chipId = $this->db->insert_id($insertChip);
-									$xifs = array();
-									foreach($xifsArr as $xifRes){
-										$xif = array(
-											'chip_id'=>$chipId,
-											'chip'=>$chip['serial_number'],
-											'xif'=>$xifRes->xif,
-											'plan_id'=>$planId,
-											'test_id'=>$testId
-										);
-										array_push($xifs, $xif);
+								if(isset($xifsArr)){
+										$xifs = array();
+										foreach($xifsArr as $xifRes){
+											$xif = array(
+												'chip_id'=>$chipId,
+												'chip'=>$chip['serial_number'],
+												'xif'=>$xifRes->xif,
+												'plan_id'=>$planId,
+												'test_id'=>$testId
+											);
+											array_push($xifs, $xif);
+										};
+			//							var_dump($xifs);
+			//							die();
+										$this->db->insert_batch('test_xifs', $xifs);
 									};
-		//							var_dump($xifs);
-		//							die();
-									$this->db->insert_batch('test_xifs', $xifs);
-								};
+								}
 								foreach($tempsArr as $result){
 									$temp = array(
 										'temp'=>$result,
