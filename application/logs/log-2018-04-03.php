@@ -129,3 +129,6 @@ ERROR - 201820182018-0404-0303 1212:0404:0404 --> Severity: Notice --> Undefined
 ERROR - 201820182018-0404-0303 1212:0404:0404 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 502
 ERROR - 201820182018-0404-0303 1212:0404:0404 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\models\plan_model.php 505
 ERROR - 201820182018-0404-0303 1212:0404:0404 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 505
+ERROR - 201820182018-0404-0303 1212:0404:3232 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
+ERROR - 201820182018-0404-0303 1212:0404:3232 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
+ERROR - 201820182018-0404-0303 1212:0404:3232 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
