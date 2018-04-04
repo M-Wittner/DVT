@@ -156,8 +156,8 @@ class Plans extends CI_Controller {
 						foreach($chipsArr as $result){
 //							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\\test_results\\" .$result->chip. "\TalynA_YA591-H511_Flip_Chip_QCA6425_B0_".$result->serial_number;
 							$chip = array(
-								'serial_number'=> $result->chip_sn,
-								'corner'=>$result->chip_process_abb,
+								'chip_sn'=> $result->chip_sn,
+								'chip_process_abb'=>$result->chip_process_abb,
 								'chip'=>$result->chip_type_id,
 //								'results_path'=>$path,
 								'plan_id'=>$planId,
@@ -225,8 +225,8 @@ class Plans extends CI_Controller {
 								foreach($chipsArr as $result){
 //								$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
 									$chip = array(
-										'serial_number'=>$result->chip_sn,
-										'corner'=>$result->chip_process_abb,
+										'chip_sn'=>$result->chip_sn,
+										'chip_process_abb'=>$result->chip_process_abb,
 										'chip'=>$result->chip_type_id,
 //									'results_path'=>$path,
 										'plan_id'=>$planId,
@@ -262,8 +262,8 @@ class Plans extends CI_Controller {
 								foreach($chipsArr as $result){
 		//							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
 									$chip = array(
-										'serial_number'=>$result->chip_sn,
-										'corner'=>$result->chip_process_abb,
+										'chip_sn'=>$result->chip_sn,
+										'chip_process_abb'=>$result->chip_process_abb,
 		//								'results_path'=>$path,
 										'plan_id'=>$planId,
 										'test_id'=>$testId
@@ -275,7 +275,7 @@ class Plans extends CI_Controller {
 										foreach($xifsArr as $xifRes){
 											$xif = array(
 												'chip_id'=>$chipId,
-												'chip'=>$chip['serial_number'],
+												'chip'=>$chip['chip_sn'],
 												'xif'=>$xifRes->xif,
 												'plan_id'=>$planId,
 												'test_id'=>$testId
@@ -322,8 +322,8 @@ class Plans extends CI_Controller {
 							$testId = $this->plan_model->tests_id($insertTest);
 							foreach($chipsArr as $result){
 								$chip = array(
-									'serial_number'=>$result->chip_sn,
-									'corner'=>$result->chip_chip_process_abb,
+									'chip_sn'=>$result->chip_sn,
+									'chip_process_abb'=>$result->chip_chip_process_abb,
 									'chip'=>$result->chip_type_id,
 									'plan_id'=>$planId,
 									'test_id'=>$testId
@@ -718,8 +718,8 @@ class Plans extends CI_Controller {
 						foreach($chipsArr as $result){
 //							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\\test_results\\" .$result->chip. "\TalynA_YA591-H511_Flip_Chip_QCA6425_B0_".$result->serial_number;
 							$chip = array(
-								'serial_number'=> $result->chip_sn,
-								'corner'=>$result->chip_process_abb,
+								'chip_sn'=> $result->chip_sn,
+								'chip_process_abb'=>$result->chip_process_abb,
 								'chip'=>$result->chip_type_id,
 //								'results_path'=>$path,
 								'plan_id'=>$planId,
@@ -772,9 +772,9 @@ class Plans extends CI_Controller {
 								foreach($chipsArr as $result){
 //								$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
 									$chip = array(
-										'serial_number'=>$result->chip_sn,
+										'chip_sn'=>$result->chip_sn,
 										'chip'=>$result->chip_type_id,
-										'corner'=>$result->chip_process_abb,
+										'chip_process_abb'=>$result->chip_process_abb,
 //									'results_path'=>$path,
 										'plan_id'=>$planId,
 										'test_id'=>$testId
@@ -809,8 +809,8 @@ class Plans extends CI_Controller {
 								foreach($chipsArr as $result){
 	//							$path = "\\\\filer4\\fileserver\Projects\dvt\Results\test_results\\" .$result->chip. "\TalynM_YA591-H2_Flip_Chip_QCA6425_A0_".$result->serial_number;
 									$chip = array(
-										'serial_number'=>$result->chip_sn,
-										'corner'=>$result->chip_process_abb,
+										'chip_sn'=>$result->chip_sn,
+										'chip_process_abb'=>$result->chip_process_abb,
 										'chip'=>$result->chip_type_id,
 		//								'results_path'=>$path,
 										'plan_id'=>$planId,
@@ -823,7 +823,7 @@ class Plans extends CI_Controller {
 										foreach($xifsArr as $xifRes){
 											$xif = array(
 												'chip_id'=>$chipId,
-												'chip'=>$chip['serial_number'],
+												'chip'=>$chip['chip_sn'],
 												'xif'=>$xifRes->xif,
 												'plan_id'=>$planId,
 												'test_id'=>$testId
@@ -869,8 +869,8 @@ class Plans extends CI_Controller {
 							$testId = $this->plan_model->tests_id($insertTest);
 							foreach($chipsArr as $result){
 								$chip = array(
-									'serial_number'=>$result->chip_sn,
-									'corner'=>$result->chip_process_abb,
+									'chip_sn'=>$result->chip_sn,
+									'chip_process_abb'=>$result->chip_process_abb,
 									'chip'=>$result->chip_type_id,
 									'plan_id'=>$planId,
 									'test_id'=>$testId
@@ -880,7 +880,7 @@ class Plans extends CI_Controller {
 //------------ TalynM+A station station test -------------	
 					}elseif( $testArr->station[0]->station == 'TalynM+A'){
 							$test = new stdClass();
-							$test->struct = array(
+							$test->config = array(
 									'priority'=>$testArr->priority[0],
 									'work_station_id'=>$testArr->station[0]->id,
 									'test_name_id'=>$testArr->name[0]->id,
@@ -890,9 +890,9 @@ class Plans extends CI_Controller {
 									'plan_id'=>$planId,
 									'user_id'=>$planData->userId,
 								);
+							$insertTest = $this->db->insert('tests_new', $test->config);
 							$test->params = array();
 							$params = $test->params;
-							$insertTest = $this->db->insert('tests_new', $test->struct);
 							$testId = $this->db->insert_id($insertTest);
 							$chips = $testArr->chips;
 							$chipPairs = array();
@@ -1104,9 +1104,9 @@ class Plans extends CI_Controller {
 			}
 		}
 		
-		$this->db->select('serial_number AS chip_sn,
+		$this->db->select('chip_sn,
 											chip AS  chip_type_id,
-											corner AS chip_process_abb,
+											chip_process_abb,
 											');
 		$chip = $this->db->get_where('test_chips', array('test_id'=>$test->id))->result();
 		$test->chips = $chip;

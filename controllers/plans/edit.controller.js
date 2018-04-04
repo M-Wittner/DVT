@@ -13,9 +13,6 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 		$scope.test.mcs = parseInt(response.data.mcs);
 		$scope.test.voltage = parseInt(response.data.voltage);
 		console.log(response.data);
-//		console.log($routeParams);
-//		console.log($scope.test.temps);
-		console.log(testParams.params.xifList);
 	});
 		
 	} else {

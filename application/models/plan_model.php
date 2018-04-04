@@ -458,8 +458,9 @@ class plan_model extends CI_Model {
 			$chip = array(
 				'test_id'=>$testObj->id,
 				'plan_id'=>$testObj->plan_id,
-				'serial_number'=>$chipRes->serial_number,
-				'chip'=>$chipRes->chip,
+				'chip_sn'=>$chipRes->chip_sn,
+				'chip'=>$chipRes->chip_type_id,
+				'chip_process_abb'=>$chipRes->chip_process_abb,
 				);
 			$insertStatus = $this->db->replace('test_chips', $chip);
 			$insertId = $this->db->insert_id($insertStatus);
@@ -476,8 +477,8 @@ class plan_model extends CI_Model {
 						$xif = array(
 							'test_id'=>$testObj->id,
 							'plan_id'=>$testObj->plan_id,
-							'chip_id'=>$chipRes->id,
-							'chip'=>$chipRes->serial_number,
+							'chip_id'=>$chipRes->chip_id,
+							'chip'=>$chipRes->chip_sn,
 							'xif'=>$xifRes->xif
 							);
 						$this->db->replace('test_xifs', $xif);
@@ -502,16 +503,16 @@ class plan_model extends CI_Model {
 		$error = $result->chip->error;
 //		die(var_dump($result));
 		if($runs == false && $complete == false && $error == false){
-			$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$this->db->where(array('chip_sn'=>$result->chip->chip_sn, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
 			$insertStatus = $this->db->update('test_chips', array('running'=>true, 'completed'=>false, 'error'=>false, 'update_by'=>$result->user->username));
 		} else if($runs == true && $complete == false && $error == false){
-			$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$this->db->where(array('chip_sn'=>$result->chip->chip_sn, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
 			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>true, 'error'=>false, 'update_by'=>$result->user->username));
 		} else if($runs == false && $complete == true && $error == false){
-			$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$this->db->where(array('chip_sn'=>$result->chip->chip_sn, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
 			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false ,'error'=>true, 'update_by'=>$result->user->username));
 		} else if($runs == false && $complete == false && $error == true){
-			$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+			$this->db->where(array('chip_sn'=>$result->chip->chip_sn, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
 			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false, 'error'=>false, 'update_by'=>$result->user->username));
 		} else{
 			echo 'nothing';

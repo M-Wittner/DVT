@@ -96,11 +96,11 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$scope.chipStatus = function(chip, testId, index){
 		$http.post('http://wigig-584/plans/chipstatus', {chip: chip, planId: $routeParams.id, testId: testId, user: $scope.user})
 		.then(function(response){
-			chip = response.data.chip.serial_number;
+			chip = response.data.chip.chip_sn;
 			var message = 'Chip '+chip+' Status Updated!';
 			var id = Flash.create('success', message, 3500);
 			setTimeout(function(){$window.location.reload();}, 2250);
-//			console.log(response.data);
+			console.log(response.data);
 		});
 	}
 	$scope.tempStatus = function(temp, testId){

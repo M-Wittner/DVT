@@ -233,7 +233,7 @@
 									<tbody>
 										<tr ng-repeat="chip in test.chips">
 											<td>
-												{{chip.serial_number}}
+												{{chip.chip_sn}}
 											</td>
 											<td ng-repeat="xifRes in test.xifs" ng-click="xifStatus(xifRes)" ng-if="xifRes.chip == chip.serial_number"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == '1', 'glyphicon-ok': xifRes.completed == '1', 'glyphicon-remove': xifRes.error == '1'}"></span></td>
 										</tr>
@@ -269,9 +269,9 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr ng-repeat="chip in test.chips | orderBy: 'serial_number' track by $index">
-												<td>{{chip.serial_number}}</td>
-												<td>{{chip.corner}}</td>
+											<tr ng-repeat="chip in test.chips | orderBy: 'chip_sn' track by $index">
+												<td>{{chip.chip_sn}}</td>
+												<td>{{chip.chip_process_abb}}</td>
 												<td class="text-center">
 													<span ng-click="chipStatus(chip, test.id)" class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span>
 												</td>
@@ -293,10 +293,10 @@
 										<tbody>
 											<tr ng-repeat="chip in test.chips | orderBy: 'serial_number'">
 												<td>
-													{{chip.serial_number}}
+													{{chip.chip_sn}}
 												</td>
 												<td>
-													{{chip.corner}}
+													{{chip.chip_process_abb}}
 												</td>
 												<td>
 													<span ng-click="chipStatus(chip, test.id)" class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span>
