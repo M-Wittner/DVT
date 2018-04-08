@@ -132,78 +132,104 @@ ERROR - 201820182018-0404-0303 1212:0404:0404 --> Severity: Notice --> Trying to
 ERROR - 201820182018-0404-0303 1212:0404:3232 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
 ERROR - 201820182018-0404-0303 1212:0404:3232 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
 ERROR - 201820182018-0404-0303 1212:0404:3232 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
-<<<<<<< HEAD
-ERROR - 201820182018-0404-0303 1212:0404:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
-ERROR - 201820182018-0404-0303 1212:0404:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
-ERROR - 201820182018-0404-0303 1212:0404:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
-ERROR - 201820182018-0404-0303 1212:0404:3030 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
-ERROR - 201820182018-0404-0303 1212:0404:3030 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
-ERROR - 201820182018-0404-0303 1212:0404:3030 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
-ERROR - 201820182018-0404-0303 1212:0404:3030 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
-ERROR - 201820182018-0404-0303 1212:0404:3030 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
-ERROR - 201820182018-0404-0303 1212:0404:3030 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
-ERROR - 201820182018-0404-0303 1414:0404:3131 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 1123
-ERROR - 201820182018-0404-0303 1414:0404:3131 --> Severity: error --> Exception: File "" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
-ERROR - 201820182018-0404-0303 1414:0404:5353 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 1123
-ERROR - 201820182018-0404-0303 1414:0404:5454 --> Severity: error --> Exception: File "" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
-ERROR - 201820182018-0404-0303 1414:0404:1919 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 1123
-ERROR - 201820182018-0404-0303 1414:0404:1919 --> Severity: error --> Exception: File "" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
-ERROR - 201820182018-0404-0303 1414:0404:0505 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 1123
-ERROR - 201820182018-0404-0303 1414:0404:0505 --> Severity: error --> Exception: File "" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
-ERROR - 201820182018-0404-0303 1515:0404:5858 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 611
-ERROR - 201820182018-0404-0303 1515:0404:5858 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 613
-ERROR - 201820182018-0404-0303 1515:0404:5858 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 614
-ERROR - 201820182018-0404-0303 1515:0404:5858 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 615
-ERROR - 201820182018-0404-0303 1515:0404:5858 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 617
-ERROR - 201820182018-0404-0303 1515:0404:5858 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 619
-ERROR - 201820182018-0404-0303 1515:0404:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 611
-ERROR - 201820182018-0404-0303 1515:0404:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 613
-ERROR - 201820182018-0404-0303 1515:0404:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 614
-ERROR - 201820182018-0404-0303 1515:0404:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 615
-ERROR - 201820182018-0404-0303 1515:0404:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 617
-ERROR - 201820182018-0404-0303 1515:0404:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 619
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\controllers\plans.php 1067
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 1068
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 1068
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 1068
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1069
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1069
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1083
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1083
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1095
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Notice --> Undefined property: stdClass::$id C:\xampp\htdocs\application\controllers\plans.php 1097
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Notice --> Undefined property: stdClass::$id C:\xampp\htdocs\application\controllers\plans.php 1111
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Notice --> Undefined property: stdClass::$id C:\xampp\htdocs\application\controllers\plans.php 1113
-ERROR - 201820182018-0404-0303 1515:0404:2121 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1118
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\controllers\plans.php 1067
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 1068
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 1068
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 1068
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1069
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1069
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1083
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1083
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1095
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Notice --> Undefined property: stdClass::$id C:\xampp\htdocs\application\controllers\plans.php 1097
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Notice --> Undefined property: stdClass::$id C:\xampp\htdocs\application\controllers\plans.php 1111
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Notice --> Undefined property: stdClass::$id C:\xampp\htdocs\application\controllers\plans.php 1113
-ERROR - 201820182018-0404-0303 1515:0404:2222 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1118
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\controllers\plans.php 1067
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 1068
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 1068
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 1068
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1069
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1069
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1083
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1083
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1095
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Notice --> Undefined property: stdClass::$id C:\xampp\htdocs\application\controllers\plans.php 1097
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Notice --> Undefined property: stdClass::$id C:\xampp\htdocs\application\controllers\plans.php 1111
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Notice --> Undefined property: stdClass::$id C:\xampp\htdocs\application\controllers\plans.php 1113
-ERROR - 201820182018-0404-0303 1515:0404:2323 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\controllers\plans.php 1118
-ERROR - 201820182018-0404-0303 1717:0404:3434 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 761
-ERROR - 201820182018-0404-0303 1717:0404:4646 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 761
-ERROR - 201820182018-0404-0303 1717:0404:5757 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 761
-ERROR - 201820182018-0404-0303 1717:0404:0404 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 761
-=======
->>>>>>> 9a1173271db41097c9d0ab633bef2176de39f094
+ERROR - 201820182018-0404-0303 1313:0404:2626 --> Severity: Notice --> Undefined property: stdClass::$priority C:\xampp\htdocs\application\controllers\plans.php 238
+ERROR - 201820182018-0404-0303 1313:0404:2626 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 241
+ERROR - 201820182018-0404-0303 1313:0404:2626 --> Severity: Notice --> Undefined property: stdClass::$m_lineup C:\xampp\htdocs\application\controllers\plans.php 242
+ERROR - 201820182018-0404-0303 1313:0404:2323 --> Severity: Notice --> Undefined property: stdClass::$params C:\xampp\htdocs\application\controllers\plans.php 247
+ERROR - 201820182018-0404-0303 1313:0404:2323 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 247
+ERROR - 201820182018-0404-0303 1313:0404:2828 --> Severity: Notice --> Undefined property: stdClass::$params C:\xampp\htdocs\application\controllers\plans.php 247
+ERROR - 201820182018-0404-0303 1313:0404:2828 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 247
+ERROR - 201820182018-0404-0303 1313:0404:5656 --> Severity: Warning --> print_r() expects parameter 2 to be boolean, array given C:\xampp\htdocs\application\controllers\plans.php 248
+ERROR - 201820182018-0404-0303 1313:0404:5656 --> Severity: Warning --> print_r() expects parameter 2 to be boolean, array given C:\xampp\htdocs\application\controllers\plans.php 248
+ERROR - 201820182018-0404-0303 1313:0404:5656 --> Severity: Warning --> print_r() expects parameter 2 to be boolean, array given C:\xampp\htdocs\application\controllers\plans.php 248
+ERROR - 201820182018-0404-0303 1313:0404:5656 --> Severity: Warning --> print_r() expects parameter 2 to be boolean, array given C:\xampp\htdocs\application\controllers\plans.php 248
+ERROR - 201820182018-0404-0303 1313:0404:4949 --> Severity: Notice --> Undefined variable: testId C:\xampp\htdocs\application\controllers\plans.php 252
+ERROR - 201820182018-0404-0303 1313:0404:4949 --> Severity: Notice --> Undefined index: temps_r C:\xampp\htdocs\application\controllers\plans.php 253
+ERROR - 201820182018-0404-0303 1313:0404:4949 --> Severity: Notice --> Undefined variable: testId C:\xampp\htdocs\application\controllers\plans.php 252
+ERROR - 201820182018-0404-0303 1313:0404:4949 --> Severity: Notice --> Undefined index: channels C:\xampp\htdocs\application\controllers\plans.php 253
+ERROR - 201820182018-0404-0303 1313:0404:4949 --> Severity: Notice --> Undefined variable: testId C:\xampp\htdocs\application\controllers\plans.php 252
+ERROR - 201820182018-0404-0303 1313:0404:4949 --> Severity: Notice --> Undefined index: antennas C:\xampp\htdocs\application\controllers\plans.php 253
+ERROR - 201820182018-0404-0303 1313:0404:4949 --> Severity: Notice --> Undefined variable: testId C:\xampp\htdocs\application\controllers\plans.php 252
+ERROR - 201820182018-0404-0303 1313:0404:0808 --> Severity: Notice --> Undefined index: temps_r C:\xampp\htdocs\application\controllers\plans.php 253
+ERROR - 201820182018-0404-0303 1313:0404:0808 --> Severity: Notice --> Undefined index: channels C:\xampp\htdocs\application\controllers\plans.php 253
+ERROR - 201820182018-0404-0303 1313:0404:0808 --> Severity: Notice --> Undefined index: antennas C:\xampp\htdocs\application\controllers\plans.php 253
+ERROR - 201820182018-0404-0303 1313:0404:3535 --> Severity: Notice --> Undefined index: sectors C:\xampp\htdocs\application\controllers\plans.php 253
+ERROR - 201820182018-0404-0303 1313:0404:3636 --> Severity: Notice --> Undefined index: channels C:\xampp\htdocs\application\controllers\plans.php 253
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_keys() expects parameter 1 to be array, integer given C:\xampp\htdocs\system\database\DB_query_builder.php 1563
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> sort() expects parameter 1 to be array, null given C:\xampp\htdocs\system\database\DB_query_builder.php 1564
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_keys() expects parameter 1 to be array, integer given C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_diff(): Argument #1 is not an array C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_keys() expects parameter 1 to be array, integer given C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_diff(): Argument #1 is not an array C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> ksort() expects parameter 1 to be array, integer given C:\xampp\htdocs\system\database\DB_query_builder.php 1576
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\system\database\DB_query_builder.php 1581
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_keys() expects parameter 1 to be array, integer given C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_diff(): Argument #1 is not an array C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_keys() expects parameter 1 to be array, integer given C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_diff(): Argument #1 is not an array C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> ksort() expects parameter 1 to be array, integer given C:\xampp\htdocs\system\database\DB_query_builder.php 1576
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\system\database\DB_query_builder.php 1581
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_keys() expects parameter 1 to be array, string given C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_diff(): Argument #1 is not an array C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_keys() expects parameter 1 to be array, string given C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_diff(): Argument #1 is not an array C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> ksort() expects parameter 1 to be array, string given C:\xampp\htdocs\system\database\DB_query_builder.php 1576
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\system\database\DB_query_builder.php 1581
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_diff(): Argument #1 is not an array C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> array_diff(): Argument #2 is not an array C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\system\database\DB_query_builder.php 1569
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\system\database\DB_query_builder.php 1592
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Query error: Column count doesn't match value count at row 4 - Invalid query: INSERT INTO `test_config` () VALUES (), (), (), ('8')
+ERROR - 201820182018-0404-0303 1414:0404:3434 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\system\core\Exceptions.php:271) C:\xampp\htdocs\system\core\Common.php 570
+ERROR - 201820182018-0404-0303 1414:0404:0909 --> Severity: error --> Exception: syntax error, unexpected ';', expecting ',' or ')' C:\xampp\htdocs\application\controllers\plans.php 257
+ERROR - 201820182018-0404-0303 1414:0404:1818 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 257
+ERROR - 201820182018-0404-0303 1414:0404:1818 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 257
+ERROR - 201820182018-0404-0303 1414:0404:1818 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 257
+ERROR - 201820182018-0404-0303 1414:0404:1818 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 257
+ERROR - 201820182018-0404-0303 1414:0404:1818 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 257
+ERROR - 201820182018-0404-0303 1414:0404:3131 --> Severity: Notice --> Undefined property: stdClass::$chips C:\xampp\htdocs\application\controllers\plans.php 66
+ERROR - 201820182018-0404-0303 1414:0404:0000 --> Severity: Notice --> Undefined variable: testId C:\xampp\htdocs\application\controllers\plans.php 94
+ERROR - 201820182018-0404-0303 1414:0404:0000 --> Severity: Notice --> Undefined variable: testId C:\xampp\htdocs\application\controllers\plans.php 94
+ERROR - 201820182018-0404-0303 1414:0404:0000 --> Severity: Notice --> Undefined variable: testId C:\xampp\htdocs\application\controllers\plans.php 94
+ERROR - 201820182018-0404-0303 1414:0404:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 106
+ERROR - 201820182018-0404-0303 1414:0404:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 106
+ERROR - 201820182018-0404-0303 1414:0404:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 106
+ERROR - 201820182018-0404-0303 1414:0404:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 106
+ERROR - 201820182018-0404-0303 1414:0404:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 106
+ERROR - 201820182018-0404-0303 1414:0404:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 106
+ERROR - 201820182018-0404-0303 1414:0404:0000 --> Could not find the language line "insert_batch() called with no data"
+ERROR - 201820182018-0404-0303 1414:0404:0000 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\system\core\Exceptions.php:271) C:\xampp\htdocs\system\core\Common.php 570
+ERROR - 201820182018-0404-0303 1414:0404:2727 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 107
+ERROR - 201820182018-0404-0303 1414:0404:2727 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 107
+ERROR - 201820182018-0404-0303 1414:0404:2727 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 107
+ERROR - 201820182018-0404-0303 1414:0404:2727 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 107
+ERROR - 201820182018-0404-0303 1414:0404:2727 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 107
+ERROR - 201820182018-0404-0303 1414:0404:2727 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 107
+ERROR - 201820182018-0404-0303 1414:0404:2727 --> Could not find the language line "insert_batch() called with no data"
+ERROR - 201820182018-0404-0303 1414:0404:4545 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 107
+ERROR - 201820182018-0404-0303 1414:0404:4545 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 107
+ERROR - 201820182018-0404-0303 1414:0404:4545 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 107
+ERROR - 201820182018-0404-0303 1414:0404:4545 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 107
+ERROR - 201820182018-0404-0303 1414:0404:4545 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 107
+ERROR - 201820182018-0404-0303 1414:0404:4545 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 107
+ERROR - 201820182018-0404-0303 1414:0404:4545 --> Could not find the language line "insert_batch() called with no data"
+ERROR - 201820182018-0404-0303 1414:0404:5151 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\application\controllers\plans.php 116
+ERROR - 201820182018-0404-0303 1414:0404:5151 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\application\controllers\plans.php 116
+ERROR - 201820182018-0404-0303 1414:0404:5151 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\application\controllers\plans.php 116
+ERROR - 201820182018-0404-0303 1414:0404:4040 --> Severity: Notice --> Undefined variable: value C:\xampp\htdocs\application\controllers\plans.php 122
+ERROR - 201820182018-0404-0303 1414:0404:4040 --> Severity: Notice --> Undefined variable: value C:\xampp\htdocs\application\controllers\plans.php 122
+ERROR - 201820182018-0404-0303 1414:0404:4040 --> Severity: Notice --> Undefined variable: value C:\xampp\htdocs\application\controllers\plans.php 122
+ERROR - 201820182018-0404-0303 1414:0404:4040 --> Severity: Notice --> Undefined index: pin_additional C:\xampp\htdocs\application\controllers\plans.php 121
+ERROR - 201820182018-0404-0303 1414:0404:4040 --> Severity: Notice --> Undefined variable: value C:\xampp\htdocs\application\controllers\plans.php 122
+ERROR - 201820182018-0404-0303 1414:0404:5353 --> Severity: Notice --> Undefined index: pin_additional C:\xampp\htdocs\application\controllers\plans.php 121
+ERROR - 201820182018-0404-0303 1414:0404:5656 --> Severity: Notice --> Undefined variable: testId C:\xampp\htdocs\application\controllers\plans.php 150
+ERROR - 201820182018-0404-0303 1414:0404:5656 --> Severity: Notice --> Undefined variable: testId C:\xampp\htdocs\application\controllers\plans.php 150
+ERROR - 201820182018-0404-0303 1515:0404:0000 --> Severity: Notice --> Undefined property: stdClass::$params C:\xampp\htdocs\application\controllers\plans.php 473
+ERROR - 201820182018-0404-0303 1515:0404:0000 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\controllers\plans.php 473

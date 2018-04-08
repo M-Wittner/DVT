@@ -320,7 +320,7 @@ myApp.factory('AuthService', function(testParams, $http, Session, $cookies){
 	var site = testParams.site
 	
 	authService.login = function (credentials){
-		return $http.post('http://wigig-584/auth/login', {user: credentials})
+		return $http.post('http://localhost/auth/login', {user: credentials})
 		.then(function(res){
 //			console.log(res.data);
 			if(res.data.login = true){
@@ -487,7 +487,6 @@ myApp.factory('testParams', function($http, $log){
 	$http.get(site+'/params/xifs')
 	.then(function(response){
 		testParams.params.xifList = response.data;
-//		console.log(response.data);
 	});
 	
 	testParams.params.chipListM = {};

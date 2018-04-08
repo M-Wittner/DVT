@@ -58,7 +58,7 @@
 	</div>
 	<div class="panel-body" id="planBody" ng-repeat="test in plan.tests | orderBy: 'priority'| filter:{priority: testPriority, station: testStation, name: testName} track by $index">
 		<!----------------------------------------------------	R M CAL	---------------------------------------------------->
-		<div id="desc" class="panel panel-default" ng-class="{'panel-R1' : test.station[0].station == 'R-CB1', 'panel-R2' : test.station[0].station == 'R-CB2', 'panel-M1' : test.station[0].station == 'M-CB1', 'panel-M2' : test.station[0].station == 'M-CB2'}" ng-if="test.station != 'TalynM+A'">
+		<div ng-hide="true" id="desc" class="panel panel-default" ng-class="{'panel-R1' : test.station[0].station == 'R-CB1', 'panel-R2' : test.station[0].station == 'R-CB2', 'panel-M1' : test.station[0].station == 'M-CB1', 'panel-M2' : test.station[0].station == 'M-CB2'}" ng-if="test.station[0].station">
 			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="false" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
 				<strong>Priority: {{test.priority}}, Station: {{test.station[0].station}}, Test: {{test.name}} , ID: {{test.id}}</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
@@ -233,7 +233,7 @@
 									<tbody>
 										<tr ng-repeat="chip in test.chips">
 											<td>
-												{{chip.chip_sn}}
+												{{chip.serial_number}}
 											</td>
 											<td ng-repeat="xifRes in test.xifs" ng-click="xifStatus(xifRes)" ng-if="xifRes.chip == chip.serial_number"><span class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': xifRes.running == '1', 'glyphicon-ok': xifRes.completed == '1', 'glyphicon-remove': xifRes.error == '1'}"></span></td>
 										</tr>
@@ -269,9 +269,9 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr ng-repeat="chip in test.chips | orderBy: 'chip_sn' track by $index">
-												<td>{{chip.chip_sn}}</td>
-												<td>{{chip.chip_process_abb}}</td>
+											<tr ng-repeat="chip in test.chips | orderBy: 'serial_number' track by $index">
+												<td>{{chip.serial_number}}</td>
+												<td>{{chip.corner}}</td>
 												<td class="text-center">
 													<span ng-click="chipStatus(chip, test.id)" class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span>
 												</td>
@@ -293,10 +293,10 @@
 										<tbody>
 											<tr ng-repeat="chip in test.chips | orderBy: 'serial_number'">
 												<td>
-													{{chip.chip_sn}}
+													{{chip.serial_number}}
 												</td>
 												<td>
-													{{chip.chip_process_abb}}
+													{{chip.corner}}
 												</td>
 												<td>
 													<span ng-click="chipStatus(chip, test.id)" class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span>
@@ -375,8 +375,8 @@
 				</div>
 			</div>
 		</div>
-		<!----------------------------------------------------	fULL System	---------------------------------------------------->
-		<div id="desc" class="panel panel-default panel-fs" ng-if="test.station == 'TalynM+A'">
+		<!----------------------------------------------------	New Format	---------------------------------------------------->
+		<div id="desc" class="panel panel-default"  ng-class="{'panel-R1' : test.station == 'R-CB1', 'panel-R2' : test.station == 'R-CB2', 'panel-M1' : test.station == 'M-CB1', 'panel-M2' : test.station == 'M-CB2', 'panel-fs' : test.station == 'TalynM+A'}" ng-if="!test.station[0].station">
 			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="false" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
 				<strong>Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.test_name}} , ID: {{test.id}}</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
@@ -393,7 +393,7 @@
 					<div class="panel col-md-12">
 						<div ng-if="currentUser.username == plan.user_username || currentUser.rank > '10'">
 							<span class="pull-right">
-<!--								<a class="btn btn-xs btn-warning" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>-->
+								<a class="btn btn-xs btn-warning" href="#/plans/{{plan.id}}/test/{{test.id}}/edit">Edit</a>
 								<a class="btn btn-xs btn-danger" ng-click="removeTestFS()">
 									Delete
 								</a>
@@ -409,17 +409,14 @@
 								<label class="form-control">{{test.priority}}</label>
 							</div>
 							<div class="col-md-9 col-sm-8">
-								<div class="row">
+								<div class="row" ng-if="test.a_lineup">
 									<span class="label label-primary">A Lineup:</span>
 									<label class="form-control">{{test.a_lineup}}</label>
 								</div>
-								<div class="row">
+								<div class="row" ng-if="test.m_lineup">
 									<span class="label label-primary">M Lineup:</span>
 									<label class="form-control">{{test.m_lineup}}</label>
 								</div>
-							</div>
-							<div class="col-md-1 col-sm-2">
-								
 							</div>
 						</div>
 					</div>
@@ -454,8 +451,8 @@
 											<div ng-if="test.test_name != 'RX-EVM PVT'" class="panel-body">
 												<span class="label label-primary">Temperatures:</span>
 												<ul class="list-group">
-													<li ng-repeat="param in test.params " ng-if="param.param_name == 'temp_r'" class="list-group-item">{{param.param_value}}
-													</li>
+													<li ng-repeat="param in test.params " ng-if="param.param_name == 'temp_r'" class="list-group-item">{{param.param_value}}</li>
+													<li ng-repeat="param in test.params " ng-if="param.param_name == 'temp_m'" class="list-group-item">{{param.param_value}}</li>
 												</ul>
 											</div>
 											<div ng-if="test.test_name == 'RX-EVM PVT'" class="panel-body">
@@ -483,27 +480,36 @@
 												</ul>
 											</div>
 										</div>
-									<div class="col-md-3">
-										<div class="panel-body"  ng-if="test.test_name == 'TX-EVM'">
-											<span class="label label-primary">Antennas:</span>
-											<ul class="list-group">
-												<li ng-repeat="param in test.params" ng-if="param.param_name == 'antenna'" class="list-group-item">{{param.param_value}}
-											</ul>
-										</div>
-										<div class="panel-body" ng-if="test.test_name == 'TX-BRP'  || test.test_name == 'RX-EVM PVT'">
-											<span class="label label-primary"># Of Antennas:</span>
-											<ul class="list-group">
-												<li ng-repeat="param in test.params " ng-if="param.param_name == 'num_ant'" class="list-group-item">{{param.param_value}}
-											</ul>
-										</div>
-											<div class="panel-body" ng-if="test.test_name == 'TX-EVM BF' || test.test_name == 'TX-EVM BFFW'">
+										<div class="col-md-3">
+											<div class="panel-body" ng-if="test.station_id == 1 || test.station_id == 2 || (test.station_id == 5 && test.test_name == 'TX-EVM')">
+												<span class="label label-primary">Antennas:</span>
+												<ul class="list-group">
+													<li ng-repeat="param in test.params" ng-if="param.param_name == 'antenna'" class="list-group-item">{{param.param_value}}
+												</ul>
+											</div>
+											<div class="panel-body" ng-if="test.station_id == 5 && (test.test_name == 'TX-BRP'  || test.test_name == 'RX-EVM PVT')">
+												<span class="label label-primary"># Of Antennas:</span>
+												<ul class="list-group">
+													<li ng-repeat="param in test.params " ng-if="param.param_name == 'num_ant'" class="list-group-item">{{param.param_value}}
+												</ul>
+											</div>
+											<div class="panel-body" ng-if="test.station_id == 5 && (test.test_name == 'TX-EVM BF' || test.test_name == 'TX-EVM BFFW')">
 												<span class="label label-primary">Sectors:</span></br>
 												<ul class="list-group">
-													<li ng-repeat="param in test.params " ng-if="param.param_name == 'Sector'" class="list-group-item">{{param.param_value}}
+													<li ng-repeat="param in test.params " ng-if="param.param_name == 'sector'" class="list-group-item">{{param.param_value}}
 												</ul>
 											</div>
 										</div>
-										<div class="col-md-2">
+										<div class="col-md-2" ng-if="test.station_id == 1 || test.station_id == 2">
+											<div class="panel-body">
+												<span class="label label-primary">Voltage:</span></br>
+												<ul class="list-group">
+													<li ng-repeat="param in test.params " ng-if="param.param_name == 'voltage'" class="list-group-item">{{param.param_value}}
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="col-md-2" ng-if="test.station_id == 1 || test.station_id == 2 || test.station_id == 5">
 											<div class="panel-body">
 												<span class="label label-primary">MCS:</span></br>
 												<ul class="list-group">
@@ -521,20 +527,20 @@
 											<table class="table">
 												<thead>
 													<tr>
-														<th>Chip R</th>
-														<th>Chip M</th>
+														<th ng-if="(test.station == 'R-CB1' || test.station == 'R-CB2') || test.station == 'TalynM+A'">Chip R</th>
+														<th ng-if="(test.station == 'M-CB1' || test.station == 'M-CB2') || test.station == 'TalynM+A'">Chip M</th>
 														<th>Status</th>
 														<th class="text-center">By</th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr ng-repeat="param in test.chips track by $index">
-														<td>{{param.chip_r_sn}}-{{param.corner_r}}</td>
-														<td>{{param.chip_m_sn}}-{{param.corner_m}}</td>
+														<td ng-if="param.chip_r_type_id != -1">{{param.chip_r_sn}}-{{param.corner_r}}</td>
+														<td ng-if="param.chip_m_type_id != -1">{{param.chip_m_sn}}-{{param.corner_m}}</td>
 														<td class="text-center">
-															<span ng-click="chipStatus(chip, test.id)" class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span>
+															<span ng-click="chipStatus(param, test.id)" class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': param.status_id == 2, 'glyphicon-ok': param.status_id == 3, 'glyphicon-remove': param.status_id == 4}"></span>
 														</td>
-														<td>{{chip.update_by}}</td>
+														<td>{{param.updated_by}}</td>
 													</tr>
 												</tbody>
 											</table>

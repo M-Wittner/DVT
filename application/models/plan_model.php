@@ -106,49 +106,110 @@ class plan_model extends CI_Model {
 	}
 	
 	function edit_test($id) {
-		$plan = $this->db->get_where('plans', array('id'=> $id->planId))->result();
-		$test =$this->db->get_where('tests', array('plan_id'=>$id->planId, 'id'=>$id->testId))->result()[0];
-		
-//		die(var_dump($test));
-		$test->name = $this->db->get_where('params_test_names', array('test_name'=>$test->name, 'station'=>$test->station[0]))->result();
-		$test->station = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
-		if($test->station[0]->station == 'M-CB1' || $test->station[0]->station == 'M-CB2') {
-			$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$id->testId))->result();
-			$test->xifs = $xifRes;
-
-		} else if($test->station[0]->station == 'R-CB1' || $test->station[0]->station == 'R-CB2'){
-			$test->antennas = array();
-			$ant = $this->db->get_where('test_antennas', array('test_id'=>$id->testId))->result();
-			if(isset($ant)){
-				foreach($ant as $value){
-					array_push($test->antennas, $value->antenna);
+//		die(var_dump($id));
+//		$plan = $this->db->get_where('plans', array('id'=> $id->planId))->result();
+		$test = $this->db->get_where('tests', array('id'=>$id->testId))->result();
+		if(!isset($test[0])){
+			$test = $this->db->get_where('tests_view_new',array('id'=>$id->testId))->result()[0];
+			$test->station = $this->db->get_where('params_stations', ['id'=>$test->station_id])->result();
+			$test->name = $this->db->get_where('params_test_names', ['id'=>$test->test_name_id])->result();
+			$test->flag = 1;
+			$chips = $this->db->get_where('test_chips_view', ['test_id'=>$id->testId])->result();
+//			echo json_encode($chips);
+//			die();
+			$test->chips = array();
+			foreach($chips as $key=>$chip){
+				switch($test->station_id){
+					case 1:
+					case 2:
+						$data = array(
+							'chip_id'=>$chip->id,
+							'chip_sn'=>$chip->chip_r_sn,
+							'chip_process_abb'=>$chip->corner_r,
+							'chip_type_id'=>$chip->chip_r_type_id
+						);
+						break;
+					case 3:
+					case 4:
+						$data = array(
+							'chip_id'=>$chip->id,
+							'chip_sn'=>$chip->chip_m_sn,
+							'chip_process_abb'=>$chip->corner_m,
+							'chip_type_id'=>$chip->chip_m_type_id
+						);
+						break;
+					case 5:
+						$data = new stdClass();
+						$data->chip_r[$key] = array(
+							'chip_id'=>$chip->id,
+							'chip_sn'=>$chip->chip_r_sn,
+							'chip_process_abb'=>$chip->corner_r,
+							'chip_type_id'=>$chip->chip_r_type_id,
+							'pair_id'=>$chip->pair_id,
+						);
+						$data->chip_m[$key] = array(
+							'chip_id'=>$chip->id,
+							'chip_sn'=>$chip->chip_m_sn,
+							'chip_process_abb'=>$chip->corner_m,
+							'chip_type_id'=>$chip->chip_m_type_id,
+							'pair_id'=>$chip->pair_id,
+						);
+						break;
 					}
-			} else{
-				$ant = null;
+					array_push($test->chips, $data);
+				}
+
+			$params = $this->db->get_where('test_params_view', ['test_id'=>$test->id])->result();
+			foreach($params as $param){
+				$name = $param->param_name;
+				if(!isset($test->$name)){
+					$test->$name = array();
+				}
+				array_push($test->$name, $param->param_value);
 			}
-		}
-		$test->channels = array();
-		if($test->station[0]->station !='TalynM+A'){
-			$this->db->select('channel');
-			$ch = $this->db->get_where('test_channels', array('test_id'=>$id->testId))->result();
-			if(isset($ch)){
-				foreach($ch as $value){
-						array_push($test->channels, $value->channel);
-					}
-			}else{
-				$ch = null;
+		} else{
+			$test = $test[0];
+			$test->flag = 0;
+			$test->name = $this->db->get_where('params_test_names', array('id'=>$test->test_name_id, 'station'=>$test->station[0]))->result();
+			$test->station = $this->db->get_where('params_stations', array('id'=>$test->station_id))->result();
+//			if($test->station[0]->station == 'M-CB1' || $test->station[0]->station == 'M-CB2') {
+//				$xifRes = $this->db->get_where('test_xifs', array('test_id'=>$id->testId))->result();
+//				$test->xifs = $xifRes;
+//
+//			} else 
+				if($test->station[0]->station == 'R-CB1' || $test->station[0]->station == 'R-CB2'){
+				$test->antennas = array();
+				$ant = $this->db->get_where('test_antennas', array('test_id'=>$id->testId))->result();
+				if(isset($ant)){
+					foreach($ant as $value){
+						array_push($test->antennas, $value->antenna);
+						}
+				} else{
+					$ant = null;
+				}
 			}
+			$test->channels = array();
+			if($test->station[0]->station !='TalynM+A'){
+				$this->db->select('channel');
+				$ch = $this->db->get_where('test_channels', array('test_id'=>$id->testId))->result();
+				if(isset($ch)){
+					foreach($ch as $value){
+							array_push($test->channels, $value->channel);
+						}
+				}else{
+					$ch = null;
+				}
+			}
+
+			$test->chips = $this->db->get_where('test_chips', array('test_id'=>$id->testId))->result();
+
+			$temp = $this->db->get_where('test_temps', array('test_id'=>$id->testId))->result();
+			foreach($temp as $i => $value){
+				$temp[$i] = $value->temp;
+			}
+			$test->temps = $temp;
 		}
-
-		$test->chips = $this->db->get_where('test_chips', array('test_id'=>$id->testId))->result();
-
-		$temp = $this->db->get_where('test_temps', array('test_id'=>$id->testId))->result();
-		foreach($temp as $i => $value){
-			$temp[$i] = $value->temp;
-		}
-		$test->temps = $temp;
-
-		return $test;
+		return $test;	
 	}
 	
 	 function add_plan($plan)
@@ -306,9 +367,126 @@ class plan_model extends CI_Model {
 		return $comments;
 	}
 	
-	function update_test($data){
-//		echo json_encode($data);
+	function config_params($test){
+		$test_params = $this->db->get('test_params')->result();
+		$paramsArr = array();
+		foreach($test_params as $param){
+			$paramsArr[$param->param_name] = $param->param_id;
+		}
+		$params = array();
+		foreach($test as $param=>$values){
+			$d = array_key_exists($param, $paramsArr);
+			if($d == true){
+				if(is_array($values)){
+					foreach($values as $value){
+						$data = array(
+							'plan_id'=>$test->plan_id,
+							'test_id'=>$test->id,
+							'param_id'=>$paramsArr[$param],
+							'param_value_id'=>$value,
+						);
+						array_push($params, $data);
+					}
+				}else{
+					$data = array(
+						'plan_id'=>$test->plan_id,
+						'test_id'=>$test->id,
+						'param_id'=>$paramsArr[$param],
+						'param_value_id'=>$values,
+					);
+					array_push($params, $data);
+				}
+			}
+		} 
+		return $params;
+	}
+	
+	function update_test($test){
+		$this->db->delete('test_chips_new', ['test_id'=>$test->id, 'plan_id'=>$test->plan_id]);
+		$chips = array();
+		switch($test->station_id){
+			//R STATIONS
+			case 1:
+			case 2:
+				$updatedTest = array(
+					'priority'=>$test->priority[0],
+					'work_station_id'=>$test->station_id,
+					'test_name_id'=>$test->test_name_id,
+					'a_lineup'=>$test->a_lineup,
+					'notes'=>$test->notes,
+				);
+				foreach($test->chips as $chip){
+					$data = array(
+						'plan_id'=>$test->plan_id,
+						'test_id'=>$test->id,
+						'chip_r_type_id'=>$chip->chip_type_id,
+						'chip_r_id'=>$chip->chip_id,
+					);
+					array_push($chips, $data);
+				}
+				break;
+			//M STATIONS
+			case 3:
+			case 4:
+				$updatedTest = array(
+					'priority'=>$test->priority[0],
+					'work_station_id'=>$test->station_id,
+					'test_name_id'=>$test->test_name_id,
+					'm_lineup'=>$test->m_lineup,
+					'notes'=>$test->notes,
+				);
+				foreach($test->chips as $chip){
+					$data = array(
+						'plan_id'=>$test->plan_id,
+						'test_id'=>$test->id,
+						'chip_m_type_id'=>$chip->chip_type_id,
+						'chip_m_id'=>$chip->chip_id,
+					);
+					array_push($chips, $data);
+				}
+				break;
+			//TalynM+A STATION
+			case 5:
+				$updatedTest = array(
+					'priority'=>$test->priority[0],
+					'work_station_id'=>$test->station_id,
+					'test_name_id'=>$test->test_name_id,
+					'a_lineup'=>$test->a_lineup,
+					'm_lineup'=>$test->m_lineup,
+					'notes'=>$test->notes,
+				);
+				foreach($test->chips as $key=>$chip){
+					$data = array(
+						'plan_id'=>$test->plan_id,
+						'test_id'=>$test->id,
+						'chip_r_type_id'=>$chip->chip_r[0]->chip_type_id,
+						'chip_r_id'=>$chip->chip_r[0]->chip_id,
+						'chip_m_type_id'=>$chip->chip_m[0]->chip_type_id,
+						'chip_m_id'=>$chip->chip_m[0]->chip_id,
+						'pair_id'=>$key+1,
+					);
+					array_push($chips, $data);
+				}
+				break;
+		}
+//		echo json_encode($chips);
 //		die();
+		$status = new stdClass();
+		
+		$this->db->set($updatedTest);
+		$this->db->where('id', $test->id);
+		$status->test = $this->db->update('tests_new');
+		
+		$status->chips = $this->db->insert_batch('test_chips_new', $chips);
+		
+		$params = $this->config_params($test);
+		$this->db->delete('test_config', ['test_id'=>$test->id, 'plan_id'=>$test->plan_id]);
+		$status->params = $this->db->insert_batch('test_config', $params);
+		
+		return $status;
+	}
+	
+	function update_test_old($data){
 		$testObj = $data->test;
 
 		if(isset($testObj->notes)){
@@ -317,50 +495,13 @@ class plan_model extends CI_Model {
 			$notes = null;
 		}
 		if($testObj->station[0]->station == "R-CB1" || $testObj->station[0]->station == "R-CB2"){
-			$pinFrom = null;
-			$pinTo = null;
-			$pinStep = null;
-			if(isset($testObj->pin_from) && isset($testObj->pin_to) && isset($testObj->pin_step)){
-				$pinFrom = $testObj->pin_from;
-				$pinTo = $testObj->pin_to;
-				$pinStep = $testObj->pin_step;
-			}
-			if(isset($testObj->pin_additional)){
-				$pinAdd = $testObj->pin_additional;
-			} else{
-				$pinAdd = null;
-			}
 			
-			$loPinFrom = null;
-			$loPinTo = null;
-			$loPinStep = null;
-			$loPinAdd = null;
-			if($testObj->name[0]->test_name == 'Tx EVM vs. LO Power' || $testObj->name[0]->test_name == 'Rx EVM vs. LO power'){
-				$loPinFrom=$testObj->lo_pin_from;
-				$loPinTo=$testObj->lo_pin_to;
-				$loPinStep=$testObj->lo_pin_step;
-				if(isset($testObj->lo_pin_additional)){
-					$loPinAdd = $testObj->lo_pin_additional;
-				}
-			}
 			$test = array(
 				'priority'=>$testObj->priority[0],
-				'lineup'=>$testObj->lineup,
-				'station'=>$testObj->station[0]->station,
-				'name'=>$testObj->name[0]->test_name,
-				'pin_from'=>$pinFrom,
-				'pin_to'=>$pinTo,
-				'pin_step'=>$pinStep,
-				'pin_additional'=>$pinAdd,
-				'lo_pin_from'=>$loPinFrom,
-				'lo_pin_to'=>$loPinTo,
-				'lo_pin_step'=>$loPinStep,
-				'lo_pin_additional'=>$loPinAdd,
-				'mcs'=>$testObj->mcs,
-				'voltage'=>$testObj->voltage,
+				'lineup'=>$testObj->a_lineup,
+				'work_station_id'=>$testObj->station[0]->station,
+				'test_name_id'=>$testObj->name[0]->id,
 				'notes'=>$notes,
-//				'time'=>$time,
-				'plan_id'=>$testObj->plan_id
 			);
 			
 			// Update antennas
@@ -460,9 +601,8 @@ class plan_model extends CI_Model {
 			$chip = array(
 				'test_id'=>$testObj->id,
 				'plan_id'=>$testObj->plan_id,
-				'chip_sn'=>$chipRes->chip_sn,
+				'serial_number'=>$chipRes->serial_number,
 				'chip'=>$chipRes->chip,
-				'chip_process_abb'=>$chipRes->chip_process_abb,
 				);
 			$insertStatus = $this->db->replace('test_chips', $chip);
 			$insertId = $this->db->insert_id($insertStatus);
@@ -479,8 +619,8 @@ class plan_model extends CI_Model {
 						$xif = array(
 							'test_id'=>$testObj->id,
 							'plan_id'=>$testObj->plan_id,
-							'chip_id'=>$chipRes->chip_id,
-							'chip'=>$chipRes->chip_sn,
+							'chip_id'=>$chipRes->id,
+							'chip'=>$chipRes->serial_number,
 							'xif'=>$xifRes->xif
 							);
 						$this->db->replace('test_xifs', $xif);
@@ -500,27 +640,45 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_chip_status($result){
-		$runs = $result->chip->running;
-		$complete = $result->chip->completed;
-		$error = $result->chip->error;
-//		die(var_dump($result));
-		if($runs == false && $complete == false && $error == false){
-			$this->db->where(array('chip_sn'=>$result->chip->chip_sn, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-			$insertStatus = $this->db->update('test_chips', array('running'=>true, 'completed'=>false, 'error'=>false, 'update_by'=>$result->user->username));
-		} else if($runs == true && $complete == false && $error == false){
-			$this->db->where(array('chip_sn'=>$result->chip->chip_sn, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>true, 'error'=>false, 'update_by'=>$result->user->username));
-		} else if($runs == false && $complete == true && $error == false){
-			$this->db->where(array('chip_sn'=>$result->chip->chip_sn, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false ,'error'=>true, 'update_by'=>$result->user->username));
-		} else if($runs == false && $complete == false && $error == true){
-			$this->db->where(array('chip_sn'=>$result->chip->chip_sn, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-			$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false, 'error'=>false, 'update_by'=>$result->user->username));
-		} else{
-			echo 'nothing';
+//		echo json_encode($result);
+//		die();
+		if(!isset($result->chip->status_id)){
+//------------------------------	Old Format	------------------------------
+			$runs = $result->chip->running;
+			$complete = $result->chip->completed;
+			$error = $result->chip->error;
+			if($runs == false && $complete == false && $error == false){
+				$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+				$insertStatus = $this->db->update('test_chips', array('running'=>true, 'completed'=>false, 'error'=>false, 'update_by'=>$result->user->username));
+			} else if($runs == true && $complete == false && $error == false){
+				$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+				$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>true, 'error'=>false, 'update_by'=>$result->user->username));
+			} else if($runs == false && $complete == true && $error == false){
+				$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+				$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false ,'error'=>true, 'update_by'=>$result->user->username));
+			} else if($runs == false && $complete == false && $error == true){
+				$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
+				$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false, 'error'=>false, 'update_by'=>$result->user->username));
+			} else{
+				echo 'nothing';
+			}
+		}else{
+//------------------------------	New Format	------------------------------
+			$statusId = $result->chip->status_id;
+			if($statusId < 4){
+				$statusId++;
+				$userId = $result->user->id;
+			}else{
+				$statusId = 1;
+				$userId = NULL;
+			}
+			$this->db->where('id', $result->chip->id);
+			$this->db->update('test_chips_new', ['status_id'=>$statusId, 'updated_by'=>$userId]);
+			$result->chip->status_id = $statusId;
 		}
 		return $result;
 	}
+	
 	function update_temp_status($result){
 		$runs = $result->temp->running;
 		$complete = $result->temp->completed;

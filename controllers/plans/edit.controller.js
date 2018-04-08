@@ -2,17 +2,27 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	if($scope.isAuthenticated == true) {
+		var site = testParams.site;
 	
 	$scope.user = $scope.currentUser.username;
 		
+	$scope.testOld = {};
 	$scope.test = {};
-	$http.post('http://wigig-584/plans/edit', $routeParams)
+	$http.post(site+'/plans/edit', $routeParams)
 	.then(function(response){
-//		$scope.plan = response.data.plan[0];
-		$scope.test = response.data;
-		$scope.test.mcs = parseInt(response.data.mcs);
-		$scope.test.voltage = parseInt(response.data.voltage);
+		if(response.data.flag == 0){
+			$scope.testOld = response.data;
+			$scope.testOld.mcs = parseInt(response.data.mcs);
+			$scope.testOld.voltage = parseInt(response.data.voltage);
+		} else if(response.data.flag == 1){
+			$scope.test = response.data;
+			if($scope.test.station_id != 5){
+				$scope.test.mcs = parseInt(response.data.mcs)
+			}
+			$scope.test.vlotage = parseInt(response.data.vlotage);
+		}
 		console.log(response.data);
+//		console.log($scope.test);
 	});
 		
 	} else {
@@ -33,8 +43,15 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 		$scope.lock = !$scope.lock;
 	};
 	
+	$scope.addPair = function(){
+		$scope.test.chips.push({});
+	}
+	$scope.removePair = function(test){
+		$scope.test.chips.splice($scope.test.chips.length-1, 1);
+	}
+	
 	$scope.editPlan = function(){
-		$http.post('http://wigig-584/plans/update', {plan: $scope.plan, test: $scope.test})
+		$http.post(site+'/plans/update', $scope.test)
 		.then(function(response){
 			if(response.data == 'success'){
 				$location.path('/plans/'+$routeParams.planId);

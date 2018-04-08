@@ -1,6 +1,7 @@
 myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', '$routeParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams, $routeParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.testParams = testParams;
+	var site = testParams.site;
 
 	if($scope.isAuthenticated == false){
 		var message = 'Please Login first!';
@@ -46,7 +47,7 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	};
 
 	$scope.addTestToPlan = function() {
-		$http.post('http://wigig-584/plans/addTests', {plan: $scope.plan, test: $scope.array})
+		$http.post(site+'/plans/create', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
 			if(response.data == 'success'){
 				var message = 'Plan Created Succesfully!';
@@ -62,7 +63,7 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	}
 	
 	$scope.copyTest = function(){
-		$http.post('http://wigig-584/plans/copyTest', $scope.copyId)
+		$http.post(site+'/plans/copyTest', $scope.copyId)
 		.then(function(response){
 			console.log(response.data);
 			$scope.test = response.data;
