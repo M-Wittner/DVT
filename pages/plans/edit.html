@@ -214,7 +214,7 @@
 							<span class="label label-primary">Test Lineup</span>
 							<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.a_lineup" ng-disabled="lock">
 						</div>
-						<div class="col-md-11" ng-if="test.m_lineup">
+						<div class="col-md-11" ng-if="test.m_lineup || test.station_id == 4">
 							<span class="label label-primary">Test Lineup</span>
 							<input class="form-control" type="text" placeholder="Test Lineup" name="lineup" ng-model="test.m_lineup" ng-disabled="lock">
 						</div>

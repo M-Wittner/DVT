@@ -6,13 +6,14 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	if($scope.isAuthenticated == true) {	
 	$http.post(site+'/plans/show', $routeParams.id)
 	.then(function(response){
+		console.log(response.data);
 		$scope.plan = response.data.tests;
 		if(response.data.fs.length > 0){
 			response.data.fs.forEach(function(elem){
 				$scope.plan.tests.push(elem);
 			})
 		}
-		console.log(response.data);
+//		console.log(response.data);
 	});
 
 	$scope.user = {};
@@ -94,7 +95,8 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	};
 	
 	$scope.chipStatus = function(chip, testId, index){
-		$http.post(site+'/plans/chipstatus', {chip: chip, planId: $routeParams.id, testId: testId, user: $scope.user})
+//		console.log(this.param);
+		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user})
 		.then(function(response){
 			var chip_r = response.data.chip.chip_r_sn;
 			var chip_m = response.data.chip.chip_m_sn;

@@ -11,7 +11,8 @@
 		<tr ng-repeat="test in tests | orderBy: 'priority' track by $index">
 			<td>{{test.priority}}</td>
 			<td>{{test.station}}</td>
-			<td>{{test.name}}</td>
+			<td ng-if="test.name">{{test.name}}</td>
+			<td ng-if="test.test_name">{{test.test_name}}</td>
 			<td>{{test.status}}</td>
 		</tr>
 	</tbody>
