@@ -485,3 +485,47 @@ ERROR - 201820182018-0404-0404 1515:0404:4747 --> Severity: Notice --> Undefined
 ERROR - 201820182018-0404-0404 1515:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 506
 ERROR - 201820182018-0404-0404 1515:0404:0202 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 506
 ERROR - 201820182018-0404-0404 1515:0404:3232 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 506
+ERROR - 201820182018-0404-0404 1515:0404:3636 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 60
+ERROR - 201820182018-0404-0404 1515:0404:1414 --> Severity: Notice --> Undefined property: stdClass::$chip_type_id C:\xampp\htdocs\application\models\plan_model.php 462
+ERROR - 201820182018-0404-0404 1515:0404:1919 --> Severity: Notice --> Undefined property: stdClass::$chip_type_id C:\xampp\htdocs\application\models\plan_model.php 462
+ERROR - 201820182018-0404-0404 1515:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 60
+ERROR - 201820182018-0404-0404 1515:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 60
+ERROR - 201820182018-0404-0404 1515:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 60
+ERROR - 201820182018-0404-0404 1515:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 60
+ERROR - 201820182018-0404-0404 1515:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 60
+ERROR - 201820182018-0404-0404 1515:0404:5757 --> Severity: Notice --> Undefined property: stdClass::$chip_type_id C:\xampp\htdocs\application\models\plan_model.php 462
+ERROR - 201820182018-0404-0404 1515:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$chip_type_id C:\xampp\htdocs\application\models\plan_model.php 462
+ERROR - 201820182018-0404-0404 1515:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$chip_type_id C:\xampp\htdocs\application\models\plan_model.php 462
+ERROR - 201820182018-0404-0404 1515:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$chip_type_id C:\xampp\htdocs\application\models\plan_model.php 462
+ERROR - 201820182018-0404-0404 1515:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$chip_type_id C:\xampp\htdocs\application\models\plan_model.php 462
+ERROR - 201820182018-0404-0404 1515:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$chip_type_id C:\xampp\htdocs\application\models\plan_model.php 462
+ERROR - 201820182018-0404-0404 1515:0404:2727 --> Severity: Notice --> Undefined property: stdClass::$chip_type_id C:\xampp\htdocs\application\models\plan_model.php 462
+ERROR - 201820182018-0404-0404 1616:0404:5353 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 60
+ERROR - 201820182018-0404-0404 1616:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 60
+ERROR - 201820182018-0404-0404 1616:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 60
+ERROR - 201820182018-0404-0404 1616:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 60
+ERROR - 201820182018-0404-0404 1616:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 60
+ERROR - 201820182018-0404-0404 1616:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 60
+ERROR - 201820182018-0404-0404 1616:0404:5858 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201820182018-0404-0404 1616:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201820182018-0404-0404 1616:0404:0303 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201820182018-0404-0404 1616:0404:2121 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201820182018-0404-0404 1616:0404:2121 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201820182018-0404-0404 1616:0404:3232 --> Severity: Notice --> Undefined property: stdClass::$chip_id C:\xampp\htdocs\application\models\plan_model.php 482
+ERROR - 201820182018-0404-0404 1616:0404:3232 --> Query error: Column 'chip_id' cannot be null - Invalid query: REPLACE INTO `test_xifs` (`test_id`, `plan_id`, `chip_id`, `chip`, `xif`) VALUES ('1551', '928', NULL, 'YB378000002', '0')
+ERROR - 201820182018-0404-0404 1616:0404:3737 --> Severity: Notice --> Undefined property: stdClass::$chip_id C:\xampp\htdocs\application\models\plan_model.php 482
+ERROR - 201820182018-0404-0404 1616:0404:3737 --> Query error: Column 'chip_id' cannot be null - Invalid query: REPLACE INTO `test_xifs` (`test_id`, `plan_id`, `chip_id`, `chip`, `xif`) VALUES ('1551', '928', NULL, 'YB378000002', '0')
+ERROR - 201820182018-0404-0404 1616:0404:4242 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201820182018-0404-0404 1616:0404:3535 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\models\plan_model.php 464
+ERROR - 201820182018-0404-0404 1616:0404:4040 --> Severity: Notice --> Undefined property: stdClass::$chip_id C:\xampp\htdocs\application\models\plan_model.php 482
+ERROR - 201820182018-0404-0404 1616:0404:4040 --> Query error: Column 'chip_id' cannot be null - Invalid query: REPLACE INTO `test_xifs` (`test_id`, `plan_id`, `chip_id`, `chip`, `xif`) VALUES ('1551', '928', NULL, 'YB378000002', '0')
+ERROR - 201820182018-0404-0404 1616:0404:4848 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201820182018-0404-0404 1717:0404:2626 --> Could not find the language line "insert_batch() called with no data"
+ERROR - 201820182018-0404-0404 1717:0404:3333 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201820182018-0404-0404 1717:0404:5959 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201820182018-0404-0404 1717:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\models\plan_model.php 464
+ERROR - 201820182018-0404-0404 1717:0404:2525 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201820182018-0404-0404 1717:0404:2525 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201820182018-0404-0404 1717:0404:5757 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\models\plan_model.php 464
+ERROR - 201820182018-0404-0404 1717:0404:0101 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66
+ERROR - 201820182018-0404-0404 1717:0404:0101 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 66

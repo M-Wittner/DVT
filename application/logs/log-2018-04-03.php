@@ -132,6 +132,7 @@ ERROR - 201820182018-0404-0303 1212:0404:0404 --> Severity: Notice --> Trying to
 ERROR - 201820182018-0404-0303 1212:0404:3232 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
 ERROR - 201820182018-0404-0303 1212:0404:3232 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
 ERROR - 201820182018-0404-0303 1212:0404:3232 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
+<<<<<<< HEAD
 ERROR - 201820182018-0404-0303 1212:0404:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 21
 ERROR - 201820182018-0404-0303 1212:0404:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 23
 ERROR - 201820182018-0404-0303 1212:0404:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\auth.php 24
@@ -204,3 +205,5 @@ ERROR - 201820182018-0404-0303 1717:0404:3434 --> Severity: Notice --> Undefined
 ERROR - 201820182018-0404-0303 1717:0404:4646 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 761
 ERROR - 201820182018-0404-0303 1717:0404:5757 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 761
 ERROR - 201820182018-0404-0303 1717:0404:0404 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 761
+=======
+>>>>>>> 9a1173271db41097c9d0ab633bef2176de39f094

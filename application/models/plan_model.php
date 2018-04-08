@@ -307,6 +307,8 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_test($data){
+//		echo json_encode($data);
+//		die();
 		$testObj = $data->test;
 
 		if(isset($testObj->notes)){
@@ -459,7 +461,7 @@ class plan_model extends CI_Model {
 				'test_id'=>$testObj->id,
 				'plan_id'=>$testObj->plan_id,
 				'chip_sn'=>$chipRes->chip_sn,
-				'chip'=>$chipRes->chip_type_id,
+				'chip'=>$chipRes->chip,
 				'chip_process_abb'=>$chipRes->chip_process_abb,
 				);
 			$insertStatus = $this->db->replace('test_chips', $chip);
