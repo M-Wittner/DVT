@@ -44,12 +44,12 @@ class Plans extends CI_Controller {
 		foreach($test_params as $param){
 			$paramsArr[$param->param_name] = $param->param_id;
 		}
-//				echo json_encode($paramsArr);
-//						die();
+
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
 //		echo json_encode($postData);
-//						die();
+//							die();
+		
 		$planData = $postData->plan;
 		$plan = array(
 			'user_id'=>$planData->userId,
@@ -78,37 +78,101 @@ class Plans extends CI_Controller {
 							$res = $this->lineup($testArr);
 						}
 					}
-//					$testId = 101;
-//			------------- R station test -------------
-					if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
-//						echo json_encode($testArr);
-//						die();
-						
+					if(!isset($testArr->params)){
+						$testArr->params = $this->plan_model->config_params($testArr);
+						echo "Not valid yet";
+						die();
+					}
+					
+					//			------------- R station test -------------
+						if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
+	//						echo json_encode($testArr);
+	//						die();
+							if(isset($testArr->lineup)){
+								$lineup = $testArr->lineup;;
+							}else{
+								$lineup = $testArr->a_lineup;
+							}
+
+							$test = new stdClass();
+								$test->struct = array(
+										'priority'=>$testArr->priority[0],
+										'work_station_id'=>$testArr->station[0]->id,
+										'test_name_id'=>$testArr->name[0]->id,
+										'a_lineup'=>$lineup,
+										'notes'=>$notes,
+										'plan_id'=>$planId,
+										'user_id'=>$planData->userId,
+									);
+								$insertTest = $this->db->insert('tests_new', $test->struct);
+								$testId = $this->db->insert_id($insertTest);
+
+								$chips = $testArr->chips;
+								$chipPairs = array();
+								foreach($chips as $chip){
+									$data = array(
+										'plan_id'=>$planId,
+										'test_id'=>$testId,
+										'chip_r_type_id'=>$chip->chip_type_id,
+										'chip_r_id'=>$chip->chip_id,
+									);
+									$this->db->insert('test_chips_new', $data);
+								}
+
+								$test->params = array();
+								$params = $test->params;
+								foreach($testArr->params as $name=>$values){
+									$params[$name] = array();
+									if(is_array($values)){
+										foreach($values as $value){
+											$data = array(
+												'plan_id'=>$planId,
+												'test_id'=>$testId,
+												'param_id'=>$paramsArr[$name],
+												'param_value_id'=>$value,
+											);
+											array_push($params[$name], $data);
+										}
+									}else{
+										$data = array(
+											'plan_id'=>$planId,
+											'test_id'=>$testId,
+											'param_id'=>$paramsArr[$name],
+											'param_value_id'=>$values,
+										);
+										array_push($params[$name], $data);
+									}
+								}
+							foreach ($params as $param){
+								$status = $this->db->insert_batch('test_config', $param);
+							}
+
+	////			------------- M station test -------------
+						} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
 						$test = new stdClass();
 							$test->struct = array(
-									'priority'=>$testArr->priority[0],
-									'work_station_id'=>$testArr->station[0]->id,
-									'test_name_id'=>$testArr->name[0]->id,
-									'a_lineup'=>$testArr->lineup,
-									'notes'=>$notes,
-									'plan_id'=>$planId,
-									'user_id'=>$planData->userId,
-								);
+								'priority'=>$testArr->priority[0],
+								'work_station_id'=>$testArr->station[0]->id,
+								'test_name_id'=>$testArr->name[0]->id,
+								'm_lineup'=>$testArr->lineup,
+								'notes'=>$notes,
+								'plan_id'=>$planId,
+								'user_id'=>$planData->userId,
+							);
 							$insertTest = $this->db->insert('tests_new', $test->struct);
 							$testId = $this->db->insert_id($insertTest);
-						
+
 							$chips = $testArr->chips;
 							$chipPairs = array();
 							foreach($chips as $chip){
 								$data = array(
 									'plan_id'=>$planId,
 									'test_id'=>$testId,
-									'chip_r_type_id'=>$chip->chip_type_id,
-									'chip_r_id'=>$chip->chip_id,
+									'chip_m_type_id'=>$chip->chip_type_id,
+									'chip_m_id'=>$chip->chip_id,
 								);
 								$this->db->insert('test_chips_new', $data);
 							}
-						
 							$test->params = array();
 							$params = $test->params;
 							foreach($testArr->params as $name=>$values){
@@ -133,153 +197,99 @@ class Plans extends CI_Controller {
 									array_push($params[$name], $data);
 								}
 							}
-						foreach ($params as $param){
-							$status = $this->db->insert_batch('test_config', $param);
-						}
-						
-////			------------- M station test -------------
-					} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
-					$test = new stdClass();
-						$test->struct = array(
-							'priority'=>$testArr->priority[0],
-							'work_station_id'=>$testArr->station[0]->id,
-							'test_name_id'=>$testArr->name[0]->id,
-							'm_lineup'=>$testArr->lineup,
-							'notes'=>$notes,
-							'plan_id'=>$planId,
-							'user_id'=>$planData->userId,
-						);
-						$insertTest = $this->db->insert('tests_new', $test->struct);
-						$testId = $this->db->insert_id($insertTest);
-						
-						$chips = $testArr->chips;
-						$chipPairs = array();
-						foreach($chips as $chip){
-							$data = array(
-								'plan_id'=>$planId,
-								'test_id'=>$testId,
-								'chip_m_type_id'=>$chip->chip_type_id,
-								'chip_m_id'=>$chip->chip_id,
-							);
-							$this->db->insert('test_chips_new', $data);
-						}
-						$test->params = array();
-						$params = $test->params;
-						foreach($testArr->params as $name=>$values){
-							$params[$name] = array();
-							if(is_array($values)){
-								foreach($values as $value){
-									$data = array(
+							foreach ($params as $param){
+								$status = $this->db->insert_batch('test_config', $param);
+							}
+	//						die();
+	//------------ PTAT/ABS/Vgb+TEMP station test -------------
+						} elseif($testArr->station[0]->station == 'PTAT/ABS/Vgb+TEMP') {
+								$chipsArr = $testArr->chips;
+								$test = array(
+									'priority'=>$testArr->priority[0],
+									'lineup'=>null,
+									'station'=>$testArr->station[0]->station,
+									'name'=>$testArr->name[0]->test_name,
+									'notes'=>$notes,
+									'plan_id'=>$planId
+								);
+								$insertTest = $this->plan_model->add_test($test);
+								$testId = $this->plan_model->tests_id($insertTest);
+								foreach($chipsArr as $result){
+									$chip = array(
+										'serial_number'=>$result->chip_sn,
+										'corner'=>$result->chip_chip_process_abb,
+										'chip'=>$result->chip_type_id,
 										'plan_id'=>$planId,
-										'test_id'=>$testId,
-										'param_id'=>$paramsArr[$name],
-										'param_value_id'=>$value,
+										'test_id'=>$testId
 									);
-									array_push($params[$name], $data);
+									$insertChip = $this->plan_model->add_chips($chip);
 								}
-							}else{
-								$data = array(
+	//------------ TalynM+A station test -------------
+						} elseif($testArr->station[0]->station == 'TalynM+A'){
+								$test = new stdClass();
+								$test->struct = array(
+									'priority'=>$testArr->priority[0],
+									'work_station_id'=>$testArr->station[0]->id,
+									'test_name_id'=>$testArr->name[0]->id,
+									'a_lineup'=>$testArr->lineup,
+									'm_lineup'=>$testArr->m_lineup,
+									'notes'=>$notes,
+									'plan_id'=>$planId,
+									'user_id'=>$planData->userId,
+								);
+							$insertTest = $this->db->insert('tests_new', $test->struct);
+							$testId = $this->db->insert_id($insertTest);
+
+							$chips = $testArr->chips;
+							$chipPairs = array();
+							foreach($chips as $key=>$chip){
+								$pairData = array(
 									'plan_id'=>$planId,
 									'test_id'=>$testId,
-									'param_id'=>$paramsArr[$name],
-									'param_value_id'=>$values,
+									'chip_r_type_id'=>$chip->chip_r[0]->chip_type_id,
+									'chip_r_id'=>$chip->chip_r[0]->chip_id,
+									'chip_m_type_id'=>$chip->chip_m[0]->chip_type_id,
+									'chip_m_id'=>$chip->chip_m[0]->chip_id,
+									'pair_id'=>$key+1,
 								);
-								array_push($params[$name], $data);
-							}
-						}
-						foreach ($params as $param){
-							$status = $this->db->insert_batch('test_config', $param);
-						}
-//						die();
-//------------ PTAT/ABS/Vgb+TEMP station test -------------
-					} elseif($testArr->station[0]->station == 'PTAT/ABS/Vgb+TEMP') {
-							$chipsArr = $testArr->chips;
-							$test = array(
-								'priority'=>$testArr->priority[0],
-								'lineup'=>null,
-								'station'=>$testArr->station[0]->station,
-								'name'=>$testArr->name[0]->test_name,
-								'notes'=>$notes,
-								'plan_id'=>$planId
-							);
-							$insertTest = $this->plan_model->add_test($test);
-							$testId = $this->plan_model->tests_id($insertTest);
-							foreach($chipsArr as $result){
-								$chip = array(
-									'serial_number'=>$result->chip_sn,
-									'corner'=>$result->chip_chip_process_abb,
-									'chip'=>$result->chip_type_id,
-									'plan_id'=>$planId,
-									'test_id'=>$testId
-								);
-								$insertChip = $this->plan_model->add_chips($chip);
-							}
-//------------ TalynM+A station test -------------
-					} elseif($testArr->station[0]->station == 'TalynM+A'){
-							$test = new stdClass();
-							$test->struct = array(
-								'priority'=>$testArr->priority[0],
-								'work_station_id'=>$testArr->station[0]->id,
-								'test_name_id'=>$testArr->name[0]->id,
-								'a_lineup'=>$testArr->lineup,
-								'm_lineup'=>$testArr->m_lineup,
-								'notes'=>$notes,
-								'plan_id'=>$planId,
-								'user_id'=>$planData->userId,
-							);
-						$insertTest = $this->db->insert('tests_new', $test->struct);
-						$testId = $this->db->insert_id($insertTest);
 
-						$chips = $testArr->chips;
-						$chipPairs = array();
-						foreach($chips as $key=>$chip){
-							$pairData = array(
-								'plan_id'=>$planId,
-								'test_id'=>$testId,
-								'chip_r_type_id'=>$chip->chip_r[0]->chip_type_id,
-								'chip_r_id'=>$chip->chip_r[0]->chip_id,
-								'chip_m_type_id'=>$chip->chip_m[0]->chip_type_id,
-								'chip_m_id'=>$chip->chip_m[0]->chip_id,
-								'pair_id'=>$key+1,
-							);
-
-							$this->db->insert('test_chips_new', $pairData);
-						}
-						$test->params = array();
-						$params = $test->params;
-						foreach($testArr->params as $name=>$values){
-							$params[$name] = array();
-							foreach($values as $value){
-								if(in_array($name, ['temp_r', 'temp_m']) && $value == 'None'){
-									$data = array(
-										'plan_id'=>$planId,
-										'test_id'=>$testId,
-										'param_id'=>$paramsArr[$name],
-										'param_value_id'=>-273,
-									);
-								}else{
+								$this->db->insert('test_chips_new', $pairData);
+							}
+							$test->params = array();
+							$params = $test->params;
+							foreach($testArr->params as $name=>$values){
+								$params[$name] = array();
+								foreach($values as $value){
+									if(in_array($name, ['temp_r', 'temp_m']) && $value == 'None'){
 										$data = array(
 											'plan_id'=>$planId,
 											'test_id'=>$testId,
 											'param_id'=>$paramsArr[$name],
-											'param_value_id'=>$value,
+											'param_value_id'=>-273,
 										);
-									}
-								array_push($params[$name], $data);
+									}else{
+											$data = array(
+												'plan_id'=>$planId,
+												'test_id'=>$testId,
+												'param_id'=>$paramsArr[$name],
+												'param_value_id'=>$value,
+											);
+										}
+									array_push($params[$name], $data);
+								}
 							}
-						}
-//						echo json_encode($params);
-//						die();
-					foreach ($params as $param){
-						$status = $this->db->insert_batch('test_config', $param);
-					}						
-//					echo $status."aaa";
-				} else {
-					echo 'not valid station';
+	//						echo json_encode($params);
+	//						die();
+						foreach ($params as $param){
+							$status = $this->db->insert_batch('test_config', $param);
+						}						
+	//					echo $status."aaa";
+					} else {
+						echo 'not valid station';
+					}
 				}
-			}
-			echo 'success';
-			} else {
+				echo 'success';
+			}else {
 				echo 'No plan inserted!';
 			}	
 		} else {
@@ -736,9 +746,12 @@ class Plans extends CI_Controller {
 	
 	function planStatus(){
 		$id = json_decode(file_get_contents('php://input'));
+//		echo $id;
+//		die();;
 		$this->db->where('plan_id', $id);
 		$tests = $this->db->get('tests')->result();
 		if (!count($tests) > 0){
+			$this->db->where('plan_id', $id);
 			$tests = $this->db->get('tests_view_new')->result();
 			foreach($tests as $test){
 				$test->chips = $this->db->get_where('test_chips_view', ['test_id'=>$test->id])->result();
@@ -800,59 +813,9 @@ class Plans extends CI_Controller {
 	}
 	
 	function copyTest(){
-		$id = json_decode(file_get_contents('php://input'));
-		$test = $this->db->get_where('tests', array('id'=>$id))->result()[0];
-		$test->name = $this->db->get_where('params_test_names', array('test_name'=>$test->name, 'station'=>$test->station[0]))->result();
-		if($test->station == 'M-CB1' || $test->station == 'M-CB2') {
-			$this->db->select('xif');
-			$this->db->from('test_xifs');
-			$this->db->where('test_id', $test->id);
-			$xifRes = $this->db->get()->result();
-			$test->xifs = array();
-			if(isset($xifRes)){
-				foreach($xifRes as $value){
-					array_push($test->xifs, $value->xif);
-				}
-			} else {
-				$xifRes = null;
-			}
-
-		} else if($test->station == 'R-CB1' || $test->station == 'R-CB2'){
-			$test->antennas = array();
-			$ant = $this->db->get_where('test_antennas', array('test_id'=>$test->id))->result();
-			if(isset($ant)){
-				foreach($ant as $value){
-					array_push($test->antennas, $value->antenna);
-					}
-			} else{
-				$ant = null;
-			}
-		}
-		$test->channels = array();
-		if($test->station !='TalynM+A'){
-			$this->db->select('channel');
-			$ch = $this->db->get_where('test_channels', array('test_id'=>$test->id))->result();
-			if(isset($ch)){
-				foreach($ch as $value){
-						array_push($test->channels, $value->channel);
-					}
-			}else{
-				$ch = null;
-			}
-		}
-		
-		$this->db->select('serial_number AS chip_sn,
-											chip AS  chip_type_id,
-											corner AS chip_process_abb,
-											');
-		$chip = $this->db->get_where('test_chips', array('test_id'=>$test->id))->result();
-		$test->chips = $chip;
-		$temp = $this->db->get_where('test_temps', array('test_id'=>$test->id))->result();
-		foreach($temp as $i => $value){
-			$temp[$i] = $value->temp;
-		}
-		$test->temps = $temp;
-		$test->station = $this->db->get_where('params_stations', array('station'=>$test->station))->result();
+		$data = new stdClass();
+		$data->testId = json_decode(file_get_contents('php://input'));
+		$test = $this->plan_model->edit_test($data);
 		echo json_encode($test);
 	}
 		public function lineup($test){

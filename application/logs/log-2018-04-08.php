@@ -228,3 +228,261 @@ WHERE `test_id` = '1550'
 ERROR - 201820182018-0404-0808 1818:0404:3030 --> Severity: Notice --> Undefined property: stdClass::$temps C:\xampp\htdocs\application\models\excel_model.php 86
 ERROR - 201820182018-0404-0808 1818:0404:3030 --> Severity: Notice --> Undefined property: stdClass::$channels C:\xampp\htdocs\application\models\excel_model.php 87
 ERROR - 201820182018-0404-0808 1818:0404:3030 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\application\models\excel_model.php 91
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:3333 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3333 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3333 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3333 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:3838 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3838 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3838 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3838 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3939 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4747 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4747 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:4747 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4848 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4848 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4848 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:4848 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4848 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4848 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4848 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:0404 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0404 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0404 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0404 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:0404 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0404 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0404 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0404 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:0606 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0606 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0606 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0606 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:0707 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0707 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0707 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0707 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:0707 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0707 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0707 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0707 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:0808 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:1212 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:1212 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:1212 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:1212 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:3434 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3434 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3434 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:3434 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:4242 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4242 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4242 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4242 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:4242 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4242 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4242 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4242 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:4242 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4242 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4242 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:4242 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2020 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:2525 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2525 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2525 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2525 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:2626 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2626 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2626 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 1919:0404:2626 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0404-0808 1919:0404:1010 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 355
+ERROR - 201820182018-0404-0808 1919:0404:1010 --> Query error: Column 'station' cannot be null - Invalid query: INSERT INTO `test_comments` (`plan_id`, `test_id`, `author`, `severity`, `station`, `details`) VALUES ('946', '18', 'c-greenb', 'Major', NULL, 'TESTING TEST')
+ERROR - 201820182018-0404-0808 1919:0404:1111 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 355
+ERROR - 201820182018-0404-0808 1919:0404:1111 --> Query error: Column 'station' cannot be null - Invalid query: INSERT INTO `test_comments` (`plan_id`, `test_id`, `author`, `severity`, `station`, `details`) VALUES ('946', '18', 'c-greenb', 'Major', NULL, 'TESTING TEST')
+ERROR - 201820182018-0404-0808 1919:0404:1111 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 355
+ERROR - 201820182018-0404-0808 1919:0404:1111 --> Query error: Column 'station' cannot be null - Invalid query: INSERT INTO `test_comments` (`plan_id`, `test_id`, `author`, `severity`, `station`, `details`) VALUES ('946', '18', 'c-greenb', 'Major', NULL, 'TESTING TEST')
+ERROR - 201820182018-0404-0808 1919:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 342
+ERROR - 201820182018-0404-0808 1919:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$name C:\xampp\htdocs\application\models\plan_model.php 343
+ERROR - 201820182018-0404-0808 1919:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\models\plan_model.php 344
+ERROR - 201820182018-0404-0808 1919:0404:1616 --> Query error: Column 'station' cannot be null - Invalid query: INSERT INTO `test_comments` (`plan_id`, `test_id`, `author`, `severity`, `station`, `test_name`, `chip`, `details`) VALUES ('946', '18', 'c-greenb', 'Minor', NULL, NULL, NULL, 'TESTING TEST')
+ERROR - 201820182018-0404-0808 1919:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 342
+ERROR - 201820182018-0404-0808 1919:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$name C:\xampp\htdocs\application\models\plan_model.php 343
+ERROR - 201820182018-0404-0808 1919:0404:1616 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\models\plan_model.php 344
+ERROR - 201820182018-0404-0808 1919:0404:1616 --> Query error: Column 'station' cannot be null - Invalid query: INSERT INTO `test_comments` (`plan_id`, `test_id`, `author`, `severity`, `station`, `test_name`, `chip`, `details`) VALUES ('946', '18', 'c-greenb', 'Minor', NULL, NULL, NULL, 'TESTING TEST')
+ERROR - 201820182018-0404-0808 1919:0404:4444 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 342
+ERROR - 201820182018-0404-0808 1919:0404:4444 --> Severity: Notice --> Undefined property: stdClass::$name C:\xampp\htdocs\application\models\plan_model.php 343
+ERROR - 201820182018-0404-0808 1919:0404:4444 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\models\plan_model.php 344
+ERROR - 201820182018-0404-0808 1919:0404:4444 --> Query error: Column 'station' cannot be null - Invalid query: INSERT INTO `test_comments` (`plan_id`, `test_id`, `author`, `severity`, `station`, `test_name`, `chip`, `details`) VALUES ('946', '16', 'c-greenb', 'Minor', NULL, NULL, NULL, 'דשכשכשד')
+ERROR - 201820182018-0404-0808 1919:0404:4444 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 342
+ERROR - 201820182018-0404-0808 1919:0404:4444 --> Severity: Notice --> Undefined property: stdClass::$name C:\xampp\htdocs\application\models\plan_model.php 343
+ERROR - 201820182018-0404-0808 1919:0404:4444 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\models\plan_model.php 344
+ERROR - 201820182018-0404-0808 1919:0404:4444 --> Query error: Column 'station' cannot be null - Invalid query: INSERT INTO `test_comments` (`plan_id`, `test_id`, `author`, `severity`, `station`, `test_name`, `chip`, `details`) VALUES ('946', '16', 'c-greenb', 'Minor', NULL, NULL, NULL, 'דשכשכשד')
+ERROR - 201820182018-0404-0808 1919:0404:4545 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 342
+ERROR - 201820182018-0404-0808 1919:0404:4545 --> Severity: Notice --> Undefined property: stdClass::$name C:\xampp\htdocs\application\models\plan_model.php 343
+ERROR - 201820182018-0404-0808 1919:0404:4545 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\models\plan_model.php 344
+ERROR - 201820182018-0404-0808 1919:0404:4545 --> Query error: Column 'station' cannot be null - Invalid query: INSERT INTO `test_comments` (`plan_id`, `test_id`, `author`, `severity`, `station`, `test_name`, `chip`, `details`) VALUES ('946', '16', 'c-greenb', 'Minor', NULL, NULL, NULL, 'דשכשכשד')
+ERROR - 201820182018-0404-0808 2222:0404:1717 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\models\plan_model.php 344
+ERROR - 201820182018-0404-0808 2222:0404:2929 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 2222:0404:2929 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 2222:0404:2929 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 663
+ERROR - 201820182018-0404-0808 2222:0404:2929 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c-greenb'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL

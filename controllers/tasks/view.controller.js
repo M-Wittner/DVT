@@ -47,8 +47,13 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 		$http.post(site+'/tasks/assignedUpdate', {task: task, user: user, sender: $scope.sender, site: site})
 			.then(function(response){
 			if(response.data != false){
+				var message = 'Task was assigned to '+response.data+"! Email has been sent";
+				var id = Flash.create('success', message, 3500);
 				$scope.task.assigned = response.data
 				$scope.task.approved = true;
+			}else{
+				var message = 'Task was not assigned to '+response.data;
+				var id = Flash.create('danger', message, 3500);
 			}
 			console.log(response.data);
 		})

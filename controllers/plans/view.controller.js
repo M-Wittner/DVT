@@ -148,6 +148,15 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		console.log(path);
 	}
 	
+	$scope.filterByName = function(params, word){
+		var data = params.filter(param => param.param_name.includes(word));
+		if(typeof data[0] != 'undefined'){
+			return true;
+		} else{
+			return false;
+		}
+	}
+	
 	$scope.xifStatus = function(xif){
 //		console.log(xif);
 		$http.post(site+'/plans/xifstatus', xif)

@@ -26,10 +26,11 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 		$scope.testCount.push({})
 	}
 	
-	$scope.insertTest = function(){
+	$scope.insertTest = function(data){
 		$scope.planParams.push(this.test);
 		$scope.lock = true;
 		console.log(this);
+		console.log(data);
 	}
 	$scope.editToggle = function(){
 		$scope.lock = false;

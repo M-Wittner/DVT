@@ -137,35 +137,38 @@ class Tasks extends CI_Controller {
 	
 	public function assignedUpdate(){
 		$data = json_decode(file_get_contents('php://input'));
-//		echo json_encode($data);
-//		die();
+		
 		$to = $data->user;
 		$from = $data->sender;
 		$task = $data->task;
 		$site = $data->site;
-		$this->db->select(['assigned']);
-		$status = $this->db->get_where('tasks_view',['id'=>$to->id])->result();
-		
+		$text = substr(strip_tags($task->description), 0, 100);
+//		echo json_encode($text);
+//		die();
 		$this->db->select('email');
 		$to->email = $this->db->get_where('users', ['id'=>$to->id])->result()[0]->email;
 		
 		$this->db->select('email');
 		$from->email = $this->db->get_where('users', ['id'=>$from->userId])->result()[0]->email;
 		
-		$this->db->where('id', $to->id);
+		$this->db->where('id', $task->id);
 		$res = $this->db->update('tasks', ['assigned_to'=>$to->id, 'approved'=>true]);
 		
 		if($res = true){
 			$this->db->select(['assigned']);
 			$status = $this->db->get_where('tasks_view',['id'=>$task->id])->result()[0]->assigned;
 			
-			//SEND EMAIL
+//			//SEND EMAIL
 			$this->email->from("DVT - WEB");
 //			$this->email->from($sender->email, $sender->username);
 			$this->email->to($to->email);
 			$this->email->subject("You've got a new task!");
-			$this->email->message("A new task has been assigned to you by ".$from->username."\n".
+			$this->email->message("A new task was created by ".$task->creator." and has been assigned to you by ".$from->username.
+														"\n Field of operation: ".$task->station[0]->work_station.
+														"\n Task type: ".$task->type[0]->task_type." \n".
 														"Title: ".$task->title."\n".
+														"Description:"."\n\n".
+														$text."... \n".
 														"You can view it in the following link: \n".
 													 	$site."/tasks/".$task->id
 													 );
