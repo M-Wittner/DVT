@@ -123,7 +123,8 @@ class plan_model extends CI_Model {
 					case 1:
 					case 2:
 						$data = array(
-							'chip_id'=>$chip->id,
+							'pair_id'=>$chip->id,
+							'chip_id'=>$chip->chip_r_id,
 							'chip_sn'=>$chip->chip_r_sn,
 							'chip_process_abb'=>$chip->corner_r,
 							'chip_type_id'=>$chip->chip_r_type_id
@@ -132,7 +133,8 @@ class plan_model extends CI_Model {
 					case 3:
 					case 4:
 						$data = array(
-							'chip_id'=>$chip->id,
+							'pair_id'=>$chip->id,
+							'chip_id'=>$chip->chip_m_id,
 							'chip_sn'=>$chip->chip_m_sn,
 							'chip_process_abb'=>$chip->corner_m,
 							'chip_type_id'=>$chip->chip_m_type_id
@@ -141,14 +143,14 @@ class plan_model extends CI_Model {
 					case 5:
 						$data = new stdClass();
 						$data->chip_r[$key] = array(
-							'chip_id'=>$chip->id,
+							'pair_id'=>$chip->id,
 							'chip_sn'=>$chip->chip_r_sn,
 							'chip_process_abb'=>$chip->corner_r,
 							'chip_type_id'=>$chip->chip_r_type_id,
 							'pair_id'=>$chip->pair_id,
 						);
 						$data->chip_m[$key] = array(
-							'chip_id'=>$chip->id,
+							'pair_id'=>$chip->id,
 							'chip_sn'=>$chip->chip_m_sn,
 							'chip_process_abb'=>$chip->corner_m,
 							'chip_type_id'=>$chip->chip_m_type_id,
@@ -402,19 +404,26 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_test($test){
-//		$oldChips = $this->db->get_where('test_chips_new', ['plan_id'=>$test->plan_id])->result();	
-//		$newChips = array();
-//		foreach ($test->chips as $chip){
-//			array_push($newChips, $chip->chip_id);
-//			$id = $chip->chip_id;
-//			foreach($oldChips as $oldChip){
-//				if($oldChip->)
-//			}
-//		}
-//
-//		echo json_encode($newChips);
-//		die();
-		$this->db->delete('test_chips_new', ['test_id'=>$test->id, 'plan_id'=>$test->plan_id]);
+		$oldChips = $this->db->get_where('test_chips_new', ['test_id'=>$test->id])->result();	
+		$sortedChips = array();
+		foreach($oldChips as $oldChip){
+			if($oldChip->chip_m_id != -1){
+				array_push($sortedChips, $oldChip->chip_m_id);
+			}elseif($oldChip->chip_r_id != -1){
+				array_push($sortedChips, $oldChip->chip_r_id);
+			}
+		}
+		$newChips = array();
+		foreach ($test->chips as $chip){
+			if(!in_array($chip->chip_id, $sortedChips)){
+				$this->db->delete('test_chips_new', ['test_id'=>$test->id, 'plan_id'=>$test->plan_id, 'id'=>$chip->pair_id]);
+			}
+		}
+
+//		echo json_encode($test->chips);
+//		echo json_encode($sortedChips);
+		die();
+		
 		$chips = array();
 		switch($test->station_id){
 			//R STATIONS

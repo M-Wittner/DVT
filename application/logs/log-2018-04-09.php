@@ -542,3 +542,10 @@ ERROR - 201820182018-0404-0909 1616:0404:3030 --> Severity: Notice --> Undefined
 ERROR - 201820182018-0404-0909 1616:0404:3030 --> Severity: error --> Exception: File "" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
 ERROR - 201820182018-0404-0909 1616:0404:3535 --> Severity: Notice --> Undefined property: stdClass::$lineup C:\xampp\htdocs\application\controllers\plans.php 823
 ERROR - 201820182018-0404-0909 1616:0404:3636 --> Severity: error --> Exception: File "" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
+ERROR - 201820182018-0404-0909 1919:0404:3636 --> Severity: Notice --> Undefined property: stdClass::$chip_r_id C:\xampp\htdocs\application\models\plan_model.php 408
+ERROR - 201820182018-0404-0909 1919:0404:3636 --> Severity: Notice --> Undefined property: stdClass::$chip_m_id C:\xampp\htdocs\application\models\plan_model.php 408
+ERROR - 201820182018-0404-0909 1919:0404:3939 --> Severity: Parsing Error --> syntax error, unexpected '->' (T_OBJECT_OPERATOR) C:\xampp\htdocs\application\models\plan_model.php 414
+ERROR - 201820182018-0404-0909 1919:0404:5656 --> Severity: Parsing Error --> syntax error, unexpected '->' (T_OBJECT_OPERATOR) C:\xampp\htdocs\application\models\plan_model.php 414
+ERROR - 201820182018-0404-0909 1919:0404:1010 --> Severity: Notice --> Undefined property: stdClass::$chip_m_id C:\xampp\htdocs\application\models\plan_model.php 413
+ERROR - 201820182018-0404-0909 1919:0404:1010 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\models\plan_model.php 413
+ERROR - 201820182018-0404-0909 1919:0404:3434 --> Severity: Notice --> Undefined property: stdClass::$chip_m_id C:\xampp\htdocs\application\models\plan_model.php 414
