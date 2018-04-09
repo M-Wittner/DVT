@@ -404,26 +404,7 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_test($test){
-		$oldChips = $this->db->get_where('test_chips_new', ['test_id'=>$test->id])->result();	
-		$sortedChips = array();
-		foreach($oldChips as $oldChip){
-			if($oldChip->chip_m_id != -1){
-				array_push($sortedChips, $oldChip->chip_m_id);
-			}elseif($oldChip->chip_r_id != -1){
-				array_push($sortedChips, $oldChip->chip_r_id);
-			}
-		}
-		$newChips = array();
-		foreach ($test->chips as $chip){
-			if(!in_array($chip->chip_id, $sortedChips)){
-				$this->db->delete('test_chips_new', ['test_id'=>$test->id, 'plan_id'=>$test->plan_id, 'id'=>$chip->pair_id]);
-			}
-		}
-
-//		echo json_encode($test->chips);
-//		echo json_encode($sortedChips);
-		die();
-		
+		$this->db->delete('test_chips_new', ['test_id'=>$test->id, 'plan_id'=>$test->plan_id]);
 		$chips = array();
 		switch($test->station_id){
 			//R STATIONS

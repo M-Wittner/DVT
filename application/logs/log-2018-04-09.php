@@ -549,3 +549,6 @@ ERROR - 201820182018-0404-0909 1919:0404:5656 --> Severity: Parsing Error --> sy
 ERROR - 201820182018-0404-0909 1919:0404:1010 --> Severity: Notice --> Undefined property: stdClass::$chip_m_id C:\xampp\htdocs\application\models\plan_model.php 413
 ERROR - 201820182018-0404-0909 1919:0404:1010 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\models\plan_model.php 413
 ERROR - 201820182018-0404-0909 1919:0404:3434 --> Severity: Notice --> Undefined property: stdClass::$chip_m_id C:\xampp\htdocs\application\models\plan_model.php 414
+ERROR - 201820182018-0404-0909 1919:0404:3535 --> Severity: Notice --> Undefined property: stdClass::$pair_id C:\xampp\htdocs\application\models\plan_model.php 419
+ERROR - 201820182018-0404-0909 2020:0404:5050 --> Severity: Notice --> Undefined property: stdClass::$chip_m_id C:\xampp\htdocs\application\models\plan_model.php 422
+ERROR - 201820182018-0404-0909 2020:0404:5050 --> Severity: Notice --> Undefined property: stdClass::$chip_m_id C:\xampp\htdocs\application\models\plan_model.php 422
