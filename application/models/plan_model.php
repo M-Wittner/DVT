@@ -143,14 +143,14 @@ class plan_model extends CI_Model {
 					case 5:
 						$data = new stdClass();
 						$data->chip_r[$key] = array(
-							'pair_id'=>$chip->id,
+							'chip_id'=>$chip->chip_r_id,
 							'chip_sn'=>$chip->chip_r_sn,
 							'chip_process_abb'=>$chip->corner_r,
 							'chip_type_id'=>$chip->chip_r_type_id,
 							'pair_id'=>$chip->pair_id,
 						);
 						$data->chip_m[$key] = array(
-							'pair_id'=>$chip->id,
+							'chip_id'=>$chip->chip_m_id,
 							'chip_sn'=>$chip->chip_m_sn,
 							'chip_process_abb'=>$chip->corner_m,
 							'chip_type_id'=>$chip->chip_m_type_id,
@@ -639,6 +639,59 @@ class plan_model extends CI_Model {
 		$res = $this->db->update('tests', $test);
 		return $res;
 		
+	}
+	
+	function format_edit($test){
+		$test->params = new stdClass();
+		$test->params->channel = $test->channel;
+		switch($test->station_id){
+			case 1:
+			case 2:
+				if(isset($test->a_lineup)){
+			$test->lineup = $test->a_lineup;
+			if(isset($test->pin_from)){
+				$test->params->pin_from = $test->pin_from[0];
+				$test->params->pin_to = $test->pin_to[0];
+				$test->params->pin_step = $test->pin_step[0];
+				if(isset($test->pin_additional)){
+					$test->params->pin_additional = $test->pin_additional[0];
+				}
+			}elseif(isset($test->lo_pin_from)){
+				$test->params->lo_pin_from = $test->lo_pin_from[0];
+				$test->params->lo_pin_to = $test->lo_pin_to[0];
+				$test->params->lo_pin_step = $test->lo_pin_step[0];
+				if(isset($test->lo_pin_additional)){
+					$test->params->lo_pin_additional = $test->lo_pin_additional[0];
+				}
+			}
+			$test->params->temp_r = $test->temp_r;
+//			$test->params->channel = $test->channel;
+			$test->params->antenna = $test->antenna;
+			$test->params->mcs = $test->mcs[0];
+			$test->params->voltage = $test->voltage[0];
+		}
+				break;
+			case 3:
+			case 4:
+				$test->lineup = $test->m_lineup;
+				$test->params->temp_m = $test->temp_m;
+				
+				$test->params->voltage = $test->voltage[0];
+				break;
+			case 5:
+				$test->lineup = $test->a_lineup;
+				$test->params->temp_r = $test->temp_r;
+				$test->params->temp_m = $test->temp_m;
+				$test->params->mcs = $test->mcs;
+				$params = ['num_ant', 'antenna', 'sector', 'active_ants'];
+				foreach ($params as $name){
+					if(isset($test->$name)){
+						$test->params->$name = $test->$name;
+					}
+				}
+		}
+		
+		return $test;
 	}
 	
 	function update_chip_status($result){

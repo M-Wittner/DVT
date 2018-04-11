@@ -202,6 +202,11 @@
 				<multiselect ng-model="test.params.num_ant" options="testParams.params.numAntsList" show-search="true" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 				</multiselect>
 			</div>
+			<div class="col-md-2" ng-if="test.station[0].station == 'TalynM+A' && (test.name[0].test_name == 'TX-BRP' || test.name[0].test_name == 'RX-EVM PVT')">
+				<span class="label label-dangerC">Active Antennas:</span>
+				<multiselect ng-model="test.params.active_ants" options="testParams.params.antList" show-search="true" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
+				</multiselect>
+			</div>
 			<div class="col-md-3" ng-if="test.station[0].station == 'TalynM+A' && (test.name[0].test_name == 'TX-EVM BF' || test.name[0].test_name == 'TX-EVM BFFW')">
 				<span class="label label-dangerC">Sectors:</span></br>
 				<multiselect ng-model="test.params.sector" options="testParams.params.sectorList" show-search="true" show-select-all="true" show-unselect-all="true" ng-disabled="lock">

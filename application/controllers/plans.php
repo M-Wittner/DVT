@@ -581,7 +581,9 @@ class Plans extends CI_Controller {
 		$data = new stdClass();
 		$data->testId = json_decode(file_get_contents('php://input'));
 		$test = $this->plan_model->edit_test($data);
-		echo json_encode($test);
+		$formatedTest = $this->plan_model->format_edit($test);
+		
+		echo json_encode($formatedTest);
 	}
 		public function lineup($test){
 //			die(print_r($test));
