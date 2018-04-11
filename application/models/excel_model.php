@@ -83,8 +83,12 @@ class excel_model extends CI_Model {
 	}
 	
 	public function validate($test, $param, $unique){
-		$temps = $test->temps;
-		$channels = $test->channels;
+		if(isset($test->params->temp_r)){
+			$temps = $test->params->temp_r;
+		} elseif(isset($test->params->temp_m)){
+			$temps = $test->params->temp_m;
+		}
+		$channels = $test->params->channel;
 		$name = strtolower($param);
 //		var_dump($name);
 		if($name == 'temp'){

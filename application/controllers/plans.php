@@ -83,7 +83,7 @@ class Plans extends CI_Controller {
 						echo "Not valid yet";
 						die();
 					}
-					
+//					die();
 					//			------------- R station test -------------
 						if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
 	//						echo json_encode($testArr);

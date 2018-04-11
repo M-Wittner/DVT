@@ -469,7 +469,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-md-3">
+										<div class="col-md-2">
 											<div class="col-md-12">
 												<span class="label label-primary">Channels:</span>
 												<ul class="list-group">
@@ -535,10 +535,9 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
-										<div class="col-md-12">
+									<div class="col-md-5">
 											<span class="label label-primary">Chip S/N:</span>
-											<table class="table">
+											<table class="table table-condensed">
 												<thead>
 													<tr>
 														<th ng-if="(test.station == 'R-CB1' || test.station == 'R-CB2') || test.station == 'TalynM+A'">Chip R</th>
@@ -558,15 +557,14 @@
 													</tr>
 												</tbody>
 											</table>
-										</div>
 									</div>
-									<div class="col-md-6" ng-if="filterByName(test.params, 'pin')"> 
+									<div class="col-md-4" ng-if="filterByName(test.params, 'pin')"> 
 										<span class="label label-primary">Pin:</span>
 <!--										<button ng-click="filterByName(test.params)">click</button>-->
 										<table class="table table-condensed text-center">
 											<thead>
 												<tr>
-													<th class="text-center">Type</th>
+													<th class="text-center col-md-1">Type</th>
 													<th class="text-center" ng-if="filterByName(test.params, 'pin_from')">From</th>
 													<th class="text-center" ng-if="filterByName(test.params, 'pin_to')">To</th>
 													<th class="text-center" ng-if="filterByName(test.params, 'pin_step')">Step</th>
@@ -575,11 +573,11 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td><span class="label label-info">Pin</span></td>
+													<td class="col-md-1"><span class="label label-info">Pin</span></td>
 													<td ng-repeat="param in test.params | filter: 'pin'" ng-if="!param.param_name.includes('lo')" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">{{param.param_value}}</td>
 												</tr>
 												<tr>
-													<td ng-if="false"><span class="label label-dangerC">LO_Pin</span></td>
+													<td class="col-md-1" ng-if="false"><span class="label label-dangerC">LO_Pin</span></td>
 													<td ng-repeat="param in test.params | filter: 'lo'" ng-if="param.param_value != 0" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">{{param.param_value}}</td>
 												</tr>
 											</tbody>
