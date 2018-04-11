@@ -23,3 +23,37 @@ ERROR - 201820182018-0404-1111 1010:0404:3131 --> Severity: Parsing Error --> sy
 ERROR - 201820182018-0404-1111 1010:0404:1515 --> Severity: Parsing Error --> syntax error, unexpected '$test' (T_VARIABLE), expecting case (T_CASE) or default (T_DEFAULT) or '}' C:\xampp\htdocs\application\models\plan_model.php 647
 ERROR - 201820182018-0404-1111 1010:0404:5454 --> Severity: Notice --> Undefined property: stdClass::$chip_id C:\xampp\htdocs\application\controllers\plans.php 250
 ERROR - 201820182018-0404-1111 1010:0404:5454 --> Severity: Notice --> Undefined property: stdClass::$chip_id C:\xampp\htdocs\application\controllers\plans.php 252
+ERROR - 201820182018-0404-1111 1010:0404:1717 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 375
+ERROR - 201820182018-0404-1111 1010:0404:1717 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 376
+ERROR - 201820182018-0404-1111 1010:0404:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 375
+ERROR - 201820182018-0404-1111 1010:0404:2222 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 376
+ERROR - 201820182018-0404-1111 1010:0404:2828 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 375
+ERROR - 201820182018-0404-1111 1010:0404:2828 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 376
+ERROR - 201820182018-0404-1111 1010:0404:3333 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 375
+ERROR - 201820182018-0404-1111 1010:0404:3333 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 376
+ERROR - 201820182018-0404-1111 1010:0404:0303 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 375
+ERROR - 201820182018-0404-1111 1010:0404:0303 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 376
+ERROR - 201820182018-0404-1111 1010:0404:1010 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 375
+ERROR - 201820182018-0404-1111 1010:0404:1111 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 376
+ERROR - 201820182018-0404-1111 1010:0404:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 375
+ERROR - 201820182018-0404-1111 1010:0404:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 376
+ERROR - 201820182018-0404-1111 1010:0404:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 338
+ERROR - 201820182018-0404-1111 1010:0404:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 338
+ERROR - 201820182018-0404-1111 1010:0404:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 351
+ERROR - 201820182018-0404-1111 1010:0404:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 351
+ERROR - 201820182018-0404-1111 1010:0404:5555 --> Severity: Notice --> Undefined property: stdClass::$station C:\xampp\htdocs\application\models\plan_model.php 357
+ERROR - 201820182018-0404-1111 1010:0404:5555 --> Query error: Column 'station' cannot be null - Invalid query: INSERT INTO `test_comments` (`plan_id`, `test_id`, `author`, `severity`, `station`, `details`) VALUES ('952', '48', 'c_matanw', 'Major', NULL, 'fffffff')
+ERROR - 201820182018-0404-1111 1010:0404:2020 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 375
+ERROR - 201820182018-0404-1111 1010:0404:2020 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 376
+ERROR - 201820182018-0404-1111 1010:0404:1616 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 375
+ERROR - 201820182018-0404-1111 1010:0404:1616 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 376
+ERROR - 201820182018-0404-1111 1010:0404:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 375
+ERROR - 201820182018-0404-1111 1010:0404:2525 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 376
+ERROR - 201820182018-0404-1111 1010:0404:1111 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 375
+ERROR - 201820182018-0404-1111 1010:0404:1111 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 376
+ERROR - 201820182018-0404-1111 1010:0404:5353 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 375
+ERROR - 201820182018-0404-1111 1010:0404:5353 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 376
+ERROR - 201820182018-0404-1111 1010:0404:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 338
+ERROR - 201820182018-0404-1111 1010:0404:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 338
+ERROR - 201820182018-0404-1111 1010:0404:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 351
+ERROR - 201820182018-0404-1111 1010:0404:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 351
