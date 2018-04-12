@@ -382,6 +382,8 @@ class Plans extends CI_Controller {
 		$id = json_decode(file_get_contents('php://input'));
 		$test = $this->db->get_where('tests_view_new', array('id'=>$id->testId))->result()[0];
 		$rawChips = $this->db->get_where('test_chips_view', array('test_id'=>$id->testId))->result();
+//		echo json_encode($rawChips);
+//		die();
 		$chips = array();
 		foreach($rawChips as $key=>$chip){
 			switch($test->station_id){
@@ -406,20 +408,16 @@ class Plans extends CI_Controller {
 					);
 					break;
 				case 5:
-					$data = new stdClass();
-					$data->chip_r[$key] = array(
+					$data = array(
+						'chip_r_id'=>$chip->chip_r_id,
+						'chip_m_id'=>$chip->chip_m_id,
 						'pair_id'=>$chip->id,
-						'chip_sn'=>$chip->chip_r_sn,
-						'chip_process_abb'=>$chip->corner_r,
-						'chip_type_id'=>$chip->chip_r_type_id,
-						'pair_id'=>$chip->pair_id,
-					);
-					$data->chip_m[$key] = array(
-						'pair_id'=>$chip->id,
-						'chip_sn'=>$chip->chip_m_sn,
-						'chip_process_abb'=>$chip->corner_m,
-						'chip_type_id'=>$chip->chip_m_type_id,
-						'pair_id'=>$chip->pair_id,
+						'chip_r_sn'=>$chip->chip_r_sn,
+						'corner_r'=>$chip->corner_r,
+						'chip_r_type_id'=>$chip->chip_r_type_id,
+						'chip_m_sn'=>$chip->chip_m_sn,
+						'croner_m'=>$chip->corner_m,
+						'chip_m_type_id'=>$chip->chip_m_type_id,
 					);
 					break;
 				}

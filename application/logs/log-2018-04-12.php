@@ -15,3 +15,10 @@ ERROR - 201820182018-0404-1212 0808:0404:3737 --> Severity: Notice --> Undefined
 ERROR - 201820182018-0404-1212 0808:0404:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\controllers\plans.php 642
 ERROR - 201820182018-0404-1212 0808:0404:3737 --> Severity: Notice --> Undefined variable: spreadsheet C:\xampp\htdocs\application\controllers\plans.php 656
 ERROR - 201820182018-0404-1212 0808:0404:1919 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 105
+ERROR - 201820182018-0404-1212 0909:0404:1414 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 324
+ERROR - 201820182018-0404-1212 0909:0404:5757 --> Query error: Unknown column 'tcn.chip_id' in 'on clause' - Invalid query: SELECT *
+FROM `test_comments_view`
+WHERE `test_id` = '42'
+ERROR - 201820182018-0404-1212 0909:0404:1212 --> Query error: Unknown column 'tcn.chip_id' in 'on clause' - Invalid query: SELECT *
+FROM `test_comments_view`
+WHERE `test_id` = '42'

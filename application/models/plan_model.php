@@ -321,7 +321,7 @@ class plan_model extends CI_Model {
 			'test_id'=>$data->id->testId,
 			'user_id'=>$data->comment->userId,
 			'severity'=>$data->comment->severity,
-			'chip_id'=>$data->comment->chip[0]->chip_id,
+			'config_id'=>$data->comment->chip[0]->pair_id,
 			'comment'=>$data->comment->details,
 		);
 		$status = $this->db->insert('test_comments_new', $comment);

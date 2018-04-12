@@ -14,32 +14,24 @@
 			<div ng-if=" comment.severity == 'Minor'">
 				<div class="col-md-3 col-sm-3 col-xs-3">
 					<span class="label label-primary">Chip</span>
-					<div ng-if="test.station_id == 1 || test.station_id == 2">
-<!--
-						<select ng-model="comment.chip" class="form-control">
-							<option ng-repeat="chip in chips">
-								{{chip.chip_r_sn}}
-							</option>
-						</select>
--->
+					<div ng-if="test.station_id == 1 || test.station_id == 2 || test.station_id == 3 || test.station_id == 4">
 						<ui-select multiple limit="1" style="width: 100%;" close-on-select="false" ng-model="comment.chip" data-placeholder="Pick Chips" ng-disabled="lock">
 							<ui-select-match>{{$item.chip_sn}}-{{$item.chip_process_abb}}</ui-select-match>
 							<ui-select-choices repeat="chip in chips | filter:$select.search" group-by="'corner'" sortable="true">{{chip.chip_sn}}-{{chip.chip_process_abb}}</ui-select-choices>
 						</ui-select>
 					</div>
-					<div ng-if="test.station_id == 3 || test.station_id == 4">
-						<select ng-model="comment.chip" class="form-control">
-							<option ng-repeat="chip in chips">
-								{{chip.chip_m_sn}}
-							</option>
-						</select>
-					</div>
 					<div ng-if="test.station_id == 5">
+						<ui-select multiple limit="1" style="width: 100%;" close-on-select="false" ng-model="comment.chip" data-placeholder="Pick Chips" ng-disabled="lock">
+							<ui-select-match>{{$item.chip_r_sn}}-{{$item.chip_m_sn}}</ui-select-match>
+							<ui-select-choices repeat="chip in chips | filter:$select.search" group-by="'corner'" sortable="true">{{chip.chip_r_sn}}-{{chip.chip_m_sn}}</ui-select-choices>
+						</ui-select>
+<!--
 						<select ng-model="comment.chip" class="form-control">
 							<option ng-repeat="chip in chips">
 								{{chip.chip_r_sn}}-{{chip.chip_m_sn}}
 							</option>
 						</select>
+-->
 					</div>
 				</div>
 			</div>
