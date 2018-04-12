@@ -374,7 +374,7 @@
 		<!----------------------------------------------------	New Format	---------------------------------------------------->
 		<div id="desc" class="panel panel-default"  ng-class="{'panel-R1' : test.station == 'R-CB1', 'panel-R2' : test.station == 'R-CB2', 'panel-M1' : test.station == 'M-CB1', 'panel-M2' : test.station == 'M-CB2', 'panel-fs' : test.station == 'TalynM+A'}" ng-if="!test.station[0].station">
 			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="false" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
-				<strong >Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.test_name}} , ID: #{{test.id}}  {{test.progress}}%</strong>
+				<strong >Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.test_name}} , ID: #{{test.id}}</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
 				<span class="pull-right">
 					<span class="glyphicon glyphicon-envelope" ng-if="test.comments.length > 0" id="testStatus"></span>
