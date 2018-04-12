@@ -574,12 +574,34 @@
 											<tbody>
 												<tr>
 													<td class="col-md-1"><span class="label label-info">Pin</span></td>
-													<td ng-repeat="param in test.params | filter: 'pin' | orderBy: 'param_id'" ng-if="!param.param_name.includes('lo') && (param.param_value != 0)" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">{{param.param_value}}</td>
-													<td></td>
+													<td ng-repeat="param in test.params | filter: 'pin_from' | orderBy: 'param_id'" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">
+														<span ng-if="!param.param_name.includes('lo') && (param.param_value != 0)">{{param.param_value}}</span>
+													</td>
+													<td ng-repeat="param in test.params | filter: 'pin_to' | orderBy: 'param_id'" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">
+														<span ng-if="!param.param_name.includes('lo') && (param.param_value != 0)">{{param.param_value}}</span>
+													</td>
+													<td ng-repeat="param in test.params | filter: 'pin_step' | orderBy: 'param_id'" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">
+														<span ng-if="!param.param_name.includes('lo') && (param.param_value != 0)">{{param.param_value}}</span>
+													</td>
+													<td ng-repeat="param in test.params | filter: 'pin_additional' | orderBy: 'param_id'" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">
+														<span ng-if="!param.param_name.includes('lo') && (param.param_value != 0)">{{param.param_value}}</span>
+													</td>
 												</tr>
 												<tr>
 													<td class="col-md-1" ng-if="filterByName(test.params, 'lo')"><span class="label label-dangerC">LO_Pin</span></td>
-													<td ng-repeat="param in test.params | filter: 'lo' | orderBy: 'param_id'" ng-if="param.param_value != 0" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">{{param.param_value}}</td>
+<!--													<td ng-repeat="param in test.params | filter: 'lo' | orderBy: 'param_id'" ng-if="param.param_value != 0" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">{{param.param_value}}</td>-->
+													<td ng-repeat="param in test.params | filter: 'lo_pin_from' | orderBy: 'param_id'" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">
+														<span ng-if="(param.param_value != 0)">{{param.param_value}}</span>
+													</td>
+													<td ng-repeat="param in test.params | filter: 'lo_pin_to' | orderBy: 'param_id'" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">
+														<span ng-if="(param.param_value != 0)">{{param.param_value}}</span>
+													</td>
+													<td ng-repeat="param in test.params | filter: 'lo_pin_step' | orderBy: 'param_id'" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">
+														<span ng-if="(param.param_value != 0)">{{param.param_value}}</span>
+													</td>
+													<td ng-repeat="param in test.params | filter: 'lo_pin_additional' | orderBy: 'param_id'" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">
+														<span ng-if="(param.param_value != 0)">{{param.param_value}}</span>
+													</td>
 												</tr>
 											</tbody>
 										</table>

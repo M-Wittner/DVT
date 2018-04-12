@@ -488,6 +488,8 @@ class Plans extends CI_Controller {
 	
 	function update(){
 		$test = json_decode(file_get_contents('php://input'));
+//		echo json_encode($test);
+//		die();
 		switch($test->flag){
 			case 0:
 				$result = $this->plan_model->update_test_old($test);

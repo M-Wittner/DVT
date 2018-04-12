@@ -370,14 +370,14 @@ class plan_model extends CI_Model {
 	function update_test($test){
 		$this->db->delete('test_chips_new', ['test_id'=>$test->id, 'plan_id'=>$test->plan_id]);
 		$chips = array();
-		switch($test->station_id){
+		switch($test->station[0]->id){
 			//R STATIONS
 			case 1:
 			case 2:
 				$updatedTest = array(
 					'priority'=>$test->priority[0],
-					'work_station_id'=>$test->station_id,
-					'test_name_id'=>$test->test_name_id,
+					'work_station_id'=>$test->station[0]->id,
+					'test_name_id'=>$test->name[0]->id,
 					'a_lineup'=>$test->a_lineup,
 					'notes'=>$test->notes,
 				);
@@ -396,8 +396,8 @@ class plan_model extends CI_Model {
 			case 4:
 				$updatedTest = array(
 					'priority'=>$test->priority[0],
-					'work_station_id'=>$test->station_id,
-					'test_name_id'=>$test->test_name_id,
+					'work_station_id'=>$test->station[0]->id,
+					'test_name_id'=>$test->name[0]->id,
 					'm_lineup'=>$test->m_lineup,
 					'notes'=>$test->notes,
 				);
@@ -415,8 +415,8 @@ class plan_model extends CI_Model {
 			case 5:
 				$updatedTest = array(
 					'priority'=>$test->priority[0],
-					'work_station_id'=>$test->station_id,
-					'test_name_id'=>$test->test_name_id,
+					'work_station_id'=>$test->station[0]->id,
+					'test_name_id'=>$test->name[0]->id,
 					'a_lineup'=>$test->a_lineup,
 					'm_lineup'=>$test->m_lineup,
 					'notes'=>$test->notes,
