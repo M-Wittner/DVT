@@ -14,7 +14,7 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 				dataset: response.data
 			})
 			$scope.plans=response.data;
-//			console.log(response.data);
+			console.log(response.data);
 		});
 		$scope.view = function(data){
 			$location.path('/plans/'+data);

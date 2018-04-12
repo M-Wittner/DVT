@@ -203,7 +203,7 @@ class Tasks extends CI_Controller {
 			$this->email->subject($from->username." has completed a task you requested");
 			$this->email->message($from->username." marked '".$task->title."' task as 'Completed'! \n".
 														"You can view it in the following link: \n".
-													 	$site."/tasks/".$task->id
+													 	$site."/index.htm#/tasks/".$task->id
 													 );
 			$this->email->send();
 			echo "Completed";

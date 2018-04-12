@@ -1,13 +1,13 @@
-myApp.controller('newCommentCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', function ($scope, $location, $http, $routeParams, Flash, AuthService) {
+myApp.controller('newCommentCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', 'testParams', function ($scope, $location, $http, $routeParams, Flash, AuthService, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-	
+	var site = testParams.site;
 	if($scope.isAuthenticated == true) {
 		
-		$http.post('http://wigig-584/plans/newComment', $routeParams)
+		$http.post(site+'/plans/newComment', $routeParams)
 		.then(function(response){
 			$scope.test = response.data.test;
 			$scope.chips = response.data.chips;
-//			console.log(response.data);
+			console.log(response.data);
 		});
 
 		} else {
@@ -17,10 +17,10 @@ myApp.controller('newCommentCtrl', ['$scope', '$location','$http', '$routeParams
 		};
 	
 	$scope.comment = {};
-	$scope.comment.author = $scope.currentUser.username;
+	$scope.comment.userId = $scope.currentUser.userId;
 
 	$scope.newCmt = function(){
-		$http.post('http://wigig-584/plans/addComment', {comment: this.comment, id: $routeParams})
+		$http.post(site+'/plans/addComment', {comment: this.comment, id: $routeParams})
 		.then(function(response){
 			if(response.data == 'true') {
 //				console.log(response.data);

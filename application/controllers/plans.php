@@ -17,16 +17,18 @@ class Plans extends CI_Controller {
 
 	function index() {
 		$this->db->order_by('date', 'desc');
+//		$this->db->limit('1');
 		$plans = $this->db->get('plans')->result();
 			foreach($plans as $plan){
 				$this->db->where('plan_id', $plan->id);
 				$plan->tests = $this->db->get('tests')->result();
 				if(!count($plan->tests) > 0){
+					$this->db->where('plan_id', $plan->id);
 					$plan->tests = $this->db->get('tests_view_new')->result();
 				}
 				$testProgress = 0;
 				foreach($plan->tests as $test){
-					$testProgress = $testProgress + $test->progress;			
+					$testProgress += $test->progress;			
 				}
 				if(count($plan->tests) > 0){
 					$plan->progress = round((($testProgress / count($plan->tests))), 2);
@@ -83,7 +85,7 @@ class Plans extends CI_Controller {
 						echo "Not valid yet";
 						die();
 					}
-//					die();
+					die();
 					//			------------- R station test -------------
 						if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
 	//						echo json_encode($testArr);
@@ -149,12 +151,17 @@ class Plans extends CI_Controller {
 
 	////			------------- M station test -------------
 						} else if($testArr->station[0]->station == 'M-CB1' || $testArr->station[0]->station == 'M-CB2' || $testArr->station[0]->station == 'Calibration'){
-						$test = new stdClass();
+							$test = new stdClass();
+							if(isset($testArr->lineup)){
+								$lineup = $testArr->lineup;
+							}else{
+								$lineup = "-1";
+							}
 							$test->struct = array(
 								'priority'=>$testArr->priority[0],
 								'work_station_id'=>$testArr->station[0]->id,
 								'test_name_id'=>$testArr->name[0]->id,
-								'm_lineup'=>$testArr->lineup,
+								'm_lineup'=>$lineup,
 								'notes'=>$notes,
 								'plan_id'=>$planId,
 								'user_id'=>$planData->userId,
@@ -349,10 +356,11 @@ class Plans extends CI_Controller {
 			}
 			$test->progress = $progress;
 			$this->db->where('id', $test->id);
-			$this->db->set(['progress'=>$test->progress, 'status_id'=>$test->status_id]);
+			$this->db->set(['status_id'=>$test->status_id, 'progress'=>$test->progress]);
 			$this->db->update('tests_new');
 			$test->status = $this->db->get_where('tests_view_new', ['id'=>$test->id])->result()[0]->status;
 			$test->params = $this->db->get_where('test_params_view', ['test_id'=>$test->id])->result();
+			$test->comments = $this->db->get_where('test_comments_view', ['test_id'=>$test->id])->result();
 		}
 		echo json_encode($result);
 		
@@ -372,8 +380,51 @@ class Plans extends CI_Controller {
 	
 	function newcomment(){
 		$id = json_decode(file_get_contents('php://input'));
-		$test = $this->db->get_where('tests', array('id'=>$id->testId))->result();
-		$chips = $this->db->get_where('test_chips', array('test_id'=>$id->testId))->result();
+		$test = $this->db->get_where('tests_view_new', array('id'=>$id->testId))->result()[0];
+		$rawChips = $this->db->get_where('test_chips_view', array('test_id'=>$id->testId))->result();
+		$chips = array();
+		foreach($rawChips as $key=>$chip){
+			switch($test->station_id){
+				case 1:
+				case 2:
+					$data = array(
+						'pair_id'=>$chip->id,
+						'chip_id'=>$chip->chip_r_id,
+						'chip_sn'=>$chip->chip_r_sn,
+						'chip_process_abb'=>$chip->corner_r,
+						'chip_type_id'=>$chip->chip_r_type_id
+					);
+					break;
+				case 3:
+				case 4:
+					$data = array(
+						'pair_id'=>$chip->id,
+						'chip_id'=>$chip->chip_m_id,
+						'chip_sn'=>$chip->chip_m_sn,
+						'chip_process_abb'=>$chip->corner_m,
+						'chip_type_id'=>$chip->chip_m_type_id
+					);
+					break;
+				case 5:
+					$data = new stdClass();
+					$data->chip_r[$key] = array(
+						'pair_id'=>$chip->id,
+						'chip_sn'=>$chip->chip_r_sn,
+						'chip_process_abb'=>$chip->corner_r,
+						'chip_type_id'=>$chip->chip_r_type_id,
+						'pair_id'=>$chip->pair_id,
+					);
+					$data->chip_m[$key] = array(
+						'pair_id'=>$chip->id,
+						'chip_sn'=>$chip->chip_m_sn,
+						'chip_process_abb'=>$chip->corner_m,
+						'chip_type_id'=>$chip->chip_m_type_id,
+						'pair_id'=>$chip->pair_id,
+					);
+					break;
+				}
+				array_push($chips, $data);
+			}
 		$result = array(
 			'test'=>$test,
 			'chips'=>$chips
@@ -396,12 +447,13 @@ class Plans extends CI_Controller {
 	
 	function getcomment(){
 		$data = json_decode(file_get_contents('php://input'));
-			$res = array(
-				'comment' => $this->db->get_where('test_comments', array('id'=>$data->commentId))->result(),
-				'test' => $this->db->get_where('tests', array('id'=>$data->testId))->result(),
-				'chips' => $this->db->get_where('test_chips', array('test_id'=>$data->testId))->result()
-			);
-		echo json_encode($res);
+		$comment = $this->db->get_where('tests_comments_view', ['test_id'=>$data->testId])->result();
+//			$res = array(
+//				'comment' => $this->db->get_where('test_comments', array('id'=>$data->commentId))->result(),
+//				'test' => $this->db->get_where('tests', array('id'=>$data->testId))->result(),
+//				'chips' => $this->db->get_where('test_chips', array('test_id'=>$data->testId))->result()
+//			);
+		echo json_encode($comment);
 	}
 	
 	function editcomment(){
@@ -505,7 +557,7 @@ class Plans extends CI_Controller {
 	}	
 	function removeComment(){
 		$id = json_decode(file_get_contents('php://input'));
-		$result = $this->plan_model->delete_comment($id);
+		$result = $this->db->query("DELETE FROM `test_comments_new` WHERE comment_id = ?", $id);
 		return $result;
 	}
 	
@@ -580,10 +632,9 @@ class Plans extends CI_Controller {
 	function copyTest(){
 		$data = new stdClass();
 		$data->testId = json_decode(file_get_contents('php://input'));
-		$test = $this->plan_model->edit_test($data);
-		$formatedTest = $this->plan_model->format_edit($test);
-		
-		echo json_encode($formatedTest);
+		$rawTest = $this->plan_model->edit_test($data);
+		$test = $this->plan_model->format_edit($rawTest);
+		echo json_encode($test);
 	}
 		public function lineup($test){
 //			die(print_r($test));

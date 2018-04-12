@@ -70,25 +70,6 @@ class plan_model extends CI_Model {
 						}
 					}
 				}
-				if($c == count($chips)){
-					$test->status = 'Completed';
-				} elseif($e > 0){
-					$test->status = 'Error';
-				} elseif($r > 0 && $c < count($chips)){
-					$test->status = 'In Progress' ;
-				} else{
-					$test->status = 'IDLE';
-				} 
-				if(count($chips) > 0){
-					$progress = (($c + ($r/2)) / count($chips))*100;
-				} else{
-					$progress = null;
-				}
-				$test->progress = $progress;
-				$this->db->where('id', $test->id);
-				$this->db->set('progress', $test->progress);
-				$this->db->update('tests');
-
 				$test->chips = $chips;
 //				$test->mChips = $mChips;
 				$this->db->order_by('temp', 'ASC');
@@ -143,14 +124,14 @@ class plan_model extends CI_Model {
 					case 5:
 						$data = new stdClass();
 						$data->chip_r[$key] = array(
-							'chip_id'=>$chip->chip_r_id,
+							'pair_id'=>$chip->id,
 							'chip_sn'=>$chip->chip_r_sn,
 							'chip_process_abb'=>$chip->corner_r,
 							'chip_type_id'=>$chip->chip_r_type_id,
 							'pair_id'=>$chip->pair_id,
 						);
 						$data->chip_m[$key] = array(
-							'chip_id'=>$chip->chip_m_id,
+							'pair_id'=>$chip->id,
 							'chip_sn'=>$chip->chip_m_sn,
 							'chip_process_abb'=>$chip->corner_m,
 							'chip_type_id'=>$chip->chip_m_type_id,
@@ -334,34 +315,17 @@ class plan_model extends CI_Model {
 	}
 	
 	function add_comment($data){
-//		die(var_dump($data));
-		if($data->comment->severity == 'Minor'){
-			$comment = array(
-				'plan_id'=>$data->id->planId,
-				'test_id'=>$data->id->testId,
-				'author'=>$data->comment->author,
-				'severity'=>$data->comment->severity,
-				'station'=>$data->comment->station,
-				'test_name'=>$data->comment->name,
-				'chip'=>$data->comment->chip,
-				'details'=>$data->comment->details
-			);
-			$insertStatus = $this->db->insert('test_comments', $comment);
-			return $insertStatus;
-		} elseif($data->comment->severity == 'Major'){
-			$comment = array(
-				'plan_id'=>$data->id->planId,
-				'test_id'=>$data->id->testId,
-				'author'=>$data->comment->author,
-				'severity'=>$data->comment->severity,
-				'station'=>$data->comment->station,
-				'details'=>$data->comment->details
-			);
-			$insertStatus = $this->db->insert('test_comments', $comment);
-			return $insertStatus;
-		}else{
-			echo 'failed';
-		};
+//		echo json_encode($data);
+//		die();
+		$comment = array(
+			'test_id'=>$data->id->testId,
+			'user_id'=>$data->comment->userId,
+			'severity'=>$data->comment->severity,
+			'chip_id'=>$data->comment->chip[0]->chip_id,
+			'comment'=>$data->comment->details,
+		);
+		$status = $this->db->insert('test_comments_new', $comment);
+		return $status;
 	}
 	
 	function get_comments($id){
@@ -641,59 +605,6 @@ class plan_model extends CI_Model {
 		
 	}
 	
-	function format_edit($test){
-		$test->params = new stdClass();
-		$test->params->channel = $test->channel;
-		switch($test->station_id){
-			case 1:
-			case 2:
-				if(isset($test->a_lineup)){
-			$test->lineup = $test->a_lineup;
-			if(isset($test->pin_from)){
-				$test->params->pin_from = $test->pin_from[0];
-				$test->params->pin_to = $test->pin_to[0];
-				$test->params->pin_step = $test->pin_step[0];
-				if(isset($test->pin_additional)){
-					$test->params->pin_additional = $test->pin_additional[0];
-				}
-			}elseif(isset($test->lo_pin_from)){
-				$test->params->lo_pin_from = $test->lo_pin_from[0];
-				$test->params->lo_pin_to = $test->lo_pin_to[0];
-				$test->params->lo_pin_step = $test->lo_pin_step[0];
-				if(isset($test->lo_pin_additional)){
-					$test->params->lo_pin_additional = $test->lo_pin_additional[0];
-				}
-			}
-			$test->params->temp_r = $test->temp_r;
-//			$test->params->channel = $test->channel;
-			$test->params->antenna = $test->antenna;
-			$test->params->mcs = $test->mcs[0];
-			$test->params->voltage = $test->voltage[0];
-		}
-				break;
-			case 3:
-			case 4:
-				$test->lineup = $test->m_lineup;
-				$test->params->temp_m = $test->temp_m;
-				
-				$test->params->voltage = $test->voltage[0];
-				break;
-			case 5:
-				$test->lineup = $test->a_lineup;
-				$test->params->temp_r = $test->temp_r;
-				$test->params->temp_m = $test->temp_m;
-				$test->params->mcs = $test->mcs;
-				$params = ['num_ant', 'antenna', 'sector', 'active_ants'];
-				foreach ($params as $name){
-					if(isset($test->$name)){
-						$test->params->$name = $test->$name;
-					}
-				}
-		}
-		
-		return $test;
-	}
-	
 	function update_chip_status($result){
 //		echo json_encode($result);
 //		die();
@@ -829,8 +740,65 @@ class plan_model extends CI_Model {
 	}	
 	
 	function delete_comment($id){
-		$q = $this->db->query("DELETE FROM `test_comments` WHERE id = ?", $id);
+		
 		return;
+	}
+	
+	function format_edit($test){
+//		echo json_encode($test->lo_pin_from);
+//		die();
+		$test->params = new stdClass();
+		$test->params->channel = $test->channel;
+		switch($test->station_id){
+			case 1:
+			case 2:
+				if(isset($test->a_lineup)){
+			$test->lineup = $test->a_lineup;
+			if(isset($test->pin_from)){
+				$test->params->pin_from = $test->pin_from[0];
+				$test->params->pin_to = $test->pin_to[0];
+				if(isset($test->pin_step)){
+					$test->params->pin_step = $test->pin_step[0];
+				}
+				if(isset($test->pin_additional)){
+					$test->params->pin_additional = $test->pin_additional[0];
+				}
+			}elseif(isset($test->lo_pin_from)){
+				$test->params->lo_pin_from = $test->lo_pin_from[0];
+				$test->params->lo_pin_to = $test->lo_pin_to[0];
+				$test->params->lo_pin_step = $test->lo_pin_step[0];
+				if(isset($test->lo_pin_additional)){
+					$test->params->lo_pin_additional = $test->lo_pin_additional[0];
+				}
+			}
+			$test->params->temp_r = $test->temp_r;
+//			$test->params->channel = $test->channel;
+			$test->params->antenna = $test->antenna;
+			$test->params->mcs = $test->mcs[0];
+			$test->params->voltage = $test->voltage[0];
+		}
+				break;
+			case 3:
+			case 4:
+				$test->lineup = $test->m_lineup;
+				$test->params->temp_m = $test->temp_m;
+				
+				$test->params->voltage = $test->voltage[0];
+				break;
+			case 5:
+				$test->lineup = $test->a_lineup;
+				$test->params->temp_r = $test->temp_r;
+				$test->params->temp_m = $test->temp_m;
+				$test->params->mcs = $test->mcs;
+				$params = ['num_ant', 'antenna', 'sector', 'active_ants'];
+				foreach ($params as $name){
+					if(isset($test->$name)){
+						$test->params->$name = $test->$name;
+					}
+				}
+		}
+		
+		return $test;
 	}
 	
 	function calc_pinAdd($data){

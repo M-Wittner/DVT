@@ -374,7 +374,7 @@
 		<!----------------------------------------------------	New Format	---------------------------------------------------->
 		<div id="desc" class="panel panel-default"  ng-class="{'panel-R1' : test.station == 'R-CB1', 'panel-R2' : test.station == 'R-CB2', 'panel-M1' : test.station == 'M-CB1', 'panel-M2' : test.station == 'M-CB2', 'panel-fs' : test.station == 'TalynM+A'}" ng-if="!test.station[0].station">
 			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.id}}" aria-expanded="false" aria-controls="{{test.id}}" ng-click="onOff=!onOff">
-				<strong>Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.test_name}} , ID: {{test.id}}</strong>
+				<strong >Priority: {{test.priority}}, Station: {{test.station}}, Test: {{test.test_name}} , ID: #{{test.id}}  {{test.progress}}%</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
 				<span class="pull-right">
 					<span class="glyphicon glyphicon-envelope" ng-if="test.comments.length > 0" id="testStatus"></span>
@@ -574,11 +574,12 @@
 											<tbody>
 												<tr>
 													<td class="col-md-1"><span class="label label-info">Pin</span></td>
-													<td ng-repeat="param in test.params | filter: 'pin'" ng-if="!param.param_name.includes('lo')" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">{{param.param_value}}</td>
+													<td ng-repeat="param in test.params | filter: 'pin' | orderBy: 'param_id'" ng-if="!param.param_name.includes('lo') && (param.param_value != 0)" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">{{param.param_value}}</td>
+													<td></td>
 												</tr>
 												<tr>
-													<td class="col-md-1" ng-if="false"><span class="label label-dangerC">LO_Pin</span></td>
-													<td ng-repeat="param in test.params | filter: 'lo'" ng-if="param.param_value != 0" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">{{param.param_value}}</td>
+													<td class="col-md-1" ng-if="filterByName(test.params, 'lo')"><span class="label label-dangerC">LO_Pin</span></td>
+													<td ng-repeat="param in test.params | filter: 'lo' | orderBy: 'param_id'" ng-if="param.param_value != 0" uib-popover="{{param.param_name}}" popover-trigger="'mouseenter'">{{param.param_value}}</td>
 												</tr>
 											</tbody>
 										</table>
@@ -596,47 +597,44 @@
 							</div>
 						</div>
 					</div>
-					<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/test/{{test.id}}/comments/new">Add New Comment</a>
-				</div>
-				<div class="panel-footer" ng-if="test.comments[0]">
-					<div ng-repeat="comment in test.comments track by $index">
-						<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
-							<div class="panel-heading" Data-toggle="collapse" data-target="#{{comment.id}}" aria-expanded="false" aria-controls="{{comment.id}}">
-								<h3 class="panel-title">From: {{comment.author}}
-									<div class="pull-right" ng-show="currentUser.username == comment.author  ||  currentUser.rank > '10'">
-										<button class="btn btn-xs btn-warning" href="#/plans/{{comment.plan_id}}/test/{{comment.test_id}}/comment/{{comment.id}}/edit" ng-click="editComment()">Edit</button>
-										<button class="btn btn-xs btn-danger" ng-click="removeComment()">
-											Delete
-										</button>
-									</div>
-								</h3>
-
-							</div>
-							<div class="panel-body collapse" id="{{comment.id}}">
-								<div class="row">
-									<div class="col-md-3 col-sm-3 col-xs-3">
-										<span class="label label-primary">Severity</span>
-										<label class="form-control">{{comment.severity}}</label>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3">
-										<span class="label label-primary">Test Station</span>
-										<label class="form-control">{{comment.station}}</label>
-									</div>
-									<div ng-if="comment.severity == 'Minor'">
-										<div class="col-md-3 col-sm-3 col-xs-3">
-											<span class="label label-primary">Test Name</span>
-											<label class="form-control">{{comment.test_name}}</label>
+					<div class="panel-body">
+						<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/test/{{test.id}}/comments/new">Add New Comment</a>
+					</div>
+					<div class="panel-footer" ng-if="test.comments[0]">
+						<div ng-repeat="comment in test.comments track by $index">
+							<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
+								<div class="panel-heading" Data-toggle="collapse" data-target="#{{comment.comment_id}}" aria-expanded="false" aria-controls="{{comment.comment_id}}">
+									<h3 class="panel-title">From: {{comment.username}}
+										<div class="pull-right" ng-show="currentUser.username == comment.username  ||  currentUser.rank > '10'">
+											<button class="btn btn-xs btn-warning" href="#/plans/{{test.plan_id}}/test/{{comment.test_id}}/comment/{{comment.comment_id}}/edit" ng-click="editComment()">Edit</button>
+											<button class="btn btn-xs btn-danger" ng-click="removeComment()">
+												Delete
+											</button>
 										</div>
-										<div class="col-md-3 col-sm-3 col-xs-3">
-											<span class="label label-primary">Chip</span>
-											<label class="form-control">{{comment.chip}}</label>
-										</div>
-									</div>
+									</h3>
 								</div>
-								<div class="row">
-									<div class="col-md-8">
-										<span class="label label-primary">Details:</span>
-										<div class="col-md-2 col-sm-2" trumbowyg-ng ng-model="comment.details" ng-disabled="lock">
+								<div class="panel-body collapse" id="{{comment.comment_id}}">
+									<div class="row">
+										<div class="col-md-3 col-sm-3 col-xs-3">
+											<span class="label label-primary">Severity</span>
+											<label class="form-control">{{comment.severity}}</label>
+										</div>
+										<div class="col-md-3 col-sm-3 col-xs-3">
+											<span class="label label-primary">Test Station</span>
+											<label class="form-control">{{test.station}}</label>
+										</div>
+										<div ng-if="comment.severity == 'Minor'">
+											<div class="col-md-3 col-sm-3 col-xs-3">
+												<span class="label label-primary">Chip</span>
+												<label class="form-control">{{comment.chip_sn}}</label>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-8">
+											<span class="label label-primary">Details:</span>
+											<div class="col-md-2 col-sm-2" trumbowyg-ng ng-model="comment.comment" ng-disabled="lock">
+											</div>
 										</div>
 									</div>
 								</div>

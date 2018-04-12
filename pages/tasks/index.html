@@ -17,7 +17,7 @@
 -->
   </div>
   <div class="panel-body">
-		<table ng-table="tableParams" class="table table-hover table-responsive" show-filter="isFilterDisabled">
+		<table ng-table="tableParams" class="table table-condensed table-hover table-responsive" show-filter="isFilterDisabled">
 			<tr ng-repeat="task in $data track by task.id" 
 					uib-tooltip-template="'pages/tasks/tooltipTemplate.html'" tooltip-popup-delay="100"
 					ng-hide="(activeTasks == false ? task.active == 0: '')"

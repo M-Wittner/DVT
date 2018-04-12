@@ -17,7 +17,7 @@
 			</div>
 		</span>
 		<span class="col-md-2">
-			Status:
+			Priority:
 			<div class="btn-group" ng-model="task.priority" uib-dropdown>
 				<button id="single-button" type="button" class="btn btn-default"  uib-dropdown-toggle>{{task.priority}} <span class="caret"></span></button>
 				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
@@ -87,11 +87,13 @@
 					<label class="form-control">{{task.active}}</label>
 				</div>
 			</div>
+<!--
 			<div class="row" ng-if="task.assigned_id == sender.userId || currentUser.rank > 60">
 				<div class="col-md-12">
 					<button class="btn btn-lg btn-success btn-block" ng-click="imDone(task)">I'm Done!</button>
 				</div>
 			</div>
+-->
 		</div>
 		<div class="col-md-8">
 			<div class="col-md-12">
