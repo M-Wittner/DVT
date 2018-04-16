@@ -8,9 +8,9 @@ myApp.controller('newTaskCommentCtrl', ['$scope', '$location','$http', '$routePa
 		var site = testParams.site;
 		
 		$scope.newCmt = function(){
-			$http.post(site+'/tasks/newComment', this.comment)
+			$http.post(site+'/tasks/newComment', {comment: this.comment, site: site})
 			.then(function(response){
-				if(response.data = true){
+				if(response.data == 'Completed'){
 					var message = 'Comment Created Succesfully!';
 					var id = Flash.create('success', message, 3500);
 					$location.path('/tasks/'+$routeParams.id);

@@ -5,6 +5,7 @@
 	<div class="panel col-md-12">
     <h3 class="panel-title col-md-1"><span class="label label-primary">Filters:</span></h3>
 		<span class="">Inactive Tasks: <input type="checkbox" ng-model="activeTasks"></span>
+		<span class="">Reviewed Tasks: <input type="checkbox" ng-model="reviewedTasks"></span>
 		<span class="">  Show Filters: <input type="checkbox" ng-model="isFilterDisabled"></span>
 		<span class="">  Show Completed: <input type="checkbox" ng-model="completedTasks"></span>
 <!--
@@ -20,7 +21,7 @@
 		<table ng-table="tableParams" class="table table-condensed table-hover table-responsive" show-filter="isFilterDisabled">
 			<tr ng-repeat="task in $data track by task.id" 
 					uib-tooltip-template="'pages/tasks/tooltipTemplate.html'" tooltip-popup-delay="100"
-					ng-hide="(activeTasks == false ? task.active == 0: '')"
+					ng-hide="(activeTasks == false ? task.active == 0: '') && (reviewedTasks == false ? task.reviewed == 1 : '')"
 					ng-show="completedTasks == false? task.status == 'Pending' || task.status == 'In Progress' || task.status == 'Declinded' : 'Completed'"
 					ng-class="[task.approved == false ? '' : {'info' : task.priority == 'Low','warning' : task.priority == 'Medium', 'danger' : task.priority == 'High'},
 										{'bug-report': task.type_id == 1, 'feature': task.type_id == 2}]"
@@ -37,6 +38,7 @@
 				<td class="col-md-1 text-center" data-title="'Creator'" filter="{creator: 'text'}" sortable="'creator'">{{task.creator}}</td>
 				<td class="col-md-2 text-center" data-title="'Assigned To'" filter="{assigned: 'text'}" sortable="'assigned'">{{task.assigned}}</td>
 				<td class="col-md-1 text-center" data-title="'Approved'" filter="{approved: 'text'}" sortable="'approved'"><span ng-class="{'glyphicon glyphicon-thumbs-up' : task.approved == 1, 'glyphicon glyphicon-minus' : task.approved == 0}"></span></td>
+				<td ng-if="currentUser.rank > 60" class="text-center" data-title="'Reviewed'" filter="{reviewed: 'text'}" sortable="'reviewed'"><span ng-class="{'glyphicon glyphicon-certificate certificateGreen' : task.reviewed == 1, 'glyphicon glyphicon-minus' : task.reviewed == 0}"></span></td>
 				<td class="col-md-2 text-center" data-title="'Operation'">
 						<a  href="#/tasks/{{task.id}}" class="btn btn-info btn-sm btn-witdhC">View</a>
 						<a  ng-if="currentUser.rank > '60'" href="#/tasks/{{task.id}}/edit" class="btn btn-warning btn-sm btn-witdhC">Edit</a>

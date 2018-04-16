@@ -4,8 +4,14 @@
 	</div>
 	<div ng-if="currentUser.rank > 60" class="panel container-fluid">
 		<span class="col-md-2">
-			approved:
-			<input type="checkbox" ng-model="task.approved" ng-click="approveUpdate(task.id, task.approved)">
+			<span class="col-md-6">
+				approved:
+				<input type="checkbox" ng-model="task.approved" ng-click="approveUpdate(task.id, task.approved)">
+			</span>
+			<span class="col-md-6">
+				Reviewed:
+				<input type="checkbox" ng-model="task.reviewed" ng-click="reviewUpdate(task.id, task.reviewed)">
+			</span>
 		</span>
 		<span class="col-md-3">
 			Status:
@@ -87,13 +93,14 @@
 					<label class="form-control">{{task.active}}</label>
 				</div>
 			</div>
-<!--
 			<div class="row" ng-if="task.assigned_id == sender.userId || currentUser.rank > 60">
-				<div class="col-md-12">
-					<button class="btn btn-lg btn-success btn-block" ng-click="imDone(task)">I'm Done!</button>
+				<div class="col-md-6" ng-if="task.status == 'In Progress'">
+					<button class="btn btn-lg btn-warning btn-block" ng-click="taskReview(task)">Review Task!</button>
+				</div>
+				<div class="col-md-6" ng-if="currentUser.rank > 60 && task.status != 'Completed'">
+					<button class="btn btn-lg btn-success btn-block" ng-click="taskDone(task)">Task Done!</button>
 				</div>
 			</div>
--->
 		</div>
 		<div class="col-md-8">
 			<div class="col-md-12">

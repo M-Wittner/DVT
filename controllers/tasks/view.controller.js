@@ -13,7 +13,7 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 		$http.post(site+'/tasks/view', $routeParams.id)
 		.then(function(response){
 			$scope.task = response.data;
-//			console.log($scope.task);
+			console.log($scope.task);
 		})
 		$scope.statusUpdate = function(taskId, status){
 			$http.post(site+'/tasks/statusUpdate', {id: taskId, status: status})
@@ -33,12 +33,22 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 			}
 		})
 		}
+	$scope.reviewUpdate = function(taskId, reviewed){
+		$http.post(site+'/tasks/reviewUpdate', {id: taskId, reviewed: reviewed})
+			.then(function(response){
+			console.log(response.data);
+			if(response.data != false){
+				$scope.task.reviewed = response.data;
+			}
+		})
+	}
+	
 	$scope.approveUpdate = function(taskId, approved){
 		$http.post(site+'/tasks/approveUpdate', {id: taskId, approved: approved})
 			.then(function(response){
 			console.log(response.data);
 			if(response.data != false){
-				$scope.task.priority = response.data;
+				$scope.task.approved = response.data;
 			}
 		})
 	}
@@ -58,12 +68,24 @@ myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$rou
 			console.log(response.data);
 		})
 	}	
-	$scope.imDone = function(task){
-		$http.post(site+'/tasks/imDone', {task: task, user: $scope.sender, site: site})
+	$scope.taskDone = function(task){
+		$http.post(site+'/tasks/taskDone', {task: task, user: $scope.sender, site: site})
 		.then(function(response){
 			console.log(response.data);
-			if(response.data != false){
+			if(response.data == 'Completed'){
 				$scope.task.status = response.data;
+				var message = 'Task was marked as Completed, email has been sent!';
+				var id = Flash.create('success', message, 3500);
+			}
+		})
+	}
+	$scope.taskReview = function(task){
+		$http.post(site+'/tasks/taskReview', {task: task, user: $scope.sender, site: site})
+		.then(function(response){
+			console.log(response.data);
+			if(response.data == 'Completed'){
+				var message = 'Task was sent for approval, email has been sent!';
+				var id = Flash.create('success', message, 3500);
 			}
 		})
 	}

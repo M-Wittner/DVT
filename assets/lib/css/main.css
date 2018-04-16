@@ -210,3 +210,8 @@ body{
 .btn-witdhC{
 	width: 65px !important;
 }
+
+.certificateGreen{
+	font-size: 150%;
+	color:#ffbe00;
+}

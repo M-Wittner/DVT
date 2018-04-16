@@ -543,6 +543,8 @@
 														<th ng-if="(test.station == 'R-CB1' || test.station == 'R-CB2') || test.station == 'TalynM+A'">Chip R</th>
 														<th ng-if="(test.station == 'M-CB1' || test.station == 'M-CB2') || test.station == 'TalynM+A'">Chip M</th>
 														<th>Status</th>
+														<th>Hot</th>
+														<th>Cold</th>
 														<th class="text-center">By</th>
 													</tr>
 												</thead>
@@ -552,6 +554,12 @@
 														<td ng-if="param.chip_m_type_id != -1">{{param.chip_m_sn}}-{{param.corner_m}}</td>
 														<td class="text-center">
 															<span ng-click="chipStatus(param, test.id)" class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': param.status_id == 2, 'glyphicon-ok': param.status_id == 3, 'glyphicon-remove': param.status_id == 4}"></span>
+														</td>
+														<td>
+															<span class="glyphicon glyphicon-minus" ng-click="coldStatus(param)" ng-class="{'glyphicon-ok': param.cold == '1'}"></span>
+														</td>
+														<td>
+															<span class="glyphicon glyphicon-minus" ng-click="hotStatus(param)" ng-class="{'glyphicon-ok': param.hot == '1'}"></span>
 														</td>
 														<td>{{param.updated_by}}</td>
 													</tr>

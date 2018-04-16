@@ -231,12 +231,13 @@ class Admin extends CI_Controller {
 	}
 		
 	public function search(){
+		$this->db->order_by('id', 'DESC');
 		$plans = $this->db->get('plans')->result();
 		
 		foreach ($plans as $plan){
-			$plan->tests = $this->db->get_where('tests', array('plan_id'=>$plan->id))->result();
+			$plan->tests = $this->db->get_where('tests_view_new', array('plan_id'=>$plan->id))->result();
 			foreach ($plan->tests as $test) {
-				$test->chips = $this->db->get_where('test_chips', array('test_id'=>$test->id))->result();
+				$test->chips = $this->db->get_where('test_chips_view', array('test_id'=>$test->id))->result();
 			}
 		}
 		echo json_encode($plans);

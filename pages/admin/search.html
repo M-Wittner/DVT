@@ -1,33 +1,33 @@
-<div class="form-inline">
-	<div class="form-group">
-		<label>Date</label>
-		<input type="text" ng-model="search.date" class="form-control" placeholder="Search By Date">
-	</div>
-	<div class="form-group">
-		<label>Station</label>
-		<input type="text" ng-model="search.tests.station" class="form-control" placeholder="Search Station">
-	</div>
-	<div class="form-group">
-		<label>Test</label>
-		<input type="text" ng-model="search.tests.name" class="form-control" placeholder="Search Test">
-	</div>
-	<div class="form-group">
-		<label>Chip</label>
-		<input type="text" ng-model="search.tests.chips.chip" class="form-control" placeholder="Search Chip">
-	</div>
-</div>
+
 
 <div class="panel panel-primary">
 	<!-- Default panel contents -->
 	<div class="panel-heading">
 		All Plans
-<!--
-		<span class="pull-right">
-			<input type="text" id="searchBox" ng-model="searchText" class="form-control" placeholder="Search">
-		</span>
--->
 	</div>
 	<div class="panel-body">
+		<div class="form-inline">
+			<div class="form-group" style="width: 15%;">
+				<label>Date</label>
+				<input type="text" ng-model="search.date" class="form-control" placeholder="Search By Date">
+			</div>
+			<div class="form-group" style="width: 15%; margin-left:5%;">
+				<label>Station</label>
+				<input type="text" ng-model="search.tests.station" class="form-control" placeholder="Search Station">
+			</div>
+			<div class="form-group" style="width: 15%; margin-left:5%;">
+				<label>Test</label>
+				<input type="text" ng-model="search.tests.test_name" class="form-control" placeholder="Search Test">
+			</div>
+			<div class="form-group" style="width: 15%; margin-left:5%;">
+				<label>Talyn A</label>
+				<input type="text" ng-model="search.tests.chips.chip_r_sn" class="form-control" placeholder="Search Chip">
+			</div>
+			<div class="form-group" style="width: 15%; margin-left:5%;">
+				<label>Talyn M</label>
+				<input type="text" ng-model="search.tests.chips.chip_m_sn" class="form-control" placeholder="Search Chip">
+			</div>
+		</div>
 	</div>
 	<!-- Table -->
 	<table class="table">
@@ -58,13 +58,22 @@
 				</td>
 				<td>
 					<ul>
-						<li ng-repeat="test in plan.tests">{{test.name}}</li>
+						<li ng-repeat="test in plan.tests">{{test.test_name}}</li>
 						
 					<ul>
 				</td>
 				<td>
 					<ul ng-repeat="test in plan.tests">
-						<li ng-repeat="chip in test.chips ">{{chip.serial_number}}<span class="pull-right glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.running == true, 'glyphicon-ok': chip.completed == true, 'glyphicon-remove': chip.error == true}"></span></li>
+						<li ng-repeat="chip in test.chips" >
+							<span ng-if="chip.chip_r_type_id != -1">
+								{{chip.chip_r_sn}}
+								<span class=" glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.status_id == 2, 'glyphicon-ok': chip.status_id == 3, 'glyphicon-remove': chip.status_id == 4}"></span>
+							</span>
+							<span ng-if="chip.chip_m_type_id != -1">
+								{{chip.chip_m_sn}}
+								<span class=" glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.status_id == 2, 'glyphicon-ok': chip.status_id == 3, 'glyphicon-remove': chip.status_id == 4}"></span>
+							</span>
+						</li>
 					<ul>
 				</td>
 <!--

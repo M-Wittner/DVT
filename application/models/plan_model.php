@@ -317,11 +317,16 @@ class plan_model extends CI_Model {
 	function add_comment($data){
 //		echo json_encode($data);
 //		die();
+		if(isset($data->comment->chip[0]->pair_id)){
+			$pairId = $data->comment->chip[0]->pair_id;
+		}else{
+			$pairId = null;
+		}
 		$comment = array(
 			'test_id'=>$data->id->testId,
 			'user_id'=>$data->comment->userId,
 			'severity'=>$data->comment->severity,
-			'config_id'=>$data->comment->chip[0]->pair_id,
+			'config_id'=>$pairId,
 			'comment'=>$data->comment->details,
 		);
 		$status = $this->db->insert('test_comments_new', $comment);
@@ -641,6 +646,8 @@ class plan_model extends CI_Model {
 			$this->db->where('id', $result->chip->id);
 			$this->db->update('test_chips_new', ['status_id'=>$statusId, 'updated_by'=>$userId]);
 			$result->chip->status_id = $statusId;
+			$this->db->select('status');
+			$result->chip->status = $this->db->get_where('operation_status', ['id'=>$statusId])->result()[0]->status;
 		}
 		return $result;
 	}
@@ -668,25 +675,24 @@ class plan_model extends CI_Model {
 		return $result;
 	}
 	
-	function update_hotcold_status($data){
-//		die(var_dump($data));
-		$chip = $data->chip;
+	function update_hotcold_status($chip){
+
 		$this->db->where(['id'=>$chip->id]);
 //		--------------- Update Hot ---------------
 		if($chip->hotCold == 'hot'){
 			if($chip->hot == false){
-				$status = $this->db->update('test_chips', ['hot'=>true]);
+				$status = $this->db->update('test_chips_new', ['hot'=>true]);
 			} elseif($chip->hot == true){
-				$status = $this->db->update('test_chips', ['hot'=>false]);
+				$status = $this->db->update('test_chips_new', ['hot'=>false]);
 			} else{
 				$status = 'hot error';
 			}
 //		--------------- Update Cold --------------
 		} elseif($chip->hotCold == 'cold'){
 			if($chip->cold == false){
-				$status = $this->db->update('test_chips', ['cold'=>true]);
+				$status = $this->db->update('test_chips_new', ['cold'=>true]);
 			} elseif($chip->hot = true){
-				$status = $this->db->update('test_chips', ['cold'=>false]);
+				$status = $this->db->update('test_chips_new', ['cold'=>false]);
 			} else{
 				$status = 'cold error';
 			}
@@ -745,7 +751,7 @@ class plan_model extends CI_Model {
 	}
 	
 	function format_edit($test){
-//		echo json_encode($test->lo_pin_from);
+//		echo json_encode($test);
 //		die();
 		$test->params = new stdClass();
 		$test->params->channel = $test->channel;
@@ -775,7 +781,7 @@ class plan_model extends CI_Model {
 //			$test->params->channel = $test->channel;
 			$test->params->antenna = $test->antenna;
 			$test->params->mcs = $test->mcs[0];
-			$test->params->voltage = $test->voltage[0];
+//			$test->params->voltage = $test->voltage[0];
 		}
 				break;
 			case 3:
@@ -783,7 +789,7 @@ class plan_model extends CI_Model {
 				$test->lineup = $test->m_lineup;
 				$test->params->temp_m = $test->temp_m;
 				
-				$test->params->voltage = $test->voltage[0];
+//				$test->params->voltage = $test->voltage[0];
 				break;
 			case 5:
 				$test->lineup = $test->a_lineup;

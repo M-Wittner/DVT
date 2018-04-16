@@ -5,6 +5,7 @@ myApp.controller('tasksCtrl', ['$scope', 'NgTableParams', '$uibModal', '$locatio
 	$scope.testParams = testParams.params;
 	console.log($scope.testParams);
 	$scope.activeTasks = false;
+	$scope.reviewedTasks = false;
 	$scope.completedTasks = true;
 	$scope.isFilterDisabled = true;
 	

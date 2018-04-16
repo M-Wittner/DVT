@@ -23,3 +23,9 @@ ERROR - 201820182018-0404-1212 0909:0404:1212 --> Query error: Unknown column 't
 FROM `test_comments_view`
 WHERE `test_id` = '42'
 ERROR - 201820182018-0404-1212 1010:0404:1010 --> Severity: Notice --> Undefined variable: plan C:\xampp\htdocs\application\models\plan_model.php 86
+ERROR - 201820182018-0404-1212 1515:0404:2424 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\models\plan_model.php 786
+ERROR - 201820182018-0404-1212 1515:0404:3131 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\models\plan_model.php 786
+ERROR - 201820182018-0404-1212 1515:0404:4040 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\models\plan_model.php 786
+ERROR - 201820182018-0404-1212 1515:0404:4646 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\models\plan_model.php 786
+ERROR - 201820182018-0404-1212 1515:0404:4545 --> Severity: Notice --> Undefined property: stdClass::$voltage C:\xampp\htdocs\application\models\plan_model.php 786
+ERROR - 201820182018-0404-1212 1515:0404:3232 --> Severity: Notice --> Undefined property: stdClass::$lo_pin_from C:\xampp\htdocs\application\models\plan_model.php 748

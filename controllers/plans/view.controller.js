@@ -2,6 +2,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 		var site = testParams.site;
+		var scope = $scope;
 	
 	if($scope.isAuthenticated == true) {	
 	$http.post(site+'/plans/show', $routeParams.id)
@@ -96,7 +97,9 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	};
 	
 	$scope.chipStatus = function(chip, testId, index){
-//		console.log(this.param);
+//		var param = this.param;
+//		var test = $scope.plan.tests.filter(test => test.id == param.test_id)[0];
+//		var chip = test.chips.filter(chip => chip.id == param.id)[0];
 		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user})
 		.then(function(response){
 			var chip_r = response.data.chip.chip_r_sn;
@@ -105,9 +108,11 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 			var id = Flash.create('success', message, 3500);
 			$window.scrollTo(0, 0);
 			setTimeout(function(){$window.location.reload();}, 1500);
+//			chip.status = response.data.chip.status;
 //			console.log(response.data);
-//			console.log($scope);
+//			console.log(param);
 		});
+//		console.log(test);
 	}
 	$scope.tempStatus = function(temp, testId){
 		$http.post(site+'/plans/tempstatus', {temp: temp, planId: $routeParams.id, testId: testId})
@@ -122,7 +127,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	
 	$scope.hotStatus = function(chip, testId){
 		chip.hotCold = 'hot';
-		$http.post(site+'/plans/hotcoldstatus', {chip: chip, planId: $routeParams.id, testId: testId})
+		$http.post(site+'/plans/hotcoldstatus', chip)
 		.then(function(response){
 			console.log(response.data);
 			if(response.data = true){
@@ -134,7 +139,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	}	
 	$scope.coldStatus = function(chip, testId){
 		chip.hotCold = 'cold';
-		$http.post(site+'/plans/hotcoldstatus', {chip: chip, planId: $routeParams.id, testId: testId})
+		$http.post(site+'/plans/hotcoldstatus', chip)
 		.then(function(response){
 			console.log(response.data);
 			if(response.data = true){
