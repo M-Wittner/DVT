@@ -4,15 +4,20 @@ myApp.controller('tasksCtrl', ['$scope', 'NgTableParams', '$uibModal', '$locatio
 	var $ctrl = this;
 	$scope.testParams = testParams.params;
 	console.log($scope.testParams);
-	$scope.activeTasks = false;
+	$scope.inactiveTasks = false;
 	$scope.reviewedTasks = false;
-	$scope.completedTasks = true;
+	$scope.completedTasks = false;
 	$scope.isFilterDisabled = true;
 	
 	if($scope.isAuthenticated == true) {
 		$http.get(site + '/tasks')
 			.then(function (response) {
 				$scope.tableParams = new NgTableParams({
+//					filter: {
+//					 status: 'Pending',
+//					 status: 'Declined',
+//					 status: 'In Progress',
+//					},
 					count: 15
 				}, {
 					counts: [],

@@ -97,7 +97,7 @@
 				<div class="col-md-6" ng-if="task.status == 'In Progress'">
 					<button class="btn btn-lg btn-warning btn-block" ng-click="taskReview(task)">Review Task!</button>
 				</div>
-				<div class="col-md-6" ng-if="currentUser.rank > 60 && task.status != 'Completed'">
+				<div class="col-md-6" ng-if="task.status != 'Completed' && currentUser.rank > 60">
 					<button class="btn btn-lg btn-success btn-block" ng-click="taskDone(task)">Task Done!</button>
 				</div>
 			</div>

@@ -80,9 +80,10 @@ class Plans extends CI_Controller {
 							$res = $this->lineup($testArr);
 						}
 					}
-					if(!isset($testArr->params)){
+					if(!isset($testArr->params) && $testArr->station[0]->id != 7){
 						$testArr->params = $this->plan_model->config_params($testArr);
 						echo "Not valid yet";
+//						echo json_encode($testArr);
 						die();
 					}
 //					die();
@@ -209,27 +210,37 @@ class Plans extends CI_Controller {
 							}
 	//						die();
 	//------------ PTAT/ABS/Vgb+TEMP station test -------------
-						} elseif($testArr->station[0]->station == 'PTAT/ABS/Vgb+TEMP') {
+						} elseif($testArr->station[0]->id == 7) {
+//							die(var_dump($testArr));
 								$chipsArr = $testArr->chips;
 								$test = array(
 									'priority'=>$testArr->priority[0],
-									'lineup'=>null,
-									'station'=>$testArr->station[0]->station,
-									'name'=>$testArr->name[0]->test_name,
+									'work_station_id'=>$testArr->station[0]->id,
+									'test_name_id'=>$testArr->name[0]->id,
 									'notes'=>$notes,
-									'plan_id'=>$planId
+									'plan_id'=>$planId,
+									'user_id'=>$planData->userId,
 								);
-								$insertTest = $this->plan_model->add_test($test);
-								$testId = $this->plan_model->tests_id($insertTest);
-								foreach($chipsArr as $result){
-									$chip = array(
-										'serial_number'=>$result->chip_sn,
-										'corner'=>$result->chip_chip_process_abb,
-										'chip'=>$result->chip_type_id,
-										'plan_id'=>$planId,
-										'test_id'=>$testId
-									);
-									$insertChip = $this->plan_model->add_chips($chip);
+								$insertTest = $this->db->insert('tests_new', $test);
+								$testId = $this->db->insert_id($insertTest);
+							
+								foreach($chipsArr as $chip){
+									if($testArr->name[0]->test_name == 'TalynM - Temperature Calibration'){
+										$data = array(
+											'plan_id'=>$planId,
+											'test_id'=>$testId,
+											'chip_m_type_id'=>$chip->chip_type_id,
+											'chip_m_id'=>$chip->chip_id,
+										);
+									}elseif($testArr->name[0]->test_name == 'TalynA - Temperature Calibration'){
+										$data = array(
+											'plan_id'=>$planId,
+											'test_id'=>$testId,
+											'chip_r_type_id'=>$chip->chip_type_id,
+											'chip_r_id'=>$chip->chip_id,
+										);
+									}
+									$this->db->insert('test_chips_new', $data);
 								}
 	//------------ TalynM+A station test -------------
 						} elseif($testArr->station[0]->station == 'TalynM+A'){

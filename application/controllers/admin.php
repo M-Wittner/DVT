@@ -117,7 +117,7 @@ class Admin extends CI_Controller {
 	
 	public function chipList(){
 		$this->db->order_by('chip_id', 'DESC');
-		$chipList = $this->db->get('chips')->result();
+		$chipList = $this->db->get('chip_view')->result();
 		echo json_encode($chipList);
 	}
 	public function operations(){

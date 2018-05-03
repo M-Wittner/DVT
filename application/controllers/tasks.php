@@ -122,7 +122,11 @@ class Tasks extends CI_Controller {
 		$id = $data->id;
 		$status = $data->status;
 		$this->db->where('id', $id);
-		$res = $this->db->update('tasks', ['status_id'=>$status]);
+		if($data->status == 3){
+			$res = $this->db->update('tasks', ['status_id'=>$status, 'active'=>false]);	
+		}else{
+			$res = $this->db->update('tasks', ['status_id'=>$status]);
+		}
 		
 		if($res = true){
 			$this->db->select('task_status');
@@ -165,7 +169,7 @@ class Tasks extends CI_Controller {
 		$from->email = $this->db->get_where('users', ['id'=>$from->userId])->result()[0]->email;
 		
 		$this->db->where('id', $task->id);
-		$res = $this->db->update('tasks', ['assigned_to'=>$to->id, 'approved'=>true]);
+		$res = $this->db->update('tasks', ['assigned_to'=>$to->id, 'approved'=>true, 'reviewed'=>true]);
 		
 		if($res = true){
 			$this->db->select(['assigned']);
@@ -202,7 +206,7 @@ class Tasks extends CI_Controller {
 		$site = $data->site;
 		
 		$this->db->where('id', $task->id);
-		$res = $this->db->update('tasks', ['assigned_to'=>33]);
+		$res = $this->db->update('tasks', ['assigned_to'=>33, 'reviewed'=>false]);
 		
 		$this->db->select('email');
 		$creatorEmail = $this->db->get_where("users", ['username'=>$task->creator])->result()[0]->email;
@@ -234,7 +238,7 @@ class Tasks extends CI_Controller {
 		$site = $data->site;
 		
 		$this->db->where('id', $task->id);
-		$res = $this->db->update('tasks', ['status_id'=>3]);
+		$res = $this->db->update('tasks', ['status_id'=>3, 'reviewed'=>true, 'active'=>false]);
 		
 		$this->db->select('email');
 		$creatorEmail = $this->db->get_where("users", ['username'=>$task->creator])->result()[0]->email;
