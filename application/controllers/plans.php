@@ -689,11 +689,11 @@ class Plans extends CI_Controller {
 				}
 				$localParams = ["temp", "v", "ch"];
 				foreach($firstRowRaw as $index => $param){
-//					var_dump($param."     param");
+
 					$trimSpace = " ";
 					$trimParam = trim($param, $trimSpace);
 					$paramIdx = array_search($param, $paramNameArr);
-//					var_dump($paramIdx);
+
 					$data = new stdClass();
 					if($paramIdx === false){
 //					INSERT TEMP CH V INTO SQL RESULT
@@ -721,17 +721,11 @@ class Plans extends CI_Controller {
 					}
 
 				}
-//				echo json_encode($match);
-//				die();
+
 	//		INSERT EXCEL INDEX TO EACH PARAM
 				foreach ($match as $value){
 					$name = strtolower($value->parameter_name);
-//					if(in_array($name, ['temp', 'ch'])){
-//						$colData = $currentSheet->rangeToArray($value->excel_index.'2:'.$value->excel_index.$highestRow, -1, false, false, false);
-//						$data = array_column($colData, 0);
-//						$unique = array_unique($data);
-//						$this->excel_model->validate($test, $value, $unique);
-//					}
+
 	//  		GET THIS COLUMN DATA
 					$col = $currentSheet->rangeToArray($value->excel_index.'2:'.$value->excel_index.$highestRow, -1, false, false, false);
 					$value->rows = array_column($col, 0);

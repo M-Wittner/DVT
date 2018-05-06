@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'mwl.calendar', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$httpProvider.defaults.cache = false;
@@ -80,6 +80,11 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 		.when('/:username/tasks', {
 				templateUrl: 'pages/profile/myTasks.html',
 				controller: 'myTasksCtrl'
+		})
+	//		--------------------	Operators PAGES --------------------
+		.when('/operators/calendar', {
+				templateUrl: 'pages/operators/calendar.html',
+				controller: 'calendarCtrl'
 		})
 	
 //		--------------------	ADMIN PAGES --------------------
@@ -561,7 +566,7 @@ myApp.factory('testParams', function($http, $log){
 		'10'
 	];
 	
-	testParams.params.mcsList = ['8','12'];
+	testParams.params.mcsList = ['12', '14'];
 	testParams.params.antList = [
 		'0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'
 	];

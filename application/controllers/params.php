@@ -156,8 +156,8 @@ class Params extends CI_Controller {
 		$data->aRxParams = $this->db->get('lineup_params')->result_array();
 		
 //		$xifs = ["XIF_0","XIF_1","XIF_2","XIF_3","XIF_4","XIF_5","XIF_6","XIF_7"];
-		$this->db->where(['lineup_type'=>'8', 'chip_type'=>'2']);
-//		$this->db->where_not_in('parameter_name', $xifs);
+		$this->db->where(['lineup_type'=>'8', 'chip_type'=>'2', 'parameter_name !='=>'MCS']);
+//		$this->db->where_not_in('parameter_name', ['MCS']);
 		$data->mGeneralParams = $this->db->get('lineup_gen_params')->result_array();
 		
 		$this->db->where(['chip_type'=>'2', 'lineup_type'=>'1']);

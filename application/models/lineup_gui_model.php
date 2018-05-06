@@ -300,7 +300,8 @@ class lineup_gui_model extends CI_Model {
 				$col = $typical->getHighestColumn();
 				break;
 		}
-		$params = ['Temp', 'Volt', 'ChipChannel','XIF_0','XIF_1','XIF_2','XIF_3','XIF_4','XIF_5','XIF_6','XIF_7', 'XIF_Matrix'];
+//		$params = ['Temp', 'Volt', 'ChipChannel','XIF_0','XIF_1','XIF_2','XIF_3','XIF_4','XIF_5','XIF_6','XIF_7', 'XIF_Matrix'];
+		$params = ['Temp', 'Volt', 'ChipChannel','MCS', 'XIF_Matrix'];
 		
 		$mGeneral_params = $lineup->mGeneral_params;
 		foreach($mGeneral_params as $param => $value){
@@ -330,39 +331,57 @@ class lineup_gui_model extends CI_Model {
 //		die(var_dump($xifMatrix));
 		foreach ($lineup->temps as $temp){
 			foreach($lineup->channels as $channel){
-				foreach($lineup->xifs as $xif){
-					foreach($lineup->tx_gain_row as $txRow){
-						$typical->getCell('A'.$i)
-							->setValue($temp);			
-						$typical->getCell('B'.$i)
-							->setValue($lineup->voltage);
-						$typical->getCell('C'.$i)
-							->setValue($channel);
-						// XIF COLS
-						for($col = "D"; $col <= "K"; $col++){
-							if(in_array(substr($xifsArr[$col], -1), $inactiveXIFs)){
-								$typical->setCellValue($col.$i, 0);
-							} else{
-								$typical->setCellValue($col.$i, 1);
+				foreach ($lineup->mcs as $mcs){
+					foreach($lineup->xifs as $xif){
+						foreach($lineup->tx_gain_row as $txRow){
+							$col = "A";
+							$typical->getCell($col.$i)
+								->setValue($temp);
+							$col++;
+							$typical->getCell($col.$i)
+								->setValue($lineup->voltage);
+							$col++;
+							$typical->getCell($col.$i)
+								->setValue($channel);
+							$col++;
+							
+	//						// XIF COLS
+	//						for($col = "D"; $col <= "K"; $col++){
+	//							if(in_array(substr($xifsArr[$col], -1), $inactiveXIFs)){
+	//								$typical->setCellValue($col.$i, 0);
+	//							} else{
+	//								$typical->setCellValue($col.$i, 1);
+	//							}
+	//						}
+							if((1 <= $channel && $channel <= 6)){
+								$mcs = 12;
+								$typical->getCell($col.$i)
+									->setValue($mcs);
+								$col++;
+							}elseif(7 <= $channel && $channel <= 10){
+								$mcs = 14;
+								$typical->getCell($col.$i)
+									->setValue($mcs);
+								$col++;
 							}
-						}
-						$typical->getCell($col.$i)
-							->setValue($xifMatrix);
-						$col++;
-						// GENERAL PARAMS
-						$typical->fromArray((array)$lineup->mGeneral_params, null, $col.$i);
-						$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params));
-						//TX GAIN ROW
-						$typical->setCellValue($lastCol.$i, $txRow);
-//							$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params) + 1);
-						if($lineupType == 3 && isset($lineup->note)){
+							$typical->getCell($col.$i)
+								->setValue($xifMatrix);
+							$col++;
+							// GENERAL PARAMS
+							$typical->fromArray((array)$lineup->mGeneral_params, null, $col.$i);
+							$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params));
+							//TX GAIN ROW
+							$typical->setCellValue($lastCol.$i, $txRow);
+	//							$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params) + 1);
 							$lastCol = chr(ord($lastCol) + 1);
-							$typical->getCell($lastCol.'1')
-								->setValue("Note");
-							$typical->getCell($lastCol.$i)
-								->setValue($lineup->note);
+								$typical->getCell($lastCol.'1')
+									->setValue("Note");
+							if($lineupType == 3 && isset($lineup->note)){
+								$typical->getCell($lastCol.$i)
+									->setValue($lineup->note);
+							}
+							$i++;
 						}
-						$i++;
 					}
 				}
 			}
@@ -383,7 +402,8 @@ class lineup_gui_model extends CI_Model {
 				$col = $typical->getHighestColumn();
 				break;
 		}
-		$params = ['Temp', 'Volt', 'ChipChannel','XIF_0','XIF_1','XIF_2','XIF_3','XIF_4','XIF_5','XIF_6','XIF_7', 'XIF_Matrix'];
+		//$params = ['Temp', 'Volt', 'ChipChannel','XIF_0','XIF_1','XIF_2','XIF_3','XIF_4','XIF_5','XIF_6','XIF_7', 'XIF_Matrix'];
+		$params = ['Temp', 'Volt', 'ChipChannel', 'XIF_Matrix', 'MCS'];
 		
 		$mGeneral_params = $lineup->mGeneral_params;
 		foreach($mGeneral_params as $param => $value){
@@ -417,49 +437,67 @@ class lineup_gui_model extends CI_Model {
 
 		foreach ($lineup->temps as $temp){
 			foreach($lineup->channels as $channel){
-				foreach($lineup->xifs as $xif){
-					foreach($lineup->Dac_fssel_val as $value){
-						$typical->getCell('A'.$i)
-							->setValue($temp);			
-						$typical->getCell('B'.$i)
-							->setValue($lineup->voltage);
-						$typical->getCell('C'.$i)
-							->setValue($channel);
-						// XIF COLS
-						for($col = "D"; $col <= "K"; $col++){
-							if(in_array(substr($xifsArr[$col], -1), $inactiveXIFs)){
-								$typical->setCellValue($col.$i, 0);
-							} else{
-								$typical->setCellValue($col.$i, 1);
+				foreach($lineup->mcs as $mcs){
+					foreach($lineup->xifs as $xif){
+						foreach($lineup->Dac_fssel_val as $value){
+							$col = "A";
+							$typical->getCell($col.$i)
+								->setValue($temp);
+							$col++;
+							$typical->getCell($col.$i)
+								->setValue($lineup->voltage);
+							$col++;
+							$typical->getCell($col.$i)
+								->setValue($channel);
+							$col++;
+							
+	//						// XIF COLS
+	//						for($col = "D"; $col <= "K"; $col++){
+	//							if(in_array(substr($xifsArr[$col], -1), $inactiveXIFs)){
+	//								$typical->setCellValue($col.$i, 0);
+	//							} else{
+	//								$typical->setCellValue($col.$i, 1);
+	//							}
+	//						}
+							$typical->getCell($col.$i)
+								->setValue($xifMatrix);
+							$col++;
+							if((1 <= $channel && $channel <= 6)){
+								$mcs = 12;
+								$typical->getCell($col.$i)
+									->setValue($mcs);
+								$col++;
+							}elseif(7 <= $channel && $channel <= 10){
+								$mcs = 14;
+								$typical->getCell($col.$i)
+									->setValue($mcs);
+								$col++;
 							}
+							// GENERAL PARAMS
+							$typical->fromArray((array)$lineup->mGeneral_params, null, $col.$i);
+							$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params));
+							//TX GAIN ROW
+							$typical->setCellValue($lastCol.$i, '17');
+							$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params) + 1);
+							//Dac_fssel_val
+							if(isset($lineup->Dac_fssel_val)){
+								$typical->setCellValue($lastCol.$i, $value);
+								$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params) + 2);
+							}
+							// TYPICAL PARAMS
+							if(isset($lineup->typical_params)){
+								//GET LAST COL AFTER INSERT GENERAL PARAM BY ASCI CONVERTION.
+								$typical->fromArray((array)$lineup->typical_params, null, $lastCol.$i);
+							}
+							if($lineupType == 3){
+	//							$lastCol = chr(ord($lastCol) + 1);
+								$typical->getCell($lastCol.'1')
+									->setValue("Note");
+								$typical->getCell($lastCol.$i)
+									->setValue($lineup->note);
+							}
+							$i++;
 						}
-						$typical->getCell($col.$i)
-							->setValue($xifMatrix);
-						$col++;
-						// GENERAL PARAMS
-						$typical->fromArray((array)$lineup->mGeneral_params, null, $col.$i);
-						$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params));
-						//TX GAIN ROW
-						$typical->setCellValue($lastCol.$i, '17');
-						$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params) + 1);
-						//Dac_fssel_val
-						if(isset($lineup->Dac_fssel_val)){
-							$typical->setCellValue($lastCol.$i, $value);
-							$lastCol = chr(ord($col) + sizeof((array)$lineup->mGeneral_params) + 2);
-						}
-						// TYPICAL PARAMS
-						if(isset($lineup->typical_params)){
-							//GET LAST COL AFTER INSERT GENERAL PARAM BY ASCI CONVERTION.
-							$typical->fromArray((array)$lineup->typical_params, null, $lastCol.$i);
-						}
-						if($lineupType == 3){
-//							$lastCol = chr(ord($lastCol) + 1);
-							$typical->getCell($lastCol.'1')
-								->setValue("Note");
-							$typical->getCell($lastCol.$i)
-								->setValue($lineup->note);
-						}
-						$i++;
 					}
 				}
 			}
