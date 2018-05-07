@@ -87,10 +87,10 @@ class plan_model extends CI_Model {
 	}
 	
 	function edit_test($id) {
-//		die(var_dump($id));
 //		$plan = $this->db->get_where('plans', array('id'=> $id->planId))->result();
 		$test = $this->db->get_where('tests', array('id'=>$id->testId))->result();
-		if(!isset($test[0])){
+//		die(var_dump($test));
+		if(!isset($test[0]) || !isset($test->test_name_id)){
 			$test = $this->db->get_where('tests_view_new',array('id'=>$id->testId))->result()[0];
 			$test->station = $this->db->get_where('params_stations', ['id'=>$test->station_id])->result();
 			$test->name = $this->db->get_where('params_test_names', ['id'=>$test->test_name_id])->result();
@@ -153,6 +153,8 @@ class plan_model extends CI_Model {
 		} else{
 			$test = $test[0];
 			$test->flag = 0;
+			echo json_encode($test);
+			die();
 			$test->name = $this->db->get_where('params_test_names', array('id'=>$test->test_name_id, 'station'=>$test->station[0]))->result();
 			$test->station = $this->db->get_where('params_stations', array('id'=>$test->station_id))->result();
 //			if($test->station[0]->station == 'M-CB1' || $test->station[0]->station == 'M-CB2') {
