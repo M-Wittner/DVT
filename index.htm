@@ -26,17 +26,18 @@
 	<script type="text/javascript" src="assets/lib/ui-bootstrap/ui-bootstrap-2.5.0.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="assets/lib/ui-bootstrap/ui-bootstrap-2.5.0-csp.css">
 	<script type="text/javascript" src="assets/lib/ui-bootstrap/ui-bootstrap-tpls-2.5.0.min.js"></script>
-	<!-- Multiselect -->
-	<script type="text/javascript" src="assets/lib/angular-bootstrap-multiselect/dist/angular-bootstrap-multiselect.js"></script>
 	<!-- MomentJS -->
 	<script type="text/javascript" src="assets/lib/momentJS/moment.min.js"></script>
 	<!-- InteractJS -->
 	<script type="text/javascript" src="assets/lib/interactJS/interact.min.js"></script>
-	<!-- Angular Bootstrap Calendar -->
-	<link href="assets/lib/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
-	<script src="assets/lib/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
+	<!-- FullCalendar -->
+	<script type="text/javascript" src="assets/lib/fullcalendar/fullcalendar.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/lib/fullcalendar/fullcalendar.min.css">
+	<!-- UI-Calendar -->
+	<script type="text/javascript" src="assets/lib/ui-calendar/src/calendar.js"></script>
+	<!-- Multiselect -->
+	<script type="text/javascript" src="assets/lib/angular-bootstrap-multiselect/dist/angular-bootstrap-multiselect.js"></script>
 	
-
 
 	<!-- Bootstrap -->
 	<!-- Latest compiled and minified CSS -->
@@ -144,7 +145,7 @@
 						<li><a href="#/tasks">Tasks</a></li>
 						<li><a href="#/admin/search">Search</a></li>
 						<li><a href="#/lineups/new">Lineup GUI</a></li>
-						<li><a href="#/operators/calendar">Calendar</a></li>
+						<li ng-if="currentUser.rank > 60"><a href="#/operators/calendar">Calendar</a></li>
 <!--						<li><a href="#/robot">Robot</a></li>-->
 <!--						<li><input type="text" id="searchBox" ng-model="searchText" class="form-control" placeholder="Search"></li>-->
 					</ul>

@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'mwl.calendar', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize', 'ui.calendar']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$httpProvider.defaults.cache = false;
@@ -359,6 +359,15 @@ myApp.factory('AuthService', function(testParams, $http, Session, $cookies){
 
 myApp.factory('testParams', function($http, $log){
 	var testParams = {};
+	testParams.days = [
+		{id: 1, name: 'Sunday'},
+		{id: 2, name: 'Monday'},
+		{id: 3, name: 'Tuesday'},
+		{id: 4, name: 'Wednesday'},
+		{id: 5, name: 'Thursday'},
+		{id: 6, name: 'Friday'},
+//		{id: 0, name: 'Saturday'},
+	];
 	testParams.site = "http://wigig-584";
 	var site = testParams.site;
 	testParams.params = {};
