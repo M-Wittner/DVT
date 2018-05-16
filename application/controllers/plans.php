@@ -244,6 +244,8 @@ class Plans extends CI_Controller {
 								}
 	//------------ TalynM+A station test -------------
 						} elseif($testArr->station[0]->station == 'TalynM+A'){
+//								echo json_encode($testArr);
+//								die();
 								$test = new stdClass();
 								$test->struct = array(
 									'priority'=>$testArr->priority[0],

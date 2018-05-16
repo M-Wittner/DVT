@@ -173,7 +173,7 @@
 					</multiselect>
 				</div>
 			</div>
-			<div class="col-md-2" ng-if="test.station[0].station == 'R-CB1' || test.station[0].station == 'R-CB2' || test.station[0].station == 'Calibration' || (test.station[0].station == 'TalynM+A' && test.name[0].test_name == 'TX-EVM')">
+			<div class="col-md-2" ng-if="test.station[0].station == 'R-CB1' || test.station[0].station == 'R-CB2' || test.station[0].station == 'Calibration' || (test.station[0].station == 'TalynM+A' && (test.name[0].test_name == 'TX-EVM' || test.name[0].test_name == 'RX-EVM PVT'))">
 				<div class="panel-body">
 					<span class="label label-dangerC">Antenna:</span>
 					<multiselect ng-model="test.params.antenna" options="testParams.params.antList" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
@@ -187,7 +187,7 @@
 					</multiselect>
 				</div>
 			</div>
-			<div class="col-md-2" ng-if="test.station[0].station == 'TalynM+A' && (test.name[0].test_name == 'TX-BRP' || test.name[0].test_name == 'RX-EVM PVT')">
+			<div class="col-md-2" ng-if="test.station[0].station == 'TalynM+A' && (test.name[0].test_name == 'TX-BRP')">
 				<div class="panel-body">
 					<span class="label label-dangerC">Active Antennas:</span>
 					<multiselect ng-model="test.params.active_ants" options="testParams.params.antList" show-search="true" show-select-all="true" show-unselect-all="true" ng-disabled="lock">

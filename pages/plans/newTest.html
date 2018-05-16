@@ -192,7 +192,7 @@
 				<multiselect ng-model="test.params.channel" display-prop="channel" options="testParams.params.chList1" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 				</multiselect>
 			</div>
-			<div class="col-md-2" ng-if="test.station[0].station == 'R-CB1' || test.station[0].station == 'R-CB2' || test.station[0].station == 'Calibration' || (test.station[0].station == 'TalynM+A' && test.name[0].test_name == 'TX-EVM')">
+			<div class="col-md-2" ng-if="test.station[0].station == 'R-CB1' || test.station[0].station == 'R-CB2' || test.station[0].station == 'Calibration' || (test.station[0].station == 'TalynM+A' && (test.name[0].test_name == 'TX-EVM' || test.name[0].test_name == 'RX-EVM PVT'))">
 				<span class="label label-dangerC">Antenna:</span>
 				<multiselect ng-model="test.params.antenna" options="testParams.params.antList" show-search="true" show-select-all="true" show-unselect-all="true" ng-disabled="lock">
 				</multiselect>

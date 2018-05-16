@@ -478,7 +478,7 @@
 											</div>
 										</div>
 										<div class="col-md-3">
-											<div class="col-md-12" ng-if="test.station_id == 1 || test.station_id == 2 || (test.station_id == 5 && test.test_name == 'TX-EVM')">
+											<div class="col-md-12" ng-if="test.station_id == 1 || test.station_id == 2 || (test.station_id == 5 && (test.test_name == 'TX-EVM' || test.test_name == 'RX-EVM PVT'))">
 												<span class="label label-primary">Antennas:</span>
 												<ul class="list-group">
 													<li ng-repeat="param in test.params | filter: 'antenna' as filter" ng-if="filter.length < 32" class="list-group-item">{{param.param_value}}</li>
@@ -495,7 +495,7 @@
 														All Antennas
 													</li>
 												</ul>
-												<div ng-if="test.test_name == 'RX-EVM PVT'">
+												<div ng-hide="true" ng-if="test.test_name == 'RX-EVM PVT'">
 													<span class="label label-primary">Active Antennas:</span>
 													<ul class="list-group">
 														<li ng-repeat="param in test.params | filter: 'active_ants' as filter" ng-if="filter.length < 32" class="list-group-item">
