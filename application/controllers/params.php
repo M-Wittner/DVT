@@ -13,6 +13,31 @@ class Params extends CI_Controller {
         $this->load->database('');
     }
 	
+	public function structs(){
+		$data = $this->db->get('test_struct_view')->result();
+		echo json_encode($data);
+	}
+	
+	public function workStations(){
+		$data = $this->db->query('SELECT * FROM dvt_60g.work_stations')->result();
+		echo json_encode($data);
+	}
+	
+	public function testTypes(){
+		$data = $this->db->query('SELECT * FROM dvt_60g.test_types;')->result();
+		echo json_encode($data);
+	}
+	
+	public function allChips(){
+		$data = $this->db->query('Select * from dvt_60g.chips where chip_type_id > 0')->result();
+		echo json_encode($data);
+	}
+	
+	public function allParams(){
+		$data = $this->db->get('test_params_new')->result();
+		echo json_encode($data);
+	}
+	
 	public function chipsM() {
 		$this->db->where_in('chip_type_id', [2, 4]);
 		$data = $this->db->get('chip_view');

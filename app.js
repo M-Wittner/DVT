@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize', 'ui.calendar']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize', 'ui.calendar', 'angularFileUpload']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$httpProvider.defaults.cache = false;
@@ -75,6 +75,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 		.when('/lineups/new', {
 			templateUrl: 'pages/lineups/new.html',
 			controller: 'newLineupCtrl'
+	})
+		.when('/lineups/check', {
+			templateUrl: 'pages/lineups/check.html',
+			controller: 'checkLineupCtrl'
 	})
 //		--------------------	PROFILE PAGES --------------------
 		.when('/:username/tasks', {
@@ -186,6 +190,17 @@ myApp.directive('testForm', function(){
 		}
 	}
 });
+
+myApp.directive('fdInput', ['$timeout', function ($timeout) {
+    return {
+        link: function (scope, element, attrs) {
+            element.on('change', function  (evt) {               
+                alert(evt.target.files[0].name);               
+                alert($('#$index').val());                
+            });
+        }
+    }
+}]);
 
 myApp.directive('lineupForm', function(){
 	return {
@@ -372,6 +387,31 @@ myApp.factory('testParams', function($http, $log){
 	var site = testParams.site;
 	testParams.params = {};
 	testParams.lineups = {};
+	
+	$http.get(site+'/params/structs')
+	.then(function(response){
+		testParams.structs = response.data;
+	})
+	
+	$http.get(site+'/params/allChips')
+	.then(function(response){
+		testParams.params.allChips = response.data;
+	})
+	$http.get(site+'/params/allParams')
+	.then(function(response){
+		testParams.params.allParams = response.data;
+//		console.log(response.data);
+	})
+	
+	$http.get(site+'/params/workStations')
+	.then(function(response){
+		testParams.params.workStations = response.data;
+	});
+	
+	$http.get(site+'/params/testTypes')
+	.then(function(response){
+		testParams.params.testTypes = response.data;
+	});
 	
 	$http.get(site+'/params/lineupParams')
 	.then(function(response){

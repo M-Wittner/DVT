@@ -56,15 +56,54 @@ class excel_model extends CI_Model {
 	}
 	
 	public function is_ch_valid($rows, $xl_idx, $sheet){
-		$this->db->select('channel');
-		$channels = array_column($this->db->get_where('channels', ['active'=>true])->result(), 'channel');
-		foreach($rows as $rowNum => $rowData){
-			$rowNum += 2;
-//		CHECK IF CH IS VALID
-			$res = array_search($rowData, $channels);
-			if($res === false){
-				echo 'on cell '.$xl_idx.$rowNum." channel isn't valid in ".$sheet." sheet";
-				die();
+//	public function is_ch_valid($rows, $xl_idx, $sheet){
+//		$this->db->select('channel');
+//		$channels = array_column($this->db->get_where('channels', ['active'=>true])->result(), 'channel');
+//		foreach($rows as $rowNum => $rowData){
+//			$rowNum += 2;
+////		CHECK IF CH IS VALID
+//			$res = array_search($rowData, $channels);
+//			if($res === false){
+//				echo 'on cell '.$xl_idx.$rowNum." channel isn't valid in ".$sheet." sheet";
+//				die();
+//			}
+//		}
+//		die(var_dump($xl_idx));
+		$validChannels = ["1","2","3","4","5","9(1+2)","10(2+3)","11(3+4)","12(4+5)"];
+		foreach($rows as $i => $val){
+			$val = str_replace(' ', '',$val);
+			$found = in_array($val, $validChannels);
+			if(!$found){
+				switch($val){
+					case "":
+						echo "Cell ".$xl_idx.($i+2)." is epmty";
+						die();
+						break;
+					case 6:
+						echo "Channel 6 in cell ".$xl_idx($i+2)." is not in usein ".$sheet." sheet";
+						die();
+						break;
+					case "7":
+						echo "Please change channel 7 in cell ".$xl_idx.($i+2)." to 9(1+2)in ".$sheet." sheet";
+						die();
+						break;
+					case 8:
+						echo "Please change channel 8 in cell ".$xl_idx.($i+2)." to 10(2+3)in ".$sheet." sheet";
+						die();
+						break;
+					case 9:
+						echo "Please change channel 9 in cell ".$xl_idx.($i+2)." to 11(3+4)in ".$sheet." sheet";
+						die();
+						break;
+					case 10:
+						echo "Please change channel 10 in cell ".$xl_idx.($i+2)." to 12(4+5)in ".$sheet." sheet";
+						die();
+						break;
+					default:
+						echo "Cell ".$xl_idx.($i+2)." (".$val.") is not a valid channel in ".$sheet." sheet";
+						die();
+						break;
+				}
 			}
 		}
 	}

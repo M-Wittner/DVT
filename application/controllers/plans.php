@@ -647,6 +647,7 @@ class Plans extends CI_Controller {
 		$test = $this->plan_model->format_edit($rawTest);
 		echo json_encode($test);
 	}
+	
 		public function lineup($test){
 //			die(print_r($test));
 			$lineup = (string)$test->lineup;
@@ -729,6 +730,43 @@ class Plans extends CI_Controller {
 	//  		GET THIS COLUMN DATA
 					$col = $currentSheet->rangeToArray($value->excel_index.'2:'.$value->excel_index.$highestRow, -1, false, false, false);
 					$value->rows = array_column($col, 0);
+					if($name == "ch"){
+						foreach($col as $i => $val){
+							$val[0] = str_replace(' ', '',$val[0]);
+							
+							//CHECK IF CHANNELS BY NEW FORMAT
+							switch($val[0]){
+//								case 1:
+//								case 2:
+//								case 3:
+//								case 4:
+//								case 5:
+//									break;
+//								case strlen($val[0]) > 1:
+//									c
+								case "6":
+									echo "Channel 6 in cell ".$value->excel_index.($i+2)." is not in use";
+									die();
+									break;
+								case "7":
+									echo "Please change channel 7 in cell ".$value->excel_index.($i+2)." to 9(1+2)";
+									die();
+									break;
+								case "8":
+									echo "Please change channel 8 in cell ".$value->excel_index.($i+2)." to 10(2+3)";
+									die();
+									break;
+								case "9":
+									echo "Please change channel 9 in cell ".$value->excel_index.($i+2)." to 11(3+4)";
+									die();
+									break;
+								case "10":
+									echo "Please change channel 10 in cell ".$value->excel_index.($i+2)." to 12(4+5)";
+									die();
+									break;
+							}
+						}
+					}
 				switch($value->parameter_range){
 					// RANGE NULL: VALUE IS NOT A NUMBER AND OPTIONAL(NOTE COL)
 						case -1:	
