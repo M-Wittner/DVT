@@ -70,6 +70,9 @@
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
 	
+	<!-- angular file upload -->
+<!--	<script type="text/javascript" src="assets/lib/angular-file-upload/dist/angular-file-upload.min.js"></script>-->
+	
 	<!-- Costum -->
 	<script type="text/javascript" src="app.js"></script>
 	<link rel="stylesheet" href="assets/lib/css/main.css" type="text/css">
@@ -115,6 +118,8 @@
 	<!--  Lineups	-->
 	<script type="text/javascript" src="controllers/lineups/lineups.controller.js"></script>
 	<script type="text/javascript" src="controllers/lineups/new.controller.js"></script>
+	<script type="text/javascript" src="controllers/lineups/check.controller.js"></script>
+	<script type="text/javascript" src="controllers/lineups/check.controller.js"></script>
 	<!--  Profile	-->
 	<script type="text/javascript" src="controllers/profile/myTasks.controller.js"></script>
 	<!--  Operators	-->
@@ -141,11 +146,17 @@
 					<ul ng-if=" isAuthenticated == true" class="nav navbar-nav">
 						<li><a href="#/plans">All Plans</a></li>
 						<li><a href="#/plans/new">New Plan</a></li>
-						<li><a href="#/admin">Admin Panel</a></li>
+						<li  class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lineup GUI<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li ng-if="currentUser.group_id == 7"><a href="#/lineups/new">New Lineup</a></li>
+								<li ng-if="currentUser.group_id == 7"><a href="#/lineups/check">Check Lineup</a></li>
+							</ul>
+						</li>
 						<li><a href="#/tasks">Tasks</a></li>
 						<li><a href="#/admin/search">Search</a></li>
-						<li><a href="#/lineups/new">Lineup GUI</a></li>
 						<li ng-if="currentUser.rank > 60"><a href="#/operators/calendar">Calendar</a></li>
+						<li><a href="#/admin">Admin Panel</a></li>
 <!--						<li><a href="#/robot">Robot</a></li>-->
 <!--						<li><input type="text" id="searchBox" ng-model="searchText" class="form-control" placeholder="Search"></li>-->
 					</ul>

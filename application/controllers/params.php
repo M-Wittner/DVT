@@ -173,5 +173,10 @@ class Params extends CI_Controller {
 		
 		echo json_encode($data);
 	}
+	
+	public function workStations(){
+		$data = $this->db->query('SELECT * FROM dvt_60g.work_stations')->result();
+		echo json_encode($data);
+	}
 }
 ?>

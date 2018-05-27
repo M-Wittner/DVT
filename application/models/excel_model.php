@@ -12,6 +12,7 @@ class excel_model extends CI_Model {
 	}
 	
 	public function check_num($rows, $range, $xl_idx, $sheet){
+		$errors = array();
 		foreach($rows as $rowNum => $rowData){
 			$rowNum += 2;
 //					CHECK IF ROWDATA IS A NUMBER
@@ -19,54 +20,106 @@ class excel_model extends CI_Model {
 				$num = pow(2, $range);
 //			CHECK IF WITHIN RANGE
 				if ($rowData > $num && $rowData >= 0){
-					echo 'cell '.$xl_idx.$rowNum." value is not in range in ".$sheet." sheet";
-					die();
+					$str = 'Cell '.$xl_idx.$rowNum." value[".$rowData."] is not in range in ".$sheet." sheet";
+					array_push($errors, $str);
 				}
 			} else {
-					echo 'cell '.$xl_idx.$rowNum." value is not a number in ".$sheet." sheet";
-					die();
+					$str = 'Cell '.$xl_idx.$rowNum." value[".$rowData."] is not a number in ".$sheet." sheet";
+					array_push($errors, $str);
 			}
 		}
+		return $errors;
 	}
 	public function check_exist($rows, $range, $xl_idx, $sheet){
+		$errors = array();
 		foreach($rows as $rowNum => $rowData){
 			$rowNum += 2;
-//			print_r($rowData."\n".$rowNum."\n".$xl_idx);
+//			array_push($errors, $rowData);
 //		CHECK IF ROWDATA NOT SET AND NOT NULL
 			if(!isset($rowData)){
-				echo 'cell '.$xl_idx.$rowNum." value is not set in ".$sheet." sheet";
-				die();
+				$str = 'Cell '.$xl_idx.$rowNum." value[".$rowData."] is not set in ".$sheet." sheet";
+				array_push($errors, $str);
 			} else {
-				return true;
+				$errors = true;
+				break;
 			}
 		}
+		return $errors;
 	}
 	public function check_bool($rows, $range, $xl_idx, $sheet){
+		$errors = array();
 		foreach($rows as $rowNum => $rowData){
 			$rowNum += 2;
 //			print_r($rowData."\n".$rowNum."\n".$xl_idx);
 //		CHECK IF ROWDATA NOT SET AND NOT NULL
 			if($rowData != 0 && $rowData != 1){
-				echo 'cell '.$xl_idx.$rowNum." value is not a boolean in ".$sheet." sheet";
-				die();
+				$str = 'Cell '.$xl_idx.$rowNum." value[".$rowData."] is not a boolean in ".$sheet." sheet";
+				array_push($errors, $str);
 			} else {
-				return true;
+				$errors = true;
+				break;
 			}
 		}
+		return $errors;
 	}
 	
 	public function is_ch_valid($rows, $xl_idx, $sheet){
-		$this->db->select('channel');
-		$channels = array_column($this->db->get_where('channels', ['active'=>true])->result(), 'channel');
-		foreach($rows as $rowNum => $rowData){
-			$rowNum += 2;
-//		CHECK IF CH IS VALID
-			$res = array_search($rowData, $channels);
-			if($res === false){
-				echo 'on cell '.$xl_idx.$rowNum." channel isn't valid in ".$sheet." sheet";
-				die();
+		$errors = array();
+		$validChannels = ["1","2","3","4","5","9(1+2)","10(2+3)","11(3+4)","12(4+5)"];
+		foreach($rows as $i => $val){
+			$val = str_replace(' ', '',$val);
+			$found = in_array($val, $validChannels);
+			if(!$found){
+				switch($val){
+					case "":
+						$str = "Cell ".$xl_idx.($i+2)." is epmty";
+						array_push($errors, $str);
+						break;
+					case $val == 6 && strlen($val) <= 3:
+						$str = "Cell: ".$xl_idx.($i+2)." - Channel ".$val." is not in use in ".$sheet." sheet";
+						array_push($errors, $str);
+						break;
+					case $val == 7 && strlen($val) <= 3:
+						$str = "Cell: ".$xl_idx.($i+2)." - Please change channel ".$val." --> to 9(1+2) in ".$sheet." sheet";
+						array_push($errors, $str);
+						break;
+					case $val == 8 && strlen($val) <= 3:
+						$str = "Cell: ".$xl_idx.($i+2)." - Please change channel ".$val." --> to 10(2+3) in ".$sheet." sheet";
+						array_push($errors, $str);
+						break;
+					case $val == 9 && strlen($val) <= 3:
+						$str = "Cell: ".$xl_idx.($i+2)." - Please change channel ".$val." --> to 11(3+4) in ".$sheet." sheet";
+						array_push($errors, $str);
+						break;
+					case $val == 9 && strlen($val) > 3:
+						$str = "Cell: ".$xl_idx.($i+2)." - Please change channel ".$val." --> to 9(1+2) in ".$sheet." sheet";
+						array_push($errors, $str);
+						break;	
+					case $val == 10 && strlen($val) <= 3:
+						$str = "Cell: ".$xl_idx.($i+2)." - Please change channel ".$val." --> to 12(4+5) in ".$sheet." sheet";
+						array_push($errors, $str);
+						break;
+					case $val == 10 && strlen($val) > 3:
+						$str = "Cell: ".$xl_idx.($i+2)." - Please change channel ".$val." --> to 10(2+3) in ".$sheet." sheet";
+						array_push($errors, $str);
+						break;
+					case $val == 11:
+//					case 11 && strlen($val) <= 3:
+						$str = "Cell: ".$xl_idx.($i+2)." - Please change channel ".$val." --> to 11(3+4) in ".$sheet." sheet";
+						array_push($errors, $str);
+						break;
+					case 12:
+						$str = "Cell: ".$xl_idx.($i+2)." - Please change channel ".$val." --> to 12(4+5)in ".$sheet." sheet";
+						array_push($errors, $str);
+						break;
+					default:
+						$str = "Cell ".$xl_idx.($i+2)." [".$val."] is not a valid channel in ".$sheet." sheet";
+						array_push($errors, $str);
+						break;
+				}
 			}
 		}
+		return $errors;
 	}
 	public function ss_from_csv($lineup){
 		$reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
@@ -83,6 +136,7 @@ class excel_model extends CI_Model {
 	}
 	
 	public function validate($test, $param, $unique){
+		$errors = array();
 		if(isset($test->params->temp_r)){
 			$temps = $test->params->temp_r;
 		} elseif(isset($test->params->temp_m)){
@@ -95,8 +149,8 @@ class excel_model extends CI_Model {
 			foreach($temps as $temp){
 				$res = in_array($temp, $unique);
 				if($res === false){
-					echo $temp." C is not found in excel file!";
-					die();
+					$str =  $temp." C is not found in excel file!";
+					array_push($errors, $str);
 				}
 			}
 		}
@@ -104,10 +158,11 @@ class excel_model extends CI_Model {
 			foreach($channels as $ch){
 				$res = in_array($ch, $unique);
 				if($res == false){
-					echo "Channel ".$ch." is not found in excel file!";
-					die();
+					$str =  "Channel ".$ch." is not found in excel file!";
+					array_push($errors, $str);
 				}
 			}
 		}
+		return $errors;
 	}
 }

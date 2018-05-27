@@ -76,6 +76,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/lineups/new.html',
 			controller: 'newLineupCtrl'
 	})
+		.when('/lineups/check', {
+			templateUrl: 'pages/lineups/check.html',
+			controller: 'checkLineupCtrl'
+	})
 //		--------------------	PROFILE PAGES --------------------
 		.when('/:username/tasks', {
 				templateUrl: 'pages/profile/myTasks.html',
@@ -601,6 +605,12 @@ myApp.factory('testParams', function($http, $log){
 	};
 
 	testParams.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+	
+//	---------------------------------------		NEW		---------------------------------------
+	$http.get(site+'/params/workStations')
+	.then(function(response){
+		testParams.params.workStations = response.data;
+	});
 	
 	return testParams;
 });
