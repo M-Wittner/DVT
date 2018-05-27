@@ -225,14 +225,14 @@ class Plans extends CI_Controller {
 								$testId = $this->db->insert_id($insertTest);
 							
 								foreach($chipsArr as $chip){
-									if($testArr->name[0]->test_name == 'TalynM - Temperature Calibration'){
+									if(in_array($testArr->name[0]->test_name, ['TalynM - Temperature Calibration', 'TalynM - Temperature Calibration RX'])){
 										$data = array(
 											'plan_id'=>$planId,
 											'test_id'=>$testId,
 											'chip_m_type_id'=>$chip->chip_type_id,
 											'chip_m_id'=>$chip->chip_id,
 										);
-									}elseif($testArr->name[0]->test_name == 'TalynA - Temperature Calibration'){
+									}elseif(in_array($testArr->name[0]->test_name, ['TalynA - Temperature Calibration'])){
 										$data = array(
 											'plan_id'=>$planId,
 											'test_id'=>$testId,
