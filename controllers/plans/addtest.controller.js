@@ -53,15 +53,46 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 			if(response.data == 'success'){
 				var message = 'Plan Created Succesfully!';
 				var id = Flash.create('success', message, 3500);
-				$location.path('/plans/'+$scope.plan.id);
-				console.log(response.data)
-			} else {
-				var message = response.data;
-				var id = Flash.create('danger', message, 3500);
-				console.log(response.data);
+				$location.path('/plans');
+			}else if(typeof(response.data) == 'object'){
+				var data = response.data
+				var result = [];
+				for(var key in data){
+//					console.log(typeof(data[key]));
+					if(typeof(data[key]) == 'object'){
+						data[key].forEach(function(msg){
+							var message = "<strong>"+key+"</strong>" + ": " + msg;
+							var id = Flash.create('danger', message, 0);
+						})
+					}else{
+							var message = "<strong>"+key+"</strong>" + ": " + data[key];
+							var id = Flash.create('danger', message, 0);
+					}
+				}
+				$window.scrollTo(0, 0);
 			}
 		})
 	}
+	
+		$scope.addPlan = function() {
+		$http.post(site+'/plans/create', {plan: $scope.plan, test: $scope.array})
+		.then(function(response){
+			console.log(response.data);
+			
+//			if(response.data == 'success'){
+//				var message = 'Plan Created Succesfully!';
+//				var id = Flash.create('success', message, 3500);
+//				$location.path('/plans');
+//				console.log(response.data);
+//			} else {
+//				$window.scrollTo(0, 0);
+//				var message = response.data;
+//				var id = Flash.create('danger', message, 25000);
+//				console.log(response.data);
+//			}
+		})
+//		console.log($scope.array);
+	};
 	
 	$scope.copyTest = function(){
 		$http.post(site+'/plans/copyTest', $scope.copyId)

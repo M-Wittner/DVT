@@ -28,6 +28,15 @@ class excel_model extends CI_Model {
 					array_push($errors, $str);
 			}
 		}
+		$numErrors = count($errors);
+		if($numErrors > 2){
+			// extract line from msg.
+			$faultyLine = substr(explode(' value', $errors[$numErrors-1])[0], -2);
+			$msg = "Line ".$faultyLine." has illigal characters, and might be out of table's range.";
+//			var_dump($msg);
+//			die();
+			return $msg;
+		}
 		return $errors;
 	}
 	public function check_exist($rows, $range, $xl_idx, $sheet){
@@ -58,6 +67,22 @@ class excel_model extends CI_Model {
 			} else {
 				$errors = true;
 				break;
+			}
+		}
+		return $errors;
+	}
+	
+	public function is_ch_valid_old($rows, $xl_idx, $sheet){
+		$errors = array();
+		$this->db->select('channel');
+		$channels = array_column($this->db->get_where('channels', ['active'=>true])->result_array(), 'channel');
+		foreach($rows as $rowNum => $rowData){
+			$rowNum += 2;
+//		CHECK IF CH IS VALID
+			$res = array_search($rowData, $channels);
+			if($res === false){
+				$str = 'on cell '.$xl_idx.$rowNum." channel isn't valid in ".$sheet." sheet";
+				array_push($errors, $str);
 			}
 		}
 		return $errors;

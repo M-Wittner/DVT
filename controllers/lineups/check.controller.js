@@ -4,6 +4,11 @@ myApp.controller('checkLineupCtrl', ['$scope', '$http', '$location', 'Flash', 'S
 	var site = testParams.site;
 //	$scope.uploader = new FileUploader();
 	$scope.lineup = {};
+	
+	$scope.clearMsgs = function(){
+		Flash.clear();
+	}
+	
 	$scope.checkLineup = function(){
 		$http.post(site+'/lineups/check', $scope.lineup)
 		.then(function(response){
