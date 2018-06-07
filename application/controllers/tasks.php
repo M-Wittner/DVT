@@ -159,8 +159,8 @@ class Tasks extends CI_Controller {
 		$from = $data->sender;
 		$task = $data->task;
 		$site = $data->site;
-		$text = substr(strip_tags($task->description), 0, 100);
-//		echo json_encode($text);
+		$text = strip_tags(str_replace(array("</p>", "</i>"), "\n", $task->description));
+//		echo json_encode($task->description);
 //		die();
 		$this->db->select('email');
 		$to->email = $this->db->get_where('users', ['id'=>$to->id])->result()[0]->email;
@@ -184,8 +184,8 @@ class Tasks extends CI_Controller {
 														"\n Field of operation: ".$task->station[0]->work_station.
 														"\n Task type: ".$task->type[0]->task_type." \n".
 														"Title: ".$task->title."\n".
-														"Description:"."\n\n".
-														$text."... \n".
+														"Description:"."\n".
+														$text. "\n".
 														"You can view it in the following link: \n".
 													 	$site."/tasks/".$task->id
 													 );

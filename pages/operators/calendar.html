@@ -1,51 +1,58 @@
-<div class="row" style="margin-bottom: 2%;">
-	<div class="btn-group pull-right">
-		<button class="btn btn-success" ng-click="changeView('agendaDay', 'calendar')">AgendaDay</button>
-		<button class="btn btn-success" ng-click="changeView('agendaWeek', 'calendar')">AgendaWeek</button>
-		<button class="btn btn-success" ng-click="changeView('month', 'calendar')">Month</button>
-	</div>
+<div>
+	<input type="file" ng-model="weekShfits" class="form-control">
 </div>
 
-<div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="calendar"></div>
 
-<div class="">
-	<table class="table table-responsive">
-		<thead>
-			<tr>
-				<td ng-repeat="day in days">{{day.name}}</td>
-			</tr>
-		</thead>
-		<tbody>
-			<td ng-repeat="day in days track by $index">
-				<div class="col-md-12">
-					<div class="row">
-						<span>Morning:</span>
-						<input type="text" class="form-control" placeholder="Operator Name" ng-model="day.morning">
+<div ng-hide="true">
+	<div class="row" style="margin-bottom: 2%;">
+		<div class="btn-group pull-right">
+			<button class="btn btn-success" ng-click="changeView('agendaDay', 'calendar')">AgendaDay</button>
+			<button class="btn btn-success" ng-click="changeView('agendaWeek', 'calendar')">AgendaWeek</button>
+			<button class="btn btn-success" ng-click="changeView('month', 'calendar')">Month</button>
+		</div>
+	</div>
+
+	<div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="calendar"></div>
+
+	<div class="">
+		<table class="table table-responsive">
+			<thead>
+				<tr>
+					<td ng-repeat="day in days">{{day.name}}</td>
+				</tr>
+			</thead>
+			<tbody>
+				<td ng-repeat="day in days track by $index">
+					<div class="col-md-12">
+						<div class="row">
+							<span>Morning:</span>
+							<input type="text" class="form-control" placeholder="Operator Name" ng-model="day.morning">
+						</div>
+						<div ng-if="day.id != 6" class="row">
+							<span>Evening:</span>
+							<input type="text" class="form-control" placeholder="Operator Name" ng-model="day.evening">
+						</div>
+						<div ng-if="day.id != 6" class="row">
+							<span>Night:</span>
+							<input type="text" class="form-control" placeholder="Operator Name" ng-model="day.night">
+						</div>
 					</div>
-					<div ng-if="day.id != 6" class="row">
-						<span>Evening:</span>
-						<input type="text" class="form-control" placeholder="Operator Name" ng-model="day.evening">
-					</div>
-					<div ng-if="day.id != 6" class="row">
-						<span>Night:</span>
-						<input type="text" class="form-control" placeholder="Operator Name" ng-model="day.night">
-					</div>
+				</td>
+			</tbody>
+		</table>
+		<div class="pull-right">
+			<button type="button" class="btn btn-primary" ng-click="addShifts(days)">Add shifts</button>
+			<button type="button" class="btn btn-danger" ng-click="removeAll(days)">Delete all shifts</button>
+		</div>
+	</div>
+	<ul ng-hide="true" class="unstyled col-md-5">
+		<!-- ngRepeat: e in events -->
+		<li ng-repeat="e in events" class="ng-scope">
+				<div class="alert alert-info ng-binding">
+						<a class="close" ng-click="remove($index)"><i class="glyphicon glyphicon-remove" style="font-size: 16px"></i></a>
+						<b> <input ng-model="e.title" class="ng-pristine ng-valid"></b> 
+						{{e.title}}
 				</div>
-			</td>
-		</tbody>
-	</table>
-	<div class="pull-right">
-		<button type="button" class="btn btn-primary" ng-click="addShifts(days)">Add shifts</button>
-		<button type="button" class="btn btn-danger" ng-click="removeAll(days)">Delete all shifts</button>
-	</div>
+		</li><!-- end ngRepeat: e in events -->
+	</ul>
 </div>
-<ul ng-hide="true" class="unstyled col-md-5">
-	<!-- ngRepeat: e in events -->
-	<li ng-repeat="e in events" class="ng-scope">
-			<div class="alert alert-info ng-binding">
-					<a class="close" ng-click="remove($index)"><i class="glyphicon glyphicon-remove" style="font-size: 16px"></i></a>
-					<b> <input ng-model="e.title" class="ng-pristine ng-valid"></b> 
-					{{e.title}}
-			</div>
-	</li><!-- end ngRepeat: e in events -->
-</ul>
