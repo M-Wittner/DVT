@@ -1,9 +1,10 @@
-myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
+myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $timeout, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.testParams = testParams;
 //	$scope.checkLineup = false;
 	var site = testParams.site;
-//	console.log($scope.testParams);
+//	var $select = $scope.$select
+	$scope.testStructs = $scope.testParams.structs;
 
 	if($scope.isAuthenticated == false){
 		var message = 'Please Login first!';
@@ -26,14 +27,11 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	$scope.insertTest = function(){
 		$scope.planParams.push(this.test);
 		$scope.lock = true;
-//		console.log($scope.test);
-		console.log(this);
+		console.log(this.test);
 	}
 	$scope.editToggle = function(){
 		$scope.lock = false;
 		$scope.planParams.splice(this.test, 1);
-//		console.log($scope);
-//		console.log(this.test);
 	}
 	
 	$scope.removeTest = function() {
@@ -47,8 +45,37 @@ myApp.controller('newPlanCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	$scope.addPair = function(){
 		$scope.chipPairs.push({});
 	}
+	
+	$scope.extras = function(test, struct){
+		if(!test.struct){
+			test.struct = [];
+		}
+		if(!test.struct[struct.name]){
+			test.struct[struct.name] = {};
+		}
+		if(!test.struct[struct.name].ext){
+			test.struct[struct.name].ext = [];
+		}else{
+			test.struct[struct.name].ext = null;
+		}
+	}
+	
+	
+	$scope.selectAll = function(test, struct){
+//		console.log(test);
+//		console.log(struct);
+//		console.log(testParams.params.allParams);
+		var result = testParams.params.allParams.filter(item => item.config_idx == struct.config_id);
+//		console.log(result);
+		if(!test.sweeps){
+			test.sweeps = [];
+		}
+		test.sweeps[struct.name] = result;
+	};
 
 	$scope.addPlan = function() {
+		console.log($scope.planParams);
+		console.log($scope.array);
 		$http.post(site+'/plans/create', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
 			if(response.data == 'success'){

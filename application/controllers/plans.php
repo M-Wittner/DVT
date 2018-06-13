@@ -49,8 +49,8 @@ class Plans extends CI_Controller {
 
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
-//		echo json_encode($postData);
-//							die();
+		echo json_encode($postData->test[0]);
+							die();
 		
 		$planData = $postData->plan;
 		$plan = array(
