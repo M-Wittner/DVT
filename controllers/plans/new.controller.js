@@ -62,10 +62,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 	
 	
 	$scope.selectAll = function(test, struct){
-//		console.log(test);
-//		console.log(struct);
-//		console.log(testParams.params.allParams);
-		var result = testParams.params.allParams.filter(item => item.config_idx == struct.config_id);
+		var result = testParams.params.allParams.filter(item => item.config_id == struct.config_id);
 //		console.log(result);
 		if(!test.sweeps){
 			test.sweeps = [];
@@ -74,9 +71,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 	};
 
 	$scope.addPlan = function() {
-		console.log($scope.planParams);
-		console.log($scope.array);
-		$http.post(site+'/plans/create', {plan: $scope.plan, test: $scope.array})
+		$http.post(site+'/plans/createnew', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
 			if(response.data == 'success'){
 				var message = 'Plan Created Succesfully!';

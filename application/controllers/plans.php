@@ -7,7 +7,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Plans extends CI_Controller {	
 	public function __construct() {
-
 	parent::__construct();
 	$this->load->helper(['form','url']);
 	$this->load->library(['email']);
@@ -40,6 +39,100 @@ class Plans extends CI_Controller {
 		echo json_encode($plans);	
 	}
 	
+	function CreateNew(){
+		$postData = json_decode(file_get_contents('php://input'));
+		$result = array();
+		$planData = $postData->plan;
+		$plan = array(
+			'user_id'=>$planData->userId,
+			'user_username'=>$planData->username
+		);
+		
+		$tests = $postData->test;
+//		echo json_encode($tests);
+//		die();
+		if(sizeof($tests) <= 0){
+			$result->msg = 'No tests detected!';
+			$result->occurred = true;
+		}else{
+			foreach($tests as $test){
+				if($test->checkLineup == true){
+					$res = $this->check($test);
+				}
+				if(isset($test->notes)){
+					$notes = $test->notes;
+				} else {
+					$notes = null;
+				}
+				$testBody = array(
+					'priority'=>$test->priority[0],
+					'test_type_id'=>$test->testType[0]->type_idx,
+					'notes'=>$notes,
+					'user_id'=>$planData->userId,
+				);
+				$insertTest = $this->db->insert('test_v1', $testBody);
+				if(!$insertTest){
+					$result->msg = 'Test was not submitted ('.$test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0].')';
+					$result->occurred = true;
+				}else{
+					$testId = $this->plan_model->get_id($insertTest);
+					foreach($test->sweeps as $sweepName => $sweepData){
+						$error = new stdClass();
+						if(is_array($sweepData)){//--------------	Deal with generic sweeps	--------------
+							if(strpos(strtolower($sweepName), 'chips') !== false){//chips
+								$chips = array();
+								$this->db->select('config_id');
+								$configId = $this->db->get_where('dvt_60g.test_configurations', array('name'=>$sweepName))->result()[0]->config_id;
+								foreach($sweepData as $sweep){
+									
+									$chip = array(
+										'test_id'=>$testId,
+										'config_id'=>$configId,
+										'value'=>$sweep->chip_id
+									);
+									array_push($chips,$chip);
+								}
+								$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $chips);
+							}else{//any other sweeps
+								foreach($sweepData as $sweep){
+									$sweep->test_id = $testId;
+									unset($sweep->display_name);
+								}
+								$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $sweepData);
+							}
+							if(!$insertSweep){
+								$error->msg = $sweepName.' was not inserted';
+								$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+								$error->occurred = true;
+								array_push($result, $error);
+							}
+						}else{          				 //--------------	Deal with different sweeps	--------------
+							$sweepData->test_id = $testId;
+							switch($sweepData->config_id){
+								case 5://Linueup
+									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData);
+									break;
+								case 60://Pin
+									$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.$sweepData->data->ext;
+									$this->db->set('config_id', $sweepData->config_idx);
+									$this->db->set('value', $pin);
+									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
+									break;
+							}
+							if(!isset($insertSweep) || !$insertSweep){
+								$error->msg = $sweepName.' was not inserted';
+								$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+								$error->occurred = true;
+								array_push($result, $error);
+							}
+						}
+					}
+				}
+			}
+		}
+		return $result;
+	}
+	
 	function Create() {
 		$test_params = $this->db->get('test_params')->result();
 		$paramsArr = array();
@@ -49,7 +142,7 @@ class Plans extends CI_Controller {
 
 		// fetching data
 		$postData = json_decode(file_get_contents('php://input'));
-		echo json_encode($postData->test[0]);
+		echo json_encode($postData);
 							die();
 		
 		$planData = $postData->plan;
@@ -58,7 +151,7 @@ class Plans extends CI_Controller {
 			'user_username'=>$planData->username
 		);
 		
-		$testsObj = $postData->test;
+		$tests = $postData->test;
 		if(sizeof($postData->test) > 0){
 			if(!isset($planData->id)){
 				$insertPlan = $this->plan_model->add_plan($plan);
@@ -68,24 +161,13 @@ class Plans extends CI_Controller {
 			}
 			if(isset($planId)){
 //				$planId = 750;
-				foreach($testsObj as $i => $testArr){
-					if(isset($testArr->notes)){
-						$notes = $testArr->notes;
+				foreach($tests as $test){
+					if(isset($test->notes)){
+						$notes = $test->notes;
 					} else {
 						$notes = null;
 					}
-					$chipsArr = $testArr->chips;
-					if(isset($testArr->checkLineup)){
-						if($testArr->checkLineup == true){
-							$res = $this->lineup($testArr);
-						}
-					}
-					if(!isset($testArr->params) && $testArr->station[0]->id != 7){
-						$testArr->params = $this->plan_model->config_params($testArr);
-						echo "Not valid yet";
-//						echo json_encode($testArr);
-						die();
-					}
+
 //					die();
 					//			------------- R station test -------------
 						if($testArr->station[0]->station == 'R-CB1' || $testArr->station[0]->station == 'R-CB2'){
