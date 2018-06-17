@@ -79,26 +79,29 @@ class Plans extends CI_Controller {
 					foreach($test->sweeps as $sweepName => $sweepData){
 						$error = new stdClass();
 						if(is_array($sweepData)){//--------------	Deal with generic sweeps	--------------
-							if(strpos(strtolower($sweepName), 'chips') !== false){//chips
-								$chips = array();
-								$this->db->select('config_id');
-								$configId = $this->db->get_where('dvt_60g.test_configurations', array('name'=>$sweepName))->result()[0]->config_id;
-								foreach($sweepData as $sweep){
-									
-									$chip = array(
-										'test_id'=>$testId,
-										'config_id'=>$configId,
-										'value'=>$sweep->chip_id
-									);
-									array_push($chips,$chip);
-								}
-								$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $chips);
-							}else{//any other sweeps
-								foreach($sweepData as $sweep){
-									$sweep->test_id = $testId;
-									unset($sweep->display_name);
-								}
-								$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $sweepData);
+							switch($sweepName){
+								case strpos(strtolower($sweepName), 'chips') !== false:
+									$chips = array();
+									$this->db->select('config_id');
+									$configId = $this->db->get_where('dvt_60g.test_configurations', array('name'=>$sweepName))->result()[0]->config_id;
+									foreach($sweepData as $sweep){
+
+										$chip = array(
+											'test_id'=>$testId,
+											'config_id'=>$configId,
+											'value'=>$sweep->chip_id
+										);
+										array_push($chips,$chip);
+									}
+									$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $chips);
+									break;
+								default:
+									foreach($sweepData as $sweep){
+										$sweep->test_id = $testId;
+										unset($sweep->display_name);
+									}
+									$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $sweepData);
+									break;
 							}
 							if(!$insertSweep){
 								$error->msg = $sweepName.' was not inserted';
@@ -108,14 +111,20 @@ class Plans extends CI_Controller {
 							}
 						}else{          				 //--------------	Deal with different sweeps	--------------
 							$sweepData->test_id = $testId;
-							switch($sweepData->config_id){
-								case 5://Linueup
+							switch($sweepData->data_type){
+								case 33://Linueup
+									unset($sweepData->data_type);
 									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData);
 									break;
 								case 60://Pin
+									unset($sweepData->data_type);
+									if(!isset($sweepData->data->ext)){
+										$sweepData->data->ext = '';
+									}
 									$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.$sweepData->data->ext;
-									$this->db->set('config_id', $sweepData->config_idx);
+									$this->db->set('config_id', $sweepData->config_id);
 									$this->db->set('value', $pin);
+									$this->db->set('test_id', $testId);
 									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
 									break;
 							}

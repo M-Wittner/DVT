@@ -33,14 +33,14 @@
 			<div class="collapse panel-body" id="{{$id}}">
 				<div ng-init="test.sweeps = {}" ng-repeat="struct in testStructs | filter:{station_id: test.station[0].idx, test_type_id: test.testType[0].type_idx}:true | orderBy:['priority', '-data_type'] track by struct.name">
 					<!----------------------------------------------------------------			Lineups			---------------------------------------------------------------->
-					<div ng-if="struct.data_type == 33" class="col-md-12 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[struct.name].config_id = struct.config_id">
+					<div ng-if="struct.data_type == 33" class="col-md-12 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[struct.name].config_id = struct.config_id; test.sweeps[struct.name].data_type = struct.data_type">
 						<span class="label label-dangerC">{{struct.name}}</span>
 						<input class="form-control" type="text" placeholder="some text" ng-model="test.sweeps[struct.name].value" ng-disabled="lock">
 					</div>
 					<!----------------------------------------------------------------			Pins			---------------------------------------------------------------->
 					<div ng-if="struct.data_type == 60" class="col-md-5 rowMarg"  uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'">
 						<span class="label label-dangerC">{{struct.name}}</span>
-						<div class="input-group input-group-sm" ng-init="test.sweeps[struct.name].config_id = struct.config_id">
+						<div class="input-group input-group-sm" ng-init="test.sweeps[struct.name].config_id = struct.config_id; test.sweeps[struct.name].data_type = struct.data_type">
 							<input class="form-control" type="number" placeholder="From" ng-model="test.sweeps[struct.name].data.from" aria-describedby="from" ng-disabled="lock">
 							<span class="input-group-addon" id="from" style="font-weight:900">;</span>
 							<input class="form-control" type="number" placeholder="Step" ng-model="test.sweeps[struct.name].data.step" aria-describedby="step" ng-disabled="lock">
