@@ -11,7 +11,7 @@ class Plans extends CI_Controller {
 	$this->load->helper(['form','url']);
 	$this->load->library(['email']);
 	$this->load->database('');
-	$this->load->model(['plan_model', 'excel_model']);
+	$this->load->model(['plan_model', 'excel_model', 'valid_model']);
     }
 
 	function index() {
@@ -49,97 +49,104 @@ class Plans extends CI_Controller {
 		);
 		
 		$tests = $postData->test;
-//		echo json_encode($tests);
-//		die();
 		if(sizeof($tests) <= 0){
 			$result->msg = 'No tests detected!';
 			$result->occurred = true;
 		}else{
-			foreach($tests as $test){
-				if($test->checkLineup == true){
-					$res = $this->check($test);
-				}
-				if(isset($test->notes)){
-					$notes = $test->notes;
-				} else {
-					$notes = null;
-				}
-				$testBody = array(
-					'priority'=>$test->priority[0],
-					'test_type_id'=>$test->testType[0]->type_idx,
-					'notes'=>$notes,
-					'user_id'=>$planData->userId,
-				);
-				$insertTest = $this->db->insert('test_v1', $testBody);
-				if(!$insertTest){
-					$result->msg = 'Test was not submitted ('.$test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0].')';
-					$result->occurred = true;
-				}else{
-					$testId = $this->plan_model->get_id($insertTest);
-					foreach($test->sweeps as $sweepName => $sweepData){
-						$error = new stdClass();
-						if(is_array($sweepData)){//--------------	Deal with generic sweeps	--------------
-							switch($sweepName){
-								case strpos(strtolower($sweepName), 'chips') !== false:
-									$chips = array();
-									$this->db->select('config_id');
-									$configId = $this->db->get_where('dvt_60g.test_configurations', array('name'=>$sweepName))->result()[0]->config_id;
-									foreach($sweepData as $sweep){
+			$valid = $this->valid_model->validate_plan($tests);
+			if(!empty($valid)){
+				$result = $valid;
+			}else{
+				foreach($tests as $test){
+					if(!isset($test->notes)){
+						$test->notes = null;
+					}
+					$error = new stdClass();
+					$testBody = array(
+						'priority'=>$test->priority[0],
+						'test_type_id'=>$test->testType[0]->type_idx,
+						'notes'=>$test->notes,
+						'user_id'=>$planData->userId,
+					);
+					$insertTest = $this->db->insert('test_v1', $testBody);
+					if(!$insertTest){
+						$error->msg = 'Test was not submitted';
+						$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+						$error->occurred = true;
+						array_push($result, $error);
+					}else{
+						$testId = $this->plan_model->get_id($insertTest);
+						foreach($test->sweeps as $sweepName => $sweepData){
+							$error = new stdClass();
+							switch($sweepData){
+								case is_array($sweepData): //--------------	Deal with generic sweeps	--------------
+									switch($sweepName){
+										case strpos(strtolower($sweepName), 'chips') !== false:
+											$chips = array();
+											$this->db->select('config_id');
+											$configId = $this->db->get_where('dvt_60g.test_configurations', array('name'=>$sweepName))->result()[0]->config_id;
+											foreach($sweepData as $sweep){
 
-										$chip = array(
-											'test_id'=>$testId,
-											'config_id'=>$configId,
-											'value'=>$sweep->chip_id
-										);
-										array_push($chips,$chip);
+												$chip = array(
+													'test_id'=>$testId,
+													'config_id'=>$configId,
+													'value'=>$sweep->chip_id
+												);
+												array_push($chips,$chip);
+											}
+											$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $chips);
+											break;
+										default:
+											foreach($sweepData as $sweep){
+												$sweep->test_id = $testId;
+												unset($sweep->display_name);
+											}
+											$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $sweepData);
+											break;
 									}
-									$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $chips);
-									break;
-								default:
-									foreach($sweepData as $sweep){
-										$sweep->test_id = $testId;
-										unset($sweep->display_name);
+									if(!$insertSweep){
+										$error->msg = $sweepName.' was not inserted';
+										$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+										$error->occurred = true;
+										array_push($result, $error);
 									}
-									$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $sweepData);
 									break;
-							}
-							if(!$insertSweep){
-								$error->msg = $sweepName.' was not inserted';
-								$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
-								$error->occurred = true;
-								array_push($result, $error);
-							}
-						}else{          				 //--------------	Deal with different sweeps	--------------
-							$sweepData->test_id = $testId;
-							switch($sweepData->data_type){
-								case 33://Linueup
-									unset($sweepData->data_type);
-									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData);
-									break;
-								case 60://Pin
-									unset($sweepData->data_type);
-									if(!isset($sweepData->data->ext)){
-										$sweepData->data->ext = '';
+								default: //--------------	Deal with different sweeps	--------------
+									$sweepData->test_id = $testId;
+									switch($sweepData->data_type){
+										case 33://Linueup
+											unset($sweepData->data_type);
+											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData);
+											break;
+										case 60://Pin
+											unset($sweepData->data_type);
+											if(!isset($sweepData->data->ext)){
+												$sweepData->data->ext = '';
+											}
+											$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.$sweepData->data->ext;
+											$this->db->set('config_id', $sweepData->config_id);
+											$this->db->set('value', $pin);
+											$this->db->set('test_id', $testId);
+											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
+											break;
 									}
-									$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.$sweepData->data->ext;
-									$this->db->set('config_id', $sweepData->config_id);
-									$this->db->set('value', $pin);
-									$this->db->set('test_id', $testId);
-									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
+									if(!isset($insertSweep) || !$insertSweep){
+										$error->msg = $sweepName.' was not inserted';
+										$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+										$error->occurred = true;
+										array_push($result, $error);
+									}
 									break;
-							}
-							if(!isset($insertSweep) || !$insertSweep){
-								$error->msg = $sweepName.' was not inserted';
-								$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
-								$error->occurred = true;
-								array_push($result, $error);
 							}
 						}
 					}
-				}
+				}	
 			}
 		}
-		return $result;
+		if(empty($result)){
+			$result = 'All tests were inserted successfully';
+		}
+		echo json_encode($result);
 	}
 	
 	function Create() {
@@ -887,6 +894,140 @@ class Plans extends CI_Controller {
 					}
 				}	
 			}		
+		}
+	}
+	
+	public function check($test){
+//		$data = json_decode(file_get_contents('php://input'));
+//			die(print_r($test));
+		$lineup = (string)$test->lineup;
+		$station = $test->station[0]->station;
+		$errors = array();
+
+		$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+		if(in_array($station, ['R-CB1', 'R-CB2'])){
+			$spreadsheet = $reader->load($lineup);
+			$expectedSheets = ['Typical', 'LO Lineup'];
+			$sheets = $spreadsheet->getSheetNames();
+			$localParams = ["temp", "v", "ch"];
+		} elseif(in_array($station, ['M-CB1', 'M-CB2'])) {
+			// CREATE SPREADSHEET FROM CSV
+			$path = $this->excel_model->ss_from_csv($lineup);
+			$spreadsheet = $reader->load($path);
+			$sheets = $spreadsheet->getSheetNames();
+			$localParams = ["temp", "volt", "chipchannel"];
+		}
+		$reader->setReadDataOnly(true);	
+		if ($spreadsheet){
+			foreach($sheets as $sheetName){
+			//CHECK FOR SHEET EXSITENCE
+				if(!in_array($sheetName, $sheets)){
+					echo $sheetName." wasn't found! Might be misspelled";
+					die();
+				}
+	// 		EXTRACTS  HIGHEST COL, HIGHEST ROW, FIRST ROW
+				$currentSheet = $spreadsheet->getSheetByName($sheetName);
+				$highestColumn = $currentSheet->getHighestColumn();
+				$highestRow = $currentSheet->getHighestRow();
+				$firstRowRaw = $currentSheet->rangeToArray('A1:'.$highestColumn.'1', null, false, false, true)[1];
+	//		GET PARAMS FOUND BOTH IN EXCEL AND DB (NOT: TEMP CH V)
+				$this->db->where_in('parameter_name', $firstRowRaw);
+				$this->db->group_by('parameter_name');
+				$match = $this->db->get('lineup_params')->result();
+				
+				$paramNameArr = [];
+				// GET PARAM NAMES FROM $MATCH INTO ARRAY
+				foreach ($match as $obj){
+					$value = $obj->parameter_name;
+					array_push($paramNameArr, $value);
+				}
+
+				foreach($firstRowRaw as $index => $param){
+					$trimSpace = " ";
+					$trimParam = trim($param, $trimSpace);
+					$paramIdx = array_search($param, $paramNameArr);
+
+					$data = new stdClass();
+					if($paramIdx === false){
+
+//					INSERT TEMP CH V INTO SQL RESULT
+						if(in_array(strtolower($param), $localParams)){
+							$data->parameter_name = $param;
+							$data->parameter_id = -1;
+							$data->parameter_range = -1;
+							$data->excel_index = $index;
+							array_push($match, $data);
+					// CHECK IF TEMPS AND CH FROM SITE ARE FOUND IN EXCEL FILE;
+							if(in_array(strtolower($param), ['temp', 'ch'])){
+								$colData = $currentSheet->rangeToArray($index.'2:'.$index.$highestRow, -1, false, false, false);
+								$data = array_column($colData, 0);
+								$unique = array_unique($data);
+								$this->excel_model->validate($test, $param, $unique);
+							}
+							
+						}elseif($trimParam != $param){
+							echo "The \"".$param."\" parameter in column ".$index." is invalid! It might contain a space!";
+							die();
+						}
+					}else{
+						$match[$paramIdx]->excel_index = $index;
+					}
+				}
+				
+	//		INSERT EXCEL INDEX TO EACH PARAM
+				foreach ($match as $value){
+					$name = strtolower($value->parameter_name);
+	//  		GET THIS COLUMN DATA
+					$col = $currentSheet->rangeToArray($value->excel_index.'2:'.$value->excel_index.$highestRow, -1, false, false, false);
+					$value->rows = array_column($col, 0);
+				switch($value->parameter_range){
+					// RANGE NULL: VALUE IS NOT A NUMBER AND OPTIONAL(NOTE COL)
+						case null:
+							break;
+					// RANGE 0 IS BOOLEAN VALUE
+						case 0:
+							$res = $this->excel_model->check_exist($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+							if($res == true){
+									$errors[$value->parameter_name] = $this->excel_model->check_bool($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+							}else{
+								$errors[$value->parameter_name] = $res;
+							}
+							
+							break;
+					// RANGE -1 IS NO RANGE, CHECKS EXISTANCE
+						case -1:
+							$this->excel_model->check_exist($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+							if(in_array($name, ['ch', 'chipchannel'])){
+							// CHECK IF CH IS VALID
+								$errors[$value->parameter_name] = $this->excel_model->is_ch_valid_old($value->rows, $value->excel_index, $sheetName);
+							}
+							break;
+					// RANGE IS NOT NULL AND NOT -1, CHECKS EXISTANCE AND IS NUMERIC
+						default:
+							$res = $this->excel_model->check_exist($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+							if($res == true){
+								$errors[$value->parameter_name] = $this->excel_model->check_num($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+							}else{
+								$errors[$value->parameter_name] = $res;
+							}
+							break;
+					}
+				}
+			}
+			
+			$endRes = array();
+			foreach($errors as $param => $ers){
+				if(isset($errors[$param][0])){
+					array_push($endRes, true);
+				} else{
+					array_push($endRes, false);
+				}
+			}
+			if(in_array(true, $endRes)){
+				return $errors;
+			}else{
+				return "Lineup is OK!";
+			}
 		}
 	}
 	

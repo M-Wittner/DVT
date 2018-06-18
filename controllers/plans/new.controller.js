@@ -73,16 +73,21 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 	$scope.addPlan = function() {
 		$http.post(site+'/plans/createnew', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
-			if(response.data == 'success'){
-				var message = 'Plan Created Succesfully!';
-				var id = Flash.create('success', message, 3500);
-				$location.path('/plans');
-				console.log(response.data);
-			} else {
-				$window.scrollTo(0, 0);
+			console.log(response.data);
+			if(typeof response.data == "object"){
+				response.data.forEach(function(error){
+					var message = error.msg;
+					if(error.occurred == true){
+						var id = Flash.create('danger', message, 0);
+					}else{
+						var id = Flash.create('success', message, 0);
+					}
+					$window.scrollTo(0, 0);
+				})	
+			}else{
 				var message = response.data;
-				var id = Flash.create('danger', message, 25000);
-				console.log(response.data);
+				var id = Flash.create('success', message, 3500);
+//				$location.path('/plans');
 			}
 		})
 //		console.log($scope.array);

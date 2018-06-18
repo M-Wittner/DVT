@@ -29,7 +29,7 @@ class Params extends CI_Controller {
 	}
 	
 	public function allChips(){
-		$data = $this->db->query('Select * from dvt_60g.chips where chip_type_id > 0')->result();
+		$data = $this->db->query('Select * from dvt_60g.chips where chip_type_id > 0 order by chip_id ASC')->result();
 		echo json_encode($data);
 	}
 	

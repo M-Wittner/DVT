@@ -8,7 +8,7 @@
 				<span class="label label-dangerC">Station:</span>
 				<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.station" data-placeholder="Pick Test" ng-disabled="lock">
 					<ui-select-match>{{$item.name}}</ui-select-match>
-					<ui-select-choices repeat="station in testParams.params.workStations" sortable="true">{{station.name}}</ui-select-choices>
+					<ui-select-choices repeat="station in testParams.params.workStations|filter: $select.search" sortable="true">{{station.name}}</ui-select-choices>
 				</ui-select>
 			</div>
 			<div class="col-md-4">
@@ -16,7 +16,7 @@
 				<div ng-if="test.station[0].idx">
 					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.testType" data-placeholder="Pick Test" ng-disabled="lock">
 						<ui-select-match>{{$item.test_name}}</ui-select-match>
-						<ui-select-choices repeat="test in testParams.params.testTypes | filter:{workstation_id: test.station[0].idx}" sortable="true">{{test.test_name}}</ui-select-choices>
+						<ui-select-choices repeat="test in testParams.params.testTypes | filter:{workstation_id: test.station[0].idx}|filter: $select.search" sortable="true">{{test.test_name}}</ui-select-choices>
 					</ui-select>
 				</div>
 			</div>
@@ -51,12 +51,12 @@
 						</div>
 					</div>
 					<!----------------------------------------------------------------			Chips			---------------------------------------------------------------->
-					<div ng-if="struct.data_type > 100" class="col-md-3 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'">
+					<div ng-if="struct.data_type > 100" class="col-md-3 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[struct.name].data_type = struct.data_type">
 						<span class="label label-dangerC">{{struct.name}}</span>
 						<div class="input-group">
 							<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.sweeps[struct.name]" data-placeholder="Pick Test" ng-disabled="lock">
 								<ui-select-match>{{$item.chip_sn}}-{{$item.chip_process_abb}}</ui-select-match>
-								<ui-select-choices repeat="chip in testParams.params.allChips |filter:{chip_type_id: struct.data_type - 100}" sortable="true" group-by="'chip_process_abb'">{{chip.chip_sn}}-{{chip.chip_process_abb}}</ui-select-choices>
+								<ui-select-choices repeat="chip in testParams.params.allChips |filter:{chip_type_id: struct.data_type - 100}|filter: $select.search" sortable="true" group-by="'chip_process_abb'">{{chip.chip_sn}}-{{chip.chip_process_abb}}</ui-select-choices>
 							</ui-select>
 							<span class="input-group-btn">
 								<button type="button" ng-click="test.struct[struct.name] = undefined" class="btn btn-default btn-sm" ng-disabled="lock">
@@ -66,12 +66,12 @@
 						</div>
 					</div>
 					<!----------------------------------------------------------------			Sweeps			---------------------------------------------------------------->
-					<div ng-if="struct.data_type != 33 && struct.data_type < 100 && struct.data_type != 60" class="col-md-3 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'" allow-clear>
+					<div ng-if="struct.data_type != 33 && struct.data_type < 100 && struct.data_type != 60" class="col-md-3 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'"  allow-clear ng-init="test.sweeps[struct.name].data_type = struct.data_type">
 						<span class="label label-dangerC">{{struct.name}}</span>
 						<div class="input-group">
 							<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.sweeps[struct.name]" data-placeholder="Pick Test" ng-disabled="lock">
 								<ui-select-match>{{$item.display_name}}</ui-select-match>
-								<ui-select-choices repeat="sweep in testParams.params.allParams |filter:{config_id: struct.config_id}:true" sortable="true">{{sweep.display_name}}</ui-select-choices>
+								<ui-select-choices repeat="sweep in testParams.params.allParams |filter:{config_id: struct.config_id}:true|filter: $select.search" sortable="true">{{sweep.display_name}}</ui-select-choices>
 							</ui-select>
 							<span class="input-group-btn">
 								<button type="button" ng-click="test.sweeps[struct.name] = undefined" class="btn btn-default btn-sm" ng-disabled="lock">
