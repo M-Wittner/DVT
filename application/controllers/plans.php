@@ -49,6 +49,8 @@ class Plans extends CI_Controller {
 		);
 		
 		$tests = $postData->test;
+//		echo json_encode($tests);
+//		die();
 		if(sizeof($tests) <= 0){
 			$result->msg = 'No tests detected!';
 			$result->occurred = true;
@@ -76,17 +78,19 @@ class Plans extends CI_Controller {
 						array_push($result, $error);
 					}else{
 						$testId = $this->plan_model->get_id($insertTest);
+//						var_dump($test->sweeps);
+//						die();
 						foreach($test->sweeps as $sweepName => $sweepData){
 							$error = new stdClass();
 							switch($sweepData){
 								case is_array($sweepData): //--------------	Deal with generic sweeps	--------------
+//									var_dump($sweepName);
 									switch($sweepName){
 										case strpos(strtolower($sweepName), 'chips') !== false:
 											$chips = array();
 											$this->db->select('config_id');
 											$configId = $this->db->get_where('dvt_60g.test_configurations', array('name'=>$sweepName))->result()[0]->config_id;
 											foreach($sweepData as $sweep){
-
 												$chip = array(
 													'test_id'=>$testId,
 													'config_id'=>$configId,
@@ -113,6 +117,7 @@ class Plans extends CI_Controller {
 									break;
 								default: //--------------	Deal with different sweeps	--------------
 									$sweepData->test_id = $testId;
+//									var_dump($sweepName);
 									switch($sweepData->data_type){
 										case 33://Linueup
 											unset($sweepData->data_type);

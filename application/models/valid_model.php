@@ -10,13 +10,19 @@ class valid_model extends CI_Model {
 	public function validate_plan($tests){
 		$result = array();
 		foreach($tests as $test){
-//			echo json_encode($test);
-//			die();
 			$error = new stdClass();
 			if($test->checkLineup == true){
 				$res = $this->check($test);
 				if($res != "Lineup is OK!"){
-					$result = $res;
+					foreach($res as $param){
+						foreach($param as $err){
+							$lineupError = new stdClass();;
+							$lineupError->msg = $err->msg;
+							$lineupError->source = $err->source;
+							$lineupError->occurred = true;
+							array_push($result, $lineupError);
+						}
+					}
 					return $result;
 				}
 			}
@@ -276,32 +282,27 @@ class valid_model extends CI_Model {
 		$struct = $this->db->get_where('test_struct_view', array('station_id'=>$station->idx, 'test_type_id'=>$testType->type_idx))->result();//get all sweeps for this testType
 		//extracting lineups from the sweeps OBJ
 		$dataTypes = array_column($struct, 'data_type');
-		$lineupIdx = array();
-		for($i = 0; $i < count($struct)-1; $i++){
+//		$lineupIdx = array();
+		$lineups = array();
+		for($i = 0; $i < count($struct); $i++){
 			if($dataTypes[$i] == '33'){
-				array_push($lineupIdx, $i);
+				$sweepName = $struct[$i]->name;
+				$lineup = (string)$test->sweeps->{$sweepName}->value;
+				array_push($lineups, $lineup);
 			}
 		}
-		$lineups = array();
-		foreach($lineupIdx as $index){
-			$sweepName = $struct[$index]->name;
-			$lineup = (string)$test->sweeps->{$sweepName}->value;
-			array_push($lineups, $lineup);
-		}
-		echo json_encode($lineups);
-		die();
-
+//		echo json_encode($lineups);
+//		die();
 		$errors = array();
-
 		$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-		if(in_array($station, ['R-CB1', 'R-CB2'])){
-			$spreadsheet = $reader->load($lineup);
+		if(in_array($station->name, ['R-CB1', 'R-CB2'])){
+			$spreadsheet = $reader->load($lineups[0]);
 			$expectedSheets = ['Typical', 'LO Lineup'];
 			$sheets = $spreadsheet->getSheetNames();
 			$localParams = ["temp", "v", "ch"];
 		} elseif(in_array($station, ['M-CB1', 'M-CB2'])) {
 			// CREATE SPREADSHEET FROM CSV
-			$path = $this->excel_model->ss_from_csv($lineup);
+			$path = $this->excel_model->ss_from_csv($lineups[0]);
 			$spreadsheet = $reader->load($path);
 			$sheets = $spreadsheet->getSheetNames();
 			$localParams = ["temp", "volt", "chipchannel"];
@@ -351,7 +352,9 @@ class valid_model extends CI_Model {
 								$colData = $currentSheet->rangeToArray($index.'2:'.$index.$highestRow, -1, false, false, false);
 								$data = array_column($colData, 0);
 								$unique = array_unique($data);
-								$this->excel_model->validate_v2($test, $param, $unique);
+								$errors['Excel '.$param] = $this->excel_model->validate_v2($test, $param, $unique, $lineups[0]);
+//								echo json_encode($param);
+//								die();
 							}
 							
 						}elseif($trimParam != $param){
@@ -403,16 +406,13 @@ class valid_model extends CI_Model {
 					}
 				}
 			}
-			
 			$endRes = array();
 			foreach($errors as $param => $ers){
-				if(isset($errors[$param][0])){
-					array_push($endRes, true);
-				} else{
-					array_push($endRes, false);
+				if(!isset($errors[$param][0])){
+					unset($errors[$param]);
 				}
 			}
-			if(in_array(true, $endRes)){
+			if(!empty($errors)){
 				return $errors;
 			}else{
 				return "Lineup is OK!";

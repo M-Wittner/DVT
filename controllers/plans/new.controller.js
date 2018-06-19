@@ -25,13 +25,15 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 	}
 	
 	$scope.insertTest = function(){
+		this.test.scopeIndex = this.$id;
 		$scope.planParams.push(this.test);
 		$scope.lock = true;
 		console.log(this.test);
 	}
 	$scope.editToggle = function(){
 		$scope.lock = false;
-		$scope.planParams.splice(this.test, 1);
+		var index = $scope.planParams.findIndex(test => test.scopeIndex == this.$id);
+		$scope.planParams.splice(index, 1);
 	}
 	
 	$scope.removeTest = function() {
@@ -76,7 +78,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 			console.log(response.data);
 			if(typeof response.data == "object"){
 				response.data.forEach(function(error){
-					var message = error.msg;
+					var message = "<strong>" + error.source +"</strong>" + ": " + error.msg;
 					if(error.occurred == true){
 						var id = Flash.create('danger', message, 0);
 					}else{

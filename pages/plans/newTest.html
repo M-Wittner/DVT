@@ -59,7 +59,7 @@
 								<ui-select-choices repeat="chip in testParams.params.allChips |filter:{chip_type_id: struct.data_type - 100}|filter: $select.search" sortable="true" group-by="'chip_process_abb'">{{chip.chip_sn}}-{{chip.chip_process_abb}}</ui-select-choices>
 							</ui-select>
 							<span class="input-group-btn">
-								<button type="button" ng-click="test.struct[struct.name] = undefined" class="btn btn-default btn-sm" ng-disabled="lock">
+								<button type="button" ng-click="test.sweeps[struct.name] = {}; test.sweeps[struct.name].data_type = struct.data_type" class="btn btn-default btn-sm" ng-disabled="lock">
 									<span class="glyphicon glyphicon-trash"></span>
 							</button>
 							</span>
@@ -74,7 +74,7 @@
 								<ui-select-choices repeat="sweep in testParams.params.allParams |filter:{config_id: struct.config_id}:true|filter: $select.search" sortable="true">{{sweep.display_name}}</ui-select-choices>
 							</ui-select>
 							<span class="input-group-btn">
-								<button type="button" ng-click="test.sweeps[struct.name] = undefined" class="btn btn-default btn-sm" ng-disabled="lock">
+								<button type="button" ng-click="test.sweeps[struct.name] = {}; test.sweeps[struct.name].data_type = struct.data_type" class="btn btn-default btn-sm" ng-disabled="lock">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 								<button type="button" ng-click="selectAll(test, struct)" class="btn btn-default btn-sm" ng-disabled="lock">
