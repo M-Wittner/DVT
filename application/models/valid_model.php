@@ -23,7 +23,7 @@ class valid_model extends CI_Model {
 							array_push($result, $lineupError);
 						}
 					}
-					return $result;
+//					return $result;
 				}
 			}
 			if(!isset($test->priority[0])){

@@ -196,10 +196,10 @@ class excel_model extends CI_Model {
 
 		$channels = array_column($test->sweeps->{'Channels'}, 'value');
 		$name = strtolower($param);
-//		var_dump(basename($lineup));
 //		die();
 		if($name == 'temp'){
 			foreach($temps as $temp){
+//				var_dump($temp);
 				$res = in_array($temp, $unique);
 				if($res === false){
 					$err = new stdClass();

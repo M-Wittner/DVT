@@ -75,6 +75,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 	$scope.addPlan = function() {
 		$http.post(site+'/plans/createnew', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
+			Flash.clear()
 			console.log(response.data);
 			if(typeof response.data == "object"){
 				response.data.forEach(function(error){

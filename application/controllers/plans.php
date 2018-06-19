@@ -57,7 +57,9 @@ class Plans extends CI_Controller {
 		}else{
 			$valid = $this->valid_model->validate_plan($tests);
 			if(!empty($valid)){
-				$result = $valid;
+				foreach ($valid as $err){
+					array_push($result, $err);
+				}
 			}else{
 				foreach($tests as $test){
 					if(!isset($test->notes)){
