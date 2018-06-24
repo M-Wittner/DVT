@@ -17,24 +17,24 @@ class Plans extends CI_Controller {
 	function index() {
 		$this->db->order_by('date', 'desc');
 //		$this->db->limit('1');
-		$plans = $this->db->get('plans')->result();
+		$plans = $this->db->get('plans_v1')->result();
 			foreach($plans as $plan){
 				$this->db->where('plan_id', $plan->id);
-				$plan->tests = $this->db->get('tests')->result();
-				if(!count($plan->tests) > 0){
-					$this->db->where('plan_id', $plan->id);
-					$plan->tests = $this->db->get('tests_view_new')->result();
-				}
-				$testProgress = 0;
-				foreach($plan->tests as $test){
-					$testProgress += $test->progress;			
-				}
-				if(count($plan->tests) > 0){
-					$plan->progress = round((($testProgress / count($plan->tests))), 2);
-					$this->db->where('id', $plan->id);
-					$this->db->set(['progress'=>$plan->progress]);
-					$this->db->update('plans');
-				}
+				$plan->tests = $this->db->get('tests_view_v1')->result();
+//				if(!count($plan->tests) > 0){
+//					$this->db->where('plan_id', $plan->id);
+//					$plan->tests = $this->db->get('tests_view_new')->result();
+//				}
+//				$testProgress = 0;
+//				foreach($plan->tests as $test){
+//					$testProgress += $test->progress;			
+//				}
+//				if(count($plan->tests) > 0){
+//					$plan->progress = round((($testProgress / count($plan->tests))), 2);
+//					$this->db->where('id', $plan->id);
+//					$this->db->set(['progress'=>$plan->progress]);
+//					$this->db->update('plans');
+//				}
 			}
 		echo json_encode($plans);	
 	}

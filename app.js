@@ -383,7 +383,7 @@ myApp.factory('testParams', function($http, $log){
 		{id: 6, name: 'Friday'},
 //		{id: 0, name: 'Saturday'},
 	];
-	testParams.site = "http://localhost";
+	testParams.site = "http://wigig-299";
 	var site = testParams.site;
 	testParams.params = {};
 	testParams.lineups = {};
