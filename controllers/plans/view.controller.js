@@ -1,19 +1,28 @@
-myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', 'LS', '$cookies', function ($scope, $route, $location, $http, $routeParams, $window, Flash, AuthService, testParams, LS, $cookies) {
+myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', 'LS', '$cookies', 'testParams', function ($scope, $route, $location, $http, $routeParams, $window, Flash, AuthService, testParams, LS, $cookies, testParams) {
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 		var site = testParams.site;
 		var scope = $scope;
+//	$scope.testStructs = $scope.testParams.structs;
+	console.log(testParams);
 	
 	if($scope.isAuthenticated == true) {	
-	$http.post(site+'/plans/show', $routeParams.id)
+//	$http.post(site+'/plans/show', $routeParams.id)
+//	.then(function(response){
+//		console.log(response.data);
+//		$scope.plan = response.data.tests;
+//		if(response.data.fs.length > 0){
+//			response.data.fs.forEach(function(elem){
+//				$scope.plan.tests.push(elem);
+//			})
+//		}
+////		console.log(response.data);
+//	});
+	
+	$http.post(site+'/plans/show_v1', $routeParams.id)
 	.then(function(response){
 		console.log(response.data);
-		$scope.plan = response.data.tests;
-		if(response.data.fs.length > 0){
-			response.data.fs.forEach(function(elem){
-				$scope.plan.tests.push(elem);
-			})
-		}
+		$scope.plan = response.data;
 //		console.log(response.data);
 	});
 

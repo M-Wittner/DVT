@@ -45,7 +45,6 @@ class Plans extends CI_Controller {
 		$planData = $postData->plan;
 		$plan = array(
 			'user_id'=>$planData->userId,
-			'user_username'=>$planData->username
 		);
 		
 		$tests = $postData->test;
@@ -55,6 +54,12 @@ class Plans extends CI_Controller {
 			$result->msg = 'No tests detected!';
 			$result->occurred = true;
 		}else{
+			if(!isset($planData->id)){
+				$insertPlan = $insertStatus = $this->db->insert('plans_v1', $plan);
+				$planId = $this->plan_model->get_id($insertPlan);
+			}else{
+				$planId = $planData->id;
+			}
 			$valid = $this->valid_model->validate_plan($tests);
 			if(!empty($valid)){
 				foreach ($valid as $err){
@@ -67,6 +72,7 @@ class Plans extends CI_Controller {
 					}
 					$error = new stdClass();
 					$testBody = array(
+						'plan_id'=>$planId,
 						'priority'=>$test->priority[0],
 						'test_type_id'=>$test->testType[0]->type_idx,
 						'notes'=>$test->notes,
@@ -418,6 +424,41 @@ class Plans extends CI_Controller {
 		} else {
 			echo 'No Test Detected!';
 		}
+	}
+	
+	function show_v1(){
+		$this->other_db = $this->load->database('main', TRUE);
+		$id = json_decode(file_get_contents('php://input'));
+		$plan = $this->db->get_where('plans_v1', array('id'=>$id))->result()[0];
+		$plan->tests = $this->db->get_where('tests_view_v1', array('plan_id'=>$id))->result();
+		foreach ($plan->tests as $test){
+			$test->sweeps = array();
+			$this->db->select('config_id, name, data_type, priority, test_type_id');
+			$this->db->order_by('priority asc','data_type desc');
+			$struct = $this->db->get_where('test_struct_view', array('station_id'=>$test->station_id, 'test_type_id'=>$test->test_type_id))->result();
+			foreach($struct as $sweep){
+				$test->sweeps[$sweep->name] = new stdClass();
+				$data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$sweep->config_id))->result();
+				if(count($data) == 1 && (in_array($sweep->data_type, [33, 60]))){
+					$test->sweeps[$sweep->name]->data = $data[0];
+				}else{
+					if($sweep->data_type > 100){
+						foreach($data as $chip){
+							$this->db->select('chip_sn, chip_process_abb');
+							$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result()[0];
+							$chip->chip_sn = $chipData->chip_sn;
+							$chip->chip_process_abb = $chipData->chip_process_abb;
+						}
+					}
+					//add any other data!!!!!!! priority,
+					$test->sweeps[$sweep->name]->data = $data;
+				}
+					$test->sweeps[$sweep->name]->data_type = $sweep->data_type;
+					$test->sweeps[$sweep->name]->priority = $sweep->priority;
+					$test->sweeps[$sweep->name]->test_type_id = $sweep->test_type_id;
+			}
+		}
+		echo json_encode($plan);
 	}
 	
 	function Show() {
