@@ -594,13 +594,13 @@ myApp.factory('testParams', function($http, $log){
 	];
 	
 	testParams.params.priorityList = [
-		'1',
-		'2',
-		'3',
-		'4',
-		'5',
-		'6',
-		'7',
+		{display_name: '1 - Highest', value: '1'},
+		{display_name: '2', value: '2'},
+		{display_name: '3', value: '3'},
+		{display_name: '4', value: '4'},
+		{display_name: '5', value: '5'},
+		{display_name: '6', value: '6'},
+		{display_name: '7 - Lowest', value: '7'},
 	];
 	
 	testParams.params.chList1 = [

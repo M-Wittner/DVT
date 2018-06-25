@@ -204,7 +204,7 @@ class excel_model extends CI_Model {
 				if($res === false){
 					$err = new stdClass();
 					$err->msg =  $temp." C is not found in excel file!";
-					$err->source =  $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0].', '.basename($lineup);
+					$err->source =  $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value.', '.basename($lineup);
 					array_push($errors, $err);
 				}
 			}
@@ -215,7 +215,7 @@ class excel_model extends CI_Model {
 				if($res === false){
 					$err = new stdClass();
 					$err->msg =  "Channel ".$ch." is not found in excel file!";
-					$err->source =  $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0].', '.basename($lineup);
+					$err->source =  $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value.', '.basename($lineup);
 					array_push($errors, $err);
 				}
 			}

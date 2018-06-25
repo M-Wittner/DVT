@@ -26,10 +26,10 @@ class valid_model extends CI_Model {
 //					return $result;
 				}
 			}
-			if(!isset($test->priority[0])){
-				$test->priority[0] = '';
+			if(!isset($test->priority[0]->value)){
+				$test->priority[0]->value = '';
 				$error->msg = 'Priority was not selected';
-				$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+				$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 				$error->occurred = true;
 				array_push($result, $error);
 //				break;
@@ -37,7 +37,7 @@ class valid_model extends CI_Model {
 			if(!isset($test->station[0]->name)){
 				$test->station[0]->name = 'null';
 				$error->msg = 'Station was not selected';
-				$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+				$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 				$error->occurred = true;
 				array_push($result, $error);
 //				break;
@@ -45,7 +45,7 @@ class valid_model extends CI_Model {
 			if(!isset($test->testType[0]->type_idx)){
 				$test->testType[0]->type_idx = 'null';
 				$error->msg = 'Test was not selected';
-				$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+				$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 				$error->occurred = true;
 				array_push($result, $error);
 //				break;
@@ -56,7 +56,7 @@ class valid_model extends CI_Model {
 					case is_array($sweepData): //--------------	Deal with generic sweeps	--------------
 						if(!isset($sweepData)){
 							$err->msg = $sweepName.' were not selected';
-							$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+							$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 							$err->occurred = true;
 							array_push($result, $err);
 						}
@@ -67,7 +67,7 @@ class valid_model extends CI_Model {
 							case 33://Linueup
 								if(!isset($sweepData->value)){
 									$err->msg = $sweepName.' were not selected';
-									$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+									$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 									$err->occurred = true;
 									array_push($result, $err);
 								}
@@ -75,14 +75,14 @@ class valid_model extends CI_Model {
 							case 60://Pin
 								if(!isset($sweepData->data->from) || !isset($sweepData->data->step) || !isset($sweepData->data->to)){
 									$err->msg = $sweepName.' is missing';
-									$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+									$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 									$err->occurred = true;
 									array_push($result, $err);
 								}
 								break;
 							default:
 								$err->msg = $sweepName.' were not selected';
-								$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+								$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 								$err->occurred = true;
 								array_push($result, $err);
 								break;

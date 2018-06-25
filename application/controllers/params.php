@@ -24,7 +24,7 @@ class Params extends CI_Controller {
 	}
 	
 	public function testTypes(){
-		$data = $this->db->query('SELECT * FROM dvt_60g.test_types;')->result();
+		$data = $this->db->query('SELECT * FROM dvt_60g.test_types where `visible` = 1')->result();
 		echo json_encode($data);
 	}
 	

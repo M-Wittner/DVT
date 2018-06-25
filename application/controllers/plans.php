@@ -73,7 +73,7 @@ class Plans extends CI_Controller {
 					$error = new stdClass();
 					$testBody = array(
 						'plan_id'=>$planId,
-						'priority'=>$test->priority[0],
+						'priority'=>$test->priority[0]->value,
 						'test_type_id'=>$test->testType[0]->type_idx,
 						'notes'=>$test->notes,
 						'user_id'=>$planData->userId,
@@ -81,7 +81,7 @@ class Plans extends CI_Controller {
 					$insertTest = $this->db->insert('test_v1', $testBody);
 					if(!$insertTest){
 						$error->msg = 'Test was not submitted';
-						$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+						$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 						$error->occurred = true;
 						array_push($result, $error);
 					}else{
@@ -118,7 +118,7 @@ class Plans extends CI_Controller {
 									}
 									if(!$insertSweep){
 										$error->msg = $sweepName.' was not inserted';
-										$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+										$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 										$error->occurred = true;
 										array_push($result, $error);
 									}
@@ -145,7 +145,7 @@ class Plans extends CI_Controller {
 									}
 									if(!isset($insertSweep) || !$insertSweep){
 										$error->msg = $sweepName.' was not inserted';
-										$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0];
+										$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 										$error->occurred = true;
 										array_push($result, $error);
 									}

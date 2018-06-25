@@ -22,15 +22,17 @@
 			</div>
 			<div class="col-md-2">
 				<span class="label label-dangerC">Test Priority</span>
-				<multiselect ng-model="test.priority" options="testParams.params.priorityList" selection-limit="1" ng-disabled="lock">
-				</multiselect>
+				<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.priority" data-placeholder="Pick Test" ng-disabled="lock">
+						<ui-select-match>{{$item.value}}</ui-select-match>
+						<ui-select-choices repeat="priority in testParams.params.priorityList">{{priority.display_name}}</ui-select-choices>
+					</ui-select>
 			</div>
 		</div>
 		<div ng-if="test.testType[0]" class="panel panel-default rowMarg">
-			<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="false" aria-controls="struct">
+			<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="true" aria-controls="struct">
 				Test Struct
 			</div>
-			<div class="collapse panel-body" id="{{$id}}">
+			<div class="collapse panel-body in" id="{{$id}}" aria-expanded="true">
 				<div ng-init="test.sweeps = {}" ng-repeat="struct in testStructs | filter:{station_id: test.station[0].idx, test_type_id: test.testType[0].type_idx}:true | orderBy:['priority', '-data_type'] track by struct.name">
 					<!----------------------------------------------------------------			Lineups			---------------------------------------------------------------->
 					<div ng-if="struct.data_type == 33" class="col-md-12 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[struct.name].config_id = struct.config_id; test.sweeps[struct.name].data_type = struct.data_type">
