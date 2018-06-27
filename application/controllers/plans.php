@@ -440,7 +440,22 @@ class Plans extends CI_Controller {
 				$test->sweeps[$sweep->name] = new stdClass();
 				$data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$sweep->config_id))->result();
 				if(count($data) == 1 && (in_array($sweep->data_type, [33, 60]))){
-					$test->sweeps[$sweep->name]->data = $data[0];
+					if($sweep->data_type == 60){
+						$data[0]->value = explode(';', $data[0]->value);
+						$data[0]->value['from'] = $data[0]->value[0];
+						$data[0]->value['step'] = $data[0]->value[1];
+						$data[0]->value['to'] = $data[0]->value[2];
+						if($data[0]->value[3] != ""){
+							$data[0]->value['ext'] = explode(',', $data[0]->value[3]);
+						}
+						for($i = 0; $i < 4; $i++){
+							unset($data[0]->value[$i]);
+						}
+						$test->sweeps[$sweep->name]->data = $data[0];
+					}else{
+						$test->sweeps[$sweep->name]->data = $data[0];
+					}
+//						$test->sweeps[$sweep->name]->data = $data[0];
 				}else{
 					if($sweep->data_type > 100){
 						foreach($data as $chip){

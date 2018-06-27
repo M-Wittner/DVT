@@ -110,15 +110,18 @@
 							<label class="form-control">{{sweepData.data.value}}</label>
 						</div>
 						<!----------------------------------------------------------------			Pins			---------------------------------------------------------------->
-						<div ng-if="sweepData.data_type == 60" class="col-md-5 rowMarg"  uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'">
+						<div ng-if="sweepData.data_type == 60" class="col-md-4 rowMarg"  uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'">
 							<span class="label label-primary">{{sweepName}}</span>
 							<div class="input-group input-group-sm">
-								<label class="form-control">{{sweepData.data.value}}</label>
-	<!--
+								<label class="form-control" type="number" uib-popover="From" popover-trigger="'mouseenter'">{{sweepData.data.value.from}}</label>
 								<span class="input-group-addon" id="from" style="font-weight:900">;</span>
+								<label class="form-control" type="number" uib-popover="Step" popover-trigger="'mouseenter'">{{sweepData.data.value.step}}</label>
 								<span class="input-group-addon" id="step" style="font-weight:900">;</span>
+								<label class="form-control" type="number" uib-popover="To" popover-trigger="'mouseenter'">{{sweepData.data.value.to}}</label>
 								<span class="input-group-addon" id="to" style="font-weight:900">;</span>
-	-->
+								<label ng-if="sweepData.data.value.ext" class="form-control" type="text" uib-popover="Extra" popover-trigger="'mouseenter'">
+									<span ng-repeat="pin in sweepData.data.value.ext">{{pin}}, </span>
+								</label>
 							</div>
 						</div>
 						<!----------------------------------------------------------------			Chips			---------------------------------------------------------------->
