@@ -3,8 +3,6 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 		var site = testParams.site;
 		var scope = $scope;
-//	$scope.testStructs = $scope.testParams.structs;
-	console.log(testParams);
 	
 	if($scope.isAuthenticated == true) {	
 //	$http.post(site+'/plans/show', $routeParams.id)

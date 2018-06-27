@@ -1,38 +1,20 @@
 <div class="containter">
 <!--	<iframe src="http://10.18.135.50/Untitled1.php" width="1000px" height="300px"></iframe>-->
-	<div class="row rowMarg">
-		<div class="bs-callout bs-callout-infoC col-md-offset-3 col-md-6">
-			<p>Color Assitance:</p>
-			<div class="col-md-5">
+	<div class="row">
+		<div class="bs-callout bs-callout-infoC" style="padding-bottom: 4%">
+			<p>Color Assistance:</p>
+			<div class="col-md-2">
 				<span class="label label-default">IDLE</span> - No chip running
 			</div>
-			<div class="col-md-7">
+			<div class="col-md-4">
 				<span class="label label-success">Completed</span> - All chips completed successfully
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-3">
 				<span class="label label-warning">In Progress</span> - Test is running	
 			</div>
-			<div class="col-md-7">
+			<div class="col-md-3">
 				<span class="label label-danger">Error</span> - 1 chip or more has an error
 			</div>		
-		</div>
-		<div>
-			<div class="col-md-2 col-sm-2 col-xs-3 row">
-				<span class="label label-primary">Test Priority:</span>
-				<select class="form-control" ng-model="testPriority">
-					<option value="">all</option>
-					<option ng-repeat="test in plan.tests | orderBy:['priority']| unique:'priority'">{{test.priority}}</option>
-				</select>
-			</div>
-<!--
-			<div class="col-md-2 col-sm-2 col-xs-3">
-				<span class="label label-primary">Test Station:</span>
-				<select class="form-control" ng-model="testStation">
-					<option value="">all</option>
-					<option ng-repeat="test in plan.tests | unique:'station'">{{test.station[0].station}}</option>
-				</select>
-			</div>
--->
 		</div>
 	</div>
 </div>
@@ -49,11 +31,6 @@
 			<button class="btn btn-xs btn-danger" ng-click="removePlan()">
 					Delete
 			</button>
-<!--
-			<button class="btn btn-xs btn-info" ng-click="sendMail()">
-					Send Mail
-			</button>
--->
 		</span>
 	</div>
 	<div class="panel-body" id="planBody" ng-repeat="test in plan.tests | orderBy: 'priority' track by $index">
