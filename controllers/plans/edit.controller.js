@@ -20,6 +20,8 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 				$scope.test.mcs = parseInt(response.data.mcs)
 			}
 			$scope.test.vlotage = parseInt(response.data.vlotage);
+		}else {
+			$scope.test = response.data;
 		}
 		console.log(response.data);
 //		console.log($scope.test);

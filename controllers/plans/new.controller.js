@@ -5,6 +5,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 	var site = testParams.site;
 //	var $select = $scope.$select
 	$scope.testStructs = $scope.testParams.structs;
+	console.log(testParams);
 
 	if($scope.isAuthenticated == false){
 		var message = 'Please Login first!';
@@ -63,13 +64,15 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 	}
 	
 	
-	$scope.selectAll = function(test, struct){
-		var result = testParams.params.allParams.filter(item => item.config_id == struct.config_id);
-//		console.log(result);
+	$scope.selectAll = function(test, sweep){
+		console.log(test);
+		console.log(sweep);
+		var result = testParams.params.allParams.filter(item => item.config_id == sweep.config_id);
+		console.log(result);
 		if(!test.sweeps){
 			test.sweeps = [];
 		}
-		test.sweeps[struct.name] = result;
+		test.sweeps[sweep.name].data = result;
 	};
 
 	$scope.addPlan = function() {

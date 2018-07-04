@@ -90,15 +90,15 @@ class Plans extends CI_Controller {
 //						die();
 						foreach($test->sweeps as $sweepName => $sweepData){
 							$error = new stdClass();
-							switch($sweepData){
-								case is_array($sweepData): //--------------	Deal with generic sweeps	--------------
+							switch($sweepData->data){
+								case is_array($sweepData->data): //--------------	Deal with generic sweeps	--------------
 //									var_dump($sweepName);
-									switch($sweepName){
-										case strpos(strtolower($sweepName), 'chips') !== false:
+									switch($sweepData->data_type){
+										case $sweepData->data_type > 100:
 											$chips = array();
 											$this->db->select('config_id');
 											$configId = $this->db->get_where('dvt_60g.test_configurations', array('name'=>$sweepName))->result()[0]->config_id;
-											foreach($sweepData as $sweep){
+											foreach($sweepData->data as $sweep){
 												$chip = array(
 													'test_id'=>$testId,
 													'config_id'=>$configId,
@@ -109,11 +109,11 @@ class Plans extends CI_Controller {
 											$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $chips);
 											break;
 										default:
-											foreach($sweepData as $sweep){
+											foreach($sweepData->data as $sweep){
 												$sweep->test_id = $testId;
 												unset($sweep->display_name);
 											}
-											$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $sweepData);
+											$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $sweepData->data);
 											break;
 									}
 									if(!$insertSweep){
@@ -124,12 +124,14 @@ class Plans extends CI_Controller {
 									}
 									break;
 								default: //--------------	Deal with different sweeps	--------------
-									$sweepData->test_id = $testId;
+									$sweepData->data->test_id = $testId;
 //									var_dump($sweepName);
 									switch($sweepData->data_type){
 										case 33://Linueup
 											unset($sweepData->data_type);
-											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData);
+//											var_dump($sweepData);
+//											die();
+											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData->data);
 											break;
 										case 60://Pin
 											unset($sweepData->data_type);
@@ -430,48 +432,10 @@ class Plans extends CI_Controller {
 		$this->other_db = $this->load->database('main', TRUE);
 		$id = json_decode(file_get_contents('php://input'));
 		$plan = $this->db->get_where('plans_v1', array('id'=>$id))->result()[0];
-		$plan->tests = $this->db->get_where('tests_view_v1', array('plan_id'=>$id))->result();
-		foreach ($plan->tests as $test){
-			$test->sweeps = array();
-			$this->db->select('config_id, name, data_type, priority, test_type_id');
-			$this->db->order_by('priority asc','data_type desc');
-			$struct = $this->db->get_where('test_struct_view', array('station_id'=>$test->station_id, 'test_type_id'=>$test->test_type_id))->result();
-			foreach($struct as $sweep){
-				$test->sweeps[$sweep->name] = new stdClass();
-				$data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$sweep->config_id))->result();
-				if(count($data) == 1 && (in_array($sweep->data_type, [33, 60]))){
-					if($sweep->data_type == 60){
-						$data[0]->value = explode(';', $data[0]->value);
-						$data[0]->value['from'] = $data[0]->value[0];
-						$data[0]->value['step'] = $data[0]->value[1];
-						$data[0]->value['to'] = $data[0]->value[2];
-						if($data[0]->value[3] != ""){
-							$data[0]->value['ext'] = explode(',', $data[0]->value[3]);
-						}
-						for($i = 0; $i < 4; $i++){
-							unset($data[0]->value[$i]);
-						}
-						$test->sweeps[$sweep->name]->data = $data[0];
-					}else{
-						$test->sweeps[$sweep->name]->data = $data[0];
-					}
-//						$test->sweeps[$sweep->name]->data = $data[0];
-				}else{
-					if($sweep->data_type > 100){
-						foreach($data as $chip){
-							$this->db->select('chip_sn, chip_process_abb');
-							$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result()[0];
-							$chip->chip_sn = $chipData->chip_sn;
-							$chip->chip_process_abb = $chipData->chip_process_abb;
-						}
-					}
-					//add any other data!!!!!!! priority,
-					$test->sweeps[$sweep->name]->data = $data;
-				}
-					$test->sweeps[$sweep->name]->data_type = $sweep->data_type;
-					$test->sweeps[$sweep->name]->priority = $sweep->priority;
-					$test->sweeps[$sweep->name]->test_type_id = $sweep->test_type_id;
-			}
+		$this->db->select('test_id');
+		$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$id))->result();
+		foreach ($plan->tests as $i=>$test){
+			$plan->tests[$i] = $this->plan_model->set_test_v1($test->test_id);
 		}
 		echo json_encode($plan);
 	}
@@ -546,7 +510,7 @@ class Plans extends CI_Controller {
 	
 	function edit(){
 		$id = json_decode(file_get_contents('php://input'));
-		$result = $this->plan_model->edit_test_v1($id);
+		$result = $this->plan_model->set_test_v1($id->testId);
 		echo json_encode($result);
 	}
 	
@@ -668,6 +632,9 @@ class Plans extends CI_Controller {
 				break;
 			case 1:
 				$result = $this->plan_model->update_test($test);
+				break;
+			case 2:
+				$result = $this->plan_model->update_test_v1($test);
 				break;
 		}
 		if($result->params && $result->chips && $result->test){

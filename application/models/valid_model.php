@@ -52,9 +52,9 @@ class valid_model extends CI_Model {
 			}
 			foreach($test->sweeps as $sweepName => $sweepData){
 				$err = new stdClass();
-				switch($sweepData){
-					case is_array($sweepData): //--------------	Deal with generic sweeps	--------------
-						if(!isset($sweepData)){
+				switch($sweepData->data){
+					case is_array($sweepData->data): //--------------	Deal with generic sweeps	--------------
+						if(!isset($sweepData->data)){
 							$err->msg = $sweepName.' were not selected';
 							$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 							$err->occurred = true;
@@ -65,7 +65,7 @@ class valid_model extends CI_Model {
 //						var_dump($sweepData);
 						switch($sweepData->data_type){
 							case 33://Linueup
-								if(!isset($sweepData->value)){
+								if(!isset($sweepData->data->value)){
 									$err->msg = $sweepName.' were not selected';
 									$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 									$err->occurred = true;
