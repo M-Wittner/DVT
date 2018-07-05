@@ -8,7 +8,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 		
 	$scope.testOld = {};
 	$scope.test = {};
-	$http.post(site+'/plans/edit', $routeParams)
+	$http.post(site+'/plans/get_test', $routeParams)
 	.then(function(response){
 		if(response.data.flag == 0){
 			$scope.testOld = response.data;

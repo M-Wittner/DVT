@@ -1,4 +1,4 @@
-<div id="desc" ng-controller="newPlanCtrl" ng-init="test.checkLineup = false">
+<div id="desc" ng-controller="newPlanCtrl" ng-init="test.checkLineup = false; test.priority = []">
 	<div class="panel col-md-12">
 		<span class="">Check Lineups? <input type="checkbox" ng-model="test.checkLineup" ng-disabled="lock"></span>
 	</div>
@@ -61,7 +61,7 @@
 								<ui-select-choices repeat="chip in testParams.params.allChips |filter:{chip_type_id: sweep.data_type - 100}|filter: $select.search" sortable="true" group-by="'chip_process_abb'">{{chip.chip_sn}}-{{chip.chip_process_abb}}</ui-select-choices>
 							</ui-select>
 							<span class="input-group-btn">
-								<button type="button" ng-click="test.sweeps[sweep.name] = {}; test.sweeps[sweep.name].data_type = sweep.data_type" class="btn btn-default btn-sm" ng-disabled="lock">
+								<button type="button" ng-click="test.sweeps[sweep.name].data = []" class="btn btn-default btn-sm" ng-disabled="lock">
 									<span class="glyphicon glyphicon-trash"></span>
 							</button>
 							</span>
@@ -76,7 +76,7 @@
 								<ui-select-choices repeat="sweep in testParams.params.allParams |filter:{config_id: sweep.config_id}:true|filter: $select.search" sortable="true">{{sweep.display_name}}</ui-select-choices>
 							</ui-select>
 							<span class="input-group-btn">
-								<button type="button" ng-click="test.sweeps[sweep.name] = {}; test.sweeps[sweep.name].data_type = sweep.data_type" class="btn btn-default btn-sm" ng-disabled="lock">
+								<button type="button" ng-click="test.sweeps[sweep.name].data = []" class="btn btn-default btn-sm" ng-disabled="lock">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 								<button type="button" ng-click="selectAll(test, sweep)" class="btn btn-default btn-sm" ng-disabled="lock">

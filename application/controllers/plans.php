@@ -56,7 +56,7 @@ class Plans extends CI_Controller {
 		}else{
 			if(!isset($planData->id)){
 				$insertPlan = $insertStatus = $this->db->insert('plans_v1', $plan);
-				$planId = $this->plan_model->get_id($insertPlan);
+				$planId = $this->db->insert_id($insertPlan);
 			}else{
 				$planId = $planData->id;
 			}
@@ -85,7 +85,7 @@ class Plans extends CI_Controller {
 						$error->occurred = true;
 						array_push($result, $error);
 					}else{
-						$testId = $this->plan_model->get_id($insertTest);
+						$testId = $this->db->insert_id($insertTest);
 //						var_dump($test->sweeps);
 //						die();
 						foreach($test->sweeps as $sweepName => $sweepData){
@@ -435,7 +435,7 @@ class Plans extends CI_Controller {
 		$this->db->select('test_id');
 		$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$id))->result();
 		foreach ($plan->tests as $i=>$test){
-			$plan->tests[$i] = $this->plan_model->set_test_v1($test->test_id);
+			$plan->tests[$i] = $this->plan_model->get_test_v1($test->test_id);
 		}
 		echo json_encode($plan);
 	}
@@ -508,9 +508,9 @@ class Plans extends CI_Controller {
 		return $result;
 	}
 	
-	function edit(){
+	function get_test(){
 		$id = json_decode(file_get_contents('php://input'));
-		$result = $this->plan_model->set_test_v1($id->testId);
+		$result = $this->plan_model->get_test_v1($id->testId);
 		echo json_encode($result);
 	}
 	

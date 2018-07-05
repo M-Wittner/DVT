@@ -192,9 +192,17 @@ class excel_model extends CI_Model {
 	}
 	public function validate_v2($test, $param, $unique, $lineup){
 		$errors = array();
-		$temps = array_column($test->sweeps->{'Temperatures'}, 'value');
+		$Temps = (array) $test->sweeps->{'Temperatures'}->data;
+		$temps = array();
+		foreach($Temps as $temp){
+			array_push($temps, $temp->value);
+		}
 
-		$channels = array_column($test->sweeps->{'Channels'}, 'value');
+		$Channels = array_column($test->sweeps->{'Channels'}->data, 'value');
+		$channels = array();
+		foreach($Channels as $channel){
+			array_push($channels, $channel->value);
+		}
 		$name = strtolower($param);
 //		die();
 		if($name == 'temp'){

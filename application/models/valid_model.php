@@ -10,89 +10,94 @@ class valid_model extends CI_Model {
 	public function validate_plan($tests){
 		$result = array();
 		foreach($tests as $test){
-			$error = new stdClass();
-			if($test->checkLineup == true){
-				$res = $this->check($test);
-				if($res != "Lineup is OK!"){
-					foreach($res as $param){
-						foreach($param as $err){
-							$lineupError = new stdClass();;
-							$lineupError->msg = $err->msg;
-							$lineupError->source = $err->source;
-							$lineupError->occurred = true;
-							array_push($result, $lineupError);
-						}
+			$result = $this->validate_test($test, $result);
+		}
+		return $result;
+	}
+	
+	public function validate_test($test, $result){
+		if($test->checkLineup == true){
+			$res = $this->check_lineup($test);
+			if($res != "Lineup is OK!"){
+				$result = $res;
+			}
+		}
+		$result = $this->test_sweep_exist($test, $result);
+		return $result;
+	}
+	
+	public function test_sweep_exist($test, $result){
+		$error = new stdClass();
+		if(!isset($test->priority[0]->value)){
+			$value = new stdClass();
+			$value->value = 'null';
+			array_push($test->priority, $value);
+			$error->msg = 'Priority was not selected';
+			$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
+			$error->occurred = true;
+			array_push($result, $error);
+//				break;
+		}
+		if(!isset($test->station[0]->name)){
+			$test->station[0]->name = 'null';
+			$error->msg = 'Station was not selected';
+			$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
+			$error->occurred = true;
+			array_push($result, $error);
+//				break;
+		}
+		if(!isset($test->testType[0]->type_idx)){
+			$test->testType[0]->type_idx = 'null';
+			$error->msg = 'Test was not selected';
+			$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
+			$error->occurred = true;
+			array_push($result, $error);
+//				break;
+		}
+		foreach($test->sweeps as $sweepName => $sweepData){
+			$err = new stdClass();
+			switch($sweepData){
+				case is_array($sweepData->data): //--------------	Deal with generic sweeps	--------------
+//				var_dump($sweepName);
+//				var_dump($sweepData->data);
+					if(!isset($sweepData->data) || empty($sweepData->data)){
+						$err->msg = $sweepName.' were not selected';
+						$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
+						$err->occurred = true;
+						array_push($result, $err);
 					}
-//					return $result;
-				}
-			}
-			if(!isset($test->priority[0]->value)){
-				$test->priority[0]->value = '';
-				$error->msg = 'Priority was not selected';
-				$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
-				$error->occurred = true;
-				array_push($result, $error);
-//				break;
-			}
-			if(!isset($test->station[0]->name)){
-				$test->station[0]->name = 'null';
-				$error->msg = 'Station was not selected';
-				$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
-				$error->occurred = true;
-				array_push($result, $error);
-//				break;
-			}
-			if(!isset($test->testType[0]->type_idx)){
-				$test->testType[0]->type_idx = 'null';
-				$error->msg = 'Test was not selected';
-				$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
-				$error->occurred = true;
-				array_push($result, $error);
-//				break;
-			}
-			foreach($test->sweeps as $sweepName => $sweepData){
-				$err = new stdClass();
-				switch($sweepData->data){
-					case is_array($sweepData->data): //--------------	Deal with generic sweeps	--------------
-						if(!isset($sweepData->data)){
-							$err->msg = $sweepName.' were not selected';
-							$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
-							$err->occurred = true;
-							array_push($result, $err);
-						}
-						break;
-					default: //--------------	Deal with different sweeps	--------------
+					break;
+				default: //--------------	Deal with different sweeps	--------------
 //						var_dump($sweepData);
-						switch($sweepData->data_type){
-							case 33://Linueup
-								if(!isset($sweepData->data->value)){
-									$err->msg = $sweepName.' were not selected';
-									$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
-									$err->occurred = true;
-									array_push($result, $err);
-								}
-								break;
-							case 60://Pin
-								if(!isset($sweepData->data->from) || !isset($sweepData->data->step) || !isset($sweepData->data->to)){
-									$err->msg = $sweepName.' is missing';
-									$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
-									$err->occurred = true;
-									array_push($result, $err);
-								}
-								break;
-							default:
+					switch($sweepData->data_type){
+						case 33://Linueup
+							if(!isset($sweepData->data->value)){
 								$err->msg = $sweepName.' were not selected';
 								$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 								$err->occurred = true;
 								array_push($result, $err);
-								break;
+							}
+							break;
+						case 60://Pin
+							if(!isset($sweepData->data->from) || !isset($sweepData->data->step) || !isset($sweepData->data->to)){
+								$err->msg = $sweepName.' is missing';
+								$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
+								$err->occurred = true;
+								array_push($result, $err);
+							}
+							break;
+						default:
+							$err->msg = $sweepName.' were not selected';
+							$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
+							$err->occurred = true;
+							array_push($result, $err);
+							break;
 						}
-						break;
-					}
+					break;
 				}
 			}
-			return $result;
-		}
+		return $result;
+	}
 	
 	public function check_num($rows, $range, $xl_idx, $sheet){
 		$errors = array();
@@ -274,20 +279,22 @@ class valid_model extends CI_Model {
 		return $errors;
 	}
 	
-	public function check($test){
+	public function check_lineup($test){
 		$data = json_decode(file_get_contents('php://input'));
 		$station = $test->station[0];
 		$testType = $test->testType[0];
 		$this->db->select('config_id, name, data_type');
-		$struct = $this->db->get_where('test_struct_view', array('station_id'=>$station->idx, 'test_type_id'=>$testType->type_idx))->result();//get all sweeps for this testType
+		$struct = $this->db->get_where('test_struct_view', array('station_id'=>$station->idx, 'test_type_id'=>$testType->type_idx))->result_array();//get all sweeps for this testType
 		//extracting lineups from the sweeps OBJ
 		$dataTypes = array_column($struct, 'data_type');
 //		$lineupIdx = array();
 		$lineups = array();
 		for($i = 0; $i < count($struct); $i++){
 			if($dataTypes[$i] == '33'){
-				$sweepName = $struct[$i]->name;
-				$lineup = (string)$test->sweeps->{$sweepName}->value;
+				$sweepName = $struct[$i]['name'];
+//				echo json_encode($test->sweeps->$sweepName);
+//				die();
+				$lineup = (string)$test->sweeps->$sweepName->data->value;
 				array_push($lineups, $lineup);
 			}
 		}
@@ -413,7 +420,17 @@ class valid_model extends CI_Model {
 				}
 			}
 			if(!empty($errors)){
-				return $errors;
+				$result = array();
+				foreach($errors as $params){
+					foreach($params as $error){
+						$lineupError = new stdClass();;
+						$lineupError->msg = $error->msg;
+						$lineupError->source = $error->source;
+						$lineupError->occurred = true;
+						array_push($result, $lineupError);
+					}
+				}
+				return $result;
 			}else{
 				return "Lineup is OK!";
 			}
