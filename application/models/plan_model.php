@@ -337,7 +337,123 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_test_v1($test){
-		
+		$result = array();
+		$valid = $this->valid_model->validate_test($test, $result);
+		if(!empty($valid)){
+			foreach ($valid as $err){
+				array_push($result, $err);
+			}
+		}else{
+			if(!isset($test->notes)){
+				$test->notes = null;
+			}
+			$error = new stdClass();
+			$testBody = array(
+//				'plan_id'=>$test->plan_id,
+				'priority'=>$test->priority[0]->value,
+				'test_type_id'=>$test->testType[0]->type_idx,
+				'notes'=>$test->notes,
+				'user_id'=>$test->user->userId,
+			);
+			$insertTest = $this->db->update('test_v1', $testBody);
+//			die();
+			if(!$insertTest){
+				$error->msg = 'Test was not submitted';
+				$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
+				$error->occurred = true;
+				array_push($result, $error);
+			}else{
+				$testId = $test->test_id;
+				foreach($test->sweeps as $sweepName => $sweepData){
+					unset($sweepData->data->display_name);
+					$error = new stdClass();
+					switch($sweepData->data){
+						case is_array($sweepData->data): //--------------	Deal with generic sweeps	--------------
+//									var_dump($sweepName);
+							switch($sweepData->data_type){
+								case $sweepData->data_type > 100:
+									$chips = array();
+									$this->db->select('config_id');
+									$configId = $this->db->get_where('dvt_60g.test_configurations', array('name'=>$sweepName))->result()[0]->config_id;
+									foreach($sweepData->data as $sweep){
+										if(isset($sweep->value)){
+											$value = $sweep->value;
+										} else if(isset($sweep->chip_id)){
+											$value = $sweep->chip_id;
+										}
+										$chip = array(
+											'test_id'=>$testId,
+											'config_id'=>$configId,
+											'value'=>$value,
+										);
+										array_push($chips,$chip);
+									}
+										$this->db->where('test_id',$testId);
+										$this->db->where('config_id',$configId);
+										$this->db->delete('dvt_60g.test_configuration_data');
+										$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $chips);
+									break;
+								default:
+									foreach($sweepData->data as $sweep){
+										$sweep->test_id = $testId;
+										unset($sweep->display_name);
+									}
+									$this->db->where('test_id',$testId);
+									$this->db->where('config_id',$sweep->config_id);
+									$this->db->delete('dvt_60g.test_configuration_data');
+									$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $sweepData->data, 'test_id');
+									break;
+							}
+							if(!$insertSweep){
+								$error->msg = $sweepName.' was not inserted';
+								$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
+								$error->occurred = true;
+								array_push($result, $error);
+							}
+							break;
+						default: //--------------	Deal with different sweeps	--------------
+							$sweepData->data->test_id = $testId;
+							switch($sweepData->data_type){
+								case 33://Linueup
+									unset($sweepData->data_type);
+									$this->db->where('test_id',$testId);
+									$this->db->where('config_id',$sweepData->data->config_id);
+									$this->db->delete('dvt_60g.test_configuration_data');
+									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData->data);
+									break;
+								case 60://Pin
+									unset($sweepData->data_type);
+									if(!isset($sweepData->data->ext)){
+										$sweepData->data->ext = '';
+									}
+									$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.$sweepData->data->ext;
+									$this->db->set('config_id', $sweepData->config_id);
+									$this->db->set('value', $pin);
+									$this->db->set('test_id', $testId);
+									$toUpdate = array(
+										'config_id' => $sweepData->config_id,
+										'value' => $pin,
+										'test_id' => $testId
+									);
+									$this->db->where('test_id',$testId);
+									$this->db->where('config_id',$sweep->config_id);
+									$this->db->delete('dvt_60g.test_configuration_data');
+//									var_dump($toUpdate);
+									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $toUpdate);
+									break;
+							}
+							if(!isset($insertSweep) || !$insertSweep){
+								$error->msg = $sweepName.' was not inserted';
+								$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
+								$error->occurred = true;
+								array_push($result, $error);
+							}
+							break;
+					}
+				}
+			}
+		}
+		return $result;
 	}
 	
 	function update_chip_status($result){

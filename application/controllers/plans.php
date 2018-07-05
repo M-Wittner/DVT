@@ -637,12 +637,7 @@ class Plans extends CI_Controller {
 				$result = $this->plan_model->update_test_v1($test);
 				break;
 		}
-		if($result->params && $result->chips && $result->test){
-			echo 'success';
-		} else {
-			echo $result;
-		}
-//			echo json_encode($result);
+			echo json_encode($result);
 	}
 	
 	function planCheck(){

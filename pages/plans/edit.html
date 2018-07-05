@@ -1,6 +1,9 @@
 <!-------------------------------------------------------	v1 Format	------------------------------------------------------->
-<div ng-init="test.flag = 2" class="panel panel-primary" ng-if="test.test_id">
+<div ng-init="test.flag = 2; test.checkLineup = true; test.user = currentUser" class="panel panel-primary" ng-if="test.test_id">
 	<div class="panel-heading">Edit: Station: {{ test.name }}</div>
+	<div class="panel col-md-12">
+		<span class="">Check Lineups? <input type="checkbox" ng-model="test.checkLineup" ng-disabled="lock"></span>
+	</div>
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-3">
@@ -67,15 +70,15 @@
 						</div>
 					</div>
 					<!----------------------------------------------------------------			Sweeps			---------------------------------------------------------------->
-					<div ng-if="sweepData.data_type != 33 && sweepData.data_type < 100 && sweepData.data_type != 60" class="col-md-3 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'"  allow-clear>
+					<div ng-if="sweepData.data_type != 33 && sweepData.data_type < 100 && sweepData.data_type != 60" class="col-md-3 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'" ng-init="sweepData.config_id = sweepData.data[0].config_id" allow-clear>
 						<span class="label label-dangerC">{{sweepName}}</span>
 						<div class="input-group">
 							<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.sweeps[sweepName].data" data-placeholder="Pick Test" ng-disabled="lock">
 								<ui-select-match>{{$item.display_name}}</ui-select-match>
-								<ui-select-choices repeat="sweep in testParams.params.allParams |filter:{config_id: struct.config_id}:true|filter: $select.search" sortable="true">{{sweep.display_name}}</ui-select-choices>
+								<ui-select-choices repeat="sweep in testParams.params.allParams |filter:{config_id: sweepData.config_id}:true|filter: $select.search" sortable="true">{{sweep.display_name}}</ui-select-choices>
 							</ui-select>
 							<span class="input-group-btn">
-								<button type="button" ng-click="test.sweeps[sweepName] = {}; test.sweeps[sweepName].data_type = sweepData.data_type" class="btn btn-default btn-sm" ng-disabled="lock">
+								<button type="button" ng-click="test.sweeps[sweepName].data = []; test.sweeps[sweepName].data_type = sweepData.data_type;" class="btn btn-default btn-sm" ng-disabled="lock">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 								<button type="button" ng-click="selectAll(test, struct)" class="btn btn-default btn-sm" ng-disabled="lock">

@@ -5,6 +5,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 		var site = testParams.site;
 	
 	$scope.user = $scope.currentUser.username;
+	console.log(testParams);
 		
 	$scope.testOld = {};
 	$scope.test = {};
