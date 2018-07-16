@@ -46,9 +46,15 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$scope.removePlan = function() {
 		$http.post(site+'/plans/removePlan', this.plan.id)
 		.then(function(response){
-			var message = 'Plan Deleted Succesfully!';
-			var id = Flash.create('success', message, 3500);
-			$location.path('/plans');
+			console.log(response.data);
+			if(response.data == 'true'){
+				var message = 'Plan Deleted Succesfully!';
+				var id = Flash.create('success', message, 3500);
+				$location.path('/plans');
+			} else{
+				var message = 'Plan Deleted Succesfully!';
+				var id = Flash.create('danger', message, 0);
+			}
 		});
 	};
 	

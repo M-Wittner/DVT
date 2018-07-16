@@ -504,12 +504,14 @@ class Plans extends CI_Controller {
 	
 	function removePlan(){
 		$id = json_decode(file_get_contents('php://input'));
-		$result = $this->plan_model->delete_plan($id);
-		return $result;
+		$this->db->where('id', $id);
+		$result = $this->db->delete('plans_v1');
+		echo json_encode($result);
 	}
 	
 	function get_test(){
 		$id = json_decode(file_get_contents('php://input'));
+		
 		$result = $this->plan_model->get_test_v1($id->testId);
 		echo json_encode($result);
 	}

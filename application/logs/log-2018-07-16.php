@@ -24,3 +24,21 @@ ERROR - 201820182018-0707-1616 0909:JulJul:3232 --> 404 Page Not Found: Assets/l
 ERROR - 201820182018-0707-1616 0909:JulJul:5050 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-0707-1616 0909:JulJul:3737 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-0707-1616 0909:JulJul:0404 --> Severity: error --> Exception: File "123456" does not exist. C:\xampp\htdocs\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php 137
+ERROR - 201820182018-0707-1616 0909:JulJul:0909 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-1616 0909:JulJul:3737 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-1616 0909:JulJul:5454 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-1616 0909:JulJul:1111 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-1616 0909:JulJul:2020 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-1616 0909:JulJul:2727 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-1616 0909:JulJul:4040 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-1616 0909:JulJul:3434 --> Severity: Parsing Error --> syntax error, unexpected 'return' (T_RETURN) C:\xampp\htdocs\application\controllers\plans.php 509
+ERROR - 201820182018-0707-1616 0909:JulJul:5757 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-1616 0909:JulJul:5757 --> Severity: Parsing Error --> syntax error, unexpected 'echo' (T_ECHO) C:\xampp\htdocs\application\controllers\plans.php 509
+ERROR - 201820182018-0707-1616 0909:JulJul:0000 --> Severity: Parsing Error --> syntax error, unexpected 'echo' (T_ECHO) C:\xampp\htdocs\application\controllers\plans.php 509
+ERROR - 201820182018-0707-1616 0909:JulJul:1414 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-1616 0909:JulJul:2323 --> Severity: Error --> Call to undefined method Plans::db_delete() C:\xampp\htdocs\application\controllers\plans.php 508
+ERROR - 201820182018-0707-1616 0909:JulJul:4646 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\controllers\plans.php 434
+ERROR - 201820182018-0707-1616 0909:JulJul:4646 --> Severity: Warning --> Creating default object from empty value C:\xampp\htdocs\application\controllers\plans.php 436
+ERROR - 201820182018-0707-1616 0909:JulJul:5656 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-1616 0909:JulJul:0202 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-1616 0909:JulJul:2222 --> 404 Page Not Found: Assets/lib
