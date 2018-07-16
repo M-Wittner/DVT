@@ -73,7 +73,8 @@ class Lineups extends CI_Controller {
 	
 	public function check(){
 		$data = json_decode(file_get_contents('php://input'));
-//			die(print_r($lineup));
+//		echo json_encode($data);
+//		die();
 			$lineup = (string)$data->path;
 			$station = $data->station[0]->name;
 

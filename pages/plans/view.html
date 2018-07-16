@@ -105,7 +105,7 @@
 								<span class="input-group-addon" id="step" style="font-weight:900">;</span>
 								<label class="form-control" type="number" uib-popover="To" popover-trigger="'mouseenter'">{{sweepData.data.to}}</label>
 								<span class="input-group-addon" id="to" style="font-weight:900">;</span>
-								<label ng-if="sweepData.data.value.ext" class="form-control" type="text" uib-popover="Extra" popover-trigger="'mouseenter'">
+								<label ng-if="sweepData.data.ext" class="form-control" type="text" uib-popover="Extra" popover-trigger="'mouseenter'">
 									<span ng-repeat="pin in sweepData.data.ext">{{pin}}, </span>
 								</label>
 							</div>

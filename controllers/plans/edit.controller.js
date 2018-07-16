@@ -38,20 +38,16 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	$scope.planParams;
 	$scope.lock = false;
 	
-	$scope.addTest1 = function(){
-		$scope.lock = true;
+	$scope.selectAll = function(test, sweep, name){
+		console.log(test);
+		console.log(sweep);
+		var result = testParams.params.allParams.filter(item => item.config_id == sweep.config_id);
+		console.log(result);
+		if(!test.sweeps){
+			test.sweeps = [];
+		}
+		test.sweeps[name].data = result;
 	};
-	
-	$scope.editToggle = function(){
-		$scope.lock = !$scope.lock;
-	};
-	
-	$scope.addPair = function(){
-		$scope.test.chips.push({});
-	}
-	$scope.removePair = function(test){
-		$scope.test.chips.splice($scope.test.chips.length-1, 1);
-	}
 	
 	$scope.editPlan = function(){
 		$http.post(site+'/plans/update', $scope.test)

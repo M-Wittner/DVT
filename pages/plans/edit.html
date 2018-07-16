@@ -81,7 +81,7 @@
 								<button type="button" ng-click="test.sweeps[sweepName].data = []; test.sweeps[sweepName].data_type = sweepData.data_type;" class="btn btn-default btn-sm" ng-disabled="lock">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
-								<button type="button" ng-click="selectAll(test, struct)" class="btn btn-default btn-sm" ng-disabled="lock">
+								<button type="button" ng-click="selectAll(test, sweepData, sweepName)" class="btn btn-default btn-sm" ng-disabled="lock">
 									<span class="glyphicon glyphicon-check"></span>
 								</button>
 								<button class="btn btn-default btn-sm" ng-click="extras(test, struct)" ng-disabled="lock">
