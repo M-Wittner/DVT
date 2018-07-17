@@ -58,8 +58,8 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		});
 	};
 	
-	$scope.removeTest = function() {
-		$http.post(site+'/plans/removeTest', this.test.id)
+	$scope.removeTest = function($testId) {
+		$http.post(site+'/plans/removeTest', $testId)
 		.then(function(response){
 			if(response.data = 'success'){
 				$window.scrollTo(0, 0);
@@ -72,24 +72,25 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 				var id = Flash.create('danger', message, 3500);
 				console.log(response.data);
 			}
+//				console.log(response.data);
 		});
 	};
-	$scope.removeTestFS = function() {
-		$http.post(site+'/plans/removeTestFS', this.test.id)
-		.then(function(response){
-			if(response.data = 'success'){
-				$window.scrollTo(0, 0);
-				var message = 'Test Deleted Succesfully!';
-				var id = Flash.create('success', message, 3500);
-				setTimeout(function(){$window.location.reload();}, 2250);
-			} else{
-				$window.scrollTo(0, 0);
-				var message = 'Test Was Not Deleted!';
-				var id = Flash.create('danger', message, 3500);
-				console.log(response.data);
-			}
-		});
-	};
+//	$scope.removeTestFS = function() {
+//		$http.post(site+'/plans/removeTestFS', this.test.id)
+//		.then(function(response){
+//			if(response.data = 'success'){
+//				$window.scrollTo(0, 0);
+//				var message = 'Test Deleted Succesfully!';
+//				var id = Flash.create('success', message, 3500);
+//				setTimeout(function(){$window.location.reload();}, 2250);
+//			} else{
+//				$window.scrollTo(0, 0);
+//				var message = 'Test Was Not Deleted!';
+//				var id = Flash.create('danger', message, 3500);
+//				console.log(response.data);
+//			}
+//		});
+//	};
 	
 	$scope.sendMail = function(){
 		$http.post(site+'/plans/sendMail', $scope.plan)

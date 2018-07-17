@@ -62,32 +62,12 @@
 						<div class="col-md-3" ng-if="currentUser.username == plan.user_username || currentUser.rank > '10'">
 							<span class="pull-right">
 								<a class="btn btn-xs btn-warning" href="#/plans/{{plan.id}}/test/{{test.test_id}}/edit">Edit</a>
-								<a class="btn btn-xs btn-danger" ng-click="removeTestFS()">
+								<a class="btn btn-xs btn-danger" ng-click="removeTest(test.test_id)">
 									Delete
 								</a>
 							</span>
 						</div>
 					</div>
-<!--
-					<div class="row">
-						<div class="panel-body">
-							<div class="col-md-2 col-sm-2">
-								<span class="label label-primary">Test ID:</span>
-								<label class="form-control" style="min-width: 30%;">{{test.test_id}}</label>
-							</div>
-							<div class="col-md-2 col-sm-2">
-								<span class="label label-primary">Test Priority:</span>
-								<label class="form-control" style="min-width: 30%;">{{test.priority[0].value}}</label>
-							</div>
-							<div class="col-md-2">
-								<span class="label label-primary">Station:</span>
-								<ul class="list-group">
-									<li class="list-group-item">{{test.name}}</li>
-									<li class="list-group-item">{{test.hostname}}</li>
-								</ul>
-						</div>
-					</div>
--->
 					<div class="row">
 						<div ng-repeat="(sweepName, sweepData) in test.sweeps track by sweepName">
 						<!----------------------------------------------------------------			Lineups			---------------------------------------------------------------->
