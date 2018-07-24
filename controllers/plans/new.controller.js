@@ -5,7 +5,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 	var site = testParams.site;
 //	var $select = $scope.$select
 	$scope.testStructs = $scope.testParams.structs;
-	console.log(testParams);
+//	console.log($scope.testStructs);
 
 	if($scope.isAuthenticated == false){
 		var message = 'Please Login first!';

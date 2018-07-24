@@ -60,11 +60,13 @@ class Plans extends CI_Controller {
 			}else{
 				$planId = $planData->id;
 			}
-			$valid = $this->valid_model->validate_plan($tests);
-			if(!empty($valid)){
-				foreach ($valid as $err){
-					array_push($result, $err);
-				}
+			if(isset($test->checkLineup)){
+				$valid = $this->valid_model->validate_plan($tests);
+				if(!empty($valid)){
+					foreach ($valid as $err){
+						array_push($result, $err);
+					}
+			}
 			}else{
 				foreach($tests as $test){
 					if(!isset($test->notes)){
@@ -113,6 +115,8 @@ class Plans extends CI_Controller {
 												$sweep->test_id = $testId;
 												unset($sweep->display_name);
 											}
+//											var_dump($sweepData);
+//											die();
 											$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $sweepData->data);
 											break;
 									}
@@ -129,11 +133,11 @@ class Plans extends CI_Controller {
 									switch($sweepData->data_type){
 										case 33://Linueup
 											unset($sweepData->data_type);
-//											var_dump($sweepData);
-//											die();
 											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData->data);
 											break;
 										case 60://Pin
+//											var_dump($sweepData);
+//											die();
 											unset($sweepData->data_type);
 											if(!isset($sweepData->data->ext)){
 												$sweepData->data->ext = '';
@@ -511,9 +515,14 @@ class Plans extends CI_Controller {
 	
 	function get_test(){
 		$id = json_decode(file_get_contents('php://input'));
-		
 		$result = $this->plan_model->get_test_v1($id->testId);
 		echo json_encode($result);
+	}
+	
+		function copyTest(){
+		$testId = json_decode(file_get_contents('php://input'));
+		$test = $this->plan_model->get_test_v1($testId);
+		echo json_encode($test);
 	}
 	
 	function newcomment(){
@@ -761,14 +770,7 @@ class Plans extends CI_Controller {
 		}
 		echo json_encode($tests);
 	}
-	
-	function copyTest(){
-		$data = new stdClass();
-		$data->testId = json_decode(file_get_contents('php://input'));
-		$rawTest = $this->plan_model->edit_test($data);
-		$test = $this->plan_model->format_edit($rawTest);
-		echo json_encode($test);
-	}
+
 	
 		public function lineup($test){
 //			die(print_r($test));

@@ -199,7 +199,7 @@ class plan_model extends CI_Model {
 	}
 	function get_test_v1($id) {
 		$this->other_db = $this->load->database('main', TRUE);
-		$test = $this->db->get_where('tests_view_v1', array('test_id'=>$id))->result()[0];
+		$test = $this->db->get_where('tests_view_v1', array('test_id'=>$id))->result()[0]; // Get test by id from test_view
 //		var_dump($id);
 //		die();
 		$test->station = $this->other_db->get_where('work_stations',['idx'=>$test->station_id])->result();
@@ -209,15 +209,20 @@ class plan_model extends CI_Model {
 		$test->priority[0] = new stdClass();
 		$test->priority[0]->value = $priority;
 //		die(var_dump($test));
+		// ----- Get Sweeps of that test ---------
 		$test->sweeps = array();
 		$this->db->select('config_id, name, data_type, priority, test_type_id');
 		$this->db->order_by('priority asc','data_type desc');
 		$struct = $this->db->get_where('test_struct_view', array('station_id'=>$test->station_id, 'test_type_id'=>$test->test_type_id))->result();
+		// ----- Populate each sweep with data ---------
 		foreach($struct as $sweep){
 			$test->sweeps[$sweep->name] = new stdClass();
 			$data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$sweep->config_id))->result();
+//			if($data[0]->config_id != 14 && $data[0]->config_id != 5){
+
+//			}
 			if(count($data) == 1 && (in_array($sweep->data_type, [33, 60]))){
-				if($sweep->data_type == 60){
+				if($sweep->data_type == 60){ //Pin sweep
 					$data[0]->value = explode(';', $data[0]->value);
 					$data[0]->from = (int) $data[0]->value[0];
 					$data[0]->step = (int) $data[0]->value[1];
@@ -229,7 +234,7 @@ class plan_model extends CI_Model {
 						unset($data[0]->value[$i]);
 					}
 					$test->sweeps[$sweep->name]->data = $data[0];
-				}else{
+				}else{ //Lineup sweep
 					$test->sweeps[$sweep->name]->data = $data[0];
 				}
 //						$test->sweeps[$sweep->name]->data = $data[0];
