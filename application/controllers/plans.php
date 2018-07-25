@@ -707,67 +707,9 @@ class Plans extends CI_Controller {
 		$id = json_decode(file_get_contents('php://input'));
 //		echo $id;
 //		die();;
+		$this->db->select('priority, name AS station, test_name');
 		$this->db->where('plan_id', $id);
-		$tests = $this->db->get('tests')->result();
-		if (!count($tests) > 0){
-			$this->db->where('plan_id', $id);
-			$tests = $this->db->get('tests_view_new')->result();
-			foreach($tests as $test){
-				$test->chips = $this->db->get_where('test_chips_view', ['test_id'=>$test->id])->result();
-				$c = 0;
-				$e = 0;
-				$r = 0;
-				foreach($test->chips as $chip){
-					switch($chip->status_id){
-						case 2:
-							$r++;
-							break;
-						case 3:
-							$c++;
-							break;
-						case 4:
-							$e++;
-							break;
-					}
-				}
-				if($c == count($test->chips)){
-					$test->status_id = 3;
-				} elseif($e > 0){
-					$test->status_id = 4;
-				} elseif($r > 0 && $c < count($test->chips)){
-					$test->status_id = 2 ;
-				} else{
-					$test->status_id = 1;
-				}
-			}
-		}else{
-			foreach($tests as $test){
-				$test->chips = $this->db->get_where('test_chips', array('plan_id'=>$id, 'test_id'=>$test->id))->result();
-				$chips = $test->chips;
-	//			die(var_dump($test->chips));
-				$c = 0;
-				$e = 0;
-				$r = 0;
-				foreach($chips as $chip){
-					if($chip->completed == true){
-						$c++;
-					}elseif($chip->error == true){
-						$e++;
-					}elseif($chip->running == true){
-						$r++;
-					}
-				}
-				if($c == count($chips)){
-					$test->status = 'Completed';
-				} elseif($e > 0){
-					$test->status = 'Error';
-				}elseif($r> 0){
-					$test->status = 'In Progress';
-				}else{
-					$test->status = 'IDLE';
-				} 
-			}	
-		}
+		$tests = $this->db->get('tests_view_v1')->result();
 		echo json_encode($tests);
 	}
 
