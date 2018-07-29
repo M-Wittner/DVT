@@ -7,6 +7,11 @@
 	width: 100px;
 }
 
+.chip-status:hover{
+	color: #439fec;
+  text-shadow: 0 0 25px #000000;
+}
+
 .panel-M1 > .panel-heading {
 	border-bottom-width: 4px;
 	border-color: #ffe34c;

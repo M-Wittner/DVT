@@ -86,7 +86,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		chip.flag = null;
 		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user})
 		.then(function(response){
-			console.log(response.data);
+//			console.log(response.data);
 			var keys = Object.keys(response.data);
 			var key = keys[0];
 			var username = keys[1]
@@ -99,9 +99,9 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	
 	$scope.hotStatus = function(chip){
 		chip.flag = 'hot';
-		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user.id})
+		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user})
 		.then(function(response){
-			console.log(response.data);
+//			console.log(response.data);
 			var key = Object.keys(response.data)[0];
 			chip[key] = response.data[key];
 //				var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
@@ -110,9 +110,9 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	}	
 	$scope.coldStatus = function(chip){
 		chip.flag = 'cold';
-		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user.id})
+		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user})
 		.then(function(response){
-			console.log(response.data);
+//			console.log(response.data);
 			var key = Object.keys(response.data)[0];
 			chip[key] = response.data[key];
 //			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';

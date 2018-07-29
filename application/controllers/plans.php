@@ -16,8 +16,7 @@ class Plans extends CI_Controller {
 
 	function index() {
 		$this->db->order_by('date', 'desc');
-//		$this->db->limit('1');
-		$plans = $this->db->get('plans_v1')->result();
+		$plans = $this->db->get('plans_v1_view')->result();
 			foreach($plans as $plan){
 				$this->db->where('plan_id', $plan->id);
 				$plan->tests = $this->db->get('tests_view_v1')->result();
@@ -183,7 +182,7 @@ class Plans extends CI_Controller {
 	function show_v1(){
 		$this->other_db = $this->load->database('main', TRUE);
 		$id = json_decode(file_get_contents('php://input'));
-		$plan = $this->db->get_where('plans_v1', array('id'=>$id))->result()[0];
+		$plan = $this->db->get_where('plans_v1_view', array('id'=>$id))->result()[0];
 		$this->db->select('test_id');
 		$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$id))->result();
 		foreach ($plan->tests as $i=>$test){

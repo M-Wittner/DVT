@@ -134,3 +134,39 @@ ERROR - 201820182018-0707-2929 1414:JulJul:0202 --> 404 Page Not Found: Assets/l
 ERROR - 201820182018-0707-2929 1414:JulJul:2424 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-0707-2929 1414:JulJul:3939 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-0707-2929 1414:JulJul:0404 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:1818 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:1717 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:0505 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:2424 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:4141 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:3636 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:4242 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:5555 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:4545 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:3333 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:4848 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:3131 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:0101 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:1717 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1515:JulJul:0707 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1515:JulJul:3838 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1515:JulJul:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 509
+ERROR - 201820182018-0707-2929 1515:JulJul:5050 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 513
+ERROR - 201820182018-0707-2929 1515:JulJul:5252 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 509
+ERROR - 201820182018-0707-2929 1515:JulJul:5252 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 513
+ERROR - 201820182018-0707-2929 1515:JulJul:5353 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 509
+ERROR - 201820182018-0707-2929 1515:JulJul:5353 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 513
+ERROR - 201820182018-0707-2929 1515:JulJul:5454 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 509
+ERROR - 201820182018-0707-2929 1515:JulJul:5454 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 513
+ERROR - 201820182018-0707-2929 1515:JulJul:5454 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 509
+ERROR - 201820182018-0707-2929 1515:JulJul:5454 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 513
+ERROR - 201820182018-0707-2929 1515:JulJul:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 509
+ERROR - 201820182018-0707-2929 1515:JulJul:3737 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 513
+ERROR - 201820182018-0707-2929 1515:JulJul:1818 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1515:JulJul:2323 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 509
+ERROR - 201820182018-0707-2929 1515:JulJul:2323 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 513
+ERROR - 201820182018-0707-2929 1515:JulJul:1414 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1515:JulJul:4343 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1515:JulJul:2222 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1515:JulJul:4848 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1515:JulJul:1313 --> 404 Page Not Found: Assets/lib
