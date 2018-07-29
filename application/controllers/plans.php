@@ -83,6 +83,7 @@ class Plans extends CI_Controller {
 											$this->db->select('config_id');
 											$configId = $this->db->get_where('dvt_60g.test_configurations', array('name'=>$sweepName))->result()[0]->config_id;
 											foreach($sweepData->data as $sweep){
+												unset($sweep->data_idx);
 												$value = -1;
 												if(isset($sweep->chip_id)){
 													$value = $sweep->chip_id;
@@ -111,6 +112,7 @@ class Plans extends CI_Controller {
 											foreach($sweepData->data as $sweep){
 												$sweep->test_id = $testId;
 												unset($sweep->display_name);
+												unset($sweep->data_idx);
 											}
 											if(isset($sweepData->ext)){
 												$extraData = explode(',', $sweepData->ext);
@@ -136,6 +138,7 @@ class Plans extends CI_Controller {
 									$sweepData->data->test_id = $testId;
 //									var_dump($sweepName);
 									unset($sweepData->data->display_name);
+									unset($sweepData->data->data_idx);
 									switch($sweepData->data_type){
 										case 33://Linueup
 											unset($sweepData->data_type);

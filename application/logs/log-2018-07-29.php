@@ -115,3 +115,8 @@ ERROR - 201820182018-0707-2929 1313:JulJul:2727 --> Severity: Notice --> Trying 
 ERROR - 201820182018-0707-2929 1313:JulJul:0101 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-0707-2929 1313:JulJul:5858 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-0707-2929 1313:JulJul:0808 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:5353 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:3636 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:4545 --> Query error: Duplicate entry '1768' for key 'PRIMARY' - Invalid query: INSERT INTO `dvt_60g`.`test_configuration_data` (`data_idx`, `test_id`, `config_id`, `value`) VALUES ('1768', 136, '15', 'fdsfdsfds')
+ERROR - 201820182018-0707-2929 1313:JulJul:2828 --> Query error: Duplicate entry '1768' for key 'PRIMARY' - Invalid query: INSERT INTO `dvt_60g`.`test_configuration_data` (`data_idx`, `test_id`, `config_id`, `value`) VALUES ('1768', 137, '15', 'fdsfdsfds')
+ERROR - 201820182018-0707-2929 1313:JulJul:3030 --> Query error: Duplicate entry '1768' for key 'PRIMARY' - Invalid query: INSERT INTO `dvt_60g`.`test_configuration_data` (`data_idx`, `test_id`, `config_id`, `value`) VALUES ('1768', 138, '15', 'fdsfdsfds')
