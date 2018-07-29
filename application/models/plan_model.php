@@ -506,11 +506,11 @@ class plan_model extends CI_Model {
 				break;
 		}
 		$this->db->set($key, $status);
-		$this->db->set('user_id', $user);
+		$this->db->set('user_id', $user->id);
 		$this->db->where(['data_idx'=>$chip->data_idx]);
 		$res = $this->db->update('chip_status');
 		if($res){
-			return array($key=>$status);
+			return array($key=>$status, 'user'=>$user->username);
 		}
 	}
 	

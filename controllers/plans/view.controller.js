@@ -83,13 +83,17 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	};
 	
 	$scope.chipStatus = function(chip){
-		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user.id})
+		chip.flag = null;
+		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user})
 		.then(function(response){
 			console.log(response.data);
-			var key = Object.keys(response.data)[0];
+			var keys = Object.keys(response.data);
+			var key = keys[0];
+			var username = keys[1]
 			chip[key] = response.data[key];
-			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
-			var id = Flash.create('success', message, 6000);
+			chip.username = response.data[username];
+//			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
+//			var id = Flash.create('success', message, 6000);
 		});
 	}
 	
@@ -100,8 +104,8 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 			console.log(response.data);
 			var key = Object.keys(response.data)[0];
 			chip[key] = response.data[key];
-				var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
-				var id = Flash.create('success', message, 6000);
+//				var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
+//				var id = Flash.create('success', message, 6000);
 		});
 	}	
 	$scope.coldStatus = function(chip){
@@ -111,8 +115,8 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 			console.log(response.data);
 			var key = Object.keys(response.data)[0];
 			chip[key] = response.data[key];
-			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
-			var id = Flash.create('success', message, 6000);
+//			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
+//			var id = Flash.create('success', message, 6000);
 		});
 	}
 	
