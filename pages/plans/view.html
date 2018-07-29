@@ -107,15 +107,15 @@
 									<tr ng-repeat="chip in sweepData.data track by $index">
 										<td >{{chip.chip_sn}}-{{chip.chip_process_abb}}</td>
 										<td class="text-center">
-											<span ng-click="chipStatus(chip, test.test_id)" class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': param.status_id == 2, 'glyphicon-ok': param.status_id == 3, 'glyphicon-remove': param.status_id == 4}"></span>
+											<span ng-click="chipStatus(chip)" class="glyphicon glyphicon-minus" ng-class="{'glyphicon-hourglass': chip.chip_status == 2, 'glyphicon-ok':  chip.chip_status == 0, 'glyphicon-remove':  chip.chip_status == 3}"></span>
 										</td>
 										<td ng-hide="test.station == 'PTAT/ABS/Vgb+TEMP'">
-											<span class="glyphicon glyphicon-minus" ng-click="coldStatus(param)" ng-class="{'glyphicon-ok': param.cold == '1'}"></span>
+											<span class="glyphicon glyphicon-minus" ng-click="hotStatus(chip)" ng-class="{'glyphicon-hourglass': chip.hot_status == 2, 'glyphicon-ok':  chip.hot_status == 0, 'glyphicon-remove':  chip.hot_status == 3}"></span>
 										</td>
 										<td ng-hide="test.station == 'PTAT/ABS/Vgb+TEMP'">
-											<span class="glyphicon glyphicon-minus" ng-click="hotStatus(param)" ng-class="{'glyphicon-ok': param.hot == '1'}"></span>
+											<span class="glyphicon glyphicon-minus" ng-click="coldStatus(chip)" ng-class="{'glyphicon-hourglass': chip.cold_status == 2, 'glyphicon-ok':  chip.cold_status == 0, 'glyphicon-remove':  chip.cold_status == 3}"></span>
 										</td>
-										<td>{{param.updated_by}}</td>
+										<td>{{chip.username}}</td>
 									</tr>
 								</tbody>
 							</table>

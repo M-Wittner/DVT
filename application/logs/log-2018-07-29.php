@@ -44,3 +44,66 @@ ERROR - 201820182018-0707-2929 1010:JulJul:5151 --> 404 Page Not Found: Assets/l
 ERROR - 201820182018-0707-2929 1010:JulJul:3232 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-0707-2929 1010:JulJul:1414 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-0707-2929 1010:JulJul:2424 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:4242 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:2323 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:0404 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:4040 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:0202 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:2626 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:5353 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:3333 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1111:JulJul:0707 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:0000 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:1515 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:1010 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:5252 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:5959 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:3636 --> Severity: Notice --> Undefined property: stdClass::$running C:\xampp\htdocs\application\models\plan_model.php 479
+ERROR - 201820182018-0707-2929 1212:JulJul:3636 --> Severity: Notice --> Undefined property: stdClass::$completed C:\xampp\htdocs\application\models\plan_model.php 480
+ERROR - 201820182018-0707-2929 1212:JulJul:3636 --> Severity: Notice --> Undefined property: stdClass::$error C:\xampp\htdocs\application\models\plan_model.php 481
+ERROR - 201820182018-0707-2929 1212:JulJul:3636 --> Severity: Notice --> Undefined property: stdClass::$serial_number C:\xampp\htdocs\application\models\plan_model.php 483
+ERROR - 201820182018-0707-2929 1212:JulJul:3636 --> Severity: Notice --> Undefined property: stdClass::$planId C:\xampp\htdocs\application\models\plan_model.php 483
+ERROR - 201820182018-0707-2929 1212:JulJul:3636 --> Severity: Notice --> Undefined property: stdClass::$testId C:\xampp\htdocs\application\models\plan_model.php 483
+ERROR - 201820182018-0707-2929 1212:JulJul:3636 --> Query error: Unknown column 'serial_number' in 'where clause' - Invalid query: UPDATE `test_chips` SET `running` = 1, `completed` = 0, `error` = 0, `update_by` = 'c_matanw'
+WHERE `serial_number` IS NULL
+AND `plan_id` IS NULL
+AND `test_id` IS NULL
+ERROR - 201820182018-0707-2929 1212:JulJul:3636 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\system\core\Exceptions.php:271) C:\xampp\htdocs\system\core\Common.php 570
+ERROR - 201820182018-0707-2929 1212:JulJul:5151 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:5151 --> Severity: Compile Error --> Cannot use isset() on the result of an expression (you can use "null !== expression" instead) C:\xampp\htdocs\application\models\plan_model.php 540
+ERROR - 201820182018-0707-2929 1212:JulJul:3030 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:4040 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:1919 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`dvt_60g_web`.`chip_status`, CONSTRAINT `FK_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION) - Invalid query: INSERT INTO `chip_status` (`data_idx`) VALUES (1747), (1748), (1749), (1750), (1751), (1752), (1753), (1754), (1755), (1756)
+ERROR - 201820182018-0707-2929 1212:JulJul:3838 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`dvt_60g_web`.`chip_status`, CONSTRAINT `FK_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION) - Invalid query: INSERT INTO `chip_status` (`data_idx`) VALUES (1758), (1759), (1760), (1761), (1762), (1763), (1764), (1765), (1766), (1767)
+ERROR - 201820182018-0707-2929 1212:JulJul:1616 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:5252 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:5252 --> Severity: Parsing Error --> syntax error, unexpected '=>' (T_DOUBLE_ARROW) C:\xampp\htdocs\application\models\plan_model.php 569
+ERROR - 201820182018-0707-2929 1212:JulJul:2424 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:3838 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:5353 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1212:JulJul:2727 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:0606 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:2525 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:1111 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:5959 --> Severity: Parsing Error --> syntax error, unexpected '}' C:\xampp\htdocs\application\models\plan_model.php 575
+ERROR - 201820182018-0707-2929 1313:JulJul:1313 --> Severity: Notice --> Undefined property: stdClass::$chip C:\xampp\htdocs\application\models\plan_model.php 540
+ERROR - 201820182018-0707-2929 1313:JulJul:1313 --> Severity: Notice --> Undefined property: stdClass::$user C:\xampp\htdocs\application\models\plan_model.php 541
+ERROR - 201820182018-0707-2929 1313:JulJul:1313 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 546
+ERROR - 201820182018-0707-2929 1313:JulJul:1313 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 554
+ERROR - 201820182018-0707-2929 1313:JulJul:1616 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:0606 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:0707 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:3333 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:4444 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:1313 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:1616 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:2020 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\application\models\plan_model.php 481
+ERROR - 201820182018-0707-2929 1313:JulJul:5757 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:4545 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:1111 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:0505 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:1717 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:1717 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:0404 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:4646 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1313:JulJul:5757 --> 404 Page Not Found: Assets/lib

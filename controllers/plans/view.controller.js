@@ -63,22 +63,6 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 //				console.log(response.data);
 		});
 	};
-//	$scope.removeTestFS = function() {
-//		$http.post(site+'/plans/removeTestFS', this.test.id)
-//		.then(function(response){
-//			if(response.data = 'success'){
-//				$window.scrollTo(0, 0);
-//				var message = 'Test Deleted Succesfully!';
-//				var id = Flash.create('success', message, 3500);
-//				setTimeout(function(){$window.location.reload();}, 2250);
-//			} else{
-//				$window.scrollTo(0, 0);
-//				var message = 'Test Was Not Deleted!';
-//				var id = Flash.create('danger', message, 3500);
-//				console.log(response.data);
-//			}
-//		});
-//	};
 	
 	$scope.sendMail = function(){
 		$http.post(site+'/plans/sendMail', $scope.plan)
@@ -98,62 +82,38 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		});
 	};
 	
-	$scope.chipStatus = function(chip, testId, index){
-//		var param = this.param;
-//		var test = $scope.plan.tests.filter(test => test.id == param.test_id)[0];
-//		var chip = test.chips.filter(chip => chip.id == param.id)[0];
-		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user})
-		.then(function(response){
-			var chip_r = response.data.chip.chip_r_sn;
-			var chip_m = response.data.chip.chip_m_sn;
-			var message = 'Chips '+chip_r+' '+chip_m +' Status Updated!';
-			var id = Flash.create('success', message, 3500);
-			$window.scrollTo(0, 0);
-			setTimeout(function(){$window.location.reload();}, 1500);
-//			chip.status = response.data.chip.status;
-//			console.log(response.data);
-//			console.log(param);
-		});
-//		console.log(test);
-	}
-	$scope.tempStatus = function(temp, testId){
-		$http.post(site+'/plans/tempstatus', {temp: temp, planId: $routeParams.id, testId: testId})
+	$scope.chipStatus = function(chip){
+		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user.id})
 		.then(function(response){
 			console.log(response.data);
-			temp = response.data.temp.temp;
-			var message = 'Temperature '+temp+' Status Updated!';
-			var id = Flash.create('success', message, 3500);
-			setTimeout(function(){$window.location.reload();}, 2250);
+			var key = Object.keys(response.data)[0];
+			chip[key] = response.data[key];
+			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
+			var id = Flash.create('success', message, 6000);
 		});
 	}
 	
-	$scope.hotStatus = function(chip, testId){
-		chip.hotCold = 'hot';
-		$http.post(site+'/plans/hotcoldstatus', chip)
+	$scope.hotStatus = function(chip){
+		chip.flag = 'hot';
+		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user.id})
 		.then(function(response){
 			console.log(response.data);
-			if(response.data = true){
-				var message = 'chip '+chip.hotCold+' Status Updated!';
-				var id = Flash.create('success', message, 3500);
-				setTimeout(function(){$window.location.reload();}, 2250);	
-				}
+			var key = Object.keys(response.data)[0];
+			chip[key] = response.data[key];
+				var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
+				var id = Flash.create('success', message, 6000);
 		});
 	}	
-	$scope.coldStatus = function(chip, testId){
-		chip.hotCold = 'cold';
-		$http.post(site+'/plans/hotcoldstatus', chip)
+	$scope.coldStatus = function(chip){
+		chip.flag = 'cold';
+		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user.id})
 		.then(function(response){
 			console.log(response.data);
-			if(response.data = true){
-				var message = 'chip '+chip.hotCold+' Status Updated!';
-				var id = Flash.create('success', message, 3500);
-				setTimeout(function(){$window.location.reload();}, 2250);	
-				}
+			var key = Object.keys(response.data)[0];
+			chip[key] = response.data[key];
+			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
+			var id = Flash.create('success', message, 6000);
 		});
-	}
-	
-	$scope.path = function(path){
-		console.log(path);
 	}
 	
 	$scope.filterByName = function(params, word){
@@ -164,18 +124,4 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 			return false;
 		}
 	}
-	
-	$scope.xifStatus = function(xif){
-//		console.log(xif);
-		$http.post(site+'/plans/xifstatus', xif)
-		.then(function(response){
-			this.xif = response.data[0];
-			var message = 'XIF '+this.xif.xif+' Status Updated!';
-			var id = Flash.create('success', message, 3500);
-			setTimeout(function(){$window.location.reload();}, 2250);
-//			console.log(this.xif);
-//			$scope.$apply();
-//			$route.reload();
-		});
-	};
 }]);

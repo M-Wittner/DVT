@@ -176,7 +176,6 @@ class Plans extends CI_Controller {
 		echo json_encode($result);
 	}
 	
-
 	
 	function show_v1(){
 		$this->other_db = $this->load->database('main', TRUE);
@@ -188,68 +187,6 @@ class Plans extends CI_Controller {
 			$plan->tests[$i] = $this->plan_model->get_test_v1($test->test_id);
 		}
 		echo json_encode($plan);
-	}
-	
-	function Show() {
-		$id = json_decode(file_get_contents('php://input'));
-		$result = new stdClass();
-		$result->tests = $this->plan_model->get_plan($id);
-//		$result->fs = $this->db->get_where('test_params_view', ['plan_id'=>$id])->result();
-		$result->fs = $this->db->get_where('tests_view_new', ['plan_id'=>$id])->result();
-		foreach ($result->fs as $test){
-			$test->chips = $this->db->get_where('test_chips_view', ['test_id'=>$test->id])->result();
-			$c = 0;
-			$e = 0;
-			$r = 0;
-			foreach($test->chips as $chip){
-				switch($chip->status_id){
-					case 2:
-						$r++;
-						break;
-					case 3:
-						$c++;
-						break;
-					case 4:
-						$e++;
-						break;
-				}
-			}
-			if($c == count($test->chips)){
-					$test->status_id = 3;
-				} elseif($e > 0){
-					$test->status_id = 4;
-				} elseif($r > 0 && $c < count($test->chips)){
-					$test->status_id = 2 ;
-				} else{
-					$test->status_id = 1;
-				} 
-			if(count($test->chips) > 0){
-				$progress = (($c + ($r/2)) / count($test->chips))*100;
-			} else{
-				$progress = 0;
-			}
-			$statusId = null;
-			if($progress < 100 && ($progress > 0 || $e > 0)){
-				if($e > 0){
-					$statusId = 4;
-				}else{
-					$statusId = 2;
-				}
-			}elseif($progress == 100){
-				$statusId = 3;
-			}else{
-				$statusId = 1;
-			}
-			$test->progress = $progress;
-			$this->db->where('id', $test->id);
-			$this->db->set(['status_id'=>$test->status_id, 'progress'=>$test->progress]);
-			$this->db->update('tests_new');
-			$test->status = $this->db->get_where('tests_view_new', ['id'=>$test->id])->result()[0]->status;
-			$test->params = $this->db->get_where('test_params_view', ['test_id'=>$test->id])->result();
-			$test->comments = $this->db->get_where('test_comments_view', ['test_id'=>$test->id])->result();
-		}
-		echo json_encode($result);
-		
 	}
 	
 	function removePlan(){
@@ -402,23 +339,15 @@ class Plans extends CI_Controller {
 		$updateStatus = $this->plan_model->update_plan_status($data);
 		echo json_encode($updateStatus);
 	}
-	
-	function chipstatus(){
-		$status = json_decode(file_get_contents('php://input'));
-//		die(var_dump($status));
-		$updateStatus = $this->plan_model->update_chip_status($status);
-		echo json_encode($updateStatus);
-	}
 	function tempstatus(){
 		$status = json_decode(file_get_contents('php://input'));
 //		die(var_dump($status));
 		$updateStatus = $this->plan_model->update_temp_status($status);
 		echo json_encode($updateStatus);
 	}
-	function hotcoldstatus(){
-		$status = json_decode(file_get_contents('php://input'));
-//		die(var_dump($status));
-		$updateStatus = $this->plan_model->update_hotcold_status($status);
+	function chipstatus(){
+		$data = json_decode(file_get_contents('php://input'));
+		$updateStatus = $this->plan_model->update_chip_status($data);
 		echo json_encode($updateStatus);
 	}	
 	function xifstatus(){

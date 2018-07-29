@@ -240,10 +240,17 @@ class plan_model extends CI_Model {
 					foreach($data as $chip){
 						$this->db->select('chip_sn, chip_process_abb');
 						$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result();
+						$statuses = $this->db->get_where('chip_status_view', ['data_idx'=>$chip->data_idx])->result();
 						if(count($chipData) == 1){
 							$chipData = $chipData[0];
 							$chip->chip_sn = $chipData->chip_sn;
 							$chip->chip_process_abb = $chipData->chip_process_abb;
+							if(count($statuses) == 1){
+								$statuses = $statuses[0];
+								foreach($statuses as $key => $value){
+									$chip->$key = $value;
+								}
+							}
 						}
 					}
 				}
@@ -464,96 +471,47 @@ class plan_model extends CI_Model {
 		return $result;
 	}
 	
-	function update_chip_status($result){
-//		echo json_encode($result);
-//		die();
-		if(!isset($result->chip->status_id)){
-//------------------------------	Old Format	------------------------------
-			$runs = $result->chip->running;
-			$complete = $result->chip->completed;
-			$error = $result->chip->error;
-			if($runs == false && $complete == false && $error == false){
-				$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-				$insertStatus = $this->db->update('test_chips', array('running'=>true, 'completed'=>false, 'error'=>false, 'update_by'=>$result->user->username));
-			} else if($runs == true && $complete == false && $error == false){
-				$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-				$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>true, 'error'=>false, 'update_by'=>$result->user->username));
-			} else if($runs == false && $complete == true && $error == false){
-				$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-				$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false ,'error'=>true, 'update_by'=>$result->user->username));
-			} else if($runs == false && $complete == false && $error == true){
-				$this->db->where(array('serial_number'=>$result->chip->serial_number, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-				$insertStatus = $this->db->update('test_chips', array('running'=>false, 'completed'=>false, 'error'=>false, 'update_by'=>$result->user->username));
-			} else{
-				echo 'nothing';
-			}
+	function update_chip_status($data){
+		$chip = $data->chip;
+		$user = $data->user;
+		$key = 'chip_status';
+		if(isset($chip->flag)){
+			$key = $chip->flag.'_status';
 		}else{
-//------------------------------	New Format	------------------------------
-			$statusId = $result->chip->status_id;
-			if($statusId < 4){
-				$statusId++;
-				$userId = $result->user->id;
-			}else{
-				$statusId = 1;
-				$userId = NULL;
-			}
-			$this->db->where('id', $result->chip->id);
-			$this->db->update('test_chips_new', ['status_id'=>$statusId, 'updated_by'=>$userId]);
-			$result->chip->status_id = $statusId;
-			$this->db->select('status');
-			$result->chip->status = $this->db->get_where('operation_status', ['id'=>$statusId])->result()[0]->status;
+			$chip->flag = null;
 		}
-		return $result;
-	}
-	
-	function update_temp_status($result){
-		$runs = $result->temp->running;
-		$complete = $result->temp->completed;
-		$error = $result->temp->error;
-//		die(var_dump($result)); 
-		if($runs == false && $complete == false && $error == false){
-			$this->db->where(array('temp'=>$result->temp->temp, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-			$insertStatus = $this->db->update('test_temps', array('running'=>true, 'completed'=>false, 'error'=>false));
-		} else if($runs == true && $complete == false && $error == false){
-			$this->db->where(array('temp'=>$result->temp->temp, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-			$insertStatus = $this->db->update('test_temps', array('running'=>false, 'completed'=>true, 'error'=>false));
-		} else if($runs == false && $complete == true && $error == false){
-			$this->db->where(array('temp'=>$result->temp->temp, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-			$insertStatus = $this->db->update('test_temps', array('running'=>false, 'completed'=>false ,'error'=>true));
-		} else if($runs == false && $complete == false && $error == true){
-			$this->db->where(array('temp'=>$result->temp->temp, 'plan_id'=>$result->planId, 'test_id'=>$result->testId));
-			$insertStatus = $this->db->update('test_temps', array('running'=>false, 'completed'=>false, 'error'=>false));
-		} else{
-			echo 'nothing';
+		switch($chip->flag){
+			case 'hot':
+				$status = $chip->hot_status;
+				break;
+			case 'cold':
+				$status = $chip->cold_status;
+				break;
+			default:
+				$status = $chip->chip_status;
+				break;
 		}
-		return $result;
-	}
-	
-	function update_hotcold_status($chip){
-
-		$this->db->where(['id'=>$chip->id]);
-//		--------------- Update Hot ---------------
-		if($chip->hotCold == 'hot'){
-			if($chip->hot == false){
-				$status = $this->db->update('test_chips_new', ['hot'=>true]);
-			} elseif($chip->hot == true){
-				$status = $this->db->update('test_chips_new', ['hot'=>false]);
-			} else{
-				$status = 'hot error';
-			}
-//		--------------- Update Cold --------------
-		} elseif($chip->hotCold == 'cold'){
-			if($chip->cold == false){
-				$status = $this->db->update('test_chips_new', ['cold'=>true]);
-			} elseif($chip->hot = true){
-				$status = $this->db->update('test_chips_new', ['cold'=>false]);
-			} else{
-				$status = 'cold error';
-			}
-		} else {
-			$status = 'Hot Cold error';
+		switch($status){
+			case 4:
+				$status = 2;
+				break;
+			case 2:
+				$status = 0;
+				break;
+			case 0:
+				$status = 3;
+				break;
+			default:
+				$status = 4;
+				break;
 		}
-		return $status;
+		$this->db->set($key, $status);
+		$this->db->set('user_id', $user);
+		$this->db->where(['data_idx'=>$chip->data_idx]);
+		$res = $this->db->update('chip_status');
+		if($res){
+			return array($key=>$status);
+		}
 	}
 	
 	function update_plan_status($result){
