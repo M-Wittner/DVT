@@ -1,7 +1,9 @@
-myApp.controller('chipCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', '$window', function ($scope, $location, $http, $routeParams, Flash, AuthService, $window) {
+myApp.controller('chipCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', '$window', '$cookies', function ($scope, $location, $http, $routeParams, Flash, AuthService, $window, $cookies) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	
 	if($scope.isAuthenticated == true) {
+		 $scope.currentUser = $cookies.getObject('loggedUser');
+		console.log($scope.currentUser);
 
 		} else {
 			var message = 'Please Login first!';

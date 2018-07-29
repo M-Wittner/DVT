@@ -1,9 +1,11 @@
-myApp.controller('chiplistCtrl', ['$scope', 'NgTableParams', '$location','$http', '$routeParams', 'Flash', 'AuthService', '$window', 'testParams', function ($scope, NgTableParams, $location, $http, $routeParams, Flash, AuthService, $window, testParams) {
+myApp.controller('chiplistCtrl', ['$scope', 'NgTableParams', '$location','$http', '$routeParams', 'Flash', 'AuthService', '$window', 'testParams', '$cookies', function ($scope, NgTableParams, $location, $http, $routeParams, Flash, AuthService, $window, testParams,  $cookies) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.isAuthenticated = true;
 	var site = testParams.site;
 	
 	if($scope.isAuthenticated == true) {
+		$scope.currentUser = $cookies.getObject('loggedUser');
+		console.log($scope.currentUser.rank);
 		$http.get(site+'/admin/chiplist')
 		.then(function(response) {
 			$scope.tableParams = new NgTableParams({count:30}, {

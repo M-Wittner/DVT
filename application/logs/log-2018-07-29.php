@@ -120,3 +120,17 @@ ERROR - 201820182018-0707-2929 1313:JulJul:3636 --> 404 Page Not Found: Assets/l
 ERROR - 201820182018-0707-2929 1313:JulJul:4545 --> Query error: Duplicate entry '1768' for key 'PRIMARY' - Invalid query: INSERT INTO `dvt_60g`.`test_configuration_data` (`data_idx`, `test_id`, `config_id`, `value`) VALUES ('1768', 136, '15', 'fdsfdsfds')
 ERROR - 201820182018-0707-2929 1313:JulJul:2828 --> Query error: Duplicate entry '1768' for key 'PRIMARY' - Invalid query: INSERT INTO `dvt_60g`.`test_configuration_data` (`data_idx`, `test_id`, `config_id`, `value`) VALUES ('1768', 137, '15', 'fdsfdsfds')
 ERROR - 201820182018-0707-2929 1313:JulJul:3030 --> Query error: Duplicate entry '1768' for key 'PRIMARY' - Invalid query: INSERT INTO `dvt_60g`.`test_configuration_data` (`data_idx`, `test_id`, `config_id`, `value`) VALUES ('1768', 138, '15', 'fdsfdsfds')
+ERROR - 201820182018-0707-2929 1414:JulJul:4141 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:5858 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:2323 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:3636 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:3030 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:5454 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:3838 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:4040 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:5959 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:4646 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:0202 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:2424 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:3939 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1414:JulJul:0404 --> 404 Page Not Found: Assets/lib
