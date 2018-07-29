@@ -227,7 +227,7 @@ class plan_model extends CI_Model {
 					$data[0]->from = (int) $data[0]->value[0];
 					$data[0]->step = (int) $data[0]->value[1];
 					$data[0]->to = (int) $data[0]->value[2];
-					if($data[0]->value[3] != ""){
+					if(isset($data[0]->value[3]) && $data[0]->value[3] != ""){
 						$data[0]->ext = explode(',', (int) $data[0]->value[3]);
 					}
 					for($i = 0; $i < 4; $i++){
@@ -242,9 +242,12 @@ class plan_model extends CI_Model {
 				if($sweep->data_type > 100){
 					foreach($data as $chip){
 						$this->db->select('chip_sn, chip_process_abb');
-						$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result()[0];
-						$chip->chip_sn = $chipData->chip_sn;
-						$chip->chip_process_abb = $chipData->chip_process_abb;
+						$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result();
+						if(count($chipData) == 1){
+							$chipData = $chipData[0];
+							$chip->chip_sn = $chipData->chip_sn;
+							$chip->chip_process_abb = $chipData->chip_process_abb;
+						}
 					}
 				}
 				//add any other data!!!!!!! priority,

@@ -9,6 +9,7 @@ class valid_model extends CI_Model {
 	
 	public function validate_plan($tests){
 		$result = array();
+//		die(var_dump('blaaaa'));
 		foreach($tests as $test){
 			$result = $this->validate_test($test, $result);
 		}
@@ -16,7 +17,7 @@ class valid_model extends CI_Model {
 	}
 	
 	public function validate_test($test, $result){
-		if($test->checkLineup == true){
+		if(isset($test->checkLineup) && $test->checkLineup == true){
 			$res = $this->check_lineup($test);
 			if($res != "Lineup is OK!"){
 				$result = $res;
@@ -27,6 +28,7 @@ class valid_model extends CI_Model {
 	}
 	
 	public function test_sweep_exist($test, $result){
+		
 		$error = new stdClass();
 		if(!isset($test->priority[0]->value)){
 			$value = new stdClass();
@@ -68,7 +70,6 @@ class valid_model extends CI_Model {
 					}
 					break;
 				default: //--------------	Deal with different sweeps	--------------
-//						var_dump($sweepData);
 					switch($sweepData->data_type){
 						case 33://Linueup
 							if(!isset($sweepData->data->value)){

@@ -45,8 +45,7 @@ class Plans extends CI_Controller {
 		$planData = $postData->plan;
 		$plan = array(
 			'user_id'=>$planData->userId,
-		);
-		
+		);	
 		$tests = $postData->test;
 //		echo json_encode($tests);
 //		die();
@@ -60,13 +59,11 @@ class Plans extends CI_Controller {
 			}else{
 				$planId = $planData->id;
 			}
-			if(isset($test->checkLineup)){
-				$valid = $this->valid_model->validate_plan($tests);
-				if(!empty($valid)){
-					foreach ($valid as $err){
-						array_push($result, $err);
-					}
-			}
+			$valid = $this->valid_model->validate_plan($tests);
+			if(!empty($valid)){
+				foreach ($valid as $err){
+					array_push($result, $err);
+				}
 			}else{
 				foreach($tests as $test){
 					if(!isset($test->notes)){
@@ -88,8 +85,6 @@ class Plans extends CI_Controller {
 						array_push($result, $error);
 					}else{
 						$testId = $this->db->insert_id($insertTest);
-//						var_dump($test->sweeps);
-//						die();
 						foreach($test->sweeps as $sweepName => $sweepData){
 							$error = new stdClass();
 							switch($sweepData->data){
@@ -97,18 +92,32 @@ class Plans extends CI_Controller {
 //									var_dump($sweepName);
 									switch($sweepData->data_type){
 										case $sweepData->data_type > 100:
+											$chipsStatus = array();
 											$chips = array();
 											$this->db->select('config_id');
 											$configId = $this->db->get_where('dvt_60g.test_configurations', array('name'=>$sweepName))->result()[0]->config_id;
 											foreach($sweepData->data as $sweep){
+												$value = -1;
+												if(isset($sweep->chip_id)){
+													$value = $sweep->chip_id;
+												}elseif(isset($sweep->value)){
+													$value = $sweep->value;
+												}
 												$chip = array(
 													'test_id'=>$testId,
 													'config_id'=>$configId,
-													'value'=>$sweep->chip_id
+													'value'=>$value,
 												);
 												array_push($chips,$chip);
+												array_push($chipsStatus,array('data_idx'=>null));
 											}
 											$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $chips);
+											$dataIdx = $this->db->insert_id($insertSweep);
+											for($i = 0; $i < $insertSweep; $i++){
+												$chipsStatus[$i]['data_idx'] = $dataIdx - $insertSweep + $i;
+//											echo json_encode($chipsStatus[$i]);
+											}
+											$insertSweep = $this->db->insert_batch('chip_status', $chipsStatus);
 											break;
 										default:
 											foreach($sweepData->data as $sweep){
@@ -130,19 +139,24 @@ class Plans extends CI_Controller {
 								default: //--------------	Deal with different sweeps	--------------
 									$sweepData->data->test_id = $testId;
 //									var_dump($sweepName);
+									unset($sweepData->data->display_name);
 									switch($sweepData->data_type){
 										case 33://Linueup
 											unset($sweepData->data_type);
 											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData->data);
 											break;
 										case 60://Pin
-//											var_dump($sweepData);
-//											die();
 											unset($sweepData->data_type);
 											if(!isset($sweepData->data->ext)){
 												$sweepData->data->ext = '';
 											}
-											$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.$sweepData->data->ext;
+//											echo json_encode($sweepData);
+//											die();
+											if(is_array($sweepData->data->ext)){
+												$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.implode(',',$sweepData->data->ext);
+											}else{
+												$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.$sweepData->data->ext;
+											}
 											$this->db->set('config_id', $sweepData->config_id);
 											$this->db->set('value', $pin);
 											$this->db->set('test_id', $testId);
@@ -159,11 +173,11 @@ class Plans extends CI_Controller {
 							}
 						}
 					}
-				}	
+				}
 			}
-		}
-		if(empty($result)){
-			$result = 'All tests were inserted successfully';
+			if(empty($result)){
+				$result = 'All tests were inserted successfully';
+			}
 		}
 		echo json_encode($result);
 	}
