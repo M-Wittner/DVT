@@ -18,3 +18,29 @@ ERROR - 201820182018-0707-2929 0707:JulJul:4343 --> 404 Page Not Found: Assets/l
 ERROR - 201820182018-0707-2929 0707:JulJul:5454 --> Severity: Notice --> Undefined property: stdClass::$checkLineup C:\xampp\htdocs\application\models\valid_model.php 20
 ERROR - 201820182018-0707-2929 0707:JulJul:5454 --> Query error: Unknown column 'display_name' in 'field list' - Invalid query: INSERT INTO `dvt_60g`.`test_configuration_data` (`test_id`, `config_id`, `value`, `display_name`) VALUES (108, '15', 'fdsfdsfds', NULL)
 ERROR - 201820182018-0707-2929 0707:JulJul:5555 --> Query error: Unknown column 'display_name' in 'field list' - Invalid query: INSERT INTO `dvt_60g`.`test_configuration_data` (`test_id`, `config_id`, `value`, `display_name`) VALUES (109, '15', 'fdsfdsfds', NULL)
+ERROR - 201820182018-0707-2929 0707:JulJul:3939 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 0707:JulJul:4343 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 0707:JulJul:2424 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 0707:JulJul:5050 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 0707:JulJul:0505 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 0707:JulJul:3030 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 0707:JulJul:2525 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 0707:JulJul:2222 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 0707:JulJul:2020 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 0808:JulJul:0505 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:1111 --> Severity: Parsing Error --> syntax error, unexpected ')' C:\xampp\htdocs\application\controllers\plans.php 114
+ERROR - 201820182018-0707-2929 1010:JulJul:4848 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:5050 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:5252 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:0606 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:3030 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:5757 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 119
+ERROR - 201820182018-0707-2929 1010:JulJul:5757 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 119
+ERROR - 201820182018-0707-2929 1010:JulJul:5757 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\application\controllers\plans.php 119
+ERROR - 201820182018-0707-2929 1010:JulJul:1616 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:1818 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:2222 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:5151 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:3232 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:1414 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0707-2929 1010:JulJul:2424 --> 404 Page Not Found: Assets/lib

@@ -218,9 +218,6 @@ class plan_model extends CI_Model {
 		foreach($struct as $sweep){
 			$test->sweeps[$sweep->name] = new stdClass();
 			$data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$sweep->config_id))->result();
-//			if($data[0]->config_id != 14 && $data[0]->config_id != 5){
-
-//			}
 			if(count($data) == 1 && (in_array($sweep->data_type, [33, 60]))){
 				if($sweep->data_type == 60){ //Pin sweep
 					$data[0]->value = explode(';', $data[0]->value);
@@ -250,7 +247,12 @@ class plan_model extends CI_Model {
 						}
 					}
 				}
-				//add any other data!!!!!!! priority,
+				foreach($data as $res){
+					if(is_null($res->display_name)){
+						$res->display_name = $res->value;
+					}
+				}
+				//-------------- Generic sweeps	--------------
 				$test->sweeps[$sweep->name]->data = $data;
 			}
 				$test->sweeps[$sweep->name]->data_type = $sweep->data_type;

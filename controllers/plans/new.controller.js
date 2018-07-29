@@ -49,18 +49,25 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 		$scope.chipPairs.push({});
 	}
 	
-	$scope.extras = function(test, struct){
-		if(!test.struct){
-			test.struct = [];
+	$scope.extras = function(test, sweep){
+		console.log(sweep);
+		console.log(test);
+		var sweepName = sweep.name;
+		if(!test.sweeps){
+			test.sweeps = [];
 		}
-		if(!test.struct[struct.name]){
-			test.struct[struct.name] = {};
+		if(!test.sweeps[sweepName]){
+			test.sweeps[sweepName] = {};
 		}
-		if(!test.struct[struct.name].ext){
-			test.struct[struct.name].ext = [];
+		if(!test.sweeps[sweepName].data){
+			test.sweeps[sweepName].data = [];
+		}			
+		if(!test.sweeps[sweepName].data.ext){
+			test.sweeps[sweepName].data.ext = [];
 		}else{
-			test.struct[struct.name].ext = null;
+			test.sweeps[sweepName].data.ext = null;
 		}
+		console.log(test);
 	}
 	
 	
