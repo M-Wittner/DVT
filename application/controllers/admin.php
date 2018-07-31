@@ -122,7 +122,8 @@ class Admin extends CI_Controller {
 	}
 	public function operations(){
 		$this->db->order_by('date_time', 'DESC');
-		$chipList = $this->db->get('operation_view')->result();
+		$this->other_db = $this->load->database('main', TRUE);
+		$chipList = $this->other_db->get('operation_view')->result();
 		echo json_encode($chipList);
 	}	
 	public function testList(){
