@@ -197,6 +197,29 @@ class Plans extends CI_Controller {
 		$result = $this->db->delete('plans_v1');
 		echo json_encode($result);
 	}
+	function deletePlans(){
+		$ids = json_decode(file_get_contents('php://input'));
+		$result = array();
+		if(!empty($ids)){
+			foreach($ids as $id){
+				$deleted = $this->db->delete('plans_v1', ['id'=>$id]);
+				$res = new stdClass();
+				if(!$deleted){
+					$res->occured = !$deleted;
+					$res->msg = "Not Deleted!";
+					$res->source = $id;
+				} else{
+					$res->occured = $deleted;
+					$res->msg = "Deleted!";
+					$res->source = $id;
+				}
+					array_push($result, $res);
+			}
+		}else{
+			$result = "No Plans Selected";
+		}
+		echo json_encode($result);
+	}
 	
 	function get_test(){
 		$id = json_decode(file_get_contents('php://input'));

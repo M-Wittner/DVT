@@ -9,11 +9,32 @@
 -->
 	</div>
 	<div class="panel-body">
+		<div class="col-md-1 col-md-offset-11">
+			<span class="pull-right">
+				<button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#modal">Delete Selected</button>
+			</button>
+		</div>
+		<!--	Modal		-->
+		<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="Confirmation">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="modal">Confirm Delete?</h4>
+					</div>
+					<div class="modal-body">
+						<button class="btn btn-danger" data-dismiss="modal" ng-click="deleteSelected()" type="button">Delete Selected</button>
+						<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- Table -->
 	<table ng-table="tableParams" class="table table-striped">
-		<tr ng-repeat="plan in $data track by plan.id">
-			<td class="col-md-2" data-title="'Date'">{{plan.date}}</td>
+		<tr ng-repeat="plan in $data track by plan.id+$index">
+			<td class="col-md-1 text-center" data-title="'ID'"><strong>#{{plan.id}}</strong></td>
+			<td class="col-md-2 text-center" data-title="'Date'">{{plan.date}}</td>
 			<td data-title="'Progress'">
 				<div class="progress" uib-tooltip-template="'pages/plans/tooltipTemplate.html'" tooltip-placement="bottom" ng-mouseover="tooltip(plan.id)" tooltip-popup-delay="250"> 
 					<div class="progress-bar progress-bar-default progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: {{plan.progress}}%">
@@ -23,9 +44,12 @@
 					</div>
 				</div>
 			</td>
-			<td class="col-md-1 text-center" data-title="'Author'">{{plan.user_username}}</td>
+			<td class="col-md-1 text-center" data-title="'Author'">{{plan.username}}</td>
 			<td class="col-md-1 text-center" data-title="'View'">
 				<div ng-click="view(plan.id)" class="btn btn-info">View</div>	
+			</td>
+			<td ng-if="currentUser.rank > 50" class="col-md-1 text-center" data-title="'Modify'">
+				<input type="checkbox" ng-model="selected[$index]" ng-true-value="{{plan.id}}" ng-false-value="{{undefined}}">	
 			</td>
 <!--
 			<td class="col-md-2 text-center" data-title="'Seen'">
