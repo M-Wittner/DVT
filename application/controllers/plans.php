@@ -16,6 +16,7 @@ class Plans extends CI_Controller {
 
 	function index() {
 		$this->db->order_by('date', 'desc');
+		$this->db->order_by('id', 'desc');
 		$plans = $this->db->get('plans_v1_view')->result();
 			foreach($plans as $plan){
 				$this->db->where('plan_id', $plan->id);
@@ -98,10 +99,7 @@ class Plans extends CI_Controller {
 												array_push($chipsStatus,array('data_idx'=>null));
 											}
 											$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $chips);
-											$dataIdx = $this->db->insert_id($insertSweep);
-//											var_dump($insertSweep);
-//											var_dump($dataIdx);
-//											die();
+											$dataIdx = $this->db->insert_id($insertSweep);;
 											for($i = 0; $i < $insertSweep; $i++){
 												$chipsStatus[$i]['data_idx'] = $dataIdx + $i;
 											}

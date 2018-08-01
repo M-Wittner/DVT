@@ -10,6 +10,7 @@
 .chip-status:hover{
 	color: #439fec;
   text-shadow: 0 0 25px #000000;
+	cursor: pointer;
 }
 
 .panel-M1 > .panel-heading {

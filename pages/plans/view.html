@@ -28,9 +28,22 @@
 			<a class="btn btn-xs btn-success" href="#/plans/{{plan.id}}/addtests">
 					Add Tests
 			</a>
-			<button class="btn btn-xs btn-danger" ng-click="removePlan()">
-					Delete
-			</button>
+			<button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#planModal">Delete</button>
+			<!--	Modal		-->
+			<div class="modal fade" id="planModal" tabindex="-1" role="dialog" aria-labelledby="Confirmation">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="planModal">Confirm Delete?</h4>
+						</div>
+						<div class="modal-body">
+							<button class="btn btn-danger" data-dismiss="modal" ng-click="removePlan()" type="button">Delete Plan</button>
+							<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</span>
 	</div>
 	<div class="panel-body" id="planBody" ng-repeat="test in plan.tests | orderBy: 'priority' track by $index">
@@ -64,9 +77,27 @@
 						<div class="col-md-3" ng-if="currentUser.username == plan.user_username || currentUser.rank > '10'">
 							<span class="pull-right">
 								<a class="btn btn-xs btn-warning" href="#/plans/{{plan.id}}/test/{{test.test_id}}/edit">Edit</a>
+<!--
 								<a class="btn btn-xs btn-danger" ng-click="removeTest(test.test_id)">
 									Delete
 								</a>
+-->
+								<button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#testModal">Delete</button>
+								<!--	Modal		-->
+								<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="Confirmation">
+									<div class="modal-dialog modal-sm" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="testModal">Confirm Delete?</h4>
+											</div>
+											<div class="modal-body">
+												<button class="btn btn-danger" data-dismiss="modal" ng-click="removeTest(test.test_id)" type="button">Delete Test</button>
+												<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
 							</span>
 						</div>
 					</div>

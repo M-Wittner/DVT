@@ -472,6 +472,8 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_chip_status($data){
+//		echo json_encode($data->chip);
+//		die();
 		$chip = $data->chip;
 		$user = $data->user;
 		$key = 'chip_status';
