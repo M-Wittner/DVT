@@ -232,33 +232,53 @@ class Admin extends CI_Controller {
 	}
 		
 	public function search(){
-		$this->db->order_by('id', 'DESC');
-		$plans = $this->db->get('plans')->result();
-		
-		foreach ($plans as $plan){
-			$plan->tests = $this->db->get_where('tests_view_new', array('plan_id'=>$plan->id))->result();
-			foreach ($plan->tests as $test) {
-				$test->chips = $this->db->get_where('test_chips_view', array('test_id'=>$test->id))->result();
+		$tests = array();
+		$this->load->model('plan_model');
+		$this->other_db= $this->load->database('main', TRUE);
+		$this->db->select('id');
+		$this->db->order_by('id', 'desc');
+		$plans = $this->db->get('plans_v1_view')->result();
+		foreach($plans as $i=>$plan){
+//			$this->db->select('test_id');
+			$this->db->order_by('plan_id', 'desc');
+			$this->db->order_by('test_id', 'desc');
+			$plan->tests = $this->db->get_where('tests_view_v1', array('plan_id'=>$plan->id))->result();
+			foreach($plan->tests as $i=>$test){
+				$this->other_db->where(array('test_id'=>$test->test_id));
+				$this->other_db->where_in('config_id', ['11', '12']);
+				$data = $this->other_db->get('test_configuration_data')->result();
+				foreach($data as $chip){
+						$this->db->select('chip_sn, chip_process_abb');
+						$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result();
+						$statuses = $this->db->get_where('chip_status_view', ['data_idx'=>$chip->data_idx])->result();
+						if(count($chipData) == 1){
+							$chipData = $chipData[0];
+							$chip->chip_sn = $chipData->chip_sn;
+							$chip->chip_process_abb = $chipData->chip_process_abb;
+							if(count($statuses) == 1){
+								$statuses = $statuses[0];
+								foreach($statuses as $key => $value){
+									$chip->$key = $value;
+								}
+							}
+						}
+					}
+				$test->chips = $data;
+				array_push($tests, $test);
 			}
 		}
-		echo json_encode($plans);
+		echo json_encode($tests);
 	}
 	
-	public function TCP(){
-		$data =json_decode(file_get_contents('php://input'));
-		$host = '10.18.134.163';
-		$port = 5000;
-		
-		$fp = fsockopen($host,$port, $errno, $errstr, 30);
-			if (!$fp) {
-				echo "$errstr ($errno)<br />\n";
-			} else {
-				fwrite($fp, "You message");
-				while (!feof($fp)) {
-					echo fgets($fp, 128);
-				}
-				fclose($fp);
-			}
+	public function upload(){
+//	 	$data = json_decode(file_get_contents('php://input'));
+	 	$data = $_POST;
+//		echo json_encode($data);
+//		die();
+		$target_dir = "upload/";
+     print_r($_FILES);
+		$handle = fopen($target_dir.$_FILES['file']['name'], 'a') or die('Cannot open file:  '.$data);
+     $target_file = $target_dir . basename($_FILES["file"]["name"]);
 	}
 }
 ?>

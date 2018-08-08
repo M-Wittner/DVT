@@ -1,11 +1,17 @@
-myApp.controller('searchCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window','testParams', 'AuthService', function ($scope, $location, $http, Flash, $cookies, $window, testParams, AuthService) {
+myApp.controller('searchCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window','testParams', 'AuthService', 'NgTableParams', 'fileUpload', function ($scope, $location, $http, Flash, $cookies, $window, testParams, AuthService, NgTableParams, fileUpload) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	var site = testParams.site;
 	if($scope.isAuthenticated == true) {
+//		$ocLazyLoad.load('testModule.js');
 		$http.get(site+'/admin/search')
 		.then(function(response) {
 //			console.log(AuthService.isAuthenticated());
-			$scope.plans=response.data;
+			var data = response.data;
+			$scope.TableParams = new NgTableParams({count:12}, {
+				counts:[],
+				total: data.length,
+				dataset: data
+			})
 			console.log(response.data);
 		});
 		$scope.view = function(data){
@@ -17,23 +23,27 @@ myApp.controller('searchCtrl', ['$scope', '$location','$http', 'Flash', '$cookie
 		$location.path('/');
 	};
 //	console.log();
-	$scope.seen = function(plan){
-		$http.post(site+'/plans/planCheck', {plan: plan, user: $scope.currentUser})
-		.then(function(response){
-			console.log(response.data);
-			if(response.data == 'true'){
-				var message = 'Plan Marked As Seen';
-				var id = Flash.create('success', message, 3500);
-			} else{
-				var message = 'Plan Marked As Unseen';
-				var id = Flash.create('danger', message, 3500);
-			}
-//			setTimeout(function(){$window.location.reload();}, 2500);
-		});
+	
+	$scope.filterChips = function(sweeps){
+		var sweepsData = Object.values(sweeps);
+		var chips = sweepsData.filter(sweep => sweep.data_type > 100);
+		this.test.chips = chips[0].data;
 	}
 	
+	$scope.uploadFile = function(fi){
+		var file = $scope.myFile
+//		console.log('file is ' );
+//		console.dir(file);
+//		console.dir(fi);
+//		console.log($scope.myFile.name);
+
+		var uploadUrl = site+"/admin/upload";
+		var text = $scope.myFile.name;
+		fileUpload.uploadFileToUrl(file, uploadUrl, text);
+//		$http.post(uploadUrl, file)
+//		.then(function(response){
+//			console.log(response.data);
+//		})
+   };
 	
-//	console.log($scope);
-//	$log.info($location.path());
-//	$log.info('test');
 }]);

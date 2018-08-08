@@ -191,6 +191,38 @@ myApp.directive('testForm', function(){
 	}
 });
 
+myApp.directive('fileModel', ['$parse', function ($parse) {
+    return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+        var model = $parse(attrs.fileModel);
+        var modelSetter = model.assign;
+
+        element.bind('change', function(){
+            scope.$apply(function(){
+                modelSetter(scope, element[0].files[0]);
+            });
+        });
+    }
+   };
+}]);
+
+myApp.service('fileUpload', ['$http', function ($http) {
+    this.uploadFileToUrl = function(file, uploadUrl, name){
+         var fd = new FormData();
+         fd.append('file', file);
+         fd.append('name', name);
+         $http.post(uploadUrl, fd, {
+             transformRequest: angular.identity,
+             headers: {'Content-Type': undefined,'Process-Data': false}
+         })
+         .then(function(response){
+            console.log("Success");
+            console.log(response.data);
+         });
+     }
+ }]);
+
 myApp.directive('fdInput', ['$timeout', function ($timeout) {
     return {
         link: function (scope, element, attrs) {
