@@ -32,7 +32,7 @@ $config['main_site_url'] = 'http://dvt-web.com/';
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:80/';
+$config['base_url'] = 'http://wigig-299/';
 
 /*
 |--------------------------------------------------------------------------
@@ -73,7 +73,7 @@ $config['uri_protocol']	= 'REQUEST_URI';
 |
 | https://codeigniter.com/user_guide/general/urls.html
 */
-$config['url_suffix'] = '.html';
+$config['url_suffix'] = '';
 
 /*
 |--------------------------------------------------------------------------

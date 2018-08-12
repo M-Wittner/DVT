@@ -7,20 +7,19 @@ class Home extends CI_Controller {
 		$this->load->library('session');
 	}
 	function index() {
-		$this->login();
+		redirect('/index.htm');
 	}
 	function login() {
-		$postData = json_decode(file_get_contents('php://input'));
-		$userData = $postData->user;
-		$user = array(
-			'username'=>$userData->username,
-			'password'=>$userData->password,
-		);
-		$data = $this->db->insert('users', $user);
-		if($data) {
-			echo "success";
-		} else {
-			echo "failure";
+		$data = json_decode(file_get_contents('php://input'));
+//		echo json_encode($data);
+		$this->db->select('id, username, email, fname, lname, rank, group_id');
+		$user = $this->db->get_where('users', ['username'=>$data->username, 'password'=>md5($data->password)])->result();
+
+		if($user && count($user) == 1){
+			$user = $user[0];
+			echo json_encode($user);
+		}else{
+			echo json_encode(false);
 		}
 	}
 	

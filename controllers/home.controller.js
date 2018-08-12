@@ -1,43 +1,36 @@
-myApp.controller('homeCtrl', ['$scope', '$rootScope', '$http', 'AuthService', 'AUTH_EVENTS', 'USER_ROLES', '$location', 'Flash','Session','$cookies', '$window', function ($scope, $rootScope, $http, AuthService, AUTH_EVENTS, USER_ROLES, $location,
-Flash, Session, $cookies, $window) {
+myApp.controller('homeCtrl', ['$scope', '$rootScope', '$http', 'AuthService', 'AUTH_EVENTS', 'USER_ROLES', '$location', 'Flash','Session','$cookies', '$window', 'testParams', function ($scope, $rootScope, $http, AuthService, AUTH_EVENTS, USER_ROLES, $location,
+Flash, Session, $cookies, $window, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
+	var site = testParams.site;
+	$scope.isAuthorized = AuthService.isAuthorized;
+	$scope.isAuthenticated = AuthService.isAuthenticated;
+//	console.log($scope.isAuthenticated());
 	
 	if($cookies.getObject('loggedUser')){
 		$scope.currentUser = $cookies.getObject('loggedUser');
 	} else{
 		$scope.currentUser = {};
 		$scope.userRoles = USER_ROLES;
-		$scope.isAuthorized = AuthService.isAuthorized;
-		$scope.setCurrentUser = function (user) {
-			$scope.currentUser = user;
-//			$scope.currentUser.firstName = user.username;
-			
-		};
+		
 	}
 	$scope.user = {};
-	$scope.login = function (user) {
-		AuthService.login($scope.user).then(function (user) {
-			$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-			$scope.setCurrentUser(user);
-			$scope.currentUser = user;
-			if(user.username){
-				// Set Expire Time To 3 Hours
+	$scope.login = function() {
+		$http.post(site+'/home/login', $scope.user)
+		.then(function(response){
+			if(response.data != 'false'){
+				console.log(response.data);
+				$scope.currentUser = response.data;
 				var date = new Date();
- 				date.setDate(date.getDate() + 0.125);
-				$cookies.putObject('loggedUser', user, {'expires': date});
-				$window.location.reload();
+				date.setHours(date.getHours() + 3);
+				$cookies.putObject('loggedUser', $scope.user, {'expires': date});
 				$location.path('/plans');
-				var message = 'Welcome, '+ user.username + '!';
+				var message = 'Hello, '+$scope.user.username+ '! Successfully logged in!';
 				var id = Flash.create('success', message, 5000);
-//				console.log(date);
-			} else {
+			}else{
 				var message = 'Failed to log in';
 				var id = Flash.create('danger', message, 5000);
-//				console.log('Failed to log in');
+				console.log('Failed to log in');
 			}
-			
-		}, function () {
-			$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 		});
 	};
 	

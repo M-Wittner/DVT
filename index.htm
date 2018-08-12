@@ -7,6 +7,7 @@
 	<link rel="icon" href="Qualcomm-icon-2018.ico" type="image/ico">
 	<!-- jQuery -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="assets/lib/jquery.lazy/jquery.lazy.js"></script>
 <!--	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>-->
 
 	<!-- Angular -->
@@ -72,7 +73,7 @@
 	
 	<!-- angular file upload -->
 	<script type="text/javascript" src="assets/lib/angular-file-upload/dist/angular-file-upload.min.js"></script>
-	
+
 	<!-- Costum -->
 	<script type="text/javascript" src="app.js"></script>
 	<link rel="stylesheet" href="assets/lib/css/main.css" type="text/css">
@@ -142,7 +143,7 @@
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul ng-if=" isAuthenticated == true" class="nav navbar-nav">
+					<ul ng-if="isAuthenticated()" class="nav navbar-nav">
 						<li><a href="#/plans">All Plans</a></li>
 						<li><a href="#/plans/new">New Plan</a></li>
 						<li  class="dropdown">
@@ -158,7 +159,7 @@
 						<li><a href="#/admin">Admin Panel</a></li>
 					</ul>
 					<!--	Dropdown user panel	-->
-					<ul ng-if=" isAuthenticated == true" class="nav navbar-nav navbar-right">
+					<ul ng-if="isAuthenticated()" class="nav navbar-nav navbar-right">
 						 <li  class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUser.firstName}} {{currentUser.lastName}}<span class="caret"></span></a>
 							<ul class="dropdown-menu">
@@ -170,7 +171,7 @@
 					</ul>
 					
 					
-					<ul ng-if=" isAuthenticated == false" class="nav navbar-nav">
+					<ul ng-if="!isAuthenticated()" class="nav navbar-nav">
 						<li><a href="#/register">Sign up</a></li>
 					</ul>
 				</div>
@@ -181,7 +182,7 @@
 	
 	<div id="mainDiv">
 		<flash-message></flash-message>
-		<div ng-if=" isAuthenticated == false && location == register">
+		<div ng-if="!isAuthenticated() && location == register">
 			<div class="row " ng-controller="homeCtrl">
 				<div class="col-lg-6 col-sm-6 well">
 					<form>
@@ -220,7 +221,7 @@
 				</div>
 			</div>
 		</div>
-		<div ng-if="isAuthenticated == true || location == register">
+		<div ng-if="isAuthenticated() || location == register">
 			<div ng-view ></div>
 		</div>
 	</div>

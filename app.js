@@ -178,7 +178,6 @@ myApp.run(function($animate) {
 myApp.directive('testForm', function(){
 	return {
 		templateUrl: 'pages/plans/newTest.html',
-//		controller: 'testCtrl',
 		scope: {
 			planParams: '=',
 			params: '=',
