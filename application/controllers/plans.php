@@ -15,12 +15,20 @@ class Plans extends CI_Controller {
     }
 
 	function index() {
-		$this->db->order_by('date', 'desc');
+//		$this->db->order_by('date', 'asc');
+		$plans = new stdClass();
 		$this->db->order_by('id', 'desc');
-		$plans = $this->db->get('plans_v1_view')->result();
-			foreach($plans as $plan){
-				$this->db->where('plan_id', $plan->id);
-				$plan->tests = $this->db->get('tests_view_v1')->result();
+		$this->db->where('source', 0);
+		$plans->web = $this->db->get('plans_v1_view')->result();
+		$this->db->order_by('id', 'desc');
+		$this->db->where('source', 1);
+		$plans->lab = $this->db->get('plans_v1_view')->result();
+			foreach($plans->lab as $plan){
+				$this->db->select('test_id');
+				$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$plan->id))->result();
+				foreach ($plan->tests as $i=>$test){
+					$plan->tests[$i] = $this->plan_model->get_test_v1($test->test_id);
+				}
 			}
 		echo json_encode($plans);	
 	}
@@ -112,15 +120,23 @@ class Plans extends CI_Controller {
 												unset($sweep->data_idx);
 											}
 											if(isset($sweepData->ext)){
-												$extraData = explode(',', $sweepData->ext);
-												foreach($extraData as $ext){
-													$tempObj = new stdClass();
-													$tempObj->test_id = $testId;
-													$tempObj->config_id = $sweepData->config_id;
-													$tempObj->value = $ext;
-													array_push($sweepData->data, $tempObj);
-												}
-											}		
+												if($sweepData->config_id == 19){
+														$tempObj = new stdClass();
+														$tempObj->test_id = $testId;
+														$tempObj->config_id = $sweepData->config_id;
+														$tempObj->value = $sweepData->ext;
+														array_push($sweepData->data, $tempObj);
+													}else{
+														$extraData = explode(',', $sweepData->ext);
+														foreach($extraData as $ext){
+															$tempObj = new stdClass();
+															$tempObj->test_id = $testId;
+															$tempObj->config_id = $sweepData->config_id;
+															$tempObj->value = $ext;
+															array_push($sweepData->data, $tempObj);
+														}
+													}
+												}		
 											$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $sweepData->data);
 											break;
 									}

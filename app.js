@@ -190,6 +190,11 @@ myApp.directive('testForm', function(){
 	}
 });
 
+myApp.component('planComp', {
+	templateUrl: 'pages/plans/partials/planComp.html',
+	bindToController: 'planCompCtrl'
+})
+
 myApp.directive('fileModel', ['$parse', function ($parse) {
     return {
     restrict: 'A',
