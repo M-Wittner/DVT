@@ -23,10 +23,10 @@ class Tasks extends CI_Controller {
 	
 	public function create(){
 		$data = json_decode(file_get_contents('php://input'));
+//		echo json_encode($data);
+//		die();
 		$taskData = $data->task;
 		$userData = $data->user;
-//		$this->db->select('email');
-//		$userData->email = $this->db->get_where('users', ['id'=>$data->user->userId])->result()[0]->email;
 
 		$task = [
 			'station_id'=>$taskData->station[0]->id,

@@ -23,13 +23,13 @@ class Plans extends CI_Controller {
 		$this->db->order_by('id', 'desc');
 		$this->db->where('source', 1);
 		$plans->lab = $this->db->get('plans_v1_view')->result();
-			foreach($plans->lab as $plan){
-				$this->db->select('test_id');
-				$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$plan->id))->result();
-				foreach ($plan->tests as $i=>$test){
-					$plan->tests[$i] = $this->plan_model->get_test_v1($test->test_id);
-				}
-			}
+//			foreach($plans->lab as $plan){
+//				$this->db->select('test_id');
+//				$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$plan->id))->result();
+//				foreach ($plan->tests as $i=>$test){
+//					$plan->tests[$i] = $this->plan_model->get_test_v1($test->test_id);
+//				}
+//			}
 		echo json_encode($plans);	
 	}
 	

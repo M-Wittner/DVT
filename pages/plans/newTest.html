@@ -68,9 +68,9 @@
 						</div>
 					</div>
 					<!----------------------------------------------------------------			Sweeps			---------------------------------------------------------------->
-					<div ng-if="sweepData.data_type != 33 && sweepData.data_type < 100 && sweepData.data_type != 60" class="col-md-3 rowMarg" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'"  allow-clear ng-init="test.sweeps[sweepName].data_type = sweepData.data_type; test.sweeps[sweepName].config_id = sweepData.config_id">
+					<div ng-if="sweepData.data_type != 33 && sweepData.data_type < 100 && sweepData.data_type != 60" class="col-md-3 rowMarg" allow-clear ng-init="test.sweeps[sweepName].data_type = sweepData.data_type; test.sweeps[sweepName].config_id = sweepData.config_id">
 						<span class="label label-dangerC">{{sweepName}}</span>
-						<div class="input-group">
+						<div class="input-group" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'">
 							<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.sweeps[sweepName].data" data-placeholder="Pick Test" ng-disabled="lock">
 								<ui-select-match>{{$item.display_name}}</ui-select-match>
 								<ui-select-choices repeat="sweep in testParams.params.allParams |filter:{config_id: sweepData.config_id}:true|filter: $select.search" sortable="true">{{sweep.display_name}}</ui-select-choices>
@@ -79,16 +79,17 @@
 								<button type="button" ng-click="test.sweeps[sweepName].data = []" class="btn btn-default btn-sm" ng-disabled="lock">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
-								<button type="button" ng-click="selectAll(test, sweepData)" class="btn btn-default btn-sm" ng-disabled="lock">
+								<button type="button" ng-click="selectAll(test, sweepData)" class="btn btn-default btn-sm" ng-disabled="lock" ng-if="sweepData.config_id != 19">
 									<span class="glyphicon glyphicon-check"></span>
 								</button>
-								<button class="btn btn-default btn-sm" ng-click="extras(test, sweepData)" ng-disabled="lock">
+								<button class="btn btn-default btn-sm" ng-click="extras(test, sweepData)" ng-disabled="lock" ng-if="sweepData.config_id != 19">
 									<span class="glyphicon glyphicon-plus"></span>
 								</button>
 							</span>
 						</div>
 						<span ng-if="test.sweeps[sweepName].data.ext">
-							<input uib-popover="Numbers,separated by comma (60, 70, -80)" popover-trigger="'mouseenter'" type="text" class="form-control btn-crud" ng-model="test.sweeps[sweepName].ext" placeholder="Extra {{sweepName}}" style="width: 100%;" ng-disabled="lock" ng-disabled="lock">
+							<input ng-if="sweepData.config_id != 19" uib-popover="Numbers,separated by comma (60, 70, -80)" popover-trigger="'mouseenter'" type="text" class="form-control btn-crud" ng-model="test.sweeps[sweepName].ext" placeholder="Extra {{sweepName}}" style="width: 100%;" ng-disabled="lock" ng-disabled="lock">
+<!--							<input ng-if="sweepData.config_id == 19" uib-popover="Excel Path" popover-trigger="'mouseenter'" type="text" class="form-control btn-crud" ng-model="test.sweeps[sweepName].ext" placeholder="Filer4 Path" style="width: 100%;" ng-disabled="lock" ng-disabled="lock">-->
 						</span>
 					</div>
 				</div>

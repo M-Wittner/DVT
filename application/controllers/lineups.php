@@ -120,10 +120,10 @@ class Lineups extends CI_Controller {
 					$trimSpace = " ";
 					$trimParam = trim($param, $trimSpace);
 					$paramIdx = array_search($param, $paramNameArr);
-
+//					echo json_encode($paramIdx);
+//					die();
 					$data = new stdClass();
 					if($paramIdx === false){
-
 //					INSERT TEMP CH V INTO SQL RESULT
 						if(in_array(strtolower($param), $localParams)){
 							$data->parameter_name = $param;
@@ -150,6 +150,8 @@ class Lineups extends CI_Controller {
 				
 	//		INSERT EXCEL INDEX TO EACH PARAM
 				foreach ($match as $value){
+					var_dump($value);
+					die();
 					$name = strtolower($value->parameter_name);
 //							echo $name."\n";
 	//  		GET THIS COLUMN DATA

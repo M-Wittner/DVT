@@ -5,17 +5,26 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 	
 //	$scope.user = $scope.currentUser.username;
 	
-	if($scope.isAuthenticated == true) {
+	if($scope.isAuthenticated) {
+		$scope.plans = {};
 		$http.get(site+'/plans')
 		.then(function(response) {
-			$scope.tableParams = new NgTableParams({count:12}, {
-				counts:[],
-				total: response.data.length,
-				dataset: response.data
-			})
-			$scope.plans=response.data;
 			console.log(response.data);
+			var data = response.data;
+			$scope.webTableParams = new NgTableParams({count:12}, {
+				counts:[],
+				total: data.web.length,
+				dataset: data.web
+			})
+			$scope.plans.web = data.web;
+			$scope.labTableParams = new NgTableParams({count:12}, {
+				counts:[],
+				total: data.lab.length,
+				dataset: data.lab
+			})
+			$scope.plans.lab = data.lab;
 		});
+		
 		$scope.view = function(data){
 			$location.path('/plans/'+data);
 		};

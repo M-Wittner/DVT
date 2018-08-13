@@ -131,8 +131,8 @@
 									<tr>
 										<th>{{sweepName}}</th>
 										<th>Status</th>
-										<th ng-hide="test.station_id == [4,5]">Hot</th>
-										<th ng-hide="test.station_id == [4,5]">Cold</th>
+										<th ng-if="test.station_id == [4,5]">Hot</th>
+										<th ng-if="test.station_id == [4,5]">Cold</th>
 										<th class="text-center">By</th>
 									</tr>
 								</thead>
@@ -142,10 +142,10 @@
 										<td class="text-center">
 											<span ng-click="chipStatus(chip)" class="glyphicon glyphicon-minus chip-status" ng-class="{'glyphicon-hourglass': chip.chip_status == 2, 'glyphicon-ok':  chip.chip_status == 0, 'glyphicon-remove':  chip.chip_status == 3}"></span>
 										</td>
-										<td ng-hide="test.station == 'PTAT/ABS/Vgb+TEMP'">
+										<td ng-if="test.station_id == [4,5]">
 											<span class="glyphicon glyphicon-minus chip-status" ng-click="hotStatus(chip)" ng-class="{'glyphicon-hourglass': chip.hot_status == 2, 'glyphicon-ok':  chip.hot_status == 0, 'glyphicon-remove':  chip.hot_status == 3}"></span>
 										</td>
-										<td ng-hide="test.station == 'PTAT/ABS/Vgb+TEMP'">
+										<td ng-if="test.station_id == [4,5]">
 											<span class="glyphicon glyphicon-minus chip-status" ng-click="coldStatus(chip)" ng-class="{'glyphicon-hourglass': chip.cold_status == 2, 'glyphicon-ok':  chip.cold_status == 0, 'glyphicon-remove':  chip.cold_status == 3}"></span>
 										</td>
 										<td>{{chip.username}}</td>
