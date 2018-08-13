@@ -38,3 +38,23 @@ ERROR - 201820182018-0808-0101 1212:AugAug:3535 --> 404 Page Not Found: Assets/l
 ERROR - 201820182018-0808-0101 1212:AugAug:4949 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-0808-0101 1212:AugAug:5858 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-0808-0101 1212:AugAug:4646 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:0202 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:1616 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:3535 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:5151 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:0505 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:1414 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:4242 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:5151 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:2323 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:5656 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:3838 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:5050 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:0303 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:5151 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:4747 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1212:AugAug:5959 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1414:AugAug:5757 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-0808-0101 1414:AugAug:5858 --> Severity: Notice --> Undefined property: stdClass::$ext C:\xampp\htdocs\application\controllers\plans.php 123
+ERROR - 201820182018-0808-0101 1414:AugAug:5858 --> Severity: Notice --> Undefined property: stdClass::$ext C:\xampp\htdocs\application\controllers\plans.php 123
+ERROR - 201820182018-0808-0101 1414:AugAug:5858 --> Severity: Notice --> Undefined property: stdClass::$ext C:\xampp\htdocs\application\controllers\plans.php 123
