@@ -236,7 +236,13 @@ class plan_model extends CI_Model {
 				}
 //						$test->sweeps[$sweep->name]->data = $data[0];
 			}else{
-				if($sweep->data_type > 100){
+				if($sweep->data_type == 61){
+					foreach($data as $dac_atten){
+						$dac = $dac_atten->value>>8;
+						$dig = $dac_atten->value&255;
+						$dac_atten->display_name = "Dac: ".$dac." Dig: ".$dig;
+					}
+				}elseif($sweep->data_type > 100){
 					foreach($data as $chip){
 						$this->db->select('chip_sn, chip_process_abb');
 						$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result();
