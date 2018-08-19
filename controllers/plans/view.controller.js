@@ -1,10 +1,9 @@
-myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', 'LS', '$cookies', 'testParams', function ($scope, $route, $location, $http, $routeParams, $window, Flash, AuthService, testParams, LS, $cookies, testParams) {
+myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', 'LS', '$cookies', function($scope, $route, $location, $http, $routeParams, $window, Flash, AuthService, testParams, LS, $cookies){
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 		var site = testParams.site;
 		var scope = $scope;
-	
-	if($scope.isAuthenticated == true) {	
+	if($scope.isAuthenticated == true){	
 	
 	$http.post(site+'/plans/show_v1', $routeParams.id)
 	.then(function(response){
@@ -13,20 +12,20 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	});
 
 	$scope.user = {};
-	$scope.user.id = $cookies.getObject('loggedUser').userId;
+	$scope.user.id = $cookies.getObject('loggedUser').id;
 	$scope.user.username = $cookies.getObject('loggedUser').username;
 		
 	} else {
 		var message = 'Please Login first!';
 		var id = Flash.create('danger', message, 3500);
 		$location.path('/');
-	};
+	}
 	
 	$scope.toggleTest = function(index){
 //		console.log(index);
 		$scope.toggleCollapse = !$scope.toggleCollapse;
 		setTimeout($scope.toggleFade = $scope.toggleFade, 1500);
-	}
+	};
 	
 	$scope.params = testParams.params;
 	$scope.lock = true;
@@ -49,7 +48,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$scope.removeTest = function($testId) {
 		$http.post(site+'/plans/removeTest', $testId)
 		.then(function(response){
-			if(response.data = 'success'){
+			if(response.data == 'success'){
 				$window.scrollTo(0, 0);
 				var message = 'Test Deleted Succesfully!';
 				var id = Flash.create('success', message, 3500);
@@ -68,10 +67,10 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		$http.post(site+'/plans/sendMail', $scope.plan)
 		.then(function(response){
 			console.log(response.data);
-		})
-	}
+		});
+	};
 	
-	$scope.removeComment = function() {
+	$scope.removeComment = function(){
 		$http.post(site+'/plans/removeComment', this.comment.comment_id)
 		.then(function(response){
 //			console.log(response.data);
@@ -89,13 +88,13 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 			console.log(response.data);
 			var keys = Object.keys(response.data);
 			var key = keys[0];
-			var username = keys[1]
+			var username = keys[1];
 			chip[key] = response.data[key];
 			chip.username = response.data[username];
 //			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
 //			var id = Flash.create('success', message, 6000);
 		});
-	}
+	};
 	
 	$scope.hotStatus = function(chip){
 		chip.flag = 'hot';
@@ -107,7 +106,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 //				var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
 //				var id = Flash.create('success', message, 6000);
 		});
-	}	
+	};	
 	$scope.coldStatus = function(chip){
 		chip.flag = 'cold';
 		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user})
@@ -118,7 +117,7 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 //			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
 //			var id = Flash.create('success', message, 6000);
 		});
-	}
+	};
 	
 	$scope.filterByName = function(params, word){
 		var data = params.filter(param => param.param_name.includes(word));
@@ -127,5 +126,50 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		} else{
 			return false;
 		}
+	};
+	
+//	$scope.textBox;
+//	$scope.editor = function(testId){
+//	let savedEditor;
+//		InlineEditor
+//    .create( document.querySelector('#textBox'), {
+////			plugins: [Autosave],
+////			autosave: {
+////				save(editor){
+////					return saveData(editor.getData());
+////				}
+////			},
+//			toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote']
+//		})
+//    .then(editor => {
+//        console.log(editor.getData());
+//    })
+//    .catch(error => {
+//        console.error(error);
+//    });	
+//		$scope.textBox = savedEditor;
+//	}
+	
+		$scope.newCmt = function(testId, planId){
+			var test = this.test;
+			var comment = this.comment
+			this.comment.test_id = testId;
+			this.comment.plan_id = planId;
+			this.comment.user_id = $scope.user.id;
+		$http.post(site+'/plans/addComment', this.comment)
+		.then(function(response){
+			if(response.data.comment == comment.text) {
+				$window.scrollTo(0, 0);
+				var message = 'Comment Was Added successfully';
+				var id = Flash.create('success', message, 5000);
+				console.log(response.data);
+				test.comments.push(response.data);
+			} else {
+				console.log(response.data);
+				var message = response.data;
+				var id = Flash.create('danger', message, 5000);
+			}
+		})
+//		console.log(this.comment);
 	}
 }]);

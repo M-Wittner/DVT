@@ -201,6 +201,7 @@ class Plans extends CI_Controller {
 		$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$id))->result();
 		foreach ($plan->tests as $i=>$test){
 			$plan->tests[$i] = $this->plan_model->get_test_v1($test->test_id);
+			$plan->tests[$i]->comments = $this->db->get_where('test_comments_v1_view', ['test_id'=>$test->test_id])->result();
 		}
 		echo json_encode($plan);
 	}
@@ -301,8 +302,9 @@ class Plans extends CI_Controller {
 	
 	function addcomment(){
 		$postData = json_decode(file_get_contents('php://input'));
-//		die(var_dump($postData));
-		$comment = $this->plan_model->add_comment($postData);
+//		echo json_encode($postData);
+//		die();
+		$comment = $this->plan_model->add_comment_v1($postData);
 		echo json_encode($comment);
 	}
 	

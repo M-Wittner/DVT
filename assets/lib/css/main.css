@@ -7,6 +7,12 @@
 	width: 100px;
 }
 
+.textBox:Hover{
+	border-color: #439fec;
+  -webkit-box-shadow: 0 0 10px #000000;
+  box-shadow: 0 0 10px #000000;
+}
+
 .chip-status:hover{
 	color: #439fec;
   text-shadow: 0 0 25px #000000;

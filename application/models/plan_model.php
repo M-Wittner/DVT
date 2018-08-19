@@ -301,6 +301,33 @@ class plan_model extends CI_Model {
 		return $plan;
 	}
 	
+	function add_comment_v1($data){
+//		echo json_encode($data);
+//		die();
+		if($data->severity == 'Minor'){
+			$comment = array(
+				'test_id'=>$data->test_id,
+				'user_id'=>$data->user_id,
+				'severity'=>$data->severity,
+				'config_id'=>$data->chip[0]->data_idx,
+				'comment'=>$data->text,
+			);
+		}else{
+			$comment = array(
+				'test_id'=>$data->test_id,
+				'user_id'=>$data->user_id,
+				'severity'=>$data->severity,
+				'comment'=>$data->text,
+			);
+		}
+		$status = $this->db->insert('test_comments_new', $comment);
+		if($status){
+			$id = $this->db->insert_id($status);
+			$returnComment  = $this->db->get_where('test_comments_v1_view', ['comment_id'=>$id])->result()[0];
+			return $returnComment;
+		}
+	}
+	
 	function add_comment($data){
 //		echo json_encode($data);
 //		die();

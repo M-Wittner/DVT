@@ -137,7 +137,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="chip in sweepData.data track by $index">
+									<tr ng-repeat="chip in sweepData.data track by $index" ng-init="test.chips = []; test.chips.push(chip)">
 										<td >{{chip.chip_sn}}-{{chip.chip_process_abb}}</td>
 										<td class="text-center">
 											<span ng-click="chipStatus(chip)" class="glyphicon glyphicon-minus chip-status" ng-class="{'glyphicon-hourglass': chip.chip_status == 2, 'glyphicon-ok':  chip.chip_status == 0, 'glyphicon-remove':  chip.chip_status == 3}"></span>
@@ -183,9 +183,12 @@
 						</div>
 					</div>
 					<div class="panel-body">
-						<a class="btn btn-xs btn-success pull-right col-lg-5 addButton" href="#/plans/{{plan.id}}/test/{{test.id}}/comments/new">Add New Comment</a>
+						<button class="btn btn-xs btn-success pull-right col-lg-5 addButton" Data-toggle="collapse" data-target="#Comment{{test.test_id}}" aria-expanded="false" aria-controls="Comment{{test.test_id}}">Add New Comment</button>
 					</div>
-					<div class="panel-footer" ng-if="test.comments[0]">
+					<div class="panel-footer">
+						<div class="collapse fade" id="Comment{{test.test_id}}">
+							<comment-form></comment-form>
+						</div>
 						<div ng-repeat="comment in test.comments track by $index">
 							<div class="panel" ng-class="comment.severity == 'Minor' ? 'panel-warning' : 'panel-danger'">
 								<div class="panel-heading" Data-toggle="collapse" data-target="#{{comment.comment_id}}" aria-expanded="false" aria-controls="{{comment.comment_id}}">
@@ -206,23 +209,14 @@
 										</div>
 										<div class="col-md-3 col-sm-3 col-xs-3">
 											<span class="label label-primary">Test Station</span>
-											<label class="form-control">{{test.station}}</label>
+											<label class="form-control">{{test.name}}</label>
 										</div>
 										<div ng-if="comment.severity == 'Minor'">
-											<div ng-if="test.station_id != 5">
-												<div class="col-md-3 col-sm-3 col-xs-3">
-													<span class="label label-primary">Chip</span>
-													<label class="form-control">
-														<span ng-if="comment.chip_r_id != -1">{{comment.chip_r_sn}}-{{comment.corner_r}}</span>
-														<span ng-if="comment.chip_m_id != -1">{{comment.chip_m_sn}}-{{comment.corner_m}}</span>
-													</label>
-												</div>
-											</div>
-											<div ng-if="test.station_id == 5">
-												<div class="col-md-3 col-sm-3 col-xs-3">
-													<span class="label label-primary">Chip</span>
-													<label class="form-control">{{comment.chip_r_sn}} - {{comment.chip_m_sn}}</label>
-												</div>
+											<div class="col-md-3 col-sm-3 col-xs-3">
+												<span class="label label-primary">Chip</span>
+												<label class="form-control">
+													<span >{{comment.chip_sn}}-{{comment.chip_process_abb}}</span>
+												</label>
 											</div>
 										</div>
 									</div>

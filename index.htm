@@ -64,6 +64,8 @@
 	<script src="assets/lib/Trumbowyg/dist/plugins/upload/trumbowyg.upload.min.js"></script>
 	<link rel="stylesheet" href="assets/lib/Trumbowyg/dist/ui/trumbowyg.min.css">
 	<link rel="stylesheet" href="assets/lib/Trumbowyg/dist/plugins/colors/ui/trumbowyg.colors.css">
+<!--	<script src="assets/lib/ckeditor/classic/ckeditor.js"></script>-->
+	<script src="assets/lib/ckeditor/inline/ckeditor.js"></script>
 	
 	<!-- Select2 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.min.css" rel="stylesheet" />
@@ -161,7 +163,7 @@
 					<!--	Dropdown user panel	-->
 					<ul ng-if="isAuthenticated()" class="nav navbar-nav navbar-right">
 						 <li  class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUser.firstName}} {{currentUser.lastName}}<span class="caret"></span></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUser.fname}} {{currentUser.lname}}<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li ng-if="currentUser.group_id == 7"><a href="#/{{currentUser.username}}/tasks">My tasks</a></li>
 								<li role="separator" class="divider"></li>

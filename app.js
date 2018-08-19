@@ -190,10 +190,12 @@ myApp.directive('testForm', function(){
 	}
 });
 
-//myApp.component('planComp', {
-//	templateUrl: 'pages/plans/partials/planComp.html',
-//	bindToController: 'planCompCtrl'
-//})
+myApp.directive('commentForm', function(){
+	return{
+		templateUrl: 'pages/plans/partials/commentForm.html',
+//		bindToController: 'viewPlanCtrl'
+	}
+})
 
 myApp.directive('fileModel', ['$parse', function ($parse) {
     return {
