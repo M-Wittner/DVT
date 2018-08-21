@@ -1,10 +1,17 @@
-myApp.controller('stationlistCtrl', ['$scope', '$location','$http', '$routeParams', 'Flash', 'AuthService', '$window', function ($scope, $location, $http, $routeParams, Flash, AuthService, $window) {
+myApp.controller('stationlistCtrl', ['$scope', 'NgTableParams','$location','$http', '$routeParams', 'Flash', 'AuthService', '$window', 'testParams', function ($scope, NgTableParams,$location, $http, $routeParams, Flash, AuthService, $window, testParams ) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
+	var site = testParams.site;
 	
 	if($scope.isAuthenticated == true) {
-		$http.get('http://wigig-584/admin/stationlist')
+		$http.get(site+'/admin/stationlist')
 		.then(function(response) {
-//			console.log(response.data);
+			console.log(response.data);
+			var data = response.data;
+			$scope.TableParams = new NgTableParams({count:12}, {
+				counts:[],
+				total: data.length,
+				dataset: data
+			})
 			$scope.stations=response.data;
 		});
 
@@ -15,7 +22,7 @@ myApp.controller('stationlistCtrl', ['$scope', '$location','$http', '$routeParam
 		};
 	$scope.removeStation = function(){
 		var stationName = this.station.station;
-		$http.post('http://wigig-584/admin/removestation', this.station)
+		$http.post(site+'/admin/removestation', this.station)
 		.then(function(response){
 			if(response.data == 'success'){
 				$window.scrollTo(0, 0);

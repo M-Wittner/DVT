@@ -8,28 +8,17 @@
 	<div class="panel-body">
 	</div>
 	<!-- Table -->
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Station</th>
-				<th>Station Computer</th>
-				<th>WWC Computer</th>
-				<th>Chip Computer</th>
-				<th style="text-align: center">Modify</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="station in stations">
-				<th>{{ station.station }}</th>
-				<td>{{ station.pc_name}}</td>
-				<td>{{ station.pc_wwc}}</td>
-				<td>{{ station.pc_chip}}</td>
-				<td>
-					<a href="#/admin/editstation/{{station.station}}" class="btn btn-warning btn-sm">Edit</a>
-				
-					<button class="btn btn-danger btn-sm" ng-click="removeStation()">Delete</button>
-				</td>
-			</tr>
-		</tbody>
+	<table ng-table="TableParams" class="table table-striped">
+		<tr ng-repeat="station in $data track by station.idx+$index">
+			<td class="col-md-1 text-center" data-title="'Station'">{{station.name}}</td>
+			<td class="col-md-1 text-center" data-title="'Host PC'">{{station.hostname}}</td>
+			<td class="col-md-1 text-center" data-title="'WWC Host'">{{station.wwc_pc}}</td>
+			<td class="col-md-1 text-center" data-title="'DMtools Host'">{{station.dmt_pc}}</td>
+			<td ng-if="currentUser.rank > 50" class="col-md-1 text-center" data-title="'Modify'">
+<!--				<input type="checkbox" ng-model="selected[$index]" ng-true-value="{{plan.id}}" ng-false-value="{{undefined}}">	-->
+				<a href="#/admin/editstation/{{station.station}}" class="btn btn-warning btn-sm">Edit</a>
+				<button class="btn btn-danger btn-sm" ng-click="removeStation()">Delete</button>
+			</td>
+		</tr>
 	</table>
 </div>

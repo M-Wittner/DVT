@@ -121,8 +121,8 @@ class Admin extends CI_Controller {
 		echo json_encode($chipList);
 	}
 	public function operations(){
-		$this->db->order_by('date_time', 'DESC');
 		$this->other_db = $this->load->database('main', TRUE);
+		$this->other_db->order_by('test_id', 'DESC');
 		$chipList = $this->other_db->get('operation_view')->result();
 		echo json_encode($chipList);
 	}	
@@ -131,7 +131,8 @@ class Admin extends CI_Controller {
 		echo json_encode($chipList->result());
 	}
 	public function stationList(){
-		$chipList = $this->db->get('params_stations');
+//		$this->other_db = $this->load->database('main', TRUE);
+		$chipList = $this->db->get('work_stations_view');
 		echo json_encode($chipList->result());
 	}
 	
@@ -274,11 +275,12 @@ class Admin extends CI_Controller {
 //	 	$data = json_decode(file_get_contents('php://input'));
 	 	$data = $_POST;
 //		echo json_encode($data);
+//		var_dump($data);
 //		die();
-		$target_dir = "upload/";
+		$target_dir = "uploads/";
      print_r($_FILES);
 		$handle = fopen($target_dir.$_FILES['file']['name'], 'a') or die('Cannot open file:  '.$data);
-     $target_file = $target_dir . basename($_FILES["file"]["name"]);
+//     $target_file = $target_dir . basename($_FILES["file"]["name"]);
 	}
 }
 ?>
