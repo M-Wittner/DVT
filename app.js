@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize', 'ui.calendar', 'angularFileUpload']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize', 'ui.calendar', 'ngFileSaver']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$httpProvider.defaults.cache = false;
@@ -182,9 +182,10 @@ myApp.directive('testForm', function(){
 			planParams: '=',
 			params: '=',
 			index: '&',
-			locked: '='
+			locked: '=',
+			fileData: '=',
 		},
-		link: function(scope, element, attrs){
+		link: function($scope, $elm){
 			
 		}
 	}
@@ -197,27 +198,62 @@ myApp.directive('commentForm', function(){
 	}
 })
 
-myApp.directive('fileModel', ['$parse', function ($parse) {
-    return {
-    restrict: 'A',
-    link: function(scope, element, attrs) {
-        var model = $parse(attrs.fileModel);
-        var modelSetter = model.assign;
+myApp.directive('viewTemplate', function(){
+	return{
+		templateUrl: 'pages/plans/partials/viewTemplate.html',
+//		bindToController: 'viewPlanCtrl'
+	}
+})
 
-        element.bind('change', function(){
-            scope.$apply(function(){
-                modelSetter(scope, element[0].files[0]);
-            });
-        });
+app.directive("importSheetJs", function(){
+	return {
+    scope: { fileData: '=' },
+    link: function($scope, $elm) {
+      $elm.on('change', function(changeEvent) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          /* read workbook */
+          var bstr = e.target.result;
+          var wb = XLSX.read(bstr, {type:'binary'});
+
+          /* grab first sheet */
+          var wsname = wb.SheetNames[0];
+          var ws = wb.Sheets[wsname];
+
+          /* grab first row and generate column headers */
+          var aoa = XLSX.utils.sheet_to_json(ws, {header:1, raw:false});
+          var cols = [];
+          for(var i = 0; i < aoa[0].length; ++i) cols[i] = { field: aoa[0][i] };
+
+          /* generate rest of the data */
+          var data = [];
+          for(var r = 1; r < aoa.length; ++r) {
+            data[r-1] = {};
+            for(i = 0; i < aoa[r].length; ++i) {
+              if(aoa[r][i] == null) continue;
+              data[r-1][aoa[0][i]] = aoa[r][i]
+            }
+          }
+//					console.log(data);
+					console.log($scope);
+          /* update scope */
+          $scope.$apply(function() {
+            $scope.fileData = data;
+          });
+        };
+				reader.readAsBinaryString(changeEvent.target.files[0]);
+      });
     }
-   };
-}]);
+  };
+});
 
 myApp.service('fileUpload', ['$http', function ($http) {
-    this.uploadFileToUrl = function(file, uploadUrl, name){
+    this.uploadFileToUrl = function(file, uploadUrl, name, path){
          var fd = new FormData();
          fd.append('file', file);
          fd.append('name', name);
+         fd.append('path', path);
          $http.post(uploadUrl, fd, {
              transformRequest: angular.identity,
              headers: {'Content-Type': undefined,'Process-Data': false}

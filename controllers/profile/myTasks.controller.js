@@ -8,7 +8,7 @@ myApp.controller('myTasksCtrl', ['$scope', 'NgTableParams', '$uibModal', '$locat
 	$scope.isFilterDisabled = true;
 	
 	if(($scope.isAuthenticated == true && $routeParams.username == $scope.currentUser.username)){
-		$http.post(site + '/profile/mytasks', $scope.currentUser.userId)
+		$http.post(site + '/profile/mytasks', $scope.currentUser.id)
 		.then(function (response) {
 			$scope.tableParams = new NgTableParams({
 				count: 15

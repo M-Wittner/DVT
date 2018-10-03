@@ -200,9 +200,9 @@ class plan_model extends CI_Model {
 	function get_test_v1($id) {
 		$this->other_db = $this->load->database('main', TRUE);
 		$test = $this->db->get_where('tests_view_v1', array('test_id'=>$id))->result()[0]; // Get test by id from test_view
+		$test->station = $this->db->get_where('work_stations_view',['idx'=>$test->station_id])->result();
 //		var_dump($id);
 //		die();
-		$test->station = $this->other_db->get_where('work_stations',['idx'=>$test->station_id])->result();
 		$test->testType = $this->other_db->get_where('test_types',['type_idx'=>$test->test_type_id])->result();
 		$priority = $test->priority;
 		$test->priority = array();
@@ -211,12 +211,15 @@ class plan_model extends CI_Model {
 //		die(var_dump($test));
 		// ----- Get Sweeps of that test ---------
 		$test->sweeps = array();
-		$this->db->select('config_id, name, data_type, priority, test_type_id');
+		$this->db->select('config_id, name, data_type, priority, test_type_id, tooltip');
 		$this->db->order_by('priority asc','data_type desc');
 		$struct = $this->db->get_where('test_struct_view', array('station_id'=>$test->station_id, 'test_type_id'=>$test->test_type_id))->result();
 		// ----- Populate each sweep with data ---------
 		foreach($struct as $sweep){
 			$test->sweeps[$sweep->name] = new stdClass();
+			if(isset($sweep->tooltip)){
+				$test->sweeps[$sweep->name]->tooltip = $sweep->tooltip;
+			}
 			$data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$sweep->config_id))->result();
 			if(count($data) == 1 && (in_array($sweep->data_type, [33, 60]))){
 				if($sweep->data_type == 60){ //Pin sweep
@@ -240,7 +243,7 @@ class plan_model extends CI_Model {
 					foreach($data as $dac_atten){
 						$dac = $dac_atten->value>>8;
 						$dig = $dac_atten->value&255;
-						$dac_atten->display_name = "Dac: ".$dac." Dig: ".$dig;
+						$dac_atten->display_name = "DAC: ".$dac." Dig: ".$dig;
 					}
 				}elseif($sweep->data_type > 100){
 					foreach($data as $chip){

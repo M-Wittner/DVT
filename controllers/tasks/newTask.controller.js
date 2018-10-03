@@ -3,7 +3,7 @@ myApp.controller('newTaskCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	$scope.testParams = testParams;
 	var site = testParams.site;
 	$scope.user = {
-		'userId' : $cookies.getObject('loggedUser').userId,
+		'userId' : $cookies.getObject('loggedUser').id,
 		'username' : $cookies.getObject('loggedUser').username,
 		'email' : $cookies.getObject('loggedUser').email,
 	}

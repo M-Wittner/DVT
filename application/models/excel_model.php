@@ -160,6 +160,19 @@ class excel_model extends CI_Model {
 		
 	}
 	
+	public function dac_atten_file_handle($file, $path){
+		$reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+		$reader->setSheetIndex(0);
+		$reader->setDelimiter(',');
+		$spreadsheet = $reader->load($lineup);
+		$currentSheet = $spreadsheet->getSheet(0);
+		$highestColumn = $currentSheet->getHighestColumn();
+		$highestRow = $currentSheet->getHighestRow();
+		$data_2d = $currentSheet->rangeToArray('A1:'.$highestColumn.$highestRow, null, false, false, true)[1];
+		echo json_encode($data_2d);
+		die();
+	}
+	
 	public function validate($test, $param, $unique){
 		$errors = array();
 		if(isset($test->params->temp_r)){

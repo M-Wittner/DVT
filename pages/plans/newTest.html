@@ -1,12 +1,9 @@
-<div id="desc" ng-controller="newPlanCtrl" ng-init="test.checkLineup = true; test.priority = []; test.user = currentUser">
-	<div class="panel col-md-12">
-		<span class="">Check Lineups? <input type="checkbox" ng-model="test.checkLineup" ng-disabled="lock"></span>
-	</div>
+<div id="desc" ng-controller="newPlanCtrl" ng-init="test.priority = []; test.user = currentUser">
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-3">
 				<span class="label label-dangerC">Station:</span>
-				<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.station" data-placeholder="Pick Test" ng-disabled="lock">
+				<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.station" data-placeholder="Pick Test" ng-disabled="lock" ng-change="test.testType = null">
 					<ui-select-match>{{$item.name}}</ui-select-match>
 					<ui-select-choices repeat="station in testParams.params.workStations|filter: $select.search" sortable="true">{{station.name}}</ui-select-choices>
 				</ui-select>
@@ -33,11 +30,32 @@
 				Test Struct
 			</div>
 			<div class="collapse panel-body in" id="{{$id}}" aria-expanded="true">
-				<div ng-repeat="(sweepName, sweepData) in testStructs | filter:{station_id: test.station[0].idx, test_type_id: test.testType[0].type_idx}:true | orderBy: 'priority' track by sweepData.name" ng-init="sweepName = sweepData.name;">
-					<!----------------------------------------------------------------			Lineups			---------------------------------------------------------------->
-					<div ng-if="sweepData.data_type == 33" class="col-md-12 rowMarg" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[sweepName].data.config_id = sweepData.config_id; test.sweeps[sweepName].data_type = sweepData.data_type">
+				<div ng-repeat="(sweepName, sweepData) in testStructs | filter:{station_id: test.station[0].idx, test_type_id: test.testType[0].type_idx}:true | orderBy: 'priority' track by sweepData.name + $index" ng-init="sweepName = sweepData.name;">
+					<!----------------------------------------------------------------			Sweeps			---------------------------------------------------------------->
+					<div ng-if="sweepData.data_type == 10" class="col-md-3 rowMarg" allow-clear ng-init="test.sweeps[sweepName].data_type = sweepData.data_type; test.sweeps[sweepName].config_id = sweepData.config_id">
 						<span class="label label-dangerC">{{sweepName}}</span>
-						<input class="form-control" type="text" placeholder="some text" ng-model="test.sweeps[sweepName].data.value" ng-disabled="lock">
+						<div class="input-group" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'">
+							<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.sweeps[sweepName].data" data-placeholder="Pick Test" ng-disabled="lock">
+								<ui-select-match>{{$item.display_name}}</ui-select-match>
+								<ui-select-choices repeat="sweep in testParams.params.allParams |filter:{config_id: sweepData.config_id}:true|filter: $select.search" sortable="true">{{sweep.display_name}}</ui-select-choices>
+							</ui-select>
+							<span class="input-group-btn">
+								<button type="button" ng-click="test.sweeps[sweepName].data = []" class="btn btn-default btn-sm" ng-disabled="lock">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+								<button type="button" ng-click="selectAll(test, sweepData)" class="btn btn-default btn-sm" ng-disabled="lock" ng-if="sweepData.config_id != 19">
+									<span class="glyphicon glyphicon-check"></span>
+								</button>
+							</span>
+						</div>
+					</div>
+					<!----------------------------------------------------------------			Lineups			---------------------------------------------------------------->
+					<div ng-if="sweepData.data_type == 33" class="rowMarg" ng-class="test.sweeps['Debug'] ? 'col-md-9' : 'col-md-12'" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[sweepName].data.config_id = sweepData.config_id; test.sweeps[sweepName].data_type = sweepData.data_type; test.sweeps[sweepName].checkLineup = true">
+						<span class="label label-dangerC">{{sweepName}}</span>
+						<div class="input-group">
+							<input class="form-control" type="text" placeholder="some text" ng-model="test.sweeps[sweepName].data.value" ng-disabled="lock">
+							<span class="input-group-addon"><span class="glyphicon" ng-class="test.sweeps[sweepName].checkLineup == true ? 'glyphicon-eye-open' : 'glyphicon-eye-close'"></span> <input type="checkbox" ng-model="test.sweeps[sweepName].checkLineup" ng-disabled="lock"></span>
+						</div>
 					</div>
 					<!----------------------------------------------------------------			Pins			---------------------------------------------------------------->
 					<div ng-if="sweepData.data_type == 60" class="col-md-5 rowMarg"  uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'">
@@ -67,8 +85,28 @@
 							</span>
 						</div>
 					</div>
+					<!----------------------------------------------------------------			DAC_Atten			---------------------------------------------------------------->
+					<div ng-if="sweepData.data_type == 61" class="col-md-3 rowMarg" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[sweepName].data_type = sweepData.data_type">
+						<span class="label label-dangerC">{{sweepName}}</span>
+						<div class="input-group input-group-sm">
+							<input type="text" class="form-control" ng-model="test.sweeps[sweepName].data.name" ng-disabled="lock">
+							<span class="input-group-btn">
+								<label class="btn btn-default btn-sm" ng-disabled="lock" for="{{this.$id}}{{$index}}">
+									<span class="glyphicon glyphicon-folder-open">
+									</span>
+									<input style="display: none;" id="{{this.$id}}{{$index}}" type="file" import-sheet-js="" get-file-data="fileData" file-model="test.sweeps[sweepName].data" ng-model="test.sweeps[sweepName].data" ng-disabled="lock"/>
+								</label>
+								<button type="button" ng-click="uploadFile(test.sweeps[sweepName])" class="btn btn-default btn-sm" ng-disabled="lock">
+									<span style="color: limegreen; font-size: 16px" class="glyphicon glyphicon-send"></span>
+								</button>
+								<button type="button" ng-click="test.sweeps[sweepName].data = []" class="btn btn-default btn-sm" ng-disabled="lock">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</span>
+						</div>
+					</div>
 					<!----------------------------------------------------------------			Sweeps			---------------------------------------------------------------->
-					<div ng-if="sweepData.data_type != 33 && sweepData.data_type < 100 && sweepData.data_type != 60" class="col-md-3 rowMarg" allow-clear ng-init="test.sweeps[sweepName].data_type = sweepData.data_type; test.sweeps[sweepName].config_id = sweepData.config_id">
+					<div ng-if="sweepData.data_type != 33 && sweepData.data_type != 10 && sweepData.data_type < 60" class="col-md-3 rowMarg" allow-clear ng-init="test.sweeps[sweepName].data_type = sweepData.data_type; test.sweeps[sweepName].config_id = sweepData.config_id">
 						<span class="label label-dangerC">{{sweepName}}</span>
 						<div class="input-group" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'">
 							<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.sweeps[sweepName].data" data-placeholder="Pick Test" ng-disabled="lock">

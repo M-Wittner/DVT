@@ -1,4 +1,4 @@
-myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $timeout, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
+myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', 'FileSaver', 'Blob', function ($scope, $timeout, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams, fileSaver, Blob) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.testParams = testParams;
 //	$scope.checkLineup = false;
@@ -17,8 +17,10 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 	$scope.array = [];
 	$scope.plan = {};
 	$scope.chipPairs = [{}];
-	$scope.plan.userId = $cookies.getObject('loggedUser').userId;
+	$scope.plan.userId = $cookies.getObject('loggedUser').id;
 	$scope.plan.username = $cookies.getObject('loggedUser').username;
+	$scope.fileData = {};
+	
 	
 	$scope.testCount = [{}];
 	$scope.addTest = function(){
@@ -70,6 +72,46 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 		console.log(test);
 	}
 	
+	$scope.open = function(index, id, sweepName){
+		var sweep = this.test.sweeps[sweepName];
+		var buttonID = id.toString() + index.toString();
+		var button = document.getElementById(buttonID);
+		button.click();
+		setTimeout(function(){
+			var path = jQuery(button).val();
+			var name = path.split('\\').pop();
+			console.log(name);
+			console.log(sweep);
+			
+		}, 2500);
+		var station = this.test.station[0].name;
+		var test = this.test.testType[0].test_name;
+		var url = site+"/uploads/"+station+"/"+test;
+		sweep.path = url;
+	}
+	
+	$scope.uploadFile = function(sweep){
+//		var station = this.test.station[0].name;
+//		var test = this.test.testType[0].test_name;
+//		var path = "uploads/"+station+"/"+test;
+//		sweep.path = path;
+//		var file = sweep.data
+//		var uploadUrl = site+'/plans/upload';
+//		var text = sweep.data.name;
+		console.log($scope.fileData);
+//		console.log(sweep);
+//		var data = new Blob([sweep.data], { type: 'application/vnd.ms-excel' });
+//		var reader = new FileReader();
+//		console.log(data);
+//		reader.addEventListener("loadend", function() {
+//			 // reader.result contains the contents of blob as a typed array
+//			console.log(reader.result);
+//		});
+//		var text = reader.readAsText(data);
+//		console.log(text);
+//		
+//		fileUpload.uploadFileToUrl(file, uploadUrl, text, path);
+   };
 	
 	$scope.selectAll = function(test, sweep){
 		console.log(test);
@@ -85,7 +127,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 	$scope.addPlan = function() {
 		$http.post(site+'/plans/createnew', {plan: $scope.plan, test: $scope.array})
 		.then(function(response){
-			Flash.clear()
+			Flash.clear();
 			console.log(response.data);
 			if(typeof response.data == "object"){
 				response.data.forEach(function(error){
@@ -105,6 +147,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 		})
 //		console.log($scope.array);
 	};
+	
 	
 	$scope.copyTest = function(){
 		$http.post(site+'/plans/copyTest', $scope.copyId)

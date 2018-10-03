@@ -8,14 +8,6 @@
 <!--		<span class="">Reviewed Tasks: <input type="checkbox" ng-model="reviewedTasks"></span>-->
 		<span class="">  Show Filters: <input type="checkbox" ng-model="isFilterDisabled"></span>
 		<span class="">  Show Completed: <input id="completedTasks" type="checkbox" ng-model="completedTasks"></span>
-<!--
-		<span class="col-md-2">
-			Priority:
-			<select class="form-control">
-				<option ng-model="filterPriority" ng-repeat="item in testParams.taskPriorityArr">{{item}}</option>
-			</select>
-		</span>
--->
   </div>
   <div class="panel-body">
 		<table ng-table="tableParams" class="table table-condensed table-hover table-responsive" show-filter="isFilterDisabled">

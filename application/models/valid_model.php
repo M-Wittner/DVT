@@ -9,7 +9,6 @@ class valid_model extends CI_Model {
 	
 	public function validate_plan($tests){
 		$result = array();
-//		die(var_dump('blaaaa'));
 		foreach($tests as $test){
 			$result = $this->validate_test($test, $result);
 		}
@@ -72,15 +71,29 @@ class valid_model extends CI_Model {
 				default: //--------------	Deal with different sweeps	--------------
 					switch($sweepData->data_type){
 						case 33://Linueup
-							if(!isset($sweepData->data->value)){
+							if(!isset($sweepData->data->value)){ //No Lineup
 								$err->msg = $sweepName.' were not selected';
+								$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
+								$err->occurred = true;
+								array_push($result, $err);
+							}elseif($sweepData->checkLineup){ //checkLineup = TRUE
+								$res = $this->check_lineup($test);
+								if($res != "Lineup is OK!"){
+									$result = $res;
+									array_push($result, $err);
+								}
+							}
+							break;
+						case 60://Pin
+							if(!isset($sweepData->data->from) || !isset($sweepData->data->step) || !isset($sweepData->data->to)){
+								$err->msg = $sweepName.' is missing';
 								$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 								$err->occurred = true;
 								array_push($result, $err);
 							}
 							break;
-						case 60://Pin
-							if(!isset($sweepData->data->from) || !isset($sweepData->data->step) || !isset($sweepData->data->to)){
+						case 61://DAC_Atten
+							if(!isset($sweepData->data) || !isset($sweepData->path)){
 								$err->msg = $sweepName.' is missing';
 								$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
 								$err->occurred = true;

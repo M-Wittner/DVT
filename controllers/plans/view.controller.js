@@ -1,4 +1,4 @@
-myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', 'LS', '$cookies', function($scope, $route, $location, $http, $routeParams, $window, Flash, AuthService, testParams, LS, $cookies){
+myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', 'LS', '$cookies', 'NgTableParams', function($scope, $route, $location, $http, $routeParams, $window, Flash, AuthService, testParams, LS, $cookies, NgTableParams){
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 		var site = testParams.site;
@@ -8,8 +8,22 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$http.post(site+'/plans/show_v1', $routeParams.id)
 	.then(function(response){
 		console.log(response.data);
-		$scope.plan = response.data;
+		var data = response.data;
+		$scope.plan = data;
 	});
+		
+	$scope.returnName = function(sweepName){
+		return sweepName;
+	}
+	$scope.sweepsTable = function(struct){
+//		console.log(struct);
+		$scope.cols = [];
+		$scope.TableParams = new NgTableParams({
+			counts:[],
+			total: struct.length,
+			dataset: struct
+		})
+	}
 
 	$scope.user = {};
 	$scope.user.id = $cookies.getObject('loggedUser').id;

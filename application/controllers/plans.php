@@ -23,42 +23,44 @@ class Plans extends CI_Controller {
 		$this->db->order_by('id', 'desc');
 		$this->db->where('source', 1);
 		$plans->lab = $this->db->get('plans_v1_view')->result();
-//			foreach($plans->lab as $plan){
-//				$this->db->select('test_id');
-//				$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$plan->id))->result();
-//				foreach ($plan->tests as $i=>$test){
-//					$plan->tests[$i] = $this->plan_model->get_test_v1($test->test_id);
-//				}
-//			}
+		foreach($plans->web as $plan){
+			$this->db->select('test_id');
+			$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$plan->id))->result();
+			foreach ($plan->tests as $i=>$test){
+				$plan->tests[$i] = $this->plan_model->get_test_v1($test->test_id);
+			}
+		}
 		echo json_encode($plans);	
 	}
 	
 	function CreateNew(){
 		$postData = json_decode(file_get_contents('php://input'));
+//		var_dump(file_get_contents('php://input'));
+//		echo json_encode($postData);
+//		die();
 		$result = array();
 		$planData = $postData->plan;
 		$plan = array(
 			'user_id'=>$planData->userId,
 		);	
 		$tests = $postData->test;
-//		echo json_encode($tests);
-//		die();
+		
 		if(sizeof($tests) <= 0){
 			$result->msg = 'No tests detected!';
 			$result->occurred = true;
 		}else{
-			if(!isset($planData->id)){
-				$insertPlan = $insertStatus = $this->db->insert('plans_v1', $plan);
-				$planId = $this->db->insert_id($insertPlan);
-			}else{
-				$planId = $planData->id;
-			}
 			$valid = $this->valid_model->validate_plan($tests);
 			if(!empty($valid)){
 				foreach ($valid as $err){
 					array_push($result, $err);
 				}
 			}else{
+				if(!isset($planData->id)){
+					$insertPlan = $insertStatus = $this->db->insert('plans_v1', $plan);
+					$planId = $this->db->insert_id($insertPlan);
+				}else{
+					$planId = $planData->id;
+				}
 				foreach($tests as $test){
 					if(!isset($test->notes)){
 						$test->notes = null;
@@ -81,10 +83,10 @@ class Plans extends CI_Controller {
 						$testId = $this->db->insert_id($insertTest);
 						foreach($test->sweeps as $sweepName => $sweepData){
 							$error = new stdClass();
-							switch($sweepData->data){
-								case is_array($sweepData->data): //--------------	Deal with generic sweeps	--------------
+							switch($sweepData->data){ //-------------- 1st switch data (array/single)	--------------
+								case is_array($sweepData->data): //--------------	Deal with generic array sweeps	--------------
 //									var_dump($sweepName);
-									switch($sweepData->data_type){
+									switch($sweepData->data_type){ //-------------- 2nd switch data_types (array)	--------------
 										case $sweepData->data_type > 100: //--------------	Chips	--------------
 											$chipsStatus = array();
 											$chips = array();
@@ -139,7 +141,7 @@ class Plans extends CI_Controller {
 												}		
 											$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $sweepData->data);
 											break;
-									}
+									} //-------------- End of 2nd switch data_types (array)	--------------
 									if(!$insertSweep){
 										$error->msg = $sweepName.' was not inserted';
 										$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
@@ -152,7 +154,7 @@ class Plans extends CI_Controller {
 //									var_dump($sweepName);
 									unset($sweepData->data->display_name);
 									unset($sweepData->data->data_idx);
-									switch($sweepData->data_type){
+									switch($sweepData->data_type){ 
 										case 33://Linueup
 											unset($sweepData->data_type);
 											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData->data);
@@ -172,7 +174,15 @@ class Plans extends CI_Controller {
 											$this->db->set('test_id', $testId);
 											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
 											break;
-									}
+										case 61: //DAC_Atten file handle
+											$path = $sweepData->path;
+											$file = $sweepData->data;
+											var_dump($sweepData);
+											die();
+											$handle = fopen($path.$_FILES['file']['name'], 'a') or die('Cannot open file:		'.$file);
+											$values = $this->excel_model->dac_atten_file_handle($file, $path);
+											break;
+									} //--------------	End of switch data_types	--------------
 									if(!isset($insertSweep) || !$insertSweep){
 										$error->msg = $sweepName.' was not inserted';
 										$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
@@ -180,7 +190,7 @@ class Plans extends CI_Controller {
 										array_push($result, $error);
 									}
 									break;
-							}
+							} //-------------- End of 1st switch data (array/single)	--------------
 						}
 					}
 				}
@@ -579,6 +589,20 @@ class Plans extends CI_Controller {
 				}	
 			}		
 		}
+	}
+	
+	public function upload(){
+		$data = $_POST;
+		var_dump($data);
+//		die();
+		$target_dir = $data['path'];
+		if(!is_dir($target_dir)){
+			mkdir($target_dir, 0755, true);
+		}
+		 print_r($_FILES);
+//		var_dump($target_dir)
+		$handle = fopen($target_dir.'/'.$_FILES['file']['name'], 'x+') or die('Cannot open file:  '.$data);
+//		var_dump($handle);
 	}
 	
 	public function check($test){

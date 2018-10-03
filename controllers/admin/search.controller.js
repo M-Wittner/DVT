@@ -1,4 +1,4 @@
-myApp.controller('searchCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window','testParams', 'AuthService', 'NgTableParams', 'fileUpload', function ($scope, $location, $http, Flash, $cookies, $window, testParams, AuthService, NgTableParams, fileUpload) {
+myApp.controller('searchCtrl', ['$scope', '$location','$http', 'Flash', '$cookies', '$window','testParams', 'AuthService', 'NgTableParams', 'fileSaver', 'Blob', function ($scope, $location, $http, Flash, $cookies, $window, testParams, AuthService, NgTableParams, fileSaver, Blob) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	var site = testParams.site;
 	if($scope.isAuthenticated == true) {
@@ -30,20 +30,12 @@ myApp.controller('searchCtrl', ['$scope', '$location','$http', 'Flash', '$cookie
 		this.test.chips = chips[0].data;
 	}
 	
-	$scope.uploadFile = function(fi){
+	$scope.uploadFile = function(){
 		var file = $scope.myFile
-//		console.log('file is ' );
-//		console.dir(file);
-//		console.dir(fi);
-//		console.log($scope.myFile.name);
-
 		var uploadUrl = site+"/admin/upload";
 		var text = $scope.myFile.name;
+		console.log(text);
 		fileUpload.uploadFileToUrl(file, uploadUrl, text);
-//		$http.post(uploadUrl, file)
-//		.then(function(response){
-//			console.log(response.data);
-//		})
    };
 	
 }]);
