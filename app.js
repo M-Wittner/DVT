@@ -140,31 +140,6 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/admin/operations.html',
 			controller: 'operationsCtrl'
 	})
-//		--------------------	Robot PAGES --------------------
-		.when('/robot', {
-			templateUrl: 'pages/robot/index.html',
-			controller: 'robotCtrl'
-	})
-		.when('/robot/new', {
-			templateUrl: 'pages/robot/new.html',
-			controller: 'newRobotPlanCtrl'
-	})
-		.when('/robot/:id', {
-			templateUrl: 'pages/robot/view.html',
-			controller: 'viewRobotPlanCtrl'
-	})
-		.when('/robot/:id/addtests', {
-			templateUrl: 'pages/robot/addTest.html',
-			controller: 'addTestsRobotCtrl'
-	})
-		.when('/robot/:planId/test/:testId/edit', {
-			templateUrl: 'pages/robot/edit.html',
-			controller: 'editRobotPlanCtrl'
-	})
-//		.when('/robot/:planId/test/:testId/comments/new', {
-//			templateUrl: 'pages/robotnts/new.html',
-//			controller: 'newCommentCtrl'
-//	})
 		.otherwise({redirectTo: '/'});
 
 	$locationProvider.hashPrefix('');
@@ -332,45 +307,12 @@ myApp.directive('talynM', function(){
 	}
 });
 
-myApp.directive('robotTestform', function(){
-	return {
-		templateUrl: 'pages/robot/robotTestform.html',
-		controller: 'newRobotPlanCtrl',
-		scope: {
-			planParams: '=',
-			test: '=',
-			params: '=',
-			index: '&',
-			locked: '='
-		},
-		link: function(scope, element, attrs){
-			
-		}
-	}
-});
-
 myApp.directive('testFormedit', function(){
 	return {
 		templateUrl: 'pages/plans/newTestEdit.html',
 		controller: 'addTestCtrl',
 		scope: {
 			planParams: '=',
-			params: '=',
-			index: '&',
-			locked: '='
-		},
-		link: function(scope, element, attrs){
-			
-		}
-	}
-});
-myApp.directive('robotTestformadd', function(){
-	return {
-		templateUrl: 'pages/robot/robotTestFormAdd.html',
-		controller: 'addTestsRobotCtrl',
-		scope: {
-			planParams: '=',
-			test: '=',
 			params: '=',
 			index: '&',
 			locked: '='
@@ -569,44 +511,6 @@ myApp.factory('testParams', function($http, $log){
 //			console.log(response.data);
 	});
 	
-//	testParams.params.nameListRobot = {};
-	$http.get(site+'/params/testsRobot')
-	.then(function(response){
-		testParams.params.nameListRobot = response.data;
-//			console.log(response.data);
-	});
-	
-	$http.get(site+'/params/modulesRobot')
-	.then(function(response){
-		testParams.params.moduleListRobot = response.data;
-//			console.log(response.data);
-	});
-	
-	testParams.params.robotChList = [
-		'1',
-		'2',
-		'3',
-		'4',
-		'5',
-	];	
-	
-	testParams.params.robotGainIdxList = [
-		'1',
-		'2',
-		'3',
-		'4',
-		'5',
-		'6',
-		'7',
-		'8',
-		'9',
-		'10',
-		'11',
-		'12',
-		'13',
-		'14',
-		'15',
-	];
 	testParams.params.gainTableIdx = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'];
 	testParams.params.txGainRow = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
 	testParams.params.dacFssel = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40'];

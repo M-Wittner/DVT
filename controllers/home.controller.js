@@ -18,8 +18,8 @@ Flash, Session, $cookies, $window, testParams) {
 		$http.post(site+'/home/login', $scope.user)
 		.then(function(response){
 			if(response.data != 'false'){
-				console.log(response.data);
 				$scope.currentUser = response.data;
+				console.log($scope.currentUser);
 				var date = new Date();
 				date.setHours(date.getHours() + 3);
 				$cookies.putObject('loggedUser', response.data, {'expires': date});

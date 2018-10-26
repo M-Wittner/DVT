@@ -66,129 +66,161 @@ class Lineups extends CI_Controller {
 		echo $path.$res;
 	}
 	
-//	public function check(){
-//		$path = file_get_contents('php://input');
-//		echo json_encode($data);
-//	}
+	public function check_lineup(){
+		$data = file_get_contents('php://input');
+		$res = $this->check($data);
+		echo json_encode($res);
+	}
 	
 	public function check(){
 		$data = json_decode(file_get_contents('php://input'));
-//		echo json_encode($data);
-//		die();
-			$lineup = (string)$data->path;
-			$station = $data->station[0]->name;
+		$test = $data->testType[0];
+		$result = array();
+		$lineup = (string)$data->path;
+		$station = $data->station[0]->name;
 
 		$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-		if(in_array($station, ['R-CB1', 'R-CB2'])){
-			$spreadsheet = $reader->load($lineup);
+		$spreadsheet = $reader->load($lineup);
+		// ----------------------	Is Reader Exists? and not M+A station	----------------------
+		if($spreadsheet && !in_array($data->station[0]->idx, ['4', '10'])){
+			$fileNamePortions = explode('\\', $lineup);
+			$fileName = $fileNamePortions[count($fileNamePortions)-1]; // ---- Extract File's Name
 			$expectedSheets = ['Typical', 'LO Lineup'];
 			$sheets = $spreadsheet->getSheetNames();
 			$localParams = ["temp", "v", "ch"];
-		} elseif(in_array($station, ['M-CB1', 'M-CB2'])) {
-			// CREATE SPREADSHEET FROM CSV
-			$path = $this->excel_model->ss_from_csv($lineup);
-			$spreadsheet = $reader->load($path);
-			$sheets = $spreadsheet->getSheetNames();
-			$localParams = ["temp", "volt", "chipchannel"];
-		}
-		$reader->setReadDataOnly(true);	
-		if ($spreadsheet){
+			$reader->setReadDataOnly(true);
+/*	 ----------------------	Iterate over sheets	----------------------	 */
 			foreach($sheets as $sheetName){
-			//CHECK FOR SHEET EXSITENCE
+				$error = new stdClass();
+/*	 ----------------------	Is Sheet Exists?	----------------------	 */
 				if(!in_array($sheetName, $sheets)){
-					echo $sheetName." wasn't found! Might be misspelled";
-					die();
+					$error->msg = $sheetName." wasn't found! Might be misspelled";
+					$error->source = $fileName;
+					$result->occurred = true;
+					array_push($result, $error);
 				}
-	// 		EXTRACTS  HIGHEST COL, HIGHEST ROW, FIRST ROW
+				$sheetId = $sheetName == 'Typical' ? 0 : 1;
+				//EXTRACTS  HIGHEST COL, HIGHEST ROW, FIRST ROW
 				$currentSheet = $spreadsheet->getSheetByName($sheetName);
 				$highestColumn = $currentSheet->getHighestColumn();
 				$highestRow = $currentSheet->getHighestRow();
-				$firstRowRaw = $currentSheet->rangeToArray('A1:'.$highestColumn.'1', null, false, false, true)[1];
-	//		GET PARAMS FOUND BOTH IN EXCEL AND DB (NOT: TEMP CH V)
-				$this->db->where_in('parameter_name', $firstRowRaw);
-				$this->db->group_by('parameter_name');
-				$match = $this->db->get('lineup_params')->result();
-				
+				$firstRowRaw = $currentSheet->rangeToArray('A1:'.$highestColumn.'1', '-1', false, false, true)[1]; // Range, default value, calcValue?, fromatValue?, indexed array?
+			
+				//get lineup type based on test type_idx
+				$this->db->select('config_id');
+				$this->db->limit('1');
+				$lineupType = (int) $this->db->get_where('test_struct_view', ['test_type_id'=>$test->type_idx, 'data_type'=>'33'])->result()[0]->config_id;
+				//GET PARAMS FOUND BOTH IN EXCEL AND DB (NOT: TEMP CH V)
+				$this->db->select('parameter_id, parameter_name, parameter_range');
+				//$match - Lineup params array ^^
+				$match = $this->db->get_where('lineup_params_view', ['config_id'=>$lineupType, 'sheet_id'=>$sheetId])->result();
 				$paramNameArr = [];
-				// GET PARAM NAMES FROM $MATCH INTO ARRAY
+				//GET PARAM NAMES FROM $MATCH INTO ARRAY
 				foreach ($match as $obj){
 					$value = $obj->parameter_name;
 					array_push($paramNameArr, $value);
 				}
-
+/*	 ----------------------	Setup Local Variables	----------------------	 */
 				foreach($firstRowRaw as $index => $param){
+					$error = new stdClass();
 					$trimSpace = " ";
-					$trimParam = trim($param, $trimSpace);
-					$paramIdx = array_search($param, $paramNameArr);
-//					echo json_encode($paramIdx);
-//					die();
+					$trimParam = trim($param, $trimSpace); //trimmed param name
 					$data = new stdClass();
-					if($paramIdx === false){
-//					INSERT TEMP CH V INTO SQL RESULT
-						if(in_array(strtolower($param), $localParams)){
-							$data->parameter_name = $param;
-							$data->parameter_id = -1;
-							$data->parameter_range = -1;
-							$data->excel_index = $index;
-							array_push($match, $data);
-//					// CHECK IF TEMPS AND CH FROM SITE ARE FOUND IN EXCEL FILE;
-//							if(in_array(strtolower($param), ['temp', 'ch'])){
-//								$colData = $currentSheet->rangeToArray($index.'2:'.$index.$highestRow, -1, false, false, false);
-//								$data = array_column($colData, 0);
-//								$unique = array_unique($data);
-//								$this->excel_model->validate($test, $param, $unique);
-//							}
-							
-						}elseif($trimParam != $param){
-							echo "The \"".$param."\" parameter in column ".$index." is invalid! It might contain a space!";
-							die();
+					if($trimParam != $param){ // if param misspelled
+						$error->msg = "The \"".$param."\" parameter in column ".$index." is invalid! It might contain a space!";
+						$error->source = $fileName +", " +$sheetName + " sheet";
+						$error->occurred = true;
+						array_push($result, $error);
+					}else{ // if param spelled correctly
+						$paramIdx = array_search($param, $paramNameArr);
+						if($paramIdx === false){ // if param hasn't found in $paramNameArr (local params)
+							//INSERT TEMP CH V INTO SQL RESULT
+							if(in_array(strtolower($param), $localParams)){ //if param found in local params
+								$data->parameter_name = $param;
+								$data->parameter_id = -1;
+								$data->parameter_range = -1;
+								$data->excel_index = $index;
+								array_push($match, $data);	
+							}
+						}else{
+							//INSERT EXCEL INDEX TO EACH PARAM
+							$match[$paramIdx]->excel_index = $index;
 						}
-					}else{
-						$match[$paramIdx]->excel_index = $index;
 					}
 				}
+				// Sort callback function to sort $match array alphabetically
+				$sort = function($a, $b){
+					return strcmp($a->excel_index, $b->excel_index);
+				};
+				usort($match, $sort);
+/*	----------------------	^^^  Setup Local Variables ^^^ 	---------------------- */
 				
-	//		INSERT EXCEL INDEX TO EACH PARAM
-				foreach ($match as $value){
-					var_dump($value);
-					die();
-					$name = strtolower($value->parameter_name);
-//							echo $name."\n";
-	//  		GET THIS COLUMN DATA
-					$col = $currentSheet->rangeToArray($value->excel_index.'2:'.$value->excel_index.$highestRow, -1, false, false, false);
-					$value->rows = array_column($col, 0);
-//					if($name == 'ch'){
-//						die(var_dump($value));
-//					}
+/******************************************************************************************/
+/*	Iterating over column, for each column looping through rows														*/
+/* each row checks for parameter range:																										*/
+/* 0 = boolean, -1 = no range, null = NaN, default = integer, (if NaN no existance check)	*/
+/* 																																												*/
+/******************************************************************************************/
+				
+/*	----------------------	 Actuall Lineup Checking 	---------------------- */
+				
+			foreach ($match as $value){
+				$name = strtolower($value->parameter_name);
+				//GET THIS COLUMN DATA
+				$col = $currentSheet->rangeToArray($value->excel_index.'2:'.$value->excel_index.$highestRow, -1, false, false, false); // Range, default value, calcValue?, fromatValue?, indexed array?
+				$value->rows = array_column($col, 0);
 				switch($value->parameter_range){
-					// RANGE NULL: VALUE IS NOT A NUMBER AND OPTIONAL(NOTE COL)
-						case null:
-							break;
-					// RANGE 0 IS BOOLEAN VALUE
-						case 0:
-							$res = $this->excel_model->check_exist($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
-							if($res = true){
-									$this->excel_model->check_bool($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
-								}
-							break;
-					// RANGE -1 IS NO RANGE, CHECKS EXISTANCE
-						case -1:
-							$this->excel_model->check_exist($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
-								if(in_array($name, ['ch', 'chipchannel'])){
-								// CHECK IF CH IS VALID
-									$this->excel_model->is_ch_valid($value->rows, $value->excel_index, $sheetName);
-								}
-							break;
-					// RANGE IS NOT NULL AND NOT -1, CHECKS EXISTANCE AND IS NUMERIC
-						default:
-							$res = $this->excel_model->check_exist($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
-							if($res = true){
-								$this->excel_model->check_num($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+				//RANGE NULL: VALUE IS NOT A NUMBER AND OPTIONAL(NOTE COL)
+					case null:
+						break;
+				// RANGE 0 IS BOOLEAN VALUE
+					case 0:
+						$res = $this->excel_model->check_exist($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+						if($res = true){
+								$result[$value->parameter_name] = $this->excel_model->check_bool($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+							}else{
+							$result[$value->parameter_name] = $res;
+						}
+						break;
+				// RANGE -1 IS NO RANGE, CHECKS EXISTANCE
+					case -1:
+						$this->excel_model->check_exist($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+							if(in_array($name, ['ch', 'chipchannel'])){
+							// CHECK IF CH IS VALID
+								$result[$value->parameter_name] = $this->excel_model->is_ch_valid($value->rows, $value->excel_index, $sheetName);
 							}
-							break;
+						break;
+				// RANGE IS NOT NULL AND NOT -1, CHECKS EXISTANCE AND IS NUMERIC
+					default:
+						$res = $this->excel_model->check_exist($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+						if($res == true){
+							$result[$value->parameter_name] = $this->excel_model->check_num($value->rows, $value->parameter_range, $value->excel_index, $sheetName);
+						}else{
+							$result[$value->parameter_name] = $res;
+						}
+					break;
+				}
+			}	
+/*	----------------------	^^^  Actuall Lineup Checking ^^^ 	---------------------- */
+			}
+			$endRes = array();
+			foreach($result as $param => $error){
+				if(is_array($error) && isset($error[0])){
+					$endRes[$param] = true;
+				} else{
+					$endRes[$param] = false;
+				}
+			}
+			if(in_array(true, $endRes)){
+				foreach($result as $param => $errors){
+					if(!$endRes[$param]){
+						unset($result[$param]);
 					}
-				}	
-			}		
+				}
+				return $result;
+			}else{
+				return "Lineup is OK!";
+			}
 		}
 	}
 }

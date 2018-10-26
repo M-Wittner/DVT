@@ -2,6 +2,10 @@
 	margin-top: 80px;
 }
 
+.panelBody{
+	padding: 2px 15px;
+}
+
 .largeSweepsEven{
   width: 50%;
   float: left;

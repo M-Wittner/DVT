@@ -17,6 +17,7 @@ class Plans extends CI_Controller {
 	function index() {
 //		$this->db->order_by('date', 'asc');
 		$plans = new stdClass();
+		$plans->errors = array();
 		$this->db->order_by('id', 'desc');
 		$this->db->where('source', 0);
 		$plans->web = $this->db->get('plans_v1_view')->result();
@@ -27,7 +28,15 @@ class Plans extends CI_Controller {
 			$this->db->select('test_id');
 			$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$plan->id))->result();
 			foreach ($plan->tests as $i=>$test){
-				$plan->tests[$i] = $this->plan_model->get_test_v1($test->test_id);
+				$res = $this->plan_model->get_test_v1($test->test_id);
+//				echo json_encode($res);
+//				die();
+				if(isset($res->occured) && $res->occured){
+					array_push($plans->errors, $res);
+//					continue;
+				}else{
+					$plan->tests[$i] = $res;
+				}
 			}
 		}
 		echo json_encode($plans);	
@@ -35,16 +44,12 @@ class Plans extends CI_Controller {
 	
 	function CreateNew(){
 		$postData = json_decode(file_get_contents('php://input'));
-//		var_dump(file_get_contents('php://input'));
-//		echo json_encode($postData);
-//		die();
 		$result = array();
 		$planData = $postData->plan;
 		$plan = array(
 			'user_id'=>$planData->userId,
 		);	
 		$tests = $postData->test;
-		
 		if(sizeof($tests) <= 0){
 			$result->msg = 'No tests detected!';
 			$result->occurred = true;
@@ -71,7 +76,7 @@ class Plans extends CI_Controller {
 						'priority'=>$test->priority[0]->value,
 						'test_type_id'=>$test->testType[0]->type_idx,
 						'notes'=>$test->notes,
-						'user_id'=>$planData->userId,
+						'user_id'=>$planData->id,
 					);
 					$insertTest = $this->db->insert('test_v1', $testBody);
 					if(!$insertTest){
@@ -160,6 +165,7 @@ class Plans extends CI_Controller {
 											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData->data);
 											break;
 										case 60://Pin
+										case 62://Temp Cycle
 											unset($sweepData->data_type);
 											if(!isset($sweepData->data->ext)){
 												$sweepData->data->ext = '';

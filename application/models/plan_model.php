@@ -198,84 +198,92 @@ class plan_model extends CI_Model {
 		return $test;	
 	}
 	function get_test_v1($id) {
+		$result = array();
+		$error = new stdClass();
 		$this->other_db = $this->load->database('main', TRUE);
-		$test = $this->db->get_where('tests_view_v1', array('test_id'=>$id))->result()[0]; // Get test by id from test_view
-		$test->station = $this->db->get_where('work_stations_view',['idx'=>$test->station_id])->result();
-//		var_dump($id);
-//		die();
-		$test->testType = $this->other_db->get_where('test_types',['type_idx'=>$test->test_type_id])->result();
-		$priority = $test->priority;
-		$test->priority = array();
-		$test->priority[0] = new stdClass();
-		$test->priority[0]->value = $priority;
-//		die(var_dump($test));
-		// ----- Get Sweeps of that test ---------
-		$test->sweeps = array();
-		$this->db->select('config_id, name, data_type, priority, test_type_id, tooltip');
-		$this->db->order_by('priority asc','data_type desc');
-		$struct = $this->db->get_where('test_struct_view', array('station_id'=>$test->station_id, 'test_type_id'=>$test->test_type_id))->result();
-		// ----- Populate each sweep with data ---------
-		foreach($struct as $sweep){
-			$test->sweeps[$sweep->name] = new stdClass();
-			if(isset($sweep->tooltip)){
-				$test->sweeps[$sweep->name]->tooltip = $sweep->tooltip;
-			}
-			$data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$sweep->config_id))->result();
-			if(count($data) == 1 && (in_array($sweep->data_type, [33, 60]))){
-				if($sweep->data_type == 60){ //Pin sweep
-					$data[0]->value = explode(';', $data[0]->value);
-					$data[0]->from = (int) $data[0]->value[0];
-					$data[0]->step = (int) $data[0]->value[1];
-					$data[0]->to = (int) $data[0]->value[2];
-					if(isset($data[0]->value[3]) && $data[0]->value[3] != ""){
-						$data[0]->ext = explode(',', (int) $data[0]->value[3]);
-					}
-					for($i = 0; $i < 4; $i++){
-						unset($data[0]->value[$i]);
-					}
-					$test->sweeps[$sweep->name]->data = $data[0];
-				}else{ //Lineup sweep
-					$test->sweeps[$sweep->name]->data = $data[0];
+		$test = $this->db->get_where('test_v1', array('test_id'=>$id))->result(); // Get test by id from test_view
+		if(!isset($test[0])){
+			$error->msg = 'Priority was not selected';
+			$error->source = 'Test #'.$id.' was not Found!';
+			$error->occurred = true;
+			return $error;
+		}else{
+			$test = $test[0];
+			$test->testType = $this->other_db->get_where('test_types',['type_idx'=>$test->test_type_id])->result();
+			$test->station = $this->db->get_where('work_stations_view',['idx'=>$test->testType[0]->workstation_id])->result();
+			$priority = $test->priority;
+			$test->priority = array();
+			$test->priority[0] = new stdClass();
+			$test->priority[0]->value = $priority;
+//			$test->priority = (int) $priority;
+			// ----- Get Sweeps of that test ---------
+			$test->sweeps = array();
+			$this->db->select('config_id, name, data_type, priority, test_type_id, tooltip');
+			$this->db->order_by('priority asc','data_type desc');
+			$struct = $this->db->get_where('test_struct_view', array('station_id'=>$test->station[0]->idx, 'test_type_id'=>$test->test_type_id))->result();
+			// ----- Populate each sweep with data ---------
+			foreach($struct as $sweep){
+				$test->sweeps[$sweep->name] = new stdClass();
+				if(isset($sweep->tooltip)){
+					$test->sweeps[$sweep->name]->tooltip = $sweep->tooltip;
 				}
-//						$test->sweeps[$sweep->name]->data = $data[0];
-			}else{
-				if($sweep->data_type == 61){
-					foreach($data as $dac_atten){
-						$dac = $dac_atten->value>>8;
-						$dig = $dac_atten->value&255;
-						$dac_atten->display_name = "DAC: ".$dac." Dig: ".$dig;
+				$data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$sweep->config_id))->result();
+				if(count($data) == 1 && (in_array($sweep->data_type, [33, 60]))){
+					if($sweep->data_type == 60){ //Pin sweep
+						$data[0]->value = explode(';', $data[0]->value);
+						$data[0]->from = (int) $data[0]->value[0];
+						$data[0]->step = (int) $data[0]->value[1];
+						$data[0]->to = (int) $data[0]->value[2];
+						if(isset($data[0]->value[3]) && $data[0]->value[3] != ""){
+							$data[0]->ext = explode(',', (int) $data[0]->value[3]);
+						}
+						for($i = 0; $i < 4; $i++){
+							unset($data[0]->value[$i]);
+						}
+						$test->sweeps[$sweep->name]->data = $data[0];
+					}else{ //Lineup sweep
+						$test->sweeps[$sweep->name]->data = $data[0];
 					}
-				}elseif($sweep->data_type > 100){
-					foreach($data as $chip){
-						$this->db->select('chip_sn, chip_process_abb');
-						$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result();
-						$statuses = $this->db->get_where('chip_status_view', ['data_idx'=>$chip->data_idx])->result();
-						if(count($chipData) == 1){
-							$chipData = $chipData[0];
-							$chip->chip_sn = $chipData->chip_sn;
-							$chip->chip_process_abb = $chipData->chip_process_abb;
-							if(count($statuses) == 1){
-								$statuses = $statuses[0];
-								foreach($statuses as $key => $value){
-									$chip->$key = $value;
+	//						$test->sweeps[$sweep->name]->data = $data[0];
+				}else{
+					if($sweep->data_type == 61){
+						foreach($data as $dac_atten){
+							$dac = $dac_atten->value>>8;
+							$dig = $dac_atten->value&255;
+							$dac_atten->display_name = "DAC: ".$dac." Dig: ".$dig;
+						}
+					}elseif($sweep->data_type > 100){
+						foreach($data as $chip){
+							$this->db->select('chip_sn, chip_process_abb');
+							$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result();
+							$statuses = $this->db->get_where('chip_status_view', ['data_idx'=>$chip->data_idx])->result();
+							if(count($chipData) == 1){
+								$chipData = $chipData[0];
+								$chip->chip_sn = $chipData->chip_sn;
+								$chip->chip_process_abb = $chipData->chip_process_abb;
+								if(count($statuses) == 1){
+									$statuses = $statuses[0];
+									foreach($statuses as $key => $value){
+										$chip->$key = $value;
+									}
 								}
 							}
 						}
 					}
-				}
-				foreach($data as $res){
-					if(is_null($res->display_name)){
-						$res->display_name = $res->value;
+					foreach($data as $res){
+						if(is_null($res->display_name)){
+							$res->display_name = $res->value;
+						}
 					}
+					//-------------- Generic sweeps	--------------
+					$test->sweeps[$sweep->name]->data = $data;
 				}
-				//-------------- Generic sweeps	--------------
-				$test->sweeps[$sweep->name]->data = $data;
+					$test->sweeps[$sweep->name]->data_type = $sweep->data_type;
+					$test->sweeps[$sweep->name]->priority = $sweep->priority;
+					$test->sweeps[$sweep->name]->test_type_id = $sweep->test_type_id;
 			}
-				$test->sweeps[$sweep->name]->data_type = $sweep->data_type;
-				$test->sweeps[$sweep->name]->priority = $sweep->priority;
-				$test->sweeps[$sweep->name]->test_type_id = $sweep->test_type_id;
+			return $test;	
 		}
-		return $test;	
 	}
 	
 	function get_test($data){
@@ -400,13 +408,15 @@ class plan_model extends CI_Model {
 			if(!isset($test->notes)){
 				$test->notes = null;
 			}
+			echo json_encode($test);
+			die();
 			$error = new stdClass();
 			$testBody = array(
 //				'plan_id'=>$test->plan_id,
 				'priority'=>$test->priority[0]->value,
 				'test_type_id'=>$test->testType[0]->type_idx,
 				'notes'=>$test->notes,
-				'user_id'=>$test->user->userId,
+				'user_id'=>$test->user->id,
 			);
 			$insertTest = $this->db->update('test_v1', $testBody);
 			$insertTest = true;

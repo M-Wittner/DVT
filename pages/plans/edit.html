@@ -1,9 +1,6 @@
 <!-------------------------------------------------------	v1 Format	------------------------------------------------------->
-<div ng-init="test.flag = 2; test.checkLineup = true; test.user = currentUser" class="panel panel-primary" ng-if="test.test_id">
+<div ng-init="test.flag = 2; test.user = currentUser" class="panel panel-primary" ng-if="test.test_id">
 	<div class="panel-heading">Edit: Station: {{ test.name }}</div>
-	<div class="panel col-md-12">
-		<span class="">Check Lineups? <input type="checkbox" ng-model="test.checkLineup" ng-disabled="lock"></span>
-	</div>
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-3">
@@ -16,7 +13,7 @@
 			<div class="col-md-4">
 				<span class="label label-dangerC">Test Name:</span>
 				<div ng-if="test.station[0].idx">
-					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.testType" data-placeholder="Pick Test" ng-disabled="lock">
+					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.testType" data-placeholder="Pick Test" ng-disabled="lock" ng-change="test.sweeps = {}">
 						<ui-select-match>{{$item.test_name}}</ui-select-match>
 						<ui-select-choices repeat="test in testParams.params.testTypes | filter:{workstation_id: test.station[0].idx}|filter: $select.search" sortable="true">{{test.test_name}}</ui-select-choices>
 					</ui-select>
@@ -37,21 +34,25 @@
 			<div class="collapse panel-body in" id="{{$id}}" aria-expanded="true">
 				<div ng-repeat="(sweepName, sweepData) in test.sweeps track by $index">
 					<!----------------------------------------------------------------			Lineups			---------------------------------------------------------------->
-					<div ng-if="sweepData.data_type == 33" class="col-md-12 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[sweepName].config_id = struct.config_id; test.sweeps[sweepName].data_type = sweepData.data_type">
+					<div ng-if="sweepData.data_type == 33" class="rowMarg" ng-class="test.sweeps['Debug'] ? 'col-md-9' : 'col-md-12'" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[sweepName].data.config_id = sweepData.config_id; test.sweeps[sweepName].data_type = sweepData.data_type; test.sweeps[sweepName].checkLineup = true">
+						<pre>{{sweepData}}</pre>
 						<span class="label label-dangerC">{{sweepName}}</span>
-						<input class="form-control" type="text" placeholder="some text" ng-model="test.sweeps[sweepName].data.value" ng-disabled="lock">
+						<div class="input-group">
+							<input class="form-control" type="text" placeholder="some text" ng-model="test.sweeps[sweepName].data.value" ng-disabled="lock">
+							<span class="input-group-addon"><span class="glyphicon" ng-class="test.sweeps[sweepName].checkLineup == true ? 'glyphicon-eye-open' : 'glyphicon-eye-close'"></span> <input type="checkbox" ng-model="test.sweeps[sweepName].checkLineup" ng-disabled="lock"></span>
+						</div>
 					</div>
 					<!----------------------------------------------------------------			Pins			---------------------------------------------------------------->
-					<div ng-if="sweepData.data_type == 60" class="col-md-5 rowMarg"  uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'">
+					<div ng-if="sweepData.data_type == 60 || sweepData.data_type == 62" class="col-md-5 rowMarg"  uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'">
 						<span class="label label-dangerC">{{sweepName}}</span>
-						<div class="input-group input-group-sm" ng-init="test.sweeps[sweepName].config_id = sweepData.data.config_id; test.sweeps[sweepName].data_type = sweepData.data_type;">
+						<div class="input-group input-group-sm" ng-init="test.sweeps[sweepName].config_id = sweepData.config_id; test.sweeps[sweepName].data_type = sweepData.data_type">
 							<input class="form-control" type="number" placeholder="From" ng-model="test.sweeps[sweepName].data.from" aria-describedby="from" ng-disabled="lock">
 							<span class="input-group-addon" id="from" style="font-weight:900">;</span>
 							<input class="form-control" type="number" placeholder="Step" ng-model="test.sweeps[sweepName].data.step" aria-describedby="step" ng-disabled="lock">
 							<span class="input-group-addon" id="step" style="font-weight:900">;</span>
 							<input class="form-control" type="number" placeholder="To" ng-model="test.sweeps[sweepName].data.to" aria-describedby="to"  ng-disabled="lock">
-							<span class="input-group-addon" id="to" style="font-weight:900">;</span>
-							<input class="form-control" type="text" placeholder="Extra" ng-model="test.sweeps[sweepName].data.ext" uib-popover="Ex: -50,-55.5,-60" popover-trigger="'mouseenter'" ng-disabled="lock">
+							<span ng-if="sweepData.data_type == 60" class="input-group-addon" id="to" style="font-weight:900">;</span>
+							<input ng-if="sweepData.data_type == 60" class="form-control" type="text" placeholder="Extra" ng-model="test.sweeps[sweepName].data.ext" uib-popover="Ex: -50,-55.5,-60" popover-trigger="'mouseenter'" ng-disabled="lock">
 						</div>
 					</div>
 					<!----------------------------------------------------------------			Chips			---------------------------------------------------------------->

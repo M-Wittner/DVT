@@ -15,16 +15,16 @@ class excel_model extends CI_Model {
 		$errors = array();
 		foreach($rows as $rowNum => $rowData){
 			$rowNum += 2;
-//					CHECK IF ROWDATA IS A NUMBER
-			if(is_numeric($rowData) && $rowData != -1){
-				$num = pow(2, $range);
+//		CHECK IF ROWDATA IS A NUMBER
+			if(is_numeric($rowData) && $rowData > -1){
+				$limit = pow(2, $range)-1;
 //			CHECK IF WITHIN RANGE
-				if ($rowData > $num && $rowData >= 0){
+				if($rowData > $limit){
 					$str = 'Cell '.$xl_idx.$rowNum." value[".$rowData."] is not in range in ".$sheet." sheet";
 					array_push($errors, $str);
 				}
 			} else {
-					$str = 'Cell '.$xl_idx.$rowNum." value[".$rowData."] is not a number in ".$sheet." sheet";
+					$str = 'Cell '.$xl_idx.$rowNum." value[".$rowData."] is not a valid number in ".$sheet." sheet";
 					array_push($errors, $str);
 			}
 		}
@@ -41,18 +41,13 @@ class excel_model extends CI_Model {
 	}
 	public function check_exist($rows, $range, $xl_idx, $sheet){
 		$errors = array();
-		foreach($rows as $rowNum => $rowData){
-			$rowNum += 2;
-//			array_push($errors, $rowData);
-//		CHECK IF ROWDATA NOT SET AND NOT NULL
-			if(!isset($rowData)){
-				$str = 'Cell '.$xl_idx.$rowNum." value[".$rowData."] is not set in ".$sheet." sheet";
-				array_push($errors, $str);
-			} else {
-				$errors = true;
-				break;
+			for($i = 0; $i < count($rows); $i++){
+				$rowNumber = $i +2;
+				if(!isset($rows[$i]) || $rows[$i] == -1){
+					$str = 'Cell '.$xl_idx.$rowNumber." value(".$rows[$i].") is not set in ".$sheet." sheet";
+					array_push($errors, $str);
+				}
 			}
-		}
 		return $errors;
 	}
 	public function check_bool($rows, $range, $xl_idx, $sheet){
@@ -170,7 +165,7 @@ class excel_model extends CI_Model {
 		$highestRow = $currentSheet->getHighestRow();
 		$data_2d = $currentSheet->rangeToArray('A1:'.$highestColumn.$highestRow, null, false, false, true)[1];
 		echo json_encode($data_2d);
-		die();
+//		die();
 	}
 	
 	public function validate($test, $param, $unique){

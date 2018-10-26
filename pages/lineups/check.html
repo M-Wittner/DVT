@@ -1,18 +1,30 @@
 <div class="row">
 	<div class="col-md-3">
-		<span class="label label-dangerC">Station:</span>
-		<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="lineup.station" data-placeholder="Pick Test">
-			<ui-select-match>{{$item.name}}</ui-select-match>
-			<ui-select-choices repeat="station in testParams.params.workStations | filter:{workstation_id: test.station[0].idx}" sortable="true">{{station.name}}</ui-select-choices>
-		</ui-select>
+		<div class="row">
+			<span class="label label-dangerC">Station:</span>
+			<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="lineup.station" data-placeholder="Pick Test">
+				<ui-select-match>{{$item.name}}</ui-select-match>
+				<ui-select-choices repeat="station in testParams.params.workStations | filter:{workstation_id: test.station[0].idx}" sortable="true">{{station.name}}</ui-select-choices>
+			</ui-select>
+		</div>
+		<div class="row">
+			<div ng-if="lineup.station[0].idx">
+			<span class="label label-dangerC">Test Name:</span>
+				<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="lineup.testType" data-placeholder="Pick Test" ng-disabled="lock">
+					<ui-select-match>{{$item.test_name}}</ui-select-match>
+					<ui-select-choices repeat="test in testParams.params.testTypes | filter:{workstation_id: lineup.station[0].idx}|filter: $select.search" sortable="true">{{test.test_name}}</ui-select-choices>
+				</ui-select>
+			</div>
+		</div>
 	</div>
 	<div class="col-md-9">
 		<span class="label label-dangerC">Lineup Path:</span>
 		<input type="text" class="form-control" ng-model="lineup.path" placeholder="Choose Fineup File">
 	</div>
 </div>
-<div class="row">
+<div class="row rowMarg">
 	<button class="btn btn-success" type="submit" ng-click="checkLineup()">Send</button>
+	<button class="btn btn-default" type="submit" ng-click="clearAll()">Clear Errors</button>
 </div>
 
 <!--

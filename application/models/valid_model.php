@@ -16,7 +16,15 @@ class valid_model extends CI_Model {
 	}
 	
 	public function validate_test($test, $result){
-		if(isset($test->checkLineup) && $test->checkLineup == true){
+//		echo json_encode($test);
+//		die();
+		$checkLineup = false;
+			foreach($test->sweeps as $sweep){
+				if($sweep->data_type == '33'){
+					$checkLineup = $sweep->checkLineup;
+				}
+			}
+		if($checkLineup){
 			$res = $this->check_lineup($test);
 			if($res != "Lineup is OK!"){
 				$result = $res;
@@ -27,7 +35,7 @@ class valid_model extends CI_Model {
 	}
 	
 	public function test_sweep_exist($test, $result){
-		
+		$result = array();
 		$error = new stdClass();
 		if(!isset($test->priority[0]->value)){
 			$value = new stdClass();
@@ -57,10 +65,10 @@ class valid_model extends CI_Model {
 		}
 		foreach($test->sweeps as $sweepName => $sweepData){
 			$err = new stdClass();
+//			echo json_encode($sweepData);
+//			die();
 			switch($sweepData){
 				case is_array($sweepData->data): //--------------	Deal with generic sweeps	--------------
-//				var_dump($sweepName);
-//				var_dump($sweepData->data);
 					if(!isset($sweepData->data) || empty($sweepData->data)){
 						$err->msg = $sweepName.' were not selected';
 						$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
@@ -79,10 +87,12 @@ class valid_model extends CI_Model {
 							}elseif($sweepData->checkLineup){ //checkLineup = TRUE
 								$res = $this->check_lineup($test);
 								if($res != "Lineup is OK!"){
-									$result = $res;
+									$err = $res;
 									array_push($result, $err);
 								}
 							}
+//							echo json_encode($sweepData);
+//							die();
 							break;
 						case 60://Pin
 							if(!isset($sweepData->data->from) || !isset($sweepData->data->step) || !isset($sweepData->data->to)){
@@ -93,6 +103,16 @@ class valid_model extends CI_Model {
 							}
 							break;
 						case 61://DAC_Atten
+							if(!isset($sweepData->data) || !isset($sweepData->path)){
+								$err->msg = $sweepName.' is missing';
+								$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
+								$err->occurred = true;
+								array_push($result, $err);
+							}
+							break;
+						case 10://Enums
+							echo json_encode($sweepData);
+							die();
 							if(!isset($sweepData->data) || !isset($sweepData->path)){
 								$err->msg = $sweepName.' is missing';
 								$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
@@ -329,7 +349,7 @@ class valid_model extends CI_Model {
 			$localParams = ["temp", "volt", "chipchannel"];
 		}
 		$reader->setReadDataOnly(true);	
-		if ($spreadsheet){
+		if (isset($spreadsheet)){
 			foreach($sheets as $sheetName){
 			//CHECK FOR SHEET EXSITENCE
 				if(!in_array($sheetName, $sheets)){

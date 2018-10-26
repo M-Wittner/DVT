@@ -12,7 +12,7 @@ myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 	
 	$scope.array = [];
 	$scope.plan = {};
-	$scope.plan.userId = $cookies.getObject('loggedUser').userId;
+	$scope.plan.userId = $cookies.getObject('loggedUser').id;
 	$scope.plan.username = $cookies.getObject('loggedUser').username;
 	$scope.plan.id = $routeParams.planId;
 	$scope.chipPairs = [{}];

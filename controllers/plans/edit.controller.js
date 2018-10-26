@@ -5,7 +5,10 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 		var site = testParams.site;
 	
 	$scope.user = $scope.currentUser.username;
-	console.log(testParams);
+//	$scope.plan.userId = $cookies.getObject('loggedUser').id;
+////	$scope.plan.username = $cookies.getObject('loggedUser').username;
+	console.log($scope.currentUser);
+	console.log(testParams.params.allParams);
 		
 	$scope.testOld = {};
 	$scope.test = {};
@@ -62,6 +65,6 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 				console.log(response.data);
 			}
 		});
-//		console.log(this.test.station);
+//		console.log(this.test);
 	};
 }]);

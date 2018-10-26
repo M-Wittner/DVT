@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-3">
 				<span class="label label-dangerC">Station:</span>
-				<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.station" data-placeholder="Pick Test" ng-disabled="lock" ng-change="test.testType = null">
+				<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.station" data-placeholder="Pick Test" ng-disabled="lock" ng-change="test.testType = []">
 					<ui-select-match>{{$item.name}}</ui-select-match>
 					<ui-select-choices repeat="station in testParams.params.workStations|filter: $select.search" sortable="true">{{station.name}}</ui-select-choices>
 				</ui-select>
@@ -11,7 +11,7 @@
 			<div class="col-md-4">
 				<span class="label label-dangerC">Test Name:</span>
 				<div ng-if="test.station[0].idx">
-					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.testType" data-placeholder="Pick Test" ng-disabled="lock">
+					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.testType" data-placeholder="Pick Test" ng-disabled="lock" ng-change="test.sweeps = {}">
 						<ui-select-match>{{$item.test_name}}</ui-select-match>
 						<ui-select-choices repeat="test in testParams.params.testTypes | filter:{workstation_id: test.station[0].idx}|filter: $select.search" sortable="true">{{test.test_name}}</ui-select-choices>
 					</ui-select>
@@ -58,7 +58,7 @@
 						</div>
 					</div>
 					<!----------------------------------------------------------------			Pins			---------------------------------------------------------------->
-					<div ng-if="sweepData.data_type == 60" class="col-md-5 rowMarg"  uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'">
+					<div ng-if="sweepData.data_type == 60 || sweepData.data_type == 62" class="col-md-5 rowMarg"  uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'">
 						<span class="label label-dangerC">{{sweepName}}</span>
 						<div class="input-group input-group-sm" ng-init="test.sweeps[sweepName].config_id = sweepData.config_id; test.sweeps[sweepName].data_type = sweepData.data_type">
 							<input class="form-control" type="number" placeholder="From" ng-model="test.sweeps[sweepName].data.from" aria-describedby="from" ng-disabled="lock">
@@ -66,8 +66,8 @@
 							<input class="form-control" type="number" placeholder="Step" ng-model="test.sweeps[sweepName].data.step" aria-describedby="step" ng-disabled="lock">
 							<span class="input-group-addon" id="step" style="font-weight:900">;</span>
 							<input class="form-control" type="number" placeholder="To" ng-model="test.sweeps[sweepName].data.to" aria-describedby="to"  ng-disabled="lock">
-							<span class="input-group-addon" id="to" style="font-weight:900">;</span>
-							<input class="form-control" type="text" placeholder="Extra" ng-model="test.sweeps[sweepName].data.ext" uib-popover="Ex: -50,-55.5,-60" popover-trigger="'mouseenter'" ng-disabled="lock">
+							<span ng-if="sweepData.data_type == 60" class="input-group-addon" id="to" style="font-weight:900">;</span>
+							<input ng-if="sweepData.data_type == 60" class="form-control" type="text" placeholder="Extra" ng-model="test.sweeps[sweepName].data.ext" uib-popover="Ex: -50,-55.5,-60" popover-trigger="'mouseenter'" ng-disabled="lock">
 						</div>
 					</div>
 					<!----------------------------------------------------------------			Chips			---------------------------------------------------------------->
