@@ -44,6 +44,8 @@ class Plans extends CI_Controller {
 	
 	function CreateNew(){
 		$postData = json_decode(file_get_contents('php://input'));
+//		echo json_encode($postData);
+//		die();
 		$result = array();
 		$planData = $postData->plan;
 		$plan = array(
@@ -76,7 +78,7 @@ class Plans extends CI_Controller {
 						'priority'=>$test->priority[0]->value,
 						'test_type_id'=>$test->testType[0]->type_idx,
 						'notes'=>$test->notes,
-						'user_id'=>$planData->id,
+						'user_id'=>$planData->userId,
 					);
 					$insertTest = $this->db->insert('test_v1', $testBody);
 					if(!$insertTest){
@@ -123,8 +125,12 @@ class Plans extends CI_Controller {
 										default: //-------------- Generic sweeps	--------------
 											foreach($sweepData->data as $sweep){
 												$sweep->test_id = $testId;
-												unset($sweep->display_name);
-												unset($sweep->data_idx);
+												if(isset($sweep->display_name)){
+													unset($sweep->display_name);
+												}
+												if(isset($sweep->data_idx)){
+													unset($sweep->data_idx);
+												}
 											}
 											if(isset($sweepData->ext)){
 												if($sweepData->config_id == 19){

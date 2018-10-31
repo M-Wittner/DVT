@@ -54,7 +54,7 @@
 						<span class="label label-dangerC">{{sweepName}}</span>
 						<div class="input-group">
 							<input class="form-control" type="text" placeholder="some text" ng-model="test.sweeps[sweepName].data.value" ng-disabled="lock">
-							<span class="input-group-addon"><span class="glyphicon" ng-class="test.sweeps[sweepName].checkLineup == true ? 'glyphicon-eye-open' : 'glyphicon-eye-close'"></span> <input type="checkbox" ng-model="test.sweeps[sweepName].checkLineup" ng-disabled="lock"></span>
+							<span class="input-group-addon"><span class="glyphicon" ng-class="test.sweeps[sweepName].checkLineup == true ? 'glyphicon-eye-open check-seen' : 'glyphicon-eye-close'"></span> <input type="checkbox" ng-model="test.sweeps[sweepName].checkLineup" ng-disabled="lock"></span>
 						</div>
 					</div>
 					<!----------------------------------------------------------------			Pins			---------------------------------------------------------------->
@@ -86,7 +86,7 @@
 						</div>
 					</div>
 					<!----------------------------------------------------------------			DAC_Atten			---------------------------------------------------------------->
-					<div ng-if="sweepData.data_type == 61" class="col-md-3 rowMarg" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[sweepName].data_type = sweepData.data_type">
+					<div ng-if="sweepData.data_type == 61" class="col-md-4 rowMarg" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[sweepName].data_type = sweepData.data_type; test.sweeps[sweepName].data = []">
 						<span class="label label-dangerC">{{sweepName}}</span>
 						<div class="input-group input-group-sm">
 							<input type="text" class="form-control" ng-model="test.sweeps[sweepName].data.name" ng-disabled="lock">
@@ -94,9 +94,9 @@
 								<label class="btn btn-default btn-sm" ng-disabled="lock" for="{{this.$id}}{{$index}}">
 									<span class="glyphicon glyphicon-folder-open">
 									</span>
-									<input style="display: none;" id="{{this.$id}}{{$index}}" type="file" import-sheet-js="" get-file-data="fileData" file-model="test.sweeps[sweepName].data" ng-model="test.sweeps[sweepName].data" ng-disabled="lock"/>
+									<input style="display: none;" id="{{this.$id}}{{$index}}" type="file" import-sheet-js="{{this.$id}}" ng-model="test.sweeps[sweepName].fileData" ng-disabled="lock"/>
 								</label>
-								<button type="button" ng-click="uploadFile(test.sweeps[sweepName])" class="btn btn-default btn-sm" ng-disabled="lock">
+								<button type="button" ng-click="loadData(test.sweeps[sweepName])" class="btn btn-default btn-sm" ng-disabled="lock">
 									<span style="color: limegreen; font-size: 16px" class="glyphicon glyphicon-send"></span>
 								</button>
 								<button type="button" ng-click="test.sweeps[sweepName].data = []" class="btn btn-default btn-sm" ng-disabled="lock">

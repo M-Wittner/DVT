@@ -132,9 +132,23 @@
 							</div>
 						</div>
 						<!---------------------------------			Sweeps			--------------------------------->
-						<div ng-if="sweepData.data_type != 60 && sweepData.data_type != 33 && sweepData.data_type < 100" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'" allow-clear>
+						<div ng-if="sweepData.data_type != (60 && 33) && sweepData.data_type < 100" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'" allow-clear>
 							<div ng-repeat="data in sweepData.data track by $index" class="form-control sweeps">{{data.display_name}}</div>
 						</div>
+<!--
+						<div class="col-md-10" ng-if="sweepData.data_type == 61 " uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'" allow-clear>
+							<table class="table-condensed table-bordered">
+								<tr>
+									<td>Dac</td>
+									<td ng-repeat="data in sweepData.data track by $index">{{data.display_name[0]}}</td>
+								</tr>
+								<tr>
+									<td>Dig</td>
+									<td ng-repeat="data in sweepData.data track by $index">{{data.display_name[1]}}</td>
+								</tr>
+							</table>
+					</div>
+-->
 					</div>
 				</td>
 				<td data-title="'Count'" class="text-center"><strong>{{sweepData.data.length}}</strong></td>

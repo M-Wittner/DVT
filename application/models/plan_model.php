@@ -250,7 +250,8 @@ class plan_model extends CI_Model {
 						foreach($data as $dac_atten){
 							$dac = $dac_atten->value>>8;
 							$dig = $dac_atten->value&255;
-							$dac_atten->display_name = "DAC: ".$dac." Dig: ".$dig;
+							$dac_atten->display_name = "DAC:".$dac." Dig:".$dig;
+//							$dac_atten->display_name = array($dac, $dig);
 						}
 					}elseif($sweep->data_type > 100){
 						foreach($data as $chip){
