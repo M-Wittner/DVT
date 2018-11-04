@@ -228,14 +228,9 @@ class Plans extends CI_Controller {
 		echo json_encode($plan);
 	}
 	
-	function removePlan(){
-		$id = json_decode(file_get_contents('php://input'));
-		$this->db->where('id', $id);
-		$result = $this->db->delete('plans_v1');
-		echo json_encode($result);
-	}
 	function deletePlans(){
 		$ids = json_decode(file_get_contents('php://input'));
+		$ids = array_filter($ids);
 		$result = array();
 		if(!empty($ids)){
 			foreach($ids as $id){
@@ -253,7 +248,40 @@ class Plans extends CI_Controller {
 					array_push($result, $res);
 			}
 		}else{
-			$result = "No Plans Selected";
+			$res = new stdClass();
+			$res->occured = true;
+			$res->msg = "No Plans Selected";
+			$res->source = "Delete Plans";
+			array_push($result, $res);
+		}
+		echo json_encode($result);
+	}
+	function deleteTests(){
+		$ids = json_decode(file_get_contents('php://input'));
+		$ids = array_filter($ids);
+		$result = array();
+		echo json_encode($ids);
+		if(!empty($ids)){
+			foreach($ids as $id){
+				$deleted = $this->db->delete('test_v1', ['test_id'=>$id]);
+				$res = new stdClass();
+				if(!$deleted){
+					$res->occured = !$deleted;
+					$res->msg = "Not Deleted!";
+					$res->source = $id;
+				} else{
+					$res->occured = $deleted;
+					$res->msg = "Deleted!";
+					$res->source = $id;
+				}
+					array_push($result, $res);
+			}
+		}else{
+			$res = new stdClass();
+			$res->occured = true;
+			$res->msg = "No Tests Selected";
+			$res->source = "Delete Tests";
+			array_push($result, $res);
 		}
 		echo json_encode($result);
 	}

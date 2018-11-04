@@ -82,3 +82,199 @@ ERROR - 201820182018-1010-3131 1313:OctOct:0202 --> 404 Page Not Found: Assets/l
 ERROR - 201820182018-1010-3131 1313:OctOct:3838 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-1010-3131 1313:OctOct:4242 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-1010-3131 1313:OctOct:2626 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:5353 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:1717 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:5353 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 205
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:5555 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 206
+ERROR - 201820182018-1010-3131 1313:OctOct:2727 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:5656 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5757 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:0909 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:1010 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1010 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1010 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1010 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1010 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1010 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:1111 --> Severity: Warning --> Attempt to assign property of non-object C:\xampp\htdocs\application\models\plan_model.php 211
+ERROR - 201820182018-1010-3131 1313:OctOct:4141 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:1717 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 213
+ERROR - 201820182018-1010-3131 1313:OctOct:1919 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 213
+ERROR - 201820182018-1010-3131 1313:OctOct:3535 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:5252 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:5454 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 213
+ERROR - 201820182018-1010-3131 1313:OctOct:1717 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:3131 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:4343 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:1515 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:4545 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:4646 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:4646 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:5959 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:5959 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:5959 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:5959 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:5959 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:5959 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:5959 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:5959 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:5959 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:5959 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:5959 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 214
+ERROR - 201820182018-1010-3131 1313:OctOct:2121 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:1010 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:1212 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\application\models\plan_model.php 215
+ERROR - 201820182018-1010-3131 1313:OctOct:1212 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\application\models\plan_model.php 215
+ERROR - 201820182018-1010-3131 1313:OctOct:0606 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:4646 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:5454 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:1313 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:4343 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:1414 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:4242 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:5858 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1313:OctOct:3434 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:5454 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:3636 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:5555 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:1414 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:3333 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:4848 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:0303 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:2121 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:2525 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:3636 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:5050 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:2323 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:0101 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:1515 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:3131 --> Severity: Notice --> Undefined variable: id C:\xampp\htdocs\application\controllers\plans.php 240
+ERROR - 201820182018-1010-3131 1414:OctOct:3434 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1010-3131 1414:OctOct:5656 --> Severity: Notice --> Undefined variable: id C:\xampp\htdocs\application\controllers\plans.php 240
+ERROR - 201820182018-1010-3131 1717:OctOct:3030 --> 404 Page Not Found: Assets/lib

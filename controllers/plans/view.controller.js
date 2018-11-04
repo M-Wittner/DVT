@@ -44,38 +44,33 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	$scope.params = testParams.params;
 	$scope.lock = true;
 	
-	$scope.removePlan = function() {
-		$http.post(site+'/plans/removePlan', this.plan.id)
-		.then(function(response){
-			console.log(response.data);
-			if(response.data == 'true'){
-				var message = 'Plan Deleted Succesfully!';
-				var id = Flash.create('success', message, 3500);
-				$location.path('/plans');
-			} else{
-				var message = 'Plan Deleted Succesfully!';
-				var id = Flash.create('danger', message, 0);
-			}
-		});
-	};
+
 	
-	$scope.removeTest = function($testId) {
-		$http.post(site+'/plans/removeTest', $testId)
-		.then(function(response){
-			if(response.data == 'success'){
-				$window.scrollTo(0, 0);
-				var message = 'Test Deleted Succesfully!';
-				var id = Flash.create('success', message, 3500);
-				setTimeout(function(){$window.location.reload();}, 2250);
-			} else{
-				$window.scrollTo(0, 0);
-				var message = 'Test Was Not Deleted!';
-				var id = Flash.create('danger', message, 3500);
+	$scope.deleteSelectedTests = function(){
+		if($scope.selectedTests.length > 0){
+			$http.post(site+'/plans/deleteTests', $scope.selectedTests)
+			.then(function(response){
 				console.log(response.data);
-			}
-//				console.log(response.data);
-		});
-	};
+				if(typeof response.data == "object"){
+					response.data.forEach(function(error){
+						var message = "<strong> Test #" + error.source +"</strong>" + ": " + error.msg;
+						if(error.occurred == true){
+							var id = Flash.create('danger', message, 0);
+						}else{
+							var id = Flash.create('success', message, 0);
+						}
+						$window.scrollTo(0, 0);
+					})	
+				}else{
+					var message = response.data;
+					var id = Flash.create('success', message, 3500);
+				}
+			})
+		}else{
+			var message = "No Tests Selected";
+			var id = Flash.create('danger', message, 3500);
+		}
+	}
 	
 	$scope.sendMail = function(){
 		$http.post(site+'/plans/sendMail', $scope.plan)

@@ -70,23 +70,6 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 		console.log(test);
 	}
 	
-//	$scope.open = function(index, id, sweepName){
-//		var sweep = this.test.sweeps[sweepName];
-//		var buttonID = id.toString() + index.toString();
-//		var button = document.getElementById(buttonID);
-//		button.click();
-//		setTimeout(function(){
-//			var path = jQuery(button).val();
-//			var name = path.split('\\').pop();
-//			console.log(name);
-//			console.log(sweep);
-//			
-//		}, 2500);
-//		var station = this.test.station[0].name;
-//		var test = this.test.testType[0].test_name;
-//		var url = site+"/uploads/"+station+"/"+test;
-//		sweep.path = url;
-//	}
 	
 	$scope.loadData = function(sweep){
 		var reader = new FileReader();
@@ -112,6 +95,7 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 			})
 		});
    };
+	
 	
 	$scope.selectAll = function(test, sweep){
 		console.log(test);

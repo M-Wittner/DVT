@@ -209,6 +209,11 @@ class plan_model extends CI_Model {
 			return $error;
 		}else{
 			$test = $test[0];
+			$this->db->select('username');
+			$username = $this->db->get_where('users', ['id'=>$test->user_id])->result();
+			if(is_array($username) && isset($username[0])){
+				$test->username = $username[0]->username;
+			}
 			$test->testType = $this->other_db->get_where('test_types',['type_idx'=>$test->test_type_id])->result();
 			$test->station = $this->db->get_where('work_stations_view',['idx'=>$test->testType[0]->workstation_id])->result();
 			$priority = $test->priority;
