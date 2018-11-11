@@ -51,7 +51,7 @@
 			<!--	Newest format!	-->
 			<div id="desc" class="panel panel-default" ng-if="!test.station[0].station">
 			<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.test_id}}" aria-expanded="false" aria-controls="{{test.test_id}}" ng-click="onOff=!onOff" style="border-bottom-width: 4px; border-bottom-color: {{test.station[0].color}}">
-				<strong >Priority: {{test.priority[0].value}}, Station: {{test.name}}, Test: {{test.test_name}} , ID: #{{test.test_id}}</strong>
+				<strong>Priority: {{test.priority[0].value}}, Station: {{test.station[0].name}}, Test: {{test.testType[0].test_name}} , ID: #{{test.test_id}}</strong>
 				<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
 				<span class="pull-right">
 					<span class="glyphicon glyphicon-envelope" ng-if="test.comments.length > 0" id="testStatus"></span>

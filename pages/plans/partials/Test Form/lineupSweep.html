@@ -1,0 +1,7 @@
+<div ng-if="sweepData.data_type == 33" class="rowMarg" ng-class="test.sweeps['Debug'] ? 'col-md-9' : 'col-md-12'" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[sweepName].data.config_id = sweepData.config_id; test.sweeps[sweepName].data_type = sweepData.data_type; test.sweeps[sweepName].checkLineup = true">
+	<span class="label label-dangerC">{{sweepName}}</span>
+	<div class="input-group">
+		<input class="form-control" type="text" placeholder="some text" ng-model="test.sweeps[sweepName].data.value" ng-disabled="lock">
+		<span class="input-group-addon"><span class="glyphicon" ng-class="test.sweeps[sweepName].checkLineup == true ? 'glyphicon-eye-open check-seen' : 'glyphicon-eye-close'"></span> <input type="checkbox" ng-model="test.sweeps[sweepName].checkLineup" ng-disabled="lock"></span>
+	</div>
+</div>

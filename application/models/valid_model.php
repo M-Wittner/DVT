@@ -111,8 +111,8 @@ class valid_model extends CI_Model {
 							}
 							break;
 						case 10://Enums
-							echo json_encode($sweepData);
-							die();
+//							echo json_encode($sweepData);
+//							die();
 							if(!isset($sweepData->data) || !isset($sweepData->path)){
 								$err->msg = $sweepName.' is missing';
 								$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;

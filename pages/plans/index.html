@@ -24,7 +24,7 @@
 			</span>
 		</div>
     <uib-tab index="0" heading="Web">
-			<div class="container-fluid" ng-repeat="plan in plans.web">
+			<div class="container-fluid" ng-repeat="plan in plans.web track by $index">
 				<view-template></view-template>
 			</div>
 <!--

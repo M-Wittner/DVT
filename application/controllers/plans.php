@@ -72,6 +72,9 @@ class Plans extends CI_Controller {
 					if(!isset($test->notes)){
 						$test->notes = null;
 					}
+//					echo json_encode($test->station[0]->idx);
+//					die();
+					$stationId = $test->station[0]->idx;
 					$error = new stdClass();
 					$testBody = array(
 						'plan_id'=>$planId,
@@ -88,6 +91,7 @@ class Plans extends CI_Controller {
 						array_push($result, $error);
 					}else{
 						$testId = $this->db->insert_id($insertTest);
+						
 						foreach($test->sweeps as $sweepName => $sweepData){
 							$error = new stdClass();
 							switch($sweepData->data){ //-------------- 1st switch data (array/single)	--------------
@@ -116,11 +120,13 @@ class Plans extends CI_Controller {
 												array_push($chipsStatus,array('data_idx'=>null));
 											}
 											$insertSweep = $this->db->insert_batch('dvt_60g.test_configuration_data', $chips);
-											$dataIdx = $this->db->insert_id($insertSweep);;
-											for($i = 0; $i < $insertSweep; $i++){
-												$chipsStatus[$i]['data_idx'] = $dataIdx + $i;
+											$dataIdx = $this->db->insert_id($insertSweep);
+											if(in_array($stationId, [5,6])){												
+												for($i = 0; $i < $insertSweep; $i++){
+													$chipsStatus[$i]['data_idx'] = $dataIdx + $i;
+												}
+												$insertSweep = $this->db->insert_batch('chip_status', $chipsStatus);
 											}
-											$insertSweep = $this->db->insert_batch('chip_status', $chipsStatus);
 											break;
 										default: //-------------- Generic sweeps	--------------
 											foreach($sweepData->data as $sweep){
@@ -473,7 +479,7 @@ class Plans extends CI_Controller {
 		$id = json_decode(file_get_contents('php://input'));
 //		echo $id;
 //		die();;
-		$this->db->select('priority, name AS station, test_name');
+		$this->db->select('test_id as id, priority, name AS station, test_name');
 		$this->db->where('plan_id', $id);
 		$tests = $this->db->get('tests_view_v1')->result();
 		echo json_encode($tests);

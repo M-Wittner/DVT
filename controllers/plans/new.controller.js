@@ -96,7 +96,6 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 		});
    };
 	
-	
 	$scope.selectAll = function(test, sweep){
 		console.log(test);
 		console.log(sweep);

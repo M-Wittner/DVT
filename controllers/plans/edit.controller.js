@@ -7,30 +7,29 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 	$scope.user = $scope.currentUser.username;
 //	$scope.plan.userId = $cookies.getObject('loggedUser').id;
 ////	$scope.plan.username = $cookies.getObject('loggedUser').username;
-	console.log($scope.currentUser);
-	console.log(testParams.params.allParams);
-		
-	$scope.testOld = {};
-	$scope.test = {};
-	$http.post(site+'/plans/get_test', $routeParams)
-	.then(function(response){
-		if(response.data.flag == 0){
-			$scope.testOld = response.data;
-			$scope.testOld.mcs = parseInt(response.data.mcs);
-			$scope.testOld.voltage = parseInt(response.data.voltage);
-		} else if(response.data.flag == 1){
-			$scope.test = response.data;
-			if($scope.test.station_id != 5){
-				$scope.test.mcs = parseInt(response.data.mcs)
+		$scope.testParams = testParams;
+		$scope.testStructs = $scope.testParams.structs;
+		console.log($scope.testStructs);
+		$scope.testOld = {};
+		$scope.test = {};
+		$http.post(site+'/plans/get_test', $routeParams)
+		.then(function(response){
+			if(response.data.flag == 0){
+				$scope.testOld = response.data;
+				$scope.testOld.mcs = parseInt(response.data.mcs);
+				$scope.testOld.voltage = parseInt(response.data.voltage);
+			} else if(response.data.flag == 1){
+				$scope.test = response.data;
+				if($scope.test.station_id != 5){
+					$scope.test.mcs = parseInt(response.data.mcs)
+				}
+				$scope.test.vlotage = parseInt(response.data.vlotage);
+			}else {
+				$scope.test = response.data;
 			}
-			$scope.test.vlotage = parseInt(response.data.vlotage);
-		}else {
-			$scope.test = response.data;
-		}
-		console.log(response.data);
-//		console.log($scope.test);
-	});
-		
+			console.log(response.data);
+	//		console.log($scope.test);
+		});
 	} else {
 		var message = 'Please Login first!';
 		var id = Flash.create('danger', message, 3500);
@@ -51,6 +50,31 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 		}
 		test.sweeps[name].data = result;
 	};
+	
+	$scope.loadData = function(sweep){
+		var reader = new FileReader();
+		var text = reader.readAsText(sweep.fileData);
+		var result;
+		var array = [];
+		var formatedArray = [];
+		sweep.data.name = sweep.fileData.name;
+		reader.addEventListener("loadend", function() {
+			// reader.result contains the contents of blob as a typed array
+			result = reader.result;
+			array = result.split("\n");
+			array.splice(array.length-1, 1);
+//			console.log(array);
+			array.forEach(function(number){
+				var split = number.split(",");
+				var shifted = split[0] << 8 | (split[1] & 255);
+				var dataObj = {
+					'config_id': 19,
+					'value': shifted
+				}
+				sweep.data.push(dataObj);
+			})
+		});
+   };
 	
 	$scope.editPlan = function(){
 		$http.post(site+'/plans/update', $scope.test)

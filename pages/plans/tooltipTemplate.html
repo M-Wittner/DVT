@@ -1,6 +1,7 @@
 <table class="table-tooltip-striped">
 	<thead style="color:red">
 		<tr>
+			<th style="font-weight:800" class="col-md-1">ID</th>
 			<th style="font-weight:800" class="col-md-1">Priority</th>
 			<th style="font-weight:800" class="col-md-1">Station</th>
 			<th style="font-weight:800" class="col-md-3">Name</th>
@@ -9,6 +10,7 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="test in tests | orderBy: 'priority' track by $index">
+			<td>{{test.id}}</td>
 			<td>{{test.priority}}</td>
 			<td>{{test.station}}</td>
 			<td ng-if="test.name">{{test.name}}</td>

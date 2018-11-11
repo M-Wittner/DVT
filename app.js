@@ -179,6 +179,18 @@ myApp.directive('viewTemplate', function(){
 //		bindToController: 'viewPlanCtrl'
 	}
 })
+myApp.directive('testForm', function(){
+	return{
+		templateUrl: 'pages/plans/partials/testForm.html',
+//		bindToController: 'viewPlanCtrl'
+	}
+})
+myApp.directive('lineupSweep', function(){
+	return{
+		templateUrl: 'pages/plans/partials/Test Form/lineupSweep.html',
+//		bindToController: 'viewPlanCtrl'
+	}
+})
 
 app.directive("importSheetJs", function(){
 	return {
