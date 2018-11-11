@@ -1,0 +1,14 @@
+<div ng-if="sweepData.data_type > 100" class="col-md-3 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'">
+	<span class="label label-dangerC">{{sweepName}}</span>
+	<div class="input-group">
+		<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.sweeps[sweepName].data" data-placeholder="Pick Test" ng-disabled="lock">
+			<ui-select-match>{{$item.chip_sn}}-{{$item.chip_process_abb}}</ui-select-match>
+			<ui-select-choices repeat="chip in testParams.params.allChips |filter:{chip_type_id: sweepData.data_type - 100}|filter: $select.search" sortable="true" group-by="'chip_process_abb'">{{chip.chip_sn}}-{{chip.chip_process_abb}}</ui-select-choices>
+		</ui-select>
+		<span class="input-group-btn">
+								<button type="button" ng-click="test.sweeps[sweepName] = {}; test.sweeps[sweepName].data_type = sweepData.data_type" class="btn btn-default btn-sm" ng-disabled="lock">
+									<span class="glyphicon glyphicon-trash"></span>
+		</button>
+		</span>
+	</div>
+</div>

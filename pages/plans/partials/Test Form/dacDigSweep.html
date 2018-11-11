@@ -1,0 +1,20 @@
+<div ng-if="sweepData.data_type == 61" class="col-md-4 rowMarg" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'" ng-init="sweepData.config_id = sweepData.data[0].config_id; test.sweeps[sweepName].data != null ? test.sweeps[sweepName].data.name = 'Power_Sweep_'+test.sweeps[sweepName].data.length+'.csv' :test.sweeps[sweepName].data = []">
+	<span class="label label-dangerC">{{sweepName}}</span>
+	<span ng-if="test.sweeps[sweepName].data.length == 0" class="label label-info pull-right">File Missing!</span>
+	<div class="input-group input-group-sm">
+		<input type="text" class="form-control" ng-model="test.sweeps[sweepName].data.name" ng-disabled="lock">
+		<span class="input-group-btn">
+			<label class="btn btn-default btn-sm" ng-disabled="lock" for="{{this.$id}}{{$index}}">
+				<span class="glyphicon glyphicon-folder-open">
+				</span>
+				<input style="display: none;" id="{{this.$id}}{{$index}}" type="file"  import-sheet-js="{{this.$id}}" ng-model="test.sweeps[sweepName].fileData" ng-disabled="lock"/>
+			</label>
+			<button type="button" ng-click="loadData(test.sweeps[sweepName])" class="btn btn-default btn-sm" ng-disabled="lock">
+				<span style="color: limegreen; font-size: 16px" class="glyphicon glyphicon-send"></span>
+			</button>
+			<button type="button" ng-click="test.sweeps[sweepName].data = []" class="btn btn-default btn-sm" ng-disabled="lock">
+				<span class="glyphicon glyphicon-trash"></span>
+			</button>
+		</span>
+	</div>
+</div>

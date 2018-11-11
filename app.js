@@ -169,26 +169,42 @@ myApp.directive('testForm', function(){
 myApp.directive('commentForm', function(){
 	return{
 		templateUrl: 'pages/plans/partials/commentForm.html',
-//		bindToController: 'viewPlanCtrl'
 	}
 })
 
 myApp.directive('viewTemplate', function(){
 	return{
 		templateUrl: 'pages/plans/partials/viewTemplate.html',
-//		bindToController: 'viewPlanCtrl'
 	}
 })
-myApp.directive('testForm', function(){
+myApp.directive('testStruct', function(){
 	return{
-		templateUrl: 'pages/plans/partials/testForm.html',
-//		bindToController: 'viewPlanCtrl'
+		templateUrl: 'pages/plans/partials/Test Form/testStruct.html',
 	}
 })
 myApp.directive('lineupSweep', function(){
 	return{
 		templateUrl: 'pages/plans/partials/Test Form/lineupSweep.html',
-//		bindToController: 'viewPlanCtrl'
+	}
+})
+myApp.directive('chipSweep', function(){
+	return{
+		templateUrl: 'pages/plans/partials/Test Form/chipSweep.html',
+	}
+})
+myApp.directive('pinSweep', function(){
+	return{
+		templateUrl: 'pages/plans/partials/Test Form/pinSweep.html',
+	}
+})
+myApp.directive('dacDigSweep', function(){
+	return{
+		templateUrl: 'pages/plans/partials/Test Form/dacDigSweep.html',
+	}
+})
+myApp.directive('generalSweep', function(){
+	return{
+		templateUrl: 'pages/plans/partials/Test Form/generalSweep.html',
 	}
 })
 

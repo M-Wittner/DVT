@@ -70,6 +70,13 @@ myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Fl
 		console.log(test);
 	}
 	
+	$scope.log = function(structs){
+		this.testStructs = $scope.testStructs;
+		console.log($scope.testStructs);
+		console.log(structs);
+		console.log($scope);
+	}
+	
 	
 	$scope.loadData = function(sweep){
 		var reader = new FileReader();

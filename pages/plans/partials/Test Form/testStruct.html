@@ -1,0 +1,19 @@
+<div ng-init="" ng-if="test.testType[0]" class="panel panel-default rowMarg">
+	<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="true" aria-controls="struct">
+		Test Struct
+	</div>
+	<div class="collapse panel-body in" id="{{$id}}" aria-expanded="true">
+		<div ng-repeat="(sweepName, sweepData) in testStructs | filter:{station_id: test.station[0].idx, test_type_id: test.testType[0].type_idx}:true | orderBy: 'priority' track by sweepData.name + $index" ng-init="sweepName = sweepData.name;">
+			<!----------------------------------------------------------------			Lineups			---------------------------------------------------------------->
+			<lineup-sweep></lineup-sweep>
+			<!----------------------------------------------------------------			Pins			---------------------------------------------------------------->
+			<pin-sweep></pin-sweep>
+			<!----------------------------------------------------------------			Chips			---------------------------------------------------------------->
+			<chip-sweep></chip-sweep>
+			<!----------------------------------------------------------------			DAC_Atten			---------------------------------------------------------------->
+			<dac-dig-sweep></dac-dig-sweep>
+			<!----------------------------------------------------------------			Sweeps			---------------------------------------------------------------->
+			<general-sweep></general-sweep>
+		</div>
+	</div>
+</div>

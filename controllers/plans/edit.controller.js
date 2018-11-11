@@ -9,7 +9,6 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
 ////	$scope.plan.username = $cookies.getObject('loggedUser').username;
 		$scope.testParams = testParams;
 		$scope.testStructs = $scope.testParams.structs;
-		console.log($scope.testStructs);
 		$scope.testOld = {};
 		$scope.test = {};
 		$http.post(site+'/plans/get_test', $routeParams)
