@@ -44,8 +44,8 @@ class Plans extends CI_Controller {
 	
 	function CreateNew(){
 		$postData = json_decode(file_get_contents('php://input'));
-		echo json_encode($postData);
-		die();
+//		echo json_encode($postData);
+//		die();
 		$result = array();
 		$planData = $postData->plan;
 		$plan = array(
@@ -444,6 +444,8 @@ class Plans extends CI_Controller {
 	}
 	function chipstatus(){
 		$data = json_decode(file_get_contents('php://input'));
+//		echo json_encode($data);
+//		die();
 		$updateStatus = $this->plan_model->update_chip_status($data);
 		echo json_encode($updateStatus);
 	}	
@@ -486,7 +488,7 @@ class Plans extends CI_Controller {
 	}
 
 	
-		public function lineup($test){
+	public function lineup($test){
 //			die(print_r($test));
 			$lineup = (string)$test->lineup;
 			$station = $test->station[0]->station;

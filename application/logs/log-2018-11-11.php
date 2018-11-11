@@ -130,3 +130,56 @@ ERROR - 201820182018-1111-1111 0909:NovNov:1313 --> 404 Page Not Found: Assets/l
 ERROR - 201820182018-1111-1111 0909:NovNov:3737 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-1111-1111 0909:NovNov:0101 --> 404 Page Not Found: Assets/lib
 ERROR - 201820182018-1111-1111 0909:NovNov:1818 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 0909:NovNov:1313 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 0909:NovNov:5454 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 0909:NovNov:2929 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 0909:NovNov:4848 --> 404 Page Not Found: Controllers/robot
+ERROR - 201820182018-1111-1111 0909:NovNov:4848 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 0909:NovNov:4949 --> 404 Page Not Found: Controllers/robot
+ERROR - 201820182018-1111-1111 0909:NovNov:2222 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 0909:NovNov:1616 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 0909:NovNov:1717 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 0909:NovNov:4242 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 0909:NovNov:2424 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 0909:NovNov:3434 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:5757 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:5959 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:3232 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:4848 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:2727 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:2222 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:2626 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:2929 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:1010 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:3030 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:4747 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:2323 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:5050 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:3838 --> Severity: Notice --> Undefined property: stdClass::$data_type C:\xampp\htdocs\application\models\valid_model.php 23
+ERROR - 201820182018-1111-1111 1010:NovNov:3838 --> Severity: Notice --> Undefined property: stdClass::$data_type C:\xampp\htdocs\application\models\valid_model.php 23
+ERROR - 201820182018-1111-1111 1010:NovNov:3838 --> Severity: Notice --> Undefined property: stdClass::$data_type C:\xampp\htdocs\application\controllers\plans.php 100
+ERROR - 201820182018-1111-1111 1010:NovNov:3838 --> Severity: Notice --> Undefined property: stdClass::$data_type C:\xampp\htdocs\application\controllers\plans.php 101
+ERROR - 201820182018-1111-1111 1010:NovNov:3838 --> Severity: Notice --> Undefined property: stdClass::$data_type C:\xampp\htdocs\application\controllers\plans.php 100
+ERROR - 201820182018-1111-1111 1010:NovNov:3838 --> Severity: Notice --> Undefined property: stdClass::$data_type C:\xampp\htdocs\application\controllers\plans.php 101
+ERROR - 201820182018-1111-1111 1010:NovNov:0404 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:0606 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:2929 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:5353 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:5252 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:5454 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:5858 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:5454 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:3333 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:0101 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:3535 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:3434 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1010:NovNov:3030 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1111:NovNov:4949 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1111:NovNov:5656 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1212:NovNov:4747 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1212:NovNov:1212 --> Severity: Notice --> Undefined property: stdClass::$id C:\xampp\htdocs\application\models\plan_model.php 495
+ERROR - 201820182018-1111-1111 1212:NovNov:1212 --> Severity: Notice --> Undefined property: stdClass::$username C:\xampp\htdocs\application\models\plan_model.php 499
+ERROR - 201820182018-1111-1111 1212:NovNov:5353 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1212:NovNov:4040 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1212:NovNov:4747 --> 404 Page Not Found: Assets/lib
+ERROR - 201820182018-1111-1111 1212:NovNov:4545 --> 404 Page Not Found: Assets/lib

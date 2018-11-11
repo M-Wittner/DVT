@@ -2,6 +2,7 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	var site = testParams.site;
 //	console.log($scope.currentUser);
+//	console.log($scope.currentUser);
 	
 //	$scope.user = $scope.currentUser.username;
 	
@@ -60,21 +61,21 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 			var id = Flash.create('danger', message, 3500);
 		}
 	}
-
-	$scope.seen = function(plan){
-		$http.post(site+'/plans/planCheck', {plan: plan, user: $scope.currentUser})
+	
+	$scope.chipStatus = function(chip, flag){
+		chip.flag = flag;
+		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.currentUser})
 		.then(function(response){
-//			console.log(response.data);
-			if(response.data == 'true'){
-				var message = 'Plan Marked As Seen';
-				var id = Flash.create('success', message, 3500);
-			} else{
-				var message = 'Plan Marked As Unseen';
-				var id = Flash.create('danger', message, 3500);
-			}
-//			setTimeout(function(){$window.location.reload();}, 2500);
+			console.log(response.data);
+			var keys = Object.keys(response.data);
+			var key = keys[0];
+			var username = keys[1];
+			chip[key] = response.data[key];
+			chip.username = response.data[username];
+			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
+			var id = Flash.create('success', message, 6000);
 		});
-	}
+	};
 	
 	$scope.tooltip= function(id){
 		$http.post(site+'/plans/planStatus', id)

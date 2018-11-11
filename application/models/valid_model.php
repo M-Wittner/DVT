@@ -16,8 +16,6 @@ class valid_model extends CI_Model {
 	}
 	
 	public function validate_test($test, $result){
-//		echo json_encode($test);
-//		die();
 		$checkLineup = false;
 			foreach($test->sweeps as $sweep){
 				if($sweep->data_type == '33'){

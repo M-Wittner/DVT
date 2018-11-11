@@ -153,12 +153,12 @@ myApp.run(function($animate) {
 myApp.directive('testForm', function(){
 	return {
 		templateUrl: 'pages/plans/newTest.html',
+		controller: 'testFormCtrl',
 		scope: {
 			planParams: '=',
 			params: '=',
 			index: '&',
 			locked: '=',
-			fileData: '=',
 		},
 		link: function($scope, $elm){
 			

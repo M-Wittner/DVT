@@ -1,9 +1,9 @@
-<div ng-init="" ng-if="test.testType[0]" class="panel panel-default rowMarg">
+<div ng-if="test.testType[0]" class="panel panel-default rowMarg">
 	<div class="panel-heading" Data-toggle="collapse" data-target="#{{$id}}" aria-expanded="true" aria-controls="struct">
 		Test Struct
 	</div>
 	<div class="collapse panel-body in" id="{{$id}}" aria-expanded="true">
-		<div ng-repeat="(sweepName, sweepData) in testStructs | filter:{station_id: test.station[0].idx, test_type_id: test.testType[0].type_idx}:true | orderBy: 'priority' track by sweepData.name + $index" ng-init="sweepName = sweepData.name;">
+		<div ng-repeat="(sweepName, sweepData) in testStructs | filter:{station_id: test.station[0].idx, test_type_id: test.testType[0].type_idx}:true | orderBy: 'priority' track by sweepData.name + $index" ng-init="sweepName = sweepData.name; test.sweeps[sweepName].config_id = sweepData.config_id; test.sweeps[sweepName].data_type = sweepData.data_type">
 			<!----------------------------------------------------------------			Lineups			---------------------------------------------------------------->
 			<lineup-sweep></lineup-sweep>
 			<!----------------------------------------------------------------			Pins			---------------------------------------------------------------->

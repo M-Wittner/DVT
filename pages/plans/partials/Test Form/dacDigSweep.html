@@ -1,4 +1,4 @@
-<div ng-if="sweepData.data_type == 61" class="col-md-4 rowMarg" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'" ng-init="sweepData.config_id = sweepData.data[0].config_id; test.sweeps[sweepName].data != null ? test.sweeps[sweepName].data.name = 'Power_Sweep_'+test.sweeps[sweepName].data.length+'.csv' :test.sweeps[sweepName].data = []">
+<div ng-if="sweepData.data_type == 61" class="col-md-4 rowMarg" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'" ng-init="test.sweeps[sweepName].data != null ? test.sweeps[sweepName].data.name = 'Power_Sweep_'+test.sweeps[sweepName].data.length+'.csv' :test.sweeps[sweepName].data = []">
 	<span class="label label-dangerC">{{sweepName}}</span>
 	<span ng-if="test.sweeps[sweepName].data.length == 0" class="label label-info pull-right">File Missing!</span>
 	<div class="input-group input-group-sm">
