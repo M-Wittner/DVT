@@ -15,15 +15,11 @@ class Plans extends CI_Controller {
     }
 
 	function index() {
-//		$this->db->order_by('date', 'asc');
 		$plans = new stdClass();
 		$plans->errors = array();
 		$this->db->order_by('id', 'desc');
 		$this->db->where('source', 0);
 		$plans->web = $this->db->get('plans_v1_view')->result();
-		$this->db->order_by('id', 'desc');
-		$this->db->where('source', 1);
-		$plans->lab = $this->db->get('plans_v1_view')->result();
 		foreach($plans->web as $plan){
 			$this->db->select('test_id');
 			$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$plan->id))->result();
@@ -36,6 +32,29 @@ class Plans extends CI_Controller {
 //					continue;
 				}else{
 					$plan->tests[$i] = $res;
+					$plan->tests[$i]->comments = $this->db->get_where('test_comments_v1_view', ['test_id'=>$test->test_id])->result();
+					
+				}
+			}
+		}
+		$this->db->order_by('id', 'desc');
+		$this->db->where('source', 1);
+		$this->db->limit('20');
+		$plans->lab = $this->db->get('plans_v1_view')->result();
+		foreach($plans->lab as $plan){
+			$this->db->select('test_id');
+			$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$plan->id))->result();
+			foreach ($plan->tests as $i=>$test){
+				$res = $this->plan_model->get_test_v1($test->test_id);
+//				echo json_encode($res);
+//				die();
+				if(isset($res->occured) && $res->occured){
+					array_push($plans->errors, $res);
+//					continue;
+				}else{
+					$plan->tests[$i] = $res;
+					$plan->tests[$i]->comments = $this->db->get_where('test_comments_v1_view', ['test_id'=>$test->test_id])->result();
+					
 				}
 			}
 		}
@@ -358,8 +377,6 @@ class Plans extends CI_Controller {
 	
 	function addcomment(){
 		$postData = json_decode(file_get_contents('php://input'));
-//		echo json_encode($postData);
-//		die();
 		$comment = $this->plan_model->add_comment_v1($postData);
 		echo json_encode($comment);
 	}
@@ -444,8 +461,6 @@ class Plans extends CI_Controller {
 	}
 	function chipstatus(){
 		$data = json_decode(file_get_contents('php://input'));
-//		echo json_encode($data);
-//		die();
 		$updateStatus = $this->plan_model->update_chip_status($data);
 		echo json_encode($updateStatus);
 	}	
@@ -639,19 +654,6 @@ class Plans extends CI_Controller {
 		}
 	}
 	
-	public function upload(){
-		$data = $_POST;
-		var_dump($data);
-//		die();
-		$target_dir = $data['path'];
-		if(!is_dir($target_dir)){
-			mkdir($target_dir, 0755, true);
-		}
-		 print_r($_FILES);
-//		var_dump($target_dir)
-		$handle = fopen($target_dir.'/'.$_FILES['file']['name'], 'x+') or die('Cannot open file:  '.$data);
-//		var_dump($handle);
-	}
 	
 	public function check($test){
 //		$data = json_decode(file_get_contents('php://input'));
@@ -789,8 +791,6 @@ class Plans extends CI_Controller {
 	
 	public function sendMail(){
 		$data = json_decode(file_get_contents('php://input'));
-//		echo json_encode($data);
-//		die();
 		$testPlans = $data->tests;
 		$progress = $data->progress;
 //		$data = file_get_contents('php://input');

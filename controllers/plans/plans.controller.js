@@ -2,9 +2,6 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	var site = testParams.site;
 //	console.log($scope.currentUser);
-//	console.log($scope.currentUser);
-	
-//	$scope.user = $scope.currentUser.username;
 	
 	if($scope.isAuthenticated) {
 		$scope.plans = {};
@@ -12,11 +9,6 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 		.then(function(response) {
 			console.log(response.data);
 			var data = response.data;
-			$scope.webTableParams = new NgTableParams({count:12}, {
-				counts:[],
-				total: data.web.length,
-				dataset: data.web
-			})
 			$scope.plans.web = data.web;
 			$scope.labTableParams = new NgTableParams({count:12}, {
 				counts:[],
@@ -40,7 +32,7 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 		if($scope.selected.length > 0){
 			$http.post(site+'/plans/deletePlans', $scope.selected)
 			.then(function(response){
-				console.log(response.data);
+//				console.log(response.data);
 				if(typeof response.data == "object"){
 					response.data.forEach(function(error){
 						var message = "<strong> Plan #" + error.source +"</strong>" + ": " + error.msg;
@@ -62,6 +54,14 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 		}
 	}
 	
+	$scope.tooltip= function(id){
+		$http.post(site+'/plans/planStatus', id)
+		.then(function(response){
+//			console.log(response.data);
+			$scope.tests = response.data;
+		});
+	}
+	
 	$scope.chipStatus = function(chip, flag){
 		chip.flag = flag;
 		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.currentUser})
@@ -77,11 +77,27 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 		});
 	};
 	
-	$scope.tooltip= function(id){
-		$http.post(site+'/plans/planStatus', id)
+	$scope.newCmt = function(testId, planId){
+		var test = this.test;
+		var comment = this.comment
+		comment.test_id = testId;
+		comment.plan_id = planId;
+		comment.user_id = $scope.currentUser.id;
+		$http.post(site+'/plans/addComment', comment)
 		.then(function(response){
-//			console.log(response.data);
-			$scope.tests = response.data;
-		});
+			if(response.data.comment == comment.text) {
+				$window.scrollTo(0, 0);
+				var message = 'Comment Was Added successfully';
+				var id = Flash.create('success', message, 5000);
+				console.log(response.data);
+				test.comments.push(response.data);
+				angular.element('#Comment'+testId).click();
+			} else {
+				console.log(response.data);
+				var message = response.data;
+				var id = Flash.create('danger', message, 5000);
+			}
+		})
+//		console.log(this.comment);
 	}
 }]);

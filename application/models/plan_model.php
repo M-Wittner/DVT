@@ -8,11 +8,6 @@ class plan_model extends CI_Model {
 				$this->load->model(['excel_model', 'valid_model']);
     }
 	
-//	function Plans() {
-//		$q = $this->db->get('plans')->result();
-//		return $q;
-//	}
-	
 	function delete_plan($id){
 		$q = $this->db->query("DELETE FROM `plans` WHERE id = ?", $id);
 		return;
@@ -186,32 +181,6 @@ class plan_model extends CI_Model {
 		}
 	}
 	
-	function get_test($data){
-		$q = $this->db->get_where('plans', array('id'=> $data->planId))->result();
-		$test =$this->db->get_where('tests', array('plan_id'=>$data->planId, 'id'=>$data->testId))->result();
-		$sql = "SELECT id FROM `tests` WHERE plan_id = ?";
-		$query = $this->db->query($sql, $data->planId);
-		$testsIdArr = $query->result();
-		$channels = $this->db->get_where('test_channels', array('test_id'=>$data->testId))->result();
-		$chips = $this->db->get_where('test_chips', array('test_id'=>$data->testId))->result();
-		$temps = $this->db->get_where('test_temps', array('test_id'=>$data->testId))->result();
-		$antennas = $this->db->get_where('test_antennas', array('test_id'=>$data->testId))->result();
-		$comments = $this_db->get_where('test_comments', array('test_id'=>$data->testId))->result();
-		die(var_dump($comments));
-
-		$test[0]->channels = $channels;
-		$test[0]->chips = $chips;
-		$test[0]->antennas = $antennas;
-		$test[0]->temps = $temps;
-		$test[0]->comments = $comments;
-
-		$plan = array(
-			'plan'=>$q,
-			'test'=>$test,
-		);
-		return $plan;
-	}
-	
 	function add_comment_v1($data){
 //		echo json_encode($data);
 //		die();
@@ -237,25 +206,6 @@ class plan_model extends CI_Model {
 			$returnComment  = $this->db->get_where('test_comments_v1_view', ['comment_id'=>$id])->result()[0];
 			return $returnComment;
 		}
-	}
-	
-	function add_comment($data){
-//		echo json_encode($data);
-//		die();
-		if(isset($data->comment->chip[0]->pair_id)){
-			$pairId = $data->comment->chip[0]->pair_id;
-		}else{
-			$pairId = null;
-		}
-		$comment = array(
-			'test_id'=>$data->id->testId,
-			'user_id'=>$data->comment->userId,
-			'severity'=>$data->comment->severity,
-			'config_id'=>$pairId,
-			'comment'=>$data->comment->details,
-		);
-		$status = $this->db->insert('test_comments_new', $comment);
-		return $status;
 	}
 	
 	function get_comments($id){
@@ -515,160 +465,4 @@ class plan_model extends CI_Model {
 		}
 	}
 	
-	function update_xif_status($result){
-//		die(var_dump($result));
-		$runs = $result->running;
-		$complete = $result->completed;
-		$error = $result->error;
-		if($runs == false && $complete == false && $error == false){
-			$this->db->where(array('id'=>$result->id));
-			$insertStatus = $this->db->update('test_xifs', array('running'=>true, 'completed'=>false, 'error'=>false));
-		} else if($runs == true && $complete == false && $error == false){
-			$this->db->where(array('id'=>$result->id));
-			$insertStatus = $this->db->update('test_xifs', array('running'=>false, 'completed'=>true, 'error'=>false));
-		} else if($runs == false && $complete == true && $error == false){
-			$this->db->where(array('id'=>$result->id));
-			$insertStatus = $this->db->update('test_xifs', array('running'=>false, 'completed'=>false ,'error'=>true));
-		} else if($runs == false && $complete == false && $error == true){
-			$this->db->where(array('id'=>$result->id));
-			$insertStatus = $this->db->update('test_xifs', array('running'=>false, 'completed'=>false, 'error'=>false));
-		} else{
-			echo 'nothing';
-		}
-		return $this->db->get_where('test_xifs', array('id'=>$result->id))->result();
-	}
-	
-	function delete_test($id){
-		$q = $this->db->query("DELETE FROM `tests` WHERE id = ?", $id);
-		return;
-	}	
-	
-	function delete_comment($id){
-		
-		return;
-	}
-	
-	function format_edit($test){
-//		echo json_encode($test);
-//		die();
-		$test->params = new stdClass();
-		$test->params->channel = $test->channel;
-		switch($test->station_id){
-			case 1:
-			case 2:
-				if(isset($test->a_lineup)){
-			$test->lineup = $test->a_lineup;
-			if(isset($test->pin_from)){
-				$test->params->pin_from = $test->pin_from[0];
-				$test->params->pin_to = $test->pin_to[0];
-				if(isset($test->pin_step)){
-					$test->params->pin_step = $test->pin_step[0];
-				}
-				if(isset($test->pin_additional)){
-					$test->params->pin_additional = $test->pin_additional[0];
-				}
-			}elseif(isset($test->lo_pin_from)){
-				$test->params->lo_pin_from = $test->lo_pin_from[0];
-				$test->params->lo_pin_to = $test->lo_pin_to[0];
-				$test->params->lo_pin_step = $test->lo_pin_step[0];
-				if(isset($test->lo_pin_additional)){
-					$test->params->lo_pin_additional = $test->lo_pin_additional[0];
-				}
-			}
-			$test->params->temp_r = $test->temp_r;
-//			$test->params->channel = $test->channel;
-			$test->params->antenna = $test->antenna;
-			$test->params->mcs = $test->mcs[0];
-//			$test->params->voltage = $test->voltage[0];
-		}
-				break;
-			case 3:
-			case 4:
-				$test->lineup = $test->m_lineup;
-				$test->params->temp_m = $test->temp_m;
-				
-//				$test->params->voltage = $test->voltage[0];
-				break;
-			case 5:
-				$test->lineup = $test->a_lineup;
-				$test->params->temp_r = $test->temp_r;
-				$test->params->temp_m = $test->temp_m;
-				$test->params->mcs = $test->mcs;
-				$params = ['num_ant', 'antenna', 'sector', 'active_ants'];
-				foreach ($params as $name){
-					if(isset($test->$name)){
-						$test->params->$name = $test->$name;
-					}
-				}
-		}
-		
-		return $test;
-	}
-	
-	function calc_pinAdd($data){
-		$array = explode(",", $data);
-		if(sizeof($array) > 0) {
-			return sizeof($array);	
-		} else {
-			return 0;
-		}
-		
-	}
-	
-	function calc_pins($pinFrom, $pinTo, $pinStep, $pinAddNum){
-		$pinFrom = abs(floatval($pinFrom));
-		$pinTo = abs(floatval($pinTo));
-		$pinStep = abs(floatval($pinStep));
-		if(!isset($pinAddNum)){
-			$pinAddNum = 0;	
-		}
-//		die(var_dump($pinFrom, $pinTo, $pinStep, $pinAddNum));
-		if($pinFrom > $pinTo){
-			$pins = ((($pinFrom - $pinTo) + $pinAddNum) / $pinStep) + 1;
-		} elseif($pinFrom < $pinTo){
-			$pins = ((($pinTo - $pinFrom) + $pinAddNum) / $pinStep) + 1;
-		}
-		
-		if(isset($pins)){
-			return $pins;
-		} else{
-			$pins = 1;
-		}
-		
-	}
-	
-	function calc_runtime($variables){
-		if(!isset($variables->pins)){
-			$pins = 1;
-		}
-		if(!isset($variables->loPins)){
-			$loPins = 1;
-		}
-		
-		$this->db->select('iteration_time');
-		$iteration_time = floatval($this->db->get_where('params_test_iteration', ['station'=>$variables->station, 'test_name'=>$variables->test_name])->result()[0]->iteration_time);
-		if(!isset($iteration_time)){
-			echo 'error';
-			exit;
-		}
-//		var_dump($iteration_time);
-		$pins = 1;
-		$loPins = 1;
-		if($variables->station == 'R-CB1' || $variables->station == 'R-CB2'){
-			$antsXIFS = $variables->antennas;
-			$pins = $variables->pins;
-			$loPins = $variables->loPins;
-		} elseif($variables->station == 'M-CB1' || $variables->station == 'M-CB1'){
-			$antsXIFS = $variables->xifs;
-		} else{
-			$antsXIFS = 1;
-		}
-		
-		$estimate_time = $variables->temps * $variables->channels * $antsXIFS * $pins * $loPins * $iteration_time;
-		
-		$form_time = gmdate("H:i:s", $estimate_time);
-//		var_dump($form_time);
-//		die();
-		return $form_time;
-	}
 }

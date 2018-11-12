@@ -137,34 +137,12 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 		}
 	};
 	
-//	$scope.textBox;
-//	$scope.editor = function(testId){
-//	let savedEditor;
-//		InlineEditor
-//    .create( document.querySelector('#textBox'), {
-////			plugins: [Autosave],
-////			autosave: {
-////				save(editor){
-////					return saveData(editor.getData());
-////				}
-////			},
-//			toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote']
-//		})
-//    .then(editor => {
-//        console.log(editor.getData());
-//    })
-//    .catch(error => {
-//        console.error(error);
-//    });	
-//		$scope.textBox = savedEditor;
-//	}
-	
-		$scope.newCmt = function(testId, planId){
-			var test = this.test;
-			var comment = this.comment
-			this.comment.test_id = testId;
-			this.comment.plan_id = planId;
-			this.comment.user_id = $scope.user.id;
+	$scope.newCmt = function(testId, planId){
+		var test = this.test;
+		var comment = this.comment
+		this.comment.test_id = testId;
+		this.comment.plan_id = planId;
+		this.comment.user_id = $scope.user.id;
 		$http.post(site+'/plans/addComment', this.comment)
 		.then(function(response){
 			if(response.data.comment == comment.text) {

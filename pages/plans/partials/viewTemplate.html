@@ -235,8 +235,8 @@
 											<div class="pull-right" ng-show="currentUser.username == comment.username  ||  currentUser.rank > '10'">
 												<button class="btn btn-xs btn-warning" href="#/plans/{{test.plan_id}}/test/{{comment.test_id}}/comment/{{comment.comment_id}}/edit" ng-click="editComment()">Edit</button>
 												<button class="btn btn-xs btn-danger" ng-click="removeComment()">
-																		Delete
-																	</button>
+													Delete
+												</button>
 											</div>
 										</h3>
 									</div>
@@ -248,14 +248,14 @@
 											</div>
 											<div class="col-md-3 col-sm-3 col-xs-3">
 												<span class="label label-primary">Test Station</span>
-												<label class="form-control">{{test.name}}</label>
+												<label class="form-control">{{test.station[0].name}}</label>
 											</div>
 											<div ng-if="comment.severity == 'Minor'">
 												<div class="col-md-3 col-sm-3 col-xs-3">
 													<span class="label label-primary">Chip</span>
 													<label class="form-control">
-																			<span >{{comment.chip_sn}}-{{comment.chip_process_abb}}</span>
-																		</label>
+														<span >{{comment.chip_sn}}-{{comment.chip_process_abb}}</span>
+													</label>
 												</div>
 											</div>
 										</div>
