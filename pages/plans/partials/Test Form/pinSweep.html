@@ -1,12 +1,12 @@
 <div ng-if="sweepData.data_type == 60 || sweepData.data_type == 62" class="col-md-5 rowMarg" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'">
 	<span class="label label-dangerC">{{sweepName}}</span>
-	<div class="input-group input-group-sm" ng-init="test.sweeps[sweepName].config_id = sweepData.config_id; test.sweeps[sweepName].data_type = sweepData.data_type">
-		<input class="form-control" type="number" placeholder="From" ng-model="test.sweeps[sweepName].data.from" aria-describedby="from" ng-disabled="lock">
+	<div class="input-group input-group-sm">
+		<input class="form-control" type="number" placeholder="From" ng-model="test.sweeps[sweepName].data[0].from" aria-describedby="from" ng-disabled="lock">
 		<span class="input-group-addon" id="from" style="font-weight:900">;</span>
-		<input class="form-control" type="number" placeholder="Step" ng-model="test.sweeps[sweepName].data.step" aria-describedby="step" ng-disabled="lock">
+		<input class="form-control" type="number" placeholder="Step" ng-model="test.sweeps[sweepName].data[0].step" aria-describedby="step" ng-disabled="lock">
 		<span class="input-group-addon" id="step" style="font-weight:900">;</span>
-		<input class="form-control" type="number" placeholder="To" ng-model="test.sweeps[sweepName].data.to" aria-describedby="to" ng-disabled="lock">
+		<input class="form-control" type="number" placeholder="To" ng-model="test.sweeps[sweepName].data[0].to" aria-describedby="to" ng-disabled="lock">
 		<span ng-if="sweepData.data_type == 60" class="input-group-addon" id="to" style="font-weight:900">;</span>
-		<input ng-if="sweepData.data_type == 60" class="form-control" type="text" placeholder="Extra" ng-model="test.sweeps[sweepName].data.ext" uib-popover="Ex: -50,-55.5,-60" popover-trigger="'mouseenter'" ng-disabled="lock">
+		<input ng-if="sweepData.data_type == 60" class="form-control" type="text" placeholder="Extra" ng-model="test.sweeps[sweepName].data[0].ext" uib-popover="Ex: -50,-55.5,-60" popover-trigger="'mouseenter'" ng-disabled="lock">
 	</div>
 </div>

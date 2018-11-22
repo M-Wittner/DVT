@@ -13,6 +13,7 @@ Flash, Session, $cookies, $window, testParams) {
 		$scope.userRoles = USER_ROLES;
 		
 	}
+//	console.log($scope.currentUser);
 	$scope.user = {};
 	$scope.login = function() {
 		$http.post(site+'/home/login', $scope.user)

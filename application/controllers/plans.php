@@ -17,7 +17,6 @@ class Plans extends CI_Controller {
 	function index() {
 		$plans = new stdClass();
 		$plans->errors = array();
-		$this->db->order_by('id', 'desc');
 		$this->db->where('source', 0);
 		$plans->web = $this->db->get('plans_v1_view')->result();
 		foreach($plans->web as $plan){
@@ -147,6 +146,22 @@ class Plans extends CI_Controller {
 												$insertSweep = $this->db->insert_batch('chip_status', $chipsStatus);
 											}
 											break;
+										case 60://Pin
+										case 62://Temp Cycle
+											unset($sweepData->data_type);
+											if(!isset($sweepData->data[0]->ext)){
+												$sweepData->data[0]->ext = '';
+											}
+											if(is_array($sweepData->data->ext)){
+												$pin = $sweepData->data[0]->from.';'.$sweepData->data[0]->step.';'.$sweepData->data[0]->to.';'.implode(',',$sweepData->data[0]->ext);
+											}else{
+												$pin = $sweepData->data[0]->from.';'.$sweepData->data[0]->step.';'.$sweepData->data[0]->to.';'.$sweepData->data[0]->ext;
+											}
+											$this->db->set('config_id', $sweepData->config_id);
+											$this->db->set('value', $pin);
+											$this->db->set('test_id', $testId);
+											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
+											break;
 										default: //-------------- Generic sweeps	--------------
 											foreach($sweepData->data as $sweep){
 												$sweep->test_id = $testId;
@@ -194,22 +209,6 @@ class Plans extends CI_Controller {
 										case 33://Linueup
 											unset($sweepData->data_type);
 											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData->data);
-											break;
-										case 60://Pin
-										case 62://Temp Cycle
-											unset($sweepData->data_type);
-											if(!isset($sweepData->data->ext)){
-												$sweepData->data->ext = '';
-											}
-											if(is_array($sweepData->data->ext)){
-												$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.implode(',',$sweepData->data->ext);
-											}else{
-												$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.$sweepData->data->ext;
-											}
-											$this->db->set('config_id', $sweepData->config_id);
-											$this->db->set('value', $pin);
-											$this->db->set('test_id', $testId);
-											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
 											break;
 										case 61: //DAC_Atten file handle
 											$path = $sweepData->path;
@@ -310,19 +309,16 @@ class Plans extends CI_Controller {
 		}
 		echo json_encode($result);
 	}
-	
 	function get_test(){
 		$id = json_decode(file_get_contents('php://input'));
 		$result = $this->plan_model->get_test_v1($id->testId);
 		echo json_encode($result);
 	}
-	
-		function copyTest(){
+	function copyTest(){
 		$testId = json_decode(file_get_contents('php://input'));
 		$test = $this->plan_model->get_test_v1($testId);
 		echo json_encode($test);
 	}
-	
 	function newcomment(){
 		$id = json_decode(file_get_contents('php://input'));
 		$test = $this->db->get_where('tests_view_new', array('id'=>$id->testId))->result()[0];

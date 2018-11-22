@@ -153,8 +153,6 @@ class valid_model extends CI_Model {
 			// extract line from msg.
 			$faultyLine = substr(explode(' value', $errors[$numErrors-1])[0], -2);
 			$msg = "Line ".$faultyLine." has illigal characters, and might be out of table's range.";
-//			var_dump($msg);
-//			die();
 			return $msg;
 		}
 		return $errors;

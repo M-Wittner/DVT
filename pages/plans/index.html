@@ -18,10 +18,11 @@
 	</div>
 	<!-- Table -->
 	<uib-tabset active="active">
-		<div class="pull-right btn-crud">
-			<span class="col-md-1 ">
+		<div class="btn-crud">
+			<div class="col-md-2 pull-right">
+				<a class="btn btn-success btn-xs" ui-sref="newPlan" ui-sref-active="navActive">New Plan</a>
 				<button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#modal">Delete Plans</button>
-			</span>
+			</div>
 		</div>
     <uib-tab index="0" heading="Web">
 			<div class="container-fluid" ng-repeat="plan in plans.web track by $index">

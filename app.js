@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize', 'ui.calendar', 'ngFileSaver']);
+var myApp = angular.module('myApp', ['ui.router', 'ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize', 'ui.calendar', 'ngFileSaver']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$httpProvider.defaults.cache = false;
@@ -140,11 +140,87 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/admin/operations.html',
 			controller: 'operationsCtrl'
 	})
-		.otherwise({redirectTo: '/'});
+//		.otherwise({redirectTo: '/'});
 
 	$locationProvider.hashPrefix('');
 
 }]);
+
+myApp.config(function($stateProvider){
+	var states = [
+		home = 				{	name: 'home',
+										url: '/',
+										templateUrl: 'pages/home.html',
+										controller: 'homeCtrl'},
+		register = 		{	name: 'register',
+										url: '/register',
+										templateUrl: 'pages/register.html',
+										controller: 'regCtrl'},
+//		--------------------	DVT PAGES --------------------
+		plans =			 {	name: 'plans',
+										url: '/plans',
+										templateUrl: 'pages/plans/index.html',
+										controller: 'plansCtrl'},
+		newPlan =		 {	name: 'newPlan',
+										url: '/new',
+										templateUrl: 'pages/plans/new.html',
+										controller: 'newPlanCtrl'},
+//		viewPlan = {	name: 'viewPlan',
+//									url: '/plans/{planId}',
+//									params: {obj: null},
+//									templateUrl: 'pages/plans/view.html',
+//									controller: 'viewPlanCtrl'},
+		editTest = 		{	name: 'editTest',
+										url: '/plans/{planId}/test/{testId}/edit',
+										params: {obj: null},
+										templateUrl: 'pages/plans/edit.html',
+										controller: 'editPlanCtrl'},
+		addTest =	 		{	name: 'addTest',
+										url: '/plans/{planId}/addtests',
+										params: {obj: null},
+										templateUrl: 'pages/plans/addtest.html',
+										controller: 'addTestCtrl'},
+		editComment = {	name: 'editComment',
+										url: '/plans/{planId}/test/{testId}/comment/{commentId}/edit',
+										params: {obj: null},
+										templateUrl: 'pages/comments/edit.html',
+										controller: 'editCommentCtrl'},
+//		--------------------	TASKS PAGES --------------------
+		tasks 			= {	name: 'tasks',
+										url: '/tasks',
+										templateUrl: 'pages/tasks/index.html',
+									 	controller: 'tasksCtrl'},
+		newTasks 			= {	name: 'newTasks',
+										url: '/tasks/new',
+										templateUrl: 'pages/tasks/new.html',
+										controller: 'newTaskCtrl'},
+		viewTask 			= {	name: 'viewTask',
+										url: '/tasks/{testId}',
+										params: {obj: null},
+										templateUrl: 'pages/tasks/view.html',
+										controller: 'viewTaskCtrl'},
+		editTask 			= {	name: 'editTask',
+										url: '/tasks/{testId}/edit',
+										params: {obj: null},
+										templateUrl: 'pages/tasks/edit.html',
+										controller: 'editTaskCtrl'},
+		commentTask 	= {	name: 'commentTask',
+										url: '/tasks/{testId}/edit',
+										params: {obj: null},
+										templateUrl: 'pages/tasks/edit.html',
+										controller: 'editTaskCtrl'},
+//		--------------------	PROFILE PAGES --------------------
+		userTasks 	= {	name: 'userTasks',
+										url: '/{username}/tasks',
+										params: {obj: null},
+										templateUrl: 'pages/profile/myTasks.html',
+										controller: 'myTasksCtrl'},
+	];
+	
+	states.forEach(function(state){
+		$stateProvider.state(state);
+	})
+});
 
 myApp.run(function($animate) {
   $animate.enabled(true);

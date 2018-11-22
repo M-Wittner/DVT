@@ -76,7 +76,7 @@ myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams',
    };
 	
 	$scope.editPlan = function(){
-		$http.post(site+'/plans/update', $scope.test)
+		$http.post(site+'/plans/update', this.test)
 		.then(function(response){
 			if(response.data == 'success'){
 				$location.path('/plans/'+$routeParams.planId);

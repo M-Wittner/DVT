@@ -120,12 +120,16 @@ class plan_model extends CI_Model {
 				$data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$sweep->config_id))->result();
 				if(count($data) == 1 && (in_array($sweep->data_type, [33, 60]))){
 					if($sweep->data_type == 60){ //Pin sweep
+//						echo json_encode($data);
+//						die();
 						$data[0]->value = explode(';', $data[0]->value);
 						$data[0]->from = (int) $data[0]->value[0];
 						$data[0]->step = (int) $data[0]->value[1];
-						$data[0]->to = (int) $data[0]->value[2];
+						if(isset($data[0]->value[2])){
+							$data[0]->to = (int) $data[0]->value[2];
+						}
 						if(isset($data[0]->value[3]) && $data[0]->value[3] != ""){
-							$data[0]->ext = explode(',', (int) $data[0]->value[3]);
+							$data[0]->ext = $data[0]->value[3];
 						}
 						for($i = 0; $i < 4; $i++){
 							unset($data[0]->value[$i]);
@@ -134,19 +138,13 @@ class plan_model extends CI_Model {
 					}else{ //Lineup sweep
 						$test->sweeps[$sweep->name]->data = $data[0];
 					}
-	//						$test->sweeps[$sweep->name]->data = $data[0];
 				}else{
 					if($sweep->data_type == 61){
-//						$count = count($data);
-//						$sweep->data_name = "Power_Sweep_".$count.".csv";
 						foreach($data as $dac_atten){
 							$dac = $dac_atten->value>>8;
 							$dig = $dac_atten->value&255;
 							$dac_atten->display_name = "DAC:".$dac." Dig:".$dig;
-//							$dac_atten->display_name = array($dac, $dig);
 						}
-//						echo json_encode($sweep);
-//						die();
 					}elseif($sweep->data_type > 100){
 						foreach($data as $chip){
 							$this->db->select('chip_sn, chip_process_abb');
@@ -259,7 +257,8 @@ class plan_model extends CI_Model {
 			if(!isset($test->notes)){
 				$test->notes = null;
 			}
-//			echo json_encode($test);
+//			$s = "ChipR Pin";
+//			echo json_encode($test->sweeps->$s);
 //			die();
 			$error = new stdClass();
 			$testBody = array(
@@ -273,7 +272,6 @@ class plan_model extends CI_Model {
 			$this->db->where('test_id', $test->test_id);
 			$insertTest = $this->db->update('test_v1', $testBody);
 //			$insertTest = true;
-//			die();
 			if(!$insertTest){
 				$error->msg = 'Test was not submitted';
 				$error->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;
@@ -317,6 +315,22 @@ class plan_model extends CI_Model {
 										$chipsStatus[$i]['data_idx'] = $dataIdx + $i;
 									}
 									$insertSweep = $this->db->insert_batch('chip_status', $chipsStatus);
+									break;
+								case 60://Pin
+								case 62://Temp Cycle
+									unset($sweepData->data_type);
+									if(!isset($sweepData->data[0]->ext)){
+										$sweepData->data[0]->ext = '';
+									}
+									if(is_array($sweepData->data[0]->ext)){
+										$pin = $sweepData->data[0]->from.';'.$sweepData->data[0]->step.';'.$sweepData->data[0]->to.';'.implode(',',$sweepData->data[0]->ext);
+									}else{
+										$pin = $sweepData->data[0]->from.';'.$sweepData->data[0]->step.';'.$sweepData->data[0]->to.';'.$sweepData->data[0]->ext;
+									}
+									$this->db->set('config_id', $sweepData->config_id);
+									$this->db->set('value', $pin);
+									$this->db->set('test_id', $testId);
+									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
 									break;
 								default: //-------------- Generic sweeps	--------------
 									foreach($sweepData->data as $sweep){
@@ -366,27 +380,9 @@ class plan_model extends CI_Model {
 									unset($sweepData->data_type);
 									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data', $sweepData->data);
 									break;
-								case 60://Pin
-								case 62://Temp Cycle
-									unset($sweepData->data_type);
-									if(!isset($sweepData->data->ext)){
-										$sweepData->data->ext = '';
-									}
-									if(is_array($sweepData->data->ext)){
-										$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.implode(',',$sweepData->data->ext);
-									}else{
-										$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.$sweepData->data->ext;
-									}
-									$this->db->set('config_id', $sweepData->data->config_id);
-									$this->db->set('value', $pin);
-									$this->db->set('test_id', $testId);
-									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
-									break;
 								case 61: //DAC_Atten file handle
 									$path = $sweepData->path;
 									$file = $sweepData->data;
-//											var_dump($sweepData);
-//											die();
 									$handle = fopen($path.$_FILES['file']['name'], 'a') or die('Cannot open file:		'.$file);
 									$values = $this->excel_model->dac_atten_file_handle($file, $path);
 									break;
@@ -401,6 +397,9 @@ class plan_model extends CI_Model {
 					} //-------------- End of 1st switch data (array/single)	--------------
 				}
 			}
+		}
+		if(empty($result)){
+			$result = 'Test Updated successfully';
 		}
 		return $result;
 	}

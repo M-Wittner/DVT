@@ -2,6 +2,20 @@
 	margin-top: 80px;
 }
 
+.navActive{
+	border-radius: 10px 10px 10px 10px !important;
+	color: aliceblue !important;
+	background-color: #3071ab !important;
+	font-weight: 500 !important;
+}
+.navActive:hover{
+		border-radius: 10px 10px 10px 10px !important;
+    color: aliceblue !important;
+    background-color: #3071ab !important;
+    font-weight: 500 !important;
+    text-shadow: 0px 0px 10px aliceblue !important;
+}
+
 .panelBody{
 	padding: 2px 15px;
 }
