@@ -2,53 +2,47 @@
 	<!-- Default panel contents -->
 	<div class="panel-heading">All Operations</div>
 	<div class="panel-body">
+		<div class="col-md-2">
+			<span class="label label-warning">Station</span>
+			<select class="form-control" ng-model="tableParams.filter()['work_station']">
+				<option value="">All</option>
+				<option ng-repeat="station in workStations">{{station.name}}</option>
+			</select>
+		</div>
+		<div class="col-md-2">
+			<span class="label label-warning">User</span>
+			<select class="form-control" ng-model="tableParams.filter()['user']">
+				<option value="">All</option>
+				<option ng-repeat="user in operators">{{user.name}}</option>
+			</select>
+		</div>
+		<div class="col-md-3">
+			<span class="label label-warning">Date</span>
+			<div class="input-group">
+<!--				<input class="form-control" ng-model="tableParams.filter()['start_date']" type="datetime-local" value=""  id="dateTimeInput">-->
+				 <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" show-weeks="false"is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="openDatePopup()">
+						<i class="glyphicon glyphicon-calendar"></i>
+					</button>
+				</span>
+			</div>
+		</div>
 	</div>
 	<!-- Table -->
 	<table ng-table="tableParams" class="table table-striped">
 		<tr ng-repeat="data in $data track by $index">
-			<td class="col-md-1 text-center" data-title="'Test ID'" sortable="'data.test_id'">{{data.test_id}}</td>
-			<td class="col-md-2 text-center" data-title="'Date'" filter="{date_time: 'text'}" sortable="'date_time'">{{data.date_time}}</td>
-			<td class="col-md-1 text-center" data-title="'Test Type'">{{data.test_type}}</td>
 			<td class="col-md-1 text-center" data-title="'Station'">{{data.work_station}}</td>
-			<td class="col-md-1 text-center" data-title="'Chip Type'"><span ng-if="data.chip_m_id == '-1' ? Type = 'TalynA' : data.chip_r_id == '-1' ? Type = 'TalynM': Type = null">{{Type}}</span></td>
-			<td class="col-md-1 text-center" data-title="'Serial Number'"><span ng-if="data.chip_m_id == '-1' ? chip = data.chip_r_sn : data.chip_r_id == '-1' ? chip = data.chip_m_sn : chip = 'null'">{{chip}}</span></td>
-			<td class="col-md-1 text-center" data-title="'Oeprator'">{{data.operator}}</td>
-			<td class="col-md-1 text-center" data-title="'Test Status'">{{data.test_status}}</td>
-			<td class="col-md-1 text-center" data-title="'Status'">{{data.status}}</td>
+			<td class="col-md-2 text-center" data-title="'Start Date'" sortable="'start_date'">{{data.start_date}}</td>
+			<td class="col-md-1 text-center" data-title="'Test Name'">{{data.test_name}}</td>
+			<td class="col-md-1 text-center" data-title="'Plan ID'" sortable="'data.plan_id'">{{data.plan_id}}</td>
+			<td class="col-md-1 text-center" data-title="'Test ID'" sortable="'data.test_id'">{{data.test_id}}</td>
+			<td class="col-md-1 text-center" data-title="'Chip S/N'"><span ng-if="data.chip_m_id == '-1' ? chip = data.chip_r_sn : data.chip_r_id == '-1' ? chip = data.chip_m_sn : chip = data.chip_r_sn+' + '+data.chip_m_sn">{{chip}}</span></td>
+			<td class="col-md-1 text-center" data-title="'User'">{{data.user}}</td>
+			<td class="col-md-1 text-center" data-title="'Status'">
+				{{data.status}}
+				<span ng-click="chipStatus(chip)" class="glyphicon chip-status" ng-class="{'glyphicon-hourglass': data.status_id == 2, 'glyphicon-ok':  data.status_id == 0, 'glyphicon-remove':  data.status_id == 1}"></span>
+			</td>
 		</tr>
 	</table>
-	
-	<!--
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Chip</th>
-				<th>Board</th>
-				<th>Package</th>
-				<th>Model</th>
-				<th>Revision</th>
-				<th>Serial Number</th>
-				<th>Corner</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="chip in chips | orderBy:'chip'">
-				<th>{{ chip.chip }}</th>
-				<td>{{ chip.board }}</td>
-				<td>{{ chip.package }}</td>
-				<td>{{ chip.model }}</td>
-				<td>{{ chip.revision }}</td>
-				<td>{{ chip.serial_number }}</td>
-				<td>{{ chip.corner }}</td>
-				<td>
-					<button class="btn btn-warning btn-sm">Edit</button>
-				</td>
-				<td>
-					<button class="btn btn-danger btn-sm" ng-click="removeChip(chip.id, chip.serial_number)">Delete</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
--->
 </div>

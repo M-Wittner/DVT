@@ -252,6 +252,19 @@ class Plans extends CI_Controller {
 		echo json_encode($plan);
 	}
 	
+	function today(){
+		$plans = $this->db->query("SELECT * FROM plans_v1_view where date(date_time) = curdate()")->result();
+			foreach($plans as $plan){
+				$this->db->select('test_id');
+				$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$plan->id))->result();
+				foreach ($plan->tests as $i=>$test){
+					$plan->tests[$i] = $this->plan_model->get_test_v1($test->test_id);
+					$plan->tests[$i]->comments = $this->db->get_where('test_comments_v1_view', ['test_id'=>$test->test_id])->result();
+				}
+			}
+		echo json_encode($plans);
+	}
+	
 	function deletePlans(){
 		$ids = json_decode(file_get_contents('php://input'));
 		$ids = array_filter($ids);

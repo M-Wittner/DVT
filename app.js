@@ -157,6 +157,10 @@ myApp.config(function($stateProvider){
 										templateUrl: 'pages/register.html',
 										controller: 'regCtrl'},
 //		--------------------	DVT PAGES --------------------
+		todayPlan =	 {	name: 'todayPlan',
+										url: '/today',
+										templateUrl: 'pages/plans/view.html',
+										controller: 'todayPlanCtrl'},
 		plans =			 {	name: 'plans',
 										url: '/plans',
 										templateUrl: 'pages/plans/index.html',
@@ -165,11 +169,11 @@ myApp.config(function($stateProvider){
 										url: '/new',
 										templateUrl: 'pages/plans/new.html',
 										controller: 'newPlanCtrl'},
-//		viewPlan = {	name: 'viewPlan',
-//									url: '/plans/{planId}',
-//									params: {obj: null},
-//									templateUrl: 'pages/plans/view.html',
-//									controller: 'viewPlanCtrl'},
+		viewPlan = {	name: 'viewPlan',
+									url: '/plans/{planId}',
+									params: {obj: null},
+									templateUrl: 'pages/plans/view.html',
+									controller: 'viewPlanCtrl'},
 		editTest = 		{	name: 'editTest',
 										url: '/plans/{planId}/test/{testId}/edit',
 										params: {obj: null},
@@ -209,6 +213,11 @@ myApp.config(function($stateProvider){
 										params: {obj: null},
 										templateUrl: 'pages/tasks/edit.html',
 										controller: 'editTaskCtrl'},
+//		--------------------	ADMIN PAGES --------------------
+		log						=	{	name: 'log',
+										 url: '/log',
+										 templateUrl: 'pages/admin/operations.html',
+										 controller: 'logCtrl'},
 //		--------------------	PROFILE PAGES --------------------
 		userTasks 	= {	name: 'userTasks',
 										url: '/{username}/tasks',
@@ -251,6 +260,26 @@ myApp.directive('commentForm', function(){
 myApp.directive('viewTemplate', function(){
 	return{
 		templateUrl: 'pages/plans/partials/viewTemplate.html',
+	}
+})
+myApp.directive('testFormView', function(){
+	return{
+		templateUrl: 'pages/plans/partials/View/testForm.html',
+	}
+})
+myApp.directive('testStructView', function(){
+	return{
+		templateUrl: 'pages/plans/partials/View/testStruct.html',
+	}
+})
+myApp.directive('testProgressBar', function(){
+	return{
+		templateUrl: 'pages/plans/partials/View/progressBar.html',
+	}
+})
+myApp.directive('testFooter', function(){
+	return{
+		templateUrl: 'pages/plans/partials/View/testFooter.html',
 	}
 })
 myApp.directive('testStruct', function(){
@@ -492,10 +521,10 @@ myApp.factory('testParams', function($http, $log){
 //		console.log(response.data);
 	})
 	
-	$http.get(site+'/params/workStations')
-	.then(function(response){
-		testParams.params.workStations = response.data;
-	});
+//	$http.get(site+'/params/workStations')
+//	.then(function(response){
+//		testParams.params.workStations = response.data;
+//	});
 	
 	$http.get(site+'/params/testTypes')
 	.then(function(response){
@@ -540,6 +569,14 @@ myApp.factory('testParams', function($http, $log){
 	$http.get(site+'/params/stations')
 	.then(function(response){
 		testParams.params.stationList = response.data;
+	});
+	$http.get(site+'/admin/stationList')
+	.then(function(response){
+		testParams.params.workStations = response.data;
+	});
+	$http.get(site+'/admin/operatorList')
+	.then(function(response){
+		testParams.params.operatorList = response.data;
 	});
 	
 	testParams.params.newTest = [

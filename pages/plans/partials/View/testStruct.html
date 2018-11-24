@@ -1,0 +1,75 @@
+<div class="row">
+	<!----------------------------------------------------------------			Table			---------------------------------------------------------------->
+	<div class="container-fluid">
+		<table ng-table="TableParams" class="table table-hover table-condensed">
+			<tr ng-repeat="(sweepName, sweepData) in test.sweeps">
+				<td>
+					<div class="col-md-2">
+						<!--											<span class="pull-left label label-primary">{{sweepName}}</span>-->
+						<strong class="pull-left">{{sweepName}}</strong>
+					</div>
+					<div class="col-md-10">
+						<!---------------------------------			Lineups			--------------------------------->
+						<div ng-if="sweepData.data_type == 33" uib-popover="{{sweepData.tooltip}}" popover-trigger="'mouseenter'">
+							{{sweepData.data.value}}
+							<!--												<a  target="_self" ng-href="{{sweepData.data.value}}" download="{{sweepData.data.value}}"></a>												-->
+						</div>
+						<!---------------------------------			Chips			--------------------------------->
+						<div ng-if="sweepData.data_type > 100">
+							<div ng-repeat="chip in sweepData.data track by $index">
+								<div class="input-group input-group-sm sweeps" style="float: none; margin-bottom: 0.25%">
+									<label class="form-control" type="number" popover-trigger="'mouseenter'">{{chip.chip_sn}}-{{chip.chip_process_abb}}</label>
+									<span class="input-group-addon" id="from" style="font-weight:800">Status 
+																<span ng-click="chipStatus(chip)" class="glyphicon glyphicon-minus chip-status" ng-class="{'glyphicon-hourglass': chip.chip_status == 2, 'glyphicon-ok':  chip.chip_status == 0, 'glyphicon-remove':  chip.chip_status == 3}"></span>
+									</span>
+									<span class="input-group-addon" id="from" style="font-weight:800;" ng-if="test.station[0].idx == 5 || test.station[0].idx == 6">Hot 
+																<span class="glyphicon glyphicon-minus chip-status" style="color:red" ng-click="chipStatus(chip, 'hot')" ng-class="{'glyphicon-hourglass': chip.hot_status == 2, 'glyphicon-ok':  chip.hot_status == 0, 'glyphicon-remove':  chip.hot_status == 3}"></span>
+									</span>
+									<span class="input-group-addon" id="from" style="font-weight:800;" ng-if="test.station[0].idx == 5 || test.station[0].idx == 6">Cold 
+																<span class="glyphicon glyphicon-minus chip-status" style="color:dodgerblue" ng-click="chipStatus(chip, 'cold')" ng-class="{'glyphicon-hourglass': chip.cold_status == 2, 'glyphicon-ok':  chip.cold_status == 0, 'glyphicon-remove':  chip.cold_status == 3}"></span>
+									</span>
+									<span class="input-group-addon" id="from" style="font-weight:800; width:130px"><span ng-if="chip.username">By: {{chip.username}}</span>
+								</div>
+							</div>
+						</div>
+						<!---------------------------------			Pins			--------------------------------->
+						<div ng-if="sweepData.data_type == 60" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'">
+							<div class="input-group input-group-sm">
+								<span class="input-group-addon" id="from" style="font-weight:900">From :</span>
+								<label class="form-control" type="number" uib-popover="From" popover-trigger="'mouseenter'">{{sweepData.data.from}}</label>
+								<!--												<span class="input-group-addon" id="from" style="font-weight:900">;</span>-->
+								<span class="input-group-addon" id="from" style="font-weight:900">Step :</span>
+								<label class="form-control" type="number" uib-popover="Step" popover-trigger="'mouseenter'">{{sweepData.data.step}}</label>
+								<!--												<span class="input-group-addon" id="step" style="font-weight:900">;</span>-->
+								<span class="input-group-addon" id="from" style="font-weight:900">To :</span>
+								<label class="form-control" type="number" uib-popover="To" popover-trigger="'mouseenter'">{{sweepData.data.to}}</label>
+								<span class="input-group-addon" ng-if="sweepData.data.ext" id="to" style="font-weight:900">Extra :</span>
+								<label ng-if="sweepData.data.ext" class="form-control" type="text" uib-popover="Extra" popover-trigger="'mouseenter'">
+															<span >{{sweepData.data.ext}} </span>
+														</label>
+							</div>
+						</div>
+						<!---------------------------------			Sweeps			--------------------------------->
+						<div ng-if="sweepData.data_type != 33 && sweepData.data_type != 60 && sweepData.data_type < 100" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'" allow-clear>
+							<div ng-repeat="data in sweepData.data track by $index" class="form-control sweeps">{{data.display_name}}</div>
+						</div>
+					</div>
+				</td>
+				<td data-title="'Count'" class="text-center"><span style="border-radius:3px; background-color: #2E3A49;" class="badge">{{sweepData.data.length}}</span></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-10">
+		<div class="row">
+			<div class="col-md-8" ng-hide="test.notes == '' || test.notes == null">
+				<div class="panel-body">
+					<span class="label label-primary">Notes:</span>
+					<div trumbowyg-ng ng-disabled="lock" ng-model="test.notes" editor-config="{hideButtonTexts: true}">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

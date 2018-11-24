@@ -1,0 +1,56 @@
+<div id="desc" class="panel panel-default" ng-repeat="test in plan.tests | orderBy: 'priority[0].value' track by test.test_id" ng-if="!test.station[0].station" style="border-top-width: 4px; border-top-color: {{test.station[0].color}}">
+	<div class="panel-heading" Data-toggle="collapse" data-target="#{{test.test_id}}" aria-expanded="false" aria-controls="{{test.test_id}}" ng-click="onOff=!onOff">
+		<strong>Priority: {{test.priority[0].value}}, Station: {{test.station[0].name}}, Test: {{test.testType[0].test_name}} , ID: #{{test.test_id}}</strong>
+		<span class="pull-right glyphicon" ng-class="onOff ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
+		<span class="pull-right">
+								<span class="glyphicon glyphicon-envelope" ng-if="test.comments.length > 0" id="testStatus"></span>
+		<span class="label" ng-class="{'label-default' : test.status_id == 1, 'label-warning' : test.status_id == 2, 'label-success' : test.status_id == 3, 'label-danger' : test.status_id == 4}" ng-model="test.status">{{test.status}}</span>
+		</span>
+	</div>
+	<div class="collapse fade" id="{{test.test_id}}">
+		<div class="panel-body">
+			<div class="panel row">
+				<div class="col-md-9" style="margin-bottom: 1%;">
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon" id="from" style="font-weight:900">Test ID:</span>
+						<label class="form-control" type="number">#{{test.test_id}}</label>
+						<span class="input-group-addon" id="from" style="font-weight:900">Test Priority:</span>
+						<label class="form-control" type="number">{{test.priority[0].value}}</label>
+						<span class="input-group-addon" id="from" style="font-weight:900">Station:</span>
+						<label class="form-control" type="number">{{test.station[0].name}}</label>
+						<span class="input-group-addon" id="step" style="font-weight:900">PC: </span>
+						<label class="form-control" type="number">{{test.station[0].hostname}}</label>
+						<span class="input-group-addon" id="step" style="font-weight:900">Owner: </span>
+						<label class="form-control" type="number">{{test.username}}</label>
+					</div>
+				</div>
+				<!--	Modal		-->
+				<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="Confirmation">
+					<div class="modal-dialog modal-sm" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="testModal">Confirm Test Delete?</h4>
+							</div>
+							<div class="modal-body">
+								<button class="btn btn-danger" data-dismiss="modal" ng-click="removeTest(test.test_id)" type="button">Delete Test</button>
+								<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3" ng-if="currentUser.username == plan.user_username || currentUser.rank > '10'">
+					<span class="pull-right">
+						<a class="btn btn-xs btn-warning" href="#/plans/{{plan.id}}/test/{{test.test_id}}/edit">Edit</a>
+						<button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#testModal">Delete</button>
+					</span>
+				</div>
+			</div>
+			<test-struct-view></test-struct-view>
+		</div>
+		<div class="panel-body">
+			<button class="btn btn-xs btn-success pull-right col-lg-5 addButton" Data-toggle="collapse" data-target="#Comment{{test.test_id}}" aria-expanded="false" aria-controls="Comment{{test.test_id}}">Add New Comment</button>
+		</div>
+		<test-footer></test-footer>
+	</div>
+</div>

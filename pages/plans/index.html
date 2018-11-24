@@ -25,9 +25,11 @@
 			</div>
 		</div>
     <uib-tab index="0" heading="Web">
-			<div class="container-fluid" ng-repeat="plan in plans.web track by $index">
-				<view-template></view-template>
-			</div>
+			<uib-accordion>
+				<div class="container-fluid" ng-repeat="plan in plans.web track by $index">
+					<view-template></view-template>
+				</div>
+			</uib-accordion>
 		</uib-tab>
     <uib-tab index="1" heading="LabView">
 <!--
