@@ -24,7 +24,7 @@ Flash, Session, $cookies, $window, testParams) {
 				var date = new Date();
 				date.setHours(date.getHours() + 3);
 				$cookies.putObject('loggedUser', response.data, {'expires': date});
-				$location.path('/plans');
+				$location.path('/today');
 				var message = 'Hello, '+$scope.user.username+ '! Successfully logged in!';
 				var id = Flash.create('success', message, 5000);
 			}else{
