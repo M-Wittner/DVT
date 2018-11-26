@@ -134,9 +134,9 @@ class Admin extends CI_Controller {
 														ws.idx AS work_station_id,        
 														ws.name AS work_station,
 														top.chip_m_id AS chip_m_id,
-														ch_m.chip_sn AS chip_m_sn,
+														concat(ch_m.chip_sn, ' ', ch_m.chip_process_abb) AS chip_m_sn,
 														top.chip_r_id AS chip_r_id,
-														ch_r.chip_sn AS chip_r_sn,
+														concat(ch_r.chip_sn, ' ', ch_r.chip_process_abb) AS chip_r_sn,
 														CONCAT(u.fname, ' ', u.lname) AS user,
 														top.test_status AS status_id,
 														statuses.status AS status

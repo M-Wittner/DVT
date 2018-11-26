@@ -1,26 +1,16 @@
-myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', 'testParams', function ($scope, NgTableParams, $location, $http, Flash, $cookies, $window, AuthService, testParams) {
+myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', 'testParams', '$stateParams', '$state', function ($scope, NgTableParams, $location, $http, Flash, $cookies, $window, AuthService, testParams, $stateParams, $state) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	var site = testParams.site;
-//	console.log($scope.currentUser);
+	console.log($state);
 	
 	if($scope.isAuthenticated) {
-		$scope.plans = {};
-		$http.get(site+'/plans')
-		.then(function(response) {
-			console.log(response.data);
-			var data = response.data;
-			$scope.plans.web = data.web;
-			$scope.labTableParams = new NgTableParams({count:12}, {
-				counts:[],
-				total: data.lab.length,
-				dataset: data.lab
-			})
-			$scope.plans.lab = data.lab;
-		});
-		
-		$scope.view = function(data){
-			$location.path('/plans/'+data);
-		};
+		$scope.plans = testParams.plans;
+		$scope.labTableParams = new NgTableParams({count:12}, {
+			counts:[],
+			total: $scope.plans.lab.length,
+			dataset: $scope.plans.lab
+		})
+		console.log(testParams.plans);
 	} else {
 		var message = 'Please Login first!';
 		var id = Flash.create('danger', message, 3500);
@@ -70,8 +60,10 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 			var keys = Object.keys(response.data);
 			var key = keys[0];
 			var username = keys[1];
+			var user = keys[2];
 			chip[key] = response.data[key];
 			chip.username = response.data[username];
+			chip.user = response.data[user];
 			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
 			var id = Flash.create('success', message, 6000);
 		});

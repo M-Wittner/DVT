@@ -51,6 +51,6 @@
 		<div class="panel-body">
 			<button class="btn btn-xs btn-success pull-right col-lg-5 addButton" Data-toggle="collapse" data-target="#Comment{{test.test_id}}" aria-expanded="false" aria-controls="Comment{{test.test_id}}">Add New Comment</button>
 		</div>
-		<test-footer></test-footer>
+		<test-footer ng-if="test.comments.length > 0"></test-footer>
 	</div>
 </div>

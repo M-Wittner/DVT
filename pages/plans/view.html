@@ -95,7 +95,7 @@
 					<div class="pull-right">
 						<button class="btn btn-xs btn-success col-lg-5 addButton" Data-toggle="collapse" data-target="#Comment{{test.test_id}}" aria-expanded="false" aria-controls="Comment{{test.test_id}}">Add New Comment</button>
 					</div>
-					<div style="margin-top: 2%;">
+					<div ng-if="test.comments.length > 0" style="margin-top: 2%;">
 						<test-footer></test-footer>
 					</div>
 				</uib-accordion>

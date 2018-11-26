@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ui.router', 'ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize', 'ui.calendar', 'ngFileSaver']);
+var myApp = angular.module('myApp', ['ui.router', 'ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize', 'ui.calendar', 'ngFileSaver', 'oc.lazyLoad']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$httpProvider.defaults.cache = false;
@@ -146,7 +146,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 
 }]);
 
-myApp.config(function($stateProvider){
+myApp.config(['$stateProvider', function($stateProvider){
 	var states = [
 		home = 				{	name: 'home',
 										url: '/',
@@ -164,7 +164,12 @@ myApp.config(function($stateProvider){
 		plans =			 {	name: 'plans',
 										url: '/plans',
 										templateUrl: 'pages/plans/index.html',
-										controller: 'plansCtrl'},
+										controller: 'plansCtrl',
+//										lazyLoad: function($transition$){
+//											return $transition$.injector().get('$ocLazyLoad').load('pages/plans/index.html');
+//										}
+//										resolve: ,
+								 },
 		newPlan =		 {	name: 'newPlan',
 										url: '/new',
 										templateUrl: 'pages/plans/new.html',
@@ -174,6 +179,11 @@ myApp.config(function($stateProvider){
 									params: {obj: null},
 									templateUrl: 'pages/plans/view.html',
 									controller: 'viewPlanCtrl'},
+		viewTest = {	name: 'viewTest',
+									url: '/plans/{planId}/test/{testId}',
+									params: {obj: null, test: null},
+									templateUrl: 'pages/plans/viewTest.html',
+									controller: 'viewTestCtrl'},
 		editTest = 		{	name: 'editTest',
 										url: '/plans/{planId}/test/{testId}/edit',
 										params: {obj: null},
@@ -217,7 +227,8 @@ myApp.config(function($stateProvider){
 		log						=	{	name: 'log',
 										 url: '/log',
 										 templateUrl: 'pages/admin/operations.html',
-										 controller: 'logCtrl'},
+										 controller: 'logCtrl',
+										},
 //		--------------------	PROFILE PAGES --------------------
 		userTasks 	= {	name: 'userTasks',
 										url: '/{username}/tasks',
@@ -229,7 +240,7 @@ myApp.config(function($stateProvider){
 	states.forEach(function(state){
 		$stateProvider.state(state);
 	})
-});
+}]);
 
 myApp.run(function($animate) {
   $animate.enabled(true);
@@ -492,24 +503,31 @@ myApp.factory('AuthService', function(testParams, $http, Session, $cookies){
 
 myApp.factory('testParams', function($http, $log){
 	var testParams = {};
-	testParams.days = [
-		{id: 1, name: 'Sunday'},
-		{id: 2, name: 'Monday'},
-		{id: 3, name: 'Tuesday'},
-		{id: 4, name: 'Wednesday'},
-		{id: 5, name: 'Thursday'},
-		{id: 6, name: 'Friday'},
-//		{id: 0, name: 'Saturday'},
-	];
 	testParams.site = "http://wigig-299";
 	var site = testParams.site;
 	testParams.params = {};
 	testParams.lineups = {};
+	testParams.plans = {};
+	$http.get(site+'/plans')
+	.then(function(response) {
+		var data = response.data;
+		testParams.plans.web = data.web;
+		testParams.plans.lab = data.lab;
+	});
 	
 	$http.get(site+'/params/structs')
 	.then(function(response){
 		testParams.structs = response.data;
 	})
+	$http.get(site+'/admin/stationList')
+	.then(function(response){
+		testParams.params.workStations = response.data;
+	});
+	
+	$http.get(site+'/admin/operatorList')
+	.then(function(response){
+		testParams.params.operatorList = response.data;
+	});
 	
 	$http.get(site+'/params/allChips')
 	.then(function(response){
@@ -520,11 +538,6 @@ myApp.factory('testParams', function($http, $log){
 		testParams.params.allParams = response.data;
 //		console.log(response.data);
 	})
-	
-//	$http.get(site+'/params/workStations')
-//	.then(function(response){
-//		testParams.params.workStations = response.data;
-//	});
 	
 	$http.get(site+'/params/testTypes')
 	.then(function(response){
@@ -566,153 +579,10 @@ myApp.factory('testParams', function($http, $log){
 		testParams.params.autoUsersArr = response.data.arr;
 	});
 	
-	$http.get(site+'/params/stations')
-	.then(function(response){
-		testParams.params.stationList = response.data;
-	});
-	$http.get(site+'/admin/stationList')
-	.then(function(response){
-		testParams.params.workStations = response.data;
-	});
-	$http.get(site+'/admin/operatorList')
-	.then(function(response){
-		testParams.params.operatorList = response.data;
-	});
-	
-	testParams.params.newTest = [
-		'R - Stations',
-		'M - Stations',
-		'Calibration',
-		'TalynM+A',
-		'Robot',
-		'PTAT/ABS/Vgb+TEMP',
-	];
-	
-//	testParams.params.nameListM = {};
-	$http.get(site+'/params/testsM')
-	.then(function(response){
-		testParams.params.nameListM = response.data;
-	});
-	
-	testParams.params.nameListR = {};
-	$http.get(site+'/params/testsR')
-	.then(function(response){
-		testParams.params.nameListR = response.data;
-//			console.log(response.data);
-	});
-	
-	testParams.params.nameListCal = {};
-	$http.get(site+'/params/testsCal')
-	.then(function(response){
-		testParams.params.nameListCal = response.data;
-//			console.log(response.data);
-	});
-	
-	testParams.params.nameListPTAT = {};
-	$http.get(site+'/params/testsPTAT')
-	.then(function(response){
-		testParams.params.nameListPTAT = response.data;
-//			console.log(response.data);
-	});
-	testParams.params.nameListFS = {};
-	$http.get(site+'/params/testsFS')
-	.then(function(response){
-		testParams.params.nameListFS = response.data;
-//			console.log(response.data);
-	});
-	
-	testParams.params.gainTableIdx = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'];
-	testParams.params.txGainRow = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
-	testParams.params.dacFssel = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40'];
-	
-	testParams.params.xifList = {};
-	$http.get(site+'/params/xifs')
-	.then(function(response){
-		testParams.params.xifList = response.data;
-	});
-	
-	testParams.params.chipListM = {};
-    $http.get(site+'/params/chipsM')
-	.then(function(response){
-		testParams.params.chipListM = response.data;
-			
-	});
-	
-	testParams.params.chipListR = {};
-	$http.get(site+'/params/chipsR')
-	.then(function(response){
-		testParams.params.chipListR = response.data;
-//		console.log(response.data);
-	});
-		
-	testParams.params.chipListMR = {};
-	$http.get(site+'/params/chipsMR')
-	.then(function(response){
-		testParams.params.chipListMR = response.data;
-//		console.log(response.data);
-	});
-	
-	testParams.params.tempList = [
-		'None',
-		'-60',
-		'-50',
-		'-40',
-		'-30',
-		'-20',
-		'-10',
-		'0',
-		'10',
-		'15',
-		'20',
-		'25',
-		'30',
-		'40',
-		'50',
-		'55',
-		'60',
-		'65',
-		'70',
-		'75',
-		'80',
-		'85',
-		'90',
-		'95',
-		'100',
-		'105',
-	];
-	
-	testParams.params.priorityList = [
-		{display_name: '1 - Highest', value: '1'},
-		{display_name: '2', value: '2'},
-		{display_name: '3', value: '3'},
-		{display_name: '4', value: '4'},
-		{display_name: '5', value: '5'},
-		{display_name: '6', value: '6'},
-		{display_name: '7 - Lowest', value: '7'},
-	];
-	
-	testParams.params.chList1 = [
-		'1',
-		'2',
-		'3',
-		'4',
-		'5',
-		'7',
-		'8',
-		'9',
-		'10'
-	];
-	
-	testParams.params.mcsList = ['12', '14'];
-	testParams.params.antList = [
-		'0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'
-	];
-	testParams.params.numAntsList = [
-		'1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32'
-	];
-	testParams.params.sectorList = [
-		'1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100','101','102','103','104','105','106','107','108','109','110','111','112','113','114','115','116','117','118','119','120','121','122','123','124','125','126','127',
-	];
+//	$http.get(site+'/params/stations')
+//	.then(function(response){
+//		testParams.params.stationList = response.data;
+//	});
 
 	testParams.status = {
 		isopen: false
@@ -727,27 +597,9 @@ myApp.factory('testParams', function($http, $log){
 		$event.stopPropagation();
 		testParams.status.isopen = !testParams.status.isopen;
 	};
-
 	testParams.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 	
 	return testParams;
-});
-
-myApp.filter('unique', function() {
-   return function(collection, keyname) {
-      var output = [], 
-          keys = [];
-
-      angular.forEach(collection, function(item) {
-          var key = item[keyname];
-          if(keys.indexOf(key) === -1) {
-              keys.push(key);
-              output.push(item);
-          }
-      });
-
-      return output;
-   };
 });
 
 myApp.service('Session', function(){

@@ -1,12 +1,11 @@
-myApp.controller('logCtrl', ['$scope', 'NgTableParams', '$location','$http', '$routeParams', 'Flash', 'AuthService', '$window', 'testParams', function ($scope, NgTableParams, $location, $http, $routeParams, Flash, AuthService, $window, testParams) {
+myApp.controller('logCtrl', ['$scope','$http', 'Flash', 'AuthService', 'NgTableParams', 'testParams', '$stateParams', function ($scope, $http, Flash, AuthService, NgTableParams, testParams, $stateParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.isAuthenticated = true;
 	var site = testParams.site;
 	$scope.testParams = testParams;
-//	$scope.workStations = testParams.params.workStations.map(a => a.name);
 	$scope.workStations = testParams.params.workStations;
 	$scope.operators = testParams.params.operatorList;
-//	console.log($scope.operators);
+	console.log($scope.operators);
 	var vm = this;
   
   function today() {
