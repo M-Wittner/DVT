@@ -1,22 +1,22 @@
-myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', 'LS', '$cookies', 'NgTableParams', function($scope, $route, $location, $http, $routeParams, $window, Flash, AuthService, testParams, LS, $cookies, NgTableParams){
+myApp.controller('viewPlanCtrl', ['$scope', '$rootScope', '$route', '$location','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', '$stateParams', '$cookies', 'NgTableParams', function($scope, $rootScope, $route, $location, $http, $routeParams, $window, Flash, AuthService, testParams, $stateParams, $cookies, NgTableParams){
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-		var site = testParams.site;
+		var site = $rootScope.site;
 		var scope = $scope;
 	if($scope.isAuthenticated == true){	
 	
-	$http.post(site+'/plans/show_v1', $routeParams.id)
+	$http.post(site+'/plans/show_v1', $stateParams.planId)
 	.then(function(response){
 		console.log(response.data);
 		var data = response.data;
-		$scope.plan = data;
+		$scope.plans = [];
+		$scope.plans.push(data);
 	});
 		
 	$scope.returnName = function(sweepName){
 		return sweepName;
 	}
 	$scope.sweepsTable = function(struct){
-//		console.log(struct);
 		$scope.cols = [];
 		$scope.TableParams = new NgTableParams({
 			counts:[],
@@ -43,8 +43,6 @@ myApp.controller('viewPlanCtrl', ['$scope', '$route', '$location','$http', '$rou
 	
 	$scope.params = testParams.params;
 	$scope.lock = true;
-	
-
 	
 	$scope.deleteSelectedTests = function(){
 		if($scope.selectedTests.length > 0){

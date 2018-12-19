@@ -1,0 +1,51 @@
+<uib-accordion class="panel" >
+	<div style="margin: auto; width: 0%">
+		<div class="loader" ng-class="{'fadeOut': plan.tests.length > 0}" ng-hide="plan.errors.length > 0"></div>
+	</div>
+	<div ng-show="plan.errors.length > 0 || !plan.tests.length > 0" ng-repeat="error in plan.errors">
+		<div class="alert alert-danger fadeIn" role="alert">{{error.msg}}</div>
+	</div>
+	<div ng-if="plan.tests.length > 0 && !plan.errors" ng-repeat="test in plan.tests | orderBy: 'priority' track by $index" uib-accordion-group class="panel-default fadeIn" is-open="test.isOpen" is-disabled="status.isFirstDisabled" style="border-top-width: 4px; border-top-color: {{test.station[0].color}}">
+		<uib-accordion-heading>
+			<strong>Priority: {{test.priority[0].value}}, Station: {{test.station[0].name}}, Test: {{test.testType[0].test_name}} , ID: #{{test.test_id}}</strong>
+			<span class="pull-right glyphicon" ng-class="test.isOpen ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
+			<span class="pull-right">
+						<span class="glyphicon glyphicon-envelope" ng-if="test.comments.length > 0" id="testStatus"></span>
+			<span class="label" ng-class="{'label-default' : test.status_id == 1, 'label-warning' : test.status_id == 2, 'label-success' : test.status_id == 3, 'label-danger' : test.status_id == 4}" ng-model="test.status">{{test.status}}</span>
+			</span>
+		</uib-accordion-heading>
+		<test-progress-bar class="col-md-12" data="test"></test-progress-bar>
+		<div class="col-md-9">
+			<test-bar></test-bar>
+		</div>
+		<span class="pull-right" ng-if="currentUser.username == plan.user_username || currentUser.rank > '10'">
+			<a class="btn btn-xs btn-warning" href="#/plans/{{plan.id}}/test/{{test.test_id}}/edit">Edit</a>
+			<button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#testModal">Delete</button>
+			<!--	Modal		-->
+			<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="Confirmation">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="testModal">Confirm Delete?</h4>
+						</div>
+						<div class="modal-body">
+							<button class="btn btn-danger" data-dismiss="modal" ng-click="removeTest(test.test_id)" type="button">Delete Test</button>
+							<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</span>
+		<uib-accordion>
+			<test-struct-view></test-struct-view>
+			<div class="pull-right">
+				<button class="btn btn-xs btn-success col-lg-5 addButton" Data-toggle="collapse" data-target="#Comment{{test.test_id}}" aria-expanded="false" aria-controls="Comment{{test.test_id}}">Add New Comment</button>
+			</div>
+			<div style="margin-top: 2%;">
+				<test-footer></test-footer>
+			</div>
+		</uib-accordion>
+		<test-errors ng-if="test.errors.length > 0 && currentUser.group_id == 7"></test-errors>
+	</div>
+</uib-accordion>

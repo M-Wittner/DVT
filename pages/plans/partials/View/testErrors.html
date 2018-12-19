@@ -1,0 +1,19 @@
+<table ng-table="tableParams" class="table table-striped">
+	<tr ng-repeat="data in test.errors track by $index">
+		<td class="col-md-1 text-center" data-title="'ID'">{{data.idx}}</td>
+		<td class="col-md-2 text-center" data-title="'Operation ID'" sortable="'test_id'">{{data.test_id}}</td>
+		<td class="col-md-1 text-center" data-title="'Log Type'">
+			<span class="glyphicon" ng-class="{'glyphicon-random': data.log_type == 2, 'glyphicon-flash':  data.log_type == 1, 'glyphicon-warning-sign': data.log_type == 0}"></span>
+		</td>
+		<td class="col-md-2 text-center" data-title="'Date'">{{data.date_time}}</td>
+		<td class="col-md-2 text-center" data-title="'Config ID'" sortable="'data.config_id'">{{data.config_id}}</td>
+		<td class="col-md-1 text-center" data-title="'Step'">{{data.step_name}}</td>
+		<td class="col-md-1 text-center" data-title="'Error ID'">{{data.data_id}}</td>
+		<td class="col-md-2 text-center" data-title="'Error'">{{data.data}}</td>
+<!--
+		<td class="col-md-1 text-center" data-title="'View'">
+			<a class="btn btn-sm btn-info" ui-sref="viewTest({planId: data.plan_id, testId: data.test_id})" ui-sref-active="navActive">View</a>
+		</td>
+-->
+	</tr>
+</table>

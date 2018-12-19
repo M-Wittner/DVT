@@ -20,52 +20,25 @@
 	<uib-tabset active="active">
 		<div class="btn-crud">
 			<div class="col-md-2 pull-right">
-				<a class="btn btn-success btn-xs" ui-sref="newPlan" ui-sref-active="navActive">New Plan</a>
-				<button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#modal">Delete Plans</button>
+				<a class="btn btn-success btn-xs" ui-sref="newPlan" ui-sref-active="navActive">New Plan</span></a>
+				<button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#modal">Delete <span class="glyphicon glyphicon-trash"></span></button>
 			</div>
 		</div>
     <uib-tab index="0" heading="Web">
 			<uib-accordion>
 				<div class="container-fluid" ng-repeat="plan in plans.web track by $index">
-					<view-template></view-template>
+					<plan></plan>
 				</div>
+				<ul uib-pagination total-items="plans.web.length" ng-model="currentPage.web" max-size="2" class="pagination-sm" boundary-link-numbers="true"></ul>
 			</uib-accordion>
 		</uib-tab>
     <uib-tab index="1" heading="LabView">
-<!--
-			<table class="table table-condensed" cellspacing="0" cellpadding="0" style="border:none !important">
-				<tr ng-repeat="plan in plans.lab track by $plan.id+$index">
-					<td>
-						<div class="container-fluid">
-							<view-template></view-template>
-						</div>
-					</td>
-				</tr>
-			</table>
--->
-				<table ng-table="labTableParams" class="table table-striped">
-				<tr ng-repeat="plan in $data | filter:{'source': 1} track by plan.id+$index">
-					<td class="col-md-1 text-center" data-title="'ID'"><strong>#{{plan.id}}</strong></td>
-					<td class="col-md-1 text-center" data-title="'Date'" filter="{date: 'text'}" sortable="'date'">{{plan.date}}</td>
-					<td data-title="'Progress'">
-						<div class="progress" uib-tooltip-template="'pages/plans/tooltipTemplate.html'" tooltip-placement="bottom" ng-mouseover="tooltip(plan.id)" tooltip-popup-delay="250"> 
-							<div class="progress-bar progress-bar-default progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: {{plan.progress}}%">
-								<span ng-class="plan.progress <= 10 ? 'progressBlack' : ''">
-									<strong>{{plan.progress}}%</strong>
-								</span>
-							</div>
-						</div>
-					</td>
-					<td class="col-md-1 text-center" data-title="'Author'" filter="{username: 'text'}" sortable="'username'">{{plan.username}}<span ng-if="plan.username == null">Debug</span></td>
-					<td class="col-md-1 text-center" data-title="'Source'"><span class="glyphicon" ng-class="{'glyphicon-wrench' : plan.source == 1, 'glyphicon-user' : plan.source == 0}"></span></td>
-					<td class="col-md-1 text-center" data-title="'View'">	
-						<div ng-click="view(plan.id)" class="btn btn-info">View</div>	
-					</td>
-					<td ng-if="currentUser.rank > 50" class="col-md-1 text-center" data-title="'Modify'">
-						<input type="checkbox" ng-model="selected[$index]" ng-true-value="{{plan.id}}" ng-false-value="{{undefined}}">	
-					</td>
-				</tr>
-			</table>
+			<uib-accordion>
+				<div class="container-fluid" ng-repeat="plan in labPlans track by $index">
+					<plan></plan>
+				</div>
+				<ul uib-pagination total-items="plans.lab.length" ng-model="currentPage.lab" ng-change="setPage(currentPage.lab)" max-size="5" items-per-page="itemsPerPage" class="pagination-sm" boundary-link-numbers="true"></ul>
+			</uib-accordion>
 		</uib-tab>
   </uib-tabset>
 </div>

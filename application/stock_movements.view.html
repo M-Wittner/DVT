@@ -1,0 +1,151 @@
+<style>
+    #scrollable-area {
+        height: 150px;
+        overflow-y: scroll;
+        /* <-- here is what is important*/
+    }
+
+    .table {
+        border: 1px solid #DDDDDD;
+        max-height: 300px !important;
+    }
+
+    .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th {
+        white-space: nowrap !important;
+        font-size: 12px;
+        border-right: 1px solid #DDDDDD;
+    }
+
+    .t-nb>thead>tr:first-child>td,
+    .t-nb>tbody>tr:first-child>td,
+    .t-nb>tfoot>tr:first-child>td {
+        border-top: 0 none !important;
+        font-size: 14px;
+    }
+
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
+        white-space: nowrap !important;
+        border-right: 1px solid #DDDDDD;
+        font-size: 14px;
+    }
+
+    .table-responsive td {
+        text-align: right;
+        padding: 6px 5px !important;
+    }
+
+    .tns-b td {
+        text-align: center;
+        padding: 6px 0 !important
+    }
+
+    .middletable>tbody>tr>td {
+        vertical-align: middle
+    }
+
+    .col-69 {
+        padding: 0 8px 8px !important
+    }
+
+    .col-70 {
+        padding-top: 13px !important
+    }
+
+    .col-md-4 p {
+        margin: 5px 5px 5px !important;
+        text-align: right;
+    }
+</style>
+
+<div class="col-md-12 mspacer well">
+    <div class="btn-group">
+
+    </div>
+
+    <a class="btn btn-success" ng-click="exportData()">{{ 'EXPORT_TO_EXCEL' | translate }}</a>
+    <a class="btn btn-primary" ng-click="exportDataAfterFiltering()">{{ 'EXPORT_TO_EXCEL_AFTER_FILTERING' | translate }}</a>
+    <form class="form-inline" style="padding-right: 20px; padding-top: 20px;">
+        <div class="row">
+            <div class="dropdown form-group dropdown-start-parent">
+                <label>מתאריך:</label>
+                <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target=".dropdown-start-parent" href="#/stock_movements">
+                    <div class="input-group date">
+                        <span class="form-control" style="min-width:20vh">{{dateRangeStart | date: 'dd/MM/yyyy'}}</span>
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker disabled data-ng-model="dateRangeStart" data-datetimepicker-config="{ startView:'day', minView:'day',  dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }"
+                        data-on-set-time="startDateOnSetTime()" data-before-render="startDateBeforeRender($dates)"></datetimepicker>
+                </ul>
+            </div>
+
+            <div class="dropdown form-group dropdown-end-parent" style="padding-right: 20px;">
+                <label>עד תאריך:</label>
+                <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target=".dropdown-end-parent" href="#/stock_movements">
+                    <div class="input-group date">
+                        <span class="form-control" style="min-width:20vh">{{dateRangeEnd | date: 'dd/MM/yyyy'}}</span>
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="dateRangeEnd" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }"
+                        data-on-set-time="endDateOnSetTime()" data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="ItemCode">פריט:</label>
+                <ui-select name="ItemCode" id="ItemCode" ng-model="autoCompleteItem.selected" on-select="setItemCode($select.selected)" theme="bootstrap">
+                    <ui-select-match allow-clear="true" placeholder="{{ 'ENTER_MESSAGE' | translate }} {{ 'ItemCode' | translate }}...">{{$select.selected.Item}}</ui-select-match>
+                    <ui-select-choices style="min-width:400px;" refresh="refreshFunction($select.search, $select)" refresh-delay="400" repeat="item in items | filter: $select.search">
+                        <span ng-bind-html="item.Item | highlight: $select.search"></span>
+                    </ui-select-choices>
+                    <ui-select-no-choice>
+                        לא נמצאו פריטים המכילים מק"ט זה
+                    </ui-select-no-choice>
+                </ui-select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="SSCC">משטח:</label>
+                <input type="text" ng-model="formData.SSCC" class="form-control" id="SSCC">
+            </div>
+            <div class="form-group" style="padding-right: 20px;">
+                <label for="CP">משטח לקוח:</label>
+                <input type="text" ng-model="formData.CP" class="form-control" id="CP">
+            </div>
+            <div class="form-group" style="padding-right: 20px;">
+                <label for="CC">מכולה:</label>
+                <input type="text" ng-model="formData.CC" class="form-control" id="CC">
+            </div>
+            <div class="form-group" style="padding-right: 20px;">
+                <label for="BTC">אצווה:</label>
+                <input type="text" ng-model="formData.BTC" class="form-control" id="BTC">
+            </div>
+            <div style="padding-top: 10px;">
+                <button type="submit" ng-disabled="!dateRangeStart || !dateRangeEnd" ng-click="checkAndSubmitForm()" class="btn btn-primary">חפש</button>
+                <button ng-disabled="!dateRangeStart || !dateRangeEnd" ng-click="reset()" class="btn btn-danger">אפס</button>
+            </div>
+        </div>
+    </form>
+
+    <div ng-show="tableParams.data.length > 0 && !error" class="table-responsive">
+        <table ng-table-dynamic="tableParams with cols" show-filter="true" fixed-table-headers="scrollable-area" ng-table-pagination-scroll
+            class="table table-bordered table-striped">
+            <tr ng-class="{ 'danger': row.UnsReason.length > 1 }" ng-repeat="row in $data">
+                <td ng-repeat="col in $columns">{{col.field == 'ROW_NUMBER' ? (((tableParams.page() - 1) * tableParams.count()) + $parent.$index + 1) : row[col.field]}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

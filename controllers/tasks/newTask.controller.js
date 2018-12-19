@@ -1,7 +1,7 @@
-myApp.controller('newTaskCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
+myApp.controller('newTaskCtrl', ['$rootScope', '$scope', '$routeParams', '$uibModal', '$http', 'Flash', '$cookies', 'AuthService', 'taskParams', function ($rootScope, $scope, $routeParams, $uibModal, $http, Flash, $cookies, AuthService, taskParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-	$scope.testParams = testParams;
-	var site = testParams.site;
+	$scope.taskParams = taskParams;
+	var site = $rootScope.site;
 	$scope.user = {
 		'userId' : $cookies.getObject('loggedUser').id,
 		'username' : $cookies.getObject('loggedUser').username,
@@ -16,7 +16,6 @@ myApp.controller('newTaskCtrl', ['$scope', '$http', '$location', 'Flash', 'Sessi
 			if(response.data == 'true'){
 				var message = 'Task Created Succesfully!';
 				var id = Flash.create('success', message, 3500);
-				$location.path('/tasks');
 				console.log(response.data);
 			} else {
 				var message = response.data;

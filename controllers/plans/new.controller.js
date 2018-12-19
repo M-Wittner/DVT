@@ -1,7 +1,7 @@
-myApp.controller('newPlanCtrl', ['$scope', '$timeout', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $timeout, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
+myApp.controller('newPlanCtrl', ['$scope', '$rootScope', '$timeout', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $rootScope, $timeout, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.testParams = testParams;
-	var site = testParams.site;
+	var site = $rootScope.site;
 //	$scope.testStructs = $scope.testParams.structs;
 //	console.log($scope);
 

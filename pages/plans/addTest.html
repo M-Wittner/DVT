@@ -1,7 +1,7 @@
 <div ng-if="isAuthenticated == true">
 	<form>
 		<div class="panel panel-primary">
-			<div class="panel-heading">Add test to {{plan.id}}</div>
+			<div class="panel-heading">Add Test to Plan #{{plan.id}}</div>
 			<div id="plan">
 <!--				<test-formedit ng-repeat="test in testCount track by $index" plan-params="array" params="params"></test-formedit>-->
 				<test-form ng-repeat="test in testCount track by $index" plan-params="array" params="params" file-data="fileData"></test-form>

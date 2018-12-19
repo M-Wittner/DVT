@@ -3,8 +3,8 @@ myApp.controller('regCtrl', ['$scope', '$http', '$location', 'Flash', 'AuthServi
 	$scope.location = $location.path();
 	
 	$scope.user = {};
+//	var site = $rootScope.site;
 	$scope.register = function() {
-//		console.log($scope.user);
 		$http.post('http://wigig-584/register', $scope.user)
 		.then(function(response){
 //			console.log(response.data);

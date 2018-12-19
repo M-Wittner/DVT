@@ -11,18 +11,7 @@
 		<div class="panel-body">
 			<div class="panel row">
 				<div class="col-md-9" style="margin-bottom: 1%;">
-					<div class="input-group input-group-sm">
-						<span class="input-group-addon" id="from" style="font-weight:900">Test ID:</span>
-						<label class="form-control" type="number">#{{test.test_id}}</label>
-						<span class="input-group-addon" id="from" style="font-weight:900">Test Priority:</span>
-						<label class="form-control" type="number">{{test.priority[0].value}}</label>
-						<span class="input-group-addon" id="from" style="font-weight:900">Station:</span>
-						<label class="form-control" type="number">{{test.station[0].name}}</label>
-						<span class="input-group-addon" id="step" style="font-weight:900">PC: </span>
-						<label class="form-control" type="number">{{test.station[0].hostname}}</label>
-						<span class="input-group-addon" id="step" style="font-weight:900">Owner: </span>
-						<label class="form-control" type="number">{{test.username}}</label>
-					</div>
+					<test-bar></test-bar>
 				</div>
 				<!--	Modal		-->
 				<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="Confirmation">
@@ -51,6 +40,6 @@
 		<div class="panel-body">
 			<button class="btn btn-xs btn-success pull-right col-lg-5 addButton" Data-toggle="collapse" data-target="#Comment{{test.test_id}}" aria-expanded="false" aria-controls="Comment{{test.test_id}}">Add New Comment</button>
 		</div>
-		<test-footer ng-if="test.comments.length > 0"></test-footer>
+		<test-footer></test-footer>
 	</div>
 </div>

@@ -1,9 +1,9 @@
-myApp.controller('tasksCtrl', ['$scope', 'NgTableParams', '$uibModal', '$location', '$http', 'Flash', '$cookies', '$window', 'AuthService', 'testParams', function ($scope, NgTableParams, $uibModal, $location, $http, Flash, $cookies, $window, AuthService, testParams) {
+myApp.controller('tasksCtrl', ['$rootScope', '$scope', 'NgTableParams', '$uibModal', '$location', '$http', 'Flash', '$cookies', '$window', 'AuthService', 'taskParams', function ($rootScope, $scope, NgTableParams, $uibModal, $location, $http, Flash, $cookies, $window, AuthService, taskParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-	var site = testParams.site;
+	var site = $rootScope.site;
 	var $ctrl = this;
-	$scope.testParams = testParams.params;
-	console.log($scope.testParams);
+	$scope.taskParams = taskParams;
+	console.log($scope.taskParams);
 	$scope.inactiveTasks = false;
 	$scope.reviewedTasks = false;
 	$scope.completedTasks = false;

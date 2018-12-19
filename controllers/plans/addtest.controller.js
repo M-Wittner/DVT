@@ -1,7 +1,7 @@
-myApp.controller('addTestCtrl', ['$scope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', '$routeParams', function ($scope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams, $routeParams) {
+myApp.controller('addTestCtrl', ['$scope', '$rootScope', '$http', '$location', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', '$routeParams', function ($scope, $rootScope, $http, $location, Flash, Session, $cookies, AuthService, $window, testParams, $routeParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.testParams = testParams;
-	var site = testParams.site;
+	var site = $rootScope.site;
 
 	if($scope.isAuthenticated == false){
 		var message = 'Please Login first!';

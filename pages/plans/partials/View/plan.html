@@ -1,0 +1,15 @@
+<div class="pull-right" style="margin:11.5px;">
+	<input type="checkbox" ng-model="selected[$index]" ng-true-value="{{plan.id}}" ng-false-value="{{undefined}}">
+</div>
+<div uib-accordion-group class="panel-default" ng-click="getPlanData(plan)" is-open="plan.isOpen">
+	<uib-accordion-heading>
+		<strong>ID: #{{plan.id}}</strong> Submitted by: {{plan.user}}
+	</uib-accordion-heading>
+	<test-progress-bar class="col-md-11" data="plan"></test-progress-bar>
+	<span class="col-md-1">
+		<a class="btn btn-xs btn-primary" href="#/plans/{{plan.id}}/addtests">Add Tests <span class="glyphicon glyphicon-plus"></span></a>
+	</span>
+		<test></test>
+</div>
+
+<!--uib-tooltip-template="'pages/plans/tooltipTemplate.html'" tooltip-placement="bottom" ng-mouseover="tooltip(plan.id)" tooltip-popup-delay="250"-->

@@ -86,7 +86,7 @@ class plan_model extends CI_Model {
 		$result = array();
 		$error = new stdClass();
 		$this->other_db = $this->load->database('main', TRUE);
-		$test = $this->db->get_where('test_v1', array('test_id'=>$id))->result(); // Get test by id
+		$test = $this->db->get_where('tests_view_v1', array('test_id'=>$id))->result(); // Get test by id
 		if(!isset($test[0])){
 			$error->msg = 'Test was not found';
 			$error->source = 'Test #'.$id.' was not found!';
@@ -94,12 +94,16 @@ class plan_model extends CI_Model {
 			return $error;
 		}else{
 			$test = $test[0];
-			$this->db->select('username');
+			$this->db->select('username, fname, lname');
 			$username = $this->db->get_where('users', ['id'=>$test->user_id])->result();
 			if(is_array($username) && isset($username[0])){
 				$test->username = $username[0]->username;
+				$test->user = $username[0]->fname.' '.$username[0]->lname;
 			}
 			$test->testType = $this->other_db->get_where('test_types',['type_idx'=>$test->test_type_id])->result();
+//			if(!isset($test->testType[0])){
+//				die(var_dump($test));
+//			}
 			$test->station = $this->db->get_where('work_stations_view',['idx'=>$test->testType[0]->workstation_id])->result();
 			$priority = $test->priority;
 			$test->priority = array();
@@ -162,6 +166,10 @@ class plan_model extends CI_Model {
 								}
 							}
 						}
+						$test->progress = $this->calcProg($data);
+						$this->db->set('progress', $test->progress);
+						$this->db->where('test_id', $test->test_id);
+						$res = $this->db->update('test_v1');
 					}
 					foreach($data as $res){
 						if(is_null($res->display_name)){
@@ -175,8 +183,38 @@ class plan_model extends CI_Model {
 					$test->sweeps[$sweep->name]->priority = $sweep->priority;
 					$test->sweeps[$sweep->name]->test_type_id = $sweep->test_type_id;
 			}
+			$test->errors = $this->db->query("select log.* from dvt_60g.log
+										join dvt_60g.test_operation tp on 
+										log.test_id = tp.test_id 
+										where tp.plan_id = ".$id)->result();
 			return $test;	
 		}
+	}
+	
+	function calcProg($chips){
+		$count = count($chips);
+		$progress = 0;
+		foreach($chips as $chip){
+			if(isset($chip->chip_status)){
+				switch($chip->chip_status){
+					case 0:
+						$progress += 100;
+						break;
+					case 2:
+						$progress += 50;
+						break;
+					default:
+						$progress = $progress;
+						break;
+				}
+			}else{
+				$chipStatus = array(
+					'data_idx'=>$chip->data_idx
+				);
+				$res = $this->db->insert('chip_status', $chipStatus);
+			}
+		}
+		return round($progress/$count, 0, PHP_ROUND_HALF_UP);
 	}
 	
 	function add_comment_v1($data){

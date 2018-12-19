@@ -1,22 +1,55 @@
-myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', 'testParams', '$stateParams', '$state', function ($scope, NgTableParams, $location, $http, Flash, $cookies, $window, AuthService, testParams, $stateParams, $state) {
+myApp.controller('plansCtrl', ['$scope', '$rootScope', 'NgTableParams', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', 'testParams', '$stateParams', '$state', function ($scope, $rootScope, NgTableParams, $location, $http, Flash, $cookies, $window, AuthService, testParams, $stateParams, $state) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-	var site = testParams.site;
-	console.log($state);
+	var site = $rootScope.site;
 	
 	if($scope.isAuthenticated) {
+//		console.log(testParams.plans);
 		$scope.plans = testParams.plans;
-		$scope.labTableParams = new NgTableParams({count:12}, {
-			counts:[],
-			total: $scope.plans.lab.length,
-			dataset: $scope.plans.lab
-		})
-		console.log(testParams.plans);
+		$scope.itemsPerPage = 15;
+		$scope.currentPage = {
+			web: 1,
+			lab: 1
+		};
+		$scope.setPage = function(page){
+			if(page > 0){
+				var pageData = $scope.plans.lab.slice(
+				(page - 1) * $scope.itemsPerPage,
+				 page * $scope.itemsPerPage
+				);
+				$scope.labPlans = pageData;
+			}
+//			console.log($scope.labPlans);
+		}
+		setTimeout(function(){$scope.setPage(1)}, 900);
 	} else {
 		var message = 'Please Login first!';
 		var id = Flash.create('danger', message, 3500);
 		$location.path('/');
 	};
 	
+
+	$scope.getPlanData = function($plan){
+		if(!$plan.isOpen && $plan.dirty)
+			return;
+		else{
+			$plan.dirty = true;
+		}
+		if(!$plan.tests){			
+			$http.get(site + '/plans/GetPlan/' + $plan.id)
+				.then(function(response) {
+				console.log(response.data);
+//				console.log($.isEmptyObject(response.data));
+				if($.isEmptyObject(response.data) || response.data.errors.length > 0){
+					$plan.errors = response.data.errors;
+//					$plan.errors.push("No Data Found");
+//					console.log($plan);
+				}else{
+					$plan.tests = response.data.tests;
+					$plan.progress = response.data.progress;
+				}
+			});
+		}
+	}
 	$scope.selected = [];
 	$scope.deleteSelected = function(){
 		if($scope.selected.length > 0){
@@ -42,14 +75,6 @@ myApp.controller('plansCtrl', ['$scope', 'NgTableParams', '$location','$http', '
 			var message = "No Plans Selected";
 			var id = Flash.create('danger', message, 3500);
 		}
-	}
-	
-	$scope.tooltip= function(id){
-		$http.post(site+'/plans/planStatus', id)
-		.then(function(response){
-//			console.log(response.data);
-			$scope.tests = response.data;
-		});
 	}
 	
 	$scope.chipStatus = function(chip, flag){

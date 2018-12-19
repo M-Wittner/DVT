@@ -1,7 +1,7 @@
-myApp.controller('homeCtrl', ['$scope', '$rootScope', '$http', 'AuthService', 'AUTH_EVENTS', 'USER_ROLES', '$location', 'Flash','Session','$cookies', '$window', 'testParams', function ($scope, $rootScope, $http, AuthService, AUTH_EVENTS, USER_ROLES, $location,
+myApp.controller('homeCtrl', ['$scope', '$rootScope', '$http', 'AuthService', 'AUTH_EVENTS', 'USER_ROLES', '$location', 'Flash','Session','$cookies', '$window', function ($scope, $rootScope, $http, AuthService, AUTH_EVENTS, USER_ROLES, $location,
 Flash, Session, $cookies, $window, testParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-	var site = testParams.site;
+	var site = $rootScope.site;
 	$scope.isAuthorized = AuthService.isAuthorized;
 	$scope.isAuthenticated = AuthService.isAuthenticated;
 //	console.log($scope.isAuthenticated());

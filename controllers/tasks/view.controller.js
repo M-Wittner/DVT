@@ -1,8 +1,8 @@
-myApp.controller('viewTaskCtrl', ['$scope', '$route', '$location','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', 'LS', '$cookies', function ($scope, $route, $location, $http, $routeParams, $window, Flash, AuthService, testParams, LS, $cookies) {
+myApp.controller('viewTaskCtrl', ['$rootScope', '$scope', '$routeParams', '$uibModal', '$http', 'Flash', '$cookies', 'AuthService', 'taskParams', function ($rootScope, $scope, $routeParams, $uibModal, $http, Flash, $cookies, AuthService, taskParams) {
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-	var site = testParams.site;
-	$scope.params = testParams.params;
+	var site = $rootScope.site;
+	$scope.params = taskParams;
 	if($scope.isAuthenticated == true) {
 		$scope.sender = {
 			'userId' : $cookies.getObject('loggedUser').userId,

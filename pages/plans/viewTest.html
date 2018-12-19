@@ -1,0 +1,49 @@
+<!--
+<div class="containter">
+	<div class="row">
+		<div class="bs-callout bs-callout-infoC" style="padding-bottom: 4%">
+			<p>Color Assistance:</p>
+			<div class="col-md-2">
+				<span class="label label-default">IDLE</span> - No chip running
+			</div>
+			<div class="col-md-4">
+				<span class="label label-success">Completed</span> - All chips completed successfully
+			</div>
+			<div class="col-md-3">
+				<span class="label label-warning">In Progress</span> - Test is running	
+			</div>
+			<div class="col-md-3">
+				<span class="label label-danger">Error</span> - 1 chip or more has an error
+			</div>		
+		</div>
+	</div>
+</div>
+</br>
+-->
+<div class="panel panel-primary">
+	<div class="panel-heading">Submitted by: {{test.user}}
+		<span class="pull-right"> {{test.date_time}} </span>
+	</div>
+	<span class="pull-right btn-crud">
+		<a class="btn btn-xs btn-info" ui-sref="viewPlan({planId: plan.id})">View Plan</a>
+		<button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#planModal">Delete  <span class="glyphicon glyphicon-trash"></span></button>
+		<!--	Modal		-->
+		<div class="modal fade" id="planModal" tabindex="-1" role="dialog" aria-labelledby="Confirmation">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="planModal">Confirm Delete?</h4>
+					</div>
+					<div class="modal-body">
+						<button class="btn btn-danger" data-dismiss="modal" ng-click="removePlan()" type="button">Delete Plan</button>
+						<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</span>
+	<div class="panel-body" style="padding: 0;">
+		<test></test>
+	</div>
+</div>

@@ -21,85 +21,56 @@
 </br>
 -->
 <div class="panel panel-primary">
-	<div class="panel-heading">Submitted by: {{plan.username}}
-		<span class="pull-right"> {{ plan.date }} </span>
+	<div class="panel-heading">Plan
+		<span class="pull-right"> {{ today }} </span>
 	</div>
-	<span class="pull-right btn-crud">
-		<a class="btn btn-xs btn-success" href="#/plans/{{plan.id}}/addtests">
-				Add Tests
-		</a>
-		<button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#planModal">Delete</button>
-		<!--	Modal		-->
-		<div class="modal fade" id="planModal" tabindex="-1" role="dialog" aria-labelledby="Confirmation">
-			<div class="modal-dialog modal-sm" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="planModal">Confirm Delete?</h4>
-					</div>
-					<div class="modal-body">
-						<button class="btn btn-danger" data-dismiss="modal" ng-click="removePlan()" type="button">Delete Plan</button>
-						<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
-					</div>
+	<div class="panel-body" style="padding: 0;" id="tester">
+		<div class="row">
+			<span class="container-fluid pull-right btn-crud">
+				<div class="btn-group" ng-if="state == 'todayPlan'">
+					<button type="button" class="btn btn-success btn-xs" ng-click="startTests(root.workStations)">Start <span class="glyphicon glyphicon-flash"></span></button>
+					<button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="caret"></span>
+						<span class="sr-only">Toggle Dropdown</span>
+					</button>
+					<ul class="dropdown-menu">
+						<li ng-repeat="station in root.workStations track by $index">
+							<div class="input-group input-group-sm">
+								<span class="input-group-addon">
+									<input type="checkbox" ng-model="station.run">
+								</span>
+								<input type="text" class="form-control" disabled ng-model="station.name">
+							</div>
+						</li>
+					</ul>
 				</div>
-			</div>
-		</div>
-	</span>
-	<div class="panel-body" style="padding: 0;">
-		<uib-accordion class="panel col-md-12" close-others="false">
-			<div ng-repeat="test in plan.tests | orderBy: 'priority' track by $index" uib-accordion-group class="panel-default" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" style="border-top-width: 4px; border-top-color: {{test.station[0].color}}">
-				<uib-accordion-heading >
-					<strong >Priority: {{test.priority[0].value}}, Station: {{test.station[0].name}}, Test: {{test.testType[0].test_name}} , ID: #{{test.test_id}}</strong>
-					<span class="pull-right glyphicon" ng-class="status.isFirstOpen ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
-					<span class="pull-right">
-						<span class="glyphicon glyphicon-envelope" ng-if="test.comments.length > 0" id="testStatus"></span>
-						<span class="label" ng-class="{'label-default' : test.status_id == 1, 'label-warning' : test.status_id == 2, 'label-success' : test.status_id == 3, 'label-danger' : test.status_id == 4}" ng-model="test.status">{{test.status}}</span>
-					</span>
-				</uib-accordion-heading>
-		<!--		<test-progress-bar></test-progress-bar>-->
-				<div class="col-md-9">
-					<div class="input-group input-group-sm">
-						<span class="input-group-addon" id="from" style="font-weight:900">Test ID:</span>
-						<label class="form-control" type="number">#{{test.test_id}}</label>
-						<span class="input-group-addon" id="from" style="font-weight:900">Test Priority:</span>
-						<label class="form-control" type="number">{{test.priority[0].value}}</label>
-						<span class="input-group-addon" id="from" style="font-weight:900">Station:</span>
-						<label class="form-control" type="number">{{test.station[0].name}}</label>
-						<span class="input-group-addon" id="step" style="font-weight:900">PC: </span>
-						<label class="form-control" type="number">{{test.station[0].hostname}}</label>
-						<span class="input-group-addon" id="step" style="font-weight:900">Owner: </span>
-						<label class="form-control" type="number">{{test.username}}</label>
-					</div>
-				</div>
-				<span class="pull-right" ng-if="currentUser.username == plan.user_username || currentUser.rank > '10'">
-					<a class="btn btn-xs btn-warning" href="#/plans/{{plan.id}}/test/{{test.test_id}}/edit">Edit</a>
-					<button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#testModal">Delete</button>
-					<!--	Modal		-->
-					<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="Confirmation">
-						<div class="modal-dialog modal-sm" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									<h4 class="modal-title" id="testModal">Confirm Delete?</h4>
-								</div>
-								<div class="modal-body">
-									<button class="btn btn-danger" data-dismiss="modal" ng-click="removeTest(test.test_id)" type="button">Delete Test</button>
-									<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
-								</div>
+				<button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#planModal">Delete<span class="glyphicon glyphicon-trash"></span></button>
+				<!--	Modal		-->
+				<div class="modal fade" id="planModal" tabindex="-1" role="dialog" aria-labelledby="Confirmation">
+					<div class="modal-dialog modal-sm" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="planModal">Confirm Delete?</h4>
+							</div>
+							<div class="modal-body">
+								<button class="btn btn-danger" data-dismiss="modal" ng-click="removePlan()" type="button">Delete Plan</button>
+								<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
 							</div>
 						</div>
 					</div>
-				</span>
-				<uib-accordion>
-					<test-struct-view></test-struct-view>
-					<div class="pull-right">
-						<button class="btn btn-xs btn-success col-lg-5 addButton" Data-toggle="collapse" data-target="#Comment{{test.test_id}}" aria-expanded="false" aria-controls="Comment{{test.test_id}}">Add New Comment</button>
-					</div>
-					<div ng-if="test.comments.length > 0" style="margin-top: 2%;">
-						<test-footer></test-footer>
-					</div>
-				</uib-accordion>
-			</div>
-		</uib-accordion>
+				</div>
+			</span>
+		</div>
+		<div id="loader">
+			<uib-accordion>
+				<div style="margin: auto; width: 0%">
+					<div class="loader" ng-class="plans.length > 0 ? 'fadeOut' : ''"></div>
+				</div>
+				<div class="container-fluid" ng-if="plans.length > 0" ng-repeat="plan in plans track by $index">
+					<plan></plan>
+				</div>
+			</uib-accordion>
+		</div>
 	</div>
 </div>

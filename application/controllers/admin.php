@@ -121,44 +121,54 @@ class Admin extends CI_Controller {
 		echo json_encode($chipList);
 	}
 	public function operations(){
-//		$this->other_db = $this->load->database('main', TRUE);
-//		$this->other_db->order_by('test_id', 'DESC');
-//		$chipList = $this->other_db->get('operation_view')->result();
 		$data = $this->db->query("SELECT 
-														top.test_id AS operation_id,
-														top.date_time AS start_date,
-														tt.type_idx AS test_type_id,
-														t1.plan_id AS plan_id,
-														t1.test_id AS test_id,
-														tt.test_name AS test_name,
-														ws.idx AS work_station_id,        
-														ws.name AS work_station,
-														top.chip_m_id AS chip_m_id,
-														concat(ch_m.chip_sn, ' ', ch_m.chip_process_abb) AS chip_m_sn,
-														top.chip_r_id AS chip_r_id,
-														concat(ch_r.chip_sn, ' ', ch_r.chip_process_abb) AS chip_r_sn,
-														CONCAT(u.fname, ' ', u.lname) AS user,
-														top.test_status AS status_id,
-														statuses.status AS status
-												FROM
-														(Select * from dvt_60g.test_operation WHERE (date_time between DATE_SUB(now(), interval 6 MONTH) and now())) as top
-														JOIN dvt_60g.chips as `ch_r` ON `ch_r`.chip_id = `top`.chip_r_id
-														JOIN dvt_60g.chips as `ch_m` ON `ch_m`.chip_id = `top`.chip_m_id
-														JOIN dvt_60g.statuses ON top.test_status = statuses.test_status
-														JOIN dvt_60g.test_types as `tt` ON `tt`.test_name = `top`.test_type
-														JOIN dvt_60g.work_stations as `ws` ON `ws`.name = `top`.work_station
-														JOIN dvt_60g_web.test_v1 as `t1` ON `top`.plan_id = `t1`.test_id
-														JOIN dvt_60g_web.users as `u` ON `top`.operator = `u`.username
-														order by start_date desc"
-										)->result();
+																top.test_id AS operation_id,
+																top.date_time AS start_date,
+																date_format(top.date_time, '%d/%m/%Y') AS date,
+																date_format(top.date_time, '%H:%i') AS time,
+																tt.type_idx AS test_type_id,
+																t1.plan_id AS plan_id,
+																t1.test_id AS test_id,
+																tt.test_name AS test_name,
+																ws.idx AS work_station_id,        
+																ws.name AS work_station,
+																top.chip_m_id AS chip_m_id,
+																concat(ch_m.chip_sn, ' ', ch_m.chip_process_abb) AS chip_m_sn,
+																top.chip_r_id AS chip_r_id,
+																concat(ch_r.chip_sn, ' ', ch_r.chip_process_abb) AS chip_r_sn,
+																CONCAT(u.fname, ' ', u.lname) AS user,
+																top.test_status AS status_id,
+																statuses.status AS status
+															FROM
+																(Select * from dvt_60g.test_operation WHERE (date_time between DATE_SUB(now(), interval 6 MONTH) and now())) as top
+																JOIN dvt_60g.chips as `ch_r` ON `ch_r`.chip_id = `top`.chip_r_id
+																JOIN dvt_60g.chips as `ch_m` ON `ch_m`.chip_id = `top`.chip_m_id
+																JOIN dvt_60g.statuses ON top.test_status = statuses.test_status
+																JOIN dvt_60g.work_stations as `ws` ON `ws`.name = `top`.work_station
+																JOIN dvt_60g_web.test_v1 as `t1` ON `top`.plan_id = `t1`.test_id
+																JOIN dvt_60g.test_types as `tt` ON `tt`.type_idx = `t1`.test_type_id
+																JOIN dvt_60g_web.users as `u` ON `top`.operator = `u`.username
+																order by start_date desc"
+														)->result();
 //		$this->db->select("")
 		echo json_encode($data);
 	}	
+	
+	public function testLog(){
+		$testId = json_decode(file_get_contents('php://input'));
+		$testLog = $this->db->query("select log.* from dvt_60g.log
+											join dvt_60g.test_operation tp on 
+											log.test_id = tp.test_id 
+											where tp.plan_id = ".$testId)->result();
+		
+		echo json_encode($testLog);
+	}
 	public function testList(){
 		$chipList = $this->db->get('params_test_names');
 		echo json_encode($chipList->result());
 	}
 	public function stationList(){
+		$this->db->where('name !=', 'Debug');
 		$data = $this->db->get('work_stations_view')->result();
 		echo json_encode($data);
 	}

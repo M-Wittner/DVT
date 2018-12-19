@@ -1,0 +1,12 @@
+<div class="input-group input-group-sm">
+	<span class="input-group-addon" id="from" style="font-weight:900">Test ID:</span>
+	<label class="form-control" type="number">#{{test.test_id}}</label>
+	<span class="input-group-addon" id="from" style="font-weight:900">Test Priority:</span>
+	<label class="form-control" type="number">{{test.priority[0].value}}</label>
+	<span class="input-group-addon" id="from" style="font-weight:900">Station:</span>
+	<label class="form-control" type="number">{{test.station[0].name}}</label>
+	<span class="input-group-addon" id="step" style="font-weight:900">PC: </span>
+	<label class="form-control" type="number">{{test.station[0].hostname}}</label>
+	<span class="input-group-addon" id="step" style="font-weight:900">Owner: </span>
+	<label class="form-control" type="number">{{test.user}}</label>
+</div>

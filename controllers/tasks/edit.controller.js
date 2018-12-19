@@ -1,7 +1,7 @@
-myApp.controller('editTaskCtrl', ['$scope', '$http', '$location', '$routeParams', 'Flash', 'Session', '$cookies', 'AuthService', '$window', 'testParams', function ($scope, $http, $location, $routeParams, Flash, Session, $cookies, AuthService, $window, testParams) {
+myApp.controller('editTaskCtrl', ['$rootScope', '$scope', '$routeParams', '$uibModal', '$http', 'Flash', '$cookies', 'AuthService', 'taskParams', function ($rootScope, $scope, $routeParams, $uibModal, $http, Flash, $cookies, AuthService, taskParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-	$scope.testParams = testParams;
-	var site = testParams.site;
+	$scope.taskParams = taskParams;
+	var site = $rootScope.site;
 //	console.log($routeParams.id);
 	$http.post(site+'/tasks/view', $routeParams.id)
 	.then(function(response){
