@@ -5,12 +5,15 @@ myApp.controller('viewPlanCtrl', ['$scope', '$rootScope', '$route', '$location',
 		var scope = $scope;
 	if($scope.isAuthenticated == true){	
 	
-	$http.post(site+'/plans/show_v1', $stateParams.planId)
+	$http.get(site+'/plans/getPlan/' + $stateParams.planId)
 	.then(function(response){
 		console.log(response.data);
 		var data = response.data;
-		$scope.plans = [];
-		$scope.plans.push(data);
+//		$scope.plans = [];
+		$scope.plan = data;
+//		$scope.plans[0].tests = data.tests;
+//		$scope.plans[0].progress = data.progress;
+//		console.log($scope.plan);
 	});
 		
 	$scope.returnName = function(sweepName){

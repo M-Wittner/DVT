@@ -1,9 +1,40 @@
-myApp.controller('plansCtrl', ['$scope', '$rootScope', 'NgTableParams', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', 'testParams', '$stateParams', '$state', function ($scope, $rootScope, NgTableParams, $location, $http, Flash, $cookies, $window, AuthService, testParams, $stateParams, $state) {
+myApp.controller('plansCtrl', ['$scope', '$rootScope', '$filter', 'NgTableParams', '$location','$http', 'Flash', '$cookies', '$window', 'AuthService', 'testParams', '$stateParams', '$state', function ($scope, $rootScope, $filter, NgTableParams, $location, $http, Flash, $cookies, $window, AuthService, testParams, $stateParams, $state) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	var site = $rootScope.site;
+	function getPlan($plan){
+		console.log($plan.id)
+		$http.get(site + '/plans/GetPlan/' + $plan.id)
+			.then(function(response) {
+			console.log(response.data);
+//				console.log($.isEmptyObject(response.data));
+			if($.isEmptyObject(response.data) || response.data.errors.length > 0){
+				$plan.errors = response.data.errors;
+//					$plan.errors.push("No Data Found");
+//					console.log($plan);
+			}else{
+				$plan.tests = response.data.tests;
+				$plan.progress = response.data.progress;
+			}
+		});
+		return $plan;
+	}
+	function getTest($test){
+		$http.get(site + '/plans/GetTest/' + $test.test_id)
+			.then(function(response) {
+			if($.isEmptyObject(response.data)){
+				$test.errors = response.data.errors;
+			}else{
+				$test.errors = response.data.errors;
+				$test.sweeps = response.data.sweeps;
+				console.log(response.data);
+			}
+		});
+		return $test;
+	}
 	
 	if($scope.isAuthenticated) {
 //		console.log(testParams.plans);
+		$scope.state = $state.$current.name;
 		$scope.plans = testParams.plans;
 		$scope.itemsPerPage = 15;
 		$scope.currentPage = {
@@ -18,7 +49,6 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', 'NgTableParams', '$locati
 				);
 				$scope.labPlans = pageData;
 			}
-//			console.log($scope.labPlans);
 		}
 		setTimeout(function(){$scope.setPage(1)}, 900);
 	} else {
@@ -27,7 +57,6 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', 'NgTableParams', '$locati
 		$location.path('/');
 	};
 	
-
 	$scope.getPlanData = function($plan){
 		if(!$plan.isOpen && $plan.dirty)
 			return;
@@ -35,20 +64,20 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', 'NgTableParams', '$locati
 			$plan.dirty = true;
 		}
 		if(!$plan.tests){			
-			$http.get(site + '/plans/GetPlan/' + $plan.id)
-				.then(function(response) {
-				console.log(response.data);
-//				console.log($.isEmptyObject(response.data));
-				if($.isEmptyObject(response.data) || response.data.errors.length > 0){
-					$plan.errors = response.data.errors;
-//					$plan.errors.push("No Data Found");
-//					console.log($plan);
-				}else{
-					$plan.tests = response.data.tests;
-					$plan.progress = response.data.progress;
-				}
-			});
+			$plan = getPlan($plan);
 		}
+//		console.log($plan);
+	}
+	$scope.getTestData = function($test){
+		if(!$test.isOpen && $test.dirty)
+			return;
+		else{
+			$test.dirty = true;
+		}
+		if(!$test.sweeps){			
+			$test = getTest($test);
+		}
+//		console.log($test);
 	}
 	$scope.selected = [];
 	$scope.deleteSelected = function(){
@@ -77,22 +106,49 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', 'NgTableParams', '$locati
 		}
 	}
 	
-	$scope.chipStatus = function(chip, flag){
-		chip.flag = flag;
-		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.currentUser})
+	$scope.deleteTest = function(testID, $plan){
+		console.log($plan);
+		console.log(testID);
+		$http.get(site+'/plans/deleteTest/'+testID)
+		.then(function(response){
+			console.log(response.data);
+			var res = response.data;
+			var type = res.occured == true ? 'danger' : 'success';
+			var msg = "Test #"+res.source+ " "+res.msg;
+			var id = Flash.create(type, msg, 6000);
+			console.log(type);
+		}).then(function(){
+//			$plan = getPlan($plan);
+			$plan.tests = $plan.tests.filter(function(test){
+				return test.test_id !== testID;
+			})
+		})
+	}
+	
+	$scope.chipStatus = function(chip, flag, test, plan){
+		chip.flag = flag == '' ? null : flag;
+		console.log(test);
+		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user})
 		.then(function(response){
 			console.log(response.data);
 			var keys = Object.keys(response.data);
 			var key = keys[0];
 			var username = keys[1];
-			var user = keys[2];
 			chip[key] = response.data[key];
 			chip.username = response.data[username];
-			chip.user = response.data[user];
+//			test.progress = response.data['progress'];
 			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
 			var id = Flash.create('success', message, 6000);
+		}).then(function(){
+//					var $test = getTest(test);
+			var $plan = getPlan(plan);
+					console.log($plan);
+//			test = $test;
+//					console.log('bal')
+				}).then(function(){
+			test.isOpen = true;
 		});
-	};
+	};;
 	
 	$scope.newCmt = function(testId, planId){
 		var test = this.test;

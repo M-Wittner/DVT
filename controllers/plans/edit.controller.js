@@ -1,8 +1,8 @@
-myApp.controller('editPlanCtrl', ['$scope', '$location','$http', '$routeParams', 'AuthService', 'Flash', 'testParams', function ($scope, $location, $http, $routeParams, AuthService, Flash, testParams) {
+myApp.controller('editPlanCtrl', ['$scope', '$rootScope','$location','$http', '$routeParams', 'AuthService', 'Flash', 'testParams', function ($scope, $rootScope, $location, $http, $routeParams, AuthService, Flash, testParams) {
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	if($scope.isAuthenticated == true) {
-		var site = testParams.site;
+		var site = $rootScope.site;
 	
 	$scope.user = $scope.currentUser.username;
 //	$scope.plan.userId = $cookies.getObject('loggedUser').id;

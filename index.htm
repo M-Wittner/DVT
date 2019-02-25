@@ -11,13 +11,8 @@
 <!--	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>-->
 
 	<!-- Angular -->
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-sanitize.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-touch.min.js"></script>
+	<script type="text/javascript" src="assets/lib/angularJS/1.6.5/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/hammerjs/2.0.8/hammer.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-cookies.min.js"></script>
 	<link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
 	<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
@@ -29,21 +24,13 @@
 	<script type="text/javascript" src="assets/lib/ui-bootstrap/ui-bootstrap-tpls-2.5.0.min.js"></script>
 	<!-- MomentJS -->
 	<script type="text/javascript" src="assets/lib/momentJS/moment.min.js"></script>
-	<!-- InteractJS -->
-	<script type="text/javascript" src="assets/lib/interactJS/interact.min.js"></script>
-	<!-- FullCalendar -->
-	<script type="text/javascript" src="assets/lib/fullcalendar/fullcalendar.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="assets/lib/fullcalendar/fullcalendar.min.css">
-	<!-- UI-Calendar -->
-	<script type="text/javascript" src="assets/lib/ui-calendar/src/calendar.js"></script>
-	<!-- Multiselect -->
-	<script type="text/javascript" src="assets/lib/angular-bootstrap-multiselect/dist/angular-bootstrap-multiselect.js"></script>
 	<!-- UI-Router -->
 	<script src="//unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
 
 	<!-- Bootstrap -->
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="/assets/lib/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/lib/css/daterangepicker-bs3.css">
 	
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="/assets/lib/bootstrap/bootstrap-theme.min.css">
@@ -69,19 +56,21 @@
 	
 	<!-- angular file upload -->
 <!--	<script type="text/javascript" src="assets/lib/angular-file-upload/dist/angular-file-upload.min.js"></script>-->
+<!--
 	<script type="text/javascript" src="assets/lib/angular-file-saver/dist/angular-file-saver.bundle.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
 	<script type="text/javascript" src="assets/lib/js-xlsx/shim.js"></script>
 	<script type="text/javascript" src="assets/lib/js-xlsx/dist/xlsx.core.min.js"></script>
 	<script type="text/javascript" src="assets/lib/js-xlsx/dist/xlsx.full.min.js"></script>
+-->
 	
-	<!-- ocLazyLoader -->
-	<script type="text/javascript" src="assets/lib/ocLazyLoad\dist\ocLazyLoad.min.js"></script>
+	<script type="text/javascript" src="assets/lib/underscore.js"></script>
+	<script type="text/javascript" src="assets/lib/daterangepicker.js"></script>
 
 	<!-- Costum -->
 	<script type="text/javascript" src="app.js"></script>
 	<link rel="stylesheet" href="assets/lib/css/main.css" type="text/css">
-	<link rel="stylesheet" href="assets/lib/css/nga.min.css" type="text/css">
+<!--	<link rel="stylesheet" href="assets/lib/css/nga.min.css" type="text/css">-->
 	<script type="text/javascript" src="services/multiselect.service.js"></script>
 	<!--  Register	-->
 	<script type="text/javascript" src="controllers/register.controller.js"></script>
@@ -98,19 +87,19 @@
 	<script type="text/javascript" src="controllers/plans/testForm.controller.js"></script>
 	<script type="text/javascript" src="controllers/plans/addtest.controller.js"></script>
 	<script type="text/javascript" src="controllers/plans/edit.controller.js"></script>
-	<script type="text/javascript" src="controllers/admin/search.controller.js"></script>
+<!--	<script type="text/javascript" src="controllers/admin/search.controller.js"></script>-->
 	<script type="text/javascript" src="controllers/comments/new.controller.js"></script>
 	<script type="text/javascript" src="controllers/comments/edit.controller.js"></script>
 	<script type="text/javascript" src="controllers/admin/panel.controller.js"></script>
 	<script type="text/javascript" src="controllers/admin/chip.controller.js"></script>
 	<script type="text/javascript" src="controllers/admin/test.controller.js"></script>
-	<script type="text/javascript" src="controllers/admin/station.controller.js"></script>
-	<script type="text/javascript" src="controllers/admin/editstation.controller.js"></script>
+	<script type="text/javascript" src="controllers/admin/stations.controller.js"></script>
+<!--	<script type="text/javascript" src="controllers/admin/editstation.controller.js"></script>-->
 	<script type="text/javascript" src="controllers/admin/chiplist.controller.js"></script>
-	<script type="text/javascript" src="controllers/admin/testlist.controller.js"></script>
-	<script type="text/javascript" src="controllers/admin/stationlist.controller.js"></script>
-	<script type="text/javascript" src="controllers/admin/iterationlist.controller.js"></script>
-	<script type="text/javascript" src="controllers/admin/edititeration.controller.js"></script>
+<!--	<script type="text/javascript" src="controllers/admin/testlist.controller.js"></script>-->
+	<script type="text/javascript" src="controllers/admin/stations.controller.js"></script>
+<!--	<script type="text/javascript" src="controllers/admin/iterationlist.controller.js"></script>-->
+<!--	<script type="text/javascript" src="controllers/admin/edititeration.controller.js"></script>-->
 	<script type="text/javascript" src="controllers/admin/operations.controller.js"></script>
 	<!--  Tasks	-->
 	<script type="text/javascript" src="controllers/tasks/tasks.controller.js"></script>
@@ -121,11 +110,11 @@
 	<!--  Lineups	-->
 	<script type="text/javascript" src="controllers/lineups/lineups.controller.js"></script>
 	<script type="text/javascript" src="controllers/lineups/new.controller.js"></script>
-	<script type="text/javascript" src="controllers/lineups/check.controller.js"></script>
+<!--	<script type="text/javascript" src="controllers/lineups/check.controller.js"></script>-->
 	<!--  Profile	-->
 	<script type="text/javascript" src="controllers/profile/myTasks.controller.js"></script>
 	<!--  Operators	-->
-	<script type="text/javascript" src="controllers/operators/calendar.controller.js"></script>
+<!--	<script type="text/javascript" src="controllers/operators/calendar.controller.js"></script>-->
 </head>
 
 <body ng-app="myApp" ng-controller="homeCtrl">
@@ -158,18 +147,33 @@
 							</ul>
 						</li>
 -->
-						<li><a ui-sref="tasks" ui-sref-active="navActive">Tasks</a></li>
-						<li><a ui-sref="log" ui-sref-active="navActive">Log</a></li>
 <!--						<li><a href="#/admin/search">Search</a></li>-->
 <!--						<li ng-if="currentUser.rank > 60"><a href="#/operators/calendar">Calendar</a></li>-->
 <!--						<li><a href="#/admin">Admin Panel</a></li>-->
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Panel<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+<!--								<li class="dropdown-header">Lists</li>-->
+								<li><a ui-sref="chipList">All Chips</a></li>
+<!--								<li><a ui-sref="newChip">New Chip</a></li>-->
+								<li><a ui-sref="stations">All Stations</a></li>
+								<li role="separator" class="divider"></li>
+								<li class="dropdown-header" ng-if="currentUser.group_id == 7 || currentUser.rank > 60">Automation</li>
+								<li><a ui-sref="tasks" ui-sref-active="navActive">Tasks</a></li>
+								<li><a ui-sref="log" ui-sref-active="navActive">Log</a></li>
+<!--
+								<li><a ui-sref="addChip">New Chip</a></li>
+								<li><a ui-sref="addTest">New Test</a></li>
+-->
+							</ul>
+						</li>
 					</ul>
 					<!--	Dropdown user panel	-->
 					<ul ng-if="isAuthenticated()" class="nav navbar-nav navbar-right">
 						 <li  class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUser.fname}} {{currentUser.lname}}<span class="caret"></span></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$root.currentUser.fname}} {{$root.currentUser.lname}}<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li ng-if="currentUser.group_id == 7"><a ui-sref="home({username: currentUser.username})" ui-sref-active="navActive">My tasks</a></li>
+								<li ng-if="$root.currentUser.group_id == 7"><a ui-sref="userTasks({username: $root.currentUser.username})" ui-sref-active="navActive">My tasks</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="" ng-click="logout()">Log Out</a></li>
 							</ul>

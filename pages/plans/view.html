@@ -26,6 +26,7 @@
 	</div>
 	<div class="panel-body" style="padding: 0;" id="tester">
 		<div class="row">
+			<span style="margin-left: 3%"> Last Update: <strong>{{updateTime}}</strong></span>
 			<span class="container-fluid pull-right btn-crud">
 				<div class="btn-group" ng-if="state == 'todayPlan'">
 					<button type="button" class="btn btn-success btn-xs" ng-click="startTests(root.workStations)">Start <span class="glyphicon glyphicon-flash"></span></button>
@@ -39,7 +40,7 @@
 								<span class="input-group-addon">
 									<input type="checkbox" ng-model="station.run">
 								</span>
-								<input type="text" class="form-control" disabled ng-model="station.name">
+								<lablel type="text" class="form-control">{{station.name}}</lablel>
 							</div>
 						</li>
 					</ul>

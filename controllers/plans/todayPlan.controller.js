@@ -1,22 +1,36 @@
-myApp.controller('todayPlanCtrl', ['$rootScope', '$scope', '$state', '$route', '$filter', '$location','$http', '$stateParams', '$window', 'Flash', 'AuthService', '$cookies', 'NgTableParams', function($rootScope, $scope, $state, $route, $filter, $location, $http, $stateParams, $window, Flash, AuthService, $cookies, NgTableParams){
+myApp.controller('todayPlanCtrl', ['$rootScope', '$scope', '$state', '$route', '$filter', '$location', '$http', '$stateParams', '$window', '$interval', 'Flash', 'AuthService', '$cookies', 'NgTableParams', function($rootScope, $scope, $state, $route, $filter, $location, $http, $stateParams, $window, $interval, Flash, AuthService, $cookies, NgTableParams){
 	
 	$scope.root = $rootScope;
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-	console.log($scope.root);
+//	console.log($rootScope);
 	var site = $rootScope.site;
+//	$interval(function(){console.log('bla')}, 1000, 0 , true);
 	if($scope.isAuthenticated == true){
+		$scope.currentUser =$cookies.getObject('loggedUser');
 		$scope.state = $state.$current.name;
 		var today = new Date();
+		$scope.updateTime = today.toLocaleTimeString('he-IL', {hour12: false});
 		$scope.plans = [];
 		if($scope.plans.length == 0){
 			$http.post(site+'/plans/today', today)
-			.then(function(response){
-				$scope.today = $scope.root.parse(today);
-				console.log(response.data[0]);
-				$scope.plans = response.data;
-				$scope.plans[0].isOpen = true;
-			});
+				.then(function(response){
+					$scope.today = $scope.root.parse(today);
+	//				console.log(response.data[0]);
+					console.log(response.data);
+					$scope.plans = response.data;
+					$scope.plans[0].isOpen = true;
+				})
+			$interval(function(){$http.post(site+'/plans/today', today)
+				.then(function(response){
+					$scope.today = $scope.root.parse(today);
+	//				console.log(response.data[0]);
+					$scope.updateTime = new Date().toLocaleTimeString('he-IL', {hour12: false});
+					console.log("Data Refreshed, "+ $scope.updateTime);
+					$scope.plans = response.data;
+					$scope.plans[0].isOpen = true;
+				})}, 300000, 0 , true);;
 		}
+//		$scope.tableErrors = new NgTableParams({});
 		$scope.user = {};
 		$scope.user.id = $cookies.getObject('loggedUser').id;
 		$scope.user.username = $cookies.getObject('loggedUser').username;
@@ -25,6 +39,56 @@ myApp.controller('todayPlanCtrl', ['$rootScope', '$scope', '$state', '$route', '
 			var id = Flash.create('danger', message, 3500);
 			$location.path('/');
 		}
+	
+	function getPlan($plan){
+		console.log($plan.id)
+		$http.get(site + '/plans/GetPlan/' + $plan.id)
+			.then(function(response) {
+			if($.isEmptyObject(response.data) || response.data.errors.length > 0){
+				$plan.errors = response.data.errors;
+			}else{
+				$plan.tests = response.data.tests;
+				$plan.progress = response.data.progress;
+			}
+		});
+		return $plan;
+	}
+	function getTest($test){
+		$http.get(site + '/plans/GetTest/' + $test.test_id)
+			.then(function(response) {
+			console.log(response.data);
+			if($.isEmptyObject(response.data)){
+				$test.errors = response.data.errors;
+			}else{
+				$test.errors = response.data.errors;
+				$test.sweeps = response.data.sweeps;
+			}
+		});
+		return $test;
+	}
+
+	$scope.getPlanData = function($plan){
+		if(!$plan.isOpen && $plan.dirty)
+			return;
+		else{
+			$plan.dirty = true;
+		}
+		if(!$plan.tests){			
+			$plan = getPlan($plan);
+		}
+		console.log($plan);
+	}
+	$scope.getTestData = function($test){
+		if(!$test.isOpen && $test.dirty)
+			return;
+		else{
+			$test.dirty = true;
+		}
+		if(!$test.sweeps){			
+			$test = getTest($test);
+		}
+		console.log($test);
+	}
 	
 	$scope.logger = function(data){
 		console.log(data);
@@ -71,8 +135,9 @@ myApp.controller('todayPlanCtrl', ['$rootScope', '$scope', '$state', '$route', '
 			});
 		};
 
-		$scope.chipStatus = function(chip){
-			chip.flag = null;
+		$scope.chipStatus = function(chip, flag, test){
+			chip.flag = flag == '' ? null : flag;
+			console.log(test);
 			$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user})
 			.then(function(response){
 				console.log(response.data);
@@ -81,9 +146,10 @@ myApp.controller('todayPlanCtrl', ['$rootScope', '$scope', '$state', '$route', '
 				var username = keys[1];
 				chip[key] = response.data[key];
 				chip.username = response.data[username];
-	//			var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
-	//			var id = Flash.create('success', message, 6000);
-			});
+				test.progress = response.data['progress'];
+				var message = 'Chip ' + chip.chip_sn+'-'+chip.chip_process_abb + ' '+ key + ' has been updated <strong>(test: #' + chip.test_id +')</strong>';
+				var id = Flash.create('success', message, 6000);
+			})
 		};
 
 		$scope.hotStatus = function(chip){

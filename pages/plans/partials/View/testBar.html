@@ -2,11 +2,18 @@
 	<span class="input-group-addon" id="from" style="font-weight:900">Test ID:</span>
 	<label class="form-control" type="number">#{{test.test_id}}</label>
 	<span class="input-group-addon" id="from" style="font-weight:900">Test Priority:</span>
-	<label class="form-control" type="number">{{test.priority[0].value}}</label>
+	<label class="form-control" type="number">{{test.priority}}</label>
 	<span class="input-group-addon" id="from" style="font-weight:900">Station:</span>
-	<label class="form-control" type="number">{{test.station[0].name}}</label>
+	<label class="form-control" type="number">{{test.name}}</label>
 	<span class="input-group-addon" id="step" style="font-weight:900">PC: </span>
-	<label class="form-control" type="number">{{test.station[0].hostname}}</label>
+	<label class="form-control" type="number">{{test.hostname}}</label>
 	<span class="input-group-addon" id="step" style="font-weight:900">Owner: </span>
-	<label class="form-control" type="number">{{test.user}}</label>
+	<label class="form-control" type="number">{{test.username}}</label>
+	<span class="input-group-addon" id="step" style="font-weight:900">Source: </span>
+	<label class="form-control" type="number">
+		<span ng-init="text = test.source == 0 ? 'Web' : test.source == 1 ? 'LabVIEW' : 'invalid'">
+			<span class="glyphicon" ng-class="{'glyphicon-globe': test.source == 0, 'glyphicon-cog': test.source == 1}"></span>
+			 {{text}}
+		</span>
+	</label>
 </div>

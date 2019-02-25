@@ -30,7 +30,7 @@ myApp.factory('authenticationService', ['$http', '$cookies', '$rootScope', '$tim
 		
 //		Store user details in globals cookie that keeps user logged in for 3 hours or until the logout
 		var cookieExp = new Date();
-		cookieExp.setSdate(cookieExp.getDate() + 3);
+		cookieExp.setSdate(cookieExp.getDate() + 5);
 		$cookies.putObject('globals', $rootScope.globals, {expires: cookieExp});
 		
 		function ClearCredentials(){

@@ -66,7 +66,8 @@ class valid_model extends CI_Model {
 //			echo json_encode($sweepData);
 //			die();
 			switch($sweepData){
-				case is_array($sweepData->data): //--------------	Deal with generic sweeps	--------------
+				case is_array($sweepData->data): 
+					//--------------	Deal with generic sweeps	--------------
 					if(!isset($sweepData->data) || empty($sweepData->data)){
 						$err->msg = $sweepName.' were not selected';
 						$err->source = $test->station[0]->name.', '.$test->testType[0]->test_name.', priority: '.$test->priority[0]->value;

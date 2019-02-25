@@ -14,7 +14,7 @@
 				</div>
 				<div class="col-md-6">
 					<span class="label label-dangerC">Task Type</span>
-					<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="task.type">
+					<ui-select style="min-width: 100%" multiple close-on-select="false" limit="1" ng-model="task.type">
 						<ui-select-match>{{$item.task_type}}</ui-select-match>
 						<ui-select-choices repeat="station in taskParams.taskTypes | filter:$select.search" sortable="true">{{station.task_type}}</ui-select-choices>
 					</ui-select>

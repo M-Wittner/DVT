@@ -1,4 +1,4 @@
-myApp.controller('newTaskCtrl', ['$rootScope', '$scope', '$routeParams', '$uibModal', '$http', 'Flash', '$cookies', 'AuthService', 'taskParams', function ($rootScope, $scope, $routeParams, $uibModal, $http, Flash, $cookies, AuthService, taskParams) {
+myApp.controller('newTaskCtrl', ['$rootScope', '$scope', '$routeParams', '$uibModal', '$http', 'Flash', '$cookies', 'AuthService', 'taskParams', '$state', function ($rootScope, $scope, $routeParams, $uibModal, $http, Flash, $cookies, AuthService, taskParams, $state) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.taskParams = taskParams;
 	var site = $rootScope.site;
@@ -22,7 +22,9 @@ myApp.controller('newTaskCtrl', ['$rootScope', '$scope', '$routeParams', '$uibMo
 				var id = Flash.create('danger', message, 3500);
 				console.log(response.data);
 			}
-		});
+		}).then(function(){
+				$state.go('tasks');
+		})
 	}
 
 }]);

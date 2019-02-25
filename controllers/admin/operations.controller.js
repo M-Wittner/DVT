@@ -1,54 +1,54 @@
-myApp.controller('logCtrl', ['$scope', '$rootScope', '$filter','$http', 'Flash', 'AuthService', 'NgTableParams', 'testParams', '$stateParams', 'uibDateParser', function ($scope, $rootScope, $filter, $http, Flash, AuthService, NgTableParams, testParams, $stateParams) {
+myApp.controller('logCtrl', ['$scope', '$rootScope', '$interpolate', '_', '$filter','$http', 'Flash', 'AuthService', 'NgTableParams', 'testParams', '$stateParams', 'uibDateParser', function ($scope, $rootScope, $interpolate, _,$filter, $http, Flash, AuthService, NgTableParams, testParams, $stateParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.isAuthenticated = true;
 	var site = $rootScope.site;
+	var scope = $scope;
 	$scope.testParams = testParams;
-	$scope.workStations = testParams.params.workStations;
-	$scope.operators = testParams.params.operatorList;
+	$scope.parse = testParams.parseDate;
+	$scope.dateFilter = {
+		start:{
+			id: 'text',
+			placeholder: 'Start'
+		},
+		end:{
+			id: 'text',
+			placeholder: 'End'
+		}
+	}
 	if($scope.isAuthenticated == true) {
 		$http.get(site+'/admin/operations')
 		.then(function(response) {
-			$scope.parse = testParams.parseDate;
-			$scope.idFilter = {
-				start:{
-					id: 'number',
-					placeholder: 'Start'
-				},
-				end:{
-					id: 'number',
-					placeholder: 'End'
-				}
-			}
-			$scope.dateFilter = {
-				start:{
-					id: 'text',
-					placeholder: 'Start'
-				},
-				end:{
-					id: 'text',
-					placeholder: 'End'
-				}
-			}
-			
-//			var $data = response.data.splice(0, response.data.length - 30);
+			$scope.data = response.data;
+			console.log($scope.data);
+			$scope.loaded = false;
+			$scope.operatorNames = testParams.params.operatorList.map(operator => {
+				return {id: operator.name, title: operator.name};
+			})
+			$scope.stations = testParams.params.workStations.map(station => {
+				return {id: station.name, title: station.name};
+			});
+			$scope.colsList = [
+				{field: 'operation_id', title: 'Operation ID', filter: {operation_id: 'number'}, show: true},
+				{field: 'work_station', title: 'Station', filter: {work_station: 'select'}, filterData: $scope.stations, show: true},
+				{field: 'date', title: 'Date', filter: {date: 'text'}, show: true},
+				{field: 'test_name', title: 'Test Name', filter: {test_name: 'text'}, show: true},
+				{field: 'plan_id', title: 'Plan ID',filter: {plan_id: 'number'} ,show: true},
+				{field: 'test_id', title: 'Test ID', filter: {test_id: 'number'}, show: true},
+				{field: 'chipR', title: 'ChipR', filter: {chip_r_sn: 'text'}, show: true},
+				{field: 'chipM', title: 'ChipM', filter: {chip_m_sn: 'text'}, show: true},
+				{field: 'status', title: 'Status', filter: {status: 'text'}, show: true},
+				{field: 'user', title: 'Operator', filter: {user: 'select'}, filterData: $scope.operatorNames, show: true},
+				{field: 'View', title: 'View', show: true},
+			];
+			$scope.cols = _.indexBy($scope.colsList, "field");
+			console.log($scope.cols)
+		})
+		.then(function(){
 			$scope.tableParams = new NgTableParams({},{
-//				 getData: function(params) {
-//					 return $data;
-//				},
-				filterOptions: {filterFn: dateRange},
-				dataset: response.data,
+				total: $scope.data.length,
+				dataset: $scope.data,
 				filterLayout: 'horizontal',
 			});
-			
-//			function idRange(data, filterValues){
-//				return data.filter(function(item){
-////					console.log(data);
-////					console.log(filterValues);
-//					var start = filterValues.start == null ? Number.MIN_VALUE : filterValues.start;
-//					var end = filterValues.end == null ? Number.MAX_VALUE : filterValues.end;
-//					return start <= item.operation_id && end >= item.operation_id;
-//				})
-//			}
 			var minDate = new Date();
 			minDate = minDate.getFullYear() - 2;
 			minDate - Date.parse(minDate);
@@ -71,13 +71,6 @@ myApp.controller('logCtrl', ['$scope', '$rootScope', '$filter','$http', 'Flash',
 					return start <= tempDate && end >= tempDate;
 				})
 			}
-			$scope.tableData = {};
-			$scope.tableData.all =response.data;
-//			$scope.tableData.current =response.data;
-//			$scope.tableData.filtered =response.data;
-			$scope.loaded = false;
-		})
-		.then(function(){
 //			$scope.currentPage = 1;
 //			$scope.itemsPerPage = 10;
 //			$scope.setPage = function(page, data){
@@ -132,6 +125,18 @@ myApp.controller('logCtrl', ['$scope', '$rootScope', '$filter','$http', 'Flash',
 	$scope.dateTo = $scope.today;
 	$scope.filter;
 	
+	$scope.updateStatus = function(operation){
+//		chip.flag = flag == '' ? null : flag;
+		$http.post(site+'/plans/operationstatus', operation)
+		.then(function(response){
+//			console.log(response.data);
+			var status = response.data
+			operation.status_id = status.test_status;
+			operation.status = status.status;
+			var message = '<strong>Operation #' + operation.operation_id+'</strong> Status has been updated <strong>('+status.status+')</strong>';
+			var id = Flash.create('success', message, 6000);
+		});
+	};
 	
 	$scope.filterDate = function(search){
 		console.log(search);

@@ -19,8 +19,9 @@ class Profile extends CI_Controller {
 		
 	}
 	
-	public function myTasks(){
-		$id = json_decode(file_get_contents('php://input'));
+	public function myTasks($id){
+//		$id = json_decode(file_get_contents('php://input'));
+//		die(json_encode($id));
 		$this->db->order_by('date', 'DESC');
 		$tasks = $this->db->get_where('tasks_view', ['assigned_id'=>$id])->result();
 		echo json_encode($tasks);

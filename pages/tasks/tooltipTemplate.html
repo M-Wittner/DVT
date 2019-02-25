@@ -9,14 +9,14 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td>{{task.priority}}</td>
-			<td>{{task.station}}</td>
-			<td>{{task.type}}</td>
-			<td>{{task.status}}</td>
+			<td>{{row.priority}}</td>
+			<td>{{row.station}}</td>
+			<td>{{row.type}}</td>
+			<td>{{row.status}}</td>
 		</tr>
 	</tbody>
 </table>
 <div>
 	<h6 style="font-weight:800; color: red">Description</h6>
-	<p ng-bind-html="task.description"></p>
+	<p ng-bind-html="row.description"></p>
 </div>

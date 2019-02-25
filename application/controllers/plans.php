@@ -36,7 +36,7 @@ class Plans extends CI_Controller {
 		echo json_encode($plans);	
 	}
 	
-	function GetHeaders(){
+	function GetPlanHeaders(){
 		$plans = new stdClass();
 		$plans->errors = array();
 		$this->db->where('source', 0);
@@ -47,35 +47,86 @@ class Plans extends CI_Controller {
 		$plans->lab = $this->db->get('plans_v1_view as p')->result();
 		die(json_encode($plans));	
 	}
-	
-	function GetPlan($planId){
-		$plan = $this->GetPlanData($planId);
-		die(json_encode($plan));
+	function GetTestHeader($testID){
+		$test = $this->db->get_where('tests_view_v1', ['test_id'=>$testID])->result()[0];
+		return $test;
 	}
 	
-	function GetPlanData($planId){
+	function GetTestData($testID){
+		$res = $this->plan_model->get_test_v1($testID);
+		return $res;
+	}
+	
+	function GetTest($testID){
+		$res = $this->GetTestData($testID);
+		die(json_encode($res));
+	}
+	
+	function GetPlan($planID){
+		$res = $this->GetPlanData($planID);
+		if(count($res->errors) > 0){
+				$plan->errors = $res->errors;
+			}else{
+				$plan->tests = $res->tests;
+				$plan->progress = $res->progress;
+				if($plan->progress > 0){
+					foreach($plan->tests as $test){
+						$test->statuses = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id])->result();
+//						$test->progress = $this->plan_model->calcProgNew($test->statuses);
+					}
+				}
+			}
+//		die(json_encode($planID));
+		die(json_encode($res));
+	}
+	
+	function GetPlanData($planId, $filters){
+//		die(json_encode($planId));
 		$plan = new stdClass();
 		$plan->errors = array();
 		$progress = 0;
 		$result = new stdClass();
 		$this->db->select('test_id');
-		$query = $this->db->get_where('test_v1', array('plan_id'=>intval($planId)))->result();
-		if(sizeof($query) > 0 && !empty($query)){
-			foreach ($query as $i=>$test){
-				$res = $this->plan_model->get_test_v1($test->test_id);
+		if(isset($filters)){
+			if(count($filters) == 1){
+				$key = array_keys($filters)[0];
+				$this->db->where($key."!=".$filters[$key]);
+			}else{
+				foreach($filters as $key=>$filter){
+					$f = $key."!=".$filter;
+					$this->db->where($f);
+				}
+			}
+		}
+		$this->db->where(['plan_id'=>intval($planId)]);
+		$plan->tests = $this->db->get('tests_view_v1')->result();
+//		die(json_encode($plan));
+		if(sizeof($plan->tests) > 0 && !empty($plan->tests)){
+			$plan->statuses = $this->db->get_where('chip_status_view', ['plan_id'=>$planId])->result();
+			$totalProg = 0;
+			foreach ($plan->tests as $i=>$test){
+				$res = $this->GetTestHeader($test->test_id);
+//				die(json_encode($res));
 				if(isset($res->occured) && $res->occured){
 					array_push($plans->errors, $res);
 					continue;
 				}else{
 					$plan->tests[$i] = $res;
+					$totalProg += ( double)$plan->tests[$i]->progress;
+//					die(json_encode($plan->tests[$i]));
 					$plan->tests[$i]->comments = $this->db->get_where('test_comments_v1_view', ['test_id'=>$test->test_id])->result();
 				}
+//				$statuses = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id])->result();
+//				$plan->tests[$i]->chipErrors = array_values(array_filter($statuses, function($e){
+//					return $e->chip_status == 1;
+//				}));
 			}
-			$plan->statuses = $this->db->get_where('chip_status_view', ['plan_id'=>$planId])->result();
-			$plan->progress = $this->plan_model->calcProg($plan->statuses);
-			$this->db->set('progress', $plan->progress);
-			$this->db->where('id', $plan->$planId);
-			$res = $this->db->update('plans_v1');
+//			$plan->progress = $this->plan_model->calcProgNew($plan->statuses);
+			$plan->progress = $totalProg / count($plan->tests);
+//			die(json_encode($plan->progress));
+//			$this->db->set('progress', $plan->progress);
+//			$this->db->where('id', $plan->$planId);
+//			$res = $this->db->update('plans_v1');
 		}else{
 			$result->msg = 'No Tests Found on Plan #'.$planId;
 			$result->occurred = true;
@@ -86,8 +137,6 @@ class Plans extends CI_Controller {
 	
 	function CreateNew(){
 		$postData = json_decode(file_get_contents('php://input'));
-//		echo json_encode($postData);
-//		die();
 		$result = array();
 		$planData = $postData->plan;
 		$plan = array(
@@ -99,6 +148,8 @@ class Plans extends CI_Controller {
 			$result->occurred = true;
 		}else{
 			$valid = $this->valid_model->validate_plan($tests);
+//			echo json_encode($valid);
+//			die();
 			if(!empty($valid)){
 				foreach ($valid as $err){
 					array_push($result, $err);
@@ -124,6 +175,7 @@ class Plans extends CI_Controller {
 						'test_type_id'=>$test->testType[0]->type_idx,
 						'notes'=>$test->notes,
 						'user_id'=>$planData->userId,
+						'source'=>0
 					);
 					$insertTest = $this->db->insert('test_v1', $testBody);
 					if(!$insertTest){
@@ -169,22 +221,6 @@ class Plans extends CI_Controller {
 												}
 												$insertSweep = $this->db->insert_batch('chip_status', $chipsStatus);
 //											}
-											break;
-										case 60://Pin
-										case 62://Temp Cycle
-											unset($sweepData->data_type);
-											if(!isset($sweepData->data[0]->ext)){
-												$sweepData->data[0]->ext = '';
-											}
-											if(is_array($sweepData->data->ext)){
-												$pin = $sweepData->data[0]->from.';'.$sweepData->data[0]->step.';'.$sweepData->data[0]->to.';'.implode(',',$sweepData->data[0]->ext);
-											}else{
-												$pin = $sweepData->data[0]->from.';'.$sweepData->data[0]->step.';'.$sweepData->data[0]->to.';'.$sweepData->data[0]->ext;
-											}
-											$this->db->set('config_id', $sweepData->config_id);
-											$this->db->set('value', $pin);
-											$this->db->set('test_id', $testId);
-											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
 											break;
 										default: //-------------- Generic sweeps	--------------
 											foreach($sweepData->data as $sweep){
@@ -237,10 +273,28 @@ class Plans extends CI_Controller {
 										case 61: //DAC_Atten file handle
 											$path = $sweepData->path;
 											$file = $sweepData->data;
-											var_dump($sweepData);
-											die();
+//											var_dump($sweepData);
+//											die();
 											$handle = fopen($path.$_FILES['file']['name'], 'a') or die('Cannot open file:		'.$file);
 											$values = $this->excel_model->dac_atten_file_handle($file, $path);
+											break;
+										case 60://Pin
+										case 62://Temp Cycle
+//												echo json_encode($sweepData);
+//												die();
+											unset($sweepData->data_type);
+											if(!isset($sweepData->data->ext)){
+												$sweepData->data->ext = '';
+											}
+											if(is_array($sweepData->data->ext)){
+												$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.implode(',',$sweepData->data->ext);
+											}else{
+												$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.$sweepData->data->ext;
+											}
+											$this->db->set('config_id', $sweepData->config_id);
+											$this->db->set('value', $pin);
+											$this->db->set('test_id', $testId);
+											$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
 											break;
 									} //--------------	End of switch data_types	--------------
 									if(!isset($insertSweep) || !$insertSweep){
@@ -262,55 +316,41 @@ class Plans extends CI_Controller {
 		echo json_encode($result);
 	}
 	
-	
-//	function show_v1(){
-//		$result = new stdClass();
+	function show_test($id){
 //		$id = json_decode(file_get_contents('php://input'));
-//		$plan = $this->db->get_where('plans_v1_view', array('id'=>$id))->result();
-//		if(isset($plan[0])){
-//			$plan = $plan[0];
-//			$this->db->select('test_id');
-//			$plan->tests = $this->db->get_where('test_v1', array('plan_id'=>$id))->result();
-//			foreach ($plan->tests as $i=>$test){
-//				$plan->tests[$i] = $this->plan_model->get_test_v1($test->test_id);
-//				$plan->tests[$i]->comments = $this->db->get_where('test_comments_v1_view', ['test_id'=>$test->test_id])->result();
-//			}
-//			$plan->statuses = $this->db->get_where('chip_status_view', ['plan_id'=>$planId])->result();
-//			$plan->progress = $this->plan_model->calcProg($plan->statuses);
-//			echo json_encode($plan);
-//		}else {
-//			$result->msg = 'No Plans found!';
-//			$result->occurred = true;
-//			echo json_encode($result);
-//		}
-//	}
-	
-	function show_test(){
-		$id = json_decode(file_get_contents('php://input'));
-		$test = $this->plan_model->get_test_v1($id);
+//		$test = $this->plan_model->get_test_v1($id);
+		$test = $this->GetTestData($id);
+//		die(json_encode($id));
 		$test->comments = $this->db->get_where('test_comments_v1_view', ['test_id'=>$id])->result();
 		echo json_encode($test);
 	}
 	
 	function today(){
 		$result = new stdClass();
-		for($i = 0; $i < 2; $i++){
-			$query = "SELECT * FROM plans_v1_view where date(date_time) = curdate() - ".$i." limit 2";
-			$plans = $this->db->query($query)->result();
-			if(sizeof($plans) > 0){
-				foreach($plans as $plan){
-					$res = $this->GetPlanData($plan->id);
-					$plan->tests = $res->tests;
-					$plan->progress = $res->progress;
-				}
-				break;
+		$plans = $this->db->get('today_plan')->result();
+		if(sizeof($plans) > 0){
+			$plan = $plans[0];
+//			$this->db->where('progress < 1');
+			$res = $this->GetPlanData($plan->id, ['user_id'=>54]);
+			if(count($res->errors) > 0){
+				$plan->errors = $res->errors;
 			}else{
-				$result->msg = "No Plans Found in the last 3 Days";
-				$result->occurred = true;
-				array_push($plans, new stdClass());
-				$plans[0]->errors = array();
-				array_push($plans[0]->errors, $result);
+				$plan->tests = $res->tests;
+				$plan->progress = $res->progress;
+				if($plan->progress > 0){
+					foreach($plan->tests as $test){
+						$test->statuses = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id])->result();
+//						$test->progress = $this->plan_model->calcProgNew($test->statuses);
+//						if($test->test_id == 5762){die(json_encode($test));}
+					}
+				}
 			}
+		}else{
+			$result->msg = "No Plans Found in the last 3 Days";
+			$result->occurred = true;
+			array_push($plans, new stdClass());
+			$plans[0]->errors = array();
+			array_push($plans[0]->errors, $result);
 		}
 		echo json_encode($plans);
 	}
@@ -368,7 +408,10 @@ class Plans extends CI_Controller {
 		$result = array();
 		if(!empty($ids)){
 			foreach($ids as $id){
-				$deleted = $this->db->delete('plans_v1', ['id'=>$id]);
+				$this->db->set('visible', 0);
+				$this->db->where('id', $id);
+				$deleted = $this->db->update('plans_v1');
+//				$deleted = $this->db->delete('plans_v1', ['id'=>$id]);
 				$res = new stdClass();
 				if(!$deleted){
 					$res->occured = !$deleted;
@@ -390,6 +433,25 @@ class Plans extends CI_Controller {
 		}
 		echo json_encode($result);
 	}
+	
+	function deleteTest($testID){
+//		die(json_encode($testID));
+		$this->db->set('visible', 0);
+		$this->db->where('test_id', intval($testID));
+		$deleted = $this->db->update('test_v1');
+		$res = new stdClass();
+		if(!$deleted){
+			$res->occured = $deleted;
+			$res->msg = "Not Deleted!";
+			$res->source = $testID;
+		} else{
+			$res->occured = !$deleted;
+			$res->msg = "Deleted!";
+			$res->source = $testID;
+		}
+		die(json_encode($res));
+	}
+	
 	function deleteTests(){
 		$ids = json_decode(file_get_contents('php://input'));
 		$ids = array_filter($ids);
@@ -568,6 +630,11 @@ class Plans extends CI_Controller {
 	function chipstatus(){
 		$data = json_decode(file_get_contents('php://input'));
 		$updateStatus = $this->plan_model->update_chip_status($data);
+		echo json_encode($updateStatus);
+	}
+	function operationstatus(){
+		$data = json_decode(file_get_contents('php://input'));
+		$updateStatus = $this->plan_model->update_operation_status($data);
 		echo json_encode($updateStatus);
 	}	
 	function xifstatus(){

@@ -1,27 +1,8 @@
 <div class="panel panel-primary">
 	<!-- Default panel contents -->
 	<div class="panel-heading">All Operations</div>
-	<div class="panel-body">
-		<div class="col-md-2">
-			<span class="label label-warning">Station</span>
 <!--
-			<select class="form-control"  ng-model="search.work_station" ng-change="filterTable(search.work_station, 'work_station')">
-				<option value="">All</option>
-				<option ng-repeat="station in workStations">{{station.name}}</option>
-			</select>
--->
-			<select class="form-control"  ng-model="tableParams.filter()['work_station']">
-				<option value="">All</option>
-				<option ng-repeat="station in workStations">{{station.name}}</option>
-			</select>
-		</div>
-		<div class="col-md-2">
-			<span class="label label-warning">User</span>
-			<select class="form-control" ng-model="tableParams.filter()['name']">
-				<option value="">All</option>
-				<option ng-repeat="user in operators">{{user.name}}</option>
-			</select>
-		</div>
+	<div class="panel-body">
 		<div class="col-md-8">
 			<div class="col-md-3">
 				<span class="label label-warning">Date</span>
@@ -48,30 +29,31 @@
 			</div>
 		</div>
 	</div>
+-->
 	<div style="margin: auto; width: 0%">
 		<div class="loader" ng-class="{'fadeOut': loaded}"></div>
 	</div>
 	<div class="fadeIn" ng-show="loaded">
 		<!-- Table -->
-		<table ng-table="tableParams" class="table table-striped">
-			<tr ng-repeat="data in $data track by data.operation_id">
-				<td class="col-md-1 text-center" data-title="'Operation ID'" filter="idFilter">{{data.operation_id}}</td>
-				<td class="col-md-1 text-center" data-title="'Station'" filter="{work_station: 'text'}">{{data.work_station}}</td>
-				<td class="col-md-2 text-center" data-title="'Date'" sortable="'date'" filter="dateFilter">{{data.date}} {{data.time}}</td>
-				<td class="col-md-1 text-center" data-title="'Test Name'">{{data.test_name}}</td>
-				<td class="col-md-1 text-center" data-title="'Plan ID'" sortable="'data.plan_id'">{{data.plan_id}}</td>
-				<td class="col-md-1 text-center" data-title="'Test ID'" sortable="'data.test_id'">{{data.test_id}}</td>
-				<td class="col-md-1 text-center" data-title="'Chip S/N'"><span ng-if="data.chip_m_id == '-1' ? chip = data.chip_r_sn : data.chip_r_id == '-1' ? chip = data.chip_m_sn : chip = data.chip_r_sn+' + '+data.chip_m_sn">{{chip}}</span></td>
-				<td class="col-md-1 text-center" data-title="'User'">{{data.user}}</td>
-				<td class="col-md-1 text-center" data-title="'Status'">
-					{{data.status}}
-					<span ng-click="chipStatus(chip)" class="glyphicon chip-status" ng-class="{'glyphicon-hourglass': data.status_id == 2, 'glyphicon-ok':  data.status_id == 0, 'glyphicon-remove':  data.status_id == 1, 'glyphicon-warning-sign': data.status_id == 3}"></span>
+		 <table ng-table-dynamic="tableParams with colsList" class="table table-condesed table-striped">
+			<tr ng-repeat="row in $data">
+				<td ng-if="cols.operation_id.show" class="col-md-1 text-center" title="cols.operation_id.title">{{row[cols.operation_id.field]}}</td>
+				<td ng-if="cols.work_station.show" class="col-md-1 text-center" title="cols.work_station.title">{{row[cols.work_station.field]}}</td>
+				<td ng-if="cols.date.show" class="col-md-1 text-center" title="cols.date.title">{{row[cols.date.field]}} - {{row.time}}</td>
+				<td ng-if="cols.test_name.show" class="col-md-1 text-center" title="cols.test_name.title">{{row[cols.test_name.field]}}</td>
+				<td ng-if="cols.plan_id.show" class="col-md-1 text-center" title="cols.plan_id.title">{{row[cols.plan_id.field]}}</td>
+				<td ng-if="cols.test_id.show" class="col-md-1 text-center" title="cols.test_id.title">{{row[cols.test_id.field]}}</td>
+				<td ng-if="cols.chipR.show" class="col-md-1 text-center" title="cols.chipR.title">{{row.chip_r_sn}}</td>
+				<td ng-if="cols.chipM.show" class="col-md-1 text-center" title="cols.chipM.title">{{row.chip_m_sn}}</td>
+				<td ng-if="cols.status.show" class="col-md-1 text-center" title="cols.status.title">
+					{{row[cols.status.field]}}
+					<span ng-click="updateStatus(row)" class="glyphicon chip-status" ng-class="{'glyphicon-hourglass': row.status_id == 2, 'glyphicon-ok':  row.status_id == 0, 'glyphicon-remove':  row.status_id == 1, 'glyphicon-warning-sign': row.status_id == 3, 'glyphicon-tent': row.status_id == 4}"></span>
 				</td>
-				<td class="col-md-1 text-center" data-title="'View'">
-					<a class="btn btn-sm btn-info" ui-sref="viewTest({planId: data.plan_id, testId: data.test_id})" ui-sref-active="navActive">View</a>
+				<td ng-if="cols.user.show" class="col-md-1 text-center" title="cols.user.title">{{row[cols.user.field]}}</td>
+				<td class="col-md-1 text-center" title="cols.user.title">
+					<a class="btn btn-sm btn-info" ui-sref="viewTest({planId: row.plan_id, testId: row.test_id})" ui-sref-active="navActive">View</a>
 				</td>
 			</tr>
 		</table>
-<!--		<ul uib-pagination total-items="tableData.filtered.length" ng-model="currentPage" ng-change="setPage(currentPage, tableData.filtered)" max-size="7" class="pagination-sm" boundary-link-numbers="true"></ul>-->
 	</div>
 </div>

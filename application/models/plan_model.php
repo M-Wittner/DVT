@@ -106,26 +106,36 @@ class plan_model extends CI_Model {
 //			}
 			$test->station = $this->db->get_where('work_stations_view',['idx'=>$test->testType[0]->workstation_id])->result();
 			$priority = $test->priority;
-			$test->priority = array();
-			$test->priority[0] = new stdClass();
-			$test->priority[0]->value = $priority;
-//			$test->priority = (int) $priority;
+			$test->errors = $this->db->query("select log.* from dvt_60g.log
+																				join dvt_60g.test_operation tp on log.test_id = tp.test_id 
+																				where tp.plan_id = ".$id)->result();
 			// ----- Get Sweeps of that test ---------
 			$test->sweeps = array();
 			$this->db->select('config_id, name, data_type, priority, test_type_id, tooltip');
 			$this->db->order_by('priority asc','data_type desc');
 			$struct = $this->db->get_where('test_struct_view', array('station_id'=>$test->station[0]->idx, 'test_type_id'=>$test->test_type_id))->result();
 			// ----- Populate each sweep with data ---------
+			$chipTypes = array_filter($struct, function($c){return $c->data_type > 100 ? $c->config_id : null;});
+			foreach ($chipTypes as $type){
+				$type->data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$type->config_id))->result();
+				$type->num = count($type->data);
+			}
+			$counts = array_map(function($c){return $c->num;}, $chipTypes);
+			$maxTests = max($counts) == 0 ? 1 : max($counts);
+			$totalProg = 0;
+//			die(json_encode($maxTests));
 			foreach($struct as $sweep){
 				$test->sweeps[$sweep->name] = new stdClass();
 				if(isset($sweep->tooltip)){
 					$test->sweeps[$sweep->name]->tooltip = $sweep->tooltip;
 				}
 				$data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$sweep->config_id))->result();
+				if($sweep->data_type == 60){
+//					echo json_encode($sweep);
+//					die();
+				}
 				if(count($data) == 1 && (in_array($sweep->data_type, [33, 60]))){
 					if($sweep->data_type == 60){ //Pin sweep
-//						echo json_encode($data);
-//						die();
 						$data[0]->value = explode(';', $data[0]->value);
 						$data[0]->from = (int) $data[0]->value[0];
 						$data[0]->step = (int) $data[0]->value[1];
@@ -150,9 +160,11 @@ class plan_model extends CI_Model {
 							$dac_atten->display_name = "DAC:".$dac." Dig:".$dig;
 						}
 					}elseif($sweep->data_type > 100){
+//						$chipStatus = array();
 						foreach($data as $chip){
 							$this->db->select('chip_sn, chip_process_abb');
 							$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result();
+							$this->db->select('progress');
 							$statuses = $this->db->get_where('chip_status_view', ['data_idx'=>$chip->data_idx])->result();
 							if(count($chipData) == 1){
 								$chipData = $chipData[0];
@@ -160,16 +172,16 @@ class plan_model extends CI_Model {
 								$chip->chip_process_abb = $chipData->chip_process_abb;
 								if(count($statuses) == 1){
 									$statuses = $statuses[0];
-									foreach($statuses as $key => $value){
-										$chip->$key = $value;
-									}
+									$chip->progress = $statuses->progress;
+									$totalProg += (double)$chip->progress;
+//									die(json_encode($totalProg));
+//									array_push($chipStatus, $chip->progress);
 								}
 							}
 						}
-						$test->progress = $this->calcProg($data);
-						$this->db->set('progress', $test->progress);
-						$this->db->where('test_id', $test->test_id);
-						$res = $this->db->update('test_v1');
+						$test->chipErrors = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id, 'chip_status'=>1])->result();
+//--------------------------------------- Comment out section below of calc and update progress and replace with summing up all progresses and after loop ends calc the progress. --------------------------------------------------
+//						$test->progress = $this->calcProgNew($data);
 					}
 					foreach($data as $res){
 						if(is_null($res->display_name)){
@@ -183,15 +195,37 @@ class plan_model extends CI_Model {
 					$test->sweeps[$sweep->name]->priority = $sweep->priority;
 					$test->sweeps[$sweep->name]->test_type_id = $sweep->test_type_id;
 			}
-			$test->errors = $this->db->query("select log.* from dvt_60g.log
-										join dvt_60g.test_operation tp on 
-										log.test_id = tp.test_id 
-										where tp.plan_id = ".$id)->result();
+			$test->progress = $totalProg / $maxTests;
+			$chipErrors = count($test->chipErrors);
+			$testErrors = count($test->errors);
+			$status = ($test->progress == 0 && $chipErrors == 0) ? 4 : //IDLE
+								$test->progress < 1 && $chipErrors == 0 ? 2 : //Running
+								$test->progress == 1 && $chipErrors == 0 ? 0 : //Passed
+								($chipErrors > 0 && $test->progress < 1) || ($testErrors > 0 && $test->progress == 0) ? 3 : -1;
+//			$test->status = $status == 4 ? 'IDLE' : $status == 3 ? 'Error' : $status == 2 ? 'Running' : $status == 0 ? 'Passed' : '?';
+			$this->db->set('progress', $test->progress);
+//			$this->db->set('status', $status);
+			$this->db->where('test_id', $test->test_id);
+			$res = $this->db->update('test_v1');
+//			die(json_encode($totalProg));
 			return $test;	
 		}
 	}
 	
+	function calcProgNew($chips){
+		$count = count($chips);
+//		die(var_dump($count));
+		$progress = 0;
+		foreach($chips as $chip){
+//			die(var_dump($chip));
+			$progress = $progress + $chip->progress*100;
+		}
+//		die(print(round($progress/$count, 1)));
+		return round($progress/$count, 1);
+	}
+	
 	function calcProg($chips){
+//		die(json_encode($chips));
 		$count = count($chips);
 		$progress = 0;
 		foreach($chips as $chip){
@@ -305,7 +339,7 @@ class plan_model extends CI_Model {
 				'priority'=>$test->priority[0]->value,
 				'test_type_id'=>$test->testType[0]->type_idx,
 				'notes'=>$test->notes,
-				'user_id'=>$test->user->id,
+//				'user_id'=>$test->user->id,
 			);
 			$this->db->where('test_id', $test->test_id);
 			$insertTest = $this->db->update('test_v1', $testBody);
@@ -353,22 +387,6 @@ class plan_model extends CI_Model {
 										$chipsStatus[$i]['data_idx'] = $dataIdx + $i;
 									}
 									$insertSweep = $this->db->insert_batch('chip_status', $chipsStatus);
-									break;
-								case 60://Pin
-								case 62://Temp Cycle
-									unset($sweepData->data_type);
-									if(!isset($sweepData->data[0]->ext)){
-										$sweepData->data[0]->ext = '';
-									}
-									if(is_array($sweepData->data[0]->ext)){
-										$pin = $sweepData->data[0]->from.';'.$sweepData->data[0]->step.';'.$sweepData->data[0]->to.';'.implode(',',$sweepData->data[0]->ext);
-									}else{
-										$pin = $sweepData->data[0]->from.';'.$sweepData->data[0]->step.';'.$sweepData->data[0]->to.';'.$sweepData->data[0]->ext;
-									}
-									$this->db->set('config_id', $sweepData->config_id);
-									$this->db->set('value', $pin);
-									$this->db->set('test_id', $testId);
-									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
 									break;
 								default: //-------------- Generic sweeps	--------------
 									foreach($sweepData->data as $sweep){
@@ -424,6 +442,22 @@ class plan_model extends CI_Model {
 									$handle = fopen($path.$_FILES['file']['name'], 'a') or die('Cannot open file:		'.$file);
 									$values = $this->excel_model->dac_atten_file_handle($file, $path);
 									break;
+								case 60://Pin
+								case 62://Temp Cycle
+									unset($sweepData->data_type);
+									if(!isset($sweepData->data->ext)){
+										$sweepData->data->ext = '';
+									}
+									if(is_array($sweepData->data->ext)){
+										$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.implode(',',$sweepData->data->ext);
+									}else{
+										$pin = $sweepData->data->from.';'.$sweepData->data->step.';'.$sweepData->data->to.';'.$sweepData->data->ext;
+									}
+									$this->db->set('config_id', $sweepData->config_id);
+									$this->db->set('value', $pin);
+									$this->db->set('test_id', $testId);
+									$insertSweep = $this->db->insert('dvt_60g.test_configuration_data');
+									break;
 							} //--------------	End of switch data_types	--------------
 							if(!isset($insertSweep) || !$insertSweep){
 								$error->msg = $sweepName.' was not inserted';
@@ -444,8 +478,9 @@ class plan_model extends CI_Model {
 	
 	function update_chip_status($data){
 //		echo json_encode($data->chip);
-//		die();
+		$this->other_db = $this->load->database('main', TRUE);
 		$chip = $data->chip;
+//		die(json_encode($res2));
 		$user = $data->user;
 		$key = 'chip_status';
 		if(isset($chip->flag)){
@@ -472,7 +507,7 @@ class plan_model extends CI_Model {
 				$status = 0;
 				break;
 			case 0:
-				$status = 3;
+				$status = 1;
 				break;
 			default:
 				$status = 4;
@@ -483,7 +518,45 @@ class plan_model extends CI_Model {
 		$this->db->where(['data_idx'=>$chip->data_idx]);
 		$res = $this->db->update('chip_status');
 		if($res){
-			return array($key=>$status, 'user'=>$user->username);
+			$this->other_db->select('data_idx');
+			$res = $this->other_db->get_where('test_configuration_data', ['test_id'=>$chip->test_id, 'config_id'=>$chip->config_id])->result();
+			if($res){
+				$res = array_map(function($data){
+					return $data->data_idx;
+				}, $res);
+				$this->db->select('chip_status, data_idx');
+				$this->db->where_in('data_idx', $res);
+				$res2 = $this->db->get('chip_status_view')->result();
+				$prog = $this->calcProg($res2);
+			}
+			return array($key=>$status, 'user'=>$user->username, 'progress'=>$prog);
+		}
+	}
+	
+	function update_operation_status($data){
+//		die(json_encode($data));
+		$this->other_db = $this->load->database('main', TRUE);
+		$status = $data->status_id;
+		switch($status){
+			case 4:
+				$status = 2;
+				break;
+			case 2:
+				$status = 0;
+				break;
+			case 0:
+				$status = 3;
+				break;
+			default:
+				$status = 4;
+				break;
+		}
+		$this->other_db->set('test_status', $status);
+		$this->other_db->where(['test_id'=>$data->operation_id]);
+		$res = $this->other_db->update('test_operation');
+		if($res){
+			$status = $this->other_db->get_where('statuses', ['test_status'=>$status])->result()[0];
+			return $status;
 		}
 	}
 	

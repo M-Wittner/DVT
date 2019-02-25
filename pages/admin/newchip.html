@@ -1,48 +1,119 @@
-<div class="alert alert-warning col-md-offset-1  col-md-10">Example: 'YB378000019'</div>
+<div class="panel panel-success">
+	<div class="panel-heading">Add New Chip</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="form-group col-md-3"><label>Chip Type</label>
+<!--				<div class="input-group">-->
+					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="chip.chip_type" data-placeholder="Pick Test" ng-disabled="lock">
+						<ui-select-match>{{$item}}</ui-select-match>
+						<ui-select-choices repeat="chip_type in params.chip_types" sortable="true">{{chip_type}}</ui-select-choices>
+					</ui-select>
 <!--
-<div class="alert alert-info col-md-offset-1  col-md-10">Download Current Chip List<a class="pull-right btn btn-sm btn-default" href="http://wigig-584/admin/updatechiplist" download="Web-ChipList.csv">
-            	Download <span class="glyphicon glyphicon-save"></span>
-        	</a></div>
+					<span class="input-group-btn">
+							<button class="btn btn-default btn-sm" ng-click="extras(chip, 'chip_type')" ng-disabled="lock">
+								<span class="glyphicon glyphicon-plus"></span>
+					</button>
+					</span>
 -->
-<div class="container-fluid col-md-offset-3 col-md-5" ng-if="isAuthenticated == true">
-	<form>
-		<div class="panel panel-primary">
-			<div class="panel-heading">Add New Chip</div>
-			<div class="panel-body">
-				<div class="form-group col-md-10">
-					<label>Chip Type</label>
-					<select class="form-control" ng-model="chip.chip">
-						<option>TalynA 1</option>
-						<option>TalynM 1</option>
-						<option>TalynA 2</option>
-						<option>TalynM 2</option>
-					</select>
+<!--				</div>-->
+				<span ng-if="chip.chip_type.ext">
+						<input uib-popover="New chip_type" popover-trigger="'mouseenter'" type="text" class="form-control btn-crud" ng-model="chip.chip_type.ext" placeholder="New" style="width: 100%;" ng-disabled="lock" ng-disabled="lock">
+					</span>
+			</div>
+			<div class="form-group col-md-3">
+				<label>Board</label>
+				<div class="input-group">
+					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="chip.board" data-placeholder="Pick Test" ng-disabled="lock">
+						<ui-select-match>{{$item}}</ui-select-match>
+						<ui-select-choices repeat="board in params.boards" sortable="true">{{board}}</ui-select-choices>
+					</ui-select>
+					<span class="input-group-btn">
+							<button class="btn btn-default btn-sm" ng-click="extras(chip, 'board')" ng-disabled="lock">
+								<span class="glyphicon glyphicon-plus"></span>
+					</button>
+					</span>
 				</div>
-				<div class="form-group col-md-10">
-					 <label>Board</label>
-					 <select class="form-control" ng-model="chip.board">
-						<option>YA591-H511</option>
-						<option>YA591-H502</option>
-						<option>YA591-H1</option>
-						<option>YA591-H2</option>
-					 </select>
+				<span ng-if="chip.board.ext">
+						<input uib-popover="New Board" popover-trigger="'mouseenter'" type="text" class="form-control btn-crud" ng-model="chip.board.ext" placeholder="New" style="width: 100%;" ng-disabled="lock" ng-disabled="lock">
+					</span>
+			</div>
+			<div class="form-group col-md-3">
+				<label>package</label>
+				<div class="input-group">
+					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="chip.package" data-placeholder="Pick Test" ng-disabled="lock">
+						<ui-select-match>{{$item}}</ui-select-match>
+						<ui-select-choices repeat="package in params.packages" sortable="true">{{package}}</ui-select-choices>
+					</ui-select>
+					<span class="input-group-btn">
+							<button class="btn btn-default btn-sm" ng-click="extras(chip, 'package')" ng-disabled="lock">
+								<span class="glyphicon glyphicon-plus"></span>
+					</button>
+					</span>
 				</div>
-				<div class="form-group col-md-10">
-					<label>Chip Serial Number</label>
-					<input type="text" class="form-control" ng-model="chip.sn" placeholder="YB378000019 / YA951020581">
+				<span ng-if="chip.package.ext">
+						<input uib-popover="New package" popover-trigger="'mouseenter'" type="text" class="form-control btn-crud" ng-model="chip.package.ext" placeholder="New" style="width: 100%;" ng-disabled="lock" ng-disabled="lock">
+					</span>
+			</div>
+			<div class="form-group col-md-3">
+				<label>model</label>
+				<div class="input-group">
+					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="chip.model" data-placeholder="Pick Test" ng-disabled="lock">
+						<ui-select-match>{{$item}}</ui-select-match>
+						<ui-select-choices repeat="model in params.models" sortable="true">{{model}}</ui-select-choices>
+					</ui-select>
+					<span class="input-group-btn">
+							<button class="btn btn-default btn-sm" ng-click="extras(chip, 'model')" ng-disabled="lock">
+								<span class="glyphicon glyphicon-plus"></span>
+					</button>
+					</span>
 				</div>
-				<div class="form-group col-md-10">
-					 <label>Corner</label>
-					 <select class="form-control" ng-model="chip.corner">
-						<option>TT</option>
-						<option>FF</option>
-						<option>SS</option>
-						<option>FS</option>
-						<option>SF</option>
-					 </select>
-				</div>
+				<span ng-if="chip.model.ext">
+						<input uib-popover="New model" popover-trigger="'mouseenter'" type="text" class="form-control btn-crud" ng-model="chip.model.ext" placeholder="New" style="width: 100%;" ng-disabled="lock" ng-disabled="lock">
+					</span>
 			</div>
 		</div>
-		<button class="btn btn-lg btn-success" ng-click="addChip()">Submit!</button>
-	</form>
+		<div class="row">
+			<div class="form-group col-md-3">
+				<label>revision</label>
+				<div class="input-group">
+					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="chip.revision" data-placeholder="Pick Test" ng-disabled="lock">
+						<ui-select-match>{{$item}}</ui-select-match>
+						<ui-select-choices repeat="revision in params.revisions" sortable="true">{{revision}}</ui-select-choices>
+					</ui-select>
+					<span class="input-group-btn">
+							<button class="btn btn-default btn-sm" ng-click="extras(chip, 'revision')" ng-disabled="lock">
+								<span class="glyphicon glyphicon-plus"></span>
+					</button>
+					</span>
+				</div>
+				<span ng-if="chip.revision.ext">
+						<input uib-popover="New model" popover-trigger="'mouseenter'" type="text" class="form-control btn-crud" ng-model="chip.revision.ext" placeholder="New" style="width: 100%;" ng-disabled="lock" ng-disabled="lock">
+					</span>
+			</div>
+			<div class="form-group col-md-3">
+				<label>Chip Serial Number</label>
+				<input type="text" class="form-control" ng-model="chip.chip_sn" placeholder="YB378000019 / YA951020581">
+			</div>
+			<div class="form-group col-md-3">
+				<label>chip_process_abb</label>
+				<div class="input-group">
+					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="chip.chip_process_abb" data-placeholder="Pick Test" ng-disabled="lock">
+						<ui-select-match>{{$item}}</ui-select-match>
+						<ui-select-choices repeat="chip_process_abb in params.chip_process_abbs" sortable="true">{{chip_process_abb}}</ui-select-choices>
+					</ui-select>
+					<span class="input-group-btn">
+							<button class="btn btn-default btn-sm" ng-click="extras(chip, 'chip_process_abb')" ng-disabled="lock">
+								<span class="glyphicon glyphicon-plus"></span>
+					</button>
+					</span>
+				</div>
+				<span ng-if="chip.chip_process_abb.ext">
+						<input uib-popover="New model" popover-trigger="'mouseenter'" type="text" class="form-control btn-crud" ng-model="chip.chip_process_abb.ext" placeholder="New" style="width: 100%;" ng-disabled="lock" ng-disabled="lock">
+					</span>
+			</div>
+			<div class="form-group col-md-3">
+				<button class="btn btn-block btn-success" style="margin-top: 10%" ng-click="addChip()">Submit!</button>
+			</div>
+		</div>
+	</div>
 </div>

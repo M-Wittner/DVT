@@ -18,42 +18,54 @@ class Admin extends CI_Controller {
     }
 	
 	public function addChip() {
-		$postData = json_decode(file_get_contents('php://input'));
-		$chipType = $postData->chip;
-		$chip = array(
-			'board'=>$postData->board,
-			'chip_sn'=>$postData->sn,
-			'chip_process_abb'=>$postData->corner,
-			'package'=>'Flip_Chip',
-			'model'=>'OCA6425',
-		);
-		switch($chipType){
-			case 'TalynA 1':
-				$chip['revision'] = 'A0';
-				$chip['chip_type_id'] = 1;
-				break;
-			case 'TalynA 2':
-				$chip['revision'] = 'A0';
-				$chip['chip_type_id'] = 3;
-				break;
-			case 'TalynM 1':
-				$chip['revision'] = 'B0';
-				$chip['chip_type_id'] = 2;
-			case 'TalynM 2':
-				$chip['revision'] = 'B0';
-				$chip['chip_type_id'] = 4;
-				break;
-		}
-//		die(var_dump($chip));
-		if(isset($chip['chip_sn'])){
-			$this->other_db= $this->load->database('main', TRUE);
-			$insertStatus = $this->other_db->insert('chips', $chip);
-			if($insertStatus == true){
-				echo 'success';
+		$chip = json_decode(file_get_contents('php://input'));
+		$result = array();
+		$error = new stdClass();
+		if(count((array)$chip) == 7){
+			foreach($chip as $key=>$value){
+				if(is_array($value)){
+					$chip->$key = $value[0];
+				}elseif(isset($value->ext)){
+					$chip->$key = $value->ext;
+				}
+				if(empty($chip->$key)){
+					$error->msg = $key.' is missing!';
+					$error->source = $chip;
+					$error->occurred = true;
+					array_push($result, $error);
+				}
 			}
-		}else {
-			echo 'No Chip Was Inserted!';
+		}else{
+			$error->msg = 'Some of the fields are missing!';
+			$error->source = $chip;
+			$error->occurred = true;
+			array_push($result, $error);
 		}
+		if(empty($result)){
+			$this->other_db = $this->load->database('main', TRUE);
+
+			$dupChip = $this->other_db->get_where('chips', ['chip_sn'=>$chip->chip_sn])->result();
+			if(count($dupChip) > 0){
+				$error->msg = 'There is already a chip with that Serial Number ('.$chip->chip_sn.')';
+				$error->source = $dupChip;
+				$error->occurred = true;
+				array_push($result, $error);
+			}else{ // ----------------- No Duplicate Chips! ----------------- //
+				$this->other_db->select('chip_type_id');
+				$id = $this->other_db->get_where('chip_types', ['chip_type_name'=>$chip->chip_type])->result()[0]->chip_type_id;
+				$chip->chip_type_id = $id;
+				unset($chip->chip_type);
+				$insertStatus = $this->other_db->insert('chips', $chip);
+		//		$insertStatus = true;
+				if($insertStatus){
+					$error->occurred = false;
+					$error->source = $chip;
+					$error->msg = 'Chip '.$chip->chip_sn.' was inserted successfully';
+					array_push($result, $error);
+				}
+			}
+		}
+		die(json_encode($result));
 		
 	}
 	public function addstation() {
@@ -120,6 +132,24 @@ class Admin extends CI_Controller {
 		$chipList = $this->db->get('chip_view')->result();
 		echo json_encode($chipList);
 	}
+	public function chipParams(){
+		$data = new stdClass();
+//		--------------- Objects ----------------
+//		$data->boards = $this->db->query("SELECT distinct `board` FROM dvt_60g.chips")->result();
+//		$data->packages = $this->db->query("SELECT distinct `package` FROM dvt_60g.chips")->result();
+//		$data->models = $this->db->query("SELECT distinct `model` FROM dvt_60g.chips")->result();
+//		$data->revisions = $this->db->query("SELECT distinct `revision` FROM dvt_60g.chips")->result();
+//		$data->chip_process_abbs = $this->db->query("SELECT distinct `chip_process_abb` FROM dvt_60g.chips")->result();
+//		$data->chip_types = $this->db->query("SELECT distinct `chip_type_name` FROM dvt_60g.chips c JOIN dvt_60g.chip_types as `ct` ON c.chip_type_id = ct.chip_type_id")->result();
+//		--------------- Array ----------------
+		$data->boards = array_map(function($e){return $e->board;}, $this->db->query("SELECT distinct `board` FROM dvt_60g.chips")->result());
+		$data->packages = array_map(function($e){return $e->package;}, $this->db->query("SELECT distinct `package` FROM dvt_60g.chips")->result());
+		$data->models = array_map(function($e){return $e->model;}, $this->db->query("SELECT distinct `model` FROM dvt_60g.chips")->result());
+		$data->revisions = array_map(function($e){return $e->revision;}, $this->db->query("SELECT distinct `revision` FROM dvt_60g.chips")->result());
+		$data->chip_process_abbs = array_map(function($e){return $e->chip_process_abb;}, $this->db->query("SELECT distinct `chip_process_abb` FROM dvt_60g.chips")->result());
+		$data->chip_types = array_map(function($e){return $e->chip_type_name;}, $this->db->query("SELECT distinct `chip_type_name` FROM dvt_60g.chips c JOIN dvt_60g.chip_types as `ct` ON c.chip_type_id = ct.chip_type_id")->result());
+		echo json_encode($data);
+	}
 	public function operations(){
 		$data = $this->db->query("SELECT 
 																top.test_id AS operation_id,
@@ -172,6 +202,18 @@ class Admin extends CI_Controller {
 		$data = $this->db->get('work_stations_view')->result();
 		echo json_encode($data);
 	}
+	
+	function GetStationTests($stationID){
+		$this->other_db = $this->load->database('main', TRUE);
+		$res = $this->other_db->get_where('test_types', ['workstation_id'=>$stationID])->result();
+//		$res = $this->db->get_where('test_struct_view', ['station_id'=>$stationID])->result();
+		die(json_encode($res));
+	}
+	function GetTestData($testID){
+		$res = $this->db->get_where('test_struct_view', ['test_type_id'=>$testID])->result();
+		die(json_encode($res));
+	}
+	
 	public function OperatorList(){
 //		$data = $this->db->get('operator_view')->result();
 		$data = $this->db->query("SELECT 

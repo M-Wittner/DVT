@@ -1,14 +1,15 @@
-myApp.controller('myTasksCtrl', ['$scope', 'NgTableParams', '$uibModal', '$location', '$http', 'Flash', '$cookies', '$window', 'AuthService', 'testParams', '$routeParams', function ($scope, NgTableParams, $uibModal, $location, $http, Flash, $cookies, $window, AuthService, testParams, $routeParams) {
+myApp.controller('myTasksCtrl', ['$scope', '$rootScope', '$state', 'NgTableParams', '$uibModal', '$location', '$http', 'Flash', '$cookies', '$window', 'AuthService', 'testParams', '$routeParams', function ($scope, $rootScope, $state, NgTableParams, $uibModal, $location, $http, Flash, $cookies, $window, AuthService, testParams, $routeParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-	var site = testParams.site;
+	var site = $rootScope.site;
 	var $ctrl = this;
 	$scope.testParams = testParams.params;
 	$scope.activeTasks = true;
 	$scope.completedTasks = true;
 	$scope.isFilterDisabled = true;
+	console.log($rootScope);
 	
-	if(($scope.isAuthenticated == true && $routeParams.username == $scope.currentUser.username)){
-		$http.post(site + '/profile/mytasks', $scope.currentUser.id)
+	if(($scope.isAuthenticated == true && $state.params.username == $rootScope.currentUser.username)){
+		$http.get(site + '/profile/mytasks/' + $rootScope.currentUser.id)
 		.then(function (response) {
 			$scope.tableParams = new NgTableParams({
 				count: 15
@@ -17,10 +18,12 @@ myApp.controller('myTasksCtrl', ['$scope', 'NgTableParams', '$uibModal', '$locat
 				total: response.data.length,
 				dataset: response.data
 			});
-//			console.log(response.data);
+			console.log(response.data);
 		})
 	} else{
-		$location.path("/plans");
+//		$state.go("/plans");
+		console.log($state.params.username);
+		console.log($scope.currentUser.username);
 		var message = 'You can only view you own tasks';
 		var id = Flash.create('danger', message, 3500);
 	}

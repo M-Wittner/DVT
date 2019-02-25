@@ -4,12 +4,13 @@
   </div>
 	<div class="panel col-md-12">
     <h3 class="panel-title col-md-1"><span class="label label-primary">Filters:</span></h3>
-		<span class="">Inactive Tasks: <input type="checkbox" ng-model="activeTasks"></span>
+		<span class="">Inactive Tasks: <input type="checkbox" ng-model="activeTasks" ng-init="activeTasks = false" ng-change="activeTasks == true ? '' : tableTasks.filter()['active']=1"></span>
 <!--		<span class="">Reviewed Tasks: <input type="checkbox" ng-model="reviewedTasks"></span>-->
-		<span class="">  Show Filters: <input type="checkbox" ng-model="isFilterDisabled"></span>
-		<span class="">  Show Completed: <input id="completedTasks" type="checkbox" ng-model="completedTasks"></span>
+		<span class="">Show Filters: <input type="checkbox" ng-model="isFilterEnabled"></span>
+		<span class="">Show Completed: <input id="completedTasks" type="checkbox" ng-model="completedTasks"></span>
   </div>
   <div class="panel-body">
+<!--
 		<table ng-table="tableParams" class="table table-condensed table-hover table-responsive" show-filter="isFilterDisabled">
 			<tr ng-repeat="task in $data track by task.id" 
 					uib-tooltip-template="'pages/tasks/tooltipTemplate.html'" tooltip-popup-delay="100"
@@ -26,7 +27,7 @@
 				<td class="col-md-1 text-center" data-title="'Priority'" filter="{priority: 'text'}" sortable="'priority'">{{task.priority}}</td>
 				<td class="col-md-1 text-center" data-title="'Station'" filter="{station: 'text'}" sortable="'station'">{{task.station}}</td>
 				<td class="col-md-2 text-center" data-title="'Title'" filter="{title: 'text'}">{{task.title}}</td>
-<!--				<td class="col-md-1 text-center" data-title="'Type'" filter="{type: 'text'}" sortable="'task_type'">{{task.type}}</td>-->
+				<td class="col-md-1 text-center" data-title="'Type'" filter="{type: 'text'}" sortable="'task_type'">{{task.type}}</td>
 				<td class="col-md-1 text-center" data-title="'Creator'" filter="{creator: 'text'}" sortable="'creator'">{{task.creator}}</td>
 				<td class="col-md-2 text-center" data-title="'Assigned To'" filter="{assigned: 'text'}" sortable="'assigned'">{{task.assigned}}</td>
 				<td class="col-md-1 text-center" data-title="'Approved'" filter="{approved: 'text'}" sortable="'approved'"><span ng-class="{'glyphicon glyphicon-thumbs-up' : task.approved == 1, 'glyphicon glyphicon-minus' : task.approved == 0}"></span></td>
@@ -40,6 +41,64 @@
 							<span ng-if="task.active == false">Activate</span>
 						</button>
 						<button ng-click="deleteTask(task.id)" class="btn btn-danger btn-sm btn-witdhC">Delete</button>
+					</div>
+				</td>
+			</tr>
+		</table>
+-->
+		<table ng-table-dynamic="tableTasks with colsList" class="table table-condesed table-hover table-responsive" show-filter="isFilterEnabled">
+			<tr ng-repeat="row in $data track by row.id"
+					uib-tooltip-template="'pages/tasks/tooltipTemplate.html'" tooltip-popup-delay="100"
+					ng-hide="(completedTasks == false ? row.status == 'Completed' : '')"
+					ng-class="[row.approved == false ? '' : {'info' : row.priority == 'Low','warning' : row.priority == 'Medium', 'danger' : row.priority == 'High'},
+										{'bug-report': row.type_id == 1, 'feature': row.type_id == 2}]"
+					style="cursor: pointer">
+				<td ng-if="cols.date.show" class="col-md-1 text-center" title="cols.date.title" ng-click="viewTask(row.id)">{{row[cols.date.field]}}</td>
+				<td ng-if="cols.status.show" class="col-md-1 text-center" title="cols.status.title" ng-click="viewTask(row.id)">{{row[cols.status.field]}}</td>
+				<td ng-if="cols.priority.show" class="col-md-1 text-center" title="cols.priority.title" ng-click="viewTask(row.id)">{{row[cols.priority.field]}}</td>
+				<td ng-if="cols.station.show" class="col-md-1 text-center" title="cols.station.title" ng-click="viewTask(row.id)">{{row[cols.station.field]}}</td>
+				<td ng-if="cols.title.show" class="col-md-1 text-center" title="cols.title.title" ng-click="viewTask(row.id)">{{row[cols.title.field]}}</td>
+				<td ng-if="cols.creator.show" class="col-md-1 text-center" title="cols.creator.title" ng-click="viewTask(row.id)">{{row[cols.creator.field]}}</td>
+				<td ng-if="cols.assigned.show" class="col-md-1 text-center" title="cols.assigned.title" ng-click="viewTask(row.id)">{{row[cols.assigned.field]}}</td>
+				<td ng-if="cols.approved.show" class="col-md-1 text-center" title="cols.approved.title" ng-click="viewTask(row.id)">
+					<span ng-class="{'glyphicon glyphicon-thumbs-up' : row.approved == 1, 'glyphicon glyphicon-minus' : row.approved == 0}"></span>
+				</td>
+				<td ng-if="cols.reviewed.show" class="col-md-1 text-center" title="cols.reviewed.title">
+					<span ng-class="{'glyphicon glyphicon-certificate certificateGreen' : row.reviewed == 1, 'glyphicon glyphicon-minus' : taskrowreviewed == 0}"></span>
+				</td>
+				<td ng-if="cols.control.show" class="col-md-2 col-sm-2 text-center" title="cols.control.title">
+<!--
+					<div class="btn-group">
+						<button type="button" class="btn btn-sm btn-default">Action</button>
+						<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="caret"></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a href="#/tasks/{{row.id}}" class="btn-info">View</a></li>
+							<li role="separator" class="divider"></li>
+							<li ng-if="currentUser.rank > '60'"><a href="#/tasks/{{row.id}}/edit" class="btn-warning">Edit</a></li>
+							<li role="separator" class="divider"></li>
+							<li>
+								<a ng-click="activeTask(row)" ng-class="row.active ? 'btn-success' : 'btn-default'">
+									<small ng-if="row.active">Active!</small>
+									<span ng-if="!row.active">Inactive</span>
+								</a>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li><a ng-if="currentUser.rank > '60'" ng-click="deleteTask(row.id)" class="btn-danger">Delete</a></li>
+							<li><a href="#">Separated link</a></li>
+						</ul>
+					</div>
+-->
+						<a href="#/tasks/{{row.id}}" class="btn btn-info btn-xs btn-witdhC">View</a>
+						<a ng-if="currentUser.rank > '60'" href="#/tasks/{{row.id}}/edit" class="btn btn-warning btn-xs btn-witdhC">Edit</a>
+					<div ng-if="currentUser.rank > '60'" class="btn-crud">
+						<button ng-click="activeTask(row)" ng-class="row.active == '1' ? 'btn-success' : 'btn-default'" class="btn btn-xs btn-witdhC">
+							<small ng-if="row.active == '1'">Active!</small>
+									<span ng-if="row.active == '' || !row.active">Inactive</span>
+						</button>
+						<button ng-click="deleteTask(row.id)" class="btn btn-danger btn-xs btn-witdhC">Delete</button>
 					</div>
 				</td>
 			</tr>

@@ -10,7 +10,7 @@ myApp.controller('viewTaskCtrl', ['$rootScope', '$scope', '$routeParams', '$uibM
 			'email' : $cookies.getObject('loggedUser').email,
 		}
 		
-		$http.post(site+'/tasks/view', $routeParams.id)
+		$http.get(site+'/tasks/view/'+$routeParams.id)
 		.then(function(response){
 			$scope.task = response.data;
 			console.log($scope.task);
@@ -102,13 +102,13 @@ myApp.controller('viewTaskCtrl', ['$rootScope', '$scope', '$routeParams', '$uibM
 		})
 	}
 	$scope.deleteTask = function(taskId){
-		$http.post(site+'/tasks/delete', taskId)
+		$http.get(site+'/tasks/delete/'+taskId)
 		.then(function(response){
 //			console.log(response.data);
 			if(response.data == 'true'){
 				var message = 'Task Deleted Succesfully!';
 				var id = Flash.create('success', message, 3500);
-				$location.path('/tasks');
+//				$location.path('/tasks');
 			}
 		})
 	}

@@ -5,7 +5,7 @@ myApp.controller('viewTestCtrl', ['$scope','$rootScope', '$route', '$location','
 		var scope = $scope;
 	if($scope.isAuthenticated == true){	
 	
-	$http.post(site+'/plans/show_test', $stateParams.testId)
+	$http.get(site+'/plans/show_test/' + $stateParams.testId)
 	.then(function(response){
 		var data = response.data;
 		$scope.plan = {};

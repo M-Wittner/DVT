@@ -1,4 +1,9 @@
-var myApp = angular.module('myApp', ['ui.router', 'ngRoute', 'ngTable', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'btorfs.multiselect', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'ngSanitize', 'ui.calendar', 'ngFileSaver', 'oc.lazyLoad']);
+var underscore = angular.module('underscore', []);
+underscore.factory('_', ['$window', function ($window) {
+	return $window._; // assumes underscore has already been loaded on the page
+}]);
+
+var myApp = angular.module('myApp', ['ui.router', 'ngRoute', 'ngTable', 'ui.bootstrap', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'underscore']);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$httpProvider.defaults.cache = false;
@@ -90,7 +95,6 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 			templateUrl: 'pages/operators/calendar.html',
 			controller: 'calendarCtrl'
 		})
-
 		//		--------------------	ADMIN PAGES --------------------
 		.when('/admin', {
 			templateUrl: 'pages/admin/panel.html',
@@ -271,7 +275,25 @@ myApp.config(['$stateProvider', '$locationProvider', function ($stateProvider, $
 			url: '/log',
 			templateUrl: 'pages/admin/operations.html',
 			controller: 'logCtrl',
-										},
+		},
+		chipList = {
+			name: 'chipList',
+			url: '/chips/list',
+			templateUrl: 'pages/admin/chiplist.html',
+			controller: 'chipListCtrl',
+		},
+		newChip = {
+			name: 'newChip',
+			url: '/chips/new',
+			templateUrl: 'pages/admin/newchip.html',
+			controller: 'chipCtrl',
+		},
+		stations = {
+			name: 'stations',
+			url: '/stations',
+			templateUrl: 'pages/admin/stations.html',
+			controller: 'stationsCtrl',
+		},
 //		--------------------	PROFILE PAGES --------------------
 		userTasks = {
 			name: 'userTasks',
@@ -383,6 +405,16 @@ myApp.directive('dacDigSweep', function () {
 myApp.directive('generalSweep', function () {
 	return {
 		templateUrl: 'pages/plans/partials/Test Form/generalSweep.html',
+	}
+})
+myApp.directive('singleSweep', function () {
+	return {
+		templateUrl: 'pages/plans/partials/Test Form/singleSweep.html',
+	}
+})
+myApp.directive('addChip', function () {
+	return {
+		templateUrl: 'pages/admin/newchip.html',
 	}
 })
 
@@ -517,18 +549,6 @@ myApp.constant('USER_ROLES', {
 	guest: 'guest'
 });
 
-//myApp.factory('LS', function ($window, $rootScope) {
-//	var LS = {};
-//	LS.setData = function (val) {
-//		$window.localStorage && $window.localStorage.setItem('chipStatus', val);
-//		return this;
-//	};
-//	LS.getData = function () {
-//		return $window.localStorage && $window.localStorage.getItem('chipStatus');
-//	};
-//	return LS;
-//});
-
 myApp.factory('AuthService', function (testParams, $http, Session, $cookies) {
 	var authService = {};
 	var site = testParams.site
@@ -567,37 +587,35 @@ myApp.factory('AuthService', function (testParams, $http, Session, $cookies) {
 
 	return authService;
 });
-myApp.factory('siteParams', function ($http, $log, $rootScope){
-//	$rootScope.$site = "http://wigig-299";
+myApp.factory('siteParams', function ($http, $log, $rootScope) {
+	//	$rootScope.$site = "http://wigig-299";
 	var siteParams = {}
 	var site = $rootScope.site;
 	siteParams.params = {};
-});
-myApp.factory('testParams', function ($http, $log, $rootScope) {
-	var lineupParams = {};
-	var site = $rootScope.site;
-	$http.get(site + '/params/lineupParams')
-		.then(function (response) {
-			lineupParams.lineups = response.data;
-//					console.log(response.data);
-		});	
-	return lineupParams;
 });
 myApp.factory('taskParams', function ($http, $log, $rootScope) {
 	var site = $rootScope.site;
 	var taskParams = {};
 	taskParams.autoUsers = {};
+	taskParams.approved = [{id: 0, title: 'Declined'},{id: 1, title: 'Approved'}];
+	taskParams.reviewed = [{id: 0, title: 'Not'},{id: 1, title: 'Reviewed'}];
 	$http.get(site + '/params/autoUsers')
-	.then(function (response) {
-//		console.log(response.data);
-		taskParams.autoUsers = response.data.obj;
-		taskParams.autoUsersArr = response.data.arr;
-	});
+		.then(function (response) {
+			//		console.log(response.data);
+			taskParams.autoUsers = response.data.obj;
+			taskParams.autoUsersArr = response.data.arr;
+			taskParams.assignees = response.data.obj.map(user=>{
+				return {id: user.id, title: user.fname + " " + user.lname};
+			})
+		});
 	$http.get(site + '/params/fields')
 		.then(function (response) {
 			taskParams.fieldList = response.data.obj;
 			taskParams.fieldListArr = response.data.arr;
-			//		console.log(response.data);
+//					console.log(response.data);
+			taskParams.stations = response.data.obj.map(station => {
+				return {id: station.id, title: station.work_station};
+			});
 		});
 	$http.get(site + '/params/taskTypes')
 		.then(function (response) {
@@ -608,50 +626,76 @@ myApp.factory('taskParams', function ($http, $log, $rootScope) {
 		.then(function (response) {
 			taskParams.taskStatus = response.data.obj;
 			taskParams.taskStatusArr = response.data.arr;
+			taskParams.statuses = response.data.obj.map(status => {
+				return {id: status.id, title: status.task_status};
+			});
 		});
 
 	$http.get(site + '/params/taskPriority')
 		.then(function (response) {
 			taskParams.taskPriority = response.data.obj;
 			taskParams.taskPriorityArr = response.data.arr;
+			taskParams.priorities = response.data.obj.map(status => {
+				return {id: status.id, title: status.task_priority};
+			});
 		});
-//	console.log(taskParams);
+	//	console.log(taskParams);
 	return taskParams;
 });
-
 myApp.factory('testParams', function ($http, $log, $rootScope) {
 	$rootScope.site = "http://wigig-299";
 	var testParams = {};
 	var site = $rootScope.site;
 	var today = new Date();
-	testParams.parseDate = function(date){
+	testParams.parseDate = function (date) {
 		var dd = date.getDate();
-		var mm = date.getMonth()+1; //January is 0!
+		var mm = date.getMonth() + 1; //January is 0!
 		var yyyy = date.getFullYear();
-		if(dd<10) {
-    dd = '0'+dd
-		} 
+		if (dd < 10) {
+			dd = '0' + dd
+		}
 
-		if(mm<10) {
-				mm = '0'+mm
+		if (mm < 10) {
+			mm = '0' + mm
 		}
 		var parsedDate = dd + '/' + mm + '/' + yyyy;
 		return parsedDate;
 	}
 	$rootScope.parse = testParams.parseDate;
 	testParams.today = today;
-	
+
 	testParams.params = {};
 	testParams.params.priorityList = [
-		{display_name: '1 - Highest', value: '1'},
-		{display_name: '2', value: '2'},
-		{display_name: '3', value: '3'},
-		{display_name: '4', value: '4'},
-		{display_name: '5', value: '5'},
-		{display_name: '6', value: '6'},
-		{display_name: '7 - Lowest', value: '7'},
+		{
+			display_name: '1 - Highest',
+			value: '1'
+		},
+		{
+			display_name: '2',
+			value: '2'
+		},
+		{
+			display_name: '3',
+			value: '3'
+		},
+		{
+			display_name: '4',
+			value: '4'
+		},
+		{
+			display_name: '5',
+			value: '5'
+		},
+		{
+			display_name: '6',
+			value: '6'
+		},
+		{
+			display_name: '7 - Lowest',
+			value: '7'
+		},
 	];
-	
+
 	testParams.plans = {};
 	$http.get(site + '/plans')
 		.then(function (response) {
@@ -673,6 +717,7 @@ myApp.factory('testParams', function ($http, $log, $rootScope) {
 	$http.get(site + '/admin/operatorList')
 		.then(function (response) {
 			testParams.params.operatorList = response.data;
+			//		console.log(response.data);
 		});
 
 	$http.get(site + '/params/allChips')
@@ -682,7 +727,7 @@ myApp.factory('testParams', function ($http, $log, $rootScope) {
 	$http.get(site + '/params/allParams')
 		.then(function (response) {
 			testParams.params.allParams = response.data;
-//					console.log(response.data);
+			//					console.log(response.data);
 		})
 
 	$http.get(site + '/params/testTypes')
@@ -690,25 +735,25 @@ myApp.factory('testParams', function ($http, $log, $rootScope) {
 			testParams.params.testTypes = response.data;
 		});
 
-//		$http.get(site+'/params/stations')
-//		.then(function(response){
-//			testParams.params.stationList = response.data;
-//		});
+	//		$http.get(site+'/params/stations')
+	//		.then(function(response){
+	//			testParams.params.stationList = response.data;
+	//		});
 
-//	testParams.status = {
-//		isopen: false
-//	};
-//
-//	testParams.toggled = function (open) {
-//		$log.log('Dropdown is now: ', open);
-//	};
-//
-//	testParams.toggleDropdown = function ($event) {
-//		$event.preventDefault();
-//		$event.stopPropagation();
-//		testParams.status.isopen = !testParams.status.isopen;
-//	};
-//	testParams.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+	//	testParams.status = {
+	//		isopen: false
+	//	};
+	//
+	//	testParams.toggled = function (open) {
+	//		$log.log('Dropdown is now: ', open);
+	//	};
+	//
+	//	testParams.toggleDropdown = function ($event) {
+	//		$event.preventDefault();
+	//		$event.stopPropagation();
+	//		testParams.status.isopen = !testParams.status.isopen;
+	//	};
+	//	testParams.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 
 	return testParams;
 });

@@ -1,4 +1,4 @@
-<table ng-table="tableParams" class="table table-striped">
+<table ng-table="tableParamss" class="table table-striped">
 	<tr ng-repeat="data in test.errors track by $index">
 		<td class="col-md-1 text-center" data-title="'ID'">{{data.idx}}</td>
 		<td class="col-md-2 text-center" data-title="'Operation ID'" sortable="'test_id'">{{data.test_id}}</td>
@@ -10,10 +10,6 @@
 		<td class="col-md-1 text-center" data-title="'Step'">{{data.step_name}}</td>
 		<td class="col-md-1 text-center" data-title="'Error ID'">{{data.data_id}}</td>
 		<td class="col-md-2 text-center" data-title="'Error'">{{data.data}}</td>
-<!--
-		<td class="col-md-1 text-center" data-title="'View'">
-			<a class="btn btn-sm btn-info" ui-sref="viewTest({planId: data.plan_id, testId: data.test_id})" ui-sref-active="navActive">View</a>
-		</td>
--->
 	</tr>
 </table>
+<!--<ul uib-pagination total-items="test.errors.length" ng-change="setPage(currentPage)" ng-model="currentPage" max-size="5" items-per-page="itemsPerPage" class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>-->

@@ -1,0 +1,68 @@
+<!--
+<div class="panel panel-primary">
+	 Default panel contents 
+	<div class="panel-heading">All Stations</div>
+	<div class="panel-body">
+		 Table 
+		<table ng-table="TableParams" class="table table-condensed">
+			<tr ng-repeat="station in $data track by station.idx+$index"  style="border-left: 5px solid {{station.color}};">
+				<td class="col-md-1 text-center" data-title="'Station'">{{station.name}}</td>
+				<td class="col-md-1 text-center" data-title="'Host PC'">{{station.hostname}}</td>
+				<td class="col-md-1 text-center" data-title="'WWC Host'">{{station.wwc_pc}}</td>
+				<td class="col-md-1 text-center" data-title="'DMtools Host'">{{station.dmt_pc}}</td>
+				<td ng-if="currentUser.rank > 50" class="col-md-1 text-center" data-title="'Modify'">
+					<a href="#/admin/editstation/{{station.station}}" class="btn btn-warning btn-sm" ng-disabled="true">Edit</a>
+					<button class="btn btn-danger btn-sm" ng-click="removeStation()" ng-disabled="true">Delete</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+-->
+
+<div class="panel panel-primary">
+	<!-- Default panel contents -->
+	<div class="panel-heading">All Stations</div>
+	<div class="panel-body">
+	<uib-tabset active="active">
+	<!--	<div uib-tab ng-repeat="station in $data track by station.idx+$index" index="0" heading="{{station.name}}">Static content</uib-tab>-->
+		<uib-tab index="$index + 1" ng-repeat="station in stations track by station.idx+$index" heading="{{station.name}}" disable="station.disabled" style="border-bottom: 5px solid {{station.color}};" ng-click="getStationData(station)">
+			<div class="panel-body">
+				<div class="row">
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon" style="font-weight:900">Station:</span>
+						<label class="form-control">#{{station.name}}</label>
+						<span class="input-group-addon" style="font-weight:900">Host PC:</span>
+						<label class="form-control">{{station.hostname}}</label>
+						<span ng-if="station.wwc_pc" class="input-group-addon" style="font-weight:900">WWC PC:</span>
+						<label ng-if="station.wwc_pc" class="form-control">{{station.wwc_pc}}</label>
+						<span class="input-group-addon" style="font-weight:900">DMtools Host:</span>
+						<label class="form-control">{{station.dmt_pc}}</label>
+					</div>
+				</div>
+				<div class="row rowMarg">
+					<div style="margin: auto; width: 0%">
+						<div class="loader" ng-class="{'fadeOut': station.tests.length > 0}" ng-hide="station.errors.length > 0"></div>
+					</div>
+					<uib-accordion class="fadeIn">
+						<div uib-accordion-group ng-repeat="test in station.tests track by type_idx+$index" class="panel-default" ng-click="getTestData(test)" is-open="test.isOpen" ng-if="station.tests.length > 0 && !test.errors" class="panel-default fadeIn">
+							<uib-accordion-heading>
+								<strong>{{test.test_name}}</strong>
+							</uib-accordion-heading>
+							<div style="margin: auto; width: 0%">
+								<div class="loader" ng-class="{'fadeOut': test.sweeps.length > 0}" ng-hide="test.errors.length > 0"></div>
+							</div>
+							<div class="fadeIn">
+								<div ng-repeat="sweep in test.sweeps | orderBy: ['priority']">
+									{{sweep.name}}
+									<pre>{{sweep}}</pre>
+								</div>
+							</div>
+						</div>
+					</uib-accordion>
+				</div>
+			</div>
+		</uib-tab>
+	</uib-tabset>
+	</div>
+</div>

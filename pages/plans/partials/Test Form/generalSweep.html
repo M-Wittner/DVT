@@ -1,4 +1,4 @@
-<div ng-if="sweepData.data_type != 33 && sweepData.data_type < 100 && sweepData.data_type != 60 && sweepData.data_type != 61" class="col-md-3 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'"  allow-clear>
+<div ng-if="sweepData.data_type != 33 && sweepData.data_type < 100 && sweepData.data_type != 60 && sweepData.data_type != 61 && sweepData.data_type != 10" class="col-md-3 rowMarg" uib-popover="{{struct.tooltip}}" popover-trigger="'mouseenter'"  allow-clear>
 	<span class="label label-dangerC">{{sweepName}}</span>
 	<div class="input-group">
 		<ui-select style="min-width: 100%" multiple close-on-select="false" ng-model="test.sweeps[sweepName].data" data-placeholder="Pick Test" ng-disabled="lock">
@@ -12,7 +12,7 @@
 			<button type="button" ng-click="selectAll(test, sweepData, sweepName)" class="btn btn-default btn-sm" ng-disabled="lock">
 				<span class="glyphicon glyphicon-check"></span>
 			</button>
-			<button class="btn btn-default btn-sm" ng-click="extras(test, sweepData)" ng-disabled="lock">
+			<button ng-if="sweepData.data_type == 2" class="btn btn-default btn-sm" ng-click="extras(test, sweepData)" ng-disabled="lock">
 				<span class="glyphicon glyphicon-plus"></span>
 			</button>
 		</span>

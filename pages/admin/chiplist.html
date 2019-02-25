@@ -1,20 +1,26 @@
 <div class="panel panel-primary">
 	<!-- Default panel contents -->
-	<div class="panel-heading">All Chips</div>
+	<div class="panel-heading">All Chips
+		<span class="pull-right">
+			<div ng-click="chipPanel = !chipPanel" class="btn btn-xs btn-success">New!</div>
+		</span>
+	</div>
 	<div class="panel-body">
+		<add-chip class="fadeIn" ng-class="{'fadeOut': !chipPanel}"></add-chip>
 	</div>
 	<!-- Table -->
 	<table ng-table="tableParams" class="table table-striped">
 		<tr ng-repeat="(title, chip) in $data track by chip.chip_id">
 			<td class="col-md-1 text-center" data-title="'ID'" sortable="'chip_id'">{{chip.chip_id}}</td>
 			<td class="col-md-1 text-center" data-title="'Serial Number'" filter="{chip_sn: 'text'}" sortable="'chip_sn'">{{chip.chip_sn}}</td>
+			<td class="col-md-1 text-center" data-title="'Corner'" filter="{chip_process_abb: 'text'}" sortable="'chip_process_abb'">{{chip.chip_process_abb}}</td>
 			<td class="col-md-1 text-center" data-title="'Board'">{{chip.board}}</td>
 			<td class="col-md-1 text-center" data-title="'Package'">{{chip.package}}</td>
 			<td class="col-md-1 text-center" data-title="'Revision'">{{chip.revision}}</td>
 			<td class="col-md-1 text-center" data-title="'Type'" filter="{chip_type_id: 'text'}" sortable="'chip_type_id'"><span ng-if="chip.chip_type_id == '1' ? Type = 'TalynA' : chip.chip_type_id == '2' ? Type = 'TalynM': chip.chip_type_id == '3' ? Type = 'TalynA-2' : chip.chip_type_id == '4' ? Type = 'TalynM-2' : Type = null">{{Type}}</span></td>
 			<td ng-if="currentUser.rank > 60" class="col-md-1 text-center" data-title="'Modify'">
-				<div ng-click="edit(chip.chip_id)" class="btn btn-warning">Edit</div>	
-				<div ng-click="delete(chip.chip_id)" class="btn btn-danger">Delete</div>	
+				<div ng-click="edit(chip.chip_id)" class="btn btn-warning" ng-disabled="true">Edit</div>	
+				<div ng-click="delete(chip.chip_id)" class="btn btn-danger" ng-disabled="true">Delete</div>	
 			</td>
 		</tr>
 	</table>

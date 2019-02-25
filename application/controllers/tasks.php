@@ -41,8 +41,7 @@ class Tasks extends CI_Controller {
 		echo json_encode($response);
 	}
 	
-	public function view(){
-		$id = json_decode(file_get_contents('php://input'));
+	public function view($id){
 		$task = $this->db->get_where('tasks_view', ['id'=>$id])->result()[0];
 		if($task->approved == "0"){
 			$task->approved = false;
@@ -83,21 +82,23 @@ class Tasks extends CI_Controller {
 		echo json_encode($res);
 	}
 	
-	public function delete(){
-		$id = json_decode(file_get_contents('php://input'));
+	public function delete($id){
+//		$id = json_decode(file_get_contents('php://input'));
 		$this->db->where('id', $id);
 		$res = $this->db->delete('tasks');
 		
 		echo json_encode($res);
 	}
-	public function active(){
-		$data = json_decode(file_get_contents('php://input'));
-		$id = $data->taskId;
-		$active = !$data->active;
+	public function active($id){
+		$this->db->select('active');
+		$state = $this->db->get_where('tasks', ['id'=>$id])->result();
+		if(isset($state) && count($state) == 1){
+			$state = !($state[0]->active);
+		}
+//		die(json_encode($state));
 		$this->db->where('id', $id);
-		$res = $this->db->update('tasks', ['active'=>$active]);
-		
-		echo json_encode($res);
+		$res = $this->db->update('tasks', ['active'=>$state]);
+		die($state);
 	}
 	
 	public function approveUpdate(){
