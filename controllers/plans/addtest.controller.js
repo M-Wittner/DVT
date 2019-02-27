@@ -15,48 +15,26 @@ myApp.controller('addTestCtrl', ['$scope', '$rootScope', '$http', '$location', '
 	$scope.plan.userId = $cookies.getObject('loggedUser').id;
 	$scope.plan.username = $cookies.getObject('loggedUser').username;
 	$scope.plan.id = $routeParams.planId;
-	$scope.chipPairs = [{}];
-	
-	$scope.addPair = function(){
-		$scope.chipPairs.push({});
-	}
 	
 	$scope.testCount = [{}];
 	$scope.addTest = function(){
 		$scope.testCount.push({})
 	}
 	
-	$scope.insertTest = function(data){
-		$scope.planParams.push(this.test);
-		$scope.lock = true;
-		console.log(this);
-		console.log(data);
-	}
-	$scope.editToggle = function(){
-		$scope.lock = false;
-		$scope.planParams.splice(this.test, 1);
-//		console.log($scope);
-		console.log(this.test);
-	}
-	
 	$scope.removeTest = function() {
 		$scope.testCount.splice($scope.testCount.length-1,1);
 	}
-	$scope.calc = false;
-	$scope.showCalc = function(){
-		$scope.calc = !$scope.calc;
-	};
 
-	$scope.selectAll = function(test, sweep){
-		console.log(test);
-		console.log(sweep);
-		var result = testParams.params.allParams.filter(item => item.config_id == sweep.config_id);
-		console.log(result);
-		if(!test.sweeps){
-			test.sweeps = [];
-		}
-		test.sweeps[sweep.name].data = result;
-	};
+//	$scope.selectAll = function(test, sweep){
+//		console.log(test);
+//		console.log(sweep);
+//		var result = testParams.params.allParams.filter(item => item.config_id == sweep.config_id);
+//		console.log(result);
+//		if(!test.sweeps){
+//			test.sweeps = [];
+//		}
+//		test.sweeps[sweep.name].data = result;
+//	};
 
 	$scope.addPlan = function() {
 		$http.post(site+'/plans/createnew', {plan: $scope.plan, test: $scope.array})
@@ -76,10 +54,9 @@ myApp.controller('addTestCtrl', ['$scope', '$rootScope', '$http', '$location', '
 			}else{
 				var message = response.data;
 				var id = Flash.create('success', message, 3500);
-//				$location.path('/plans');
+				$location.path('/today');
 			}
 		})
-//		console.log($scope.array);
 	};
 	
 	$scope.copyTest = function(){
@@ -88,6 +65,5 @@ myApp.controller('addTestCtrl', ['$scope', '$rootScope', '$http', '$location', '
 			console.log(response.data);
 			$scope.test = response.data;
 		})
-//		console.log($scope.copyId);
 	}
 }]);

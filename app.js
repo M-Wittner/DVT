@@ -5,194 +5,197 @@ underscore.factory('_', ['$window', function ($window) {
 
 var myApp = angular.module('myApp', ['ui.router', 'ngRoute', 'ngTable', 'ui.bootstrap', 'ngFlash', 'ngCookies', 'trumbowyg-ng', 'ui.select', 'underscore']);
 
-myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
-	$httpProvider.defaults.cache = false;
-	if (!$httpProvider.defaults.headers.get) {
-		$httpProvider.defaults.headers.get = {};
-	}
-	// disable IE ajax request caching
-	$httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
-	//.... proceed routes
-	$routeProvider
-		.when('/', {
-			templateUrl: 'pages/home.html',
-			controller: 'homeCtrl'
-		})
-		.when('/register', {
-			templateUrl: 'pages/register.html',
-			controller: 'regCtrl'
-		})
-		//		--------------------	DVT PAGES --------------------
-		.when('/plans', {
-			templateUrl: 'pages/plans/index.html',
-			controller: 'plansCtrl'
-		})
-		.when('/plans/new', {
-			templateUrl: 'pages/plans/new.html',
-			controller: 'newPlanCtrl'
-		})
-		.when('/plans/:id', {
-			templateUrl: 'pages/plans/view.html',
-			controller: 'viewPlanCtrl'
-		})
-		.when('/plans/:planId/test/:testId/edit', {
-			templateUrl: 'pages/plans/edit.html',
-			controller: 'editPlanCtrl'
-		})
-		.when('/plans/:planId/test/:testId/comments/new', {
-			templateUrl: 'pages/comments/new.html',
-			controller: 'newCommentCtrl'
-		})
-		.when('/plans/:planId/test/:testId/comment/:commentId/edit', {
-			templateUrl: 'pages/comments/edit.html',
-			controller: 'editCommentCtrl'
-		})
-		.when('/plans/:planId/addtests', {
-			templateUrl: 'pages/plans/addtest.html',
-			controller: 'addTestCtrl'
-		})
-		//		--------------------	TASKS PAGES --------------------
-		.when('/tasks', {
-			templateUrl: 'pages/tasks/index.html',
-			controller: 'tasksCtrl'
-		})
-		.when('/tasks/new', {
-			templateUrl: 'pages/tasks/new.html',
-			controller: 'newTaskCtrl'
-		})
-		.when('/tasks/:id', {
-			templateUrl: 'pages/tasks/view.html',
-			controller: 'viewTaskCtrl'
-		})
-		.when('/tasks/:id/edit', {
-			templateUrl: 'pages/tasks/edit.html',
-			controller: 'editTaskCtrl'
-		})
-		.when('/tasks/:id/comment/new', {
-			templateUrl: 'pages/tasks/comments/new.html',
-			controller: 'newTaskCommentCtrl'
-		})
-		//		--------------------	LINEUP PAGES --------------------
-		.when('/lineups', {
-			templateUrl: 'pages/lineups/index.html',
-			controller: 'lineupsCtrl'
-		})
-		.when('/lineups/new', {
-			templateUrl: 'pages/lineups/new.html',
-			controller: 'newLineupCtrl'
-		})
-		.when('/lineups/check', {
-			templateUrl: 'pages/lineups/check.html',
-			controller: 'checkLineupCtrl'
-		})
-		//		--------------------	PROFILE PAGES --------------------
-		.when('/:username/tasks', {
-			templateUrl: 'pages/profile/myTasks.html',
-			controller: 'myTasksCtrl'
-		})
-		//		--------------------	Operators PAGES --------------------
-		.when('/operators/calendar', {
-			templateUrl: 'pages/operators/calendar.html',
-			controller: 'calendarCtrl'
-		})
-		//		--------------------	ADMIN PAGES --------------------
-		.when('/admin', {
-			templateUrl: 'pages/admin/panel.html',
-			controller: 'adminCtrl'
-		})
-		.when('/admin/search', {
-			templateUrl: 'pages/admin/search.html',
-			controller: 'searchCtrl'
-		})
-		.when('/admin/newchip', {
-			templateUrl: 'pages/admin/newchip.html',
-			controller: 'chipCtrl'
-		})
-		.when('/admin/newtest', {
-			templateUrl: 'pages/admin/newtest.html',
-			controller: 'testCtrl'
-		})
-		.when('/admin/newstation', {
-			templateUrl: 'pages/admin/newstation.html',
-			controller: 'stationCtrl'
-		})
-		.when('/admin/editstation/:station', {
-			templateUrl: 'pages/admin/editstation.html',
-			controller: 'editStationCtrl'
-		})
-		.when('/admin/chiplist', {
-			templateUrl: 'pages/admin/chiplist.html',
-			controller: 'chiplistCtrl'
-		})
-		.when('/admin/testlist', {
-			templateUrl: 'pages/admin/testlist.html',
-			controller: 'testlistCtrl'
-		})
-		.when('/admin/stationlist', {
-			templateUrl: 'pages/admin/stationlist.html',
-			controller: 'stationlistCtrl'
-		})
-		.when('/admin/iterationlist', {
-			templateUrl: 'pages/admin/iterationlist.html',
-			controller: 'iterationlistCtrl'
-		})
-		.when('/admin/edititeration/:id', {
-			templateUrl: 'pages/admin/edititeration.html',
-			controller: 'edititerationCtrl'
-		})
-		.when('/admin/operations', {
-			templateUrl: 'pages/admin/operations.html',
-			controller: 'operationsCtrl'
-		})
-	//		.otherwise({redirectTo: '/'});
+//myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
+//	$httpProvider.defaults.cache = false;
+//	if (!$httpProvider.defaults.headers.get) {
+//		$httpProvider.defaults.headers.get = {};
+//	}
+//	// disable IE ajax request caching
+//	$httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
+//	//.... proceed routes
+//	$routeProvider
+//		.when('/', {
+//			templateUrl: 'pages/home.html',
+//			controller: 'homeCtrl'
+//		})
+//		.when('/register', {
+//			templateUrl: 'pages/register.html',
+//			controller: 'regCtrl'
+//		})
+//		//		--------------------	DVT PAGES --------------------
+//		.when('/plans', {
+//			templateUrl: 'pages/plans/index.html',
+//			controller: 'plansCtrl'
+//		})
+//		.when('/plans/new', {
+//			templateUrl: 'pages/plans/new.html',
+//			controller: 'newPlanCtrl'
+//		})
+//		.when('/plans/:id', {
+//			templateUrl: 'pages/plans/view.html',
+//			controller: 'viewPlanCtrl'
+//		})
+//		.when('/plans/:planId/test/:testId/edit', {
+//			templateUrl: 'pages/plans/edit.html',
+//			controller: 'editPlanCtrl'
+//		})
+//		.when('/plans/:planId/test/:testId/comments/new', {
+//			templateUrl: 'pages/comments/new.html',
+//			controller: 'newCommentCtrl'
+//		})
+//		.when('/plans/:planId/test/:testId/comment/:commentId/edit', {
+//			templateUrl: 'pages/comments/edit.html',
+//			controller: 'editCommentCtrl'
+//		})
+//		.when('/plans/:planId/addtests', {
+//			templateUrl: 'pages/plans/addtest.html',
+//			controller: 'addTestCtrl'
+//		})
+//		//		--------------------	TASKS PAGES --------------------
+//		.when('/tasks', {
+//			templateUrl: 'pages/tasks/index.html',
+//			controller: 'tasksCtrl'
+//		})
+//		.when('/tasks/new', {
+//			templateUrl: 'pages/tasks/new.html',
+//			controller: 'newTaskCtrl'
+//		})
+//		.when('/tasks/:id', {
+//			templateUrl: 'pages/tasks/view.html',
+//			controller: 'viewTaskCtrl'
+//		})
+//		.when('/tasks/:id/edit', {
+//			templateUrl: 'pages/tasks/edit.html',
+//			controller: 'editTaskCtrl'
+//		})
+//		.when('/tasks/:id/comment/new', {
+//			templateUrl: 'pages/tasks/comments/new.html',
+//			controller: 'newTaskCommentCtrl'
+//		})
+//		//		--------------------	LINEUP PAGES --------------------
+//		.when('/lineups', {
+//			templateUrl: 'pages/lineups/index.html',
+//			controller: 'lineupsCtrl'
+//		})
+//		.when('/lineups/new', {
+//			templateUrl: 'pages/lineups/new.html',
+//			controller: 'newLineupCtrl'
+//		})
+//		.when('/lineups/check', {
+//			templateUrl: 'pages/lineups/check.html',
+//			controller: 'checkLineupCtrl'
+//		})
+//		//		--------------------	PROFILE PAGES --------------------
+//		.when('/:username/tasks', {
+//			templateUrl: 'pages/profile/myTasks.html',
+//			controller: 'myTasksCtrl'
+//		})
+//		//		--------------------	Operators PAGES --------------------
+//		.when('/operators/calendar', {
+//			templateUrl: 'pages/operators/calendar.html',
+//			controller: 'calendarCtrl'
+//		})
+//		//		--------------------	ADMIN PAGES --------------------
+//		.when('/admin', {
+//			templateUrl: 'pages/admin/panel.html',
+//			controller: 'adminCtrl'
+//		})
+//		.when('/admin/search', {
+//			templateUrl: 'pages/admin/search.html',
+//			controller: 'searchCtrl'
+//		})
+//		.when('/admin/newchip', {
+//			templateUrl: 'pages/admin/newchip.html',
+//			controller: 'chipCtrl'
+//		})
+//		.when('/admin/newtest', {
+//			templateUrl: 'pages/admin/newtest.html',
+//			controller: 'testCtrl'
+//		})
+//		.when('/admin/newstation', {
+//			templateUrl: 'pages/admin/newstation.html',
+//			controller: 'stationCtrl'
+//		})
+//		.when('/admin/editstation/:station', {
+//			templateUrl: 'pages/admin/editstation.html',
+//			controller: 'editStationCtrl'
+//		})
+//		.when('/admin/chiplist', {
+//			templateUrl: 'pages/admin/chiplist.html',
+//			controller: 'chiplistCtrl'
+//		})
+//		.when('/admin/testlist', {
+//			templateUrl: 'pages/admin/testlist.html',
+//			controller: 'testlistCtrl'
+//		})
+//		.when('/admin/stationlist', {
+//			templateUrl: 'pages/admin/stationlist.html',
+//			controller: 'stationlistCtrl'
+//		})
+//		.when('/admin/iterationlist', {
+//			templateUrl: 'pages/admin/iterationlist.html',
+//			controller: 'iterationlistCtrl'
+//		})
+//		.when('/admin/edititeration/:id', {
+//			templateUrl: 'pages/admin/edititeration.html',
+//			controller: 'edititerationCtrl'
+//		})
+//		.when('/admin/operations', {
+//			templateUrl: 'pages/admin/operations.html',
+//			controller: 'operationsCtrl'
+//		})
+//	//		.otherwise({redirectTo: '/'});
+//
+//	$locationProvider.hashPrefix('');
+//
+//}]);
 
-	$locationProvider.hashPrefix('');
-
-}]);
-
-myApp.config(['$stateProvider', '$locationProvider', function ($stateProvider, $locationProvider) {
-	var states = [
-		home = {
+myApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', function ($stateProvider, $locationProvider, $urlRouterProvider) {
+	$stateProvider
+		.state('home' , {
 			name: 'home',
 			url: '/',
 			templateUrl: 'pages/home.html',
 			controller: 'homeCtrl'
-		},
-		register = {
+		})
+		.state('register', {
 			name: 'register',
 			url: '/register',
 			templateUrl: 'pages/register.html',
 			controller: 'regCtrl'
-		},
+		})
 //		--------------------	DVT PAGES --------------------
-		todayPlan = {
+		.state('todayPlan', {
 			name: 'todayPlan',
 			url: '/today',
 			templateUrl: 'pages/plans/view.html',
 			controller: 'todayPlanCtrl',
-		},
-		plans = {
+		})
+		.state('plans', {
 			name: 'plans',
 			url: '/plans',
 			templateUrl: 'pages/plans/index.html',
 			controller: 'plansCtrl',
-		},
-		newPlan = {
+		})
+		.state('newPlan', {
 			name: 'newPlan',
 			url: '/new',
 			templateUrl: 'pages/plans/new.html',
 			controller: 'newPlanCtrl'
-		},
-		viewPlan = {
+		})
+		.state('viewPlan', {
 			name: 'viewPlan',
 			url: '/plans/{planId}',
-			params: {
-				obj: null
-			},
+			params: {},
 			templateUrl: 'pages/plans/view.html',
-			controller: 'viewPlanCtrl'
-		},
-		viewTest = {
+			controller: 'viewPlanCtrl',
+//			resolve: {
+//				'planData': ['$state', '$stateParams', 'GetData', function($state, $stateParams, GetData){
+//					return GetData.getPlan({id: $stateParams.planId});
+//				}]
+//			}
+		})
+		.state('viewTest', {
 			name: 'viewTest',
 			url: '/plans/{planId}/test/{testId}',
 			params: {
@@ -201,8 +204,8 @@ myApp.config(['$stateProvider', '$locationProvider', function ($stateProvider, $
 			},
 			templateUrl: 'pages/plans/viewTest.html',
 			controller: 'viewTestCtrl'
-		},
-		editTest = {
+		})
+		.state('editTest', {
 			name: 'editTest',
 			url: '/plans/{planId}/test/{testId}/edit',
 			params: {
@@ -210,8 +213,8 @@ myApp.config(['$stateProvider', '$locationProvider', function ($stateProvider, $
 			},
 			templateUrl: 'pages/plans/edit.html',
 			controller: 'editPlanCtrl'
-		},
-		addTest = {
+		})
+		.state('addTest', {
 			name: 'addTest',
 			url: '/plans/{planId}/addtests',
 			params: {
@@ -219,8 +222,8 @@ myApp.config(['$stateProvider', '$locationProvider', function ($stateProvider, $
 			},
 			templateUrl: 'pages/plans/addtest.html',
 			controller: 'addTestCtrl'
-		},
-		editComment = {
+		})
+		.state('editComment', {
 			name: 'editComment',
 			url: '/plans/{planId}/test/{testId}/comment/{commentId}/edit',
 			params: {
@@ -228,21 +231,21 @@ myApp.config(['$stateProvider', '$locationProvider', function ($stateProvider, $
 			},
 			templateUrl: 'pages/comments/edit.html',
 			controller: 'editCommentCtrl'
-		},
+		})
 //		--------------------	TASKS PAGES --------------------
-		tasks = {
+		.state('tasks', {
 			name: 'tasks',
 			url: '/tasks',
 			templateUrl: 'pages/tasks/index.html',
 			controller: 'tasksCtrl'
-		},
-		newTasks = {
+		})
+		.state('newTasks', {
 			name: 'newTasks',
 			url: '/tasks/new',
 			templateUrl: 'pages/tasks/new.html',
 			controller: 'newTaskCtrl'
-		},
-		viewTask = {
+		})
+		.state('viewTask', {
 			name: 'viewTask',
 			url: '/tasks/{testId}',
 			params: {
@@ -250,8 +253,8 @@ myApp.config(['$stateProvider', '$locationProvider', function ($stateProvider, $
 			},
 			templateUrl: 'pages/tasks/view.html',
 			controller: 'viewTaskCtrl'
-		},
-		editTask = {
+		})
+		.state('editTask', {
 			name: 'editTask',
 			url: '/tasks/{testId}/edit',
 			params: {
@@ -259,8 +262,8 @@ myApp.config(['$stateProvider', '$locationProvider', function ($stateProvider, $
 			},
 			templateUrl: 'pages/tasks/edit.html',
 			controller: 'editTaskCtrl'
-		},
-		commentTask = {
+		})
+		.state('commentTask', {
 			name: 'commentTask',
 			url: '/tasks/{testId}/edit',
 			params: {
@@ -268,34 +271,28 @@ myApp.config(['$stateProvider', '$locationProvider', function ($stateProvider, $
 			},
 			templateUrl: 'pages/tasks/edit.html',
 			controller: 'editTaskCtrl'
-		},
+		})
 //		--------------------	ADMIN PAGES --------------------
-		log = {
+		.state('log', {
 			name: 'log',
 			url: '/log',
 			templateUrl: 'pages/admin/operations.html',
 			controller: 'logCtrl',
-		},
-		chipList = {
+		})
+		.state('chipList', {
 			name: 'chipList',
 			url: '/chips/list',
 			templateUrl: 'pages/admin/chiplist.html',
 			controller: 'chipListCtrl',
-		},
-		newChip = {
-			name: 'newChip',
-			url: '/chips/new',
-			templateUrl: 'pages/admin/newchip.html',
-			controller: 'chipCtrl',
-		},
-		stations = {
+		})
+		.state('stations', {
 			name: 'stations',
 			url: '/stations',
 			templateUrl: 'pages/admin/stations.html',
 			controller: 'stationsCtrl',
-		},
+		})
 //		--------------------	PROFILE PAGES --------------------
-		userTasks = {
+		.state('userTasks', {
 			name: 'userTasks',
 			url: '/{username}/tasks',
 			params: {
@@ -303,20 +300,61 @@ myApp.config(['$stateProvider', '$locationProvider', function ($stateProvider, $
 			},
 			templateUrl: 'pages/profile/myTasks.html',
 			controller: 'myTasksCtrl'
-		},
-	];
-
-	states.forEach(function (state) {
-		$stateProvider.state(state);
-	})
+		});
 	$locationProvider.hashPrefix('');
 	$locationProvider.html5Mode();
 }]);
 
-myApp.run(function ($animate) {
-	$animate.enabled(true);
+//myApp.run(function ($animate) {
+//	$animate.enabled(true);
+//})
+
+myApp.service('GetData', function($q, $http, $rootScope){
+	var site = $rootScope.site;
+	this.getPlan = function($plan){
+		var deffered = $q.defer();
+		$http.get(site + '/plans/GetPlan/' + $plan.id)
+			.then(function(response) {
+			deffered.resolve(response.data);
+			if($.isEmptyObject(response.data) || response.data.errors.length > 0){
+				$plan.errors = response.data.errors;
+			}else{	
+				$plan = response.data;
+				$plan.tests = response.data.tests;
+				$plan.progress = response.data.progress;
+			}
+			console.log($plan);
+		});
+		return $plan;
+	}
+	this.getTest = function($test){
+		$http.get(site + '/plans/GetTest/' + $test.test_id)
+			.then(function(response) {
+//			console.log(response.data);
+			if($.isEmptyObject(response.data)){
+				$test.errors = response.data.errors;
+			}else{
+				$test.errors = response.data.errors;
+				$test.sweeps = response.data.sweeps;
+			}
+		});
+		return $test;
+	}
+	this.getTestData = function($test){
+		if(!$test.isOpen && $test.dirty)
+			return;
+		else{
+			$test.dirty = true;
+		}
+		if(!$test.sweeps){			
+			$test = this.getTest($test);
+		}
+		console.log($test);
+	}
+//	return Data;
 })
 
+//		------------------------	New Test Directives ------------------------
 myApp.directive('testForm', function () {
 	return {
 		templateUrl: 'pages/plans/newTest.html',
@@ -332,54 +370,9 @@ myApp.directive('testForm', function () {
 		}
 	}
 });
-
-myApp.directive('commentForm', function () {
-	return {
-		templateUrl: 'pages/plans/partials/commentForm.html',
-	}
-})
-
-myApp.directive('test', function () {
-	return {
-		templateUrl: 'pages/plans/partials/view/test.html',
-	}
-})
-myApp.directive('plan', function () {
-	return {
-		templateUrl: 'pages/plans/partials/view/plan.html',
-	}
-})
-myApp.directive('testStructView', function () {
-	return {
-		templateUrl: 'pages/plans/partials/View/testStruct.html',
-	}
-})
-myApp.directive('testProgressBar', function () {
-	return {
-		templateUrl: 'pages/plans/partials/View/progressBar.html',
-		scope: {
-			data: '=',
-		}
-	}
-})
-myApp.directive('testFooter', function () {
-	return {
-		templateUrl: 'pages/plans/partials/View/testFooter.html',
-	}
-})
 myApp.directive('testStruct', function () {
 	return {
 		templateUrl: 'pages/plans/partials/Test Form/testStruct.html',
-	}
-})
-myApp.directive('testErrors', function () {
-	return {
-		templateUrl: 'pages/plans/partials/view/testErrors.html',
-	}
-})
-myApp.directive('testBar', function () {
-	return {
-		templateUrl: 'pages/plans/partials/view/testBar.html',
 	}
 })
 myApp.directive('lineupSweep', function () {
@@ -412,6 +405,54 @@ myApp.directive('singleSweep', function () {
 		templateUrl: 'pages/plans/partials/Test Form/singleSweep.html',
 	}
 })
+//		--------------------	End Of New Test Directives --------------------
+//		------------------------	View Test Directives ------------------------
+myApp.directive('plan', function () {
+	return {
+		templateUrl: 'pages/plans/partials/view/plan.html',
+	}
+})
+myApp.directive('test', function () {
+	return {
+		templateUrl: 'pages/plans/partials/view/test.html',
+	}
+})
+myApp.directive('testProgressBar', function () {
+	return {
+		templateUrl: 'pages/plans/partials/View/progressBar.html',
+		scope: {
+			data: '=',
+		}
+	}
+})
+myApp.directive('testBar', function () {
+	return {
+		templateUrl: 'pages/plans/partials/view/testBar.html',
+	}
+})
+myApp.directive('testStructView', function () {
+	return {
+		templateUrl: 'pages/plans/partials/View/testStruct.html',
+	}
+})
+myApp.directive('testFooter', function () {
+	return {
+		templateUrl: 'pages/plans/partials/View/testFooter.html',
+	}
+})
+myApp.directive('testErrors', function () {
+	return {
+		templateUrl: 'pages/plans/partials/view/testErrors.html',
+	}
+})
+myApp.directive('commentForm', function () {
+	return {
+		templateUrl: 'pages/plans/partials/commentForm.html',
+	}
+})
+//		--------------------	End Of View Test Directives --------------------
+
+
 myApp.directive('addChip', function () {
 	return {
 		templateUrl: 'pages/admin/newchip.html',
@@ -429,27 +470,25 @@ app.directive("importSheetJs", function () {
 		}
 	};
 });
-
-myApp.service('fileUpload', ['$http', function ($http) {
-	this.uploadFileToUrl = function (file, uploadUrl, name, path) {
-		var fd = new FormData();
-		fd.append('file', file);
-		fd.append('name', name);
-		fd.append('path', path);
-		$http.post(uploadUrl, fd, {
-				transformRequest: angular.identity,
-				headers: {
-					'Content-Type': undefined,
-					'Process-Data': false
-				}
-			})
-			.then(function (response) {
-				console.log("Success");
-				console.log(response.data);
-			});
-	}
- }]);
-
+//myApp.service('fileUpload', ['$http', function ($http) {
+//	this.uploadFileToUrl = function (file, uploadUrl, name, path) {
+//		var fd = new FormData();
+//		fd.append('file', file);
+//		fd.append('name', name);
+//		fd.append('path', path);
+//		$http.post(uploadUrl, fd, {
+//				transformRequest: angular.identity,
+//				headers: {
+//					'Content-Type': undefined,
+//					'Process-Data': false
+//				}
+//			})
+//			.then(function (response) {
+//				console.log("Success");
+//				console.log(response.data);
+//			});
+//	}
+// }]);
 myApp.directive('fdInput', ['$timeout', function ($timeout) {
 	return {
 		link: function (scope, element, attrs) {
@@ -460,7 +499,6 @@ myApp.directive('fdInput', ['$timeout', function ($timeout) {
 		}
 	}
 }]);
-
 myApp.directive('lineupForm', function () {
 	return {
 		templateUrl: 'pages/lineups/partials/lineupForm.html',
@@ -474,7 +512,6 @@ myApp.directive('lineupForm', function () {
 		}
 	}
 });
-
 myApp.directive('fullSystem', function () {
 	return {
 		require: '^^lineupForm',
@@ -489,7 +526,6 @@ myApp.directive('fullSystem', function () {
 		}
 	}
 });
-
 myApp.directive('talynA', function () {
 	return {
 		require: ['^^lineupForm'],
@@ -516,7 +552,6 @@ myApp.directive('talynM', function () {
 		}
 	}
 });
-
 myApp.directive('testFormedit', function () {
 	return {
 		templateUrl: 'pages/plans/newTestEdit.html',
@@ -532,7 +567,6 @@ myApp.directive('testFormedit', function () {
 		}
 	}
 });
-
 myApp.constant('AUTH_EVENTS', {
 	loginSuccess: 'auth-login-success',
 	loginFailed: 'auth-login-failed',
@@ -541,7 +575,6 @@ myApp.constant('AUTH_EVENTS', {
 	notAuthenticated: 'auth-not-authenticated',
 	notAuthorized: 'auth-not-authorized'
 });
-
 myApp.constant('USER_ROLES', {
 	all: '*',
 	admin: 'admin',
@@ -642,6 +675,25 @@ myApp.factory('taskParams', function ($http, $log, $rootScope) {
 	//	console.log(taskParams);
 	return taskParams;
 });
+myApp.factory('date', function(){
+	var date = {};
+	date.today = new Date();
+	date.parse = function(dateIn) {
+		var dd = dateIn.getDate();
+		var mm = dateIn.getMonth() + 1; //January is 0!
+		var yyyy = dateIn.getFullYear();
+		if (dd < 10) {
+			dd = '0' + dd
+		}
+		if (mm < 10) {
+			mm = '0' + mm
+		}
+		var parsedDate = dd + '/' + mm + '/' + yyyy;
+		return parsedDate;
+	}
+	
+	return date;
+})
 myApp.factory('testParams', function ($http, $log, $rootScope) {
 	$rootScope.site = "http://wigig-299";
 	var testParams = {};
@@ -661,39 +713,18 @@ myApp.factory('testParams', function ($http, $log, $rootScope) {
 		var parsedDate = dd + '/' + mm + '/' + yyyy;
 		return parsedDate;
 	}
-	$rootScope.parse = testParams.parseDate;
-	testParams.today = today;
+//	$rootScope.parse = testParams.parseDate;
+//	testParams.today = today;
 
 	testParams.params = {};
 	testParams.params.priorityList = [
-		{
-			display_name: '1 - Highest',
-			value: '1'
-		},
-		{
-			display_name: '2',
-			value: '2'
-		},
-		{
-			display_name: '3',
-			value: '3'
-		},
-		{
-			display_name: '4',
-			value: '4'
-		},
-		{
-			display_name: '5',
-			value: '5'
-		},
-		{
-			display_name: '6',
-			value: '6'
-		},
-		{
-			display_name: '7 - Lowest',
-			value: '7'
-		},
+		{display_name: '1 - Highest', value: '1'},
+		{display_name: '2', value: '2'},
+		{display_name: '3', value: '3'},
+		{display_name: '4', value: '4'},
+		{display_name: '5', value: '5'},
+		{display_name: '6', value: '6'},
+		{display_name: '7 - Lowest', value: '7'},
 	];
 
 	testParams.plans = {};
@@ -734,26 +765,6 @@ myApp.factory('testParams', function ($http, $log, $rootScope) {
 		.then(function (response) {
 			testParams.params.testTypes = response.data;
 		});
-
-	//		$http.get(site+'/params/stations')
-	//		.then(function(response){
-	//			testParams.params.stationList = response.data;
-	//		});
-
-	//	testParams.status = {
-	//		isopen: false
-	//	};
-	//
-	//	testParams.toggled = function (open) {
-	//		$log.log('Dropdown is now: ', open);
-	//	};
-	//
-	//	testParams.toggleDropdown = function ($event) {
-	//		$event.preventDefault();
-	//		$event.stopPropagation();
-	//		testParams.status.isopen = !testParams.status.isopen;
-	//	};
-	//	testParams.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 
 	return testParams;
 });

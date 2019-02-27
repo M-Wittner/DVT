@@ -13,21 +13,10 @@ myApp.controller('editPlanCtrl', ['$scope', '$rootScope','$location','$http', '$
 		$scope.test = {};
 		$http.post(site+'/plans/get_test', $routeParams)
 		.then(function(response){
-			if(response.data.flag == 0){
-				$scope.testOld = response.data;
-				$scope.testOld.mcs = parseInt(response.data.mcs);
-				$scope.testOld.voltage = parseInt(response.data.voltage);
-			} else if(response.data.flag == 1){
-				$scope.test = response.data;
-				if($scope.test.station_id != 5){
-					$scope.test.mcs = parseInt(response.data.mcs)
-				}
-				$scope.test.vlotage = parseInt(response.data.vlotage);
-			}else {
-				$scope.test = response.data;
-			}
+			$scope.test = response.data;
+			$scope.test.priority = [{value: $scope.test.priority}];
 			console.log(response.data);
-	//		console.log($scope.test);
+			console.log($scope.test);
 		});
 	} else {
 		var message = 'Please Login first!';
@@ -40,8 +29,6 @@ myApp.controller('editPlanCtrl', ['$scope', '$rootScope','$location','$http', '$
 	$scope.lock = false;
 	
 	$scope.selectAll = function(test, sweep, name){
-		console.log(test);
-		console.log(sweep);
 		var result = testParams.params.allParams.filter(item => item.config_id == sweep.config_id);
 		console.log(result);
 		if(!test.sweeps){
@@ -78,9 +65,10 @@ myApp.controller('editPlanCtrl', ['$scope', '$rootScope','$location','$http', '$
 	$scope.editPlan = function(){
 		$http.post(site+'/plans/update', this.test)
 		.then(function(response){
-			if(response.data == 'success'){
-				$location.path('/plans/'+$routeParams.planId);
-				var message = 'Test was edited successfully';
+			console.log(response.data);
+			if(typeof response.data == "string"){
+				$location.path('/plans/');
+				var message = response.data;
 				var id = Flash.create('success', message, 5000);
 			}else {
 				var message = response.data;

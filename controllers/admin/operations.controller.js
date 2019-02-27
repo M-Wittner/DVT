@@ -1,4 +1,4 @@
-myApp.controller('logCtrl', ['$scope', '$rootScope', '$interpolate', '_', '$filter','$http', 'Flash', 'AuthService', 'NgTableParams', 'testParams', '$stateParams', 'uibDateParser', function ($scope, $rootScope, $interpolate, _,$filter, $http, Flash, AuthService, NgTableParams, testParams, $stateParams) {
+myApp.controller('logCtrl', ['$scope', '$rootScope', '_','$http', 'Flash', 'AuthService', 'NgTableParams', 'testParams', '$stateParams', function ($scope, $rootScope, _, $http, Flash, AuthService, NgTableParams, testParams, $stateParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.isAuthenticated = true;
 	var site = $rootScope.site;

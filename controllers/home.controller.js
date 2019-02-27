@@ -9,6 +9,8 @@ Flash, Session, $cookies, $window, testParams) {
 	if($cookies.getObject('loggedUser')){
 		$scope.currentUser = $cookies.getObject('loggedUser');
 		$rootScope.currentUser = $cookies.getObject('loggedUser');
+		$state.go('todayPlan');
+//		console.log('bla');
 	}else{
 		$scope.currentUser = {};
 		$scope.userRoles = USER_ROLES;	

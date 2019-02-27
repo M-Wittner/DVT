@@ -1,13 +1,19 @@
-myApp.controller('editTaskCtrl', ['$rootScope', '$scope', '$routeParams', '$uibModal', '$http', 'Flash', '$cookies', 'AuthService', 'taskParams', function ($rootScope, $scope, $routeParams, $uibModal, $http, Flash, $cookies, AuthService, taskParams) {
+myApp.controller('editTaskCtrl', ['$rootScope', '$location', '$scope', '$routeParams', '$uibModal', '$http', 'Flash', '$cookies', 'AuthService', 'taskParams', function ($rootScope, $location, $scope, $routeParams, $uibModal, $http, Flash, $cookies, AuthService, taskParams) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.taskParams = taskParams;
 	var site = $rootScope.site;
 //	console.log($routeParams.id);
-	$http.post(site+'/tasks/view', $routeParams.id)
-	.then(function(response){
-		$scope.task = response.data;
-//		console.log($scope.task);
-	});
+	if($scope.isAuthenticated){
+		$http.post(site+'/tasks/view', $routeParams.id)
+		.then(function(response){
+			$scope.task = response.data;
+	//		console.log($scope.task);
+		});
+	}else{
+		var message = 'Please Login first!';
+		var id = Flash.create('danger', message, 3500);
+		$location.path('/');
+	}
 	
 	$scope.editTask = function(){
 		$http.post(site+'/tasks/edit', $scope.task)

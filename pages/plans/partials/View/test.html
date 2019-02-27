@@ -5,7 +5,7 @@
 	<div ng-show="plan.errors.length > 0 || !plan.tests.length > 0" ng-repeat="error in plan.errors">
 		<div class="alert alert-danger fadeIn" role="alert">{{error.msg}}</div>
 	</div>
-	<div uib-accordion-group ng-if="plan.tests.length > 0 && !plan.errors" ng-repeat="test in plan.tests | orderBy: ['station_id','priority'] track by $index" class="panel-default fadeIn" is-open="test.isOpen" is-disabled="status.isFirstDisabled" style="border-top-width: 4px; border-top-color: {{test.station_color}}" ng-class="{'fadeOut': test.visible == 0}" ng-click="getTestData(test)">
+	<div uib-accordion-group ng-if="plan.tests.length > 0 && (!plan.errors || plan.errors.length == 0)" ng-repeat="test in plan.tests | orderBy: ['station_id','priority'] track by $index" class="panel-default fadeIn" is-open="test.isOpen" is-disabled="status.isFirstDisabled" style="border-top-width: 4px; border-top-color: {{test.station_color}}" ng-class="{'fadeOut': test.visible == 0}" ng-click="getTestData(test)">
 		<uib-accordion-heading>
 			<strong>Priority: {{test.priority}}, Station: {{test.name}}, Test: {{test.test_name}} , ID: #{{test.test_id}} , {{test.time}}</strong>
 			<span class="pull-right glyphicon" ng-class="test.isOpen ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>

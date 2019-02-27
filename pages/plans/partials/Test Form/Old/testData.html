@@ -1,0 +1,51 @@
+<div class="panel-body">
+	<div class="row">
+		<div class="col-md-3">
+			<span class="label label-dangerC">Station:</span>
+			<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.station" data-placeholder="Pick Test" ng-disabled="lock" ng-change="test.testType = [];">
+				<ui-select-match>{{$item.name}}</ui-select-match>
+				<ui-select-choices repeat="station in testParams.params.workStations|filter: $select.search" sortable="true">{{station.name}}</ui-select-choices>
+			</ui-select>
+		</div>
+		<div class="col-md-4">
+			<span class="label label-dangerC">Test Name:</span>
+			<div ng-if="test.station[0].idx">
+				<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.testType" data-placeholder="Pick Test" ng-disabled="lock" ng-change="test.sweeps = {}">
+					<ui-select-match>{{$item.test_name}}</ui-select-match>
+					<ui-select-choices repeat="test in testParams.params.testTypes | filter:{workstation_id: test.station[0].idx}:true|filter: $select.search" sortable="true">{{test.test_name}}</ui-select-choices>
+				</ui-select>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<span class="label label-dangerC">Test Priority</span>
+			<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.priority" data-placeholder="Pick Test" ng-disabled="lock">
+				<ui-select-match>{{$item.value}}</ui-select-match>
+				<ui-select-choices repeat="priority in testParams.params.priorityList">{{priority.display_name}}</ui-select-choices>
+			</ui-select>
+		</div>
+	</div>
+	<test-sturct></test-sturct>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel-body" ng-disabled="lock">
+				<span class="label label-primary">Notes:</span>
+				<div trumbowyg-ng placeholder="Test Notes" ng-model="test.notes" editor-config="{btns: ['viewHTML', ['undo', 'redo'],['strong', 'em', 'del'], ['link'], ['formatting'], ['foreColor', 'backColor'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['unorderedList', 'orderedList'], ['removeformat'],]}">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<button class="btn btn-xs btn-info addButton" ng-click="insertTest()" ng-disabled="lock">
+		Insert!
+	</button>
+		<button class="btn btn-xs btn-warning addButton" ng-click="editToggle()">
+		Edit!
+	</button>
+		<span class="form-inline">
+		<div class="form-group">
+			<input type="number" ng-model="copyId" class="form-control" id="copy" placeholder="Test ID">
+		</div>
+		<button type="submit" class="btn btn-default" ng-click="copyTest()">Copy</button>
+	</span>
+	</div>
+</div>

@@ -63,30 +63,26 @@ class Plans extends CI_Controller {
 	}
 	
 	function GetPlan($planID){
+		$plan = $this->db->get_where('plans_view', ['id'=>$planID])->result()[0];
+//		die(json_encode($plan));
 		$res = $this->GetPlanData($planID);
-		if(count($res->errors) > 0){
-				$plan->errors = $res->errors;
-			}else{
-				$plan->tests = $res->tests;
-				$plan->progress = $res->progress;
-				if($plan->progress > 0){
-					foreach($plan->tests as $test){
-						$test->statuses = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id])->result();
-//						$test->progress = $this->plan_model->calcProgNew($test->statuses);
-					}
-				}
+		$plan->errors = $res->errors;
+		$plan->tests = $res->tests;
+		$plan->progress = $res->progress;
+		if($plan->progress > 0){
+			foreach($plan->tests as $test){
+				$test->statuses = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id])->result();
+//				$test->progress = $this->plan_model->calcProgNew($test->statuses);
 			}
-//		die(json_encode($planID));
-		die(json_encode($res));
+		}
+		die(json_encode($plan));
 	}
 	
 	function GetPlanData($planId, $filters){
-//		die(json_encode($planId));
 		$plan = new stdClass();
 		$plan->errors = array();
-		$progress = 0;
 		$result = new stdClass();
-		$this->db->select('test_id');
+//		$this->db->select('test_id');
 		if(isset($filters)){
 			if(count($filters) == 1){
 				$key = array_keys($filters)[0];
@@ -100,29 +96,19 @@ class Plans extends CI_Controller {
 		}
 		$this->db->where(['plan_id'=>intval($planId)]);
 		$plan->tests = $this->db->get('tests_view_v1')->result();
-//		die(json_encode($plan));
 		if(sizeof($plan->tests) > 0 && !empty($plan->tests)){
-			$plan->statuses = $this->db->get_where('chip_status_view', ['plan_id'=>$planId])->result();
-			$totalProg = 0;
+//			$plan->statuses = $this->db->get_where('chip_status_view', ['plan_id'=>$planId])->result();
+//			$totalProg = 0;
 			foreach ($plan->tests as $i=>$test){
-				$res = $this->GetTestHeader($test->test_id);
-//				die(json_encode($res));
-				if(isset($res->occured) && $res->occured){
-					array_push($plans->errors, $res);
-					continue;
-				}else{
-					$plan->tests[$i] = $res;
-					$totalProg += ( double)$plan->tests[$i]->progress;
-//					die(json_encode($plan->tests[$i]));
-					$plan->tests[$i]->comments = $this->db->get_where('test_comments_v1_view', ['test_id'=>$test->test_id])->result();
-				}
+				$plan->tests[$i]->comments = $this->db->get_where('test_comments_v1_view', ['test_id'=>$test->test_id])->result();
+//				}
 //				$statuses = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id])->result();
 //				$plan->tests[$i]->chipErrors = array_values(array_filter($statuses, function($e){
 //					return $e->chip_status == 1;
 //				}));
 			}
 //			$plan->progress = $this->plan_model->calcProgNew($plan->statuses);
-			$plan->progress = $totalProg / count($plan->tests);
+//			$plan->progress = $totalProg / count($plan->tests);
 //			die(json_encode($plan->progress));
 //			$this->db->set('progress', $plan->progress);
 //			$this->db->where('id', $plan->$planId);
@@ -317,8 +303,6 @@ class Plans extends CI_Controller {
 	}
 	
 	function show_test($id){
-//		$id = json_decode(file_get_contents('php://input'));
-//		$test = $this->plan_model->get_test_v1($id);
 		$test = $this->GetTestData($id);
 //		die(json_encode($id));
 		$test->comments = $this->db->get_where('test_comments_v1_view', ['test_id'=>$id])->result();
@@ -328,23 +312,20 @@ class Plans extends CI_Controller {
 	function today(){
 		$result = new stdClass();
 		$plans = $this->db->get('today_plan')->result();
+//		die(json_encode($plans));
 		if(sizeof($plans) > 0){
 			$plan = $plans[0];
 //			$this->db->where('progress < 1');
 			$res = $this->GetPlanData($plan->id, ['user_id'=>54]);
-			if(count($res->errors) > 0){
-				$plan->errors = $res->errors;
-			}else{
-				$plan->tests = $res->tests;
-				$plan->progress = $res->progress;
-				if($plan->progress > 0){
-					foreach($plan->tests as $test){
-						$test->statuses = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id])->result();
+			$plan->errors = $res->errors;	
+			$plan->tests = $res->tests;
+//			$plan->progress = $res->progress;
+//			if($plan->progress > 0){
+//				foreach($plan->tests as $test){
+//					$test->statuses = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id])->result();
 //						$test->progress = $this->plan_model->calcProgNew($test->statuses);
 //						if($test->test_id == 5762){die(json_encode($test));}
-					}
-				}
-			}
+//				}
 		}else{
 			$result->msg = "No Plans Found in the last 3 Days";
 			$result->occurred = true;
@@ -365,38 +346,57 @@ class Plans extends CI_Controller {
 		return $status;
 	}
 	
-	function TCP($ip, $port){
+	function stationsStatus(){
+		$this->other_db = $this->load->database('main', TRUE);
+		$port = 50001;
+		$stations = $this->other_db->get('work_stations')->result();
+//		die(json_encode($stations));
+		foreach($stations as $station){
+//			$station->ip = gethostbyname($station->hostname);
+			$station->ip = '10.18.134.163';
+			$station->alive = $this->checkAlive($station->ip);
+			if($station->alive){
+				$result = $this->TCP($station->ip, $port,"Alive");
+				$station->errors = $result->errors;
+				$station->out = $result->out;
+				$station->remote = $result->out == "Alive" ? true : false;
+			}
+		}
+		die(json_encode($stations));
+	}
+	
+	function TCP($ip, $port, $msg){
+		$res = new stdClass();
 		$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 		if ($socket === false) {
-//			die(json_encode($this->errors));
-//			die(json_encode($ip));
 		}else {
 			$con = socket_connect($socket, $ip, $port);
 			if($con === false){
 //				die();
 			}else{
-				$id = "1";
+				$id = isset($msg) ? $msg : "1";
+				$id = $id."\r\n";
 				socket_write($socket, $id, strlen($id));
-				$out = '';
-				while ($out = socket_read($socket, 10000)) {
-//					print($out.".\n");
-				}
+				$res->out = preg_replace('/[^A-Za-z0-9\-]/', '', socket_read($socket, 15000));
 				socket_close($socket);
 			}
 		}
-		return $this->errors;
+		$res->errors = $this->errors;
+		return $res;
 	}
 	
 	function runTest(){
 		$stations = json_decode(file_get_contents('php://input'));
 		$port = 50001;
 		foreach ($stations as $i => $station){
-			$station->ip = gethostbyname($station->hostname);
+//			$station->ip = gethostbyname($station->hostname);
+			$station->ip = '10.18.134.163';
 			$station->alive = $this->checkAlive($station->ip);
 			if($station->alive){
 				$result = $this->TCP($station->ip, $port);
 			}
-			$station->errors = $result;
+			$station->errors = $result->errors;
+			$station->out = $result->out;
 			$this->errors = array();
 		}
 		die(json_encode($stations));

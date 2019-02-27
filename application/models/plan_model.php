@@ -101,9 +101,6 @@ class plan_model extends CI_Model {
 				$test->user = $username[0]->fname.' '.$username[0]->lname;
 			}
 			$test->testType = $this->other_db->get_where('test_types',['type_idx'=>$test->test_type_id])->result();
-//			if(!isset($test->testType[0])){
-//				die(var_dump($test));
-//			}
 			$test->station = $this->db->get_where('work_stations_view',['idx'=>$test->testType[0]->workstation_id])->result();
 			$priority = $test->priority;
 			$test->errors = $this->db->query("select log.* from dvt_60g.log
@@ -114,26 +111,28 @@ class plan_model extends CI_Model {
 			$this->db->select('config_id, name, data_type, priority, test_type_id, tooltip');
 			$this->db->order_by('priority asc','data_type desc');
 			$struct = $this->db->get_where('test_struct_view', array('station_id'=>$test->station[0]->idx, 'test_type_id'=>$test->test_type_id))->result();
-			// ----- Populate each sweep with data ---------
+			// ----- Calc Test Progress ---------
+			$test->chipErrors = array();
 			$chipTypes = array_filter($struct, function($c){return $c->data_type > 100 ? $c->config_id : null;});
 			foreach ($chipTypes as $type){
 				$type->data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$type->config_id))->result();
 				$type->num = count($type->data);
 			}
 			$counts = array_map(function($c){return $c->num;}, $chipTypes);
-			$maxTests = max($counts) == 0 ? 1 : max($counts);
+			$bigTypeId = $chipTypes[array_search(max($counts), $counts)]->config_id;
+			$maxTests = max(1 ,max($counts));
 			$totalProg = 0;
-//			die(json_encode($maxTests));
+			// ----- Populate each sweep with data ---------
 			foreach($struct as $sweep){
 				$test->sweeps[$sweep->name] = new stdClass();
 				if(isset($sweep->tooltip)){
 					$test->sweeps[$sweep->name]->tooltip = $sweep->tooltip;
 				}
 				$data = $this->db->get_where('test_configuration_data_view', array('test_id'=>$test->test_id, 'config_id'=>$sweep->config_id))->result();
-				if($sweep->data_type == 60){
+//				if($sweep->data_type == 60){
 //					echo json_encode($sweep);
 //					die();
-				}
+//				}
 				if(count($data) == 1 && (in_array($sweep->data_type, [33, 60]))){
 					if($sweep->data_type == 60){ //Pin sweep
 						$data[0]->value = explode(';', $data[0]->value);
@@ -165,23 +164,26 @@ class plan_model extends CI_Model {
 							$this->db->select('chip_sn, chip_process_abb');
 							$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result();
 							$this->db->select('progress');
-							$statuses = $this->db->get_where('chip_status_view', ['data_idx'=>$chip->data_idx])->result();
+							$status = $this->db->get_where('chip_status_view', ['data_idx'=>$chip->data_idx])->result();
+									die(json_encode($status));
 							if(count($chipData) == 1){
 								$chipData = $chipData[0];
 								$chip->chip_sn = $chipData->chip_sn;
 								$chip->chip_process_abb = $chipData->chip_process_abb;
-								if(count($statuses) == 1){
-									$statuses = $statuses[0];
-									$chip->progress = $statuses->progress;
-									$totalProg += (double)$chip->progress;
-//									die(json_encode($totalProg));
+								if(count($status) == 1){
+									$statuses = $status[0];
+									$chip->progress = $status->progress;
+									if($chip->config_id == $bigTypeId){										
+										$totalProg += (double)$chip->progress;
+									}
+									if(in_array($status->chip_status, [1,3])){ // status terminated or error
+										array_push($test->chipErrors, $chip);
+									}
 //									array_push($chipStatus, $chip->progress);
 								}
 							}
 						}
-						$test->chipErrors = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id, 'chip_status'=>1])->result();
-//--------------------------------------- Comment out section below of calc and update progress and replace with summing up all progresses and after loop ends calc the progress. --------------------------------------------------
-//						$test->progress = $this->calcProgNew($data);
+						$test->chipErrors = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id, 'chip_status'=>1, 'chip_status'=>3])->result();
 					}
 					foreach($data as $res){
 						if(is_null($res->display_name)){
@@ -477,10 +479,9 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_chip_status($data){
-//		echo json_encode($data->chip);
+//		echo json_encode($data);
 		$this->other_db = $this->load->database('main', TRUE);
 		$chip = $data->chip;
-//		die(json_encode($res2));
 		$user = $data->user;
 		$key = 'chip_status';
 		if(isset($chip->flag)){
@@ -507,7 +508,7 @@ class plan_model extends CI_Model {
 				$status = 0;
 				break;
 			case 0:
-				$status = 1;
+				$status = 3;
 				break;
 			default:
 				$status = 4;

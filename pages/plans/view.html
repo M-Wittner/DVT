@@ -26,8 +26,9 @@
 	</div>
 	<div class="panel-body" style="padding: 0;" id="tester">
 		<div class="row">
-			<span style="margin-left: 3%"> Last Update: <strong>{{updateTime}}</strong></span>
+			<span style="margin-left: 3%" ng-if="state == 'todayPlan'"> Last Update: <strong>{{updateTime}}</strong></span>
 			<span class="container-fluid pull-right btn-crud">
+<!--				<button type="button" class="btn btn-success btn-xs" ng-click="alive()">Alive?</button>-->
 				<div class="btn-group" ng-if="state == 'todayPlan'">
 					<button type="button" class="btn btn-success btn-xs" ng-click="startTests(root.workStations)">Start <span class="glyphicon glyphicon-flash"></span></button>
 					<button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

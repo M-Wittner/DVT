@@ -40,12 +40,9 @@ myApp.controller('testFormCtrl', ['$scope', '$rootScope', '$timeout', '$http', '
 			console.log(response.data);
 			$scope.test = response.data;
 		})
-//		console.log($scope.copyId);
 	}
 	
 	$scope.extras = function(test, sweep){
-//		console.log(sweep);
-//		console.log(test);
 		var sweepName = sweep.name;
 		if(!test.sweeps){
 			test.sweeps = [];
@@ -64,12 +61,6 @@ myApp.controller('testFormCtrl', ['$scope', '$rootScope', '$timeout', '$http', '
 		}
 		console.log(test);
 	}
-	
-	$scope.log = function(structs){
-		console.log(structs);
-		console.log($scope);
-	}
-	
 	
 	$scope.loadData = function(sweep){
 		var reader = new FileReader();

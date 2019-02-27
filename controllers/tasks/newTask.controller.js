@@ -1,7 +1,12 @@
-myApp.controller('newTaskCtrl', ['$rootScope', '$scope', '$routeParams', '$uibModal', '$http', 'Flash', '$cookies', 'AuthService', 'taskParams', '$state', function ($rootScope, $scope, $routeParams, $uibModal, $http, Flash, $cookies, AuthService, taskParams, $state) {
+myApp.controller('newTaskCtrl', ['$rootScope', '$location', '$scope', '$routeParams', '$uibModal', '$http', 'Flash', '$cookies', 'AuthService', 'taskParams', '$state', function ($rootScope, $location, $scope, $routeParams, $uibModal, $http, Flash, $cookies, AuthService, taskParams, $state) {
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	$scope.taskParams = taskParams;
 	var site = $rootScope.site;
+	if(!$scope.isAuthenticated()){
+		var message = 'Please Login first!';
+		var id = Flash.create('danger', message, 3500);
+		$location.path('/');
+	}
 	$scope.user = {
 		'userId' : $cookies.getObject('loggedUser').id,
 		'username' : $cookies.getObject('loggedUser').username,

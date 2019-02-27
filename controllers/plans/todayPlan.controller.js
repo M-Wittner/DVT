@@ -1,43 +1,36 @@
-myApp.controller('todayPlanCtrl', ['$rootScope', '$scope', '$state', '$route', '$filter', '$location', '$http', '$stateParams', '$window', '$interval', 'Flash', 'AuthService', '$cookies', 'NgTableParams', function($rootScope, $scope, $state, $route, $filter, $location, $http, $stateParams, $window, $interval, Flash, AuthService, $cookies, NgTableParams){
+myApp.controller('todayPlanCtrl', ['$rootScope', '$scope', '$state', '$route', '$filter', 'date', '$http', '$stateParams', '$window', '$interval', 'Flash', 'AuthService', '$cookies', 'NgTableParams', function($rootScope, $scope, $state, $route, $filter, date, $http, $stateParams, $window, $interval, Flash, AuthService, $cookies, NgTableParams){
 	
-	$scope.root = $rootScope;
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-//	console.log($rootScope);
 	var site = $rootScope.site;
-//	$interval(function(){console.log('bla')}, 1000, 0 , true);
 	if($scope.isAuthenticated == true){
-		$scope.currentUser =$cookies.getObject('loggedUser');
+		$scope.user = $rootScope.currentUser;
 		$scope.state = $state.$current.name;
 		var today = new Date();
 		$scope.updateTime = today.toLocaleTimeString('he-IL', {hour12: false});
 		$scope.plans = [];
 		if($scope.plans.length == 0){
 			$http.post(site+'/plans/today', today)
-				.then(function(response){
-					$scope.today = $scope.root.parse(today);
-	//				console.log(response.data[0]);
-					console.log(response.data);
-					$scope.plans = response.data;
-					$scope.plans[0].isOpen = true;
+			.then(function(response){
+				$scope.today = date.parse(today);
+//				console.log(response.data[0]);
+				console.log(response.data);
+				$scope.plans = response.data;
+				$scope.plans[0].isOpen = true;
 				})
 			$interval(function(){$http.post(site+'/plans/today', today)
 				.then(function(response){
-					$scope.today = $scope.root.parse(today);
+					$scope.today = date.parse(today);
 	//				console.log(response.data[0]);
 					$scope.updateTime = new Date().toLocaleTimeString('he-IL', {hour12: false});
 					console.log("Data Refreshed, "+ $scope.updateTime);
 					$scope.plans = response.data;
 					$scope.plans[0].isOpen = true;
 				})}, 300000, 0 , true);;
-		}
-//		$scope.tableErrors = new NgTableParams({});
-		$scope.user = {};
-		$scope.user.id = $cookies.getObject('loggedUser').id;
-		$scope.user.username = $cookies.getObject('loggedUser').username;
+			}
 		} else {
 			var message = 'Please Login first!';
 			var id = Flash.create('danger', message, 3500);
-			$location.path('/');
+			$state.go('home');
 		}
 	
 	function getPlan($plan){
@@ -65,6 +58,13 @@ myApp.controller('todayPlanCtrl', ['$rootScope', '$scope', '$state', '$route', '
 			}
 		});
 		return $test;
+	}
+	
+	$scope.alive = function(){
+		$http.get(site+'/plans/stationsStatus')
+		.then(function(res){
+			console.log(res.data);
+		})
 	}
 
 	$scope.getPlanData = function($plan){
@@ -105,7 +105,7 @@ myApp.controller('todayPlanCtrl', ['$rootScope', '$scope', '$state', '$route', '
 		.then(function(response){
 			console.log(response.data);
 			response.data.forEach(function(station, $i){
-				if(station.errors.length > 0){
+				if($.isEmptyObject(station.errors) || station.errors.length > 0){
 					station.errors.forEach(function(error, $i){
 						var message = "<strong>"+station.name+":</strong> "+error.msg;
 						var id = Flash.create('danger', message, 0);
@@ -118,11 +118,11 @@ myApp.controller('todayPlanCtrl', ['$rootScope', '$scope', '$state', '$route', '
 		})
 	}
 
-		$scope.toggleTest = function(index){
-			console.log(index);
-			$scope.toggleCollapse = !$scope.toggleCollapse;
-			setTimeout($scope.toggleFade = $scope.toggleFade, 1500);
-		};
+//		$scope.toggleTest = function(index){
+//			console.log(index);
+//			$scope.toggleCollapse = !$scope.toggleCollapse;
+//			setTimeout($scope.toggleFade = $scope.toggleFade, 1500);
+//		};
 	
 		$scope.removeComment = function(){
 			$http.post(site+'/plans/removeComment', this.comment.comment_id)

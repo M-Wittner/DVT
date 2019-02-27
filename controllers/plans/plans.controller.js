@@ -2,11 +2,10 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', '$filter', 'NgTableParams
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	var site = $rootScope.site;
 	function getPlan($plan){
-		console.log($plan.id)
+//		console.log($plan.id)
 		$http.get(site + '/plans/GetPlan/' + $plan.id)
 			.then(function(response) {
 			console.log(response.data);
-//				console.log($.isEmptyObject(response.data));
 			if($.isEmptyObject(response.data) || response.data.errors.length > 0){
 				$plan.errors = response.data.errors;
 //					$plan.errors.push("No Data Found");
@@ -127,7 +126,7 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', '$filter', 'NgTableParams
 	
 	$scope.chipStatus = function(chip, flag, test, plan){
 		chip.flag = flag == '' ? null : flag;
-		console.log(test);
+		console.log(chip);
 		$http.post(site+'/plans/chipstatus', {chip: chip, user: $scope.user})
 		.then(function(response){
 			console.log(response.data);
@@ -141,12 +140,12 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', '$filter', 'NgTableParams
 			var id = Flash.create('success', message, 6000);
 		}).then(function(){
 //					var $test = getTest(test);
-			var $plan = getPlan(plan);
-					console.log($plan);
+//			var $plan = getPlan(plan);
+//					console.log($plan);
 //			test = $test;
 //					console.log('bal')
-				}).then(function(){
-			test.isOpen = true;
+//				}).then(function(){
+//			test.isOpen = true;
 		});
 	};;
 	

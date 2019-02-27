@@ -21,9 +21,9 @@ myApp.controller('myTasksCtrl', ['$scope', '$rootScope', '$state', 'NgTableParam
 			console.log(response.data);
 		})
 	} else{
-//		$state.go("/plans");
-		console.log($state.params.username);
-		console.log($scope.currentUser.username);
+		$location.path("/plans");
+//		console.log($state.params.username);
+//		console.log($scope.currentUser.username);
 		var message = 'You can only view you own tasks';
 		var id = Flash.create('danger', message, 3500);
 	}

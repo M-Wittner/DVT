@@ -13,7 +13,7 @@
 				<div ng-if="test.station[0].idx">
 					<ui-select style="min-width: 100%" multiple limit="1" close-on-select="false" ng-model="test.testType" data-placeholder="Pick Test" ng-disabled="lock" ng-change="test.sweeps = {}">
 						<ui-select-match>{{$item.test_name}}</ui-select-match>
-						<ui-select-choices repeat="test in testParams.params.testTypes | filter:{workstation_id: test.station[0].idx}|filter: $select.search" sortable="true">{{test.test_name}}</ui-select-choices>
+						<ui-select-choices repeat="test in testParams.params.testTypes | filter:{workstation_id: test.station[0].idx}:true|filter: $select.search" sortable="true">{{test.test_name}}</ui-select-choices>
 					</ui-select>
 				</div>
 			</div>

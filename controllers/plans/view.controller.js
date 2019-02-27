@@ -1,43 +1,58 @@
-myApp.controller('viewPlanCtrl', ['$scope', '$rootScope', '$route', '$location','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', '$stateParams', '$cookies', 'NgTableParams', function($scope, $rootScope, $route, $location, $http, $routeParams, $window, Flash, AuthService, testParams, $stateParams, $cookies, NgTableParams){
+myApp.controller('viewPlanCtrl', ['$scope', '$rootScope', '$state', '$route', 'GetData','$http', '$routeParams', '$window', 'Flash', 'AuthService', 'testParams', '$stateParams', '$cookies', 'NgTableParams', function($scope, $rootScope, $state, $route, GetData, $http, $routeParams, $window, Flash, AuthService, testParams, $stateParams, $cookies, NgTableParams){
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
-		var site = $rootScope.site;
-		var scope = $scope;
-	if($scope.isAuthenticated == true){	
-	
-	$http.get(site+'/plans/getPlan/' + $stateParams.planId)
-	.then(function(response){
-		console.log(response.data);
-		var data = response.data;
-//		$scope.plans = [];
-		$scope.plan = data;
-//		$scope.plans[0].tests = data.tests;
-//		$scope.plans[0].progress = data.progress;
-//		console.log($scope.plan);
-	});
-		
-	$scope.returnName = function(sweepName){
-		return sweepName;
-	}
-	$scope.sweepsTable = function(struct){
-		$scope.cols = [];
-		$scope.TableParams = new NgTableParams({
-			counts:[],
-			total: struct.length,
-			dataset: struct
-		})
-	}
+	var site = $rootScope.site;
+	if($scope.isAuthenticated == true){
+		$scope.user = $rootScope.currentUser;
+		$scope.state = $state.$current.name;
+		$http.get(site+'/plans/GetPlan/' + $stateParams.planId)
+		.then(function(response){
+			console.log($scope);
+			console.log(response.data);
+			var data = response.data;
+			$scope.plans = [data];
+		});
 
-	$scope.user = {};
-	$scope.user.id = $cookies.getObject('loggedUser').id;
-	$scope.user.username = $cookies.getObject('loggedUser').username;
-		
+		$scope.returnName = function(sweepName){
+			return sweepName;
+		}
+		$scope.sweepsTable = function(struct){
+			$scope.cols = [];
+			$scope.TableParams = new NgTableParams({
+				counts:[],
+				total: struct.length,
+				dataset: struct
+			})
+		}
 	} else {
 		var message = 'Please Login first!';
 		var id = Flash.create('danger', message, 3500);
-		$location.path('/');
+		$state.go('home');
 	}
-	
+	function getTest($test){
+		$http.get(site + '/plans/GetTest/' + $test.test_id)
+			.then(function(response) {
+			console.log(response.data);
+			if($.isEmptyObject(response.data)){
+				$test.errors = response.data.errors;
+			}else{
+				$test.errors = response.data.errors;
+				$test.sweeps = response.data.sweeps;
+			}
+		});
+		return $test;
+	}
+$scope.getTestData = function($test){
+		if(!$test.isOpen && $test.dirty)
+			return;
+		else{
+			$test.dirty = true;
+		}
+		if(!$test.sweeps){			
+			$test = getTest($test);
+		}
+		console.log($test);
+	}
 	$scope.toggleTest = function(index){
 //		console.log(index);
 		$scope.toggleCollapse = !$scope.toggleCollapse;
@@ -72,13 +87,6 @@ myApp.controller('viewPlanCtrl', ['$scope', '$rootScope', '$route', '$location',
 			var id = Flash.create('danger', message, 3500);
 		}
 	}
-	
-	$scope.sendMail = function(){
-		$http.post(site+'/plans/sendMail', $scope.plan)
-		.then(function(response){
-			console.log(response.data);
-		});
-	};
 	
 	$scope.removeComment = function(){
 		$http.post(site+'/plans/removeComment', this.comment.comment_id)
@@ -129,14 +137,14 @@ myApp.controller('viewPlanCtrl', ['$scope', '$rootScope', '$route', '$location',
 		});
 	};
 	
-	$scope.filterByName = function(params, word){
-		var data = params.filter(param => param.param_name.includes(word));
-		if(typeof data[0] != 'undefined'){
-			return true;
-		} else{
-			return false;
-		}
-	};
+//	$scope.filterByName = function(params, word){
+//		var data = params.filter(param => param.param_name.includes(word));
+//		if(typeof data[0] != 'undefined'){
+//			return true;
+//		} else{
+//			return false;
+//		}
+//	};
 	
 	$scope.newCmt = function(testId, planId){
 		var test = this.test;
