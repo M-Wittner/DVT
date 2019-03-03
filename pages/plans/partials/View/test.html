@@ -1,11 +1,11 @@
 <uib-accordion class="panel">
 	<div style="margin: auto; width: 0%">
-		<div class="loader" ng-class="{'fadeOut': plan.tests.length > 0}" ng-hide="plan.errors.length > 0"></div>
+		<div class="loader" ng-class="{'fadeOut': station.tests.length > 0}" ng-hide="plan.errors.length > 0"></div>
 	</div>
 	<div ng-show="plan.errors.length > 0 || !plan.tests.length > 0" ng-repeat="error in plan.errors">
 		<div class="alert alert-danger fadeIn" role="alert">{{error.msg}}</div>
 	</div>
-	<div uib-accordion-group ng-if="plan.tests.length > 0 && (!plan.errors || plan.errors.length == 0)" ng-repeat="test in plan.tests | orderBy: ['station_id','priority'] track by $index" class="panel-default fadeIn" is-open="test.isOpen" is-disabled="status.isFirstDisabled" style="border-top-width: 4px; border-top-color: {{test.station_color}}" ng-class="{'fadeOut': test.visible == 0}" ng-click="getTestData(test)">
+	<div uib-accordion-group ng-if="station.tests.length > 0 && (!plan.errors || plan.errors.length == 0)" ng-repeat="test in station.tests | orderBy: ['station_id','priority'] track by $index" class="panel-default fadeIn" is-open="test.isOpen" is-disabled="status.isFirstDisabled" style="border-top-width: 4px; border-top-color: {{test.station_color}}" ng-class="{'fadeOut': test.visible == 0}" ng-click="getTestData(test)">
 		<uib-accordion-heading>
 			<strong>Priority: {{test.priority}}, Station: {{test.name}}, Test: {{test.test_name}} , ID: #{{test.test_id}} , {{test.time}}</strong>
 			<span class="pull-right glyphicon" ng-class="test.isOpen ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
@@ -21,7 +21,7 @@
 		</uib-accordion-heading>
 		<div>
 		<test-progress-bar class="col-md-12" data="test"></test-progress-bar>
-		<div class="col-md-10">
+		<div class="col-md-11">
 			<test-bar></test-bar>
 		</div>
 			<span class="pull-right" ng-if="currentUser.username == plan.user_username || currentUser.rank > '10'">

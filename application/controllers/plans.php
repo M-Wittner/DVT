@@ -66,15 +66,10 @@ class Plans extends CI_Controller {
 		$plan = $this->db->get_where('plans_view', ['id'=>$planID])->result()[0];
 //		die(json_encode($plan));
 		$res = $this->GetPlanData($planID);
-		$plan->errors = $res->errors;
-		$plan->tests = $res->tests;
-		$plan->progress = $res->progress;
-		if($plan->progress > 0){
-			foreach($plan->tests as $test){
-				$test->statuses = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id])->result();
-//				$test->progress = $this->plan_model->calcProgNew($test->statuses);
+		$resVars = get_object_vars($res);
+			foreach($resVars as $key=>$value){
+				$plan->$key = $value;
 			}
-		}
 		die(json_encode($plan));
 	}
 	
@@ -90,35 +85,36 @@ class Plans extends CI_Controller {
 			}
 		}
 		$this->db->where(['plan_id'=>intval($planId)]);
-		$plan->tests = $this->db->get('tests_view_v1')->result();
+		$tests = $this->db->get('tests_view_v1')->result();
 //		$plan->tests = array();
-//		$plan->testCount = count($tests);
-//		$this->db->distinct();
-//		$this->db->select('station_id');
-//		if(isset($filters)){
-//			foreach($filters as $key=>$filter){
-//				$f = $key."!=".$filter;
-//				$this->db->where($f);
-//			}
-//		}
-//		$this->db->where(['plan_id'=>intval($planId)]);
-//		$stationsIds = $this->db->get('tests_view_v1')->result_array();
-//		$stationsIds = array_map('intval',array_column($stationsIds, "station_id"));
-//		$this->db->where_in('idx', $stationsIds);
-//		$stations = $this->db->get('work_stations_view')->result();
-//		$plan->stations = array();
-		if(sizeof($plan->tests) > 0 && !empty($plan->tests)){
+		$plan->testCount = count($tests);
+		$this->db->distinct();
+		$this->db->select('station_id');
+		if(isset($filters)){
+			foreach($filters as $key=>$filter){
+				$f = $key."!=".$filter;
+				$this->db->where($f);
+			}
+		}
+		$this->db->where(['plan_id'=>intval($planId)]);
+		$stationsIds = $this->db->get('tests_view_v1')->result_array();
+		$stationsIds = array_map('intval',array_column($stationsIds, "station_id"));
+		$this->db->where_in('idx', $stationsIds);
+		$stations = $this->db->get('work_stations_view')->result();
+		$plan->stations = array();
+		if(sizeof($tests) > 0 && !empty($tests)){
 			$totalProg = 0;
-//			foreach($stations as $station){
-//				$id = $station->idx;
-//				$station->tests = array_values(array_filter($tests, function($t) use($id){if($t->station_id == $id){return $t;};}));
-				foreach ($plan->tests as $i=>$test){
-					$plan->tests[$i]->comments = $this->db->get_where('test_comments_v1_view', ['test_id'=>$test->test_id])->result();
+			foreach($stations as $station){
+				$id = $station->idx;
+				$station->tests = array_values(array_filter($tests, function($t) use($id){if($t->station_id == $id){return $t;};}));
+				foreach ($station->tests as $i=>$test){
+					$station->tests[$i]->comments = $this->db->get_where('test_comments_v1_view', ['test_id'=>$test->test_id])->result();
 					$totalProg += $test->progress;
 				}
-//				array_push($plan->stations, $station);
-//			}
-			$plan->progress = (string)round($totalProg / count($plan->tests),4);
+				array_push($plan->stations, $station);
+			}
+			$plan->progress = (string)round($totalProg / $plan->testCount,4);
+//					die(json_encode($plan->progress));
 			$this->db->set('progress', $plan->progress);
 			$this->db->where('id', $plan->$planId);
 			$res = $this->db->update('plans_v1');
@@ -325,11 +321,10 @@ class Plans extends CI_Controller {
 			$plan = $plans[0];
 //			$this->db->where('progress < 1');
 			$res = $this->GetPlanData($plan->id, ['user_id'=>54]);
-//		die(json_encode($res));
-			$plan->errors = $res->errors;	
-			$plan->tests = $res->tests;
-//			$plan->stations = $res->stations;
-			$plan->progress = $res->progress;
+			$resVars = get_object_vars($res);
+			foreach($resVars as $key=>$value){
+				$plan->$key = $value;
+			}
 		}else{
 			$result->msg = "No Plans Found in the last 3 Days";
 			$result->occurred = true;

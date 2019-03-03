@@ -5,14 +5,16 @@
 	<uib-accordion-heading>
 		<strong>ID: #{{plan.id}}</strong> Submitted by: {{plan.user}} <strong class="pull-right">{{plan.date}}</strong>
 	</uib-accordion-heading>
-	<test-progress-bar ng-class="state == 'todayPlan' ? 'col-md-11' : 'col-md-12'" data="plan"></test-progress-bar>
-	<span class="col-md-1" ng-if="state == 'todayPlan'">
-		<a class="btn btn-xs btn-primary" href="#/plans/{{plan.id}}/addtests">Add Tests <span class="glyphicon glyphicon-plus"></span></a>
-	</span>
-		<test></test>
-<!--
+	<div class="container-fluid">
+		<test-progress-bar ng-class="state == 'todayPlan' ? 'col-md-11' : 'col-md-12'" data="plan"></test-progress-bar>
+		<span class="col-md-1" ng-if="state == 'todayPlan'">
+			<a class="btn btn-xs btn-primary" href="#/plans/{{plan.id}}/addtests">Add Tests <span class="glyphicon glyphicon-plus"></span></a>
+		</span>
+	</div>
+<!--		<test></test>-->
+	<div class="container-fluid">
 	<uib-tabset active="active">
-		<div uib-tab ng-repeat="station in $data track by station.idx+$index" index="0" heading="{{station.name}}">Static content</uib-tab>
+<!--		<div uib-tab ng-repeat="station in plan.stations track by station.idx+$index" index="0" heading="{{station.name}}">Static content</uib-tab>-->
 			<uib-tab index="$index + 1" ng-repeat="station in plan.stations track by station.idx+$index" heading="{{station.name}}" disable="station.disabled" style="border-bottom: 5px solid {{station.color}};" ng-click="getStationData(station)">
 				<div class="panel-body">
 					<div class="row">
@@ -27,9 +29,11 @@
 							<label class="form-control">{{station.dmt_pc}}</label>
 						</div>
 					</div>
+					<div class="row">
 						<test></test>
+					</div>
 				</div>
 			</uib-tab>
 		</uib-tabset>
--->
+	</div>
 </div>

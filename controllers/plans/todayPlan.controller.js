@@ -22,8 +22,6 @@ myApp.controller('todayPlanCtrl', ['$rootScope', '$scope', '$state', '$route', '
 				for(var key in response.data){
 					$test[key] = response.data[key];
 				}
-				$test.chipsName = ($test.station[0].idx == 5||$test.station[0].idx == 6) ? 'TalynA2 Chips' : ($test.station[0].idx == 2||$test.station[0].idx == 3) ? 'TalynM2 Chips' : '';
-//				console.log($test);
 			}
 		});
 		return $test;
@@ -43,24 +41,31 @@ myApp.controller('todayPlanCtrl', ['$rootScope', '$scope', '$state', '$route', '
 			$http.post(site+'/plans/today', today)
 			.then(function(response){
 				$scope.today = date.parse(today);
-//				console.log(response.data[0]);
 				console.log(response.data);
 				$scope.plans = response.data;
 				$scope.plans[0].isOpen = true;
 				})
 			$interval(function(){
-				$http.post(site+'/plans/today', today)
-				.then(function(response){
-					$scope.today = date.parse(today);
-	//				console.log(response.data[0]);
-					$scope.updateTime = new Date().toLocaleTimeString('he-IL', {hour12: false});
-					console.log("Data Refreshed, "+ $scope.updateTime);
-					$scope.plans = response.data;
-					$scope.plans[0].isOpen = true;
-					$scope.plans[0].tests.forEach(function($test){
-						getTest($test);
-					})
-				})}, 300000, 0 , true);;
+				$scope.isAuthenticated = AuthService.isAuthenticated();
+				if($scope.isAuthenticated){
+					$http.post(site+'/plans/today', today)
+					.then(function(response){
+						$scope.today = date.parse(today);
+		//				console.log(response.data[0]);
+						$scope.updateTime = new Date().toLocaleTimeString('he-IL', {hour12: false});
+						console.log("Data Refreshed, "+ $scope.updateTime);
+						$scope.plans = response.data;
+						$scope.plans[0].isOpen = true;
+						$scope.plans[0].tests.forEach(function($test){
+							getTest($test);
+						});
+					});
+				} else{
+					var message = 'Please Login first!';
+					var id = Flash.create('danger', message, 3500);
+					$state.go('home');		
+				}
+			}, 300000, 0 , true);;
 			}
 		} else {
 			var message = 'Please Login first!';
