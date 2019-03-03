@@ -20,7 +20,7 @@
 								<div class="input-group input-group-sm sweeps" style="float: none; margin-bottom: 0.25%">
 									<label class="form-control" type="number" popover-trigger="'mouseenter'">{{chip.chip_sn}}-{{chip.chip_process_abb}}</label>
 									<span class="input-group-addon" id="from" style="font-weight:800">Status 
-										<span ng-click="chipStatus(chip, '', test, plan)" class="glyphicon glyphicon-minus chip-status" ng-class="{'glyphicon-hourglass': chip.progress > 0 && chip.progress < 1, 'glyphicon-ok':  chip.progress == 1, 'glyphicon-remove':  chip.chip_status == 1 && chip.progress < 1}"></span>
+										<span ng-click="chipStatus(chip, '', test, plan)" class="glyphicon glyphicon-minus chip-status" ng-class="{'glyphicon-hourglass': chip.chip_status == 2, 'glyphicon-ok':  chip.chip_status == 0, 'glyphicon-remove':  chip.chip_status == 1 || chip.chip_status == 3, 'glyphicon-minus': chip.chip_status == 4}"></span>
 									</span>
 									<span class="input-group-addon" id="from" style="font-weight:800;" ng-if="test.station[0].idx == 5 || test.station[0].idx == 6">Hot 
 										<span class="glyphicon glyphicon-minus chip-status" style="color:red" ng-click="chipStatus(chip, 'hot', test)" ng-class="{'glyphicon-hourglass': chip.hot_status == 2, 'glyphicon-ok':  chip.hot_status == 0, 'glyphicon-remove':  chip.hot_status == 3}"></span>

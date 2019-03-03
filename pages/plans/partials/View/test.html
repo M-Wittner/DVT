@@ -13,7 +13,7 @@
 <!--				<span class="glyphicon glyphicon-envelope" ng-if="test.comments.length > 0" id="testStatus"></span>-->
 				<span class="label"
 							ng-model="status"
-							ng-class="[{'label-default': test.status_id == 4, 'label-warning': test.status_id == 2, 'label-success': test.status_id == 0, 'label-danger': test.status_id == 3}]"
+							ng-class="[{'label-default': test.status_id == 4, 'label-warning': test.status_id == 2, 'label-success': test.status_id == 0, 'label-danger': (test.status_id == 3 || test.status_id == 1), 'label-info': test.status_id == -1}]"
 							style="font-size: x-small; margin-left: -20%;"
 							>{{test.test_status}}</span>
 <!-----------------------------------------------------------				Temp Fix - Guin Needed				----------------------------------------------------------->

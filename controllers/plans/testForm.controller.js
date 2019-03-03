@@ -39,6 +39,7 @@ myApp.controller('testFormCtrl', ['$scope', '$rootScope', '$timeout', '$http', '
 		.then(function(response){
 			console.log(response.data);
 			$scope.test = response.data;
+			$scope.test.priority = [{value: response.data.priority}];
 		})
 	}
 	

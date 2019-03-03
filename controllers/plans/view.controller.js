@@ -36,8 +36,9 @@ myApp.controller('viewPlanCtrl', ['$scope', '$rootScope', '$state', '$route', 'G
 			if($.isEmptyObject(response.data)){
 				$test.errors = response.data.errors;
 			}else{
-				$test.errors = response.data.errors;
-				$test.sweeps = response.data.sweeps;
+				for(var key in response.data){
+					$test[key] = response.data[key];
+				}
 			}
 		});
 		return $test;

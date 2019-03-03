@@ -34,7 +34,15 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', '$filter', 'NgTableParams
 	if($scope.isAuthenticated) {
 //		console.log(testParams.plans);
 		$scope.state = $state.$current.name;
-		$scope.plans = testParams.plans;
+//		$scope.plans = testParams.plans;
+		$scope.plans = {};
+		$http.get(site + '/plans')
+		.then(function (response) {
+			var data = response.data;
+			console.log(data);
+			$scope.plans.web = data.web;
+			$scope.plans.lab = data.lab;
+		});
 		$scope.itemsPerPage = 15;
 		$scope.currentPage = {
 			web: 1,
@@ -98,6 +106,8 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', '$filter', 'NgTableParams
 					var message = response.data;
 					var id = Flash.create('success', message, 3500);
 				}
+			}).then(function(){
+				$state.go('plans')
 			})
 		}else{
 			var message = "No Plans Selected";

@@ -728,12 +728,12 @@ myApp.factory('testParams', function ($http, $log, $rootScope) {
 	];
 
 	testParams.plans = {};
-	$http.get(site + '/plans')
-		.then(function (response) {
-			var data = response.data;
-			testParams.plans.web = data.web;
-			testParams.plans.lab = data.lab;
-		});
+//	$http.get(site + '/plans')
+//		.then(function (response) {
+//			var data = response.data;
+//			testParams.plans.web = data.web;
+//			testParams.plans.lab = data.lab;
+//		});
 
 	$http.get(site + '/params/structs')
 		.then(function (response) {

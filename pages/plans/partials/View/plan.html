@@ -10,4 +10,26 @@
 		<a class="btn btn-xs btn-primary" href="#/plans/{{plan.id}}/addtests">Add Tests <span class="glyphicon glyphicon-plus"></span></a>
 	</span>
 		<test></test>
+<!--
+	<uib-tabset active="active">
+		<div uib-tab ng-repeat="station in $data track by station.idx+$index" index="0" heading="{{station.name}}">Static content</uib-tab>
+			<uib-tab index="$index + 1" ng-repeat="station in plan.stations track by station.idx+$index" heading="{{station.name}}" disable="station.disabled" style="border-bottom: 5px solid {{station.color}};" ng-click="getStationData(station)">
+				<div class="panel-body">
+					<div class="row">
+						<div class="input-group input-group-sm">
+							<span class="input-group-addon" style="font-weight:900">Station:</span>
+							<label class="form-control">#{{station.name}}</label>
+							<span class="input-group-addon" style="font-weight:900">Host PC:</span>
+							<label class="form-control">{{station.hostname}}</label>
+							<span ng-if="station.wwc_pc" class="input-group-addon" style="font-weight:900">WWC PC:</span>
+							<label ng-if="station.wwc_pc" class="form-control">{{station.wwc_pc}}</label>
+							<span class="input-group-addon" style="font-weight:900">DMtools Host:</span>
+							<label class="form-control">{{station.dmt_pc}}</label>
+						</div>
+					</div>
+						<test></test>
+				</div>
+			</uib-tab>
+		</uib-tabset>
+-->
 </div>

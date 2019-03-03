@@ -163,27 +163,26 @@ class plan_model extends CI_Model {
 						foreach($data as $chip){
 							$this->db->select('chip_sn, chip_process_abb');
 							$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result();
-							$this->db->select('progress');
+							$this->db->select('progress, chip_status, username');
 							$status = $this->db->get_where('chip_status_view', ['data_idx'=>$chip->data_idx])->result();
-									die(json_encode($status));
 							if(count($chipData) == 1){
 								$chipData = $chipData[0];
 								$chip->chip_sn = $chipData->chip_sn;
 								$chip->chip_process_abb = $chipData->chip_process_abb;
 								if(count($status) == 1){
-									$statuses = $status[0];
+									$status = $status[0];
 									$chip->progress = $status->progress;
+									$chip->chip_status = $status->chip_status;
+									$chip->username = $status->username;
 									if($chip->config_id == $bigTypeId){										
 										$totalProg += (double)$chip->progress;
 									}
-									if(in_array($status->chip_status, [1,3])){ // status terminated or error
+									if(in_array($chip->chip_status, [1,3])){ // status terminated or error
 										array_push($test->chipErrors, $chip);
 									}
-//									array_push($chipStatus, $chip->progress);
 								}
 							}
 						}
-						$test->chipErrors = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id, 'chip_status'=>1, 'chip_status'=>3])->result();
 					}
 					foreach($data as $res){
 						if(is_null($res->display_name)){
@@ -197,60 +196,36 @@ class plan_model extends CI_Model {
 					$test->sweeps[$sweep->name]->priority = $sweep->priority;
 					$test->sweeps[$sweep->name]->test_type_id = $sweep->test_type_id;
 			}
-			$test->progress = $totalProg / $maxTests;
+			$test->progress = (string)round($totalProg / $maxTests, 4);
 			$chipErrors = count($test->chipErrors);
-			$testErrors = count($test->errors);
-			$status = ($test->progress == 0 && $chipErrors == 0) ? 4 : //IDLE
-								$test->progress < 1 && $chipErrors == 0 ? 2 : //Running
-								$test->progress == 1 && $chipErrors == 0 ? 0 : //Passed
-								($chipErrors > 0 && $test->progress < 1) || ($testErrors > 0 && $test->progress == 0) ? 3 : -1;
-//			$test->status = $status == 4 ? 'IDLE' : $status == 3 ? 'Error' : $status == 2 ? 'Running' : $status == 0 ? 'Passed' : '?';
+//			die(json_encode($test->progress));
+			$testErrors = count($test->errors); 
+			$testStatus = -1;
+			if($test->progress == 1 && $chipErrors == 0){ //Passed
+				$testStatus = 0;
+			}
+			elseif($test->progress == 0 && $chipErrors == 0){ //IDLE
+				$testStatus = 4;
+			}
+			elseif($test->progress < 1 && $chipErrors == 0){ //Running
+				$testStatus = 2;
+			}
+			elseif($chipErrors > 0 && ($test->progress < 1 && $test->progress > 0)){ //Error
+				$testStatus = 3;
+			}
+			elseif($test->progress == 0 && $chipErrors > 0){ // Terminated
+				$testStatus = 1;
+			}
+			$test->status_id = $testStatus;
+//			die(json_encode($test));
+			$test->test_status = $testStatus >= 0 ? $this->other_db->get_where('statuses', ["test_status"=>$testStatus])->result()[0]->status : '?';
 			$this->db->set('progress', $test->progress);
-//			$this->db->set('status', $status);
+			$this->db->set('status', $testStatus);
 			$this->db->where('test_id', $test->test_id);
 			$res = $this->db->update('test_v1');
-//			die(json_encode($totalProg));
+			$test->progress = $test->progress*100;
 			return $test;	
 		}
-	}
-	
-	function calcProgNew($chips){
-		$count = count($chips);
-//		die(var_dump($count));
-		$progress = 0;
-		foreach($chips as $chip){
-//			die(var_dump($chip));
-			$progress = $progress + $chip->progress*100;
-		}
-//		die(print(round($progress/$count, 1)));
-		return round($progress/$count, 1);
-	}
-	
-	function calcProg($chips){
-//		die(json_encode($chips));
-		$count = count($chips);
-		$progress = 0;
-		foreach($chips as $chip){
-			if(isset($chip->chip_status)){
-				switch($chip->chip_status){
-					case 0:
-						$progress += 100;
-						break;
-					case 2:
-						$progress += 50;
-						break;
-					default:
-						$progress = $progress;
-						break;
-				}
-			}else{
-				$chipStatus = array(
-					'data_idx'=>$chip->data_idx
-				);
-				$res = $this->db->insert('chip_status', $chipStatus);
-			}
-		}
-		return round($progress/$count, 0, PHP_ROUND_HALF_UP);
 	}
 	
 	function add_comment_v1($data){
@@ -285,39 +260,39 @@ class plan_model extends CI_Model {
 		return $comments;
 	}
 	
-	function config_params($test){
-		$test_params = $this->db->get('test_params')->result();
-		$paramsArr = array();
-		foreach($test_params as $param){
-			$paramsArr[$param->param_name] = $param->param_id;
-		}
-		$params = array();
-		foreach($test as $param=>$values){
-			$d = array_key_exists($param, $paramsArr);
-			if($d == true){
-				if(is_array($values)){
-					foreach($values as $value){
-						$data = array(
-							'plan_id'=>$test->plan_id,
-							'test_id'=>$test->id,
-							'param_id'=>$paramsArr[$param],
-							'param_value_id'=>$value,
-						);
-						array_push($params, $data);
-					}
-				}else{
-					$data = array(
-						'plan_id'=>$test->plan_id,
-						'test_id'=>$test->id,
-						'param_id'=>$paramsArr[$param],
-						'param_value_id'=>$values,
-					);
-					array_push($params, $data);
-				}
-			}
-		} 
-		return $params;
-	}
+//	function config_params($test){
+//		$test_params = $this->db->get('test_params')->result();
+//		$paramsArr = array();
+//		foreach($test_params as $param){
+//			$paramsArr[$param->param_name] = $param->param_id;
+//		}
+//		$params = array();
+//		foreach($test as $param=>$values){
+//			$d = array_key_exists($param, $paramsArr);
+//			if($d == true){
+//				if(is_array($values)){
+//					foreach($values as $value){
+//						$data = array(
+//							'plan_id'=>$test->plan_id,
+//							'test_id'=>$test->id,
+//							'param_id'=>$paramsArr[$param],
+//							'param_value_id'=>$value,
+//						);
+//						array_push($params, $data);
+//					}
+//				}else{
+//					$data = array(
+//						'plan_id'=>$test->plan_id,
+//						'test_id'=>$test->id,
+//						'param_id'=>$paramsArr[$param],
+//						'param_value_id'=>$values,
+//					);
+//					array_push($params, $data);
+//				}
+//			}
+//		} 
+//		return $params;
+//	}
 	
 	function update_test_v1($test){
 		$result = array();
@@ -479,7 +454,7 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_chip_status($data){
-//		echo json_encode($data);
+//	 	die(json_encode($data));
 		$this->other_db = $this->load->database('main', TRUE);
 		$chip = $data->chip;
 		$user = $data->user;
@@ -510,6 +485,9 @@ class plan_model extends CI_Model {
 			case 0:
 				$status = 3;
 				break;
+			case 3:
+				$status = 1;
+				break;
 			default:
 				$status = 4;
 				break;
@@ -519,18 +497,18 @@ class plan_model extends CI_Model {
 		$this->db->where(['data_idx'=>$chip->data_idx]);
 		$res = $this->db->update('chip_status');
 		if($res){
-			$this->other_db->select('data_idx');
-			$res = $this->other_db->get_where('test_configuration_data', ['test_id'=>$chip->test_id, 'config_id'=>$chip->config_id])->result();
-			if($res){
-				$res = array_map(function($data){
-					return $data->data_idx;
-				}, $res);
-				$this->db->select('chip_status, data_idx');
-				$this->db->where_in('data_idx', $res);
-				$res2 = $this->db->get('chip_status_view')->result();
-				$prog = $this->calcProg($res2);
-			}
-			return array($key=>$status, 'user'=>$user->username, 'progress'=>$prog);
+//			$this->other_db->select('data_idx');
+//			$res = $this->other_db->get_where('test_configuration_data', ['test_id'=>$chip->test_id, 'config_id'=>$chip->config_id])->result();
+//			if($res){
+//				$res = array_map(function($data){
+//					return $data->data_idx;
+//				}, $res);
+//				$this->db->select('chip_status, data_idx');
+//				$this->db->where_in('data_idx', $res);
+//				$res2 = $this->db->get('chip_status_view')->result();
+//				$prog = $this->calcProg($res2);
+//			}
+			return array($key=>$status, 'user'=>$user->username);
 		}
 	}
 	
