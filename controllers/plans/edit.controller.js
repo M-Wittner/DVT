@@ -1,16 +1,17 @@
-myApp.controller('editPlanCtrl', ['$scope', '$rootScope','$location','$http', '$stateParams', 'AuthService', 'Flash', 'testParams', function ($scope, $rootScope, $location, $http, $stateParams, AuthService, Flash, testParams) {
+myApp.controller('editPlanCtrl', ['$scope', '$rootScope','$location','$http', '$routeParams', 'AuthService', 'Flash', 'testParams', function ($scope, $rootScope, $location, $http, $routeParams, AuthService, Flash, testParams) {
 	
 	$scope.isAuthenticated = AuthService.isAuthenticated();
 	if($scope.isAuthenticated == true) {
 		var site = $rootScope.site;
 	
 	$scope.user = $scope.currentUser.username;
+//	$scope.plan.userId = $cookies.getObject('loggedUser').id;
+////	$scope.plan.username = $cookies.getObject('loggedUser').username;
 		$scope.testParams = testParams;
 		$scope.testStructs = $scope.testParams.structs;
 		$scope.testOld = {};
 		$scope.test = {};
-//		console.log($stateParams);
-		$http.get(site+'/plans/GetTest/'+$stateParams.testId)
+		$http.post(site+'/plans/get_test', $routeParams)
 		.then(function(response){
 			$scope.test = response.data;
 			$scope.test.priority = [{value: $scope.test.priority}];

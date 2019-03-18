@@ -1,19 +1,19 @@
 <uib-accordion class="panel">
 	<div style="margin: auto; width: 0%">
-		<div class="loader" ng-class="{'fadeOut': station.tests.length > 0}" ng-hide="plan.errors.length > 0"></div>
+		<div class="loader" ng-class="{'fadeOut': plan.tests.length > 0}" ng-hide="plan.errors.length > 0"></div>
 	</div>
 	<div ng-show="plan.errors.length > 0 || !plan.tests.length > 0" ng-repeat="error in plan.errors">
 		<div class="alert alert-danger fadeIn" role="alert">{{error.msg}}</div>
 	</div>
-	<div uib-accordion-group ng-if="station.tests.length > 0 && (!plan.errors || plan.errors.length == 0)" ng-repeat="test in station.tests | orderBy: ['station_id','priority'] track by $index" class="panel-default fadeIn" is-open="test.isOpen" is-disabled="status.isFirstDisabled" style="border-top-width: 4px; border-top-color: {{test.station_color}}" ng-class="{'fadeOut': test.visible == 0}" ng-click="getTestData(test)">
+	<div uib-accordion-group ng-if="station.tests.length > 0 && (!plan.errors || plan.errors.length == 0)" ng-repeat="test in station.tests | orderBy: ['station_id','priority', 'test_id'] track by $index" class="panel-default fadeIn" is-open="test.isOpen" is-disabled="status.isFirstDisabled" style="border-top-width: 4px; border-top-color: {{test.station_color}}" ng-class="{'fadeOut': test.visible == 0}" ng-click="getTestData(test)">
 		<uib-accordion-heading>
-			<strong>Priority: {{test.priority}}, Station: {{test.name}}, Test: {{test.test_name}} , ID: #{{test.test_id}} , {{test.time}}</strong>
+			<strong><span class="glyphicon glyphicon-sort" style="color: #840017"></span>: {{test.priority}} | ID: #{{test.test_id}} | {{test.name}} | {{test.test_name}} | {{test.time}}</strong>
 			<span class="pull-right glyphicon" ng-class="test.isOpen ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
 			<span class="pull-right">
 <!--				<span class="glyphicon glyphicon-envelope" ng-if="test.comments.length > 0" id="testStatus"></span>-->
 				<span class="label"
 							ng-model="status"
-							ng-class="[{'label-default': test.status_id == 4, 'label-warning': test.status_id == 2, 'label-success': test.status_id == 0, 'label-danger': (test.status_id == 3 || test.status_id == 1), 'label-info': test.status_id == -1}]"
+							ng-class="[{'label-default': test.status_id == 4, 'label-warning': test.status_id == 2, 'label-success': test.status_id == 0, 'label-danger': (test.status_id == 3 || test.status_id == 1)}]"
 							style="font-size: x-small; margin-left: -20%;"
 							>{{test.test_status}}</span>
 <!-----------------------------------------------------------				Temp Fix - Guin Needed				----------------------------------------------------------->

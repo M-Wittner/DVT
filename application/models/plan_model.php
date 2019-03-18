@@ -163,8 +163,9 @@ class plan_model extends CI_Model {
 						foreach($data as $chip){
 							$this->db->select('chip_sn, chip_process_abb');
 							$chipData = $this->db->get_where('chip_view', ['chip_id'=>$chip->value])->result();
-							$this->db->select('progress, chip_status, username');
+							$this->db->select('progress');
 							$status = $this->db->get_where('chip_status_view', ['data_idx'=>$chip->data_idx])->result();
+//									die(json_encode($status));
 							if(count($chipData) == 1){
 								$chipData = $chipData[0];
 								$chip->chip_sn = $chipData->chip_sn;
@@ -172,17 +173,18 @@ class plan_model extends CI_Model {
 								if(count($status) == 1){
 									$status = $status[0];
 									$chip->progress = $status->progress;
-									$chip->chip_status = $status->chip_status;
-									$chip->username = $status->username;
+//										die(json_encode($chip));
 									if($chip->config_id == $bigTypeId){										
 										$totalProg += (double)$chip->progress;
 									}
-									if(in_array($chip->chip_status, [1,3])){ // status terminated or error
+									if(in_array($status->chip_status, [1,3])){ // status terminated or error
 										array_push($test->chipErrors, $chip);
 									}
+//									array_push($chipStatus, $chip->progress);
 								}
 							}
 						}
+						$test->chipErrors = $this->db->get_where('chip_status_view', ['test_id'=>$test->test_id, 'chip_status'=>1, 'chip_status'=>3])->result();
 					}
 					foreach($data as $res){
 						if(is_null($res->display_name)){
@@ -197,9 +199,9 @@ class plan_model extends CI_Model {
 					$test->sweeps[$sweep->name]->test_type_id = $sweep->test_type_id;
 			}
 			$test->progress = (string)round($totalProg / $maxTests, 4);
+//			
 			$chipErrors = count($test->chipErrors);
-//			die(json_encode($test->progress));
-			$testErrors = count($test->errors); 
+			$testErrors = count($test->errors);
 			$testStatus = -1;
 			if($test->progress == 1 && $chipErrors == 0){ //Passed
 				$testStatus = 0;
@@ -217,12 +219,12 @@ class plan_model extends CI_Model {
 				$testStatus = 1;
 			}
 			$test->status_id = $testStatus;
-//			die(json_encode($test));
 			$test->test_status = $testStatus >= 0 ? $this->other_db->get_where('statuses', ["test_status"=>$testStatus])->result()[0]->status : '?';
 			$this->db->set('progress', $test->progress);
 			$this->db->set('status', $testStatus);
 			$this->db->where('test_id', $test->test_id);
 			$res = $this->db->update('test_v1');
+//			die(json_encode($test));
 			$test->progress = $test->progress*100;
 			return $test;	
 		}
@@ -260,39 +262,39 @@ class plan_model extends CI_Model {
 		return $comments;
 	}
 	
-//	function config_params($test){
-//		$test_params = $this->db->get('test_params')->result();
-//		$paramsArr = array();
-//		foreach($test_params as $param){
-//			$paramsArr[$param->param_name] = $param->param_id;
-//		}
-//		$params = array();
-//		foreach($test as $param=>$values){
-//			$d = array_key_exists($param, $paramsArr);
-//			if($d == true){
-//				if(is_array($values)){
-//					foreach($values as $value){
-//						$data = array(
-//							'plan_id'=>$test->plan_id,
-//							'test_id'=>$test->id,
-//							'param_id'=>$paramsArr[$param],
-//							'param_value_id'=>$value,
-//						);
-//						array_push($params, $data);
-//					}
-//				}else{
-//					$data = array(
-//						'plan_id'=>$test->plan_id,
-//						'test_id'=>$test->id,
-//						'param_id'=>$paramsArr[$param],
-//						'param_value_id'=>$values,
-//					);
-//					array_push($params, $data);
-//				}
-//			}
-//		} 
-//		return $params;
-//	}
+	function config_params($test){
+		$test_params = $this->db->get('test_params')->result();
+		$paramsArr = array();
+		foreach($test_params as $param){
+			$paramsArr[$param->param_name] = $param->param_id;
+		}
+		$params = array();
+		foreach($test as $param=>$values){
+			$d = array_key_exists($param, $paramsArr);
+			if($d == true){
+				if(is_array($values)){
+					foreach($values as $value){
+						$data = array(
+							'plan_id'=>$test->plan_id,
+							'test_id'=>$test->id,
+							'param_id'=>$paramsArr[$param],
+							'param_value_id'=>$value,
+						);
+						array_push($params, $data);
+					}
+				}else{
+					$data = array(
+						'plan_id'=>$test->plan_id,
+						'test_id'=>$test->id,
+						'param_id'=>$paramsArr[$param],
+						'param_value_id'=>$values,
+					);
+					array_push($params, $data);
+				}
+			}
+		} 
+		return $params;
+	}
 	
 	function update_test_v1($test){
 		$result = array();
@@ -454,7 +456,7 @@ class plan_model extends CI_Model {
 	}
 	
 	function update_chip_status($data){
-//	 	die(json_encode($data));
+//		echo json_encode($data);
 		$this->other_db = $this->load->database('main', TRUE);
 		$chip = $data->chip;
 		$user = $data->user;
@@ -485,9 +487,6 @@ class plan_model extends CI_Model {
 			case 0:
 				$status = 3;
 				break;
-			case 3:
-				$status = 1;
-				break;
 			default:
 				$status = 4;
 				break;
@@ -497,18 +496,18 @@ class plan_model extends CI_Model {
 		$this->db->where(['data_idx'=>$chip->data_idx]);
 		$res = $this->db->update('chip_status');
 		if($res){
-//			$this->other_db->select('data_idx');
-//			$res = $this->other_db->get_where('test_configuration_data', ['test_id'=>$chip->test_id, 'config_id'=>$chip->config_id])->result();
-//			if($res){
-//				$res = array_map(function($data){
-//					return $data->data_idx;
-//				}, $res);
-//				$this->db->select('chip_status, data_idx');
-//				$this->db->where_in('data_idx', $res);
-//				$res2 = $this->db->get('chip_status_view')->result();
-//				$prog = $this->calcProg($res2);
-//			}
-			return array($key=>$status, 'user'=>$user->username);
+			$this->other_db->select('data_idx');
+			$res = $this->other_db->get_where('test_configuration_data', ['test_id'=>$chip->test_id, 'config_id'=>$chip->config_id])->result();
+			if($res){
+				$res = array_map(function($data){
+					return $data->data_idx;
+				}, $res);
+				$this->db->select('chip_status, data_idx');
+				$this->db->where_in('data_idx', $res);
+				$res2 = $this->db->get('chip_status_view')->result();
+				$prog = $this->calcProg($res2);
+			}
+			return array($key=>$status, 'user'=>$user->username, 'progress'=>$prog);
 		}
 	}
 	

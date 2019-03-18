@@ -8,11 +8,10 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', '$filter', 'NgTableParams
 			console.log(response.data);
 			if($.isEmptyObject(response.data) || response.data.errors.length > 0){
 				$plan.errors = response.data.errors;
-//					$plan.errors.push("No Data Found");
-//					console.log($plan);
 			}else{
-				$plan.tests = response.data.tests;
-				$plan.progress = response.data.progress;
+				for(var key in response.data){
+					$plan[key] = response.data[key];
+				}
 			}
 		});
 		return $plan;
@@ -23,9 +22,9 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', '$filter', 'NgTableParams
 			if($.isEmptyObject(response.data)){
 				$test.errors = response.data.errors;
 			}else{
-				$test.errors = response.data.errors;
-				$test.sweeps = response.data.sweeps;
-				console.log(response.data);
+				for(var key in response.data){
+					$test[key] = response.data[key];
+				}
 			}
 		});
 		return $test;
@@ -34,15 +33,7 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', '$filter', 'NgTableParams
 	if($scope.isAuthenticated) {
 //		console.log(testParams.plans);
 		$scope.state = $state.$current.name;
-//		$scope.plans = testParams.plans;
-		$scope.plans = {};
-		$http.get(site + '/plans')
-		.then(function (response) {
-			var data = response.data;
-			console.log(data);
-			$scope.plans.web = data.web;
-			$scope.plans.lab = data.lab;
-		});
+		$scope.plans = testParams.plans;
 		$scope.itemsPerPage = 15;
 		$scope.currentPage = {
 			web: 1,
@@ -106,8 +97,6 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', '$filter', 'NgTableParams
 					var message = response.data;
 					var id = Flash.create('success', message, 3500);
 				}
-			}).then(function(){
-				$state.go('plans')
 			})
 		}else{
 			var message = "No Plans Selected";
@@ -116,8 +105,6 @@ myApp.controller('plansCtrl', ['$scope', '$rootScope', '$filter', 'NgTableParams
 	}
 	
 	$scope.deleteTest = function(testID, $plan){
-		console.log($plan);
-		console.log(testID);
 		$http.get(site+'/plans/deleteTest/'+testID)
 		.then(function(response){
 			console.log(response.data);

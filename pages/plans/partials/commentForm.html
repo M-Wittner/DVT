@@ -13,19 +13,12 @@
 							<option>Minor</option>
 						</select>
 					</div>
-					<div ng-if="comment.severity == 'Minor'" >
-						<div class="row" ng-if="test.station[0].idx != 5 && test.station[0].idx != 6">
-							<span class="label label-primary">TalynM2 Chips</span>
+					<div ng-if="comment.severity == 'Minor'" ng-init="sweepName = test.station[0].idx == (5||6) ? 'TalynA2 Chips' : test.station[0].idx == (2||3) ? 'TalynM2 Chips' : ''">
+						<div class="row">
+							<span class="label label-primary">Chip</span>
 							<ui-select multiple limit="1" style="width: 100%;" close-on-select="false" ng-model="comment.chip" data-placeholder="Pick Chips">
 								<ui-select-match>{{$item.chip_sn}}-{{$item.chip_process_abb}}</ui-select-match>
-								<ui-select-choices repeat="chip in test.sweeps['TalynM2 Chips'].data track by $index" group-by="'corner'" sortable="true">{{chip.chip_sn}}-{{chip.chip_process_abb}}</ui-select-choices>
-							</ui-select>
-						</div>
-						<div class="row" ng-if="test.station[0].idx != 2 && test.station[0].idx != 3">
-							<span class="label label-primary">TalynA2 Chips</span>
-							<ui-select multiple limit="1" style="width: 100%;" close-on-select="false" ng-model="comment.chip" data-placeholder="Pick Chips">
-								<ui-select-match>{{$item.chip_sn}}-{{$item.chip_process_abb}}</ui-select-match>
-								<ui-select-choices repeat="chip in test.sweeps['TalynA2 Chips'].data track by $index" group-by="'corner'" sortable="true">{{chip.chip_sn}}-{{chip.chip_process_abb}}</ui-select-choices>
+								<ui-select-choices repeat="chip in test.sweeps[sweepName].data track by $index" group-by="'corner'" sortable="true">{{chip.chip_sn}}-{{chip.chip_process_abb}}</ui-select-choices>
 							</ui-select>
 						</div>
 					</div>
